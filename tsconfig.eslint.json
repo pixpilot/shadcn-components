@@ -1,0 +1,16 @@
+/**
+ * This file will be detected by ESLint
+ * and used as the configuration file.
+ */
+{
+  "extends": "@pixpilot/dev-config/typescript",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowJs": false,
+    "checkJs": false,
+    "outDir": "dist"
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "build", "coverage", "dist"]
+}

@@ -1,0 +1,4 @@
+# Set the repository to show as TypeScript rather than JS in GitHub
+*.ts linguist-language=TypeScript
+*.js linguist-language=TypeScript
+*.mjs linguist-language=TypeScript

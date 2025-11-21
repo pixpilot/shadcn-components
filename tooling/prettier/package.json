@@ -1,0 +1,10 @@
+{
+  "name": "@internal/prettier-config",
+  "version": "0.0.1",
+  "private": true,
+  "main": "index.js",
+  "devDependencies": {
+    "@internal/tsconfig": "workspace:*",
+    "@pixpilot/dev-config": "catalog:dev"
+  }
+}

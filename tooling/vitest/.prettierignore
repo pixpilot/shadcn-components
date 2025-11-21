@@ -1,0 +1,4 @@
+# Ignore cache and build artifacts
+.cache/
+*.tsbuildinfo
+*.js.map
