@@ -35,7 +35,6 @@ pnpm run turbo:gen:init
 
 ## 📦 Packages
 
-<!-- List your packages here -->
 
 ## 🚢 Releases
 
