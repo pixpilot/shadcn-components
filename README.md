@@ -35,6 +35,14 @@ pnpm run turbo:gen:init
 
 ## 📦 Packages
 
+### [shadcn-auth](./packages/shadcn-auth/README.md)
+
+Authentication forms and components built with shadcn/ui.
+
+### [shadcn-ui](./packages/shadcn-ui/README.md)
+
+Custom UI components and utilities built with shadcn/ui.
+
 
 ## 🚢 Releases
 

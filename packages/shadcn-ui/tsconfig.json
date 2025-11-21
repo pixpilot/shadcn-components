@@ -1,0 +1,20 @@
+{
+  "extends": "@internal/tsconfig/base.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "lib": ["ES2022", "dom", "dom.iterable"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["../shadcn/src/*"]
+    }
+  },
+  "include": [
+    "src/**/*",
+    "test/**/*",
+    "scripts/**/*",
+    "*.config.ts",
+    "*.config.js",
+    "../shadcn/src/**/*"
+  ],
+  "exclude": ["node_modules"]
+}

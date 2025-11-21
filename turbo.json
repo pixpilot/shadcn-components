@@ -15,22 +15,18 @@
       "outputLogs": "new-only"
     },
     "lint": {
-      "dependsOn": ["^build"],
       "outputs": [".cache/.eslintcache"]
     },
     "typecheck": {
-      "dependsOn": ["^build"],
       "outputs": [".cache/tsbuildinfo.json"]
     },
     "clean:all": {
       "cache": false
     },
     "test": {
-      "dependsOn": ["^build"],
       "outputs": ["coverage/**"]
     },
     "test:coverage": {
-      "dependsOn": ["^build"],
       "outputs": ["coverage/**"]
     }
   },

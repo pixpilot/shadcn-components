@@ -49,6 +49,7 @@
     "@internal/prettier-config": "workspace:*",
     "@pixpilot/dev-config": "catalog:dev",
     "@pixpilot/workspace-package-generator": "^2.1.1",
+    "@testing-library/jest-dom": "catalog:dev",
     "@turbo/gen": "^2.5.8",
     "@types/node": "catalog:dev",
     "@vitest/coverage-v8": "catalog:dev",

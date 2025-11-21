@@ -4,9 +4,15 @@
     "target": "ESNext",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "baseUrl": ".",
+    "paths": {
+      "@/*": ["packages/shadcn/src/*"]
+    },
+    "allowImportingTsExtensions": true,
     "allowJs": false,
     "checkJs": false,
     "strict": true,
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
     "noEmit": false
   },
   "exclude": [

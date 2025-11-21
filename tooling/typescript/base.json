@@ -1,11 +1,29 @@
 {
-  "extends": "@pixpilot/dev-config/typescript",
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "declaration": true,
-    "outDir": "./dist",
-    "types": ["vitest/globals"]
+    /** Base Options */
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "types": ["vitest/globals", "@testing-library/jest-dom"],
+    /** Keep TSC performant in monorepos */
+    "incremental": true,
+    "disableSourceOfProjectReferenceRedirect": true,
+    "tsBuildInfoFile": "${configDir}/.cache/tsbuildinfo.json",
+    /** Strictness */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "checkJs": true,
+    /** Transpile using Bundler (not tsc) */
+    "module": "esnext",
+    "moduleResolution": "Bundler",
+    "noEmit": true
   },
-  "exclude": ["node_modules", "build", "coverage", "dist"]
+  "exclude": ["node_modules", "build", "dist", ".next", ".expo"]
 }

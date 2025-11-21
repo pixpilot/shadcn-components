@@ -1,0 +1,14 @@
+{
+  "extends": ["@internal/tsconfig/base.json"],
+  "compilerOptions": {
+    "composite": true,
+    "jsx": "preserve",
+    "lib": ["ES2022", "dom", "dom.iterable"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["src", "index.ts", "*.config.ts", "test"],
+  "exclude": ["node_modules"]
+}
