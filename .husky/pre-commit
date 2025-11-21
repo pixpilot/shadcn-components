@@ -1,1 +1,2 @@
+pnpm run generate-packages-section
 pnpm exec lint-staged

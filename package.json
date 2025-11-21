@@ -1,13 +1,22 @@
 {
-  "name": "pnpm-turbo-monorepo-template",
+  "name": "shadcn-components",
   "private": true,
   "packageManager": "pnpm@10.18.3",
+  "author": "m.doaie <m.doaie@hotmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/pixpilot/shadcn-components",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pixpilot/shadcn-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pixpilot/shadcn-components/issues"
+  },
   "engines": {
     "node": ">=22.14.0",
     "pnpm": ">=9.6.0"
   },
   "scripts": {
-    "setup": "npx @pixpilot/scaffoldfy --config ./setup/scaffoldfy.json",
     "prepare": "husky",
     "preinstall": "npx only-allow pnpm",
     "build": "turbo run build",
@@ -30,7 +39,8 @@
     "deps:update": "npx taze -r -w && pnpm install",
     "deps:update:major": "npx taze major -r -w && pnpm install",
     "turbo:gen:init": "pnpm turbo gen init",
-    "changeset": "changeset"
+    "changeset": "changeset",
+    "generate-packages-section": "node scripts/generate-packages-section.js"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.7",

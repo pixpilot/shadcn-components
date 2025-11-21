@@ -1,4 +1,4 @@
-# Contributing to <projectName>
+# Contributing to Shadcn Components
 
 Thank you for your interest in contributing! 🎉
 
