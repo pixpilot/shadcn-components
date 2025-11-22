@@ -1,3 +1,5 @@
+import React from 'react';
+
 /**
  * Stretched element to enable tooltips on disabled buttons
  * When a button is disabled, tooltips don't work by default.

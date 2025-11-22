@@ -1,0 +1,43 @@
+{
+  "name": "@internal/storybook",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.18.3",
+  "author": "m.doaie <m.doaie@hotmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "clean": "git clean -xdf .cache storybook-static",
+    "clean:all": "git clean -xdf .cache storybook-static node_modules"
+  },
+  "dependencies": {
+    "@internal/shadcn": "workspace:*",
+    "@pixpilot/shadcn-auth": "workspace:*",
+    "@pixpilot/shadcn-ui": "workspace:*"
+  },
+  "devDependencies": {
+    "@internal/eslint-config": "workspace:*",
+    "@internal/prettier-config": "workspace:*",
+    "@storybook/addon-essentials": "catalog:dev",
+    "@storybook/addon-interactions": "catalog:dev",
+    "@storybook/addon-links": "catalog:dev",
+    "@storybook/addon-themes": "catalog:dev",
+    "@storybook/blocks": "catalog:dev",
+    "@storybook/react": "catalog:dev",
+    "@storybook/react-vite": "catalog:dev",
+    "@storybook/test": "catalog:dev",
+    "@tailwindcss/postcss": "catalog:dev",
+    "@types/react": "catalog:dev",
+    "autoprefixer": "catalog:dev",
+    "react": "catalog:prod",
+    "react-dom": "catalog:prod",
+    "storybook": "catalog:dev",
+    "tailwindcss": "catalog:dev",
+    "tailwindcss-animate": "catalog:dev",
+    "typescript": "catalog:dev",
+    "vite": "catalog:dev"
+  },
+  "prettier": "@internal/prettier-config"
+}

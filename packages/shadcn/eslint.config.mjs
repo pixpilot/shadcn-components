@@ -16,6 +16,8 @@ const config = [
       'ts/no-use-before-define': 'warn',
       'ts/strict-boolean-expressions': 'warn',
       'jsx-a11y/anchor-has-content': 'warn',
+      'react/no-context-provider': 'off',
+      'perfectionist/sort-imports': 'off',
     },
   },
 ];

@@ -34,6 +34,8 @@
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage --config tooling/vitest/index.js",
     "typecheck": "turbo run typecheck",
+    "storybook": "pnpm --filter @internal/storybook storybook",
+    "build-storybook": "pnpm --filter @internal/storybook build-storybook",
     "clean:workspaces": "turbo run clean:all && git clean -xdf .cache .turbo",
     "clean:workspaces:install": "pnpm clean:workspaces && pnpm install",
     "deps:update": "npx taze -r -w && pnpm install",

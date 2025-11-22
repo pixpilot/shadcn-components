@@ -1,5 +1,5 @@
-import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import * as React from 'react';
+import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 
 import { cn } from '@/lib/index';
 
@@ -8,9 +8,7 @@ function TooltipProvider({
   ...props
 }: React.ComponentProps<typeof TooltipPrimitive.Provider>) {
   return (
-    // eslint-disable-next-line ts/ban-ts-comment
-    // @ts-ignore
-    <TooltipPrimitive
+    <TooltipPrimitive.Provider
       data-slot="tooltip-provider"
       delayDuration={delayDuration}
       {...props}

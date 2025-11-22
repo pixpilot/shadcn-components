@@ -28,7 +28,6 @@
     "shadcn:add": "npx shadcn@latest add"
   },
   "dependencies": {
-    "@ebay/nice-modal-react": "^1.2.13",
     "@hookform/resolvers": "^5.2.2",
     "@pixpilot/hash": "catalog:prod",
     "@radix-ui/react-alert-dialog": "^1.1.15",
