@@ -1,12 +1,12 @@
 /* eslint-disable ts/no-unsafe-assignment */
 import type { ArrayField as FormilyArrayField } from '@formily/core';
 import type { Schema } from '@formily/react';
-import type { ArrayBaseMixins, IArrayBaseProps } from './array-base';
+import type { ArrayBaseMixins, IArrayBaseProps } from '../array-base';
 import { observer, useField, useFieldSchema } from '@formily/react';
 import { cn } from '@internal/shadcn';
 import React from 'react';
 import { getDefaultValue } from '../../utils/get-default-value';
-import { ArrayBase } from './array-base';
+import { ArrayBase } from '../array-base';
 
 import { ArrayItemsEditPopover } from './array-items-edit-popover';
 import { ArrayItemsList } from './array-items-list';

@@ -1,7 +1,7 @@
 /* eslint-disable ts/no-unsafe-assignment */
 import type { ArrayField as FormilyArrayField } from '@formily/core';
 import type { Schema } from '@formily/react';
-import type { ArrayBaseMixins, IArrayBaseProps } from './array-base';
+import type { ArrayBaseMixins, IArrayBaseProps } from '../array-base';
 import {
   observer,
   RecursionField,
@@ -15,7 +15,7 @@ import React, { useState } from 'react';
 import { fieldsHasError } from '../../utils';
 import { getDefaultValue } from '../../utils/get-default-value';
 import { validateArrayItemFields } from '../../utils/validate-array-item-fields';
-import { ArrayBase } from './array-base';
+import { ArrayBase } from '../array-base';
 
 type ComposedArrayItemsAccordion = React.FC<
   React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement> & IArrayBaseProps>

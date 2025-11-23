@@ -3,7 +3,7 @@ import { useField, useForm } from '@formily/react';
 import { cn } from '@internal/shadcn';
 import React from 'react';
 import { hasArrayItemErrors } from '../../utils/has-array-item-errors';
-import { ArrayBase } from './array-base';
+import { ArrayBase } from '../array-base';
 
 export interface ArrayItemsListProps {
   /**

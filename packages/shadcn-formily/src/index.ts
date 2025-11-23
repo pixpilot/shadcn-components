@@ -1,23 +1,23 @@
 export const name = '@pixpilot/shadcn-formily';
 
-export { ArrayField } from './components/array-field';
 export type {
   ArrayBaseMixins,
-  ArrayItemsEditDialog,
   IArrayBaseAdditionProps,
   IArrayBaseContext,
   IArrayBaseItemProps,
   IArrayBaseOperationProps,
   IArrayBaseProps,
-} from './components/array-list';
+} from './components/array-base';
+
+// Array components
+export { ArrayBase } from './components/array-base';
+export { ArrayField } from './components/array-field';
+
 export {
   ArrayItems,
   ArrayItemsAccordion,
   ArrayItemsPopover,
 } from './components/array-list';
-
-// Array components
-export { ArrayBase } from './components/array-list/array-base';
 
 export { Checkbox } from './components/checkbox';
 // Core components
