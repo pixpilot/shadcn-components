@@ -6,7 +6,9 @@ import type { ArrayBaseMixins, IArrayBaseProps } from './array-base';
 import { observer, useField, useFieldSchema } from '@formily/react';
 import { cn } from '@internal/shadcn';
 import React, { useState } from 'react';
+import { getDefaultValue } from '../../utils/get-default-value';
 import { ArrayBase } from './array-base';
+
 import { ArrayItemsEditDialog } from './array-items-edit-dialog';
 
 type ComposedArrayItems = React.FC<
@@ -23,26 +25,7 @@ type ComposedArrayItems = React.FC<
     >;
   };
 
-function getSchemaDefaultValue(schema?: Schema): any {
-  if (!schema) return undefined;
-  if (schema.type === 'array') return [];
-  if (schema.type === 'object') return {};
-  if (schema.type === 'void' && schema.properties) {
-    for (const key in schema.properties) {
-      if (Object.hasOwn(schema.properties, key)) {
-        const value = getSchemaDefaultValue(schema.properties[key]);
-        if (value !== undefined) return value;
-      }
-    }
-  }
-  return undefined;
-}
-
-function getDefaultValue(defaultValue: any, schema: Schema): any {
-  if (defaultValue !== undefined) return JSON.parse(JSON.stringify(defaultValue));
-  if (Array.isArray(schema?.items)) return getSchemaDefaultValue(schema.items[0]);
-  return getSchemaDefaultValue(schema?.items);
-}
+// ...existing code...
 
 /**
  * ArrayItems component displays array items as a simple list with controls

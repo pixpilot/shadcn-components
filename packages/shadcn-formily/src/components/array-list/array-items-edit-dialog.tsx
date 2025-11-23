@@ -1,4 +1,4 @@
-import type { ArrayField as FormilyArrayField } from '@formily/core';
+import type { ArrayField } from '@formily/core';
 import type { Schema } from '@formily/react';
 
 import { RecursionField, useField, useForm } from '@formily/react';
@@ -13,6 +13,8 @@ import {
 } from '@internal/shadcn';
 
 import { useEffect, useRef, useState } from 'react';
+
+import { validateArrayItemFields } from '../../utils/validate-array-item-fields';
 
 interface ArrayItemsEditDialogProps {
   open: boolean;
@@ -37,7 +39,7 @@ export function ArrayItemsEditDialog({
   onSave,
 }: ArrayItemsEditDialogProps) {
   const form = useForm();
-  const arrayField = useField<FormilyArrayField>();
+  const arrayField = useField<ArrayField>();
   const initialValuesRef = useRef<unknown>(null);
   const [, forceUpdate] = useState({});
   const isNewItem = index === null;
@@ -69,7 +71,7 @@ export function ArrayItemsEditDialog({
       hasInitializedRef.current = false;
       tempIndexRef.current = null;
     }
-  }, [open, isNewItem, index, arrayField, defaultValue]);
+  }, [open, isNewItem, index]); // Remove arrayField and defaultValue from deps to prevent infinite loop
 
   const handleSave = () => {
     // Wrap async function to properly handle promise
@@ -78,16 +80,7 @@ export function ArrayItemsEditDialog({
         if (isNewItem && tempIndexRef.current !== null) {
           // For new items, validate the temporary item that's already in the array
           const tempIndex = tempIndexRef.current;
-          const itemPathPattern = `${arrayField.address.toString()}.${tempIndex}.*`;
-          const childFields = form.query(itemPathPattern).map((field) => field);
-
-          const validations: Promise<void>[] = [];
-          for (const field of childFields) {
-            if ('validate' in field) {
-              validations.push(field.validate() as Promise<void>);
-            }
-          }
-          await Promise.all(validations);
+          await validateArrayItemFields(form, arrayField, tempIndex);
 
           // Validation passed, keep the item and close dialog
           onSave?.(arrayField.value?.[tempIndex]);
@@ -95,17 +88,7 @@ export function ArrayItemsEditDialog({
         } else if (index !== null) {
           // Get all child fields within the current array item using pattern matching
           // This will find all fields under the specific array index
-          const itemPathPattern = `${arrayField.address.toString()}.${index}.*`;
-          const childFields = form.query(itemPathPattern).map((field) => field);
-
-          // Validate all child fields within this array item
-          const validations: Promise<void>[] = [];
-          for (const field of childFields) {
-            if ('validate' in field) {
-              validations.push(field.validate() as Promise<void>);
-            }
-          }
-          await Promise.all(validations);
+          await validateArrayItemFields(form, arrayField, index);
 
           // If validation passes, close the dialog
           // Values are already synchronized with the parent form via Formily reactivity
@@ -167,13 +150,14 @@ export function ArrayItemsEditDialog({
           RecursionField renders directly in the parent form context.
           Component registry from SchemaField is preserved through the Dialog portal.
           basePath ensures fields are rendered at the correct array item address.
-          For new items, we use the temporary index stored in tempIndexRef.
+          For new items, we render at the temporary index stored in tempIndexRef.
         */}
         <div className="grid gap-4 py-4">
-          {((isNewItem && tempIndexRef.current !== null) || index !== null) && (
+          {((isNewItem && tempIndexRef.current !== null) ||
+            (!isNewItem && index !== null)) && (
             <RecursionField
               basePath={arrayField.address.concat(
-                isNewItem ? tempIndexRef.current! : index,
+                (isNewItem ? tempIndexRef.current : index) as number,
               )}
               schema={schema}
               onlyRenderProperties

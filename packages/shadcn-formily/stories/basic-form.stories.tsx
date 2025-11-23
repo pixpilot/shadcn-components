@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-alert */
 import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
 import { createForm, Form, SchemaField } from '../src';
 
 const meta: Meta<typeof Form> = {
