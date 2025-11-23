@@ -10,7 +10,11 @@ export type {
   IArrayBaseOperationProps,
   IArrayBaseProps,
 } from './components/array-list';
-export { ArrayItems } from './components/array-list';
+export {
+  ArrayItems,
+  ArrayItemsAccordion,
+  ArrayItemsPopover,
+} from './components/array-list';
 
 // Array components
 export { ArrayBase } from './components/array-list/array-base';

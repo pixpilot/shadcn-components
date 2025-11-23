@@ -12,16 +12,14 @@ import {
   DialogTitle,
 } from '@internal/shadcn';
 
-import { useEffect, useRef, useState } from 'react';
+import { useArrayItemEditor } from '../../utils/use-array-item-editor';
 
-import { validateArrayItemFields } from '../../utils/validate-array-item-fields';
-
-interface ArrayItemsEditDialogProps {
+export interface ArrayItemsEditDialogProps {
   open: boolean;
   onClose: () => void;
   index: number | null;
   schema: Schema;
-  defaultValue?: any;
+  defaultValue?: unknown;
   onSave?: (value: any) => void;
 }
 
@@ -40,88 +38,28 @@ export function ArrayItemsEditDialog({
 }: ArrayItemsEditDialogProps) {
   const form = useForm();
   const arrayField = useField<ArrayField>();
-  const initialValuesRef = useRef<unknown>(null);
-  const [, forceUpdate] = useState({});
-  const isNewItem = index === null;
-  const tempIndexRef = useRef<number | null>(null);
-  const hasInitializedRef = useRef(false);
 
-  // Store initial values and add temporary item when dialog opens
-  useEffect(() => {
-    if (open && !hasInitializedRef.current) {
-      hasInitializedRef.current = true;
+  const { isNewItem, renderIndex, handleSave, handleCancel } = useArrayItemEditor({
+    open,
+    index,
+    arrayField,
+    form,
+    defaultValue,
+    onSave,
+  });
 
-      if (isNewItem) {
-        // For new items, add a temporary item to the array so fields can be rendered
-        const tempIndex = arrayField.value?.length ?? 0;
-        tempIndexRef.current = tempIndex;
-        arrayField.push?.(defaultValue).catch(console.error);
-        initialValuesRef.current = defaultValue;
-      } else if (index !== null) {
-        const currentValue = arrayField.value?.[index] as unknown;
-        if (currentValue !== undefined) {
-          // Deep clone the initial values to restore on cancel
-          initialValuesRef.current = JSON.parse(JSON.stringify(currentValue));
-        }
-      }
-    }
-
-    // Reset initialization flag when dialog closes
-    if (!open) {
-      hasInitializedRef.current = false;
-      tempIndexRef.current = null;
-    }
-  }, [open, isNewItem, index]); // Remove arrayField and defaultValue from deps to prevent infinite loop
-
-  const handleSave = () => {
-    // Wrap async function to properly handle promise
-    const performValidation = async () => {
-      try {
-        if (isNewItem && tempIndexRef.current !== null) {
-          // For new items, validate the temporary item that's already in the array
-          const tempIndex = tempIndexRef.current;
-          await validateArrayItemFields(form, arrayField, tempIndex);
-
-          // Validation passed, keep the item and close dialog
-          onSave?.(arrayField.value?.[tempIndex]);
-          onClose();
-        } else if (index !== null) {
-          // Get all child fields within the current array item using pattern matching
-          // This will find all fields under the specific array index
-          await validateArrayItemFields(form, arrayField, index);
-
-          // If validation passes, close the dialog
-          // Values are already synchronized with the parent form via Formily reactivity
+  const handleSaveClick = () => {
+    handleSave()
+      .then((isValid) => {
+        if (isValid) {
           onClose();
         }
-      } catch {
-        // Validation failed - errors will be displayed in the form
-        // Don't close the dialog
-        // Force a re-render to show validation errors
-        forceUpdate({});
-      }
-    };
-
-    performValidation().catch(() => {
-      // Error already handled in the try-catch above
-    });
+      })
+      .catch(console.error);
   };
 
-  const handleCancel = () => {
-    if (isNewItem && tempIndexRef.current !== null) {
-      // For new items, remove the temporary item from the array
-      arrayField.remove?.(tempIndexRef.current).catch(console.error);
-    } else if (!isNewItem && index !== null && initialValuesRef.current !== null) {
-      // Restore the initial values to discard changes for existing items
-      const currentValue = arrayField.value?.[index] as unknown;
-      if (currentValue !== undefined) {
-        // Restore the original value
-        const restoredValue = JSON.parse(
-          JSON.stringify(initialValuesRef.current),
-        ) as unknown;
-        arrayField.value[index] = restoredValue;
-      }
-    }
+  const handleCancelClick = () => {
+    handleCancel();
     onClose();
   };
 
@@ -130,7 +68,7 @@ export function ArrayItemsEditDialog({
       open={open}
       onOpenChange={(isOpen) => {
         if (!isOpen) {
-          handleCancel();
+          handleCancelClick();
         }
       }}
     >
@@ -150,15 +88,11 @@ export function ArrayItemsEditDialog({
           RecursionField renders directly in the parent form context.
           Component registry from SchemaField is preserved through the Dialog portal.
           basePath ensures fields are rendered at the correct array item address.
-          For new items, we render at the temporary index stored in tempIndexRef.
         */}
         <div className="grid gap-4 py-4">
-          {((isNewItem && tempIndexRef.current !== null) ||
-            (!isNewItem && index !== null)) && (
+          {renderIndex !== null && (
             <RecursionField
-              basePath={arrayField.address.concat(
-                (isNewItem ? tempIndexRef.current : index) as number,
-              )}
+              basePath={arrayField.address.concat(renderIndex)}
               schema={schema}
               onlyRenderProperties
             />
@@ -166,10 +100,10 @@ export function ArrayItemsEditDialog({
         </div>
 
         <DialogFooter>
-          <Button type="button" variant="outline" onClick={handleCancel}>
+          <Button type="button" variant="outline" onClick={handleCancelClick}>
             Cancel
           </Button>
-          <Button type="button" onClick={handleSave}>
+          <Button type="button" onClick={handleSaveClick}>
             Save Changes
           </Button>
         </DialogFooter>

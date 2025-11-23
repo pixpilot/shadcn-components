@@ -1,5 +1,4 @@
 /* eslint-disable ts/no-unsafe-assignment */
-/* eslint-disable ts/no-unsafe-return */
 import type { ArrayField as FormilyArrayField } from '@formily/core';
 import type { Schema } from '@formily/react';
 import type { ArrayBaseMixins, IArrayBaseProps } from './array-base';
@@ -10,6 +9,8 @@ import { getDefaultValue } from '../../utils/get-default-value';
 import { ArrayBase } from './array-base';
 
 import { ArrayItemsEditDialog } from './array-items-edit-dialog';
+import { ArrayItemsEditPopover } from './array-items-edit-popover';
+import { ArrayItemsList } from './array-items-list';
 
 type ComposedArrayItems = React.FC<
   React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement> & IArrayBaseProps>
@@ -23,6 +24,8 @@ type ComposedArrayItems = React.FC<
         render?: (item: any, index: number) => React.ReactNode;
       }
     >;
+    Dialog: typeof ArrayItemsEditDialog;
+    Popover: typeof ArrayItemsEditPopover;
   };
 
 // ...existing code...
@@ -42,7 +45,6 @@ const ArrayItemsComponent = observer(
   ) => {
     const field = useField<FormilyArrayField>();
     const schema = useFieldSchema();
-    const dataSource = Array.isArray(field.value) ? field.value : [];
     const {
       onAdd,
       onRemove,
@@ -97,29 +99,9 @@ const ArrayItemsComponent = observer(
         onEdit={handleEdit}
       >
         <div {...rest} className={cn('space-y-2', className)}>
-          {dataSource.map((_item, index) => (
-            <ArrayBase.Item key={index} index={index} record={() => field.value?.[index]}>
-              <div className="border-input bg-card hover:bg-accent/50 flex items-center gap-2 rounded-md border p-3 transition-colors">
-                {/* Left: Move up/down buttons */}
-                <div className="flex flex-col gap-1">
-                  <ArrayBase.MoveUp className="size-7" />
-                  <ArrayBase.MoveDown className="size-7" />
-                </div>
-
-                {/* Center: Item label */}
-                <div className="text-foreground flex-1 font-medium">
-                  <ArrayBase.Index />
-                  {' Item'}
-                </div>
-
-                {/* Right: Edit and Remove buttons */}
-                <div className="flex items-center gap-1">
-                  <ArrayBase.Edit className="size-8" />
-                  <ArrayBase.Remove className="size-8" />
-                </div>
-              </div>
-            </ArrayBase.Item>
-          ))}
+          <ArrayItemsList
+            renderEditButton={() => <ArrayBase.Edit className="size-8" />}
+          />
 
           {/* Add button - custom implementation that opens dialog first */}
           <div className="pt-2">
@@ -187,5 +169,9 @@ ArrayItems.Item = ({
 };
 
 ArrayBase.mixin(ArrayItems);
+
+// Add Dialog and Popover as nested components
+ArrayItems.Dialog = ArrayItemsEditDialog;
+ArrayItems.Popover = ArrayItemsEditPopover;
 
 export default ArrayItems;

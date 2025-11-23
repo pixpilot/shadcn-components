@@ -1,5 +1,5 @@
 import { createSchemaField } from '@formily/react';
-import { ArrayItems } from './array-list';
+import { ArrayItems, ArrayItemsAccordion, ArrayItemsPopover } from './array-list';
 import { Checkbox } from './checkbox';
 import { FormGrid } from './form-grid';
 import { FormItem } from './form-item';
@@ -24,6 +24,8 @@ export const SchemaField = createSchemaField({
     Select,
     NumberInput,
     ArrayItems,
+    ArrayItemsAccordion,
+    ArrayItemsPopover,
   },
 });
 
