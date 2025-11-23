@@ -15,6 +15,7 @@
   "dependencies": {
     "@internal/shadcn": "workspace:*",
     "@pixpilot/shadcn-auth": "workspace:*",
+    "@pixpilot/shadcn-formily": "workspace:*",
     "@pixpilot/shadcn-ui": "workspace:*"
   },
   "devDependencies": {

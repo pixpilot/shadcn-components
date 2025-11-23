@@ -1,0 +1,19 @@
+import { defineConfig } from '@internal/tsdown-config';
+
+export default defineConfig({
+  entry: 'src/index.ts',
+  dts: true,
+  minify: true,
+  clean: true,
+  external: [
+    'react',
+    'react-dom',
+    'react/jsx-runtime',
+    '@formily/core',
+    '@formily/react',
+    '@formily/reactive',
+    '@formily/shared',
+    '@internal/shadcn',
+    'lucide-react',
+  ],
+});

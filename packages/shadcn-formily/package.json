@@ -1,0 +1,72 @@
+{
+  "name": "@pixpilot/shadcn-formily",
+  "type": "module",
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.17.0",
+  "description": "Formily integration for shadcn/ui components",
+  "author": "m.doaie <m.doaie@hotmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pixpilot/shadcn-components.git",
+    "directory": "packages/shadcn-formily"
+  },
+  "keywords": [],
+  "exports": "./src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs"
+      }
+    },
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts"
+  },
+  "scripts": {
+    "prepublishOnly": "pnpm run clean && pnpm run build",
+    "clean": "git clean -xdf .cache .turbo dist",
+    "clean:all": "git clean -xdf .cache .turbo dist node_modules",
+    "build": "tsdown",
+    "build:watch": "tsdown --watch",
+    "test": "vitest --run --passWithNoTests",
+    "test:watch": "vitest --watch",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint",
+    "format": "prettier --check . --ignore-path ../../.gitignore --ignore-path ../../.prettierignore"
+  },
+  "dependencies": {
+    "@formily/core": "^2.3.7",
+    "@formily/react": "^2.3.7",
+    "@formily/reactive": "^2.3.7",
+    "@formily/shared": "^2.3.7",
+    "@internal/shadcn": "workspace:*",
+    "@pixpilot/shadcn-ui": "workspace:*",
+    "lucide-react": "^0.554.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@internal/eslint-config": "workspace:*",
+    "@internal/prettier-config": "workspace:*",
+    "@internal/tsconfig": "workspace:*",
+    "@internal/tsdown-config": "workspace:*",
+    "@internal/vitest-config": "workspace:*",
+    "@storybook/react": "^10.0.8",
+    "@types/node": "catalog:dev",
+    "@types/react": "^19.2.6",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "catalog:dev",
+    "tsdown": "catalog:dev",
+    "typescript": "catalog:dev"
+  },
+  "prettier": "@internal/prettier-config"
+}

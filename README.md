@@ -39,6 +39,10 @@ pnpm run turbo:gen:init
 
 Authentication forms and components built with shadcn/ui.
 
+### [shadcn-formily](./packages/shadcn-formily/README.md)
+
+Formily integration for shadcn/ui components
+
 ### [shadcn-ui](./packages/shadcn-ui/README.md)
 
 Custom UI components and utilities built with shadcn/ui.
