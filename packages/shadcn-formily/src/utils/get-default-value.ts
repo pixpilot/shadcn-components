@@ -19,7 +19,7 @@ export function getSchemaDefaultValue(schema?: Schema): unknown {
   return undefined;
 }
 
-export function getDefaultValue(defaultValue: unknown, schema: Schema): any {
+export function getDefaultValue(defaultValue: unknown, schema: Schema): unknown {
   if (defaultValue !== undefined) return JSON.parse(JSON.stringify(defaultValue));
   if (Array.isArray(schema?.items)) return getSchemaDefaultValue(schema.items[0]);
   return getSchemaDefaultValue(schema?.items);

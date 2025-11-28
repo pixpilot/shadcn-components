@@ -557,6 +557,9 @@ importers:
       '@pixpilot/shadcn-ui':
         specifier: workspace:*
         version: link:../../packages/shadcn-ui
+      next-themes:
+        specifier: catalog:prod
+        version: 0.4.6(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
     devDependencies:
       '@internal/eslint-config':
         specifier: workspace:*

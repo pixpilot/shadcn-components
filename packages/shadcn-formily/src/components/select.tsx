@@ -24,7 +24,7 @@ type BaseSelectProps = {
  * Formily-connected Select component with options rendering
  */
 function BaseSelect(props: BaseSelectProps) {
-  const { options, value, onChange, placeholder, ...restProps } = props;
+  const { options, value = '', onChange, placeholder, ...restProps } = props;
 
   return (
     <ShadcnSelect value={value} onValueChange={onChange} {...restProps}>

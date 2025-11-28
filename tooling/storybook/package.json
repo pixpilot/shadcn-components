@@ -16,7 +16,8 @@
     "@internal/shadcn": "workspace:*",
     "@pixpilot/shadcn-auth": "workspace:*",
     "@pixpilot/shadcn-formily": "workspace:*",
-    "@pixpilot/shadcn-ui": "workspace:*"
+    "@pixpilot/shadcn-ui": "workspace:*",
+    "next-themes": "catalog:prod"
   },
   "devDependencies": {
     "@internal/eslint-config": "workspace:*",

@@ -13,19 +13,6 @@ const preview: Preview = {
         date: /Date$/iu,
       },
     },
-    backgrounds: {
-      default: 'dark',
-      values: [
-        {
-          name: 'light',
-          value: '#ffffff',
-        },
-        {
-          name: 'dark',
-          value: '#0a0a0a',
-        },
-      ],
-    },
   },
   decorators: [
     // eslint-disable-next-line ts/explicit-module-boundary-types

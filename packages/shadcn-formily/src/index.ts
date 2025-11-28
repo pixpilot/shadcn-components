@@ -2,22 +2,15 @@ export const name = '@pixpilot/shadcn-formily';
 
 export type {
   ArrayBaseMixins,
-  IArrayBaseAdditionProps,
-  IArrayBaseContext,
-  IArrayBaseItemProps,
   IArrayBaseOperationProps,
   IArrayBaseProps,
 } from './components/array-base';
 
 // Array components
 export { ArrayBase } from './components/array-base';
-export { ArrayField } from './components/array-field';
 
-export {
-  ArrayItems,
-  ArrayItemsAccordion,
-  ArrayItemsPopover,
-} from './components/array-list';
+export * from './components/array-cards';
+export * from './components/array-collapse';
 
 export { Checkbox } from './components/checkbox';
 // Core components

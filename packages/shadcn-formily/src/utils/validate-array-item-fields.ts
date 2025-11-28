@@ -1,4 +1,4 @@
-import type { ArrayField, Form } from '@formily/core';
+import type { ArrayField } from '@formily/core';
 import { fieldsHasError } from './has-error';
 
 /**
@@ -9,10 +9,10 @@ import { fieldsHasError } from './has-error';
  * @throws Error if any field has validation errors
  */
 export async function validateArrayItemFields(
-  form: Form,
   arrayField: ArrayField,
   index: number,
 ): Promise<void> {
+  const { form } = arrayField;
   const itemPathPattern = `${arrayField.address.toString()}.${index}.*`;
   const childFields = form.query(itemPathPattern).map((field) => field);
 

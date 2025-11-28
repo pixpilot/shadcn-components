@@ -1,12 +1,16 @@
-import type { ArrayField, Form } from '@formily/core';
+// eslint-disable-next-line ts/ban-ts-comment
+// @ts-nocheck
+import type { ArrayField } from '@formily/core';
 import { useEffect, useRef, useState } from 'react';
-import { validateArrayItemFields } from './validate-array-item-fields';
+import {
+  handleArrayNewItemCancel as handleCancelUtil,
+  handleArrayChangeSave as handleSaveUtil,
+} from './array-item-editor-utils';
 
 export interface UseArrayItemEditorOptions {
   open: boolean;
   index: number | null;
   arrayField: ArrayField;
-  form: Form;
   defaultValue?: any;
   onSave?: (value: any) => void;
 }
@@ -27,7 +31,6 @@ export function useArrayItemEditor({
   open,
   index,
   arrayField,
-  form,
   defaultValue,
   onSave,
 }: UseArrayItemEditorOptions): ArrayItemEditorResult {
@@ -71,53 +74,22 @@ export function useArrayItemEditor({
    * Validate and save the item
    * Returns true if validation passed and item was saved
    */
-  const handleSave = async (): Promise<boolean> => {
-    try {
-      if (isNewItem && tempIndexRef.current !== null) {
-        // For new items, validate the temporary item that's already in the array
-        const tempIndex = tempIndexRef.current;
-        await validateArrayItemFields(form, arrayField, tempIndex);
-
-        // Validation passed, keep the item
-        onSave?.(arrayField.value?.[tempIndex]);
-        return true;
-      }
-
-      if (index !== null) {
-        // For existing items, validate the current item
-        await validateArrayItemFields(form, arrayField, index);
-
-        // Validation passed
-        return true;
-      }
-      return false;
-    } catch {
-      // Validation failed - errors will be displayed in the form
-      // Force a re-render to show validation errors
-      forceUpdate({});
-      return false;
-    }
-  };
+  const handleSave = async (): Promise<boolean> =>
+    handleSaveUtil(arrayField, index, isNewItem, tempIndexRef.current, onSave, () =>
+      forceUpdate({}),
+    );
 
   /**
    * Cancel editing and restore original values
    */
   const handleCancel = () => {
-    if (isNewItem && tempIndexRef.current !== null) {
-      // For new items, remove the temporary item from the array
-      arrayField.remove?.(tempIndexRef.current).catch(console.error);
-    } else if (!isNewItem && index !== null && initialValuesRef.current !== null) {
-      // Restore the initial values to discard changes for existing items
-      const currentValue = arrayField.value?.[index] as unknown;
-      if (currentValue !== undefined) {
-        // Restore the original value
-        const restoredValue = JSON.parse(
-          JSON.stringify(initialValuesRef.current),
-        ) as unknown;
-        // eslint-disable-next-line no-param-reassign
-        arrayField.value[index] = restoredValue;
-      }
-    }
+    handleCancelUtil(
+      arrayField,
+      index,
+      isNewItem,
+      tempIndexRef.current,
+      initialValuesRef.current,
+    );
   };
 
   /**

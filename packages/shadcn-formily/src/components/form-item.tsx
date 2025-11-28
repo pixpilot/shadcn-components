@@ -1,5 +1,5 @@
 import { isVoidField } from '@formily/core';
-import { connect, mapProps } from '@formily/react';
+import { connect, mapProps, useField } from '@formily/react';
 import { cn } from '@internal/shadcn';
 import React from 'react';
 
@@ -25,10 +25,17 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<IFormItemProps>> = (
   feedbackText,
   ...props
 }) => {
+  const field = useField();
+
+  const id =
+    (field?.componentProps?.id as string) ??
+    `form-${field?.address?.toString()?.replace(/\./gu, '-')}`;
+
   return (
     <div data-slot="form-item" className={cn('grid gap-2', className)} {...props}>
       {label != null && (
         <label
+          htmlFor={id}
           data-slot="form-label"
           data-error={Boolean(feedbackStatus === 'error')}
           className={cn(
@@ -45,7 +52,14 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<IFormItemProps>> = (
         <p className="text-muted-foreground text-[0.8rem]">{description}</p>
       )}
 
-      <div className="relative">{children}</div>
+      {/* Inject id into children only if they support it */}
+      <div className="relative">
+        {React.isValidElement(children)
+          ? React.cloneElement(children, {
+              id,
+            } as React.HTMLAttributes<HTMLElement>)
+          : children}
+      </div>
 
       {Boolean(feedbackText) && feedbackStatus === 'error' && (
         <p className="text-destructive text-[0.8rem] font-medium">{feedbackText}</p>

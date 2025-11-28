@@ -1,4 +1,4 @@
-import baseConfig from '@internal/eslint-config/base';
+import baseConfig from '@internal/eslint-config/react';
 
 // Uncomment to use the internal ESLint config if available
 // /** @type {import('@internal/eslint-config').Config} */

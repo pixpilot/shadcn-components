@@ -22,7 +22,7 @@ type RadioProps = {
  * Radio component with options rendering
  */
 export function Radio(props: RadioProps) {
-  const { options, value, onChange, ...restProps } = props;
+  const { options, value = '', onChange, ...restProps } = props;
 
   return (
     <BaseRadioGroup value={value} onValueChange={onChange} {...restProps}>
