@@ -2,7 +2,7 @@
 
 import { useTheme } from 'next-themes';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // Simple icon components (can be replaced with your preferred icon library)
 function SunIcon() {

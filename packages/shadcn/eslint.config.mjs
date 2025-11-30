@@ -18,6 +18,11 @@ const config = [
       'jsx-a11y/anchor-has-content': 'warn',
       'react/no-context-provider': 'off',
       'perfectionist/sort-imports': 'off',
+      'no-underscore-dangle': 'warn',
+      'no-nested-ternary': 'warn',
+      'react/no-nested-component-definitions': 'warn',
+      'perfectionist/sort-named-exports': 'warn',
+      'ts/no-shadow': 'warn',
     },
   },
 ];

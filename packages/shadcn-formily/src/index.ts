@@ -13,6 +13,9 @@ export * from './components/array-cards';
 export * from './components/array-collapse';
 
 export { Checkbox } from './components/checkbox';
+export { Column } from './components/column';
+export { Combobox } from './components/combobox';
+export { DatePicker } from './components/date-picker';
 // Core components
 export { Form } from './components/form';
 export { FormGrid } from './components/form-grid';
@@ -22,8 +25,12 @@ export { FormItem } from './components/form-item';
 export { Input } from './components/input';
 export { NumberInput } from './components/number-input';
 export { ConnectedRadio, Radio } from './components/radio';
+export { Row } from './components/row';
 export { SchemaField } from './components/schema-field';
 export { Select } from './components/select';
+export { Separator } from './components/separator';
+export { Slider } from './components/slider';
+export { Switch } from './components/switch';
 export { Textarea } from './components/textarea';
 
 // Re-export Formily core exports for convenience

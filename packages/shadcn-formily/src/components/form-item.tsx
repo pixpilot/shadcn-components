@@ -1,3 +1,4 @@
+/* eslint-disable react/no-clone-element */
 import { isVoidField } from '@formily/core';
 import { connect, mapProps, useField } from '@formily/react';
 import { cn } from '@internal/shadcn';
@@ -31,8 +32,22 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<IFormItemProps>> = (
     (field?.componentProps?.id as string) ??
     `form-${field?.address?.toString()?.replace(/\./gu, '-')}`;
 
+  const descriptionId = React.useId();
+  const feedbackId = React.useId();
+
+  const ariaDescribedBy = [
+    description != null ? descriptionId : undefined,
+    feedbackText != null ? feedbackId : undefined,
+  ]
+    .filter(Boolean)
+    .join(' ');
+
   return (
-    <div data-slot="form-item" className={cn('grid gap-2', className)} {...props}>
+    <div
+      data-slot="form-item"
+      className={cn('flex flex-col gap-2', className)}
+      {...props}
+    >
       {label != null && (
         <label
           htmlFor={id}
@@ -44,12 +59,18 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<IFormItemProps>> = (
           )}
         >
           {label}
-          {asterisk && <span className="text-destructive ml-1">*</span>}
+          {asterisk && (
+            <span className="text-destructive ml-1" aria-label="required">
+              *
+            </span>
+          )}
         </label>
       )}
 
       {description != null && (
-        <p className="text-muted-foreground text-[0.8rem]">{description}</p>
+        <p id={descriptionId} className="text-muted-foreground text-[0.8rem]">
+          {description}
+        </p>
       )}
 
       {/* Inject id into children only if they support it */}
@@ -57,20 +78,24 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<IFormItemProps>> = (
         {React.isValidElement(children)
           ? React.cloneElement(children, {
               id,
+              'aria-describedby': ariaDescribedBy || undefined,
+              'aria-invalid': feedbackStatus === 'error' ? 'true' : undefined,
             } as React.HTMLAttributes<HTMLElement>)
           : children}
       </div>
 
-      {Boolean(feedbackText) && feedbackStatus === 'error' && (
-        <p className="text-destructive text-[0.8rem] font-medium">{feedbackText}</p>
-      )}
-
-      {Boolean(feedbackText) && feedbackStatus === 'warning' && (
-        <p className="text-amber-600 text-[0.8rem]">{feedbackText}</p>
-      )}
-
-      {Boolean(feedbackText) && feedbackStatus === 'success' && (
-        <p className="text-green-600 text-[0.8rem]">{feedbackText}</p>
+      {Boolean(feedbackText) && (
+        <p
+          id={feedbackId}
+          className={cn(
+            'text-[0.8rem]',
+            feedbackStatus === 'error' && 'text-destructive font-medium',
+            feedbackStatus === 'warning' && 'text-amber-600',
+            feedbackStatus === 'success' && 'text-green-600',
+          )}
+        >
+          {feedbackText}
+        </p>
       )}
     </div>
   );
