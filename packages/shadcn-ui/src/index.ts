@@ -13,6 +13,7 @@ export * from './Loader';
 export * from './Pagination';
 export * from './PopoverContent';
 export * from './Select';
+export * from './Slider';
 export * from './spinner';
 export * from './tags-input';
 export * from './theme-provider';
