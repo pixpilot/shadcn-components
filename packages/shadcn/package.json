@@ -28,6 +28,7 @@
     "shadcn:add": "npx shadcn@latest add"
   },
   "dependencies": {
+    "@diceui/tags-input": "^0.7.2",
     "@hookform/resolvers": "^5.2.2",
     "@pixpilot/hash": "catalog:prod",
     "@radix-ui/react-alert-dialog": "^1.1.15",

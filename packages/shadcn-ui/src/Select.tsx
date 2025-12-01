@@ -26,7 +26,7 @@ function Select(props: BaseSelectProps) {
 
   return (
     <ShadcnSelect value={value} onValueChange={onChange} {...restProps}>
-      <SelectTrigger>
+      <SelectTrigger className="w-full">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>

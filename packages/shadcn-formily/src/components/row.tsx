@@ -34,5 +34,5 @@ export interface IRowProps {
  * ```
  */
 export function Row({ className, children }: IRowProps) {
-  return <div className={cn('flex', className)}>{children}</div>;
+  return <div className={cn('flex gap-4', className)}>{children}</div>;
 }

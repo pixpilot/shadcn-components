@@ -1,4 +1,5 @@
 import { createSchemaField } from '@formily/react';
+import { TagsInput } from '@pixpilot/shadcn-ui';
 import { ArrayCards } from './array-cards';
 import { ArrayCollapse } from './array-collapse';
 import { ArrayDialog } from './array-dialog';
@@ -37,6 +38,7 @@ export const SchemaField = createSchemaField({
     NumberInput,
     DatePicker,
     Combobox,
+    TagsInput,
     Separator,
     Slider,
     Switch,

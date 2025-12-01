@@ -1,38 +1,30 @@
 'use client';
 
 import type { ComponentProps } from 'react';
+import type { CommandOptionListItem } from './CommandOptionList';
+
 import {
   Button,
-  cn,
   Command,
-  CommandEmpty,
-  CommandGroup,
   CommandInput,
-  CommandItem,
-  CommandList,
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@internal/shadcn';
-
-import { Check, ChevronsUpDown } from 'lucide-react';
+import { ChevronsUpDown } from 'lucide-react';
 import React, { useState } from 'react';
-
-interface Option {
-  value: string;
-  label: string;
-}
+import { CommandOptionList } from './CommandOptionList';
 
 type ComboboxProps = {
   value?: string;
   onChange?: (value: string) => void;
-  options?: Option[];
+  options?: CommandOptionListItem[];
   placeholder?: string;
   searchPlaceholder?: string;
   emptyText?: string;
 } & Omit<ComponentProps<typeof Command>, 'value' | 'onValueChange'>;
 
-const DEFAULT_OPTIONS: Option[] = [];
+const DEFAULT_OPTIONS: CommandOptionListItem[] = [];
 
 const Combobox: React.FC<ComboboxProps> = (props) => {
   const {
@@ -60,32 +52,22 @@ const Combobox: React.FC<ComboboxProps> = (props) => {
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-full p-0">
+      <PopoverContent
+        className="w-full p-0"
+        style={{ width: 'var(--radix-popover-trigger-width)' }}
+      >
         <Command {...commandProps}>
           <CommandInput placeholder={searchPlaceholder} />
-          <CommandList>
-            <CommandEmpty>{emptyText}</CommandEmpty>
-            <CommandGroup>
-              {options.map((option) => (
-                <CommandItem
-                  key={option.value}
-                  value={option.value}
-                  onSelect={(currentValue) => {
-                    onChange?.(currentValue === value ? '' : currentValue);
-                    setOpen(false);
-                  }}
-                >
-                  <Check
-                    className={cn(
-                      'mr-2 h-4 w-4',
-                      value === option.value ? 'opacity-100' : 'opacity-0',
-                    )}
-                  />
-                  {option.label}
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </CommandList>
+          <CommandOptionList
+            options={options}
+            value={value}
+            onChange={(val) => {
+              // eslint-disable-next-line ts/no-unsafe-argument
+              onChange?.(val);
+              setOpen(false);
+            }}
+            emptyText={emptyText}
+          ></CommandOptionList>
         </Command>
       </PopoverContent>
     </Popover>

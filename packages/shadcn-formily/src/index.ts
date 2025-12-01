@@ -31,6 +31,7 @@ export { Select } from './components/select';
 export { Separator } from './components/separator';
 export { Slider } from './components/slider';
 export { Switch } from './components/switch';
+export { TagsInputInLine } from './components/tags-input-inline';
 export { Textarea } from './components/textarea';
 
 // Re-export Formily core exports for convenience

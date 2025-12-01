@@ -1,7 +1,7 @@
 {
   "extends": "@internal/tsconfig/base.json",
   "compilerOptions": {
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "lib": ["ES2022", "dom", "dom.iterable"],
     "paths": {
       "@/*": ["../shadcn/src/*"]

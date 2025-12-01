@@ -23,6 +23,10 @@ const config = [
       'react/no-nested-component-definitions': 'warn',
       'perfectionist/sort-named-exports': 'warn',
       'ts/no-shadow': 'warn',
+      'consistent-return': 'warn',
+      'jsx-a11y/click-events-have-key-events': 'warn',
+      'jsx-a11y/no-static-element-interactions': 'warn',
+      'import/consistent-type-specifier-style': ['warn', 'prefer-top-level'],
     },
   },
 ];

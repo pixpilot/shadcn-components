@@ -203,7 +203,6 @@ export const JSONSchemaMultiColumn: Story = {
                   'x-decorator-props': { className: 'flex-1' },
                   'x-component': 'Select',
                   enum: [
-                    { label: 'Select...', value: '' },
                     { label: 'Male', value: 'male' },
                     { label: 'Female', value: 'female' },
                     { label: 'Other', value: 'other' },
@@ -564,7 +563,6 @@ export const CustomStyledLayout: Story = {
                 x-decorator="Column"
                 x-component="Select"
                 enum={[
-                  { label: 'Select...', value: '' },
                   { label: 'Electronics', value: 'electronics' },
                   { label: 'Clothing', value: 'clothing' },
                   { label: 'Books', value: 'books' },

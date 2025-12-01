@@ -18,6 +18,8 @@ export * from './popover';
 export * from './radio-group';
 export * from './select';
 export * from './separator';
+export * from './shadcn-io/tags';
+export * from './shadcn-io/tags-input-inline';
 export * from './sheet';
 export * from './slider';
 export * from './switch';

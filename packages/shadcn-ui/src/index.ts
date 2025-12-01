@@ -14,6 +14,7 @@ export * from './Pagination';
 export * from './PopoverContent';
 export * from './Select';
 export * from './spinner';
+export * from './tags-input';
 export * from './theme-provider';
 export * from './ThemeToggle';
 export * from './toast';
