@@ -9,6 +9,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "index.ts", "*.config.ts", "test"],
+  "include": ["src", "index.ts", "*.config.ts", "*.setup.ts", "test"],
   "exclude": ["node_modules"]
 }

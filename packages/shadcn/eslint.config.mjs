@@ -9,6 +9,12 @@ const config = [
   },
   {
     files: ['**/*.ts', '**/*.tsx'],
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
     plugins: {
       'jsx-a11y': jsxA11yPlugin,
     },
@@ -27,6 +33,11 @@ const config = [
       'jsx-a11y/click-events-have-key-events': 'warn',
       'jsx-a11y/no-static-element-interactions': 'warn',
       'import/consistent-type-specifier-style': ['warn', 'prefer-top-level'],
+      'no-continue': 'off',
+      'jsx-a11y/role-supports-aria-props': 'warn',
+      'ts/switch-exhaustiveness-check': 'warn',
+      'ts/no-floating-promises': 'warn',
+      'no-param-reassign': 'warn',
     },
   },
 ];

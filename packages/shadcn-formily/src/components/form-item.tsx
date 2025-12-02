@@ -94,7 +94,15 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<IFormItemProps>> = (
             feedbackStatus === 'success' && 'text-green-600',
           )}
         >
-          {feedbackText}
+          {typeof feedbackText === 'string'
+            ? feedbackText.split('\n').map((line: string, index: number) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <React.Fragment key={index}>
+                  {line}
+                  {index < feedbackText.split('\n').length - 1 && <br />}
+                </React.Fragment>
+              ))
+            : feedbackText}
         </p>
       )}
     </div>

@@ -9,6 +9,7 @@ export * from './Combobox';
 export * from './confirmation-dialog';
 export * from './ContentCard';
 export * from './DatePicker';
+export * from './FileUploadInline';
 export * from './Loader';
 export * from './Pagination';
 export * from './PopoverContent';

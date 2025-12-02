@@ -8,6 +8,7 @@ import { Checkbox } from './checkbox';
 import { Column } from './column';
 import { Combobox } from './combobox';
 import { DatePicker } from './date-picker';
+import { FileUploadInline } from './file-upload-inline';
 import { FormGrid } from './form-grid';
 import { FormItem } from './form-item';
 import { Input } from './input';
@@ -39,6 +40,7 @@ export const SchemaField = createSchemaField({
     DatePicker,
     Combobox,
     TagsInput,
+    FileUploadInline,
     Separator,
     Slider,
     Switch,

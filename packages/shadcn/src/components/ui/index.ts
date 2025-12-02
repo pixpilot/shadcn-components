@@ -9,6 +9,7 @@ export * from './checkbox';
 export * from './command';
 export * from './dialog';
 export * from './dropdown-menu';
+export * from './file-upload';
 export * from './form';
 export * from './input';
 export * from './label';
