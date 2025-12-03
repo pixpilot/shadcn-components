@@ -4,7 +4,7 @@ import { connect, mapProps, useField } from '@formily/react';
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 
-interface IFormItemProps extends React.ComponentProps<'div'> {
+interface FormItemProps extends React.ComponentProps<'div'> {
   label?: React.ReactNode;
   description?: React.ReactNode;
   asterisk?: boolean;
@@ -16,7 +16,7 @@ interface IFormItemProps extends React.ComponentProps<'div'> {
  * BaseFormItem component serves as a decorator for Formily fields
  * It provides label, error messages, and description display
  */
-export const BaseFormItem: React.FC<React.PropsWithChildren<IFormItemProps>> = ({
+export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
   className,
   children,
   label,
