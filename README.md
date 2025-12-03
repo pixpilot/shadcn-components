@@ -35,6 +35,10 @@ pnpm run turbo:gen:init
 
 ## 📦 Packages
 
+### [shadcn](./packages/shadcn/README.md)
+
+A collection of reusable UI components built with shadcn/ui and Radix UI primitives.
+
 ### [shadcn-auth](./packages/shadcn-auth/README.md)
 
 Authentication forms and components built with shadcn/ui.
