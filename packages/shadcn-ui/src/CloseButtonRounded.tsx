@@ -1,4 +1,4 @@
-import { Button, cn } from '@internal/shadcn';
+import { Button, cn } from '@pixpilot/shadcn';
 import { X } from 'lucide-react';
 import React from 'react';
 

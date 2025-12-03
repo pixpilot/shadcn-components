@@ -2,7 +2,7 @@
 /* eslint-disable no-magic-numbers */
 
 import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from '@internal/shadcn';
+import { Button } from '@pixpilot/shadcn';
 import React from 'react';
 import { createForm, Form, SchemaField } from '../src';
 

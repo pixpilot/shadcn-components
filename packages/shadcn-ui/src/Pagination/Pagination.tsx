@@ -6,7 +6,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from '@internal/shadcn';
+} from '@pixpilot/shadcn';
 import { ChevronsLeft, ChevronsRight } from 'lucide-react';
 import React from 'react';
 

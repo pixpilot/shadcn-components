@@ -13,7 +13,7 @@ export default defineConfig({
     '@formily/react',
     '@formily/reactive',
     '@formily/shared',
-    '@internal/shadcn',
+    '@pixpilot/shadcn',
     'lucide-react',
   ],
 });

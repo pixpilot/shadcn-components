@@ -1,6 +1,6 @@
 import type { ArrayField } from '@formily/core';
 import { useField, useFieldSchema } from '@formily/react';
-import { cn } from '@internal/shadcn';
+import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 import { ArrayBase, useArrayComponents } from '../array-base';
 import { ItemWrapper } from './item-wrapper';

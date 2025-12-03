@@ -8,7 +8,7 @@ import {
   Label,
   OrContinueWithSeparator,
   Separator,
-} from '@internal/shadcn';
+} from '@pixpilot/shadcn';
 
 import { Loader2 } from 'lucide-react';
 import React, { useState } from 'react';

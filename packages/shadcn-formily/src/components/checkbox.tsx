@@ -1,5 +1,5 @@
 import { connect, mapProps } from '@formily/react';
-import { Checkbox as ShadcnCheckbox } from '@internal/shadcn';
+import { Checkbox as ShadcnCheckbox } from '@pixpilot/shadcn';
 
 /**
  * Formily-connected Checkbox component

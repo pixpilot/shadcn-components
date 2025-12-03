@@ -1,4 +1,4 @@
-import { PopoverContent as RadixPopoverContent } from '@internal/shadcn';
+import { PopoverContent as RadixPopoverContent } from '@pixpilot/shadcn';
 import React from 'react';
 
 export interface PopoverContentProps

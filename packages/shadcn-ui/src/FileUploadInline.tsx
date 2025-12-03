@@ -1,6 +1,6 @@
 'use client';
 
-import type { FileUploadProps } from '@internal/shadcn';
+import type { FileUploadProps } from '@pixpilot/shadcn';
 import {
   Button,
   cn,
@@ -10,7 +10,7 @@ import {
   FileUploadItemMetadata,
   FileUploadList,
   FileUploadTrigger,
-} from '@internal/shadcn';
+} from '@pixpilot/shadcn';
 import { FileIcon, XIcon } from 'lucide-react';
 import * as React from 'react';
 

@@ -4,7 +4,7 @@ import type { PanelStateManager } from '../../utils';
 
 import type { ArrayItemProps } from '../array-base';
 import { RecursionField, useField, useFieldSchema } from '@formily/react';
-import { cn } from '@internal/shadcn';
+import { cn } from '@pixpilot/shadcn';
 import { ChevronDownIcon } from 'lucide-react';
 import React from 'react';
 import { validateArrayItemFields } from '../../utils/validate-array-item-fields';

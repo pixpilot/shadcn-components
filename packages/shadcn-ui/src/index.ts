@@ -1,4 +1,4 @@
-import { cn } from '@internal/shadcn';
+import { cn } from '@pixpilot/shadcn';
 
 export * from './AbsoluteFill';
 export * from './Alert';

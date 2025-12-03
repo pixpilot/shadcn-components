@@ -1,6 +1,6 @@
 import type { Form as IForm } from '@formily/core';
 import { FormProvider } from '@formily/react';
-import { cn } from '@internal/shadcn';
+import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 
 export interface IFormProps {

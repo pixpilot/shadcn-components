@@ -1,5 +1,5 @@
 'use client';
-import { cn } from '@internal/shadcn';
+import { cn } from '@pixpilot/shadcn';
 import { Loader2 } from 'lucide-react';
 import React, { useEffect, useReducer } from 'react';
 

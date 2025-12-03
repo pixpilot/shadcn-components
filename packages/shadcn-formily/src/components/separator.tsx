@@ -1,5 +1,5 @@
 import { connect } from '@formily/react';
-import { Separator as ShadcnSeparator } from '@internal/shadcn';
+import { Separator as ShadcnSeparator } from '@pixpilot/shadcn';
 
 /**
  * Formily-connected Separator component

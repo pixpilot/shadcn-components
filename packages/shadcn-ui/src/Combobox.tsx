@@ -10,7 +10,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@internal/shadcn';
+} from '@pixpilot/shadcn';
 import { ChevronsUpDown } from 'lucide-react';
 import React, { useState } from 'react';
 import { CommandOptionList } from './CommandOptionList';

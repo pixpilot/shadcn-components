@@ -1,4 +1,4 @@
-import { cn } from '@internal/shadcn';
+import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 
 export interface IFormGridProps extends React.HTMLAttributes<HTMLDivElement> {}

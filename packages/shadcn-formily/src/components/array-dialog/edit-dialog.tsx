@@ -11,7 +11,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@internal/shadcn';
+} from '@pixpilot/shadcn';
 
 export interface ArrayItemsEditDialogProps {
   schema: Schema;

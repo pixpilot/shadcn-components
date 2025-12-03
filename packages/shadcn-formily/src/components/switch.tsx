@@ -1,5 +1,5 @@
 import { connect, mapProps } from '@formily/react';
-import { Switch as ShadcnSwitch } from '@internal/shadcn';
+import { Switch as ShadcnSwitch } from '@pixpilot/shadcn';
 
 /**
  * Formily-connected Switch component

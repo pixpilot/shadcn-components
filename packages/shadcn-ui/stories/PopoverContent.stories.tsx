@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Popover, PopoverTrigger } from '@internal/shadcn';
+import { Popover, PopoverTrigger } from '@pixpilot/shadcn';
 import { Button } from '../src/Button';
 import { PopoverContent } from '../src/PopoverContent';
 

@@ -6,7 +6,7 @@ import {
   CommandGroup,
   CommandItem,
   CommandList,
-} from '@internal/shadcn';
+} from '@pixpilot/shadcn';
 import { Check } from 'lucide-react';
 
 export interface CommandOptionListItem {

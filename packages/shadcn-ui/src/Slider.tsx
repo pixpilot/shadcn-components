@@ -1,4 +1,4 @@
-import { cn, Slider as ShadcnSlider } from '@internal/shadcn';
+import { cn, Slider as ShadcnSlider } from '@pixpilot/shadcn';
 import React from 'react';
 
 export interface SliderProps extends React.ComponentProps<typeof ShadcnSlider> {}

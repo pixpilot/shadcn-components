@@ -8,7 +8,7 @@ import type {
   FieldComponentProps,
 } from './types';
 
-import { cn } from '@internal/shadcn';
+import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 import { filterAndSortComponents } from '../utils/filter-and-sort-components';
 import { getArrayComponents } from './get-array-components';

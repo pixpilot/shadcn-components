@@ -1,4 +1,4 @@
-import type { buttonVariants } from '@internal/shadcn';
+import type { buttonVariants } from '@pixpilot/shadcn';
 
 import type { VariantProps } from 'class-variance-authority';
 import {
@@ -7,7 +7,7 @@ import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from '@internal/shadcn';
+} from '@pixpilot/shadcn';
 
 import React, { useCallback } from 'react';
 import { AbsoluteFill } from './AbsoluteFill';

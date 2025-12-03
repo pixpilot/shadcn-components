@@ -13,7 +13,7 @@ import {
   TagsInputInLineLabel,
   TagsInputInLineList,
   TagsInputInLineRoot,
-} from '@internal/shadcn';
+} from '@pixpilot/shadcn';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { CommandOptionList } from './CommandOptionList';

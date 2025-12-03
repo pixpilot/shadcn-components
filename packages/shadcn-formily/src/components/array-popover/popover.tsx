@@ -4,7 +4,7 @@ import type { Schema } from '@formily/react';
 import type { ActiveItemManager } from '../array-common';
 import { observer, RecursionField, useField } from '@formily/react';
 
-import { Button, Popover, PopoverContent, PopoverTrigger } from '@internal/shadcn';
+import { Button, Popover, PopoverContent, PopoverTrigger } from '@pixpilot/shadcn';
 
 export interface ArrayItemsEditPopoverProps {
   /**

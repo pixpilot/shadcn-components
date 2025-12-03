@@ -1,5 +1,5 @@
 import type { AlertProps } from '../Alert';
-import { cn } from '@internal/shadcn';
+import { cn } from '@pixpilot/shadcn';
 import { XIcon } from 'lucide-react';
 import React from 'react';
 import { Alert } from '../Alert';

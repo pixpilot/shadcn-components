@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react';
 import { connect } from '@formily/react';
-import { Label, RadioGroup, RadioGroupItem } from '@internal/shadcn';
+import { Label, RadioGroup, RadioGroupItem } from '@pixpilot/shadcn';
 
 interface Option {
   value: string;

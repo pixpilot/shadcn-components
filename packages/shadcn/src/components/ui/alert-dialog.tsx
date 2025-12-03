@@ -1,6 +1,6 @@
 'use client';
 
-import { buttonVariants } from '@internal/shadcn';
+import { buttonVariants } from '@pixpilot/shadcn';
 import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog';
 
 import * as React from 'react';

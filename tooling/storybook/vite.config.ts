@@ -16,7 +16,7 @@ export default defineConfig({
         const srcPath = path.resolve(packagesDir, pkg, 'src');
         if (fs.existsSync(srcPath)) {
           if (pkg === 'shadcn') {
-            aliases['@internal/shadcn'] = srcPath;
+            aliases['@pixpilot/shadcn'] = srcPath;
           } else {
             aliases[`@pixpilot/${pkg}`] = srcPath;
           }
@@ -34,3 +34,4 @@ export default defineConfig({
     },
   },
 });
+

@@ -1,5 +1,5 @@
 import { connect, mapProps } from '@formily/react';
-import { Input } from '@internal/shadcn';
+import { Input } from '@pixpilot/shadcn';
 
 /**
  * Formily-connected Number Input component

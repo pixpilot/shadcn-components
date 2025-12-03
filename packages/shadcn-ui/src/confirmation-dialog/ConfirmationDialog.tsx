@@ -1,5 +1,5 @@
 import NiceModal, { useModal } from '@ebay/nice-modal-react';
-import { Button } from '@internal/shadcn';
+import { Button } from '@pixpilot/shadcn';
 import {
   Dialog,
   DialogClose,

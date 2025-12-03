@@ -1,7 +1,7 @@
 /* eslint-disable react/no-clone-element */
 import { isVoidField } from '@formily/core';
 import { connect, mapProps, useField } from '@formily/react';
-import { cn } from '@internal/shadcn';
+import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 
 interface IFormItemProps extends React.ComponentProps<'div'> {

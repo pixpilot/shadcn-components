@@ -1,7 +1,7 @@
 import type { Schema } from '@formily/react';
 import type { ArrayComponentProps } from '../array-base';
 import { observer } from '@formily/react';
-import { cn } from '@internal/shadcn';
+import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 import { ArrayBase, ArrayComponentProvider } from '../array-base';
 import { DEFAULT_EDITABLE_OPERATIONS } from '../array-base/constants';

@@ -49,8 +49,8 @@
   },
   "dependencies": {
     "@ebay/nice-modal-react": "^1.2.13",
-    "@internal/shadcn": "workspace:*",
     "@pixpilot/hash": "catalog:prod",
+    "@pixpilot/shadcn": "workspace:*",
     "class-variance-authority": "catalog:prod",
     "lucide-react": "catalog:prod",
     "next-themes": "catalog:prod",

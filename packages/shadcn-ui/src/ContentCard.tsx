@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import { Card, CardContent, cn } from '@internal/shadcn';
+import { Card, CardContent, cn } from '@pixpilot/shadcn';
 import React from 'react';
 
 interface SectionCardProps extends React.ComponentProps<typeof Card> {

@@ -6,7 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
   Select as ShadcnSelect,
-} from '@internal/shadcn';
+} from '@pixpilot/shadcn';
 import React from 'react';
 
 interface Option {

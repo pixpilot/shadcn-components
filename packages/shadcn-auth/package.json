@@ -48,7 +48,7 @@
     "react-dom": ">=18.0.0"
   },
   "dependencies": {
-    "@internal/shadcn": "workspace:*",
+    "@pixpilot/shadcn": "workspace:*",
     "@pixpilot/shadcn-ui": "workspace:*",
     "lucide-react": "catalog:prod"
   },
