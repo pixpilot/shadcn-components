@@ -1,7 +1,7 @@
 {
   "name": "@pixpilot/shadcn",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.1.11",
   "packageManager": "pnpm@10.17.0",
   "description": "A collection of reusable UI components built with shadcn/ui and Radix UI primitives.",
   "author": "m.doaie <m.doaie@hotmail.com>",
@@ -12,23 +12,18 @@
     "directory": "packages/ui"
   },
   "keywords": [],
-  "exports": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "dist"
   ],
-  "publishConfig": {
-    "access": "public",
-    "exports": {
-      ".": {
-        "types": "./dist/index.d.ts",
-        "import": "./dist/index.js",
-        "require": "./dist/index.cjs"
-      }
-    },
-    "main": "./dist/index.cjs",
-    "module": "./dist/index.js",
-    "types": "./dist/index.d.ts"
-  },
   "scripts": {
     "prepublishOnly": "pnpm run clean && pnpm run build",
     "clean": "git clean -xdf .cache .turbo dist",
@@ -44,6 +39,10 @@
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",
     "shadcn:add": "npx shadcn@latest add"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
     "@diceui/tags-input": "^0.7.2",

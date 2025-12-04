@@ -82,6 +82,7 @@ pnpm-debug.log*
 # -----------------------------
 .env
 .env.*
+.npmrc.secrets
 packages/**/.env
 packages/**/.env.*
 tooling/**/.env

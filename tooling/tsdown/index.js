@@ -11,6 +11,24 @@ export function defineConfig(options) {
   return defineTsDownConfig({
     minify: true,
     bundleSize: LIMIT_KB,
+    dts: true,
+    clean: true,
+    format: ['esm', 'cjs'],
+    unbundle: true,
+    external: [
+      'react',
+      'react-dom',
+      'react/jsx-runtime', // Add this - critical!
+      'class-variance-authority',
+      'clsx',
+      'tailwind-merge',
+      'lucide-react',
+      'date-fns',
+      /^@radix-ui\//u, // Use regex pattern for better matching
+    ],
+    // Ensure proper treeshaking and no Node.js polyfills
+    treeshake: true,
+    platform: 'browser',
     // sourcemap: true,
     ...options,
   });

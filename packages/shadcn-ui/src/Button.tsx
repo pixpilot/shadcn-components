@@ -9,9 +9,9 @@ import {
   TooltipTrigger,
 } from '@pixpilot/shadcn';
 
+import { Loader2 } from 'lucide-react';
 import React, { useCallback } from 'react';
 import { AbsoluteFill } from './AbsoluteFill';
-import { Spinner } from './spinner';
 
 export interface ButtonLoaderProps {
   /**
@@ -88,7 +88,7 @@ function Button(props: ButtonProps & { ref?: React.Ref<HTMLButtonElement> }) {
     ...rest
   } = props;
 
-  const { placement: loaderPlacement = 'end', ...otherLoaderProps } = LoaderProps || {};
+  const { placement: loaderPlacement = 'end' } = LoaderProps || {};
 
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -111,16 +111,14 @@ function Button(props: ButtonProps & { ref?: React.Ref<HTMLButtonElement> }) {
     <div
       className={cn(
         'flex items-center justify-center',
-        loaderPlacement === 'center' &&
-          'rounded-0 absolute inset-0 bg-white/60 dark:bg-black/60',
+        loaderPlacement === 'center' && 'rounded-0 absolute inset-0',
         loaderPlacement === 'start' && 'mr-1',
         loaderPlacement === 'end' && 'ml-1',
       )}
     >
-      <Spinner
-        className={cn({ 'text-black dark:text-white': loaderPlacement === 'center' })}
-        size={getLoaderSize(size)}
-        {...otherLoaderProps}
+      <Loader2
+        className="text-background animate-spin"
+        style={{ height: getLoaderSize(size), width: getLoaderSize(size) }}
       />
     </div>
   );

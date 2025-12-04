@@ -1,18 +1,8 @@
-import type { Options as TsDownOptions } from 'tsdown';
+import { defineConfig } from '@internal/tsdown-config';
 
-const config: TsDownOptions = {
-  entry: ['src/**/*.{ts,tsx}'],
+export default defineConfig({
+  entry: 'src/index.ts',
   dts: true,
-  // minify: true,
+  minify: true,
   clean: true,
-  format: ['esm'],
-  external: [
-    'react',
-    'react-dom',
-    'class-variance-authority',
-    'lucide-react',
-    '@radix-ui/react-*',
-  ],
-};
-
-export default config;
+});

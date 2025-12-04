@@ -42,6 +42,10 @@
     "deps:update:major": "npx taze major -r -w && pnpm install",
     "turbo:gen:init": "pnpm turbo gen init",
     "changeset": "changeset",
+    "version": "changeset version",
+    "publish": "node scripts/publish.js",
+    "publish:dry": "node scripts/publish.js --dry-run",
+    "publish:next": "node scripts/publish.js --next",
     "generate-packages-section": "node scripts/generate-packages-section.js"
   },
   "devDependencies": {

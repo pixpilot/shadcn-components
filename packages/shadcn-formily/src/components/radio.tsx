@@ -1,8 +1,8 @@
-import type { ComponentProps } from 'react';
+import type { ComponentProps, FC } from 'react';
 import { connect } from '@formily/react';
 import { Label, RadioGroup, RadioGroupItem } from '@pixpilot/shadcn';
 
-interface Option {
+export interface RadioGroupOption {
   value: string;
   label: string;
 }
@@ -13,7 +13,7 @@ interface Option {
 const BaseRadioGroup = RadioGroup;
 
 type RadioProps = {
-  options?: Option[];
+  options?: RadioGroupOption[];
   value?: string;
   onChange?: (value: string) => void;
 } & Omit<ComponentProps<typeof RadioGroup>, 'value' | 'onValueChange' | 'children'>;
@@ -38,4 +38,4 @@ export function Radio(props: RadioProps) {
 
 Radio.displayName = 'Radio';
 
-export const ConnectedRadio = connect(Radio);
+export const ConnectedRadio: FC = connect(Radio);

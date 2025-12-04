@@ -4,7 +4,7 @@ import { connect, mapProps, useField } from '@formily/react';
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 
-interface FormItemProps extends React.ComponentProps<'div'> {
+export interface FormItemProps extends React.ComponentProps<'div'> {
   label?: React.ReactNode;
   description?: React.ReactNode;
   asterisk?: boolean;

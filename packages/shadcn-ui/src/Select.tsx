@@ -9,13 +9,13 @@ import {
 } from '@pixpilot/shadcn';
 import React from 'react';
 
-interface Option {
+export interface SelectOption {
   value: string | number;
   label: string;
 }
 
 type BaseSelectProps = {
-  options?: Option[];
+  options?: SelectOption[];
   value?: string;
   onChange?: (value: string) => void;
   placeholder?: string;
