@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-formily
 
+## 0.1.0
+
+### Minor Changes
+
+- add JSON Schema form renderer and transform schema utility
+
 ## 0.0.8
 
 ### Patch Changes
