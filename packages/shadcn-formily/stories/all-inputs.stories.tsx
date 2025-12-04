@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ISchema } from '../src';
 import React from 'react';
 import { createForm, Form, SchemaField } from '../src';
 
@@ -18,12 +19,13 @@ export const AllInputTypes: Story = {
   render: () => {
     const form = createForm();
 
-    const schema = {
+    const schema: ISchema = {
       type: 'object',
       properties: {
         textInput: {
           type: 'string',
           title: 'Text Input',
+
           'x-decorator': 'FormItem',
           'x-component': 'Input',
           'x-component-props': {

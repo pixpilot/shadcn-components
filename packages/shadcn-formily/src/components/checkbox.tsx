@@ -7,8 +7,24 @@ import { Checkbox as ShadcnCheckbox } from '@pixpilot/shadcn';
  */
 export const Checkbox = connect(
   ShadcnCheckbox,
-  mapProps({
-    value: 'checked',
-    onInput: 'onCheckedChange',
-  }),
+  mapProps(
+    {
+      value: 'checked',
+      onInput: 'onCheckedChange',
+    },
+    (props, field) => {
+      // eslint-disable-next-line no-param-reassign
+      field.decoratorProps.labelPlacement = 'end';
+
+      return {
+        ...props,
+      };
+    },
+  ),
 );
+
+/**
+ * Default label placement for checkbox
+ * Used by FormItem to determine label positioning
+ */
+(Checkbox as typeof Checkbox & { labelPlacement?: string }).labelPlacement = 'right';

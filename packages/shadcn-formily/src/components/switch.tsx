@@ -7,8 +7,15 @@ import { Switch as ShadcnSwitch } from '@pixpilot/shadcn';
  */
 export const Switch = connect(
   ShadcnSwitch,
-  mapProps({
-    value: 'checked',
-    onInput: 'onCheckedChange',
-  }),
+  mapProps(
+    {
+      value: 'checked',
+      onInput: 'onCheckedChange',
+    },
+    (props, field) => {
+      // eslint-disable-next-line no-param-reassign
+      field.decoratorProps.labelPlacement = 'end';
+      return props;
+    },
+  ),
 );

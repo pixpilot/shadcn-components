@@ -4,12 +4,15 @@ import { connect, mapProps, useField } from '@formily/react';
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 
+export type LabelPlacement = 'top' | 'bottom' | 'start' | 'end';
+
 export interface FormItemProps extends React.ComponentProps<'div'> {
   label?: React.ReactNode;
   description?: React.ReactNode;
   asterisk?: boolean;
   feedbackStatus?: 'error' | 'warning' | 'success';
   feedbackText?: React.ReactNode;
+  labelPlacement?: LabelPlacement;
 }
 
 /**
@@ -24,9 +27,15 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
   asterisk,
   feedbackStatus,
   feedbackText,
+  labelPlacement = 'top',
   ...props
 }) => {
   const field = useField();
+  const fieldProps = field?.componentProps ?? {};
+
+  // eslint-disable-next-line ts/no-unsafe-assignment
+  const effectiveLabelPlacement: LabelPlacement =
+    fieldProps.labelPlacement ?? labelPlacement;
 
   const id =
     (field?.componentProps?.id as string) ??
@@ -42,47 +51,81 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
     .filter(Boolean)
     .join(' ');
 
+  const labelElement = label != null && (
+    <label
+      htmlFor={id}
+      data-slot="form-label"
+      data-error={Boolean(feedbackStatus === 'error')}
+      className={cn(
+        'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+        feedbackStatus === 'error' && 'text-destructive',
+        (effectiveLabelPlacement === 'end' || effectiveLabelPlacement === 'start') &&
+          'shrink-0',
+      )}
+    >
+      {label}
+      {asterisk && (
+        <span className="text-destructive ml-1" aria-label="required">
+          *
+        </span>
+      )}
+    </label>
+  );
+
+  const inputElement = (
+    <div className="relative">
+      {React.isValidElement(children)
+        ? React.cloneElement(children, {
+            id,
+            'aria-describedby': ariaDescribedBy || undefined,
+            'aria-invalid': feedbackStatus === 'error' ? 'true' : undefined,
+          } as React.HTMLAttributes<HTMLElement>)
+        : children}
+    </div>
+  );
+
+  const contentElement = (
+    <>
+      {effectiveLabelPlacement === 'top' && labelElement}
+
+      {description != null && effectiveLabelPlacement === 'top' && (
+        <p id={descriptionId} className="text-muted-foreground text-[0.8rem]">
+          {description}
+        </p>
+      )}
+
+      {(effectiveLabelPlacement === 'start' || effectiveLabelPlacement === 'end') && (
+        <div
+          className={cn(
+            'flex items-center gap-2',
+            effectiveLabelPlacement === 'start' && 'flex-row',
+            // effectiveLabelPlacement === 'end' && 'flex-row-reverse',
+          )}
+        >
+          {effectiveLabelPlacement === 'start' && labelElement}
+          {inputElement}
+          {effectiveLabelPlacement === 'end' && labelElement}
+        </div>
+      )}
+
+      {effectiveLabelPlacement === 'top' && inputElement}
+
+      {description != null &&
+        (effectiveLabelPlacement === 'start' || effectiveLabelPlacement === 'end') && (
+          <p id={descriptionId} className="text-muted-foreground text-[0.8rem]">
+            {description}
+          </p>
+        )}
+    </>
+  );
+
   return (
     <div
       data-slot="form-item"
       className={cn('flex flex-col gap-2', className)}
       {...props}
     >
-      {label != null && (
-        <label
-          htmlFor={id}
-          data-slot="form-label"
-          data-error={Boolean(feedbackStatus === 'error')}
-          className={cn(
-            'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
-            feedbackStatus === 'error' && 'text-destructive',
-          )}
-        >
-          {label}
-          {asterisk && (
-            <span className="text-destructive ml-1" aria-label="required">
-              *
-            </span>
-          )}
-        </label>
-      )}
-
-      {description != null && (
-        <p id={descriptionId} className="text-muted-foreground text-[0.8rem]">
-          {description}
-        </p>
-      )}
-
-      {/* Inject id into children only if they support it */}
-      <div className="relative">
-        {React.isValidElement(children)
-          ? React.cloneElement(children, {
-              id,
-              'aria-describedby': ariaDescribedBy || undefined,
-              'aria-invalid': feedbackStatus === 'error' ? 'true' : undefined,
-            } as React.HTMLAttributes<HTMLElement>)
-          : children}
-      </div>
+      {contentElement}
 
       {Boolean(feedbackText) && (
         <p
@@ -121,6 +164,9 @@ export const FormItem = connect(
         label: (field.title ?? props.label) as React.ReactNode,
         description: (props.description ?? field.description) as React.ReactNode,
         asterisk: props.asterisk,
+        effectiveLabelPlacement: (props.labelPlacement ??
+          field.componentProps?.effectiveLabelPlacement ??
+          'top') as LabelPlacement,
       };
     }
 
@@ -157,6 +203,9 @@ export const FormItem = connect(
       feedbackStatus: takeFeedbackStatus(),
       feedbackText: takeFeedbackText(),
       asterisk: takeAsterisk(),
+      effectiveLabelPlacement: (props.labelPlacement ??
+        field.componentProps?.effectiveLabelPlacement ??
+        'top') as LabelPlacement,
     };
   }),
 );

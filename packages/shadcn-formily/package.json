@@ -53,6 +53,7 @@
     "@formily/shared": "^2.3.7",
     "@pixpilot/shadcn": "workspace:*",
     "@pixpilot/shadcn-ui": "workspace:*",
+    "json-schema-traverse": "^1.0.0",
     "lucide-react": "^0.554.0",
     "pretty-bytes": "catalog:prod"
   },
