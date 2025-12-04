@@ -46,6 +46,7 @@
     "publish": "node scripts/publish.js",
     "publish:dry": "node scripts/publish.js --dry-run",
     "publish:next": "node scripts/publish.js --next",
+    "release": "changeset version && changeset publish && git push --follow-tags",
     "check:all": "pnpm lint && pnpm format && pnpm typecheck && pnpm test",
     "generate-packages-section": "node scripts/generate-packages-section.js"
   },
