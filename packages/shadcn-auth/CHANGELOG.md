@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-auth
 
+## 0.0.8
+
+### Patch Changes
+
+- test bundler
+
 ## 0.0.7
 
 ### Patch Changes

@@ -135,6 +135,9 @@ importers:
       '@internal/prettier-config':
         specifier: workspace:*
         version: link:tooling/prettier
+      '@pixpilot/changeset':
+        specifier: ^0.1.2
+        version: 0.1.2
       '@pixpilot/dev-config':
         specifier: catalog:dev
         version: 3.16.0
@@ -1592,6 +1595,10 @@ packages:
         optional: true
       vue-eslint-parser:
         optional: true
+
+  '@pixpilot/changeset@0.1.2':
+    resolution: {integrity: sha512-ZIZyrMiFeM8Ky0d6/Q9kGyURNwSB7SJ9dDkdYFbbB+U1pLVL9q9WNBQ/nhQ3XOqpIlgIwZNZg9h+blZBIwBHlg==}
+    hasBin: true
 
   '@pixpilot/dev-config@3.16.0':
     resolution: {integrity: sha512-o/YYPYpl3JmMp6SET/t+OtCDRSEzigTFBzHmqi+wGlJc9vUMCjOAUD2fpAuiHyhZ/qzqD1CaSy193Qi32j9pug==}
@@ -7813,6 +7820,8 @@ snapshots:
       - supports-color
       - typescript
       - vitest
+
+  '@pixpilot/changeset@0.1.2': {}
 
   '@pixpilot/dev-config@3.16.0': {}
 

@@ -1,5 +1,12 @@
 # @internal/storybook
 
+## 0.0.9
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn-auth@0.0.8
+
 ## 0.0.8
 
 ### Patch Changes
