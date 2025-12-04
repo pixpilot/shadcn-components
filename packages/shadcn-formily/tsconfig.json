@@ -13,7 +13,6 @@
     "scripts/**/*",
     "*.config.ts",
     "*.config.js",
-    "../shadcn/src/**/*",
     "stories/**/*"
   ],
   "exclude": ["node_modules"]
