@@ -94,6 +94,7 @@
     "postcss": "^8.5.6",
     "prettier": "catalog:dev",
     "react": "catalog:prod",
+    "react-dom": "catalog:prod",
     "tailwindcss": "^4.1.17",
     "tsdown": "catalog:dev",
     "typescript": "catalog:dev",

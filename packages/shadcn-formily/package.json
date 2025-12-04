@@ -43,6 +43,10 @@
     "lint": "eslint",
     "format": "prettier --check . --ignore-path ../../.gitignore --ignore-path ../../.prettierignore"
   },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
   "dependencies": {
     "@formily/core": "^2.3.7",
     "@formily/react": "^2.3.7",
@@ -51,9 +55,7 @@
     "@pixpilot/shadcn": "workspace:*",
     "@pixpilot/shadcn-ui": "workspace:*",
     "lucide-react": "^0.554.0",
-    "pretty-bytes": "catalog:prod",
-    "react": "catalog:prod",
-    "react-dom": "catalog:prod"
+    "pretty-bytes": "catalog:prod"
   },
   "devDependencies": {
     "@internal/eslint-config": "workspace:*",
@@ -66,6 +68,8 @@
     "@types/react": "^19.2.6",
     "@types/react-dom": "^19.2.3",
     "eslint": "catalog:dev",
+    "react": "catalog:prod",
+    "react-dom": "catalog:prod",
     "tsdown": "catalog:dev",
     "typescript": "catalog:dev"
   },

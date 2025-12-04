@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { render, waitFor } from '@testing-library/react';
+import { act, render, waitFor } from '@testing-library/react';
 import React from 'react';
 import {
   FileUpload,
@@ -40,7 +40,9 @@ describe('fileUpload - onFilesReject prop', () => {
     });
 
     const event = new Event('change', { bubbles: true });
-    input.dispatchEvent(event);
+    act(() => {
+      input.dispatchEvent(event);
+    });
 
     await waitFor(() => {
       expect(onFilesReject).toHaveBeenCalled();
@@ -83,7 +85,9 @@ describe('fileUpload - onFilesReject prop', () => {
     });
 
     const event = new Event('change', { bubbles: true });
-    input.dispatchEvent(event);
+    act(() => {
+      input.dispatchEvent(event);
+    });
 
     await waitFor(() => {
       expect(onFilesReject).toHaveBeenCalled();
@@ -126,7 +130,9 @@ describe('fileUpload - onFilesReject prop', () => {
     });
 
     const event = new Event('change', { bubbles: true });
-    input.dispatchEvent(event);
+    act(() => {
+      input.dispatchEvent(event);
+    });
 
     await waitFor(() => {
       expect(onFilesReject).toHaveBeenCalled();
@@ -170,7 +176,9 @@ describe('fileUpload - onFilesReject prop', () => {
     });
 
     const event = new Event('change', { bubbles: true });
-    input.dispatchEvent(event);
+    act(() => {
+      input.dispatchEvent(event);
+    });
 
     await waitFor(() => {
       expect(onAccept).toHaveBeenCalled();
@@ -207,7 +215,9 @@ describe('fileUpload - onFilesReject prop', () => {
     });
 
     const event = new Event('change', { bubbles: true });
-    input.dispatchEvent(event);
+    act(() => {
+      input.dispatchEvent(event);
+    });
 
     await waitFor(() => {
       expect(onFilesReject).toHaveBeenCalled();
@@ -254,7 +264,9 @@ describe('fileUpload - onFilesReject prop', () => {
     });
 
     const event = new Event('change', { bubbles: true });
-    input.dispatchEvent(event);
+    act(() => {
+      input.dispatchEvent(event);
+    });
 
     await waitFor(() => {
       expect(onFileReject).toHaveBeenCalled();
