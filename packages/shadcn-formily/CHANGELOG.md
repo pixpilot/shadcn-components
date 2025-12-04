@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-formily
 
+## 0.0.8
+
+### Patch Changes
+
+- test release
+
 ## 0.0.7
 
 ### Patch Changes

@@ -1,5 +1,4 @@
 /* eslint-disable node/prefer-global/process */
-
 const { execSync } = require('node:child_process');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -16,7 +15,6 @@ function main() {
   if (isHelp) {
     console.log(
       `
-
 Usage: node publish.js [options]
 
 Options:
@@ -24,8 +22,7 @@ Options:
   --next           Publish to the next tag
   --help, -h       Show this help message
 
-This script automatically reads the NPM_TOKEN from .env
-and creates a temporary .npmrc file for authentication.
+This script automatically reads the NPM_TOKEN from .env and uses it for authentication.
     `.trim(),
     );
     process.exit(0);
@@ -59,14 +56,7 @@ and creates a temporary .npmrc file for authentication.
 
     console.log('✓ Found NPM token in .env');
 
-    // Create a temporary .npmrc file with the auth token
-    const tempNpmrcPath = path.join(process.cwd(), '.npmrc.temp');
-    const npmrcContent = `//registry.npmjs.org/:_authToken=${npmToken}\n`;
-
-    console.log('✓ Creating temporary .npmrc file...');
-    fs.writeFileSync(tempNpmrcPath, npmrcContent);
-
-    // Run publish command with the temporary .npmrc
+    // Run publish command with token in environment
     const publishCommand = isDryRun
       ? `pnpm changeset publish --dry-run${isNext ? ' --tag next' : ''}`
       : `pnpm changeset publish${isNext ? ' --tag next' : ''}`;
@@ -77,10 +67,11 @@ and creates a temporary .npmrc file for authentication.
       console.log('🔍 Running in dry-run mode...');
     }
 
-    // Set NPM_CONFIG_USERCONFIG to use our temp file
+    // Pass the token directly via environment variable
     const env = {
       ...process.env,
-      NPM_CONFIG_USERCONFIG: tempNpmrcPath,
+      NPM_TOKEN: npmToken,
+      NODE_AUTH_TOKEN: npmToken, // Some tools use this instead
     };
 
     execSync(publishCommand, {
@@ -90,11 +81,6 @@ and creates a temporary .npmrc file for authentication.
     });
 
     console.log('✅ Publish completed successfully!');
-
-    // Clean up: delete the temporary file
-    console.log('🧹 Cleaning up temporary .npmrc file...');
-    fs.unlinkSync(tempNpmrcPath);
-    console.log('✓ Temporary file removed safely');
   } catch (error) {
     console.error('❌ Error during publish:', error.message);
     process.exit(1);
