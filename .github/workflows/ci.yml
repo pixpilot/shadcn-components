@@ -26,6 +26,8 @@ jobs:
 
       - name: Setup project
         uses: ./.github/actions/setup-project
+        with:
+          build: 'true'
 
       - name: Lint
         run: pnpm lint
