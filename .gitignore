@@ -12,16 +12,13 @@ jspm_packages/
 # -----------------------------
 dist/
 build/
-lib/
 out/
 build/Release
 packages/**/dist/
 packages/**/build/
-packages/**/lib/
 packages/**/out/
 tooling/**/dist/
 tooling/**/build/
-tooling/**/lib/
 tooling/**/out/
 
 # -----------------------------
