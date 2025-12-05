@@ -1,7 +1,9 @@
 /* eslint-disable react/no-clone-element */
+import type { SchemaKey } from '@formily/react';
 import { isVoidField } from '@formily/core';
-import { connect, mapProps, useField } from '@formily/react';
+import { connect, mapProps, useField, useFieldSchema } from '@formily/react';
 import { cn } from '@pixpilot/shadcn';
+import { toCapitalCase } from '@pixpilot/string';
 import React from 'react';
 
 export type LabelPlacement = 'top' | 'bottom' | 'start' | 'end';
@@ -13,6 +15,19 @@ export interface FormItemProps extends React.ComponentProps<'div'> {
   feedbackStatus?: 'error' | 'warning' | 'success';
   feedbackText?: React.ReactNode;
   labelPlacement?: LabelPlacement;
+}
+
+function getLabel(
+  label: React.ReactNode,
+  fieldName?: SchemaKey | undefined,
+): React.ReactNode | null {
+  if (label != null) {
+    return label;
+  }
+  if (fieldName != null) {
+    return typeof fieldName === 'string' ? toCapitalCase(fieldName) : fieldName;
+  }
+  return null;
 }
 
 /**
@@ -32,6 +47,9 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
 }) => {
   const field = useField();
   const fieldProps = field?.componentProps ?? {};
+  const schema = useFieldSchema();
+
+  const effectiveLabel = getLabel(label, schema.name);
 
   // eslint-disable-next-line ts/no-unsafe-assignment
   const effectiveLabelPlacement: LabelPlacement =
@@ -51,7 +69,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
     .filter(Boolean)
     .join(' ');
 
-  const labelElement = label != null && (
+  const labelElement = effectiveLabel != null && (
     <label
       htmlFor={id}
       data-slot="form-label"
@@ -63,7 +81,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
           'shrink-0',
       )}
     >
-      {label}
+      {effectiveLabel}
       {asterisk && (
         <span className="text-destructive ml-1" aria-label="required">
           *
