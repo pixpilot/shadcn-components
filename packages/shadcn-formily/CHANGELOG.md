@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.1.2
+
+### Patch Changes
+
+- update package name from `@pixpilot/shadcn-formily` to `@pixpilot/formily-shadcn`
+
 ## 0.1.1
 
 ### Patch Changes
