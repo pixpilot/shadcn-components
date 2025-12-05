@@ -164,9 +164,6 @@ export const FormItem = connect(
         label: (field.title ?? props.label) as React.ReactNode,
         description: (props.description ?? field.description) as React.ReactNode,
         asterisk: props.asterisk,
-        effectiveLabelPlacement: (props.labelPlacement ??
-          field.componentProps?.effectiveLabelPlacement ??
-          'top') as LabelPlacement,
       };
     }
 
@@ -203,9 +200,6 @@ export const FormItem = connect(
       feedbackStatus: takeFeedbackStatus(),
       feedbackText: takeFeedbackText(),
       asterisk: takeAsterisk(),
-      effectiveLabelPlacement: (props.labelPlacement ??
-        field.componentProps?.effectiveLabelPlacement ??
-        'top') as LabelPlacement,
     };
   }),
 );
