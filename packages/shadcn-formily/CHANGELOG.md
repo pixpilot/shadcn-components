@@ -1,4 +1,4 @@
-# @pixpilot/shadcn-formily
+# @pixpilot/formily-shadcn
 
 ## 0.1.0
 

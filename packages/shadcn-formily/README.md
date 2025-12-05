@@ -1,4 +1,4 @@
-# @pixpilot/shadcn-formily
+# @pixpilot/formily-shadcn
 
 Formily integration for shadcn/ui components. Build powerful, schema-driven forms with shadcn/ui's beautiful components and Formily's reactive form management.
 
@@ -15,7 +15,7 @@ Formily integration for shadcn/ui components. Build powerful, schema-driven form
 ## Installation
 
 ```bash
-pnpm add @pixpilot/shadcn-formily @formily/core @formily/react
+pnpm add @pixpilot/formily-shadcn @formily/core @formily/react
 ```
 
 ## Quick Start
@@ -23,7 +23,7 @@ pnpm add @pixpilot/shadcn-formily @formily/core @formily/react
 ### Basic Form
 
 ```tsx
-import { createForm, Form, SchemaField } from '@pixpilot/shadcn-formily';
+import { createForm, Form, SchemaField } from '@pixpilot/formily-shadcn';
 
 const form = createForm();
 
@@ -97,7 +97,7 @@ import {
   ArrayField as FormilyArrayField,
   FormItem,
   Input,
-} from '@pixpilot/shadcn-formily';
+} from '@pixpilot/formily-shadcn';
 
 <FormilyArrayField name="contacts">
   {(field) => (

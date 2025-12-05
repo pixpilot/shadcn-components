@@ -593,7 +593,7 @@ importers:
       '@pixpilot/shadcn-auth':
         specifier: workspace:*
         version: link:../../packages/shadcn-auth
-      '@pixpilot/shadcn-formily':
+      '@pixpilot/formily-shadcn':
         specifier: workspace:*
         version: link:../../packages/shadcn-formily
       '@pixpilot/shadcn-ui':

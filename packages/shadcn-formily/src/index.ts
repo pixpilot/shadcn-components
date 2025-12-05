@@ -1,4 +1,4 @@
-export const name = '@pixpilot/shadcn-formily';
+export const name = '@pixpilot/formily-shadcn';
 
 export type {
   ArrayBaseMixins,

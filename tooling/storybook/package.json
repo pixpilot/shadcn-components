@@ -13,9 +13,9 @@
     "clean:all": "git clean -xdf .cache storybook-static node_modules"
   },
   "dependencies": {
+    "@pixpilot/formily-shadcn": "workspace:*",
     "@pixpilot/shadcn": "workspace:*",
     "@pixpilot/shadcn-auth": "workspace:*",
-    "@pixpilot/shadcn-formily": "workspace:*",
     "@pixpilot/shadcn-ui": "workspace:*",
     "next-themes": "catalog:prod"
   },

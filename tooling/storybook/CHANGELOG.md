@@ -5,7 +5,7 @@
 ### Patch Changes
 
 - Updated dependencies
-  - @pixpilot/shadcn-formily@0.1.0
+  - @pixpilot/formily-shadcn@0.1.0
 
 ## 0.0.9
 
@@ -19,7 +19,7 @@
 ### Patch Changes
 
 - Updated dependencies
-  - @pixpilot/shadcn-formily@0.0.8
+  - @pixpilot/formily-shadcn@0.0.8
 
 ## 0.0.7
 
@@ -28,7 +28,7 @@
 - Updated dependencies
   - @pixpilot/shadcn@0.1.11
   - @pixpilot/shadcn-auth@0.0.7
-  - @pixpilot/shadcn-formily@0.0.7
+  - @pixpilot/formily-shadcn@0.0.7
   - @pixpilot/shadcn-ui@0.0.7
 
 ## 0.0.6
@@ -36,7 +36,7 @@
 ### Patch Changes
 
 - Updated dependencies
-  - @pixpilot/shadcn-formily@0.0.6
+  - @pixpilot/formily-shadcn@0.0.6
   - @pixpilot/shadcn-auth@0.0.6
   - @pixpilot/shadcn-ui@0.0.6
   - @pixpilot/shadcn@0.1.10
@@ -48,7 +48,7 @@
 - Updated dependencies
   - @pixpilot/shadcn@0.1.9
   - @pixpilot/shadcn-auth@0.0.5
-  - @pixpilot/shadcn-formily@0.0.5
+  - @pixpilot/formily-shadcn@0.0.5
   - @pixpilot/shadcn-ui@0.0.5
 
 ## 0.0.4
@@ -58,7 +58,7 @@
 - Updated dependencies
   - @pixpilot/shadcn@0.1.8
   - @pixpilot/shadcn-auth@0.0.4
-  - @pixpilot/shadcn-formily@0.0.4
+  - @pixpilot/formily-shadcn@0.0.4
   - @pixpilot/shadcn-ui@0.0.4
 
 ## 0.0.3
@@ -68,7 +68,7 @@
 - Updated dependencies
   - @pixpilot/shadcn@0.1.7
   - @pixpilot/shadcn-auth@0.0.3
-  - @pixpilot/shadcn-formily@0.0.3
+  - @pixpilot/formily-shadcn@0.0.3
   - @pixpilot/shadcn-ui@0.0.3
 
 ## 0.0.2
@@ -78,7 +78,7 @@
 - Updated dependencies
   - @pixpilot/shadcn@0.1.6
   - @pixpilot/shadcn-auth@0.0.2
-  - @pixpilot/shadcn-formily@0.0.2
+  - @pixpilot/formily-shadcn@0.0.2
   - @pixpilot/shadcn-ui@0.0.2
 
 ## 0.0.1
@@ -88,5 +88,5 @@
 - Updated dependencies
   - @pixpilot/shadcn@0.1.0
   - @pixpilot/shadcn-auth@0.0.1
-  - @pixpilot/shadcn-formily@0.0.1
+  - @pixpilot/formily-shadcn@0.0.1
   - @pixpilot/shadcn-ui@0.0.1
