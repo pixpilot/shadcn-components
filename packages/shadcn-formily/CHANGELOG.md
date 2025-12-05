@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.1.4
+
+### Patch Changes
+
+- remove redundant `effectiveLabelPlacement` assignment
+
 ## 0.1.3
 
 ### Patch Changes
