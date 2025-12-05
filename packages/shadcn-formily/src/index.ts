@@ -24,6 +24,7 @@ export { FormItem } from './components/form-item';
 
 // Input components
 export { Input } from './components/input';
+export * from './components/json-schema-form-renderer';
 export { NumberInput } from './components/number-input';
 export { ConnectedRadio, Radio } from './components/radio';
 export { Row } from './components/row';
@@ -33,8 +34,8 @@ export { Separator } from './components/separator';
 export { Slider } from './components/slider';
 export { Switch } from './components/switch';
 export { TagsInputInLine } from './components/tags-input-inline';
-export { Textarea } from './components/textarea';
 
+export { Textarea } from './components/textarea';
 // Re-export Formily core exports for convenience
 export { createForm } from '@formily/core';
 export type { Form as IForm } from '@formily/core';
@@ -45,4 +46,5 @@ export {
   ObjectField,
   VoidField,
 } from '@formily/react';
+
 export type { ISchema } from '@formily/react';
