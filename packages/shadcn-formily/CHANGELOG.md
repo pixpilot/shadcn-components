@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.1.3
+
+### Patch Changes
+
+- re-export `Textarea` and add `json-schema-form-renderer`
+
 ## 0.1.2
 
 ### Patch Changes
