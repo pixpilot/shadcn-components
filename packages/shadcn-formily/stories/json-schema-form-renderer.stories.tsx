@@ -114,3 +114,75 @@ export const AdvancedJsonSchemaForm: Story = {
     return <JsonSchemaFormRenderer schema={schema}></JsonSchemaFormRenderer>;
   },
 };
+
+export const NestedObjectsForm: Story = {
+  render: () => {
+    const schema = {
+      type: 'object',
+      properties: {
+        personalInfo: {
+          type: 'object',
+          title: 'Personal Information',
+          properties: {
+            firstName: {
+              type: 'string',
+              title: 'First Name',
+            },
+            lastName: {
+              type: 'string',
+              title: 'Last Name',
+            },
+            dateOfBirth: {
+              type: 'string',
+              title: 'Date of Birth',
+              format: 'date',
+            },
+          },
+        },
+        address: {
+          type: 'object',
+          title: 'Address',
+          properties: {
+            street: {
+              type: 'string',
+              title: 'Street Address',
+            },
+            city: {
+              type: 'string',
+              title: 'City',
+            },
+            state: {
+              type: 'string',
+              title: 'State',
+            },
+            zipCode: {
+              type: 'string',
+              title: 'ZIP Code',
+            },
+          },
+        },
+        employment: {
+          type: 'object',
+          title: 'Employment',
+          properties: {
+            company: {
+              type: 'string',
+              title: 'Company Name',
+            },
+            position: {
+              type: 'string',
+              title: 'Position',
+            },
+            startDate: {
+              type: 'string',
+              title: 'Start Date',
+              format: 'date',
+            },
+          },
+        },
+      },
+    };
+
+    return <JsonSchemaFormRenderer schema={schema}></JsonSchemaFormRenderer>;
+  },
+};
