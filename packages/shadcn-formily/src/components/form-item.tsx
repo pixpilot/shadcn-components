@@ -5,7 +5,8 @@ import { isVoidField } from '@formily/core';
 import { connect, mapProps, useField } from '@formily/react';
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
-import { useLabel } from '../hooks';
+
+import { useFormContext, useLabel } from '../hooks';
 
 export type LabelPlacement = 'top' | 'bottom' | 'start' | 'end';
 
@@ -37,6 +38,9 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
   const fieldProps = field?.componentProps ?? {};
 
   const effectiveLabel = useLabel(label);
+
+  const { itemProps } = useFormContext();
+  const { className: itemPropsClassName } = itemProps || {};
 
   // eslint-disable-next-line ts/no-unsafe-assignment
   const effectiveLabelPlacement: LabelPlacement =
@@ -127,7 +131,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
   return (
     <div
       data-slot="form-item"
-      className={cn('flex flex-col gap-2', className)}
+      className={cn('flex flex-col gap-2', itemPropsClassName, className)}
       {...props}
     >
       {contentElement}

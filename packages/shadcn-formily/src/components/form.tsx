@@ -1,9 +1,12 @@
 import type { Form as IForm } from '@formily/core';
+import type { FormContextStates, FormContextStatesRequired } from './context';
 import { FormProvider } from '@formily/react';
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
+import { FormContextContextProvider } from './context';
+import { FormItemContainer } from './form-items-container';
 
-export interface IFormProps {
+export interface IFormProps extends FormContextStates {
   form: IForm;
   className?: string;
   style?: React.CSSProperties;
@@ -22,6 +25,10 @@ export function Form({
   children,
   onSubmit,
   onAutoSubmit,
+  itemProps,
+  objectContainerProps,
+  density,
+  responsive,
 }: IFormProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,11 +42,28 @@ export function Form({
       });
   };
 
+  const formSettings = React.useMemo(() => {
+    const settings: FormContextStatesRequired = {
+      itemProps: itemProps!,
+      objectContainerProps: objectContainerProps!,
+      density: density!,
+      responsive: responsive!,
+    };
+    return settings;
+  }, [itemProps, objectContainerProps, density, responsive]);
+
   return (
-    <FormProvider form={form}>
-      <form className={cn('space-y-6', className)} style={style} onSubmit={handleSubmit}>
-        {children}
-      </form>
-    </FormProvider>
+    <FormContextContextProvider value={formSettings}>
+      <FormProvider form={form}>
+        <FormItemContainer
+          as="form"
+          className={cn('space-y-6', className)}
+          style={style}
+          onSubmit={handleSubmit}
+        >
+          {children}
+        </FormItemContainer>
+      </FormProvider>
+    </FormContextContextProvider>
   );
 }

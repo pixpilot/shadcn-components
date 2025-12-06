@@ -5,6 +5,7 @@ export * from './get-array-item-info';
 export * from './get-default-value';
 export * from './has-array-item-errors';
 export * from './has-error';
+export * from './resolve-responsive-space';
 export * from './transform-schema';
 export * from './use-array-item-editor';
 export * from './validate-array-item-fields';

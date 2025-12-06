@@ -12,7 +12,7 @@ const meta: Meta<typeof ObjectContainer> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <div style={{ width: '400px', padding: '20px' }}>
+      <div className="w-full max-w-lg">
         <Story />
       </div>
     ),
@@ -34,7 +34,6 @@ export const JsonSchemaForm: Story = {
             firstName: {
               type: 'string',
               title: 'First Name',
-
               required: true,
             },
           },
@@ -43,5 +42,77 @@ export const JsonSchemaForm: Story = {
     };
 
     return <JsonSchemaFormRenderer schema={schema}></JsonSchemaFormRenderer>;
+  },
+};
+
+export const NestedObject: Story = {
+  render: () => {
+    const schema: ISchema = {
+      type: 'object',
+      properties: {
+        userInfo: {
+          type: 'object',
+          title: 'User Information',
+          properties: {
+            firstName: {
+              type: 'string',
+              title: 'First Name',
+              required: true,
+            },
+            lastName: {
+              type: 'string',
+              title: 'Last Name',
+              required: true,
+            },
+            email: {
+              type: 'string',
+              title: 'Email',
+              format: 'email',
+            },
+            address: {
+              type: 'object',
+              title: 'Address',
+              properties: {
+                street: {
+                  type: 'string',
+                  title: 'Street',
+                },
+                city: {
+                  type: 'string',
+                  title: 'City',
+                },
+                zipCode: {
+                  type: 'string',
+                  title: 'Zip Code',
+                },
+              },
+            },
+          },
+        },
+      },
+    };
+
+    return <JsonSchemaFormRenderer schema={schema}></JsonSchemaFormRenderer>;
+  },
+};
+
+export const withoutObject: Story = {
+  render: () => {
+    const schema: ISchema = {
+      type: 'object',
+      properties: {
+        firstName: {
+          type: 'string',
+          title: 'First Name',
+        },
+      },
+    };
+
+    return (
+      <div>
+        <h5 className="pb-5">Should not wrap with object container</h5>
+        <JsonSchemaFormRenderer schema={schema}></JsonSchemaFormRenderer>
+      </div>
+    );
   },
 };
