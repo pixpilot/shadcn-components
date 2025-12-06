@@ -5,7 +5,7 @@ import traverse from 'json-schema-traverse';
 interface InputSchemaMap {
   [key: string]: {
     'x-component': string;
-    'x-decorator': string;
+    'x-decorator'?: string;
   };
 }
 
@@ -29,6 +29,9 @@ const inputSchemaMap: InputSchemaMap = {
   array: {
     'x-component': 'ArrayCards',
     'x-decorator': 'FormItem',
+  },
+  object: {
+    'x-component': 'ObjectContainer',
   },
 };
 

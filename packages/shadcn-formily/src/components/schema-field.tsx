@@ -13,6 +13,7 @@ import { FormGrid } from './form-grid';
 import { FormItem } from './form-item';
 import { Input } from './input';
 import { NumberInput } from './number-input';
+import { ObjectContainer } from './object-container';
 import { ConnectedRadio as Radio } from './radio';
 import { Row } from './row';
 import { Select } from './select';
@@ -48,6 +49,7 @@ export const SchemaField = createSchemaField({
     ArrayDialog,
     ArrayCollapse,
     ArrayPopover,
+    ObjectContainer,
   },
 });
 

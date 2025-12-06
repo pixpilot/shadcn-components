@@ -1,36 +1,24 @@
 /* eslint-disable react/no-clone-element */
-import type { SchemaKey } from '@formily/react';
+
+import type { SyncReactNode } from '../types';
 import { isVoidField } from '@formily/core';
-import { connect, mapProps, useField, useFieldSchema } from '@formily/react';
+import { connect, mapProps, useField } from '@formily/react';
 import { cn } from '@pixpilot/shadcn';
-import { toCapitalCase } from '@pixpilot/string';
 import React from 'react';
+import { useLabel } from '../hooks';
 
 export type LabelPlacement = 'top' | 'bottom' | 'start' | 'end';
 
 export interface FormItemProps extends React.ComponentProps<'div'> {
-  label?: React.ReactNode;
-  description?: React.ReactNode;
+  label?: SyncReactNode;
+  description?: SyncReactNode;
   asterisk?: boolean;
   feedbackStatus?: 'error' | 'warning' | 'success';
-  feedbackText?: React.ReactNode;
+  feedbackText?: SyncReactNode;
   labelPlacement?: LabelPlacement;
 }
 
-function getLabel(
-  label: React.ReactNode,
-  fieldName?: SchemaKey | undefined,
-): React.ReactNode | null {
-  if (label != null) {
-    return label;
-  }
-  if (fieldName != null) {
-    return typeof fieldName === 'string' ? toCapitalCase(fieldName) : fieldName;
-  }
-  return null;
-}
-
-/**
+/*
  * BaseFormItem component serves as a decorator for Formily fields
  * It provides label, error messages, and description display
  */
@@ -47,9 +35,8 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
 }) => {
   const field = useField();
   const fieldProps = field?.componentProps ?? {};
-  const schema = useFieldSchema();
 
-  const effectiveLabel = getLabel(label, schema.name);
+  const effectiveLabel = useLabel(label);
 
   // eslint-disable-next-line ts/no-unsafe-assignment
   const effectiveLabelPlacement: LabelPlacement =
@@ -179,8 +166,8 @@ export const FormItem = connect(
   mapProps((props, field) => {
     if (isVoidField(field)) {
       return {
-        label: (field.title ?? props.label) as React.ReactNode,
-        description: (props.description ?? field.description) as React.ReactNode,
+        label: (field.title ?? props.label) as SyncReactNode,
+        description: (props.description ?? field.description) as SyncReactNode,
         asterisk: props.asterisk,
       };
     }
@@ -193,7 +180,7 @@ export const FormItem = connect(
       return undefined;
     };
 
-    const takeFeedbackText = (): React.ReactNode => {
+    const takeFeedbackText = (): SyncReactNode => {
       if (field.validating) return undefined;
       if (props.feedbackText != null) return props.feedbackText;
       if (field.selfErrors?.length) return field.selfErrors.join(', ');
@@ -213,8 +200,8 @@ export const FormItem = connect(
     };
 
     return {
-      label: (props.label ?? field.title) as React.ReactNode,
-      description: (props.description ?? field.description) as React.ReactNode,
+      label: (props.label ?? field.title) as SyncReactNode,
+      description: (props.description ?? field.description) as SyncReactNode,
       feedbackStatus: takeFeedbackStatus(),
       feedbackText: takeFeedbackText(),
       asterisk: takeAsterisk(),
