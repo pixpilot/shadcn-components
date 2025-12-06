@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.2.0
+
+### Minor Changes
+
+- enhances form labels by adding automatic generation from field names
+
 ## 0.1.4
 
 ### Patch Changes
