@@ -1,6 +1,6 @@
-import type { FormContextStates } from '../components/form-context';
+import type { FormContextStates } from '../components/context';
 import { use } from 'react';
-import { FormContext } from '../components/form-context';
+import { FormContext } from '../components/context';
 
 export function useFormContext(): FormContextStates {
   return use<FormContextStates>(FormContext);

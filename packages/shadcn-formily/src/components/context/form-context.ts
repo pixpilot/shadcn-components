@@ -1,4 +1,4 @@
-import type { FormSpace } from '../types/form';
+import type { FormSpace } from '../../types';
 import React from 'react';
 
 export interface FormContextStates extends FormSpace {

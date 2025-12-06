@@ -18,7 +18,7 @@ const densitySpaceMap: Record<
  * Converts space values to actual Tailwind utilities
  */
 const spaceClassMap: Record<Space, string> = {
-  sm: 'space-y-2',
+  sm: 'space-y-3',
   md: 'space-y-4',
   lg: 'space-y-6',
 } as const;
@@ -28,26 +28,26 @@ const spaceClassMap: Record<Space, string> = {
  * Converts space values to gap utilities for grid/flex containers
  */
 const gapClassMap: Record<Space, string> = {
-  sm: 'gap-y-2',
+  sm: 'gap-y-3',
   md: 'gap-y-4',
   lg: 'gap-y-6',
 } as const;
 
 /**
- * Responsive breakpoint classes for auto density mode
- * - Mobile (default): compact (space-y-2)
+ * Responsive breakpoint classes for responsive density mode
+ * - Mobile (default): compact (space-y-3)
  * - Tablet (md:): normal (space-y-4)
  * - Desktop (lg:): comfortable (space-y-6)
  */
-export const autoResponsiveSpaceClasses = 'space-y-2 md:space-y-4 lg:space-y-6';
+export const autoResponsiveSpaceClasses = 'space-y-3 md:space-y-4 lg:space-y-6';
 
 /**
- * Responsive breakpoint classes for auto density mode using gap
- * - Mobile (default): compact (gap-y-2)
+ * Responsive breakpoint classes for responsive density mode using gap
+ * - Mobile (default): compact (gap-y-3)
  * - Tablet (md:): normal (gap-y-4)
  * - Desktop (lg:): comfortable (gap-y-6)
  */
-export const autoResponsiveGapClasses = 'gap-y-2 md:gap-y-4 lg:gap-y-6';
+export const autoResponsiveGapClasses = 'gap-y-3 md:gap-y-4 lg:gap-y-6';
 
 /**
  * Checks if density is responsive mode
