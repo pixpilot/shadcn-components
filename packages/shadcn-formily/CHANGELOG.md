@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.4.0
+
+### Minor Changes
+
+- add hidden field
+
 ## 0.3.0
 
 ### Minor Changes
