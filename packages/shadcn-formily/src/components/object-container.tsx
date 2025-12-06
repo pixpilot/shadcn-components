@@ -9,7 +9,7 @@ import {
 } from '@pixpilot/shadcn';
 import { useLabel } from '../hooks';
 
-interface ObjectContainerProps extends React.ComponentProps<'div'> {
+export interface ObjectContainerProps extends React.ComponentProps<'div'> {
   label?: SyncReactNode;
   description?: SyncReactNode;
 }
