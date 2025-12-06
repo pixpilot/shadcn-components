@@ -1,5 +1,15 @@
 # @pixpilot/formily-shadcn
 
+## 0.3.0
+
+### Minor Changes
+
+- add object container
+
+### Patch Changes
+
+- export ObjectContainerProps interface
+
 ## 0.2.0
 
 ### Minor Changes
