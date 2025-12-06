@@ -11,6 +11,7 @@ import { DatePicker } from './date-picker';
 import { FileUploadInline } from './file-upload-inline';
 import { FormGrid } from './form-grid';
 import { FormItem } from './form-item';
+import { Hidden } from './hidden';
 import { Input } from './input';
 import { NumberInput } from './number-input';
 import { ObjectContainer } from './object-container';
@@ -50,6 +51,7 @@ export const SchemaField = createSchemaField({
     ArrayCollapse,
     ArrayPopover,
     ObjectContainer,
+    Hidden,
   },
 });
 

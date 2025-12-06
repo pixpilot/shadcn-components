@@ -40,10 +40,15 @@ export function transformSchema(schema: ISchema): ISchema {
     allKeys: true,
     cb: (currentSchema) => {
       const { type } = currentSchema;
+
       if (typeof type === 'string' && type in inputSchemaMap) {
         const mapping = inputSchemaMap[type]!;
-        currentSchema['x-component'] = mapping['x-component'];
-        currentSchema['x-decorator'] = mapping['x-decorator'];
+        if (currentSchema['x-component'] == null) {
+          currentSchema['x-component'] = mapping['x-component'];
+        }
+        if (!['Hidden'].includes(currentSchema['x-component'] as string)) {
+          currentSchema['x-decorator'] = mapping['x-decorator'];
+        }
       }
     },
   });

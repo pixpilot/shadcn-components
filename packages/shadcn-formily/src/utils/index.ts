@@ -1,3 +1,4 @@
+export * from './array-item-editor-utils';
 export * from './create-panel-state-manager';
 export * from './for-each-schema';
 export * from './get-array-item-info';

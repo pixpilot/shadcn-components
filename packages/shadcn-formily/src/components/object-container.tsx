@@ -7,7 +7,7 @@ import {
   CardTitle,
   cn,
 } from '@pixpilot/shadcn';
-import { useLabel } from '../hooks';
+import { useDescription, useLabel } from '../hooks';
 
 export interface ObjectContainerProps extends React.ComponentProps<'div'> {
   label?: SyncReactNode;
@@ -22,12 +22,14 @@ export const ObjectContainer: React.FC<ObjectContainerProps> = ({
   ...rest
 }) => {
   const effectiveLabel = useLabel(label);
+  const desc = useDescription(description);
+
   return (
     <Card {...rest} className={cn('w-full max-w-sm', className)}>
-      {(effectiveLabel != null || description != null) && (
+      {(effectiveLabel != null || desc != null) && (
         <CardHeader>
           {effectiveLabel != null && <CardTitle>{effectiveLabel}</CardTitle>}
-          {description != null && <CardDescription>{description}</CardDescription>}
+          {desc != null && <CardDescription>{desc}</CardDescription>}
         </CardHeader>
       )}
       <CardContent>{children}</CardContent>
