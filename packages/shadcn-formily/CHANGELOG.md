@@ -1,5 +1,12 @@
 # @pixpilot/formily-shadcn
 
+## 0.5.0
+
+### Minor Changes
+
+- changed spacing
+- adds form context for customizable layout settings
+
 ## 0.4.0
 
 ### Minor Changes
