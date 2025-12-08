@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '../src/Button';
-import { Loader } from '../src/Loader';
+import { LoadingOverlay } from '../src/LoadingOverlay';
 
 /**
  * A loading overlay component with backdrop and positioning options.
  * Shows a spinning loader over the entire screen or a container.
  */
 const meta = {
-  title: 'shadcn-ui/Loader',
-  component: Loader,
+  title: 'shadcn-ui/LoadingOverlay',
+  component: LoadingOverlay,
   parameters: {
     layout: 'centered',
     docs: {
@@ -39,7 +39,7 @@ const meta = {
       description: 'Delay in milliseconds before showing the loader',
     },
   },
-} satisfies Meta<typeof Loader>;
+} satisfies Meta<typeof LoadingOverlay>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -100,12 +100,51 @@ export const Interactive: Story = {
   render: function InteractiveLoader(args) {
     const [loading, setLoading] = useState(false);
 
+    useEffect(() => {
+      if (!loading) return;
+      const timeoutId = setTimeout(() => {
+        setLoading(false);
+      }, 4000);
+      // eslint-disable-next-line consistent-return
+      return () => clearTimeout(timeoutId);
+    }, [loading]);
+
     return (
       <div className="relative">
         <Button onClick={() => setLoading(!loading)}>
           {loading ? 'Stop Loading' : 'Start Loading'}
         </Button>
-        <Loader {...args} loading={loading} />
+        <LoadingOverlay {...args} loading={loading} />
+      </div>
+    );
+  },
+};
+
+export const DelayedLoader: Story = {
+  args: {
+    loading: true,
+    backdrop: true,
+    placement: 'center',
+    delay: 1000, // 1 second delay
+  },
+  render: function DelayedLoader(args) {
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+      if (!loading) return;
+      const timeoutId = setTimeout(() => {
+        setLoading(false);
+      }, 4000);
+      // eslint-disable-next-line consistent-return
+      return () => clearTimeout(timeoutId);
+    }, [loading]);
+
+    return (
+      <div className="relative">
+        <Button onClick={() => setLoading(!loading)}>
+          {loading ? 'Stop Loading' : 'Start Loading'}
+        </Button>
+        <LoadingOverlay {...args} loading={loading} />
       </div>
     );
   },

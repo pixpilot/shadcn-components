@@ -6,7 +6,7 @@ import { Input, Tabs, TabsContent, TabsList, TabsTrigger } from '@pixpilot/shadc
 import { X } from 'lucide-react';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Loader } from '../Loader';
+import { LoadingOverlay } from '../LoadingOverlay';
 import { useAsyncProviders } from './use-async-providers';
 import VirtualizedIconGrid from './virtualized-icon-grid';
 
@@ -189,7 +189,7 @@ const IconPickerContent: FC<IconPickerContentProps> = ({
 
       {/* {isLoading && ( */}
       {/* <div className="h-full min-h-[100px]"> */}
-      <Loader message="Loading icons..." loading={isLoading} />
+      <LoadingOverlay message="Loading icons..." loading={isLoading} />
       {/* </div> */}
       {/* )} */}
 

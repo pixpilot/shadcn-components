@@ -14,7 +14,7 @@ export interface LoaderProps {
   delay?: number;
 }
 
-const Loader: React.FC<LoaderProps> = (props) => {
+const LoadingOverlay: React.FC<LoaderProps> = (props) => {
   const {
     backdrop = true,
     placement = 'center',
@@ -85,4 +85,4 @@ const Loader: React.FC<LoaderProps> = (props) => {
   );
 };
 
-export { Loader };
+export { LoadingOverlay };
