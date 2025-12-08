@@ -93,6 +93,7 @@ tooling/**/.env.*
 .next
 .nuxt
 public
+!tooling/storybook/.storybook/public/
 .vuepress/dist
 **/*.cache
 **/.cache*
