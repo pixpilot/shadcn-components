@@ -1,7 +1,7 @@
 {
   "name": "@pixpilot/shadcn-ui",
   "type": "module",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "packageManager": "pnpm@10.17.0",
   "description": "Custom UI components and utilities built with shadcn/ui.",
   "author": "m.doaie <m.doaie@hotmail.com>",
