@@ -1,70 +1,86 @@
 'use client';
 import { cn } from '@pixpilot/shadcn';
 import { Loader2 } from 'lucide-react';
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const DEFAULT_DELAY = 0;
+const FADE_DURATION = 300;
 
 export interface LoaderProps {
   backdrop?: boolean;
-  /**
-   * Position of the loader
-   * @default 'center'
-   */
   placement?: 'top' | 'bottom' | 'center';
   loading: boolean;
   message?: string;
-  /**
-   * Delay in milliseconds before showing the loader
-   * @default 300
-   */
   delay?: number;
 }
 
 const Loader: React.FC<LoaderProps> = (props) => {
-  const { backdrop = true, placement = 'center', loading, delay = DEFAULT_DELAY } = props;
-  const [show, dispatch] = useReducer(
-    (state: boolean, action: { type: 'show' | 'hide' }) => {
-      switch (action.type) {
-        case 'show':
-          return true;
-        case 'hide':
-          return false;
-        default:
-          return state;
-      }
-    },
-    false,
-  );
+  const {
+    backdrop = true,
+    placement = 'center',
+    loading,
+    delay = DEFAULT_DELAY,
+    message,
+  } = props;
+
+  const [mounted, setMounted] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
     if (loading) {
-      const timer = setTimeout(() => dispatch({ type: 'show' }), delay);
-      return () => clearTimeout(timer);
+      timeoutId = setTimeout(() => {
+        setMounted(true);
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            setVisible(true);
+          });
+        });
+      }, delay);
+    } else {
+      setVisible(false);
+
+      // Only delay unmounting if we're actually mounted
+      timeoutId = setTimeout(
+        () => {
+          setMounted(false);
+        },
+        mounted ? FADE_DURATION : 0,
+      );
     }
-    dispatch({ type: 'hide' });
-    return undefined;
-  }, [loading, delay]);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [loading, delay, mounted]); // Add 'mounted' to dependencies
 
   const positionClass = {
     top: 'items-start pt-[50px]',
     center: 'items-center',
-    bottom: 'items-end  pb-[50px]',
+    bottom: 'items-end pb-[50px]',
   }[placement];
 
-  if (!show) {
+  if (!mounted) {
     return null;
   }
 
   return (
     <div
       className={cn(
-        'fixed inset-0 z-9999 flex justify-center',
+        'fixed inset-0 z-[9999] flex justify-center transition-opacity',
         positionClass,
-        backdrop && 'bg-black/50',
+        backdrop ? 'bg-black/50' : 'pointer-events-none',
+        visible ? 'opacity-100' : 'opacity-0',
       )}
+      style={{
+        transitionDuration: `${FADE_DURATION}ms`,
+      }}
     >
-      <Loader2 className="text-foreground h-10 w-10 animate-spin" />
+      <div className="flex flex-col items-center">
+        <Loader2 className="text-foreground h-10 w-10 animate-spin" />
+        {message != null && <div className="mt-2 text-foreground">{message}</div>}
+      </div>
     </div>
   );
 };

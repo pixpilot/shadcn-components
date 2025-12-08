@@ -1,4 +1,4 @@
-export const name = '@pixpilot/formily-shadcn';
+import { useAsyncProviders } from '@pixpilot/shadcn-ui';
 
 export type {
   ArrayBaseMixins,
@@ -23,6 +23,7 @@ export { FormGrid } from './components/form-grid';
 export { FormItem } from './components/form-item';
 
 // Input components
+export { IconPicker } from './components/icon-picker';
 export { Input } from './components/input';
 export * from './components/json-schema-form-renderer';
 export { NumberInput } from './components/number-input';
@@ -48,3 +49,7 @@ export {
 } from '@formily/react';
 
 export type { ISchema } from '@formily/react';
+
+// Export types for async providers
+
+export { useAsyncProviders };

@@ -1,4 +1,5 @@
-import type { FormSpace } from '../../types';
+import type { AsyncIconProvider } from '@pixpilot/shadcn-ui';
+import type { FormSpace, IconProvider } from '../../types';
 import React from 'react';
 
 export interface FormContextStates extends FormSpace {
@@ -7,6 +8,19 @@ export interface FormContextStates extends FormSpace {
   };
   objectContainerProps?: {
     className?: string;
+  };
+  fields?: {
+    iconPicker?: {
+      /**
+       * Icon providers - can be static providers or async loader functions
+       * Users can provide either IconProvider[] or AsyncIconProvider[]
+       */
+      providers: AsyncIconProvider[];
+      /**
+       * Optional callback when providers are loaded
+       */
+      onProvidersLoaded?: (providers: IconProvider[]) => void;
+    };
   };
 }
 

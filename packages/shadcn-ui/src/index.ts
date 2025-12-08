@@ -10,6 +10,8 @@ export * from './confirmation-dialog';
 export * from './ContentCard';
 export * from './DatePicker';
 export * from './FileUploadInline';
+export * from './hooks';
+export * from './icon-selector';
 export * from './Loader';
 export * from './Pagination';
 export * from './PopoverContent';

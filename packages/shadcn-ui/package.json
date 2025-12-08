@@ -48,11 +48,16 @@
   },
   "dependencies": {
     "@ebay/nice-modal-react": "^1.2.13",
+    "@iconify-json/fa": "catalog:prod",
+    "@iconify-json/mdi": "catalog:prod",
+    "@iconify/react": "catalog:prod",
     "@pixpilot/hash": "catalog:prod",
     "@pixpilot/shadcn": "workspace:*",
+    "@tanstack/react-virtual": "^3.13.12",
     "class-variance-authority": "catalog:prod",
     "lucide-react": "catalog:prod",
     "next-themes": "catalog:prod",
+    "react-responsive": "^10.0.1",
     "sonner": "2.0.7"
   },
   "devDependencies": {

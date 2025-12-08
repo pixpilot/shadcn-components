@@ -12,6 +12,7 @@ import { FileUploadInline } from './file-upload-inline';
 import { FormGrid } from './form-grid';
 import { FormItem } from './form-item';
 import { Hidden } from './hidden';
+import { IconPicker } from './icon-picker';
 import { Input } from './input';
 import { NumberInput } from './number-input';
 import { ObjectContainer } from './object-container';
@@ -43,6 +44,7 @@ export const SchemaField = createSchemaField({
     Combobox,
     TagsInput,
     FileUploadInline,
+    IconPicker,
     Separator,
     Slider,
     Switch,

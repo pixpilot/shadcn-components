@@ -11,12 +11,14 @@ Storybook is set up at the root level in `/tooling/storybook` and automatically 
 ```
 tooling/storybook/
 ├── .storybook/
-│   ├── main.ts           # Storybook configuration
-│   └── preview.ts        # Global decorators and parameters
+│   ├── main.ts              # Storybook configuration
+│   ├── preview.ts           # Global decorators and parameters
+│   ├── middleware.mjs       # Express middleware for icon API
+│   └── globals.css          # Global styles
 ├── package.json
 ├── tsconfig.json
-├── tailwind.config.ts    # Tailwind CSS configuration
-└── postcss.config.js     # PostCSS configuration
+├── tailwind.config.ts       # Tailwind CSS configuration
+└── postcss.config.js        # PostCSS configuration
 ```
 
 ## Story Location
@@ -129,7 +131,106 @@ Storybook is configured with theme switching support:
 
 Use the theme toggle in the toolbar to switch between themes.
 
+### Icon Server Configuration
+
+Storybook includes a built-in Iconify API endpoint for serving icon data. This allows components using the `IconSelector` to work offline or with custom icon collections.
+
+#### How It Works
+
+1. **Local Storybook Endpoint** (Default):
+   - By default, Storybook provides icon data via `http://localhost:6006/api/iconify`
+   - Icons are served from `@iconify-json/*` packages installed in the project
+   - Supports Material Design Icons (`mdi`) and other Iconify collections
+
+2. **Custom Icon Server**:
+   - You can use your own icon server or the public Iconify API
+   - Set the `STORYBOOK_ICONIFY_SERVER` environment variable to point to a custom server
+
+#### Configuration
+
+The icon server configuration is in `.storybook/preview.ts`:
+
+```typescript
+import { addAPIProvider } from '@iconify/react';
+
+// Default: uses local Storybook endpoint
+const iconifyServer =
+  process.env.STORYBOOK_ICONIFY_SERVER || 'http://localhost:6006/api/iconify';
+
+addAPIProvider('local', {
+  resources: [iconifyServer],
+});
+```
+
+#### Usage Examples
+
+**Using the Default Local Server:**
+
+```bash
+# Just run Storybook normally
+pnpm storybook
+```
+
+The IconSelector component will fetch icons from the local middleware at `http://localhost:6006/api/iconify`.
+
+**Using Your Own Icon Server:**
+
+```bash
+# Windows PowerShell
+$env:STORYBOOK_ICONIFY_SERVER = "https://your-icon-server.com/api/icons"
+pnpm storybook
+
+# Linux/macOS
+STORYBOOK_ICONIFY_SERVER=https://your-icon-server.com/api/icons pnpm storybook
+```
+
+**Using the Public Iconify API:**
+
+```bash
+# Windows PowerShell
+$env:STORYBOOK_ICONIFY_SERVER = "https://api.iconify.design"
+pnpm storybook
+
+# Linux/macOS
+STORYBOOK_ICONIFY_SERVER=https://api.iconify.design pnpm storybook
+```
+
+#### Icon Server Middleware
+
+The local icon server is implemented in `.storybook/middleware.mjs` and provides:
+
+- **GET /api/iconify** - Returns icon data
+  - Query parameters:
+    - `prefix` (default: `mdi`) - Icon set prefix (e.g., `mdi`, `fa`, `bi`)
+    - `icons` - Comma-separated list of icon names to fetch (optional)
+
+Example requests:
+
+```
+http://localhost:6006/api/iconify?prefix=mdi                    # All Material Design Icons
+http://localhost:6006/api/iconify?prefix=mdi&icons=home,search  # Specific icons
+http://localhost:6006/api/iconify?prefix=fa                     # Font Awesome icons
+```
+
+#### Available Icon Sets
+
+By default, the following icon sets are available if installed:
+
+- `@iconify-json/mdi` - Material Design Icons
+- `@iconify-json/fa` - Font Awesome
+- `@iconify-json/bi` - Bootstrap Icons
+- And any other `@iconify-json/*` packages in your dependencies
+
+Check `package.json` to see which icon sets are installed.
+
 ### Styling
+
+Storybook is configured with theme switching support:
+
+- Light theme
+- Dark theme
+
+Use the theme toggle in the toolbar to switch between themes.
 
 - **Tailwind CSS**: Fully configured with the same settings as the component packages
 - **CSS Variables**: Supports all shadcn/ui CSS variables for theming

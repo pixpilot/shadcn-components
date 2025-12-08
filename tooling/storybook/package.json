@@ -13,6 +13,10 @@
     "clean:all": "git clean -xdf .cache storybook-static node_modules"
   },
   "dependencies": {
+    "@iconify-json/fa": "catalog:prod",
+    "@iconify-json/mdi": "catalog:prod",
+    "@iconify-json/tabler": "catalog:prod",
+    "@iconify/react": "catalog:prod",
     "@pixpilot/formily-shadcn": "workspace:*",
     "@pixpilot/shadcn": "workspace:*",
     "@pixpilot/shadcn-auth": "workspace:*",
@@ -33,6 +37,7 @@
     "@tailwindcss/postcss": "catalog:dev",
     "@types/react": "catalog:dev",
     "autoprefixer": "catalog:dev",
+    "msw": "^2.12.4",
     "react": "catalog:prod",
     "react-dom": "catalog:prod",
     "storybook": "catalog:dev",
@@ -41,5 +46,10 @@
     "typescript": "catalog:dev",
     "vite": "catalog:dev"
   },
-  "prettier": "@internal/prettier-config"
+  "prettier": "@internal/prettier-config",
+  "msw": {
+    "workerDirectory": [
+      ".storybook\\public"
+    ]
+  }
 }
