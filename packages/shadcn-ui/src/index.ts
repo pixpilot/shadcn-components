@@ -9,7 +9,7 @@ export * from './Combobox';
 export * from './confirmation-dialog';
 export * from './ContentCard';
 export * from './DatePicker';
-export * from './FileUploadInline';
+export * from './file-upload-inline';
 export * from './hooks';
 export * from './icon-selector';
 export * from './LoadingOverlay';

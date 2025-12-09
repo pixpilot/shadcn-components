@@ -74,4 +74,39 @@ export const handlers = [
 
     return HttpResponse.json(iconData);
   }),
+
+  // Handle file upload requests with delay simulation
+  http.post('/api/upload', async ({ request }) => {
+    try {
+      const formData = await request.formData();
+      const files = formData.getAll('files') as File[];
+
+      if (files.length === 0) {
+        return HttpResponse.json({ error: 'No files provided' }, { status: 400 });
+      }
+
+      // Mock response with file information
+      const uploadedFiles = await Promise.all(
+        files.map(async (file) => ({
+          id: `${Date.now()}-${Math.random()}`,
+          name: file.name,
+          size: file.size,
+          type: file.type,
+          uploadedAt: new Date().toISOString(),
+          url: `/uploads/${file.name}`,
+        })),
+      );
+
+      return HttpResponse.json({
+        success: true,
+        files: uploadedFiles,
+        message: `${files.length} file(s) uploaded successfully`,
+      });
+    } catch (error) {
+      return HttpResponse.json(
+        { error: 'File upload failed', details: String(error) },
+        { status: 500 },
+      );
+    }
+  }),
 ];

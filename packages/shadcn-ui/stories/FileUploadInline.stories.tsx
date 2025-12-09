@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import type { FileUploadProgressCallBacks } from '../src';
 import { useState } from 'react';
-import { FileUploadInline } from '../src/FileUploadInline';
+import { FileUploadInline } from '../src';
 
 /**
  * A simple inline file upload component.
@@ -175,5 +176,124 @@ export const PDFOnly: Story = {
     const [file, setFile] = useState<File | File[] | null>(null);
 
     return <FileUploadInline {...args} value={file} onChange={setFile} />;
+  },
+};
+
+export async function delay(val: number) {
+  await new Promise((resolve) => {
+    setTimeout(resolve, val);
+  });
+}
+
+function handleUpload(
+  files: File[],
+  options: { onProgress: (file: File, progress: number) => void },
+) {
+  const maxProgress = 90;
+  const progressIncrement = 5;
+  const minIncrement = 1;
+  const intervalMs = 200;
+  const minDelay = 2000;
+  const delayRange = 2000;
+  const finalProgress = 100;
+
+  for (const uploadFile of files) {
+    // eslint-disable-next-line no-void
+    void (async () => {
+      let progress = 0;
+      const intervalId = setInterval(() => {
+        progress += Math.random() * progressIncrement + minIncrement; // Increase progress gradually
+        if (progress > maxProgress) progress = maxProgress;
+        options.onProgress(uploadFile, progress);
+      }, intervalMs); // Update every 200ms for smoother progress
+
+      // Simulate upload time with random delay
+      await delay(minDelay + Math.random() * delayRange); // 2-4 seconds
+
+      clearInterval(intervalId);
+      options.onProgress(uploadFile, finalProgress);
+    })();
+  }
+}
+
+/**
+ * File upload with API mock integration
+ * Demonstrates uploading files to a mocked /api/upload endpoint with progress tracking
+ */
+export const WithMockedUpload: Story = {
+  args: {
+    buttonText: 'Upload file',
+    showIcon: true,
+    showClear: true,
+  },
+  render: function WithMockedUploadFileUpload(args) {
+    const [files, setFiles] = useState<File | File[] | null>(null);
+
+    return (
+      <FileUploadInline
+        {...args}
+        value={files}
+        onChange={setFiles}
+        onUpload={handleUpload}
+      />
+    );
+  },
+};
+
+export const MultipleFiles: Story = {
+  args: {
+    buttonText: 'Browse files',
+    showIcon: true,
+    showClear: true,
+    multiple: true,
+  },
+  render: function MultipleFilesUpload(args) {
+    const [files, setFiles] = useState<File | File[] | null>(null);
+
+    return (
+      <FileUploadInline
+        {...args}
+        value={files}
+        onChange={setFiles}
+        onUpload={handleUpload}
+      />
+    );
+  },
+};
+
+export const WithUploadError: Story = {
+  args: {
+    buttonText: 'Upload file',
+    showIcon: true,
+    showClear: true,
+  },
+  render: function WithUploadErrorFileUpload(args) {
+    const [files, setFiles] = useState<File | File[] | null>(null);
+
+    function handleUploadWithError(
+      uploadFiles: File[],
+      options: FileUploadProgressCallBacks,
+    ) {
+      for (const uploadFile of uploadFiles) {
+        // eslint-disable-next-line no-void
+        void (async () => {
+          // Simulate upload time
+          await delay(500);
+
+          options.onProgress(uploadFile, 0);
+
+          options.onError(uploadFile, new Error('Upload failed due to network error.'));
+        })();
+      }
+    }
+
+    return (
+      <FileUploadInline
+        {...args}
+        value={files}
+        onChange={setFiles}
+        onUpload={handleUploadWithError}
+      />
+    );
   },
 };

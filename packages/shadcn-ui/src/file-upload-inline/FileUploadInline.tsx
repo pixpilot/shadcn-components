@@ -1,65 +1,17 @@
 'use client';
 
-import type { FileUploadProps } from '@pixpilot/shadcn';
+import type { FileUploadInlineProps } from './types';
 import {
   Button,
   cn,
   FileUpload,
-  FileUploadItem,
-  FileUploadItemDelete,
-  FileUploadItemMetadata,
   FileUploadList,
   FileUploadTrigger,
 } from '@pixpilot/shadcn';
-import { FileIcon, XIcon } from 'lucide-react';
-import * as React from 'react';
+import { FileIcon } from 'lucide-react';
 
-export interface FileUploadInlineProps extends Omit<FileUploadProps, 'value'> {
-  /**
-   * The current file value (single file or array)
-   */
-  value?: File | File[] | null;
-  /**
-   * Callback when file changes
-   */
-  onChange?: (file: File | File[] | null) => void;
-  /**
-   * Button text when no file is selected
-   */
-  buttonText?: string;
-  /**
-   * Show file icon
-   */
-  showIcon?: boolean;
-  /**
-   * Whether to show a clear button when a file is selected
-   */
-  showClear?: boolean;
-  /**
-   * Custom class name for the container
-   */
-  className?: string;
-  /**
-   * Accepted file types
-   */
-  accept?: string;
-  /**
-   * Whether the input is disabled
-   */
-  disabled?: boolean;
-  /**
-   * Maximum file size in bytes
-   */
-  maxSize?: number;
-  /**
-   * Maximum number of files (for multiple uploads)
-   */
-  maxFiles?: number;
-  /**
-   * Allow multiple file selection
-   */
-  multiple?: boolean;
-}
+import * as React from 'react';
+import { FileUploadInlineItem } from './FileUploadInlineItem';
 
 /**
  * FileUploadInline - An inline file upload component using FileUpload primitives
@@ -80,8 +32,9 @@ export function FileUploadInline({
   accept,
   disabled = false,
   maxSize,
-  maxFiles = 2,
+  maxFiles,
   multiple = false,
+  onValueChange,
   ...rest
 }: FileUploadInlineProps) {
   // Normalize value to always be an array internally
@@ -92,6 +45,7 @@ export function FileUploadInline({
 
   const handleValueChange = React.useCallback(
     (newFiles: File[]) => {
+      onValueChange?.(newFiles);
       if (!onChange) return;
 
       if (multiple) {
@@ -100,7 +54,7 @@ export function FileUploadInline({
         onChange(newFiles.length > 0 ? newFiles[0]! : null);
       }
     },
-    [onChange, multiple],
+    [onValueChange, onChange, multiple],
   );
 
   return (
@@ -141,25 +95,12 @@ export function FileUploadInline({
       {files.length > 0 && (
         <FileUploadList className="space-y-1 m-0">
           {files.map((file) => (
-            <FileUploadItem
+            <FileUploadInlineItem
               key={`${file.name}-${file.size}-${file.lastModified}`}
-              value={file}
-              className="flex items-center gap-2 rounded-md border border-input bg-background px-3 py-2 m-0"
-            >
-              <FileUploadItemMetadata className="min-w-0 flex-1" />
-              {showClear && !disabled && (
-                <FileUploadItemDelete asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="size-7 shrink-0"
-                    aria-label="Remove file"
-                  >
-                    <XIcon className="h-3.5 w-3.5" />
-                  </Button>
-                </FileUploadItemDelete>
-              )}
-            </FileUploadItem>
+              file={file}
+              showClear={showClear}
+              disabled={disabled}
+            />
           ))}
         </FileUploadList>
       )}
