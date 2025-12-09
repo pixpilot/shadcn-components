@@ -1,4 +1,4 @@
-import type { IconProvider } from './types';
+import type { IconProviderProps } from './types';
 
 /**
  * Icon data with pre-computed search strings for performance
@@ -22,7 +22,7 @@ export interface IconSearchData {
  * @returns Map of provider prefix to icon search data
  */
 export function createIconSearchIndex(
-  providers: IconProvider[],
+  providers: IconProviderProps[],
 ): Map<string, IconSearchData[]> {
   const searchIndex = new Map<string, IconSearchData[]>();
 

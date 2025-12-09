@@ -1,9 +1,9 @@
 import type { PopoverContent } from '@pixpilot/shadcn';
+import type { IconProvider } from '@pixpilot/shadcn-ui';
+
 import type { FC } from 'react';
 
-import type { AsyncIconProvider } from './use-async-providers';
 import { Icon } from '@iconify/react';
-
 import { Button, useMediaQuery } from '@pixpilot/shadcn-ui';
 import { useCallback, useState } from 'react';
 import { ICON_SELECTOR_ERROR_MESSAGE } from './constants';
@@ -30,7 +30,7 @@ export interface IconPickerProps {
   pickerMode?: MountType;
   popover?: Partial<React.ComponentProps<typeof PopoverContent>>;
   variant?: IconPickerVariant;
-  providers: AsyncIconProvider[];
+  providers: IconProvider[];
   isLoading?: boolean;
   onProvidersLoaded?: (providers: Array<{ prefix: string; name: string }>) => void;
 }

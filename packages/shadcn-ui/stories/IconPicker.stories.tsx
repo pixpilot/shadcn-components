@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import type { IconProvider } from '../src/icon-selector/types';
+import type { IconProviderProps } from '../src/icon-selector/types';
 import faIcons from '@iconify-json/fa/icons.json';
 import mdiIcons from '@iconify-json/mdi/icons.json';
 import { addAPIProvider } from '@iconify/react';
@@ -86,7 +86,7 @@ addAPIProvider('', {
 });
 
 // Mock icon providers for stories
-function createMockProviders(): IconProvider[] {
+function createMockProviders(): IconProviderProps[] {
   return [
     {
       name: 'Material Design Icons',
@@ -439,7 +439,7 @@ export const WithLazyLoading: Story = {
     const [value, setValue] = useState<string>(args.value ?? '');
 
     const loadFontAwesomeAsync = useCallback(async () => {
-      return new Promise<IconProvider>((resolve) => {
+      return new Promise<IconProviderProps>((resolve) => {
         setTimeout(() => {
           resolve({
             name: 'Material Design Icons',
@@ -485,7 +485,7 @@ export const MultipleAsyncProviders: Story = {
 
     const loadMdiAsync = useCallback(async () => {
       addLog('Loading MDI icons...');
-      return new Promise<IconProvider>((resolve) => {
+      return new Promise<IconProviderProps>((resolve) => {
         setTimeout(() => {
           addLog('MDI icons loaded');
           resolve({
@@ -500,7 +500,7 @@ export const MultipleAsyncProviders: Story = {
 
     const loadFaAsync = useCallback(async () => {
       addLog('Loading Font Awesome icons...');
-      return new Promise<IconProvider>((resolve) => {
+      return new Promise<IconProviderProps>((resolve) => {
         setTimeout(() => {
           addLog('Font Awesome icons loaded');
           resolve({
@@ -573,7 +573,7 @@ export const WithErrorHandling: Story = {
     const [errors, setErrors] = useState<string[]>([]);
 
     const loadValidProvider = useCallback(async () => {
-      return new Promise<IconProvider>((resolve) => {
+      return new Promise<IconProviderProps>((resolve) => {
         setTimeout(() => {
           resolve({
             name: 'Valid Provider',
@@ -585,7 +585,7 @@ export const WithErrorHandling: Story = {
     }, []);
 
     const loadFailingProvider = useCallback(async () => {
-      return new Promise<IconProvider>((_, reject) => {
+      return new Promise<IconProviderProps>((_, reject) => {
         setTimeout(() => {
           reject(new Error('Network error: Failed to fetch icons'));
         }, DELAY_FAIL_LOAD);
@@ -594,12 +594,12 @@ export const WithErrorHandling: Story = {
 
     const loadInvalidProvider = useCallback(async () => {
       // This will fail validation (missing required fields)
-      return new Promise<IconProvider>((resolve) => {
+      return new Promise<IconProviderProps>((resolve) => {
         setTimeout(() => {
           resolve({
             name: 'Invalid Provider',
             // Missing 'prefix' and 'icons' - will be filtered out
-          } as IconProvider);
+          } as IconProviderProps);
         }, DELAY_INVALID_LOAD);
       });
     }, []);
@@ -671,7 +671,7 @@ export const LargeIconSet: Story = {
     const [value, setValue] = useState<string>(args.value ?? '');
 
     const loadLargeIconSet = useCallback(async () => {
-      return new Promise<IconProvider>((resolve) => {
+      return new Promise<IconProviderProps>((resolve) => {
         setTimeout(() => {
           resolve({
             name: 'Material Design Icons',

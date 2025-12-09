@@ -1,5 +1,3 @@
-import { useAsyncProviders } from '@pixpilot/shadcn-ui';
-
 export type {
   ArrayBaseMixins,
   IArrayBaseOperationProps,
@@ -49,7 +47,3 @@ export {
 } from '@formily/react';
 
 export type { ISchema } from '@formily/react';
-
-// Export types for async providers
-
-export { useAsyncProviders };

@@ -1,4 +1,4 @@
-export interface IconProvider {
+export interface IconProviderProps {
   prefix: string;
   icons: string[];
   /**
@@ -6,3 +6,6 @@ export interface IconProvider {
    */
   name: string;
 }
+
+export type IconProviderLoader = () => Promise<IconProviderProps>;
+export type IconProvider = IconProviderProps | IconProviderLoader;

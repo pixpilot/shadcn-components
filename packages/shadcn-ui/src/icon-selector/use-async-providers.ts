@@ -1,21 +1,18 @@
-import type { IconProvider } from '../icon-selector';
+import type { IconProvider, IconProviderProps } from '../icon-selector';
 import { useEffect, useRef, useState } from 'react';
 import { isValidProvider } from './utils/is-valid-provider';
 
-export type IconProviderLoader = () => Promise<IconProvider>;
-export type AsyncIconProvider = IconProvider | IconProviderLoader;
-
 interface UseAsyncProvidersReturn {
-  providers: IconProvider[];
+  providers: IconProviderProps[];
   isLoading: boolean;
   errors: Error[];
 }
 
 export function useAsyncProviders(
-  providers: AsyncIconProvider[] = [],
+  providers: IconProvider[] = [],
 ): UseAsyncProvidersReturn {
   const [state, setState] = useState<{
-    resolved: IconProvider[];
+    resolved: IconProviderProps[];
     loading: boolean;
     errors: Error[];
   }>({
@@ -26,7 +23,7 @@ export function useAsyncProviders(
 
   // Store the previous providers array to compare items, not just the array reference
   // This allows the user to pass `[ProviderA]` inline without causing infinite loops.
-  const previousProvidersRef = useRef<AsyncIconProvider[]>([]);
+  const previousProvidersRef = useRef<IconProvider[]>([]);
 
   useEffect(() => {
     let isMounted = true;
@@ -55,7 +52,7 @@ export function useAsyncProviders(
 
       setState((prev) => ({ ...prev, loading: true, errors: [] }));
 
-      const loaded: IconProvider[] = [];
+      const loaded: IconProviderProps[] = [];
       const loadErrors: Error[] = [];
 
       const results = await Promise.allSettled(

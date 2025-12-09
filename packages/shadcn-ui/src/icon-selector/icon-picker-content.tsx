@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
-import type { IconProvider } from './types';
-import type { AsyncIconProvider } from './use-async-providers';
+import type { IconProvider, IconProviderProps } from './types';
+
 import { Input, Tabs, TabsContent, TabsList, TabsTrigger } from '@pixpilot/shadcn';
 import { X } from 'lucide-react';
 
@@ -23,7 +23,7 @@ function noIconMessage(hasIcons: boolean, isSearching: boolean) {
  * Displays searchable icon grid with provider tabs
  */
 interface IconPickerContentProps {
-  providers: AsyncIconProvider[];
+  providers: IconProvider[];
   onChange?: (value: string) => void;
   onSelect?: () => void;
   /**
@@ -67,7 +67,7 @@ const IconPickerContent: FC<IconPickerContentProps> = ({
   /**
    * Get all icons for a provider
    */
-  const getProviderIcons = useCallback((provider: IconProvider): string[] => {
+  const getProviderIcons = useCallback((provider: IconProviderProps): string[] => {
     try {
       return provider.icons.map((iconName) => `${provider.prefix}:${iconName}`);
     } catch {
