@@ -11,6 +11,7 @@ import {
 import { FileIcon } from 'lucide-react';
 
 import * as React from 'react';
+import { useValueToFiles } from '../file-upload/hooks';
 import { FileUploadInlineItem } from './FileUploadInlineItem';
 
 /**
@@ -38,10 +39,7 @@ export function FileUploadInline({
   ...rest
 }: FileUploadInlineProps) {
   // Normalize value to always be an array internally
-  const files = React.useMemo(() => {
-    if (!value) return [];
-    return Array.isArray(value) ? value : [value];
-  }, [value]);
+  const files = useValueToFiles(value);
 
   const handleValueChange = React.useCallback(
     (newFiles: File[]) => {

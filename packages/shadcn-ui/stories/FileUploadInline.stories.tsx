@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import type { FileUploadProgressCallBacks } from '../src';
 import { useState } from 'react';
 import { FileUploadInline } from '../src';
+import { delay, handleUpload } from './utils/file-upload';
 
 /**
  * A simple inline file upload component.
@@ -178,43 +179,6 @@ export const PDFOnly: Story = {
     return <FileUploadInline {...args} value={file} onChange={setFile} />;
   },
 };
-
-export async function delay(val: number) {
-  await new Promise((resolve) => {
-    setTimeout(resolve, val);
-  });
-}
-
-function handleUpload(
-  files: File[],
-  options: { onProgress: (file: File, progress: number) => void },
-) {
-  const maxProgress = 90;
-  const progressIncrement = 5;
-  const minIncrement = 1;
-  const intervalMs = 200;
-  const minDelay = 2000;
-  const delayRange = 2000;
-  const finalProgress = 100;
-
-  for (const uploadFile of files) {
-    // eslint-disable-next-line no-void
-    void (async () => {
-      let progress = 0;
-      const intervalId = setInterval(() => {
-        progress += Math.random() * progressIncrement + minIncrement; // Increase progress gradually
-        if (progress > maxProgress) progress = maxProgress;
-        options.onProgress(uploadFile, progress);
-      }, intervalMs); // Update every 200ms for smoother progress
-
-      // Simulate upload time with random delay
-      await delay(minDelay + Math.random() * delayRange); // 2-4 seconds
-
-      clearInterval(intervalId);
-      options.onProgress(uploadFile, finalProgress);
-    })();
-  }
-}
 
 /**
  * File upload with API mock integration

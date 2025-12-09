@@ -10,6 +10,7 @@ export * from './confirmation-dialog';
 export * from './ContentCard';
 export * from './DatePicker';
 export * from './file-upload-inline';
+export * from './file-upload/types';
 export * from './hooks';
 export * from './icon-selector';
 export * from './LoadingOverlay';

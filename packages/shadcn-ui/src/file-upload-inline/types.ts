@@ -22,9 +22,3 @@ export interface FileUploadInlineProps extends Omit<FileUploadProps, 'value'> {
    */
   showClear?: boolean;
 }
-
-export interface FileUploadProgressCallBacks {
-  onProgress: (file: File, progress: number) => void;
-  onSuccess: (file: File) => void;
-  onError: (file: File, error: Error) => void;
-}

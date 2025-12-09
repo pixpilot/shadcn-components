@@ -75,6 +75,8 @@ export const handlers = [
     return HttpResponse.json(iconData);
   }),
 
+  http.get('/uploads/:fileName', async ({ request }) => fetch(request)),
+
   // Handle file upload requests with delay simulation
   http.post('/api/upload', async ({ request }) => {
     try {
