@@ -1,5 +1,16 @@
 # @pixpilot/formily-shadcn
 
+## 0.6.0
+
+### Minor Changes
+
+- adds icon selector
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn-ui@0.1.0
+
 ## 0.5.0
 
 ### Minor Changes

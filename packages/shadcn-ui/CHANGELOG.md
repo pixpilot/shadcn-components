@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.1.0
+
+### Minor Changes
+
+- adds icon selector
+
 ## 0.0.7
 
 ### Patch Changes
