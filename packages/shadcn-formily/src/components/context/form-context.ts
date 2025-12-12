@@ -1,6 +1,11 @@
-import type { IconProvider } from '@pixpilot/shadcn-ui';
+import type { FileUploadProgressCallBacks, IconProvider } from '@pixpilot/shadcn-ui';
 import type { FormSpace } from '../../types';
 import React from 'react';
+
+export interface FomFileUpload {
+  onUpload?: (files: File[], options: FileUploadProgressCallBacks) => void;
+  maxSize?: number;
+}
 
 export interface FormContextStates extends FormSpace {
   itemProps?: {
@@ -9,7 +14,7 @@ export interface FormContextStates extends FormSpace {
   objectContainerProps?: {
     className?: string;
   };
-  fields?: {
+  config?: {
     iconPicker?: {
       /**
        * Icon providers - can be static providers or async loader functions
@@ -21,6 +26,7 @@ export interface FormContextStates extends FormSpace {
        */
       onProvidersLoaded?: (providers: IconProvider[]) => void;
     };
+    fileUpload?: FomFileUpload;
   };
 }
 

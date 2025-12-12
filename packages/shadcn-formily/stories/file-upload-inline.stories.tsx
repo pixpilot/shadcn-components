@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 /* eslint-disable no-alert */
 import type { Meta, StoryObj } from '@storybook/react';
-import { createForm, Form, SchemaField } from '../src';
+import { createForm, Form, JsonSchemaFormRenderer, SchemaField } from '../src';
+import { handleUpload } from './utils/file-upload';
 
 const meta: Meta<typeof Form> = {
   title: 'Formily/FileUploadInline',
@@ -40,16 +41,7 @@ export const Declarative: Story = {
             x-component-props={{
               buttonText: 'Upload resume',
               accept: '.pdf,.doc,.docx',
-            }}
-          />
-          <SchemaField.String
-            name="coverLetter"
-            title="Cover Letter"
-            x-decorator="FormItem"
-            x-component="FileUploadInline"
-            x-component-props={{
-              buttonText: 'Upload cover letter (optional)',
-              accept: '.pdf,.doc,.docx',
+              onUpload: handleUpload,
             }}
           />
           <SchemaField.String
@@ -61,6 +53,7 @@ export const Declarative: Story = {
               buttonText: 'Select photo',
               accept: 'image/*',
               showIcon: true,
+              onUpload: handleUpload,
             }}
           />
         </SchemaField>
@@ -86,6 +79,11 @@ export const DeclarativeMultiple: Story = {
         onSubmit={(values) => {
           console.log('Form submitted:', values);
           alert(JSON.stringify(values, null, JSON_INDENT));
+        }}
+        config={{
+          fileUpload: {
+            onUpload: handleUpload,
+          },
         }}
       >
         <SchemaField>
@@ -113,110 +111,7 @@ export const DeclarativeMultiple: Story = {
   },
 };
 
-export const BasicFileUpload: Story = {
-  render: () => {
-    const form = createForm();
-
-    const schema = {
-      type: 'object',
-      properties: {
-        document: {
-          type: 'string',
-          title: 'Upload Document',
-          'x-decorator': 'FormItem',
-          'x-component': 'FileUploadInline',
-          'x-component-props': {
-            buttonText: 'Browse file',
-            showIcon: true,
-          },
-        },
-      },
-    };
-
-    return (
-      <Form
-        form={form}
-        className="w-[400px]"
-        onSubmit={(values) => {
-          console.log('Form submitted:', values);
-          alert(JSON.stringify(values, null, JSON_INDENT));
-        }}
-      >
-        <SchemaField schema={schema} />
-        <button
-          type="submit"
-          className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
-        >
-          Submit
-        </button>
-      </Form>
-    );
-  },
-};
-
-export const MultipleFileUploads: Story = {
-  render: () => {
-    const form = createForm();
-
-    const schema = {
-      type: 'object',
-      properties: {
-        resume: {
-          type: 'string',
-          title: 'Resume',
-          required: true,
-          'x-decorator': 'FormItem',
-          'x-component': 'FileUploadInline',
-          'x-component-props': {
-            buttonText: 'Upload resume',
-            accept: '.pdf,.doc,.docx',
-          },
-        },
-        coverLetter: {
-          type: 'string',
-          title: 'Cover Letter',
-          'x-decorator': 'FormItem',
-          'x-component': 'FileUploadInline',
-          'x-component-props': {
-            buttonText: 'Upload cover letter',
-            accept: '.pdf,.doc,.docx',
-          },
-        },
-        portfolio: {
-          type: 'string',
-          title: 'Portfolio (Optional)',
-          'x-decorator': 'FormItem',
-          'x-component': 'FileUploadInline',
-          'x-component-props': {
-            buttonText: 'Upload portfolio',
-            accept: '.pdf',
-          },
-        },
-      },
-    };
-
-    return (
-      <Form
-        form={form}
-        className="w-[400px]"
-        onSubmit={(values) => {
-          console.log('Form submitted:', values);
-          alert(JSON.stringify(values, null, JSON_INDENT));
-        }}
-      >
-        <SchemaField schema={schema} />
-        <button
-          type="submit"
-          className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
-        >
-          Submit
-        </button>
-      </Form>
-    );
-  },
-};
-
-export const ImageUpload: Story = {
+export const WithOnUploadInSchema: Story = {
   render: () => {
     const form = createForm();
 
@@ -233,6 +128,7 @@ export const ImageUpload: Story = {
             buttonText: 'Select image',
             accept: 'image/*',
             showIcon: true,
+            onUpload: handleUpload,
           },
         },
       },
@@ -274,6 +170,7 @@ export const WithoutIcon: Story = {
           'x-component-props': {
             buttonText: 'Choose file',
             showIcon: false,
+            onUpload: handleUpload,
           },
         },
       },
@@ -315,6 +212,7 @@ export const DisabledFileUpload: Story = {
           'x-component-props': {
             buttonText: 'Browse file',
             disabled: true,
+            onUpload: handleUpload,
           },
         },
       },
@@ -389,6 +287,11 @@ export const WithValidation: Story = {
       <Form
         form={form}
         className="w-[400px]"
+        config={{
+          fileUpload: {
+            onUpload: handleUpload,
+          },
+        }}
         onSubmit={(values) => {
           console.log('Form submitted:', values);
           alert(JSON.stringify(values, null, JSON_INDENT));
@@ -406,73 +309,19 @@ export const WithValidation: Story = {
   },
 };
 
-export const ComplexForm: Story = {
+export const WithFormFieldSetting: Story = {
   render: () => {
     const form = createForm();
 
     const schema = {
       type: 'object',
       properties: {
-        personalInfo: {
-          type: 'void',
-          'x-component': 'FormGrid',
-          'x-component-props': {
-            minColumns: 1,
-            maxColumns: 2,
-          },
-          properties: {
-            firstName: {
-              type: 'string',
-              title: 'First Name',
-              required: true,
-              'x-decorator': 'FormItem',
-              'x-component': 'Input',
-              'x-component-props': {
-                placeholder: 'Enter first name',
-              },
-            },
-            lastName: {
-              type: 'string',
-              title: 'Last Name',
-              required: true,
-              'x-decorator': 'FormItem',
-              'x-component': 'Input',
-              'x-component-props': {
-                placeholder: 'Enter last name',
-              },
-            },
-          },
-        },
-        email: {
+        document: {
           type: 'string',
-          title: 'Email',
-          required: true,
-          'x-decorator': 'FormItem',
-          'x-component': 'Input',
-          'x-component-props': {
-            placeholder: 'your.email@example.com',
-            type: 'email',
-          },
-        },
-        resume: {
-          type: 'string',
-          title: 'Resume/CV',
-          required: true,
-          'x-decorator': 'FormItem',
+          title: 'Upload File',
           'x-component': 'FileUploadInline',
           'x-component-props': {
-            buttonText: 'Upload your resume',
-            accept: '.pdf,.doc,.docx',
-          },
-        },
-        coverLetter: {
-          type: 'string',
-          title: 'Cover Letter',
-          'x-decorator': 'FormItem',
-          'x-component': 'FileUploadInline',
-          'x-component-props': {
-            buttonText: 'Upload cover letter (optional)',
-            accept: '.pdf,.doc,.docx',
+            buttonText: 'Select file',
           },
         },
       },
@@ -486,6 +335,12 @@ export const ComplexForm: Story = {
           console.log('Form submitted:', values);
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
+        config={{
+          fileUpload: {
+            onUpload: handleUpload,
+            maxSize: 2 * 1024 * 1024,
+          },
+        }}
       >
         <SchemaField schema={schema} />
         <button
@@ -495,6 +350,48 @@ export const ComplexForm: Story = {
           Submit Application
         </button>
       </Form>
+    );
+  },
+};
+
+export const WithJsonSchemaFormRenderer: Story = {
+  render: () => {
+    const schema = {
+      type: 'object',
+      properties: {
+        document: {
+          type: 'string',
+          title: 'Upload File',
+          'x-component': 'FileUploadInline',
+          'x-component-props': {
+            buttonText: 'Select file',
+          },
+        },
+      },
+    };
+
+    return (
+      <JsonSchemaFormRenderer
+        schema={schema}
+        className="w-[400px]"
+        config={{
+          fileUpload: {
+            onUpload: handleUpload,
+            maxSize: 2 * 1024 * 1024,
+          },
+        }}
+        onSubmit={(values) => {
+          console.log('Form submitted:', values);
+          alert(JSON.stringify(values, null, JSON_INDENT));
+        }}
+      >
+        <button
+          type="submit"
+          className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+        >
+          Submit
+        </button>
+      </JsonSchemaFormRenderer>
     );
   },
 };

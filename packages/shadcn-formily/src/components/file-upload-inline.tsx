@@ -4,13 +4,33 @@ import { connect, mapProps, useField } from '@formily/react';
 import { FileUploadInline as ShadcnFileUploadInline } from '@pixpilot/shadcn-ui';
 import prettyBytes from 'pretty-bytes';
 import React from 'react';
-
-const DEFAULT_MAX_SIZE = 2097152; // 2 megabytes in bytes
+import { useFormContext } from '../hooks';
 
 const BaseFileUploadInline: React.FC<FileUploadInlineProps> = (props) => {
-  const { onFilesReject, maxSize = DEFAULT_MAX_SIZE, onFileValidate } = props;
+  const {
+    onFilesReject,
+    maxSize: maxSizeProp,
+    onFileValidate,
+    onUpload: onUploadProp,
+  } = props;
 
   const field = useField<Field>();
+
+  const { config } = useFormContext();
+  const { fileUpload } = config || {};
+
+  const onUpload = onUploadProp ?? fileUpload?.onUpload;
+
+  const maxSize = maxSizeProp ?? fileUpload?.maxSize;
+
+  if (!onUpload) {
+    // eslint-disable-next-line no-restricted-properties, node/prefer-global/process
+    if (process.env.NODE_ENV !== 'production') {
+      throw new Error(
+        'onUpload prop required for FileUploadInline. Provide handler on form or field props.',
+      );
+    }
+  }
 
   const handleFilesRejection = React.useCallback(
     (files: Array<{ file: File; message: string }>) => {
@@ -32,7 +52,7 @@ const BaseFileUploadInline: React.FC<FileUploadInlineProps> = (props) => {
         messages.push(maximumError[0]!.message);
       }
 
-      if (withFileSizeError.length > 0) {
+      if (maxSize != null && withFileSizeError.length > 0) {
         const fileList = withFileSizeError
           .map((f) => `${f.file.name} (${prettyBytes(f.file.size)})`)
           .join('\n');
@@ -72,6 +92,7 @@ const BaseFileUploadInline: React.FC<FileUploadInlineProps> = (props) => {
       maxSize={maxSize}
       onFilesReject={handleFilesRejection}
       onFileValidate={handleFileValidate}
+      onUpload={onUploadProp || fileUpload?.onUpload}
     />
   );
 };
