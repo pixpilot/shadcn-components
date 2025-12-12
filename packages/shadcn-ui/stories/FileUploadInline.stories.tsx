@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import type { FileUploadProgressCallBacks } from '../src';
+import type { FileMetadata, FileUploadProgressCallBacks } from '../src';
 import { useState } from 'react';
 import { FileUploadInline } from '../src';
 import { delay, handleUpload } from './utils/file-upload';
@@ -24,10 +24,6 @@ const meta = {
       control: 'boolean',
       description: 'Whether to show file icon',
     },
-    showClear: {
-      control: 'boolean',
-      description: 'Whether to show clear button when file is selected',
-    },
     disabled: {
       control: 'boolean',
       description: 'Whether the input is disabled',
@@ -43,7 +39,7 @@ const meta = {
 } satisfies Meta<typeof FileUploadInline>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof FileUploadInline>;
 
 /**
  * Default file upload input
@@ -52,12 +48,9 @@ export const Default: Story = {
   args: {
     buttonText: 'Browse file',
     showIcon: true,
-    showClear: true,
   },
   render: function DefaultFileUpload(args) {
-    const [file, setFile] = useState<File | File[] | null>(null);
-
-    return <FileUploadInline {...args} value={file} onChange={setFile} />;
+    return <FileUploadInline {...args} onUpload={handleUpload} />;
   },
 };
 
@@ -68,12 +61,9 @@ export const CustomButtonText: Story = {
   args: {
     buttonText: 'Select a document',
     showIcon: true,
-    showClear: true,
   },
   render: function CustomButtonFileUpload(args) {
-    const [file, setFile] = useState<File | File[] | null>(null);
-
-    return <FileUploadInline {...args} value={file} onChange={setFile} />;
+    return <FileUploadInline {...args} onUpload={handleUpload} />;
   },
 };
 
@@ -84,12 +74,9 @@ export const WithoutIcon: Story = {
   args: {
     buttonText: 'Choose file',
     showIcon: false,
-    showClear: true,
   },
   render: function WithoutIconFileUpload(args) {
-    const [file, setFile] = useState<File | File[] | null>(null);
-
-    return <FileUploadInline {...args} value={file} onChange={setFile} />;
+    return <FileUploadInline {...args} onUpload={handleUpload} />;
   },
 };
 
@@ -100,12 +87,9 @@ export const WithoutClearButton: Story = {
   args: {
     buttonText: 'Browse file',
     showIcon: true,
-    showClear: false,
   },
   render: function WithoutClearFileUpload(args) {
-    const [file, setFile] = useState<File | File[] | null>(null);
-
-    return <FileUploadInline {...args} value={file} onChange={setFile} />;
+    return <FileUploadInline {...args} onUpload={handleUpload} />;
   },
 };
 
@@ -116,13 +100,11 @@ export const Disabled: Story = {
   args: {
     buttonText: 'Browse file',
     showIcon: true,
-    showClear: true,
+
     disabled: true,
   },
   render: function DisabledFileUpload(args) {
-    const [file, setFile] = useState<File | File[] | null>(null);
-
-    return <FileUploadInline {...args} value={file} onChange={setFile} />;
+    return <FileUploadInline {...args} onUpload={handleUpload} />;
   },
 };
 
@@ -133,16 +115,81 @@ export const WithValue: Story = {
   args: {
     buttonText: 'Browse file',
     showIcon: true,
-    showClear: true,
   },
   render: function WithValueFileUpload(args) {
-    // Create a mock file for demonstration
-    const mockFile = new File([''], 'example-document-with-a-very-long-filename.pdf', {
-      type: 'application/pdf',
+    const [files, setFiles] = useState<FileMetadata | null>({
+      name: 'avatar.png',
+      size: 1024,
+      type: 'image/png',
+      url: `${window.location.origin}/avatar.png`,
+      lastModified: 1625247600000,
     });
-    const [file, setFile] = useState<File | File[] | null>(mockFile);
 
-    return <FileUploadInline {...args} value={file} onChange={setFile} />;
+    const handleChange = (newFiles: FileMetadata | null) => {
+      setFiles(newFiles);
+    };
+
+    return (
+      <FileUploadInline
+        {...args}
+        value={files}
+        multiple={false}
+        onChange={handleChange}
+        onUpload={handleUpload}
+      />
+    );
+  },
+};
+
+/**
+ * File upload with pre-selected file
+ */
+export const WithMultipleAndValue: Story = {
+  args: {
+    buttonText: 'Browse file',
+    showIcon: true,
+    multiple: true,
+  },
+  render: function WithValueFileUpload(args) {
+    const [files, setFiles] = useState<FileMetadata[]>([
+      {
+        name: 'avatar.png',
+        size: 1024,
+        type: 'image/png',
+        url: `${window.location.origin}/avatar.png`,
+        lastModified: 1625247600000,
+      },
+    ]);
+    const [changeCount, setChangeCount] = useState(0);
+
+    const handleChange = (newFiles: FileMetadata[]) => {
+      setFiles(newFiles);
+      setChangeCount((c) => c + 1);
+    };
+
+    return (
+      <>
+        <FileUploadInline
+          {...args}
+          value={files}
+          multiple={true}
+          onChange={handleChange}
+          onUpload={handleUpload}
+        />
+        <div style={{ marginTop: 12 }}>
+          <div style={{ fontWeight: 'bold', marginBottom: 4 }}>
+            onChange called: {changeCount} {changeCount === 1 ? 'time' : 'times'}
+          </div>
+          <pre>
+            {JSON.stringify(
+              files.map((x) => ({ name: x.name, size: x.size })),
+              null,
+              2,
+            )}
+          </pre>
+        </div>
+      </>
+    );
   },
 };
 
@@ -153,13 +200,11 @@ export const ImagesOnly: Story = {
   args: {
     buttonText: 'Select image',
     showIcon: true,
-    showClear: true,
+
     accept: 'image/*',
   },
   render: function ImagesOnlyFileUpload(args) {
-    const [file, setFile] = useState<File | File[] | null>(null);
-
-    return <FileUploadInline {...args} value={file} onChange={setFile} />;
+    return <FileUploadInline {...args} onUpload={handleUpload} />;
   },
 };
 
@@ -170,13 +215,11 @@ export const PDFOnly: Story = {
   args: {
     buttonText: 'Select PDF',
     showIcon: true,
-    showClear: true,
+
     accept: 'application/pdf',
   },
   render: function PDFOnlyFileUpload(args) {
-    const [file, setFile] = useState<File | File[] | null>(null);
-
-    return <FileUploadInline {...args} value={file} onChange={setFile} />;
+    return <FileUploadInline {...args} onUpload={handleUpload} />;
   },
 };
 
@@ -188,19 +231,9 @@ export const WithMockedUpload: Story = {
   args: {
     buttonText: 'Upload file',
     showIcon: true,
-    showClear: true,
   },
   render: function WithMockedUploadFileUpload(args) {
-    const [files, setFiles] = useState<File | File[] | null>(null);
-
-    return (
-      <FileUploadInline
-        {...args}
-        value={files}
-        onChange={setFiles}
-        onUpload={handleUpload}
-      />
-    );
+    return <FileUploadInline {...args} onUpload={handleUpload} />;
   },
 };
 
@@ -208,20 +241,11 @@ export const MultipleFiles: Story = {
   args: {
     buttonText: 'Browse files',
     showIcon: true,
-    showClear: true,
+
     multiple: true,
   },
   render: function MultipleFilesUpload(args) {
-    const [files, setFiles] = useState<File | File[] | null>(null);
-
-    return (
-      <FileUploadInline
-        {...args}
-        value={files}
-        onChange={setFiles}
-        onUpload={handleUpload}
-      />
-    );
+    return <FileUploadInline {...args} onUpload={handleUpload} />;
   },
 };
 
@@ -229,11 +253,8 @@ export const WithUploadError: Story = {
   args: {
     buttonText: 'Upload file',
     showIcon: true,
-    showClear: true,
   },
   render: function WithUploadErrorFileUpload(args) {
-    const [files, setFiles] = useState<File | File[] | null>(null);
-
     function handleUploadWithError(
       uploadFiles: File[],
       options: FileUploadProgressCallBacks,
@@ -254,9 +275,12 @@ export const WithUploadError: Story = {
     return (
       <FileUploadInline
         {...args}
-        value={files}
-        onChange={setFiles}
+        value={null}
+        multiple={false}
         onUpload={handleUploadWithError}
+        onChange={(_file) => {
+          // handle single file change
+        }}
       />
     );
   },

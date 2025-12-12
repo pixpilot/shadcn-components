@@ -57,6 +57,7 @@
     "class-variance-authority": "catalog:prod",
     "lucide-react": "catalog:prod",
     "next-themes": "catalog:prod",
+    "pretty-bytes": "^7.1.0",
     "react-responsive": "^10.0.1",
     "sonner": "2.0.7"
   },

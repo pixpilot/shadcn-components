@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import type { FileMetadata } from '../src';
+import type { FileMetadata, FileUploadProgressCallBacks } from '../src';
 import type { AvatarUploadProps } from '../src/avatar-upload/AvatarUpload';
 import { useCallback, useState } from 'react';
 import { AvatarUpload } from '../src/avatar-upload/AvatarUpload';
-import { handleUpload } from './utils/file-upload';
+import { delay, handleUpload } from './utils/file-upload';
 
 /**
  * Alert component for displaying important messages to users.
@@ -68,7 +68,32 @@ export const WithImage: Story = {
       size: 1024,
       type: 'image/png',
       url: `${window.location.origin}/avatar.png`,
+      lastModified: 1625247600000,
     },
   },
   render: Uploader,
+};
+
+export const WithUploadError: Story = {
+  args: {},
+  render: function WithUploadErrorFileUpload(args) {
+    function handleUploadWithError(
+      uploadFiles: File[],
+      options: FileUploadProgressCallBacks,
+    ) {
+      for (const uploadFile of uploadFiles) {
+        // eslint-disable-next-line no-void
+        void (async () => {
+          // Simulate upload time
+          await delay(500);
+
+          options.onProgress(uploadFile, 0);
+
+          options.onError(uploadFile, new Error('Upload failed due to network error.'));
+        })();
+      }
+    }
+
+    return <AvatarUpload {...args} value={null} onUpload={handleUploadWithError} />;
+  },
 };

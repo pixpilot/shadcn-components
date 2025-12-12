@@ -55,7 +55,7 @@ const AvatarUpload: React.FC<AvatarUploadProps> = (props) => {
         acceptedFiles.map((file) => {
           return {
             file,
-            id: crypto.randomUUID(),
+            id: `${file.name}-${file.lastModified.toString()}`,
           };
         }),
       );

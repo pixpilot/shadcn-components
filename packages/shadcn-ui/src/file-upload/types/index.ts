@@ -5,7 +5,11 @@ export interface FileMetadata {
   size: number;
   type: string;
   url?: string;
+  lastModified: number;
 }
+
+export type OnChangeSingleFile = (file: FileMetadata | null) => void;
+export type OnChangeMultipleFiles = (files: FileMetadata[]) => void;
 
 export interface FileUploadBaseProps extends Omit<OrgFileUploadProps, 'value'> {}
 
@@ -13,21 +17,21 @@ export type FileUploadProps =
   | ({
       multiple: true;
       value?: FileMetadata[];
-      onChange?: (files: FileMetadata[]) => void;
+      onChange?: OnChangeMultipleFiles;
     } & Omit<OrgFileUploadProps, 'value'>)
   | ({
       multiple?: false; // defaults to single
-      value?: FileMetadata;
-      onChange?: (file: FileMetadata) => void;
+      value?: FileMetadata | null;
+      onChange?: OnChangeSingleFile;
     } & Omit<OrgFileUploadProps, 'value'>);
 
 export interface MultiFileUploadProps extends FileUploadBaseProps {
   value?: FileMetadata[];
-  onChange?: (files: FileMetadata[]) => void;
+  onChange?: OnChangeMultipleFiles;
 }
 
-export interface SingleFileUploadProps extends FileUploadBaseProps {
-  value?: FileMetadata;
+export interface SingleFileUploadProps extends Omit<FileUploadBaseProps, 'multiple'> {
+  value?: FileMetadata | null;
   onChange?: (files: FileMetadata) => void;
 }
 

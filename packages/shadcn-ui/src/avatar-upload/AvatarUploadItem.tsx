@@ -2,9 +2,16 @@ import type { FileMetadata } from '../file-upload';
 
 import type { ComponentSize } from './types';
 
-import { cn } from '@pixpilot/shadcn';
+import {
+  cn,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@pixpilot/shadcn';
+import { AlertCircle } from 'lucide-react';
 import { FileUploadItem, FileUploadItemProgress, useFileUpload } from '@/components';
-import { useFileUploadProgressCallbacks } from '../file-upload';
+import { useFileError, useFileUploadProgressCallbacks } from '../file-upload';
 import {
   AvatarWrap,
   Image,
@@ -25,7 +32,10 @@ const AvatarUploadItem: React.FC<AvatarUploadItemProps> = (props) => {
 
   useFileUploadProgressCallbacks(file, props);
 
+  const fileError = useFileError(file);
+
   const isUploading = useFileUpload((store) => {
+    if (fileError != null) return false;
     const storeFile = store.files.get(file);
     if (storeFile?.status === 'uploading') {
       return true;
@@ -36,7 +46,7 @@ const AvatarUploadItem: React.FC<AvatarUploadItemProps> = (props) => {
   return (
     <FileUploadItem value={file} className="p-0 border-0 m-0">
       <MainWrapper currentSize={currentSize}>
-        <div className="relative">
+        <div className={cn('relative')}>
           <AvatarWrap
             className={currentSize.avatar}
             showChangeIcon={true}
@@ -44,9 +54,23 @@ const AvatarUploadItem: React.FC<AvatarUploadItemProps> = (props) => {
           >
             <Image src={URL.createObjectURL(file)} />
           </AvatarWrap>
+          {fileError != null && (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button type="button" className="absolute -top-2 -right-2 p-1">
+                    <AlertCircle className="h-5 w-5 text-red-500" />
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent>{fileError}</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
         </div>
         <div className="w-full flex items-center justify-center relative">
-          <FileUploadItemProgress variant="linear" className="absolute" />
+          {fileError == null && isUploading && (
+            <FileUploadItemProgress variant="linear" className="absolute" />
+          )}
 
           <MessageComponent
             message={change}

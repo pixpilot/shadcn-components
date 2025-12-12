@@ -72,7 +72,7 @@ export function useAsyncProviders(
               `Invalid provider at index ${index}: Missing required fields.`,
             );
             loadErrors.push(err);
-            console.warn(err.message, provider);
+            // Removed console.warn for lint compliance
           }
         } else {
           const err =
@@ -80,7 +80,7 @@ export function useAsyncProviders(
               ? result.reason
               : new Error(String(result.reason));
           loadErrors.push(err);
-          console.error(`Provider at index ${index} failed to load:`, err);
+          // Removed console.error for lint compliance
         }
       }
 

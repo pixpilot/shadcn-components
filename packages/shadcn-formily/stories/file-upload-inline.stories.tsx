@@ -61,7 +61,6 @@ export const Declarative: Story = {
               buttonText: 'Select photo',
               accept: 'image/*',
               showIcon: true,
-              showClear: true,
             }}
           />
         </SchemaField>
