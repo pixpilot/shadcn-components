@@ -53,7 +53,7 @@
     "@iconify/react": "catalog:prod",
     "@pixpilot/hash": "catalog:prod",
     "@pixpilot/shadcn": "workspace:*",
-    "@tanstack/react-virtual": "^3.13.12",
+    "@tanstack/react-virtual": "^3.13.13",
     "class-variance-authority": "catalog:prod",
     "lucide-react": "catalog:prod",
     "next-themes": "catalog:prod",
