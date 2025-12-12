@@ -11,19 +11,21 @@ export interface FileMetadata {
 export type OnChangeSingleFile = (file: FileMetadata | null) => void;
 export type OnChangeMultipleFiles = (files: FileMetadata[]) => void;
 
-export interface FileUploadBaseProps extends Omit<OrgFileUploadProps, 'value'> {}
+type MainFileUploadProps = Omit<OrgFileUploadProps, 'value'>;
+
+export interface FileUploadBaseProps extends MainFileUploadProps {}
 
 export type FileUploadProps =
   | ({
       multiple: true;
       value?: FileMetadata[];
       onChange?: OnChangeMultipleFiles;
-    } & Omit<OrgFileUploadProps, 'value'>)
+    } & MainFileUploadProps)
   | ({
       multiple?: false; // defaults to single
       value?: FileMetadata | null;
       onChange?: OnChangeSingleFile;
-    } & Omit<OrgFileUploadProps, 'value'>);
+    } & MainFileUploadProps);
 
 export interface MultiFileUploadProps extends FileUploadBaseProps {
   value?: FileMetadata[];

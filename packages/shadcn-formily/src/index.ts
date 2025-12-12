@@ -14,7 +14,7 @@ export { Checkbox } from './components/checkbox';
 export { Column } from './components/column';
 export { Combobox } from './components/combobox';
 export { DatePicker } from './components/date-picker';
-export { FileUploadInline } from './components/file-upload-inline';
+export { FileUpload, FileUploadInline } from './components/file-upload';
 // Core components
 export { Form } from './components/form';
 export { FormGrid } from './components/form-grid';

@@ -273,6 +273,52 @@ describe('useFileUploadStore', () => {
     });
   });
 
+  describe('orgValue + getFile', () => {
+    it('should create stable File instances for metadata-only values', () => {
+      const { result, rerender } = renderHook(
+        ({ value }) =>
+          useFileUploadStore({
+            value,
+            onChange: undefined,
+            multiple: false,
+          }),
+        {
+          initialProps: { value: mockFileMetadata1 as FileMetadata | null },
+        },
+      );
+
+      expect(result.current.orgValue).toHaveLength(1);
+      const firstFile = result.current.orgValue[0];
+      expect(firstFile).toBeInstanceOf(File);
+      expect(firstFile!.name).toBe(mockFileMetadata1.name);
+      expect(firstFile!.type).toBe(mockFileMetadata1.type);
+      expect(firstFile!.lastModified).toBe(mockFileMetadata1.lastModified);
+
+      rerender({ value: mockFileMetadata1 });
+
+      expect(result.current.orgValue).toHaveLength(1);
+      expect(result.current.orgValue[0]).toBe(firstFile);
+    });
+
+    it('should reuse the original File when fileMeta.file exists', () => {
+      const { result } = renderHook(() =>
+        useFileUploadStore({
+          value: null,
+          onChange: undefined,
+          multiple: true,
+        }),
+      );
+
+      act(() => {
+        result.current.handleAccept([mockFile1]);
+      });
+
+      expect(result.current.displayFiles[0]?.file).toBe(mockFile1);
+      expect(result.current.getFile(result.current.displayFiles[0]!)).toBe(mockFile1);
+      expect(result.current.orgValue).toEqual([mockFile1]);
+    });
+  });
+
   describe('deleteFile', () => {
     it('should delete upload file when file has file property', () => {
       const { result } = renderHook(() =>

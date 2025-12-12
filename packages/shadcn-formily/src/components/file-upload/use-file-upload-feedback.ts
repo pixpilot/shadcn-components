@@ -1,29 +1,34 @@
 import type { Field } from '@formily/core';
-import type { FileUploadInlineProps } from '@pixpilot/shadcn-ui';
-import { connect, mapProps, useField } from '@formily/react';
-import { FileUploadInline as ShadcnFileUploadInline } from '@pixpilot/shadcn-ui';
+import type { FileUploadBaseProps } from '@pixpilot/shadcn-ui';
+import { useField } from '@formily/react';
 import prettyBytes from 'pretty-bytes';
 import React from 'react';
-import { useFormContext } from '../hooks';
+import { useFormContext } from '../../hooks';
 
-const BaseFileUploadInline: React.FC<FileUploadInlineProps> = (props) => {
+export function useFileUploadFeedback(props: FileUploadBaseProps): {
+  onUpload: ((...args: any[]) => any) | undefined;
+  maxSize: number | undefined;
+  handleFilesRejection: (files: Array<{ file: File; message: string }>) => void;
+  handleFileValidate: (file: File) => string | null | undefined;
+} {
   const {
-    onFilesReject,
-    maxSize: maxSizeProp,
-    onFileValidate,
     onUpload: onUploadProp,
+    maxSize: maxSizeProp,
+    onFilesReject,
+    onFileValidate,
   } = props;
+
+  const { config } = useFormContext();
 
   const field = useField<Field>();
 
-  const { config } = useFormContext();
   const { fileUpload } = config || {};
 
   const onUpload = onUploadProp ?? fileUpload?.onUpload;
 
   const maxSize = maxSizeProp ?? fileUpload?.maxSize;
 
-  if (!onUpload) {
+  if (onUpload == null) {
     // eslint-disable-next-line no-restricted-properties, node/prefer-global/process
     if (process.env.NODE_ENV !== 'production') {
       throw new Error(
@@ -86,28 +91,5 @@ const BaseFileUploadInline: React.FC<FileUploadInlineProps> = (props) => {
     [field, onFileValidate],
   );
 
-  return (
-    <ShadcnFileUploadInline
-      {...props}
-      maxSize={maxSize}
-      onFilesReject={handleFilesRejection}
-      onFileValidate={handleFileValidate}
-      onUpload={onUploadProp || fileUpload?.onUpload}
-    />
-  );
-};
-
-/**
- * Formily-connected FileUploadInline component
- * Automatically connects shadcn FileUploadInline to Formily field state
- */
-export const FileUploadInline = connect(
-  BaseFileUploadInline,
-  mapProps((props, field) => {
-    return {
-      ...props,
-      // eslint-disable-next-line ts/no-unsafe-assignment
-      value: (field as Field).value ?? null,
-    };
-  }),
-);
+  return { onUpload, maxSize, handleFilesRejection, handleFileValidate };
+}

@@ -1,4 +1,5 @@
 import { cn } from '@pixpilot/shadcn';
+import { FileUpload } from './file-upload';
 
 export * from './AbsoluteFill';
 export * from './Alert';
@@ -23,4 +24,5 @@ export * from './tags-input';
 export * from './theme-provider';
 export * from './ThemeToggle';
 export * from './toast';
-export { cn };
+
+export { cn, FileUpload };

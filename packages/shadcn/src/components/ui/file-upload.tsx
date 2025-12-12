@@ -1076,7 +1076,8 @@ function FileUploadItemPreview(props: FileUploadItemPreviewProps) {
   );
 
   const onPreviewRender = React.useCallback(
-    async (file: File) => {
+    // eslint-disable-next-line ts/promise-function-async
+    (file: File) => {
       if (render) {
         return render(file, () => getDefaultRender(file));
       }

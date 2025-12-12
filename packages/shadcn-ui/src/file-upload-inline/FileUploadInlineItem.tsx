@@ -6,6 +6,7 @@ import { Button, cn, FileUploadItem, FileUploadItemProgress } from '@pixpilot/sh
 import { XIcon } from 'lucide-react';
 import prettyBytes from 'pretty-bytes';
 import React from 'react';
+import { useFileUpload } from '@/components';
 import { useFileError, useFileUploadProgressCallbacks } from '../file-upload/hooks';
 
 const FileMetaDataDisplay: React.FC<
@@ -25,7 +26,7 @@ const FileMetaDataDisplay: React.FC<
 };
 
 const DeleteIconButton: React.FC<{
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }> = ({ onClick }) => {
   return (
     <Button
@@ -57,9 +58,9 @@ const FileItemInnerWrapper: React.FC<{
 };
 
 interface FileItemProps extends Partial<FileMetadata> {
-  file?: File;
+  file: File;
   disabled?: boolean;
-  onDelete?: (file: FileWithMetadata) => void;
+  onDelete: (file: FileWithMetadata) => void;
 }
 
 export const FileUploadInlineItem: React.FC<FileItemProps> = React.memo(
@@ -72,10 +73,13 @@ export const FileUploadInlineItem: React.FC<FileItemProps> = React.memo(
     disabled = false,
     onDelete,
   }) => {
-    // Always call hooks at the top level, even if file is undefined
-    useFileUploadProgressCallbacks(file || new File([], ''), { onChange: () => {} });
-    const fileError = useFileError(file || new File([], ''));
-    const isUploadingFile = Boolean(file);
+    useFileUploadProgressCallbacks(file, { onChange: () => {} });
+    const fileError = useFileError(file);
+
+    const isUploading = useFileUpload((store) => {
+      const storeFile = store.files.get(file);
+      return storeFile?.status === 'uploading';
+    });
 
     const content = (
       <FileItemWrapper>
@@ -86,38 +90,34 @@ export const FileUploadInlineItem: React.FC<FileItemProps> = React.memo(
             lastModified={lastModified}
             type={type}
           >
-            {fileError != null && isUploadingFile && (
+            {fileError != null && isUploading && (
               <div className="text-destructive text-xs">{fileError}</div>
             )}
           </FileMetaDataDisplay>
           {!disabled && (
             <DeleteIconButton
-              onClick={() => {
-                if (onDelete) {
-                  onDelete({ name, size, type, lastModified, file });
-                }
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                onDelete({ name, size, type, lastModified, file });
               }}
             />
           )}
         </FileItemInnerWrapper>
-        {isUploadingFile && fileError == null && (
+        {isUploading && fileError == null && (
           <FileUploadItemProgress variant="linear" className="h-1 w-full" />
         )}
       </FileItemWrapper>
     );
 
-    if (isUploadingFile && file) {
-      return (
-        <FileUploadItem
-          key={`${name}-${size}-${lastModified}`}
-          className="p-0 m-0 border-none"
-          value={file}
-        >
-          {content}
-        </FileUploadItem>
-      );
-    }
-
-    return content;
+    return (
+      <FileUploadItem
+        key={`${name}-${size}-${lastModified}`}
+        className="p-0 m-0 border-none"
+        value={file}
+      >
+        {content}
+      </FileUploadItem>
+    );
   },
 );

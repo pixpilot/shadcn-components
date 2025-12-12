@@ -31,11 +31,12 @@ export function FileUploadInline(props: FileUploadInlineProps) {
     ...rest
   } = props;
 
-  const { uploadFiles, handleAccept, displayFiles, deleteFile } = useFileUploadStore({
-    value,
-    onChange,
-    multiple,
-  });
+  const { handleAccept, displayFiles, deleteFile, getFile, orgValue } =
+    useFileUploadStore({
+      value,
+      onChange,
+      multiple,
+    });
 
   const handleFileAccept = useCallback(
     (files: File[]) => {
@@ -48,7 +49,7 @@ export function FileUploadInline(props: FileUploadInlineProps) {
   return (
     <FileUpload
       {...rest}
-      value={uploadFiles}
+      value={orgValue}
       onAccept={handleFileAccept}
       disabled={disabled}
       multiple={multiple}
@@ -91,6 +92,7 @@ export function FileUploadInline(props: FileUploadInlineProps) {
                 <FileUploadInlineItem
                   key={key}
                   {...data}
+                  file={getFile(data)}
                   disabled={disabled}
                   onDelete={deleteFile}
                 />
