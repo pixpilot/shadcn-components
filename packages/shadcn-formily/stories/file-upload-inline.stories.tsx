@@ -128,7 +128,6 @@ export const BasicFileUpload: Story = {
           'x-component-props': {
             buttonText: 'Browse file',
             showIcon: true,
-            showClear: true,
           },
         },
       },
@@ -234,7 +233,6 @@ export const ImageUpload: Story = {
             buttonText: 'Select image',
             accept: 'image/*',
             showIcon: true,
-            showClear: true,
           },
         },
       },
@@ -276,7 +274,6 @@ export const WithoutIcon: Story = {
           'x-component-props': {
             buttonText: 'Choose file',
             showIcon: false,
-            showClear: true,
           },
         },
       },

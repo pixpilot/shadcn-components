@@ -2,23 +2,11 @@
 
 import type { FileMetadata } from '../file-upload/types';
 import type { FileWithMetadata } from '../file-upload/utils';
-import {
-  Button,
-  cn,
-  FileUploadItem,
-  FileUploadItemDelete,
-  FileUploadItemProgress,
-} from '@pixpilot/shadcn';
+import { Button, cn, FileUploadItem, FileUploadItemProgress } from '@pixpilot/shadcn';
 import { XIcon } from 'lucide-react';
 import prettyBytes from 'pretty-bytes';
 import React from 'react';
 import { useFileError, useFileUploadProgressCallbacks } from '../file-upload/hooks';
-
-interface FileUploadInlineItemProps {
-  file: File;
-  disabled?: boolean;
-  onChange?: (file: FileMetadata) => void;
-}
 
 const FileMetaDataDisplay: React.FC<
   FileMetadata & {
@@ -74,7 +62,7 @@ interface FileItemProps extends Partial<FileMetadata> {
   onDelete?: (file: FileWithMetadata) => void;
 }
 
-export const FileItem: React.FC<FileItemProps> = React.memo(
+export const FileUploadInlineItem: React.FC<FileItemProps> = React.memo(
   ({
     file,
     name = '',
@@ -103,27 +91,13 @@ export const FileItem: React.FC<FileItemProps> = React.memo(
             )}
           </FileMetaDataDisplay>
           {!disabled && (
-            <>
-              {isUploadingFile ? (
-                <FileUploadItemDelete asChild>
-                  <DeleteIconButton
-                    onClick={() => {
-                      if (onDelete) {
-                        onDelete({ name, size, type, lastModified, file });
-                      }
-                    }}
-                  />
-                </FileUploadItemDelete>
-              ) : (
-                <DeleteIconButton
-                  onClick={() => {
-                    if (onDelete) {
-                      onDelete({ name, size, type, lastModified, file });
-                    }
-                  }}
-                />
-              )}
-            </>
+            <DeleteIconButton
+              onClick={() => {
+                if (onDelete) {
+                  onDelete({ name, size, type, lastModified, file });
+                }
+              }}
+            />
           )}
         </FileItemInnerWrapper>
         {isUploadingFile && fileError == null && (
@@ -147,18 +121,3 @@ export const FileItem: React.FC<FileItemProps> = React.memo(
     return content;
   },
 );
-
-export function FileUploadInlineItem(props: FileUploadInlineItemProps) {
-  const { file, disabled = false } = props;
-
-  return (
-    <FileItem
-      file={file}
-      name={file.name}
-      size={file.size}
-      type={file.type}
-      lastModified={file.lastModified}
-      disabled={disabled}
-    />
-  );
-}

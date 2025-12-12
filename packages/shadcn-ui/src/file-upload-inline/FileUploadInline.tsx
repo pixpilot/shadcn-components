@@ -1,20 +1,22 @@
 'use client';
 
 import type { FileUploadInlineProps } from './types';
-import { cn, FileUpload } from '@pixpilot/shadcn';
-import { useCallback, useState } from 'react';
+import {
+  Button,
+  cn,
+  FileUpload,
+  FileUploadDropzone,
+  FileUploadList,
+  FileUploadTrigger,
+} from '@pixpilot/shadcn';
+import { CloudUpload } from 'lucide-react';
+import { useCallback } from 'react';
+import { useFileUploadStore } from '../file-upload';
 import { defaultOptions } from './defaults';
-import { FileUploadContent } from './FileUploadContent';
-import { handleFileValueChange, normalizeToArray } from './utils';
+import { FileUploadInlineItem } from './FileUploadInlineItem';
 
 /**
  * FileUploadInline - An inline file upload component using FileUpload primitives
- *
- * Features:
- * - Shows a "Browse file" or custom button text
- * - Displays selected filename with truncation
- * - Uses FileUpload component primitives for proper file handling
- * - Clean inline design
  */
 export function FileUploadInline(props: FileUploadInlineProps) {
   const {
@@ -24,35 +26,79 @@ export function FileUploadInline(props: FileUploadInlineProps) {
     disabled = defaultOptions.disabled,
     multiple = defaultOptions.multiple,
     buttonText,
-    showIcon,
+    showIcon = defaultOptions.showIcon,
+    onAccept,
     ...rest
   } = props;
 
-  const [files, setFiles] = useState<File[]>([]);
+  const { uploadFiles, handleAccept, displayFiles, deleteFile } = useFileUploadStore({
+    value,
+    onChange,
+    multiple,
+  });
 
-  const handleAccept = useCallback(
-    (acceptedFiles: File[]) => {
-      setFiles(acceptedFiles);
-      const normalizedFiles = normalizeToArray(value);
-      handleFileValueChange(normalizedFiles, acceptedFiles, multiple, onChange);
+  const handleFileAccept = useCallback(
+    (files: File[]) => {
+      onAccept?.(files);
+      handleAccept(files);
     },
-    [multiple, onChange, value],
+    [handleAccept, onAccept],
   );
-
-  const handleDelete = useCallback((file: File) => {
-    setFiles((prevFiles) => prevFiles.filter((f) => f !== file));
-  }, []);
 
   return (
     <FileUpload
       {...rest}
-      value={files}
-      onAccept={handleAccept}
+      value={uploadFiles}
+      onAccept={handleFileAccept}
       disabled={disabled}
       multiple={multiple}
       className={cn('space-y-2', className)}
     >
-      <FileUploadContent {...props} onDelete={handleDelete} files={files} />
+      <>
+        {(multiple || (!multiple && displayFiles.length === 0)) && (
+          <FileUploadDropzone
+            className={cn(
+              'rounded-md border border-input border-solid flex-row bg-background px-3 py-0 display-block w-full cursor-pointer',
+              'hover:bg-accent/50 transition-colors m-0',
+              disabled && 'cursor-not-allowed opacity-50',
+            )}
+          >
+            {showIcon && (
+              <CloudUpload className="h-4 w-4 shrink-0 mx-1 text-muted-foreground" />
+            )}
+
+            <FileUploadTrigger asChild>
+              <Button
+                variant="link"
+                size="sm"
+                className="h-auto py-2 px-0 text-sm text-muted-foreground hover:no-underline justify-start flex-1"
+                disabled={disabled}
+              >
+                {buttonText}
+              </Button>
+            </FileUploadTrigger>
+          </FileUploadDropzone>
+        )}
+
+        {displayFiles.length > 0 && (
+          <FileUploadList className="space-y-1 m-0" forceMount>
+            {displayFiles.map((data) => {
+              const { name, lastModified } = data;
+
+              const key = `${name}-${lastModified}`;
+
+              return (
+                <FileUploadInlineItem
+                  key={key}
+                  {...data}
+                  disabled={disabled}
+                  onDelete={deleteFile}
+                />
+              );
+            })}
+          </FileUploadList>
+        )}
+      </>
     </FileUpload>
   );
 }

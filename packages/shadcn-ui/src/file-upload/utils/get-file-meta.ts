@@ -8,3 +8,13 @@ export function getFileMeta(file: File): FileMetadata {
     lastModified: file.lastModified,
   };
 }
+
+export function getFileMetaAndFile(file: File): FileMetadata & { file: File } {
+  return {
+    name: file.name,
+    size: file.size,
+    type: file.type,
+    lastModified: file.lastModified,
+    file,
+  };
+}

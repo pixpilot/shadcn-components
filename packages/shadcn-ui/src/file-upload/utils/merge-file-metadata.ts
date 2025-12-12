@@ -1,4 +1,5 @@
 import type { FileMetadata } from '../types';
+import { getFileMetaAndFile } from './get-file-meta';
 
 export interface FileWithMetadata extends FileMetadata {
   file?: File;
@@ -28,13 +29,7 @@ export function mergeFileMetadata(
   // Add or update with new files (new files always win)
   newFiles.forEach((file) => {
     const key = `${file.name}-${file.lastModified}`;
-    fileMap.set(key, {
-      name: file.name,
-      type: file.type,
-      lastModified: file.lastModified,
-      size: file.size,
-      file,
-    });
+    fileMap.set(key, getFileMetaAndFile(file));
   });
 
   // Return as array
