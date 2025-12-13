@@ -1,5 +1,22 @@
 # @pixpilot/formily-shadcn
 
+## 0.8.0
+
+### Minor Changes
+
+- add RichTextEditor component and integrate with form context
+- add preventDuplicates option and refactor file upload components
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+  - @pixpilot/shadcn@0.3.0
+  - @pixpilot/shadcn-ui@0.4.0
+
 ## 0.7.0
 
 ### Minor Changes

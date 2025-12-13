@@ -1,5 +1,12 @@
 # @pixpilot/shadcn
 
+## 0.3.0
+
+### Minor Changes
+
+- adds rich text editor
+- add preventDuplicates option and refactor file upload components
+
 ## 0.2.0
 
 ### Minor Changes

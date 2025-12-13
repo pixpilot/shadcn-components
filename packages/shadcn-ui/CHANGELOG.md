@@ -1,5 +1,19 @@
 # @pixpilot/shadcn-ui
 
+## 0.4.0
+
+### Minor Changes
+
+- add RichTextEditor component and integrate with form context
+- add preventDuplicates option and refactor file upload components
+- refactor FileUpload component and add FileUploadItems
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+  - @pixpilot/shadcn@0.3.0
+
 ## 0.3.0
 
 ### Minor Changes
