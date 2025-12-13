@@ -1,5 +1,18 @@
 # @pixpilot/shadcn-ui
 
+## 0.4.0
+
+### Minor Changes
+
+- adds rich text editor
+- refactor FileUpload component and add FileUploadItems
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+  - @pixpilot/shadcn@0.3.0
+
 ## 0.3.0
 
 ### Minor Changes

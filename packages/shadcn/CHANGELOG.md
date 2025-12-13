@@ -1,5 +1,15 @@
 # @pixpilot/shadcn
 
+## 0.3.0
+
+### Minor Changes
+
+- refactor FileUpload component and add FileUploadItems
+
+### Patch Changes
+
+- adjust padding in FileUpload component
+
 ## 0.2.0
 
 ### Minor Changes
