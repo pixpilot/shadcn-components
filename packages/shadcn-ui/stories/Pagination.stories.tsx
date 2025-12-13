@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { Pagination } from '../src/Pagination';
+import { Pagination } from '../src/pagination';
 
 /**
  * A pagination component with configurable display variants and page navigation.

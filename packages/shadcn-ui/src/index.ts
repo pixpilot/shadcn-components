@@ -15,7 +15,7 @@ export * from './file-upload/types';
 export * from './hooks';
 export * from './icon-selector';
 export * from './LoadingOverlay';
-export * from './Pagination';
+export * from './pagination';
 export * from './rich-text-editor';
 export * from './Select';
 export * from './Slider';
