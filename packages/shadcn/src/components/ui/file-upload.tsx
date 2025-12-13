@@ -1162,6 +1162,7 @@ function FileUploadItemMetadata(props: FileUploadItemMetadataProps) {
 interface FileUploadItemProgressProps extends React.ComponentProps<'div'> {
   variant?: 'linear' | 'circular' | 'fill';
   size?: number;
+  strokeWidth?: number;
   asChild?: boolean;
   forceMount?: boolean;
 }
@@ -1170,6 +1171,7 @@ function FileUploadItemProgress(props: FileUploadItemProgressProps) {
   const {
     variant = 'linear',
     size = 40,
+    strokeWidth = 2,
     asChild,
     forceMount,
     className,
@@ -1217,14 +1219,14 @@ function FileUploadItemProgress(props: FileUploadItemProgressProps) {
           >
             <circle
               className="text-primary/20"
-              strokeWidth="2"
+              strokeWidth={strokeWidth}
               cx={size / 2}
               cy={size / 2}
               r={(size - 4) / 2}
             />
             <circle
               className="text-primary transition-[stroke-dashoffset] duration-300 ease-linear"
-              strokeWidth="2"
+              strokeWidth={strokeWidth}
               strokeLinecap="round"
               strokeDasharray={circumference}
               strokeDashoffset={strokeDashoffset}

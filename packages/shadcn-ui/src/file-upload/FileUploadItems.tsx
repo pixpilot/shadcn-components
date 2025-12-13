@@ -1,17 +1,9 @@
 'use client';
 
 import type { FileWithMetadata } from './utils';
-import {
-  cn,
-  FileUploadItem,
-  FileUploadItemMetadata,
-  FileUploadItemPreview,
-  FileUploadItemProgress,
-  FileUploadList,
-} from '@pixpilot/shadcn';
-import { Plus, X } from 'lucide-react';
-import * as React from 'react';
-import { Button } from '@/components/ui/button';
+import { cn, FileUploadList } from '@pixpilot/shadcn';
+import { Plus } from 'lucide-react';
+import { FileUploadListItem } from './FileUploadListItem';
 
 interface FileUploadItemsProps {
   displayFiles: FileWithMetadata[];
@@ -39,45 +31,15 @@ export function FileUploadItems({
       {displayFiles.map((fileMeta: FileWithMetadata) => {
         const { name, lastModified } = fileMeta;
         const key = `${name}-${lastModified}`;
-        const file = getFile(fileMeta);
 
         return (
-          <FileUploadItem key={key} value={file} className="p-0">
-            <FileUploadItemPreview
-              className={cn(itemSize)}
-              render={(_file, fallback): React.ReactNode => {
-                const url = typeof fileMeta.url === 'string' ? fileMeta.url : '';
-                if (url.length > 0 && fileMeta.type.startsWith('image/')) {
-                  return (
-                    // biome-ignore lint/performance/noImgElement: remote preview URLs should render as <img>
-                    <img
-                      src={url}
-                      alt={fileMeta.name}
-                      className="size-full object-cover"
-                    />
-                  );
-                }
-
-                return fallback();
-              }}
-            >
-              <FileUploadItemProgress variant="fill" />
-            </FileUploadItemPreview>
-            <FileUploadItemMetadata className="sr-only" />
-            <Button
-              type="button"
-              variant="secondary"
-              size="icon"
-              className="-top-1 -right-1 absolute size-5 rounded-full"
-              onClick={(event) => {
-                event.preventDefault();
-                event.stopPropagation();
-                deleteFile(fileMeta);
-              }}
-            >
-              <X className="size-3" />
-            </Button>
-          </FileUploadItem>
+          <FileUploadListItem
+            key={key}
+            fileMeta={fileMeta}
+            deleteFile={deleteFile}
+            getFile={getFile}
+            itemSize={itemSize}
+          />
         );
       })}
       {maxFiles === undefined || displayFiles.length < maxFiles ? (

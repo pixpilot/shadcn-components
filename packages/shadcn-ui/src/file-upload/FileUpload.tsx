@@ -16,6 +16,7 @@ export function FileUpload(props: FileUploadProps) {
     multiple = true,
     onAccept,
     maxFiles,
+    preventDuplicates,
     ...rest
   } = props;
 
@@ -29,6 +30,7 @@ export function FileUpload(props: FileUploadProps) {
     value,
     onChange,
     multiple,
+    preventDuplicates,
   });
 
   const handleFileAccept = React.useCallback(

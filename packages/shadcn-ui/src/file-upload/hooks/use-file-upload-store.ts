@@ -6,12 +6,14 @@ import {
   handleFileValueChange,
   normalizeToArray,
 } from '../../file-upload-inline/utils';
-import { getFileMetaAndFile, isFileEqual, mergeFileMetadata } from '../utils';
+import { getFileKey, getFileMetaAndFile, isFileEqual, mergeFileMetadata } from '../utils';
+import { createPlaceholderFile } from '../utils/create-placeholder-file';
 
 interface UseFileUploadInlineProps {
   value: FileMetadata | FileMetadata[] | null | undefined;
   onChange: OnChangeMultipleFiles | OnChangeSingleFile | undefined;
   multiple: boolean;
+  preventDuplicates?: boolean;
 }
 
 export interface UseFileUploadStoreResult {
@@ -27,6 +29,7 @@ export function useFileUploadStore({
   value,
   onChange,
   multiple,
+  preventDuplicates = false,
 }: UseFileUploadInlineProps): UseFileUploadStoreResult {
   const [uploadFiles, setFiles] = useState<File[]>([]);
 
@@ -35,46 +38,51 @@ export function useFileUploadStore({
 
   const fileCacheRef = useRef<Map<string, File>>(new Map());
 
-  const getCacheKey = useCallback(
-    (fileMeta: FileWithMetadata) =>
-      `${fileMeta.name}-${fileMeta.lastModified}-${fileMeta.type}-${fileMeta.size}`,
-    [],
-  );
+  const getFile = useCallback((fileMeta: FileWithMetadata) => {
+    if (fileMeta.file) return fileMeta.file;
 
-  const getFile = useCallback(
-    (fileMeta: FileWithMetadata) => {
-      if (fileMeta.file) return fileMeta.file;
+    const key = getFileKey(fileMeta);
+    const cached = fileCacheRef.current.get(key);
+    if (cached) return cached;
 
-      const key = getCacheKey(fileMeta);
-      const cached = fileCacheRef.current.get(key);
-      if (cached) return cached;
+    const created = createPlaceholderFile(fileMeta);
 
-      const created = new File([], fileMeta.name, {
-        type: fileMeta.type,
-        lastModified: fileMeta.lastModified,
-      });
-
-      fileCacheRef.current.set(key, created);
-      return created;
-    },
-    [getCacheKey],
-  );
+    fileCacheRef.current.set(key, created);
+    return created;
+  }, []);
 
   const handleAccept = useCallback(
     (acceptedFiles: File[]) => {
-      setFiles(acceptedFiles);
+      const newFiles = preventDuplicates
+        ? acceptedFiles.filter((file) => {
+            const key = getFileKey(file);
+            return !uploadFiles.some((existing) => getFileKey(existing) === key);
+          })
+        : acceptedFiles;
+      setFiles((prev) => [...prev, ...newFiles]);
       const normalizedFiles = normalizeToArray(value);
-      handleFileValueChange(normalizedFiles, acceptedFiles, multiple, onChange);
+      handleFileValueChange(normalizedFiles, newFiles, multiple, onChangeRef.current);
     },
-    [multiple, onChange, value],
+    [preventDuplicates, multiple, value, uploadFiles],
   );
 
   const displayFiles = useMemo(() => {
-    if (!value) {
-      return uploadFiles.map((file) => getFileMetaAndFile(file));
-    }
-    const normalizedValue = normalizeToArray(value);
-    return mergeFileMetadata(normalizedValue, uploadFiles);
+    const files = (() => {
+      if (!value) {
+        return uploadFiles.map((file) => getFileMetaAndFile(file));
+      }
+      const normalizedValue = normalizeToArray(value);
+      return mergeFileMetadata(normalizedValue, uploadFiles);
+    })();
+
+    // Cache the files for later retrieval
+    files.forEach((fileWithMeta) => {
+      if (fileWithMeta.file) {
+        fileCacheRef.current.set(getFileKey(fileWithMeta), fileWithMeta.file);
+      }
+    });
+
+    return files;
   }, [uploadFiles, value]);
 
   const orgValue = useMemo(() => displayFiles.map(getFile), [displayFiles, getFile]);
@@ -87,6 +95,9 @@ export function useFileUploadStore({
     (fileMeta: FileWithMetadata) => {
       if (fileMeta.file) deleteUploadFile(fileMeta.file);
 
+      const key = getFileKey(fileMeta);
+      fileCacheRef.current.delete(key);
+
       if (!multiple) {
         (onChangeRef.current as OnChangeSingleFile)?.(null);
         return;
@@ -95,7 +106,7 @@ export function useFileUploadStore({
       const updatedFiles = displayFiles.filter((f) => !isFileEqual(f, fileMeta));
       callOnChange(updatedFiles, multiple, onChangeRef.current);
     },
-    [displayFiles, multiple, deleteUploadFile],
+    [deleteUploadFile, multiple, displayFiles],
   );
 
   return {

@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import type { FileMetadata } from '../src/file-upload';
+import type { FileMetadata, FileUploadProgressCallBacks } from '../src/file-upload';
 import { useState } from 'react';
 import { FileUpload } from '../src/file-upload';
-import { handleUpload } from './utils/file-upload';
+import { delay, handleUpload } from './utils/file-upload';
 
 const meta = {
   title: 'shadcn-ui/FileUpload',
@@ -80,6 +80,40 @@ export const WithValue: Story = {
           </pre>
         </div>
       </>
+    );
+  },
+};
+
+export const WithUploadError: Story = {
+  args: {},
+  render: function WithUploadErrorFileUpload(args) {
+    function handleUploadWithError(
+      uploadFiles: File[],
+      options: FileUploadProgressCallBacks,
+    ) {
+      for (const uploadFile of uploadFiles) {
+        // eslint-disable-next-line no-void
+        void (async () => {
+          // Simulate upload time
+          await delay(500);
+
+          options.onProgress(uploadFile, 0);
+
+          options.onError(uploadFile, new Error('Upload failed due to network error.'));
+        })();
+      }
+    }
+
+    return (
+      <FileUpload
+        {...args}
+        value={null}
+        multiple={false}
+        onUpload={handleUploadWithError}
+        onChange={(_file) => {
+          // handle single file change
+        }}
+      />
     );
   },
 };

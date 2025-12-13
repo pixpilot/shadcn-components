@@ -28,6 +28,7 @@ export function FileUploadInline(props: FileUploadInlineProps) {
     buttonText,
     showIcon = defaultOptions.showIcon,
     onAccept,
+    preventDuplicates,
     ...rest
   } = props;
 
@@ -36,6 +37,7 @@ export function FileUploadInline(props: FileUploadInlineProps) {
       value,
       onChange,
       multiple,
+      preventDuplicates,
     });
 
   const handleFileAccept = useCallback(
