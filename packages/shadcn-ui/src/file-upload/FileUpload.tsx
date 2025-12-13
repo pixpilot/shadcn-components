@@ -42,7 +42,7 @@ export function FileUpload(props: FileUploadProps) {
   );
 
   const itemSize = 'size-22';
-  const containerClasses = cn('p-2');
+  const containerClasses = cn('p-1.5');
 
   return (
     <OrgFileUpload

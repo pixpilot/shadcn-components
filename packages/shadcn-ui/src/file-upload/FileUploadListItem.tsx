@@ -13,6 +13,7 @@ import {
   useFileUpload,
 } from '@pixpilot/shadcn';
 import { AlertTriangle, X } from 'lucide-react';
+import prettyBytes from 'pretty-bytes';
 import React from 'react';
 import { Button } from '@/components/ui/button';
 
@@ -38,45 +39,61 @@ const FileUploadListItem = React.memo<FileUploadListItemProps>(
 
     const hasError = storeFile?.error != null;
 
-    const shouldRenderProgress = storeFile?.progress !== 100 && !hasError;
+    const url = typeof fileMeta.url === 'string' ? fileMeta.url : '';
+
+    const shouldRenderProgress =
+      storeFile?.status !== 'idle' && storeFile?.progress !== 100 && !hasError;
+
+    const renderPreview = (
+      _file: File,
+      fallback: () => React.ReactNode,
+    ): React.ReactNode => {
+      if (url.length > 0 && fileMeta.type.startsWith('image/')) {
+        return (
+          <div className="relative size-full">
+            <img src={url} alt={fileMeta.name} className="size-full object-cover" />
+          </div>
+        );
+      }
+
+      return fallback();
+    };
 
     return (
       <FileUploadItem value={file} className={cn('p-0')}>
-        <FileUploadItemPreview
-          className={cn(itemSize, 'relative')}
-          render={(_file, fallback): React.ReactNode => {
-            const url = typeof fileMeta.url === 'string' ? fileMeta.url : '';
-
-            if (url.length > 0 && fileMeta.type.startsWith('image/')) {
-              return (
-                <div className="relative size-full">
-                  {/* biome-ignore lint/performance/noImgElement: remote preview URLs should render as <img> */}
-                  <img src={url} alt={fileMeta.name} className="size-full object-cover" />
-                </div>
-              );
-            }
-
-            return fallback();
-          }}
-        >
-          {hasError ? (
-            <Backdrop className="flex items-center justify-center">
-              <Tooltip>
-                <TooltipTrigger asChild>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <FileUploadItemPreview
+              className={cn(itemSize, 'relative')}
+              render={renderPreview}
+            >
+              {hasError ? (
+                <Backdrop className="flex items-center justify-center">
                   <AlertTriangle className="text-destructive size-9" />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>{storeFile?.error}</p>
-                </TooltipContent>
-              </Tooltip>
-            </Backdrop>
-          ) : null}
-          {shouldRenderProgress && (
-            <Backdrop>
-              <FileUploadItemProgress variant="circular" strokeWidth={4} />
-            </Backdrop>
-          )}
-        </FileUploadItemPreview>
+                </Backdrop>
+              ) : (
+                shouldRenderProgress && (
+                  <Backdrop>
+                    <FileUploadItemProgress variant="circular" strokeWidth={4} />
+                  </Backdrop>
+                )
+              )}
+            </FileUploadItemPreview>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>
+              {fileMeta.name}
+              <br />
+              Size: {prettyBytes(fileMeta.size)}
+            </p>
+            {hasError && (
+              <div className="text-destructive flex items-center gap-2 mt-2">
+                <AlertTriangle className="text-destructive size-4" />
+                <p className="font-bold">{storeFile?.error}</p>
+              </div>
+            )}
+          </TooltipContent>
+        </Tooltip>
         <FileUploadItemMetadata className="sr-only" />
         <Button
           type="button"
