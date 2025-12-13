@@ -1,5 +1,20 @@
 # @pixpilot/formily-shadcn
 
+## 0.7.0
+
+### Minor Changes
+
+- enhance file upload functionality
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+  - @pixpilot/shadcn@0.2.0
+  - @pixpilot/shadcn-ui@0.3.0
+
 ## 0.6.1
 
 ### Patch Changes

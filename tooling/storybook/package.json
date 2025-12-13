@@ -1,7 +1,7 @@
 {
   "name": "@internal/storybook",
   "type": "module",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "private": true,
   "packageManager": "pnpm@10.18.3",
   "author": "m.doaie <m.doaie@hotmail.com>",

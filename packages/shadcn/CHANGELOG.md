@@ -1,5 +1,12 @@
 # @pixpilot/shadcn
 
+## 0.2.0
+
+### Minor Changes
+
+- implement new FileUpload
+- fix file upload
+
 ## 0.1.11
 
 ### Patch Changes

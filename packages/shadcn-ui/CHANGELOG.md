@@ -1,5 +1,18 @@
 # @pixpilot/shadcn-ui
 
+## 0.3.0
+
+### Minor Changes
+
+- enhance file upload integration and configuration
+- fix file upload
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+  - @pixpilot/shadcn@0.2.0
+
 ## 0.2.0
 
 ### Minor Changes
