@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable no-alert */
 import type { Meta, StoryObj } from '@storybook/react';
-import { createForm, Form, JsonSchemaFormRenderer, SchemaField } from '../src';
+import { createForm, Form, JsonSchemaFormRenderer, SchemaFieldExtended } from '../src';
 import { handleUpload } from './utils/file-upload';
 
 const meta: Meta<typeof Form> = {
@@ -31,8 +31,8 @@ export const Declarative: Story = {
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
-        <SchemaField>
-          <SchemaField.String
+        <SchemaFieldExtended>
+          <SchemaFieldExtended.String
             name="resume"
             title="Resume"
             required
@@ -44,7 +44,7 @@ export const Declarative: Story = {
               onUpload: handleUpload,
             }}
           />
-          <SchemaField.String
+          <SchemaFieldExtended.String
             name="photo"
             title="Profile Photo"
             x-decorator="FormItem"
@@ -56,7 +56,7 @@ export const Declarative: Story = {
               onUpload: handleUpload,
             }}
           />
-        </SchemaField>
+        </SchemaFieldExtended>
         <button
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
@@ -86,8 +86,8 @@ export const DeclarativeMultiple: Story = {
           },
         }}
       >
-        <SchemaField>
-          <SchemaField.String
+        <SchemaFieldExtended>
+          <SchemaFieldExtended.String
             name="resume"
             title="Resume"
             required
@@ -99,7 +99,7 @@ export const DeclarativeMultiple: Story = {
               multiple: true,
             }}
           />
-        </SchemaField>
+        </SchemaFieldExtended>
         <button
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
@@ -143,7 +143,7 @@ export const WithOnUploadInSchema: Story = {
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
-        <SchemaField schema={schema} />
+        <SchemaFieldExtended schema={schema} />
         <button
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
@@ -185,7 +185,7 @@ export const WithoutIcon: Story = {
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
-        <SchemaField schema={schema} />
+        <SchemaFieldExtended schema={schema} />
         <button
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
@@ -227,7 +227,7 @@ export const DisabledFileUpload: Story = {
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
-        <SchemaField schema={schema} />
+        <SchemaFieldExtended schema={schema} />
         <button
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
@@ -297,7 +297,7 @@ export const WithValidation: Story = {
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
-        <SchemaField schema={schema} />
+        <SchemaFieldExtended schema={schema} />
         <button
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
@@ -342,7 +342,7 @@ export const WithFormFieldSetting: Story = {
           },
         }}
       >
-        <SchemaField schema={schema} />
+        <SchemaFieldExtended schema={schema} />
         <button
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
@@ -372,6 +372,7 @@ export const WithJsonSchemaFormRenderer: Story = {
 
     return (
       <JsonSchemaFormRenderer
+        schemaField={SchemaFieldExtended}
         schema={schema}
         className="w-[400px]"
         config={{

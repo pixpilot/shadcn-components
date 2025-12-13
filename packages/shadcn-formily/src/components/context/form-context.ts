@@ -1,4 +1,8 @@
-import type { FileUploadProgressCallBacks, IconProvider } from '@pixpilot/shadcn-ui';
+import type {
+  FileUploadProgressCallBacks,
+  IconProvider,
+  RichTextEditorProps,
+} from '@pixpilot/shadcn-ui';
 import type { FormSpace } from '../../types';
 import React from 'react';
 
@@ -27,6 +31,7 @@ export interface FormContextStates extends FormSpace {
       onProvidersLoaded?: (providers: IconProvider[]) => void;
     };
     fileUpload?: FomFileUpload;
+    richTextEditor?: RichTextEditorProps;
   };
 }
 

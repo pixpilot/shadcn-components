@@ -26,12 +26,15 @@ export { Input } from './components/input';
 export * from './components/json-schema-form-renderer';
 export { NumberInput } from './components/number-input';
 export { ConnectedRadio, Radio } from './components/radio';
+export { RichTextEditor } from './components/rich-text-editor';
 export { Row } from './components/row';
-export { SchemaField } from './components/schema-field';
+export { basicComponents, SchemaField } from './components/schema-field';
+export { SchemaFieldExtended } from './components/schema-field-extended';
 export { Select } from './components/select';
 export { Separator } from './components/separator';
 export { Slider } from './components/slider';
 export { Switch } from './components/switch';
+
 export { TagsInputInLine } from './components/tags-input-inline';
 
 export { Textarea } from './components/textarea';

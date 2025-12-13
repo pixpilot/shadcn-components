@@ -5,7 +5,7 @@ import type { IconProvider } from '../src/types';
 
 import faData from '@iconify-json/fa/icons.json';
 import mdiData from '@iconify-json/mdi/icons.json';
-import { createForm, Form, SchemaField } from '../src';
+import { createForm, Form, SchemaFieldExtended } from '../src';
 
 /**
  * <p>By default, Iconify uses its own API for icon data.</p>
@@ -78,7 +78,7 @@ export const BasicIconPicker: Story = {
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
-        <SchemaField schema={schema} />
+        <SchemaFieldExtended schema={schema} />
         <button
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
@@ -124,7 +124,7 @@ export const IconPickerWithPreselect: Story = {
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
-        <SchemaField schema={schema} />
+        <SchemaFieldExtended schema={schema} />
         <button
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
@@ -159,21 +159,21 @@ export const DeclarativeIconPicker: Story = {
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
-        <SchemaField>
-          <SchemaField.String
+        <SchemaFieldExtended>
+          <SchemaFieldExtended.String
             name="primaryIcon"
             title="Primary Icon"
             required
             x-decorator="FormItem"
             x-component="IconPicker"
           />
-          <SchemaField.String
+          <SchemaFieldExtended.String
             name="secondaryIcon"
             title="Secondary Icon"
             x-decorator="FormItem"
             x-component="IconPicker"
           />
-        </SchemaField>
+        </SchemaFieldExtended>
         <button
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
@@ -228,7 +228,7 @@ export const JsonSchemaIconPicker: Story = {
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
-        <SchemaField schema={schema} />
+        <SchemaFieldExtended schema={schema} />
         <button
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
@@ -319,7 +319,7 @@ export const AsyncProviders: Story = {
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
-        <SchemaField schema={schema} />
+        <SchemaFieldExtended schema={schema} />
         <button
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"

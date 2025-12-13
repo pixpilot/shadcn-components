@@ -2,6 +2,7 @@
 /* eslint-disable no-alert */
 import type { Meta, StoryObj } from '@storybook/react';
 import { createForm, Form, JsonSchemaFormRenderer, SchemaField } from '../src';
+import { SchemaFieldExtended } from '../src/components/schema-field-extended';
 import { handleUpload } from './utils/file-upload';
 
 const meta: Meta<typeof Form> = {
@@ -374,6 +375,7 @@ export const WithJsonSchemaFormRenderer: Story = {
       <JsonSchemaFormRenderer
         schema={schema}
         className="w-[400px]"
+        schemaField={SchemaFieldExtended}
         config={{
           fileUpload: {
             onUpload: handleUpload,

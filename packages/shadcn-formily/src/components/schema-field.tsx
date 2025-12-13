@@ -8,11 +8,9 @@ import { Checkbox } from './checkbox';
 import { Column } from './column';
 import { Combobox } from './combobox';
 import { DatePicker } from './date-picker';
-import { FileUpload, FileUploadInline } from './file-upload';
 import { FormGrid } from './form-grid';
 import { FormItem } from './form-item';
 import { Hidden } from './hidden';
-import { IconPicker } from './icon-picker';
 import { Input } from './input';
 import { NumberInput } from './number-input';
 import { ObjectContainer } from './object-container';
@@ -24,38 +22,31 @@ import { Slider } from './slider';
 import { Switch } from './switch';
 import { Textarea } from './textarea';
 
-/**
- * SchemaField with all Shadcn Formily components pre-registered
- * Use this to render forms from JSON Schema
- */
-export const SchemaField = createSchemaField({
-  components: {
-    FormItem,
-    FormGrid,
-    Row,
-    Column,
-    Input,
-    Textarea,
-    Checkbox,
-    Radio,
-    Select,
-    NumberInput,
-    DatePicker,
-    Combobox,
-    TagsInput,
-    FileUploadInline,
-    IconPicker,
-    FileUpload,
-    Separator,
-    Slider,
-    Switch,
-    ArrayCards,
-    ArrayDialog,
-    ArrayCollapse,
-    ArrayPopover,
-    ObjectContainer,
-    Hidden,
-  },
-});
+export const basicComponents = {
+  FormItem,
+  Hidden,
+  Input,
+  Textarea,
+  NumberInput,
+  Checkbox,
+  Radio,
+  Select,
+  Switch,
+  DatePicker,
+  Row,
+  Column,
+  FormGrid,
+  Combobox,
+  TagsInput,
+  Separator,
+  Slider,
+  ArrayCards,
+  ArrayDialog,
+  ArrayCollapse,
+  ArrayPopover,
+  ObjectContainer,
+};
 
-export default SchemaField;
+export const SchemaField = createSchemaField({
+  components: basicComponents,
+});
