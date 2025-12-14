@@ -1,5 +1,12 @@
 # @pixpilot/shadcn
 
+## 0.3.1
+
+### Patch Changes
+
+- update imports for Alert and ConfirmationDialog components
+- fix import and exports
+
 ## 0.3.0
 
 ### Minor Changes
