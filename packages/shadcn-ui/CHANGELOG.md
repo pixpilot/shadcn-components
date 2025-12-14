@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.4.3
+
+### Patch Changes
+
+- remove unused export and update bundle settings
+
 ## 0.4.2
 
 ### Patch Changes

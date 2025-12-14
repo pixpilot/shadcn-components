@@ -1,5 +1,13 @@
 # @pixpilot/formily-shadcn
 
+## 0.8.3
+
+### Patch Changes
+
+- remove unused export and update bundle settings
+- Updated dependencies
+  - @pixpilot/shadcn-ui@0.4.3
+
 ## 0.8.2
 
 ### Patch Changes
