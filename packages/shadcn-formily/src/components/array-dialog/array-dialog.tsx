@@ -31,7 +31,6 @@ const ArrayDialogBase = observer((props: Props) => {
     isNewItem,
     handleSaveClick,
     handleCancelClick,
-    field,
   } = useArrayEditor({ onAdd, onEdit });
 
   const { AddButton } = useArrayComponents();
@@ -49,7 +48,7 @@ const ArrayDialogBase = observer((props: Props) => {
       onEdit={handleEdit}
     >
       <ArrayItemsList className={className} isNewItem={isNewItem}>
-        <AddButton schema={schema} basePath={field.address.toString()} />
+        <AddButton schema={schema} />
       </ArrayItemsList>
       <EditDialog
         onSave={handleSaveClick}

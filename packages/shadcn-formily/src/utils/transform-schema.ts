@@ -46,7 +46,7 @@ export function transformSchema(schema: ISchema): ISchema {
         if (currentSchema['x-component'] == null) {
           currentSchema['x-component'] = mapping['x-component'];
         }
-        if (!['Hidden'].includes(currentSchema['x-component'] as string)) {
+        if (!['Hidden', 'hidden'].includes(currentSchema['x-component'] as string)) {
           currentSchema['x-decorator'] = mapping['x-decorator'];
         }
       }

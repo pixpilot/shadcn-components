@@ -66,7 +66,7 @@ const ArrayCardsBase: React.FC<ArrayComponentProps> = observer((props) => {
         hasItems={dataSource.length > 0}
       >
         {renderItems()}
-        <AddButton schema={schema} basePath={fieldAddress} />
+        <AddButton schema={schema} />
       </ArrayItemsContainer>
     </ArrayBase>
   );

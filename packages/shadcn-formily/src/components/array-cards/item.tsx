@@ -5,10 +5,9 @@ import { RecursionField, useField, useFieldSchema } from '@formily/react';
 import React from 'react';
 import { ArrayBase } from '../array-base';
 import { useArrayComponents } from '../array-base/component-context';
-import { ArrayTitle } from '../array-base/components/title';
 import { isOperationComponent } from '../array-base/utils/is-array-component';
 
-const ArrayItem = React.memo(({ index, title, record }: ArrayItemProps) => {
+const ArrayItem = React.memo(({ index, record }: ArrayItemProps) => {
   const field = useField<FormilyArrayField>();
   const schema = useFieldSchema();
 
@@ -22,16 +21,10 @@ const ArrayItem = React.memo(({ index, title, record }: ArrayItemProps) => {
       <div className=" border rounded-lg p-4 space-y-2">
         <div className="flex">
           <div className="flex-1">
-            <Components.ItemLabel
-              basePath={fieldAddress}
-              index={index}
-              schema={schema.items as Schema}
-            />{' '}
-            <ArrayTitle title={title ?? (field.title as string)} />
+            <Components.ItemLabel index={index} schema={schema.items as Schema} />{' '}
           </div>
           <div>
             <Components.OperationComponents
-              basePath={fieldAddress}
               index={index}
               schema={schema.items as Schema}
             />

@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable no-alert */
 import type { Meta, StoryObj } from '@storybook/react';
-import { createForm, Form, JsonSchemaFormRenderer, SchemaField } from '../src';
+import { createForm, Form, JsonSchemaFormRenderer } from '../src';
 import { SchemaFieldExtended } from '../src/components/schema-field-extended';
 import { handleUpload } from './utils/file-upload';
 
@@ -32,32 +32,29 @@ export const Declarative: Story = {
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
-        <SchemaField>
-          <SchemaField.String
+        <SchemaFieldExtended>
+          <SchemaFieldExtended.String
             name="resume"
             title="Resume"
             required
             x-decorator="FormItem"
             x-component="FileUpload"
             x-component-props={{
-              buttonText: 'Upload resume',
               accept: '.pdf,.doc,.docx',
               onUpload: handleUpload,
             }}
           />
-          <SchemaField.String
+          <SchemaFieldExtended.String
             name="photo"
             title="Profile Photo"
             x-decorator="FormItem"
             x-component="FileUpload"
             x-component-props={{
-              buttonText: 'Select photo',
               accept: 'image/*',
-              showIcon: true,
               onUpload: handleUpload,
             }}
           />
-        </SchemaField>
+        </SchemaFieldExtended>
         <button
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
@@ -87,20 +84,19 @@ export const DeclarativeMultiple: Story = {
           },
         }}
       >
-        <SchemaField>
-          <SchemaField.String
+        <SchemaFieldExtended>
+          <SchemaFieldExtended.String
             name="resume"
             title="Resume"
             required
             x-decorator="FormItem"
             x-component="FileUpload"
             x-component-props={{
-              buttonText: 'Upload resume',
               accept: '.pdf,.doc,.docx',
               multiple: true,
             }}
           />
-        </SchemaField>
+        </SchemaFieldExtended>
         <button
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
@@ -126,9 +122,7 @@ export const WithOnUploadInSchema: Story = {
           'x-decorator': 'FormItem',
           'x-component': 'FileUpload',
           'x-component-props': {
-            buttonText: 'Select image',
             accept: 'image/*',
-            showIcon: true,
             onUpload: handleUpload,
           },
         },
@@ -144,7 +138,7 @@ export const WithOnUploadInSchema: Story = {
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
-        <SchemaField schema={schema} />
+        <SchemaFieldExtended schema={schema} />
         <button
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
@@ -169,8 +163,6 @@ export const WithoutIcon: Story = {
           'x-decorator': 'FormItem',
           'x-component': 'FileUpload',
           'x-component-props': {
-            buttonText: 'Choose file',
-            showIcon: false,
             onUpload: handleUpload,
           },
         },
@@ -186,7 +178,7 @@ export const WithoutIcon: Story = {
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
-        <SchemaField schema={schema} />
+        <SchemaFieldExtended schema={schema} />
         <button
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
@@ -211,7 +203,6 @@ export const DisabledFileUpload: Story = {
           'x-decorator': 'FormItem',
           'x-component': 'FileUpload',
           'x-component-props': {
-            buttonText: 'Browse file',
             disabled: true,
             onUpload: handleUpload,
           },
@@ -228,7 +219,7 @@ export const DisabledFileUpload: Story = {
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
-        <SchemaField schema={schema} />
+        <SchemaFieldExtended schema={schema} />
         <button
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
@@ -254,7 +245,6 @@ export const WithValidation: Story = {
           'x-decorator': 'FormItem',
           'x-component': 'FileUpload',
           'x-component-props': {
-            buttonText: 'Upload tax document',
             accept: '.pdf',
           },
           'x-validator': [
@@ -271,7 +261,6 @@ export const WithValidation: Story = {
           'x-decorator': 'FormItem',
           'x-component': 'FileUpload',
           'x-component-props': {
-            buttonText: 'Upload ID',
             accept: 'image/*,.pdf',
           },
           'x-validator': [
@@ -298,7 +287,7 @@ export const WithValidation: Story = {
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
-        <SchemaField schema={schema} />
+        <SchemaFieldExtended schema={schema} />
         <button
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
@@ -321,9 +310,6 @@ export const WithFormFieldSetting: Story = {
           type: 'string',
           title: 'Upload File',
           'x-component': 'FileUpload',
-          'x-component-props': {
-            buttonText: 'Select file',
-          },
         },
       },
     };
@@ -343,7 +329,7 @@ export const WithFormFieldSetting: Story = {
           },
         }}
       >
-        <SchemaField schema={schema} />
+        <SchemaFieldExtended schema={schema} />
         <button
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
@@ -364,9 +350,6 @@ export const WithJsonSchemaFormRenderer: Story = {
           type: 'string',
           title: 'Upload File',
           'x-component': 'FileUpload',
-          'x-component-props': {
-            buttonText: 'Select file',
-          },
         },
       },
     };

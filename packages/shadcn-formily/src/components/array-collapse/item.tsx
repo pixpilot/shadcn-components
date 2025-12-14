@@ -39,8 +39,6 @@ const ArrayCollapseItemBase = React.memo((props: ArrayCollapseItemProps) => {
     }
   }, [index, isNewItem, itemId, formCollapse]);
 
-  const fieldAddress = field.address.concat(index).toString();
-
   return (
     <ArrayBase.Item
       key={index}
@@ -82,13 +80,13 @@ const ArrayCollapseItemBase = React.memo((props: ArrayCollapseItemProps) => {
                   isOpen && 'rotate-180',
                 )}
               />
-              <ItemLabel schema={schema} index={index} basePath={fieldAddress} />
+              <ItemLabel schema={schema} index={index} />
             </div>
           </button>
 
           {/* Right: Remove button */}
           <div className="flex items-center gap-1">
-            <OperationComponents schema={schema} basePath={fieldAddress} index={index} />
+            <OperationComponents schema={schema} index={index} />
           </div>
         </div>
 

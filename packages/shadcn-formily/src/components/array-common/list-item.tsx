@@ -1,5 +1,4 @@
-import type { ArrayField } from '@formily/core';
-import { useField, useFieldSchema } from '@formily/react';
+import { useFieldSchema } from '@formily/react';
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 import { ArrayBase, useArrayComponents } from '../array-base';
@@ -31,9 +30,9 @@ export interface ListItemProps {
 export const ListItem: React.FC<ListItemProps> = React.memo(
   ({ itemKey, index, record, isNew }) => {
     const schema = useFieldSchema();
-    const field = useField<ArrayField>();
+    // const field = useField<ArrayField>();
     const { OperationComponents, ItemLabel } = useArrayComponents();
-    const fieldAddress = field.address.toString();
+    // const fieldAddress = field.address.toString();
 
     const isNewItem = isNew;
 
@@ -45,13 +44,13 @@ export const ListItem: React.FC<ListItemProps> = React.memo(
           index={index}
         >
           <div className="text-foreground flex-1 font-medium">
-            <ItemLabel schema={schema} basePath={fieldAddress} index={index} />
+            <ItemLabel schema={schema} index={index} />
           </div>
 
           {/* Right: Edit and Remove buttons */}
           <div className="flex items-center gap-1">
             {/* {renderEditButton?.(index)} */}
-            <OperationComponents schema={schema} basePath={fieldAddress} index={index} />
+            <OperationComponents schema={schema} index={index} />
           </div>
         </ItemWrapper>
       </ArrayBase.Item>

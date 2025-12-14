@@ -121,7 +121,7 @@ const ArrayItemsCollapseBase = observer((props: Props) => {
         hasItems={dataSource.length > 0}
       >
         {renderItems()}
-        <AddButton schema={schema} basePath={fieldAddress} />
+        <AddButton schema={schema} />
       </ArrayItemsContainer>
     </ArrayBase>
   );

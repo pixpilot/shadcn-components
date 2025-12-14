@@ -2,6 +2,7 @@ import type { Schema } from '@formily/react';
 
 import type { IArrayBaseOperationProps } from '../types';
 import type { IArrayBaseAdditionProps } from './addition';
+import type { ArrayEmptyProps } from './empty';
 
 export interface ArrayBaseComponents {
   Addition: React.FC<React.PropsWithChildren<IArrayBaseAdditionProps>>;
@@ -16,7 +17,7 @@ export interface ArrayBaseComponents {
   >;
   Edit: React.FC<React.PropsWithChildren<IArrayBaseOperationProps & { index?: number }>>;
   Index: React.FC;
-  Empty: React.FC;
+  Empty: React.FC<ArrayEmptyProps>;
   Copy: React.FC<React.PropsWithChildren<IArrayBaseOperationProps & { index?: number }>>;
   Label: React.FC;
 }
@@ -38,7 +39,8 @@ export interface FieldComponentProps {
   basePath: string;
 }
 
-export interface ArrayItemComponentRegistryProps extends FieldComponentProps {
+export interface ArrayItemComponentRegistryProps
+  extends Pick<FieldComponentProps, 'schema'> {
   index: number;
 }
 

@@ -2,12 +2,13 @@ import type { Schema } from '@formily/react';
 import type { IArrayBaseAdditionProps } from './addition';
 
 import type { ArrayItemLabelProps } from './array-item-label';
+import type { ArrayEmptyProps } from './empty';
+
 import type {
   ArrayItemComponentRegistryProps,
   ArrayOperationTypes,
   FieldComponentProps,
 } from './types';
-
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 import { filterAndSortComponents } from '../utils/filter-and-sort-components';
@@ -19,15 +20,24 @@ type ArrayItemsContainerProps = FieldComponentProps &
     hasItems: boolean;
   };
 
-type AdditionProps = FieldComponentProps & IArrayBaseAdditionProps;
+type AdditionProps = Pick<FieldComponentProps, 'schema'> & IArrayBaseAdditionProps;
+
+interface ArrayComponentsProps {
+  OperationComponents: ArrayItemComponentRegistryProps;
+  AddButton: AdditionProps;
+  EmptyArray: ArrayEmptyProps;
+  ItemIndex: ArrayItemComponentRegistryProps;
+  ArrayItemsContainer: ArrayItemsContainerProps;
+  ItemLabel: ArrayItemComponentRegistryProps & ArrayItemLabelProps;
+}
 
 export interface ArrayComponents {
-  OperationComponents: React.FC<ArrayItemComponentRegistryProps>;
-  AddButton: React.FC<AdditionProps>;
-  EmptyArray: React.FC<FieldComponentProps>;
-  ItemIndex: React.FC<ArrayItemComponentRegistryProps>;
-  ArrayItemsContainer: React.FC<ArrayItemsContainerProps>;
-  ItemLabel: React.FC<ArrayItemComponentRegistryProps & ArrayItemLabelProps>;
+  OperationComponents: React.FC<ArrayComponentsProps['OperationComponents']>;
+  AddButton: React.FC<ArrayComponentsProps['AddButton']>;
+  EmptyArray: React.FC<ArrayComponentsProps['EmptyArray']>;
+  ItemIndex: React.FC<ArrayComponentsProps['ItemIndex']>;
+  ArrayItemsContainer: React.FC<ArrayComponentsProps['ArrayItemsContainer']>;
+  ItemLabel: React.FC<ArrayComponentsProps['ItemLabel']>;
 }
 
 export function useArrayComponentRegistry(
@@ -43,23 +53,25 @@ export function useArrayComponentRegistry(
     const AddButton = schemaComponents.get('Addition')?.Component;
 
     return {
-      OperationComponents: React.memo((props: FieldComponentProps) => {
-        return (
-          <>
-            {componentToRender.map(([key, { Component }]) => (
-              <React.Fragment key={key}>
-                <Component {...props} />
-              </React.Fragment>
-            ))}
-          </>
-        );
-      }),
-      AddButton: (props: AdditionProps) => {
+      OperationComponents: React.memo(
+        (props: ArrayComponentsProps['OperationComponents']) => {
+          return (
+            <>
+              {componentToRender.map(([key, { Component }]) => (
+                <React.Fragment key={key}>
+                  <Component {...props} />
+                </React.Fragment>
+              ))}
+            </>
+          );
+        },
+      ),
+      AddButton: (props: ArrayComponentsProps['AddButton']) => {
         if (!AddButton) return null;
         return <AddButton {...props} />;
       },
 
-      EmptyArray: (props: FieldComponentProps) => {
+      EmptyArray: (props: ArrayComponentsProps['EmptyArray']) => {
         if (!EmptyArray) return null;
         return (
           <>
@@ -68,33 +80,31 @@ export function useArrayComponentRegistry(
         );
       },
 
-      ItemIndex: (props: FieldComponentProps) => {
+      ItemIndex: (_props: ArrayComponentsProps['ItemIndex']) => {
         const compInfo = schemaComponents.get('Index');
         if (!compInfo) return null;
         return (
           <>
-            <compInfo.Component {...props} />
+            <compInfo.Component />
           </>
         );
       },
 
-      ArrayItemsContainer: (props: ArrayItemsContainerProps) => {
+      ArrayItemsContainer: (props: ArrayComponentsProps['ArrayItemsContainer']) => {
         const { className, schema, children, hasItems, basePath, ...otherProps } = props;
         return (
           <div {...otherProps} className={cn('space-y-3', className)}>
-            {!hasItems && EmptyArray && (
-              <EmptyArray basePath={basePath} schema={schema} />
-            )}
+            {!hasItems && EmptyArray && <EmptyArray />}
             {children}
           </div>
         );
       },
-      ItemLabel: (props: FieldComponentProps) => {
+      ItemLabel: (_props: ArrayComponentsProps['ItemLabel']) => {
         const compInfo = schemaComponents.get('Label');
         if (!compInfo) return null;
         return (
           <>
-            <compInfo.Component {...props} />
+            <compInfo.Component />
           </>
         );
       },

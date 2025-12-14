@@ -1,5 +1,6 @@
 import type { Schema } from '@formily/react';
 import type {
+  ArrayBaseComponents,
   ArrayComponentTypes,
   ArrayItemComponentRegistryProps,
   FieldComponentProps,
@@ -55,14 +56,19 @@ const componentChecks: Array<{
   { type: 'Label', check: isLabelComponent },
 ];
 
-export function getArrayComponents(rootSchema: Schema) {
-  const schemaComponents = new Map<
-    ArrayComponentTypes,
-    {
-      Component: React.FC<FieldComponentProps>;
-      isUserField: boolean;
-    }
-  >([]);
+interface ArrayComponentEntry<K extends ArrayComponentTypes> {
+  Component: ArrayBaseComponents[K];
+  isUserField: boolean;
+}
+
+interface ArrayComponentsMap
+  extends Map<ArrayComponentTypes, ArrayComponentEntry<ArrayComponentTypes>> {
+  get: <K extends ArrayComponentTypes>(key: K) => ArrayComponentEntry<K> | undefined;
+  set: <K extends ArrayComponentTypes>(key: K, value: ArrayComponentEntry<K>) => this;
+}
+
+export function getArrayComponents(rootSchema: Schema): ArrayComponentsMap {
+  const schemaComponents = new Map() as ArrayComponentsMap;
 
   forEachSchema(rootSchema, (schema, path) => {
     // Skip nested arrays (path.length > 0 means it's not root)
@@ -74,7 +80,9 @@ export function getArrayComponents(rootSchema: Schema) {
     componentChecks.forEach(({ type, check }) => {
       if (check(schema)) {
         schemaComponents.set(type, {
-          Component: getRecursionField({ isTargetField: check }),
+          Component: getRecursionField({
+            isTargetField: check,
+          }) as ArrayBaseComponents[ArrayComponentTypes],
           isUserField: true,
         });
       }
@@ -90,7 +98,7 @@ export function getArrayComponents(rootSchema: Schema) {
       return React.createElement(component as React.ComponentType<any>, props);
     };
     schemaComponents.set(key as ArrayComponentTypes, {
-      Component: DefaultComponent,
+      Component: DefaultComponent as ArrayBaseComponents[ArrayComponentTypes],
       isUserField: false,
     });
   });
