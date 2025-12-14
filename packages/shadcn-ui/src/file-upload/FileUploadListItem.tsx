@@ -2,6 +2,7 @@
 
 import type { FileWithMetadata } from './utils';
 import {
+  Button,
   cn,
   FileUploadItem,
   FileUploadItemMetadata,
@@ -15,7 +16,6 @@ import {
 import { AlertTriangle, X } from 'lucide-react';
 import prettyBytes from 'pretty-bytes';
 import React from 'react';
-import { Button } from '@/components/ui/button';
 
 interface FileUploadListItemProps {
   fileMeta: FileWithMetadata;

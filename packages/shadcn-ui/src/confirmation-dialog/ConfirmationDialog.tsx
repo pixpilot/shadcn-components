@@ -1,6 +1,6 @@
 import NiceModal, { useModal } from '@ebay/nice-modal-react';
-import { Button } from '@pixpilot/shadcn';
 import {
+  Button,
   Dialog,
   DialogClose,
   DialogContent,
@@ -8,7 +8,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
+} from '@pixpilot/shadcn';
 
 export interface ConfirmationDialogProps {
   title: string;
