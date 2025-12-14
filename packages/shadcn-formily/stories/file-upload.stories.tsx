@@ -2,7 +2,7 @@
 /* eslint-disable no-alert */
 import type { Meta, StoryObj } from '@storybook/react';
 import { createForm, Form, JsonSchemaFormRenderer } from '../src';
-import { SchemaFieldExtended } from '../src/components/schema-field-extended';
+import { SchemaFieldExtended } from '../src/components/schema-field';
 import { handleUpload } from './utils/file-upload';
 
 const meta: Meta<typeof Form> = {

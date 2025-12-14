@@ -70,13 +70,12 @@ function MyForm() {
 const schema = {
   type: 'void',
   'x-component': 'FormGrid',
-  'x-component-props': { maxColumns: 3 },
   properties: {
     field1: {
       type: 'string',
       title: 'Field 1 (Span 2)',
       'x-decorator': 'FormItem',
-      'x-decorator-props': { gridSpan: 2 },
+      'x-decorator-props': { className: 'col-span-2' },
       'x-component': 'Input',
     },
     field2: {
@@ -139,7 +138,6 @@ import {
 
 ### Field Components
 
-- `ArrayField` - Dynamic array fields
 - `SchemaField` - Renders forms from JSON Schema
 
 ## Schema Properties
@@ -150,7 +148,6 @@ import {
 - `x-decorator`: Wrapper component (typically 'FormItem')
 - `x-component-props`: Props passed to the component
 - `x-decorator-props`: Props passed to the decorator
-  - `gridSpan`: Number of grid columns to span in FormGrid
 
 ## API Reference
 
@@ -164,41 +161,3 @@ const form = createForm({
   effects: () => {},
 });
 ```
-
-### Form Props
-
-```tsx
-interface IFormProps {
-  form: IForm;
-  className?: string;
-  style?: React.CSSProperties;
-  children?: React.ReactNode;
-  onSubmit?: (values: any) => void;
-  onAutoSubmit?: (values: any) => void;
-}
-```
-
-### FormGrid Props
-
-```tsx
-interface IFormGridProps {
-  minColumns?: number | number[];
-  maxColumns?: number | number[];
-  columnGap?: number;
-  rowGap?: number;
-  className?: string;
-}
-```
-
-## Examples
-
-Check the `stories` directory for comprehensive examples:
-
-- Basic forms
-- Grid layouts
-- Array fields
-- All input types
-
-## License
-
-MIT

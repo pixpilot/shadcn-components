@@ -112,9 +112,6 @@ export const JsonSchema: Story = {
         grid: {
           type: 'void',
           'x-component': 'FormGrid',
-          'x-component-props': {
-            minColumns: [4, 6, 10],
-          },
           properties: {
             aaa: {
               type: 'string',

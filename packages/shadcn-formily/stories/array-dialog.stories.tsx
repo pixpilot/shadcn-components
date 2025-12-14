@@ -8,7 +8,7 @@ import React from 'react';
 import { createForm, Form, SchemaField } from '../src';
 
 const meta: Meta<typeof Form> = {
-  title: 'Formily/Array Items - Popover',
+  title: 'Formily/Array Dialog',
   component: Form,
   parameters: {
     layout: 'centered',
@@ -49,7 +49,7 @@ export const EmptyArray: Story = {
           <SchemaField>
             <SchemaField.Array
               name="contacts"
-              x-component="ArrayPopover"
+              x-component="ArrayDialog"
               x-component-props={{
                 className: 'space-y-4',
               }}
@@ -99,11 +99,11 @@ export const Declarative: Story = {
     return (
       <Form form={form} className="space-y-6">
         <div className="space-y-4">
-          <h2 className="text-2xl font-bold">Contact List (ArrayPopover)</h2>
+          <h2 className="text-2xl font-bold">Contact List (ArrayDialog)</h2>
         </div>
         <div className="w-100">
           <SchemaField>
-            <SchemaField.Array name="contacts" maxItems={10} x-component="ArrayPopover">
+            <SchemaField.Array name="contacts" maxItems={10} x-component="ArrayDialog">
               <SchemaField.Object>
                 <SchemaField.String
                   name="name"
@@ -147,9 +147,6 @@ export const Declarative: Story = {
   },
 };
 
-/**
- * Array items using JSON Schema with ArrayItems component (Object notation)
- */
 export const WithJSONSchema: Story = {
   render: () => {
     const form = createForm({
@@ -176,7 +173,8 @@ export const WithJSONSchema: Story = {
       properties: {
         users: {
           type: 'array',
-          'x-component': 'ArrayItems',
+          'x-component': 'ArrayDialog',
+          title: 'Contacts',
           items: {
             type: 'object',
             properties: {
@@ -246,7 +244,7 @@ export const WithJSONSchema: Story = {
             addition: {
               type: 'void',
               title: 'Add User',
-              'x-component': 'ArrayItems.Addition',
+              'x-component': 'ArrayDialog.Addition',
             },
           },
         },

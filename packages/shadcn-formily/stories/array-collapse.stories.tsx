@@ -7,7 +7,7 @@ import React from 'react';
 import { createForm, Form, SchemaField } from '../src';
 
 const meta: Meta<typeof Form> = {
-  title: 'Formily/Array Items - Collapse',
+  title: 'Formily/Array Collapse',
   component: Form,
   parameters: {
     layout: 'centered',
