@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 0.3.2
+
+### Patch Changes
+
+- 6c1ff42: ensure release
+
 ## 0.3.1
 
 ### Patch Changes
