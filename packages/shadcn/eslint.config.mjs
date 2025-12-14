@@ -38,7 +38,7 @@ const config = [
       'ts/switch-exhaustiveness-check': 'warn',
       'ts/no-floating-promises': 'warn',
       'no-param-reassign': 'warn',
-      'no-at-components-import': 'off',
+      'custom/no-at-components-import': 'off',
     },
   },
 ];
