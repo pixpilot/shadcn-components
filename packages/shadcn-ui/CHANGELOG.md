@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.4.1
+
+### Patch Changes
+
+- disable minification and update external dependencies
+
 ## 0.4.0
 
 ### Minor Changes
