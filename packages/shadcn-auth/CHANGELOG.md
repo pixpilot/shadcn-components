@@ -1,5 +1,18 @@
 # @pixpilot/shadcn-auth
 
+## 0.1.0
+
+### Minor Changes
+
+- refactor schema field components and update README
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+  - @pixpilot/shadcn@0.4.0
+  - @pixpilot/shadcn-ui@0.5.0
+
 ## 0.0.16
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 0.4.0
+
+### Minor Changes
+
+- refactor schema field components and update README
+
 ## 0.3.2
 
 ### Patch Changes

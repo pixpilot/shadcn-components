@@ -1,5 +1,18 @@
 # @pixpilot/formily-shadcn
 
+## 0.9.0
+
+### Minor Changes
+
+- refactor array components and improve type safety
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+  - @pixpilot/shadcn@0.4.0
+  - @pixpilot/shadcn-ui@0.5.0
+
 ## 0.8.4
 
 ### Patch Changes
