@@ -1,10 +1,10 @@
 import type { SingleFileUploadProps } from '../file-upload';
 import type { ComponentSizes } from './types';
 
+import { FileUpload, FileUploadDropzone, FileUploadList } from '@pixpilot/shadcn';
 import { UserCircle2 } from 'lucide-react';
-import React from 'react';
 
-import { FileUpload, FileUploadDropzone, FileUploadList } from '@/components';
+import React from 'react';
 
 import { cn } from '@/lib';
 import {

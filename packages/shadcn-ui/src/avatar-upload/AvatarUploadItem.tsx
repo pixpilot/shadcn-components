@@ -4,13 +4,15 @@ import type { ComponentSize } from './types';
 
 import {
   cn,
+  FileUploadItem,
+  FileUploadItemProgress,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
+  useFileUpload,
 } from '@pixpilot/shadcn';
 import { AlertCircle } from 'lucide-react';
-import { FileUploadItem, FileUploadItemProgress, useFileUpload } from '@/components';
 import { useFileError, useFileUploadProgressCallbacks } from '../file-upload';
 import {
   AvatarWrap,

@@ -1,3 +1,8 @@
+import type {
+  FileMetadata,
+  FileUploadProgressCallBacks,
+  FileUploadProps,
+} from './file-upload';
 import { cn } from '@pixpilot/shadcn';
 import { FileUpload } from './file-upload';
 
@@ -26,4 +31,10 @@ export * from './theme-provider';
 export * from './ThemeToggle';
 export * from './toast';
 
-export { cn, FileUpload };
+export {
+  cn,
+  type FileMetadata,
+  FileUpload,
+  type FileUploadProgressCallBacks,
+  type FileUploadProps,
+};

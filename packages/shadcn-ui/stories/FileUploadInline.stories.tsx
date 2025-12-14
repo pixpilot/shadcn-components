@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import type { FileMetadata, FileUploadProgressCallBacks } from '../src';
+import type { FileMetadata, FileUploadProgressCallBacks } from '../src/file-upload/types';
 import { useState } from 'react';
 import { FileUploadInline } from '../src';
 import { delay, handleUpload } from './utils/file-upload';
@@ -278,7 +278,7 @@ export const WithUploadError: Story = {
         value={null}
         multiple={false}
         onUpload={handleUploadWithError}
-        onChange={(_file) => {
+        onChange={(_file: FileMetadata | null) => {
           // handle single file change
         }}
       />

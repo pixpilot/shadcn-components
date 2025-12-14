@@ -2,11 +2,16 @@
 
 import type { FileMetadata } from '../file-upload/types';
 import type { FileWithMetadata } from '../file-upload/utils';
-import { Button, cn, FileUploadItem, FileUploadItemProgress } from '@pixpilot/shadcn';
+import {
+  Button,
+  cn,
+  FileUploadItem,
+  FileUploadItemProgress,
+  useFileUpload,
+} from '@pixpilot/shadcn';
 import { XIcon } from 'lucide-react';
 import prettyBytes from 'pretty-bytes';
 import React from 'react';
-import { useFileUpload } from '@/components';
 import { useFileError, useFileUploadProgressCallbacks } from '../file-upload/hooks';
 
 const FileMetaDataDisplay: React.FC<

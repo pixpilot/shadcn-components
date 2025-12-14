@@ -1,6 +1,6 @@
 import type { FileMetadata } from '../types';
+import { useFileUpload } from '@pixpilot/shadcn';
 import { useEffect, useMemo, useRef } from 'react';
-import { useFileUpload } from '@/components';
 import { getFileMeta } from '../utils';
 
 interface UseFileCallbacks {

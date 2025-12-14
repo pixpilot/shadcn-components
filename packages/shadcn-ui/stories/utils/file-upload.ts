@@ -1,4 +1,4 @@
-import type { FileUploadProgressCallBacks } from '../../src';
+import type { FileUploadProgressCallBacks } from '../../src/file-upload/types';
 
 export async function delay(val: number): Promise<void> {
   await new Promise((resolve) => {

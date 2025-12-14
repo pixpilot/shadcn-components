@@ -1,11 +1,12 @@
 import type { PopoverContent } from '@pixpilot/shadcn';
-import type { IconProvider } from '@pixpilot/shadcn-ui';
-
 import type { FC } from 'react';
 
+import type { IconProvider } from './types';
+
 import { Icon } from '@iconify/react';
-import { Button, useMediaQuery } from '@pixpilot/shadcn-ui';
 import { useCallback, useState } from 'react';
+import { Button } from '../Button';
+import { useMediaQuery } from '../hooks';
 import { ICON_SELECTOR_ERROR_MESSAGE } from './constants';
 import { IconPickerContainer } from './icon-picker-container';
 import IconPickerContent from './icon-picker-content';

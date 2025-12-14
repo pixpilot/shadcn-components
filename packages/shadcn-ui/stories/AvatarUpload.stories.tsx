@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import type { FileMetadata, FileUploadProgressCallBacks } from '../src';
 import type { AvatarUploadProps } from '../src/avatar-upload/AvatarUpload';
+import type { FileMetadata, FileUploadProgressCallBacks } from '../src/file-upload/types';
 import { useCallback, useState } from 'react';
 import { AvatarUpload } from '../src/avatar-upload/AvatarUpload';
 import { delay, handleUpload } from './utils/file-upload';

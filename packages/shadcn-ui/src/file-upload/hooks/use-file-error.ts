@@ -1,4 +1,4 @@
-import { useFileUpload } from '@/components';
+import { useFileUpload } from '@pixpilot/shadcn';
 
 export function useFileError(file: File): string | null {
   const fileError = useFileUpload((store) => {

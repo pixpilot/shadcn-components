@@ -1,5 +1,6 @@
 'use client';
 
+import type { UseFileUploadStoreResult } from '../file-upload/hooks/use-file-upload-store';
 import type { FileUploadInlineProps } from './types';
 import {
   Button,
@@ -32,13 +33,18 @@ export function FileUploadInline(props: FileUploadInlineProps) {
     ...rest
   } = props;
 
-  const { handleAccept, displayFiles, deleteFile, getFile, orgValue } =
-    useFileUploadStore({
-      value,
-      onChange,
-      multiple,
-      preventDuplicates,
-    });
+  const {
+    handleAccept,
+    displayFiles,
+    deleteFile,
+    getFile,
+    orgValue,
+  }: UseFileUploadStoreResult = useFileUploadStore({
+    value,
+    onChange,
+    multiple,
+    preventDuplicates,
+  });
 
   const handleFileAccept = useCallback(
     (files: File[]) => {
