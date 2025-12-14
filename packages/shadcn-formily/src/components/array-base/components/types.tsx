@@ -39,8 +39,10 @@ export interface FieldComponentProps {
   basePath: string;
 }
 
-export interface ArrayItemComponentRegistryProps
-  extends Pick<FieldComponentProps, 'schema'> {
+export interface ArrayItemComponentRegistryProps extends Pick<
+  FieldComponentProps,
+  'schema'
+> {
   index: number;
 }
 

@@ -17,8 +17,7 @@ export interface AlertBaseProps {
 }
 
 export interface AlertProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    AlertBaseProps {}
+  extends React.HTMLAttributes<HTMLDivElement>, AlertBaseProps {}
 
 const colors: {
   [key in AlertVariant]: {

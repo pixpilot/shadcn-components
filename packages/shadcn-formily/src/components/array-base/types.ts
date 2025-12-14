@@ -39,14 +39,13 @@ export type ComposedArrayProps<T = Record<string, unknown>> = React.FC<
 > &
   ArrayBaseMixins;
 
-export interface ArrayComponentProps
-  extends React.PropsWithChildren<
-    React.HTMLAttributes<HTMLDivElement> &
-      IArrayBaseProps & {
-        operations?: ArrayOperationTypes[] | false;
-        title?: string;
-      }
-  > {}
+export interface ArrayComponentProps extends React.PropsWithChildren<
+  React.HTMLAttributes<HTMLDivElement> &
+    IArrayBaseProps & {
+      operations?: ArrayOperationTypes[] | false;
+      title?: string;
+    }
+> {}
 
 export interface ArrayItemProps {
   index: number;

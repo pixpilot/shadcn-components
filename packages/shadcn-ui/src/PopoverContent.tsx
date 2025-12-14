@@ -1,8 +1,9 @@
 import { PopoverContent as RadixPopoverContent } from '@pixpilot/shadcn';
 import React from 'react';
 
-export interface PopoverContentProps
-  extends React.ComponentProps<typeof RadixPopoverContent> {}
+export interface PopoverContentProps extends React.ComponentProps<
+  typeof RadixPopoverContent
+> {}
 
 const PopoverContent: React.FC<PopoverContentProps> = (props) => {
   return (

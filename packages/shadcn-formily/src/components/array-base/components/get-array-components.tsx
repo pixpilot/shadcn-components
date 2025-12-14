@@ -61,8 +61,10 @@ interface ArrayComponentEntry<K extends ArrayComponentTypes> {
   isUserField: boolean;
 }
 
-interface ArrayComponentsMap
-  extends Map<ArrayComponentTypes, ArrayComponentEntry<ArrayComponentTypes>> {
+interface ArrayComponentsMap extends Map<
+  ArrayComponentTypes,
+  ArrayComponentEntry<ArrayComponentTypes>
+> {
   get: <K extends ArrayComponentTypes>(key: K) => ArrayComponentEntry<K> | undefined;
   set: <K extends ArrayComponentTypes>(key: K, value: ArrayComponentEntry<K>) => this;
 }

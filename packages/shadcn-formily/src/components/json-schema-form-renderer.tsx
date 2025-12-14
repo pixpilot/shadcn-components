@@ -5,8 +5,10 @@ import { transformSchema } from '../utils';
 import { Form } from './form';
 import { SchemaField } from './schema-field';
 
-export interface JsonSchemaFormRendererProps
-  extends Omit<React.ComponentProps<typeof Form>, 'form'> {
+export interface JsonSchemaFormRendererProps extends Omit<
+  React.ComponentProps<typeof Form>,
+  'form'
+> {
   schema: ISchema;
   children?: React.ReactNode;
   schemaField?: React.FC<{ schema: ISchema }>;

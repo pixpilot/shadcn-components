@@ -2,8 +2,9 @@ import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 import { CloseButtonRounded } from './CloseButtonRounded';
 
-export interface PopoverCloseButtonProps
-  extends React.ComponentProps<typeof CloseButtonRounded> {}
+export interface PopoverCloseButtonProps extends React.ComponentProps<
+  typeof CloseButtonRounded
+> {}
 
 const CloseButtonAbsolute: React.FC<PopoverCloseButtonProps> = (props) => {
   return (

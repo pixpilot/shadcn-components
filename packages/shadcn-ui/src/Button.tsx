@@ -22,8 +22,7 @@ export interface ButtonLoaderProps {
 }
 
 export interface ButtonProps
-  extends React.ComponentProps<typeof OrgButton>,
-    VariantProps<typeof buttonVariants> {
+  extends React.ComponentProps<typeof OrgButton>, VariantProps<typeof buttonVariants> {
   /**
    * Tooltip message to show when button is disabled
    */
