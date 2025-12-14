@@ -1,5 +1,15 @@
 # @pixpilot/shadcn-ui
 
+## 0.4.2
+
+### Patch Changes
+
+- update imports for Alert and ConfirmationDialog components
+- fix import and exports
+- Updated dependencies
+- Updated dependencies
+  - @pixpilot/shadcn@0.3.1
+
 ## 0.4.1
 
 ### Patch Changes
