@@ -2,7 +2,7 @@
   "name": "@pixpilot/shadcn-auth",
   "type": "module",
   "version": "0.0.15",
-  "packageManager": "pnpm@10.17.0",
+  "packageManager": "pnpm@10.25.0",
   "description": "Authentication forms and components built with shadcn/ui.",
   "author": "m.doaie <m.doaie@hotmail.com>",
   "license": "MIT",
@@ -63,7 +63,7 @@
     "eslint": "catalog:dev",
     "react": "catalog:prod",
     "react-dom": "catalog:prod",
-    "tailwindcss": "^4.1.17",
+    "tailwindcss": "^4.1.18",
     "tsdown": "catalog:dev",
     "typescript": "catalog:dev",
     "typescript-eslint": "catalog:dev"
