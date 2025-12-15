@@ -3,9 +3,13 @@ import { renderHook } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { useLabel } from '../../src/hooks/use-label';
 
-// Mock the useFieldSchema hook
+// Mock the hooks
 vi.mock('@formily/react', () => ({
   useFieldSchema: vi.fn(),
+}));
+
+vi.mock('../../src/hooks/use-form-context', () => ({
+  useFormConfig: vi.fn(() => ({ label: { useFieldNameAsLabel: true } })),
 }));
 
 describe('useLabel', () => {
@@ -51,7 +55,7 @@ describe('useLabel', () => {
 
     const { result } = renderHook(() => useLabel(null));
 
-    expect(result.current).toBe('Test Title');
+    expect(result.current).toBe('test title');
   });
 
   it('should return title as is if title is not a string and name is null', () => {
@@ -69,6 +73,6 @@ describe('useLabel', () => {
 
     const { result } = renderHook(() => useLabel());
 
-    expect(result.current).toBe('Test Title');
+    expect(result.current).toBe('testTitle');
   });
 });

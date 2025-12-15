@@ -52,23 +52,25 @@ export function transformSchema(
         }
       }
 
-      // Apply decorator with priority: user-provided > type mapping > nothing
+      // Apply decorator with priority: existing > user-provided > type mapping > nothing
       if (!['Hidden', 'hidden'].includes(currentSchema['x-component'] as string)) {
-        // Check if user provided a decorator for this component
-        const userDecorator =
-          xComponent != null &&
-          fieldsDecorators != null &&
-          fieldsDecorators[xComponent] != null
-            ? fieldsDecorators[xComponent]
-            : null;
+        if (currentSchema['x-decorator'] == null) {
+          // Check if user provided a decorator for this component
+          const userDecorator =
+            xComponent != null &&
+            fieldsDecorators != null &&
+            fieldsDecorators[xComponent] != null
+              ? fieldsDecorators[xComponent]
+              : null;
 
-        if (userDecorator != null) {
-          // Use user-provided decorator
-          currentSchema['x-decorator'] = userDecorator;
-        } else if (typeof type === 'string' && type in inputSchemaMap) {
-          // Fall back to type mapping decorator
-          const mapping = inputSchemaMap[type]!;
-          currentSchema['x-decorator'] = mapping['x-decorator'];
+          if (userDecorator != null) {
+            // Use user-provided decorator
+            currentSchema['x-decorator'] = userDecorator;
+          } else if (typeof type === 'string' && type in inputSchemaMap) {
+            // Fall back to type mapping decorator
+            const mapping = inputSchemaMap[type]!;
+            currentSchema['x-decorator'] = mapping['x-decorator'];
+          }
         }
       }
     },
