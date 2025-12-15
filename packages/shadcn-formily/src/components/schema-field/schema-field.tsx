@@ -3,10 +3,10 @@ import { TagsInput } from '@pixpilot/shadcn-ui';
 import { Combobox } from '../combobox';
 import { Slider } from '../slider';
 import { TagsInputInLine } from '../tags-input-inline';
-import { SchemaFieldBasicComponents } from './schema-field-basics';
+import { schemaFieldBasicComponents } from './schema-field-basics';
 
 export const schemaFieldComponents = {
-  ...SchemaFieldBasicComponents,
+  ...schemaFieldBasicComponents,
   Combobox,
   TagsInput,
   TagsInputInLine,

@@ -1,12 +1,18 @@
 /* eslint-disable no-console */
 /* eslint-disable no-alert */
 import type { Meta, StoryObj } from '@storybook/react';
-import { createForm, Form, JsonSchemaFormRenderer, SchemaFieldExtended } from '../src';
+import {
+  createForm,
+  FileUploadInline,
+  Form,
+  JsonSchemaFormRenderer,
+  SchemaFieldExtended,
+} from '../src';
 import { handleUpload } from './utils/file-upload';
 
 const meta: Meta<typeof Form> = {
   title: 'Formily/FileUploadInline',
-  component: Form,
+  component: FileUploadInline,
   parameters: {
     layout: 'centered',
   },
@@ -372,7 +378,13 @@ export const WithJsonSchemaFormRenderer: Story = {
 
     return (
       <JsonSchemaFormRenderer
-        schemaField={SchemaFieldExtended}
+        components={{
+          fields: {
+            FileUploadInline: {
+              component: FileUploadInline,
+            },
+          },
+        }}
         schema={schema}
         className="w-[400px]"
         config={{

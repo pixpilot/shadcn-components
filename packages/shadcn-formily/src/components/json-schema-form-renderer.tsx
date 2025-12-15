@@ -1,10 +1,17 @@
 import type { ISchema } from '@formily/react';
 import type { FormConfigProps } from './context';
+
 import { createForm } from '@formily/core';
+import { createSchemaField } from '@formily/react';
+import { isDevelopment } from '@pixpilot/env';
 import React, { useMemo } from 'react';
-import { transformSchema } from '../utils';
+import {
+  extractFieldsDecorators,
+  transformSchema,
+  validateSchemaComponents,
+} from '../utils';
 import { Form } from './form';
-import { SchemaField } from './schema-field';
+import { schemaFieldBasicComponents } from './schema-field';
 
 export interface JsonSchemaFormRendererProps extends Omit<
   React.ComponentProps<typeof Form>,
@@ -12,19 +19,57 @@ export interface JsonSchemaFormRendererProps extends Omit<
 > {
   schema: ISchema;
   children?: React.ReactNode;
-  schemaField?: React.FC<{ schema: ISchema }>;
+  components?: {
+    fields?: Record<string, { component: React.ComponentType<any>; decorator?: string }>;
+    decorators?: Record<string, React.ComponentType<any>>;
+  };
 }
 
 const JsonSchemaFormRenderer: React.FC<JsonSchemaFormRendererProps> = (props) => {
-  const { schema, children, schemaField, config: configProp, ...rest } = props;
+  const {
+    schema,
+    children,
+    config: configProp,
+    components: componentsProp,
+    ...rest
+  } = props;
 
   const form = useMemo(() => createForm(), []);
 
   const formSchema = useMemo(() => {
-    return transformSchema(schema);
-  }, [schema]);
+    // Extract decorator mappings from fields for transformSchema
+    const fieldsDecorators = extractFieldsDecorators(componentsProp?.fields);
+    return transformSchema(schema, fieldsDecorators);
+  }, [schema, componentsProp]);
 
-  const SchemaFieldComponent = schemaField || SchemaField;
+  const SchemaField = React.useMemo(() => {
+    // Merge basic components with user-provided field components
+    const mergedComponents: Record<string, React.ComponentType<any>> = {
+      ...schemaFieldBasicComponents,
+    };
+
+    // Extract component instances from fields
+    if (componentsProp?.fields) {
+      Object.entries(componentsProp.fields).forEach(([key, field]) => {
+        mergedComponents[key] = field.component;
+      });
+    }
+
+    // Add decorators
+    if (componentsProp?.decorators) {
+      Object.assign(mergedComponents, componentsProp.decorators);
+    }
+
+    if (isDevelopment()) {
+      validateSchemaComponents(formSchema, mergedComponents);
+    }
+
+    const schemaField = createSchemaField({
+      components: mergedComponents,
+    });
+
+    return schemaField;
+  }, [formSchema, componentsProp]);
 
   const config = useMemo((): FormConfigProps => {
     return {
@@ -38,7 +83,7 @@ const JsonSchemaFormRenderer: React.FC<JsonSchemaFormRendererProps> = (props) =>
 
   return (
     <Form {...rest} form={form} config={config}>
-      <SchemaFieldComponent schema={formSchema} />
+      <SchemaField schema={formSchema} />
       {children}
     </Form>
   );

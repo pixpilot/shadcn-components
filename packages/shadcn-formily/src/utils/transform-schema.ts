@@ -35,18 +35,39 @@ const inputSchemaMap: InputSchemaMap = {
   },
 };
 
-export function transformSchema(schema: ISchema): ISchema {
+export function transformSchema(
+  schema: ISchema,
+  fieldsDecorators?: Record<string, string | undefined>,
+): ISchema {
   traverse(schema, {
     allKeys: true,
     cb: (currentSchema) => {
       const { type } = currentSchema;
+      const xComponent = currentSchema['x-component'] as string | undefined;
 
       if (typeof type === 'string' && type in inputSchemaMap) {
         const mapping = inputSchemaMap[type]!;
         if (currentSchema['x-component'] == null) {
           currentSchema['x-component'] = mapping['x-component'];
         }
-        if (!['Hidden', 'hidden'].includes(currentSchema['x-component'] as string)) {
+      }
+
+      // Apply decorator with priority: user-provided > type mapping > nothing
+      if (!['Hidden', 'hidden'].includes(currentSchema['x-component'] as string)) {
+        // Check if user provided a decorator for this component
+        const userDecorator =
+          xComponent != null &&
+          fieldsDecorators != null &&
+          fieldsDecorators[xComponent] != null
+            ? fieldsDecorators[xComponent]
+            : null;
+
+        if (userDecorator != null) {
+          // Use user-provided decorator
+          currentSchema['x-decorator'] = userDecorator;
+        } else if (typeof type === 'string' && type in inputSchemaMap) {
+          // Fall back to type mapping decorator
+          const mapping = inputSchemaMap[type]!;
           currentSchema['x-decorator'] = mapping['x-decorator'];
         }
       }

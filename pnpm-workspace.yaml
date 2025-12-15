@@ -7,6 +7,7 @@ catalogs:
     "pretty-bytes": ^7.1.0
     '@pixpilot/hash': ^0.0.0
     "@pixpilot/string": ^2.3.0
+    "@pixpilot/env": ^0.2.1
     class-variance-authority: ^0.7.1
     clsx: ^2.1.1
     lucide-react: 0.553.0

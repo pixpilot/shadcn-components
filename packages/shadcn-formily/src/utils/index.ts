@@ -1,5 +1,6 @@
 export * from './array-item-editor-utils';
 export * from './create-panel-state-manager';
+export * from './extract-fields-decorators';
 export * from './for-each-schema';
 export * from './get-array-item-info';
 export * from './get-default-value';
@@ -9,3 +10,4 @@ export * from './resolve-responsive-space';
 export * from './transform-schema';
 export * from './use-array-item-editor';
 export * from './validate-array-item-fields';
+export * from './validate-schema-components';

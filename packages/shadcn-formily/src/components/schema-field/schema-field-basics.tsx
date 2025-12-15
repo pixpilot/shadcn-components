@@ -19,7 +19,7 @@ import { Separator } from '../separator';
 import { Switch } from '../switch';
 import { Textarea } from '../textarea';
 
-export const SchemaFieldBasicComponents = {
+export const schemaFieldBasicComponents = {
   FormItem,
   Hidden,
   Input,
@@ -42,5 +42,5 @@ export const SchemaFieldBasicComponents = {
 };
 
 export const SchemaFieldBasics = createSchemaField({
-  components: SchemaFieldBasicComponents,
+  components: schemaFieldBasicComponents,
 });

@@ -76,7 +76,13 @@ export const JsonSchemaForm: Story = {
     return (
       <JsonSchemaFormRenderer
         schema={schema}
-        schemaField={SchemaFieldExtended}
+        components={{
+          fields: {
+            RichTextEditor: {
+              component: RichTextEditor,
+            },
+          },
+        }}
         onSubmit={(values) => {
           alert(JSON.stringify(values, null, 2));
         }}
@@ -102,7 +108,13 @@ export const withFormConfig: Story = {
     return (
       <JsonSchemaFormRenderer
         schema={schema}
-        schemaField={SchemaFieldExtended}
+        components={{
+          fields: {
+            RichTextEditor: {
+              component: RichTextEditor,
+            },
+          },
+        }}
         config={{
           richTextEditor: {
             toolbarOptions: [
@@ -150,7 +162,13 @@ export const withFieldConfig: Story = {
     return (
       <JsonSchemaFormRenderer
         schema={schema}
-        schemaField={SchemaFieldExtended}
+        components={{
+          fields: {
+            RichTextEditor: {
+              component: RichTextEditor,
+            },
+          },
+        }}
         onSubmit={(values) => {
           alert(JSON.stringify(values, null, 2));
         }}
