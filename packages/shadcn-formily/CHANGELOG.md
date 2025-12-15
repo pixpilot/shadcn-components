@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.10.0
+
+### Minor Changes
+
+- add label option to form config
+
 ## 0.9.1
 
 ### Patch Changes
