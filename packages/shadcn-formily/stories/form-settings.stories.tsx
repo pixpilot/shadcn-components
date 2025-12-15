@@ -14,20 +14,6 @@ const meta: Meta<typeof JsonSchemaFormRenderer> = {
       description:
         'Space density mode. "responsive" uses responsive breakpoints: compact on mobile, normal on tablet, comfortable on desktop',
     },
-    responsive: {
-      mobile: {
-        control: { type: 'select' },
-        options: ['sm', 'md', 'lg'],
-      },
-      tablet: {
-        control: { type: 'select' },
-        options: ['sm', 'md', 'lg'],
-      },
-      desktop: {
-        control: { type: 'select' },
-        options: ['sm', 'md', 'lg'],
-      },
-    },
   },
   decorators: [
     (Story) => (

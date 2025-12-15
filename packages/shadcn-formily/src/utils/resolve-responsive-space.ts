@@ -106,10 +106,9 @@ export function isResponsiveDensity(density?: string): density is 'responsive' {
 /**
  * Resolves responsive space value from FormSpace configuration
  * Priority:
- * 1. If responsive is set → use it (ignore density)
- * 2. If density is 'responsive' → return undefined (handled separately with responsive classes)
- * 3. If only other density is set → use density-based mapping
- * 4. Default to undefined (responsive mode)
+ * 1. If density is 'responsive' → return undefined (handled separately with responsive classes)
+ * 2. If only other density is set → use density-based mapping
+ * 3. Default to undefined (responsive mode)
  *
  * @param formSpace - FormSpace configuration
  * @returns Space value ('sm' | 'md' | 'lg') or undefined for responsive mode
@@ -117,18 +116,6 @@ export function isResponsiveDensity(density?: string): density is 'responsive' {
 export function resolveResponsiveSpace(formSpace?: FormSpace): Space | undefined {
   if (!formSpace) {
     return undefined;
-  }
-
-  // If responsive is set, use it (takes priority over density)
-  if (formSpace.responsive) {
-    // For now, we'll use desktop as the default
-    // In a real implementation, you might want to detect actual screen size
-    return (
-      formSpace.responsive.desktop ||
-      formSpace.responsive.tablet ||
-      formSpace.responsive.mobile ||
-      'lg'
-    );
   }
 
   // If density is responsive, return undefined (handled with responsive classes)

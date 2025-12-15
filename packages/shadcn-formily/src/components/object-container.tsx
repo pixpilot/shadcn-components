@@ -57,9 +57,9 @@ export const ObjectContainer: React.FC<ObjectContainerProps> = ({
   const effectiveLabel = useLabel(label);
   const desc = useDescription(description);
 
-  const { objectContainerProps, density, responsive } = useFormContext();
+  const { objectContainerProps, density } = useFormContext();
 
-  const gapClass = resolveResponsiveGapClass({ density, responsive });
+  const gapClass = resolveResponsiveGapClass({ density });
   const headerGapClass = resolveSpacingClass(density, headerConfig);
   const cardPaddingClass = resolveSpacingClass(density, cardPaddingConfig);
 

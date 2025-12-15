@@ -19,6 +19,7 @@ export interface JsonSchemaFormRendererProps extends Omit<
 > {
   schema: ISchema;
   children?: React.ReactNode;
+  values?: Record<string, any>;
   components?: {
     fields?: Record<string, { component: React.ComponentType<any>; decorator?: string }>;
     decorators?: Record<string, React.ComponentType<any>>;
@@ -31,10 +32,17 @@ const JsonSchemaFormRenderer: React.FC<JsonSchemaFormRendererProps> = (props) =>
     children,
     settings: configProp,
     components: componentsProp,
+    values,
     ...rest
   } = props;
 
-  const form = useMemo(() => createForm(), []);
+  const form = useMemo(
+    () =>
+      createForm({
+        values: values || {},
+      }),
+    [values],
+  );
 
   const formSchema = useMemo(() => {
     // Extract decorator mappings from fields for transformSchema
@@ -66,6 +74,7 @@ const JsonSchemaFormRenderer: React.FC<JsonSchemaFormRendererProps> = (props) =>
 
     const schemaField = createSchemaField({
       components: mergedComponents,
+      scope: {},
     });
 
     return schemaField;

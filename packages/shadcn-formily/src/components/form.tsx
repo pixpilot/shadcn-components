@@ -28,7 +28,6 @@ export function Form({
   itemProps,
   objectContainerProps,
   density,
-  responsive,
   settings,
 }: IFormProps) {
   const handleSubmit = (e: React.FormEvent) => {
@@ -48,11 +47,10 @@ export function Form({
       itemProps: itemProps!,
       objectContainerProps: objectContainerProps!,
       density: density!,
-      responsive: responsive!,
       settings: settings!,
     };
     return sett;
-  }, [itemProps, objectContainerProps, density, responsive, settings]);
+  }, [itemProps, objectContainerProps, density, settings]);
 
   return (
     <FormContextContextProvider value={formSettings}>
