@@ -537,7 +537,7 @@ export const NestedArraysJsonSchema: Story = {
       <Form
         form={form}
         className="w-[600px]"
-        config={{
+        settings={{
           label: {
             useFieldNameAsLabel: true,
           },

@@ -18,11 +18,11 @@ export function useFileUploadFeedback(props: FileUploadBaseProps): {
     onFileValidate,
   } = props;
 
-  const { config } = useFormContext();
+  const { settings } = useFormContext();
 
   const field = useField<Field>();
 
-  const { fileUpload } = config || {};
+  const { fileUpload } = settings || {};
 
   const onUpload = onUploadProp ?? fileUpload?.onUpload;
 

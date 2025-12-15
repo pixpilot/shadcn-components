@@ -29,7 +29,7 @@ export function Form({
   objectContainerProps,
   density,
   responsive,
-  config,
+  settings,
 }: IFormProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,15 +44,15 @@ export function Form({
   };
 
   const formSettings = React.useMemo(() => {
-    const settings: FormContextStatesRequired = {
+    const sett: FormContextStatesRequired = {
       itemProps: itemProps!,
       objectContainerProps: objectContainerProps!,
       density: density!,
       responsive: responsive!,
-      config: config!,
+      settings: settings!,
     };
-    return settings;
-  }, [itemProps, objectContainerProps, density, responsive, config]);
+    return sett;
+  }, [itemProps, objectContainerProps, density, responsive, settings]);
 
   return (
     <FormContextContextProvider value={formSettings}>

@@ -68,7 +68,7 @@ export const BasicIconPicker: Story = {
       <Form
         form={form}
         className="w-[500px]"
-        config={{
+        settings={{
           iconPicker: {
             providers,
           },
@@ -114,7 +114,7 @@ export const IconPickerWithPreselect: Story = {
       <Form
         form={form}
         className="w-[500px]"
-        config={{
+        settings={{
           iconPicker: {
             providers,
           },
@@ -149,7 +149,7 @@ export const DeclarativeIconPicker: Story = {
       <Form
         form={form}
         className="w-[500px]"
-        config={{
+        settings={{
           iconPicker: {
             providers,
           },
@@ -218,7 +218,7 @@ export const JsonSchemaIconPicker: Story = {
       <Form
         form={form}
         className="w-[500px]"
-        config={{
+        settings={{
           iconPicker: {
             providers,
           },
@@ -308,7 +308,7 @@ export const AsyncProviders: Story = {
       <Form
         form={form}
         className="w-[500px]"
-        config={{
+        settings={{
           iconPicker: {
             // Mix of async providers
             providers: [loadMaterialDesignIconsAsync, loadFontAwesomeAsync],

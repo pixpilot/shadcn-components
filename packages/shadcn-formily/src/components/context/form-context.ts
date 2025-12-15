@@ -38,7 +38,7 @@ export interface FormContextStates extends FormSpace {
   objectContainerProps?: {
     className?: string;
   };
-  config?: FormConfigProps;
+  settings?: FormConfigProps;
 }
 
 export type FormContextStatesRequired = {

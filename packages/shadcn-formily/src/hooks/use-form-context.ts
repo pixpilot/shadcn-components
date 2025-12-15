@@ -11,12 +11,12 @@ export function useFormContext(): FormContextStates {
 }
 
 export function useFormFileUpload(): FomFileUpload | undefined {
-  const { config } = useFormContext();
-  const fileUploadConfig = config?.fileUpload;
+  const { settings } = useFormContext();
+  const fileUploadConfig = settings?.fileUpload;
   return fileUploadConfig;
 }
 
 export function useFormConfig(): FormConfigProps {
-  const { config } = useFormContext();
-  return config || {};
+  const { settings } = useFormContext();
+  return settings || {};
 }

@@ -8,7 +8,7 @@ import { useFormContext } from '../hooks';
 
 const RichTextEditorBase: FC<RichTextEditorProps> = (props) => {
   const formContext = useFormContext();
-  const configRichTextEditor = formContext?.config?.richTextEditor;
+  const configRichTextEditor = formContext?.settings?.richTextEditor;
   const mergedProps = { ...configRichTextEditor, ...props };
   return <OrgRichTextEditor {...mergedProps}>RichTextEditor</OrgRichTextEditor>;
 };

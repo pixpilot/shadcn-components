@@ -316,7 +316,7 @@ export const WithJsonSchema: Story = {
       <Form
         form={form}
         className="space-y-6"
-        config={{
+        settings={{
           label: {
             useFieldNameAsLabel: true,
           },

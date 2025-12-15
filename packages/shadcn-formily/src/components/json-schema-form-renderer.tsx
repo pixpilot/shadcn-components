@@ -29,7 +29,7 @@ const JsonSchemaFormRenderer: React.FC<JsonSchemaFormRendererProps> = (props) =>
   const {
     schema,
     children,
-    config: configProp,
+    settings: configProp,
     components: componentsProp,
     ...rest
   } = props;
@@ -82,7 +82,7 @@ const JsonSchemaFormRenderer: React.FC<JsonSchemaFormRendererProps> = (props) =>
   }, [configProp]);
 
   return (
-    <Form {...rest} form={form} config={config}>
+    <Form {...rest} form={form} settings={config}>
       <SchemaField schema={formSchema} />
       {children}
     </Form>

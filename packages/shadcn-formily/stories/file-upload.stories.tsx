@@ -78,7 +78,7 @@ export const DeclarativeMultiple: Story = {
           console.log('Form submitted:', values);
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
-        config={{
+        settings={{
           fileUpload: {
             onUpload: handleUpload,
           },
@@ -277,7 +277,7 @@ export const WithValidation: Story = {
       <Form
         form={form}
         className="w-[400px]"
-        config={{
+        settings={{
           fileUpload: {
             onUpload: handleUpload,
           },
@@ -322,7 +322,7 @@ export const WithFormFieldSetting: Story = {
           console.log('Form submitted:', values);
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
-        config={{
+        settings={{
           fileUpload: {
             onUpload: handleUpload,
             maxSize: 2 * 1024 * 1024,
@@ -365,7 +365,7 @@ export const WithJsonSchemaFormRenderer: Story = {
             },
           },
         }}
-        config={{
+        settings={{
           fileUpload: {
             onUpload: handleUpload,
             maxSize: 2 * 1024 * 1024,

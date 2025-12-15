@@ -115,7 +115,7 @@ export const withFormConfig: Story = {
             },
           },
         }}
-        config={{
+        settings={{
           richTextEditor: {
             toolbarOptions: [
               'bold',

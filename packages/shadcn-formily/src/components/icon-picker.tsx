@@ -16,8 +16,8 @@ const IconPickerBase: FC<
   Omit<IconPickerProps, 'providers'> & { providers?: IconProviderProps[] }
 > = (props) => {
   const { providers: propProviders, ...restProps } = props;
-  const { config } = useFormContext();
-  const { iconPicker } = config || {};
+  const { settings } = useFormContext();
+  const { iconPicker } = settings || {};
   const { providers: contextProviders = [] } = iconPicker || {};
 
   // Use prop providers if provided, otherwise use context providers
