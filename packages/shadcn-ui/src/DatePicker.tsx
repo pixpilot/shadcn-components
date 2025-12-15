@@ -14,13 +14,13 @@ import { CalendarIcon } from 'lucide-react';
 
 import React from 'react';
 
-type BaseDatePickerProps = {
+export type DatePickerProps = {
   value?: Date;
   onChange?: (date: Date | undefined) => void;
   placeholder?: string;
 } & Omit<ComponentProps<typeof Calendar>, 'selected' | 'onSelect' | 'mode'>;
 
-export function DatePicker(props: BaseDatePickerProps) {
+export function DatePicker(props: DatePickerProps) {
   const { value, onChange, placeholder = 'Pick a date', ...calendarProps } = props;
 
   return (

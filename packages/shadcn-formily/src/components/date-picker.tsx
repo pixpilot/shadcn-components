@@ -1,6 +1,6 @@
 'use client';
 
-import type { ComponentProps } from 'react';
+import type { DatePickerProps as ShadcnDatePickerProps } from '@pixpilot/shadcn-ui';
 import { connect, mapProps } from '@formily/react';
 import { DatePicker as ShadcnDatePicker } from '@pixpilot/shadcn-ui';
 
@@ -8,7 +8,7 @@ type BaseDatePickerProps = {
   value?: Date;
   onChange?: (date: Date | undefined) => void;
   placeholder?: string;
-} & Omit<ComponentProps<typeof ShadcnDatePicker>, 'selected' | 'onSelect' | 'mode'>;
+} & Omit<ShadcnDatePickerProps, 'selected' | 'onSelect' | 'mode'>;
 
 /**
  * Formily-connected Date Picker component

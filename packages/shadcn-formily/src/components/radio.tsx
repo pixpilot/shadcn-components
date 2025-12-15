@@ -1,4 +1,4 @@
-import type { ComponentProps, FC } from 'react';
+import type { FC } from 'react';
 import { connect } from '@formily/react';
 import { Label, RadioGroup, RadioGroupItem } from '@pixpilot/shadcn';
 
@@ -16,7 +16,11 @@ type RadioProps = {
   options?: RadioGroupOption[];
   value?: string;
   onChange?: (value: string) => void;
-} & Omit<ComponentProps<typeof RadioGroup>, 'value' | 'onValueChange' | 'children'>;
+} & Omit<
+  // eslint-disable-next-line custom/no-typeof-shadcn-components
+  React.ComponentType<typeof RadioGroup>,
+  'value' | 'onValueChange' | 'children'
+>;
 
 /**
  * Radio component with options rendering

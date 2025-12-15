@@ -1,4 +1,4 @@
-import type { Button } from '@pixpilot/shadcn-ui';
+import type { ButtonProps } from '@pixpilot/shadcn-ui';
 import type { IArrayBaseContext } from './array-context';
 
 import type { ArrayBaseComponents, ArrayOperationTypes } from './components/types';
@@ -19,7 +19,7 @@ export interface IArrayBaseProps {
   onCopy?: (index: number) => void;
 }
 
-export interface IArrayBaseOperationProps extends React.ComponentProps<typeof Button> {
+export interface IArrayBaseOperationProps extends ButtonProps {
   title?: string;
   index?: number;
   icon?: React.ReactNode;
