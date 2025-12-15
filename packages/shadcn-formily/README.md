@@ -161,3 +161,78 @@ const form = createForm({
   effects: () => {},
 });
 ```
+
+### Form Configuration
+
+#### useFieldNameAsLabel
+
+The `useFieldNameAsLabel` option controls whether field names are automatically converted to labels when no explicit label is provided.
+
+**Default Behavior:**
+
+- **`JsonSchemaFormRenderer`** - Sets `useFieldNameAsLabel: true` by default. Field names are automatically capitalized and used as labels if no `title` is provided in the schema.
+- **`Form` component** - Must be explicitly configured. Users need to set `useFieldNameAsLabel: true` in the `config` prop to enable this behavior.
+
+**Example with JsonSchemaFormRenderer (enabled by default):**
+
+```tsx
+import { JsonSchemaFormRenderer } from '@pixpilot/formily-shadcn';
+
+const schema = {
+  type: 'object',
+  properties: {
+    userName: {
+      type: 'string',
+      'x-decorator': 'FormItem',
+      'x-component': 'Input',
+      // No title provided - will use "User Name" as label
+    },
+  },
+};
+
+export function MyForm() {
+  return <JsonSchemaFormRenderer schema={schema} />;
+}
+```
+
+**Example with Form component (requires explicit configuration):**
+
+```tsx
+import { createForm, Form, SchemaField } from '@pixpilot/formily-shadcn';
+
+const form = createForm();
+
+const schema = {
+  type: 'object',
+  properties: {
+    userName: {
+      type: 'string',
+      'x-decorator': 'FormItem',
+      'x-component': 'Input',
+      // No title provided - will use "User Name" as label only if config is set
+    },
+  },
+};
+
+export function MyForm() {
+  return (
+    <Form
+      form={form}
+      config={{
+        label: {
+          useFieldNameAsLabel: true, // Must be explicitly set
+        },
+      }}
+    >
+      <SchemaField schema={schema} />
+    </Form>
+  );
+}
+```
+
+The label resolution priority is:
+
+1. Explicit `label` prop (if provided and not `false`)
+2. Schema `title` field
+3. Field `name` capitalized (only if `useFieldNameAsLabel: true`)
+4. No label

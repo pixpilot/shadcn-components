@@ -313,7 +313,15 @@ export const WithJsonSchema: Story = {
     };
 
     return (
-      <Form form={form} className="space-y-6">
+      <Form
+        form={form}
+        className="space-y-6"
+        config={{
+          label: {
+            useFieldNameAsLabel: true,
+          },
+        }}
+      >
         <div className="space-y-4">
           <h2 className="text-2xl font-bold">JSON Schema ArrayCollapse Form</h2>
           <p className="text-muted-foreground">

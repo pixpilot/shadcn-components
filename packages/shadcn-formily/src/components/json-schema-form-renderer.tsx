@@ -1,4 +1,5 @@
 import type { ISchema } from '@formily/react';
+import type { FormConfigProps } from './context';
 import { createForm } from '@formily/core';
 import React, { useMemo } from 'react';
 import { transformSchema } from '../utils';
@@ -15,7 +16,7 @@ export interface JsonSchemaFormRendererProps extends Omit<
 }
 
 const JsonSchemaFormRenderer: React.FC<JsonSchemaFormRendererProps> = (props) => {
-  const { schema, children, schemaField, ...rest } = props;
+  const { schema, children, schemaField, config: configProp, ...rest } = props;
 
   const form = useMemo(() => createForm(), []);
 
@@ -25,8 +26,18 @@ const JsonSchemaFormRenderer: React.FC<JsonSchemaFormRendererProps> = (props) =>
 
   const SchemaFieldComponent = schemaField || SchemaField;
 
+  const config = useMemo((): FormConfigProps => {
+    return {
+      ...configProp,
+      label: {
+        useFieldNameAsLabel: true,
+        ...(configProp?.label || {}),
+      },
+    };
+  }, [configProp]);
+
   return (
-    <Form {...rest} form={form}>
+    <Form {...rest} form={form} config={config}>
       <SchemaFieldComponent schema={formSchema} />
       {children}
     </Form>

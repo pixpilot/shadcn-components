@@ -70,3 +70,33 @@ export const JsonSchemaForm: Story = {
     return <JsonSchemaFormRenderer {...args} schema={schema}></JsonSchemaFormRenderer>;
   },
 };
+
+export const ShouldNotHaveLabel: Story = {
+  args: {
+    density: 'responsive',
+  },
+  render: (args) => {
+    const schema: ISchema = {
+      type: 'object',
+      properties: {
+        inputContainer: {
+          type: 'object',
+          title: false,
+          properties: {
+            firstName: {
+              type: 'string',
+              title: false,
+              required: true,
+            },
+            lastName: {
+              type: 'string',
+              title: false,
+            },
+          },
+        },
+      },
+    };
+
+    return <JsonSchemaFormRenderer {...args} schema={schema}></JsonSchemaFormRenderer>;
+  },
+};

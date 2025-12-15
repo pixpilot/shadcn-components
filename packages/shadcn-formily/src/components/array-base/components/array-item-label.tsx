@@ -10,7 +10,7 @@ export const ArrayItemLabel: React.FC<ArrayItemLabelProps> = () => {
   return (
     <span className="font-medium">
       {label}
-      {typeof label === 'string' ? ` ${(index ?? 0) + 1}` : ''}
+      {typeof label === 'string' || label == null ? ` ${(index ?? 0) + 1}` : ''}
     </span>
   );
 };

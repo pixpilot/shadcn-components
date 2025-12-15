@@ -11,6 +11,26 @@ export interface FomFileUpload {
   maxSize?: number;
 }
 
+export interface FormConfigProps {
+  label?: {
+    // Whether to use field name as label if title is not provided
+    useFieldNameAsLabel?: boolean;
+  };
+  iconPicker?: {
+    /**
+     * Icon providers - can be static providers or async loader functions
+     * Users can provide either IconProvider[] or AsyncIconProvider[]
+     */
+    providers: IconProvider[];
+    /**
+     * Optional callback when providers are loaded
+     */
+    onProvidersLoaded?: (providers: IconProvider[]) => void;
+  };
+  fileUpload?: FomFileUpload;
+  richTextEditor?: RichTextEditorProps;
+}
+
 export interface FormContextStates extends FormSpace {
   itemProps?: {
     className?: string;
@@ -18,21 +38,7 @@ export interface FormContextStates extends FormSpace {
   objectContainerProps?: {
     className?: string;
   };
-  config?: {
-    iconPicker?: {
-      /**
-       * Icon providers - can be static providers or async loader functions
-       * Users can provide either IconProvider[] or AsyncIconProvider[]
-       */
-      providers: IconProvider[];
-      /**
-       * Optional callback when providers are loaded
-       */
-      onProvidersLoaded?: (providers: IconProvider[]) => void;
-    };
-    fileUpload?: FomFileUpload;
-    richTextEditor?: RichTextEditorProps;
-  };
+  config?: FormConfigProps;
 }
 
 export type FormContextStatesRequired = {

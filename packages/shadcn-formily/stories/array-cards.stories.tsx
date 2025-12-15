@@ -36,6 +36,7 @@ export const EmptyArray: Story = {
           <SchemaField>
             <SchemaField.Array
               name="contacts"
+              title="Contacts"
               x-component="ArrayCards"
               x-component-props={{
                 className: 'space-y-4',
@@ -536,6 +537,11 @@ export const NestedArraysJsonSchema: Story = {
       <Form
         form={form}
         className="w-[600px]"
+        config={{
+          label: {
+            useFieldNameAsLabel: true,
+          },
+        }}
         onSubmit={(values) => {
           // eslint-disable-next-line no-console
           console.log('Form submitted:', values);
