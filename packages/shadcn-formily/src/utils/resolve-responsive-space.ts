@@ -1,6 +1,15 @@
 import type { FormSpace, Space } from '../types';
 
 /**
+ * Unified spacing configuration type
+ * Combines fixed density classes and responsive breakpoint classes
+ */
+export interface SpacingConfig {
+  fixed: Record<Space, string>;
+  responsive: string;
+}
+
+/**
  * Density-based space mapping
  * Maps density levels to Tailwind space utilities
  */
@@ -14,40 +23,75 @@ const densitySpaceMap: Record<
 };
 
 /**
- * Space to Tailwind space-y class mapping
- * Converts space values to actual Tailwind utilities
+ * Space-Y spacing configuration
+ * Controls vertical spacing between form items
  */
-const spaceClassMap: Record<Space, string> = {
-  sm: 'space-y-3',
-  md: 'space-y-4',
-  lg: 'space-y-6',
+export const spaceYConfig: SpacingConfig = {
+  fixed: {
+    sm: 'space-y-3',
+    md: 'space-y-4',
+    lg: 'space-y-6',
+  },
+  responsive: 'space-y-3 md:space-y-4 lg:space-y-6',
 } as const;
 
 /**
- * Space to Tailwind gap class mapping
- * Converts space values to gap utilities for grid/flex containers
+ * Gap-Y spacing configuration
+ * Controls vertical gaps in containers
  */
-const gapClassMap: Record<Space, string> = {
-  sm: 'gap-y-3',
-  md: 'gap-y-4',
-  lg: 'gap-y-6',
+export const gapYConfig: SpacingConfig = {
+  fixed: {
+    sm: 'gap-y-3',
+    md: 'gap-y-4',
+    lg: 'gap-y-6',
+  },
+  responsive: 'gap-y-3 md:gap-y-4 lg:gap-y-6',
 } as const;
 
 /**
- * Responsive breakpoint classes for responsive density mode
- * - Mobile (default): compact (space-y-3)
- * - Tablet (md:): normal (space-y-4)
- * - Desktop (lg:): comfortable (space-y-6)
+ * Resolves spacing class based on density and spacing configuration
+ * Generic utility that works with any spacing config
+ *
+ * @param density - Density value ('compact' | 'normal' | 'comfortable' | 'responsive')
+ * @param config - Spacing configuration with fixed and responsive classes
+ * @returns Tailwind utility class(es)
  */
-export const autoResponsiveSpaceClasses = 'space-y-3 md:space-y-4 lg:space-y-6';
+export function resolveSpacingClass(
+  density: FormSpace['density'],
+  config: SpacingConfig,
+): string {
+  // Use responsive classes if density is responsive or not specified
+  if (!density || density === 'responsive') {
+    return config.responsive;
+  }
+
+  const space = densitySpaceMap[density];
+  return config.fixed[space];
+}
 
 /**
- * Responsive breakpoint classes for responsive density mode using gap
- * - Mobile (default): compact (gap-y-3)
- * - Tablet (md:): normal (gap-y-4)
- * - Desktop (lg:): comfortable (gap-y-6)
+ * Resolves responsive space and returns the Tailwind space-y class(es)
+ * For responsive density, returns responsive breakpoint classes
+ * For fixed density, returns single space class
+ *
+ * @param formSpace - FormSpace configuration
+ * @returns Tailwind utility class(es)
  */
-export const autoResponsiveGapClasses = 'gap-y-3 md:gap-y-4 lg:gap-y-6';
+export function resolveResponsiveSpaceClass(formSpace?: FormSpace): string {
+  return resolveSpacingClass(formSpace?.density, spaceYConfig);
+}
+
+/**
+ * Resolves responsive space and returns the Tailwind gap-y class(es)
+ * For responsive density, returns responsive breakpoint classes
+ * For fixed density, returns single gap class
+ *
+ * @param formSpace - FormSpace configuration
+ * @returns Tailwind utility gap class(es)
+ */
+export function resolveResponsiveGapClass(formSpace?: FormSpace): string {
+  return resolveSpacingClass(formSpace?.density, gapYConfig);
+}
 
 /**
  * Checks if density is responsive mode
@@ -102,71 +146,13 @@ export function resolveResponsiveSpace(formSpace?: FormSpace): Space | undefined
 }
 
 /**
- * Gets the Tailwind class for a given space value
- *
- * @param space - Space value
- * @returns Tailwind utility class
+ * Deprecated: Use resolveSpacingClass instead
+ * @deprecated
  */
-export function getSpaceClass(space: Space): string {
-  return spaceClassMap[space];
-}
+export const autoResponsiveSpaceClasses = spaceYConfig.responsive;
 
 /**
- * Resolves responsive space and returns the Tailwind class(es)
- * For responsive density, returns responsive breakpoint classes
- * For fixed density, returns single space class
- *
- * @param formSpace - FormSpace configuration
- * @returns Tailwind utility class(es)
+ * Deprecated: Use resolveSpacingClass instead
+ * @deprecated
  */
-export function resolveResponsiveSpaceClass(formSpace?: FormSpace): string {
-  // Use responsive classes if density is responsive or not specified
-  if (!formSpace || isResponsiveDensity(formSpace.density)) {
-    return autoResponsiveSpaceClasses;
-  }
-
-  // If responsive is set without responsive density, use it
-  if (formSpace.responsive && !isResponsiveDensity(formSpace.density)) {
-    const space = resolveResponsiveSpace(formSpace);
-    return space ? getSpaceClass(space) : autoResponsiveSpaceClasses;
-  }
-
-  // For fixed density modes
-  const space = resolveResponsiveSpace(formSpace);
-  return space ? getSpaceClass(space) : autoResponsiveSpaceClasses;
-}
-
-/**
- * Gets the Tailwind gap class for a given space value
- *
- * @param space - Space value
- * @returns Tailwind utility gap class
- */
-export function getGapClass(space: Space): string {
-  return gapClassMap[space];
-}
-
-/**
- * Resolves responsive space and returns the Tailwind gap class(es)
- * For responsive density, returns responsive breakpoint classes
- * For fixed density, returns single gap class
- *
- * @param formSpace - FormSpace configuration
- * @returns Tailwind utility gap class(es)
- */
-export function resolveResponsiveGapClass(formSpace?: FormSpace): string {
-  // Use responsive classes if density is responsive or not specified
-  if (!formSpace || isResponsiveDensity(formSpace.density)) {
-    return autoResponsiveGapClasses;
-  }
-
-  // If responsive is set without responsive density, use it
-  if (formSpace.responsive && !isResponsiveDensity(formSpace.density)) {
-    const space = resolveResponsiveSpace(formSpace);
-    return space ? getGapClass(space) : autoResponsiveGapClasses;
-  }
-
-  // For fixed density modes
-  const space = resolveResponsiveSpace(formSpace);
-  return space ? getGapClass(space) : autoResponsiveGapClasses;
-}
+export const autoResponsiveGapClasses = gapYConfig.responsive;

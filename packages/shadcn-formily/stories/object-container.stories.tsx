@@ -116,3 +116,123 @@ export const withoutObject: Story = {
     );
   },
 };
+
+export const CompactDensity: Story = {
+  render: () => {
+    const schema: ISchema = {
+      type: 'object',
+      properties: {
+        userInfo: {
+          type: 'object',
+          title: 'User Information',
+          properties: {
+            firstName: {
+              type: 'string',
+              title: 'First Name',
+            },
+            lastName: {
+              type: 'string',
+              title: 'Last Name',
+            },
+            email: {
+              type: 'string',
+              title: 'Email',
+            },
+          },
+        },
+      },
+    };
+
+    return <JsonSchemaFormRenderer schema={schema}></JsonSchemaFormRenderer>;
+  },
+};
+
+export const NormalDensity: Story = {
+  render: () => {
+    const schema: ISchema = {
+      type: 'object',
+      properties: {
+        userInfo: {
+          type: 'object',
+          title: 'User Information',
+          properties: {
+            firstName: {
+              type: 'string',
+              title: 'First Name',
+            },
+            lastName: {
+              type: 'string',
+              title: 'Last Name',
+            },
+            email: {
+              type: 'string',
+              title: 'Email',
+            },
+          },
+        },
+      },
+    };
+
+    return <JsonSchemaFormRenderer schema={schema}></JsonSchemaFormRenderer>;
+  },
+};
+
+export const ComfortableDensity: Story = {
+  render: () => {
+    const schema: ISchema = {
+      type: 'object',
+      properties: {
+        userInfo: {
+          type: 'object',
+          title: 'User Information',
+          properties: {
+            firstName: {
+              type: 'string',
+              title: 'First Name',
+            },
+            lastName: {
+              type: 'string',
+              title: 'Last Name',
+            },
+            email: {
+              type: 'string',
+              title: 'Email',
+            },
+          },
+        },
+      },
+    };
+
+    return <JsonSchemaFormRenderer schema={schema}></JsonSchemaFormRenderer>;
+  },
+};
+
+export const ResponsiveDensity: Story = {
+  render: () => {
+    const schema: ISchema = {
+      type: 'object',
+      properties: {
+        userInfo: {
+          type: 'object',
+          title: 'User Information',
+          properties: {
+            firstName: {
+              type: 'string',
+              title: 'First Name',
+            },
+            lastName: {
+              type: 'string',
+              title: 'Last Name',
+            },
+            email: {
+              type: 'string',
+              title: 'Email',
+            },
+          },
+        },
+      },
+    };
+
+    return <JsonSchemaFormRenderer schema={schema}></JsonSchemaFormRenderer>;
+  },
+};

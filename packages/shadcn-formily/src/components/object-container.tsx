@@ -1,4 +1,5 @@
 import type { SyncReactNode } from '../types';
+import type { SpacingConfig } from '../utils/resolve-responsive-space';
 import {
   Card,
   CardContent,
@@ -9,13 +10,42 @@ import {
 } from '@pixpilot/shadcn';
 import { useDescription, useFormContext, useLabel } from '../hooks';
 
-import { resolveResponsiveGapClass } from '../utils/resolve-responsive-space';
+import {
+  resolveResponsiveGapClass,
+  resolveSpacingClass,
+} from '../utils/resolve-responsive-space';
 import { FormItemContainer } from './form-items-container';
 
 export interface ObjectContainerProps extends React.ComponentProps<'div'> {
   label?: SyncReactNode;
   description?: SyncReactNode;
 }
+
+/**
+ * Header gap spacing configuration
+ * Uses smaller gaps since headers have less content
+ */
+const headerConfig: SpacingConfig = {
+  fixed: {
+    sm: 'gap-1.5 text-lg',
+    md: 'gap-2 text-xl',
+    lg: 'gap-2.5 text-2xl',
+  },
+  responsive: 'gap-1.5 text-lg md:gap-2 md:text-xl lg:gap-2.5 lg:text-2xl',
+};
+
+/**
+ * Card padding spacing configuration
+ * Controls vertical padding of the Card component
+ */
+const cardPaddingConfig: SpacingConfig = {
+  fixed: {
+    sm: 'py-5',
+    md: 'py-6',
+    lg: 'py-7',
+  },
+  responsive: 'py-5 md:py-6 lg:py-7',
+};
 
 export const ObjectContainer: React.FC<ObjectContainerProps> = ({
   className,
@@ -30,13 +60,18 @@ export const ObjectContainer: React.FC<ObjectContainerProps> = ({
   const { objectContainerProps, density, responsive } = useFormContext();
 
   const gapClass = resolveResponsiveGapClass({ density, responsive });
+  const headerGapClass = resolveSpacingClass(density, headerConfig);
+  const cardPaddingClass = resolveSpacingClass(density, cardPaddingConfig);
 
   const { className: itemsContainerClassName } = objectContainerProps || {};
 
   return (
-    <Card {...rest} className={cn('bg-transparent', gapClass, className)}>
+    <Card
+      {...rest}
+      className={cn('bg-transparent', gapClass, cardPaddingClass, className)}
+    >
       {(effectiveLabel != null || desc != null) && (
-        <CardHeader>
+        <CardHeader className={headerGapClass}>
           {effectiveLabel != null && <CardTitle>{effectiveLabel}</CardTitle>}
           {desc != null && <CardDescription>{desc}</CardDescription>}
         </CardHeader>
