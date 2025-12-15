@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.5.1
+
+### Patch Changes
+
+- fixes bundle type generation issue
+
 ## 0.5.0
 
 ### Minor Changes
