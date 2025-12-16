@@ -12,27 +12,7 @@ export function FormItemDescriptionPopover({
   description,
   className,
 }: FormItemDescriptionPopoverProps) {
-  const CLOSE_DELAY_MS = 120;
   const [open, setOpen] = React.useState(false);
-  const closeTimer = React.useRef<number | undefined>(undefined);
-
-  const clearCloseTimer = () => {
-    if (closeTimer.current !== undefined) {
-      window.clearTimeout(closeTimer.current);
-      closeTimer.current = undefined;
-    }
-  };
-
-  const scheduleClose = () => {
-    clearCloseTimer();
-    closeTimer.current = window.setTimeout(() => setOpen(false), CLOSE_DELAY_MS);
-  };
-
-  React.useEffect(() => {
-    return () => {
-      clearCloseTimer();
-    };
-  }, []);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -41,37 +21,23 @@ export function FormItemDescriptionPopover({
           type="button"
           aria-label="Show description"
           className={cn(
-            'text-muted-foreground inline-flex items-center justify-center rounded-sm',
+            'text-muted-foreground inline-flex items-center justify-center rounded-sm hover:text-foreground transition-colors',
             className,
           )}
-          onMouseEnter={() => {
-            clearCloseTimer();
-            setOpen(true);
-          }}
-          onMouseLeave={scheduleClose}
-          onFocus={() => {
-            clearCloseTimer();
-            setOpen(true);
-          }}
-          onBlur={scheduleClose}
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-          }}
+          onMouseEnter={() => setOpen(true)}
+          onMouseLeave={() => setOpen(false)}
+          onClick={() => setOpen((prev) => !prev)}
         >
           <HelpCircleIcon className="h-4 w-4" />
         </button>
       </PopoverTrigger>
       <PopoverContent
         side="top"
-        className="w-80"
-        onMouseEnter={() => {
-          clearCloseTimer();
-          setOpen(true);
-        }}
-        onMouseLeave={scheduleClose}
+        className="w-80 bg-card border border-border"
+        onMouseEnter={() => setOpen(true)}
+        onMouseLeave={() => setOpen(false)}
       >
-        <div className="text-sm leading-relaxed">{description}</div>
+        <div className="text-sm leading-relaxed text-foreground">{description}</div>
       </PopoverContent>
     </Popover>
   );
