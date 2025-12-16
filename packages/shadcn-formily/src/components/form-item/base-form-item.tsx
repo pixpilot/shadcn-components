@@ -11,6 +11,7 @@ import React from 'react';
 
 import { useFormContext, useLabel } from '../../hooks';
 import { FormItemLabel } from './form-item-label';
+import { getSpacingConfig } from './spacing-config';
 
 function resolveLegacyDescriptionPlacement(
   labelPlacement: LabelPlacement,
@@ -68,6 +69,11 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
   const descriptionRenderedInline =
     description != null && resolvedDescriptionPlacement !== 'popover';
 
+  const spacingConfig = getSpacingConfig(
+    resolvedDescriptionPlacement,
+    descriptionRenderedInline,
+  );
+
   const ariaDescribedBy = [
     descriptionRenderedInline ? descriptionId : undefined,
     feedbackText != null ? feedbackId : undefined,
@@ -82,7 +88,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
       asterisk={asterisk}
       error={feedbackStatus === 'error'}
       shrink={effectiveLabelPlacement === 'end' || effectiveLabelPlacement === 'start'}
-      labelClassName={classes?.label}
+      labelClassName={cn(spacingConfig.label, classes?.label)}
       description={description}
       descriptionInPopover={
         resolvedDescriptionPlacement === 'popover' && description != null
@@ -105,7 +111,11 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
   const descriptionElement = descriptionRenderedInline ? (
     <p
       id={descriptionId}
-      className={cn('text-muted-foreground text-[0.8rem]', classes?.description)}
+      className={cn(
+        'text-muted-foreground text-[0.8rem]',
+        spacingConfig.description,
+        classes?.description,
+      )}
     >
       {description}
     </p>
@@ -138,11 +148,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
   );
 
   return (
-    <div
-      data-slot="form-item"
-      className={cn('flex flex-col gap-2', className)}
-      {...props}
-    >
+    <div data-slot="form-item" className={cn('flex flex-col ', className)} {...props}>
       {contentElement}
 
       {Boolean(feedbackText) && (
@@ -150,6 +156,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
           id={feedbackId}
           className={cn(
             'text-[0.8rem]',
+            spacingConfig.feedback,
             feedbackStatus === 'error' && 'text-destructive font-medium',
             feedbackStatus === 'warning' && 'text-amber-600',
             feedbackStatus === 'success' && 'text-green-600',

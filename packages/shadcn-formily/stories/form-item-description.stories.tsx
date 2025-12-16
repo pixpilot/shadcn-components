@@ -36,6 +36,7 @@ export const DescriptionPlacementTop: Story = {
           'x-component-props': {
             placeholder: 'Enter your username',
           },
+          required: true,
         },
         email: {
           type: 'string',
@@ -52,6 +53,7 @@ export const DescriptionPlacementTop: Story = {
           },
         },
       },
+      required: ['username', 'email'],
     };
 
     return (
@@ -94,6 +96,7 @@ export const DescriptionPlacementBottom: Story = {
           'x-component-props': {
             placeholder: 'Enter your username',
           },
+          required: true,
         },
         password: {
           type: 'string',
@@ -154,6 +157,7 @@ export const DescriptionPlacementPopover: Story = {
           'x-component-props': {
             placeholder: 'Enter your username',
           },
+          required: true,
         },
         email: {
           type: 'string',

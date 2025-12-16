@@ -53,7 +53,7 @@ export function Form({
       <FormProvider form={form}>
         <FormItemContainer
           as="form"
-          className={cn('space-y-6', className)}
+          className={cn(className)}
           style={style}
           onSubmit={handleSubmit}
         >
