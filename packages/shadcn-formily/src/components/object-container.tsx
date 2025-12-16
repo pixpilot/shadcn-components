@@ -57,26 +57,36 @@ export const ObjectContainer: React.FC<ObjectContainerProps> = ({
   const effectiveLabel = useLabel(label);
   const desc = useDescription(description);
 
-  const { objectContainerProps, density } = useFormContext();
+  const { objectContainer, density } = useFormContext();
 
   const gapClass = resolveResponsiveGapClass({ density });
   const headerGapClass = resolveSpacingClass(density, headerConfig);
   const cardPaddingClass = resolveSpacingClass(density, cardPaddingConfig);
 
-  const { className: itemsContainerClassName } = objectContainerProps || {};
+  const { classes } = objectContainer || {};
 
   return (
     <Card
       {...rest}
-      className={cn('bg-transparent', gapClass, cardPaddingClass, className)}
+      className={cn(
+        'bg-transparent',
+        gapClass,
+        cardPaddingClass,
+        className,
+        classes?.card,
+      )}
     >
       {(effectiveLabel != null || desc != null) && (
-        <CardHeader className={headerGapClass}>
-          {effectiveLabel != null && <CardTitle>{effectiveLabel}</CardTitle>}
-          {desc != null && <CardDescription>{desc}</CardDescription>}
+        <CardHeader className={cn(headerGapClass, classes?.header)}>
+          {effectiveLabel != null && (
+            <CardTitle className={classes?.title}>{effectiveLabel}</CardTitle>
+          )}
+          {desc != null && (
+            <CardDescription className={classes?.description}>{desc}</CardDescription>
+          )}
         </CardHeader>
       )}
-      <FormItemContainer as={CardContent} className={itemsContainerClassName}>
+      <FormItemContainer as={CardContent} className={classes?.content}>
         {children}
       </FormItemContainer>
     </Card>

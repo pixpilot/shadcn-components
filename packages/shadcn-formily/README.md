@@ -149,6 +149,17 @@ import {
 - `x-component-props`: Props passed to the component
 - `x-decorator-props`: Props passed to the decorator
 
+## Documentation
+
+### [JSON Schema Form: Headless vs Default Pattern](./docs/json-schema-form-headless-vs-default.md)
+
+Learn about the difference between `JsonSchemaFormRenderer` (headless) and `JsonSchemaForm` (batteries-included) components:
+
+- **`JsonSchemaFormRenderer`** - Pure, headless component that requires you to provide all components explicitly. Ideal for custom component registries and bundle size optimization.
+- **`JsonSchemaForm`** - Convenience wrapper that comes pre-loaded with all standard components (Slider, Combobox, TagsInput, etc.). Perfect for getting started quickly.
+
+[Read the full documentation →](./docs/json-schema-form-headless-vs-default.md)
+
 ## API Reference
 
 ### createForm

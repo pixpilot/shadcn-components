@@ -12,3 +12,10 @@ export interface IconProvider {
    */
   name: string;
 }
+
+export interface FormComponentConfig {
+  component: React.ComponentType<any>;
+  decorator?: string;
+}
+
+export type FormComponentRecord = Record<string, FormComponentConfig>;

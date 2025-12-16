@@ -1,12 +1,12 @@
 /* eslint-disable react/no-clone-element */
 
-import type { SyncReactNode } from '../types';
+import type { SyncReactNode } from '../../types';
 import { isVoidField } from '@formily/core';
 import { connect, mapProps, useField } from '@formily/react';
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 
-import { useFormContext, useLabel } from '../hooks';
+import { useFormContext, useLabel } from '../../hooks';
 
 export type LabelPlacement = 'top' | 'bottom' | 'start' | 'end';
 
@@ -40,7 +40,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
   const effectiveLabel = useLabel(label);
 
   const { itemProps } = useFormContext();
-  const { className: itemPropsClassName } = itemProps || {};
+  const { classes } = itemProps || {};
 
   // eslint-disable-next-line ts/no-unsafe-assignment
   const effectiveLabelPlacement: LabelPlacement =
@@ -70,6 +70,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
         feedbackStatus === 'error' && 'text-destructive',
         (effectiveLabelPlacement === 'end' || effectiveLabelPlacement === 'start') &&
           'shrink-0',
+        classes?.label,
       )}
     >
       {effectiveLabel}
@@ -82,7 +83,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
   );
 
   const inputElement = (
-    <div className="relative">
+    <div className={cn('relative', classes?.inputWrapper)}>
       {React.isValidElement(children)
         ? React.cloneElement(children, {
             id,
@@ -98,7 +99,10 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
       {effectiveLabelPlacement === 'top' && labelElement}
 
       {description != null && effectiveLabelPlacement === 'top' && (
-        <p id={descriptionId} className="text-muted-foreground text-[0.8rem]">
+        <p
+          id={descriptionId}
+          className={cn('text-muted-foreground text-[0.8rem]', classes?.description)}
+        >
           {description}
         </p>
       )}
@@ -121,7 +125,10 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
 
       {description != null &&
         (effectiveLabelPlacement === 'start' || effectiveLabelPlacement === 'end') && (
-          <p id={descriptionId} className="text-muted-foreground text-[0.8rem]">
+          <p
+            id={descriptionId}
+            className={cn('text-muted-foreground text-[0.8rem]', classes?.description)}
+          >
             {description}
           </p>
         )}
@@ -131,7 +138,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
   return (
     <div
       data-slot="form-item"
-      className={cn('flex flex-col gap-2', itemPropsClassName, className)}
+      className={cn('flex flex-col gap-2', className)}
       {...props}
     >
       {contentElement}
@@ -144,6 +151,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
             feedbackStatus === 'error' && 'text-destructive font-medium',
             feedbackStatus === 'warning' && 'text-amber-600',
             feedbackStatus === 'success' && 'text-green-600',
+            classes?.errorMessage,
           )}
         >
           {typeof feedbackText === 'string'

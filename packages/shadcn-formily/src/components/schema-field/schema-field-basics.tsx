@@ -1,4 +1,6 @@
+import type { FormComponentConfig } from '../../types/form';
 import { createSchemaField } from '@formily/react';
+import { extractComponents } from '../../utils/extract-components';
 import { ArrayCards } from '../array-cards';
 import { ArrayCollapse } from '../array-collapse';
 import { ArrayDialog } from '../array-dialog';
@@ -19,28 +21,30 @@ import { Separator } from '../separator';
 import { Switch } from '../switch';
 import { Textarea } from '../textarea';
 
-export const schemaFieldBasicComponents = {
-  FormItem,
-  Hidden,
-  Input,
-  Textarea,
-  NumberInput,
-  Checkbox,
-  Radio,
-  Select,
-  Switch,
-  DatePicker,
-  Row,
-  Column,
-  FormGrid,
-  Separator,
-  ArrayCards,
-  ArrayDialog,
-  ArrayCollapse,
-  ArrayPopover,
-  ObjectContainer,
-};
+export const basicComponentRegistry = {
+  FormItem: { component: FormItem },
+  Hidden: { component: Hidden },
+  Input: { component: Input, decorator: 'FormItem' },
+  Textarea: { component: Textarea, decorator: 'FormItem' },
+  NumberInput: { component: NumberInput, decorator: 'FormItem' },
+  Checkbox: { component: Checkbox, decorator: 'FormItem' },
+  Radio: { component: Radio, decorator: 'FormItem' },
+  Select: { component: Select, decorator: 'FormItem' },
+  Switch: { component: Switch, decorator: 'FormItem' },
+  DatePicker: { component: DatePicker, decorator: 'FormItem' },
+  Row: { component: Row },
+  Column: { component: Column },
+  FormGrid: { component: FormGrid },
+  Separator: { component: Separator },
+  ArrayCards: { component: ArrayCards, decorator: 'FormItem' },
+  ArrayDialog: { component: ArrayDialog, decorator: 'FormItem' },
+  ArrayCollapse: { component: ArrayCollapse, decorator: 'FormItem' },
+  ArrayPopover: { component: ArrayPopover, decorator: 'FormItem' },
+  ObjectContainer: { component: ObjectContainer, decorator: 'FormItem' },
+} satisfies Record<string, FormComponentConfig>;
+
+export const basicComponents = extractComponents(basicComponentRegistry);
 
 export const SchemaFieldBasics = createSchemaField({
-  components: schemaFieldBasicComponents,
+  components: basicComponents,
 });

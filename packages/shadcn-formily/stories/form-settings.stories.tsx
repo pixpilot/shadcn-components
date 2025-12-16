@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ISchema } from '../src';
-import { JsonSchemaFormRenderer } from '../src';
+import { JsonSchemaForm } from '../src';
 
-const meta: Meta<typeof JsonSchemaFormRenderer> = {
+const meta: Meta<typeof JsonSchemaForm> = {
   title: 'Formily/Form Settings',
-  component: JsonSchemaFormRenderer,
+  component: JsonSchemaForm,
 
   tags: ['autodocs'],
   argTypes: {
@@ -25,9 +25,9 @@ const meta: Meta<typeof JsonSchemaFormRenderer> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof JsonSchemaFormRenderer>;
+type Story = StoryObj<typeof JsonSchemaForm>;
 
-export const JsonSchemaForm: Story = {
+export const JsonSchema: Story = {
   args: {
     density: 'responsive',
   },
@@ -53,7 +53,7 @@ export const JsonSchemaForm: Story = {
       },
     };
 
-    return <JsonSchemaFormRenderer {...args} schema={schema}></JsonSchemaFormRenderer>;
+    return <JsonSchemaForm {...args} schema={schema}></JsonSchemaForm>;
   },
 };
 
@@ -83,6 +83,6 @@ export const ShouldNotHaveLabel: Story = {
       },
     };
 
-    return <JsonSchemaFormRenderer {...args} schema={schema}></JsonSchemaFormRenderer>;
+    return <JsonSchemaForm {...args} schema={schema}></JsonSchemaForm>;
   },
 };

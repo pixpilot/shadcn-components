@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ISchema } from '../src';
-import { JsonSchemaFormRenderer } from '../src';
+import { defaultComponentRegistry, JsonSchemaFormRenderer } from '../src';
 import { ObjectContainer } from '../src/components/object-container';
 
 const meta: Meta<typeof ObjectContainer> = {
@@ -41,7 +41,14 @@ export const JsonSchemaForm: Story = {
       },
     };
 
-    return <JsonSchemaFormRenderer schema={schema}></JsonSchemaFormRenderer>;
+    return (
+      <JsonSchemaFormRenderer
+        components={{
+          fields: defaultComponentRegistry,
+        }}
+        schema={schema}
+      ></JsonSchemaFormRenderer>
+    );
   },
 };
 
@@ -92,7 +99,14 @@ export const NestedObject: Story = {
       },
     };
 
-    return <JsonSchemaFormRenderer schema={schema}></JsonSchemaFormRenderer>;
+    return (
+      <JsonSchemaFormRenderer
+        components={{
+          fields: defaultComponentRegistry,
+        }}
+        schema={schema}
+      ></JsonSchemaFormRenderer>
+    );
   },
 };
 
@@ -111,7 +125,12 @@ export const withoutObject: Story = {
     return (
       <div>
         <h5 className="pb-5">Should not wrap with object container</h5>
-        <JsonSchemaFormRenderer schema={schema}></JsonSchemaFormRenderer>
+        <JsonSchemaFormRenderer
+          components={{
+            fields: defaultComponentRegistry,
+          }}
+          schema={schema}
+        ></JsonSchemaFormRenderer>
       </div>
     );
   },
@@ -143,7 +162,14 @@ export const CompactDensity: Story = {
       },
     };
 
-    return <JsonSchemaFormRenderer schema={schema}></JsonSchemaFormRenderer>;
+    return (
+      <JsonSchemaFormRenderer
+        components={{
+          fields: defaultComponentRegistry,
+        }}
+        schema={schema}
+      ></JsonSchemaFormRenderer>
+    );
   },
 };
 
@@ -173,7 +199,14 @@ export const NormalDensity: Story = {
       },
     };
 
-    return <JsonSchemaFormRenderer schema={schema}></JsonSchemaFormRenderer>;
+    return (
+      <JsonSchemaFormRenderer
+        components={{
+          fields: defaultComponentRegistry,
+        }}
+        schema={schema}
+      ></JsonSchemaFormRenderer>
+    );
   },
 };
 
@@ -203,7 +236,14 @@ export const ComfortableDensity: Story = {
       },
     };
 
-    return <JsonSchemaFormRenderer schema={schema}></JsonSchemaFormRenderer>;
+    return (
+      <JsonSchemaFormRenderer
+        components={{
+          fields: defaultComponentRegistry,
+        }}
+        schema={schema}
+      ></JsonSchemaFormRenderer>
+    );
   },
 };
 
@@ -233,6 +273,13 @@ export const ResponsiveDensity: Story = {
       },
     };
 
-    return <JsonSchemaFormRenderer schema={schema}></JsonSchemaFormRenderer>;
+    return (
+      <JsonSchemaFormRenderer
+        components={{
+          fields: defaultComponentRegistry,
+        }}
+        schema={schema}
+      ></JsonSchemaFormRenderer>
+    );
   },
 };

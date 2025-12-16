@@ -1,7 +1,7 @@
 import type { Form } from '@formily/core';
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ISchema } from '../src';
-import { JsonSchemaFormRenderer } from '../src';
+import { JsonSchemaForm } from '../src';
 import { Hidden } from '../src/components/hidden';
 
 const meta: Meta<typeof Form> = {
@@ -16,7 +16,7 @@ const meta: Meta<typeof Form> = {
 export default meta;
 type Story = StoryObj<typeof Form>;
 
-export const JsonSchemaForm: Story = {
+export const JsonSchema: Story = {
   render: () => {
     const schema: ISchema = {
       type: 'object',
@@ -42,6 +42,6 @@ export const JsonSchemaForm: Story = {
       },
     };
 
-    return <JsonSchemaFormRenderer schema={schema}></JsonSchemaFormRenderer>;
+    return <JsonSchemaForm schema={schema}></JsonSchemaForm>;
   },
 };

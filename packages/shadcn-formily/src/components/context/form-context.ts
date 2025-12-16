@@ -33,10 +33,21 @@ export interface FormConfigProps {
 
 export interface FormContextStates extends FormSpace {
   itemProps?: {
-    className?: string;
+    classes?: {
+      label?: string;
+      description?: string;
+      inputWrapper?: string;
+      errorMessage?: string;
+    };
   };
-  objectContainerProps?: {
-    className?: string;
+  objectContainer?: {
+    classes?: {
+      card?: string;
+      header?: string;
+      title?: string;
+      description?: string;
+      content?: string;
+    };
   };
   settings?: FormConfigProps;
 }

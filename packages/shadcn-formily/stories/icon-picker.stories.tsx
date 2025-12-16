@@ -6,6 +6,7 @@ import type { IconProvider } from '../src/types';
 import faData from '@iconify-json/fa/icons.json';
 import mdiData from '@iconify-json/mdi/icons.json';
 import { createForm, Form, SchemaFieldExtended } from '../src';
+import { iconProviders } from './utils/icon-providers';
 
 /**
  * <p>By default, Iconify uses its own API for icon data.</p>
@@ -35,19 +36,6 @@ type Story = StoryObj<typeof Form>;
 
 const JSON_INDENT = 2;
 
-const providers: IconProvider[] = [
-  {
-    prefix: mdiData.prefix,
-    icons: Object.keys(mdiData.icons), // Limit to first 200 icons for performance
-    name: 'Material Design',
-  },
-  {
-    prefix: faData.prefix,
-    icons: Object.keys(faData.icons), // Limit to first 200 icons for performance
-    name: 'Font Awesome',
-  },
-];
-
 export const BasicIconPicker: Story = {
   render: () => {
     const form = createForm();
@@ -70,7 +58,7 @@ export const BasicIconPicker: Story = {
         className="w-[500px]"
         settings={{
           iconPicker: {
-            providers,
+            providers: iconProviders,
           },
         }}
         onSubmit={(values) => {
@@ -116,7 +104,7 @@ export const IconPickerWithPreselect: Story = {
         className="w-[500px]"
         settings={{
           iconPicker: {
-            providers,
+            providers: iconProviders,
           },
         }}
         onSubmit={(values) => {
@@ -151,7 +139,7 @@ export const DeclarativeIconPicker: Story = {
         className="w-[500px]"
         settings={{
           iconPicker: {
-            providers,
+            providers: iconProviders,
           },
         }}
         onSubmit={(values) => {
@@ -220,7 +208,7 @@ export const JsonSchemaIconPicker: Story = {
         className="w-[500px]"
         settings={{
           iconPicker: {
-            providers,
+            providers: iconProviders,
           },
         }}
         onSubmit={(values) => {

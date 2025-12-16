@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import { defaultComponentRegistry, Form } from '../src';
-import { JsonSchemaFormRenderer } from '../src/components/json-schema-form-renderer';
+import { Form } from '../src';
+import { JsonSchemaFormBasic } from '../src/components/json-schema-form-renderer';
 
 const meta: Meta<typeof Form> = {
-  title: 'Formily/JSON Schema Form Renderer',
+  title: 'Formily/JSON Schema Form Basic',
   component: Form,
   parameters: {
     layout: 'centered',
@@ -22,7 +22,7 @@ const meta: Meta<typeof Form> = {
 export default meta;
 type Story = StoryObj<typeof Form>;
 
-export const BasicJsonSchemaForm: Story = {
+export const BasicForm: Story = {
   render: () => {
     const schema = {
       type: 'object',
@@ -54,21 +54,22 @@ export const BasicJsonSchemaForm: Story = {
           type: 'boolean',
           title: 'Subscribe to newsletter',
         },
+        gender: {
+          type: 'string',
+          title: 'Gender',
+          enum: ['male', 'female', 'other'],
+          'x-component-props': {
+            placeholder: 'Select gender',
+          },
+        },
       },
     };
 
-    return (
-      <JsonSchemaFormRenderer
-        components={{
-          fields: defaultComponentRegistry,
-        }}
-        schema={schema}
-      ></JsonSchemaFormRenderer>
-    );
+    return <JsonSchemaFormBasic schema={schema}></JsonSchemaFormBasic>;
   },
 };
 
-export const AdvancedJsonSchemaForm: Story = {
+export const FormWithArrays: Story = {
   render: () => {
     const schema = {
       type: 'object',
@@ -77,55 +78,37 @@ export const AdvancedJsonSchemaForm: Story = {
           type: 'string',
           title: 'Name',
         },
-        age: {
-          type: 'integer',
-          title: 'Age (Integer)',
-          minimum: 0,
-          maximum: 120,
-        },
-        height: {
-          type: 'number',
-          title: 'Height (Number)',
-        },
-        isActive: {
-          type: 'boolean',
-          title: 'Is Active',
-        },
         hobbies: {
           type: 'array',
           title: 'Hobbies',
           items: {
             type: 'string',
           },
+          'x-component': 'ArrayCards',
         },
-        tags: {
+        skills: {
           type: 'array',
-          title: 'Tags',
+          title: 'Skills',
           items: {
             type: 'object',
             properties: {
               name: {
                 type: 'string',
-                title: 'Tag Name',
+                title: 'Skill Name',
               },
-              value: {
+              level: {
                 type: 'string',
-                title: 'Tag Value',
+                title: 'Proficiency Level',
+                enum: ['Beginner', 'Intermediate', 'Advanced', 'Expert'],
               },
             },
           },
+          'x-component': 'ArrayDialog',
         },
       },
     };
 
-    return (
-      <JsonSchemaFormRenderer
-        components={{
-          fields: defaultComponentRegistry,
-        }}
-        schema={schema}
-      ></JsonSchemaFormRenderer>
-    );
+    return <JsonSchemaFormBasic schema={schema}></JsonSchemaFormBasic>;
   },
 };
 
@@ -153,57 +136,23 @@ export const NestedObjectsForm: Story = {
             },
           },
         },
-        address: {
+        contact: {
           type: 'object',
-          title: 'Address',
+          title: 'Contact Information',
           properties: {
-            street: {
+            email: {
               type: 'string',
-              title: 'Street Address',
+              title: 'Email',
             },
-            city: {
+            phone: {
               type: 'string',
-              title: 'City',
-            },
-            state: {
-              type: 'string',
-              title: 'State',
-            },
-            zipCode: {
-              type: 'string',
-              title: 'ZIP Code',
-            },
-          },
-        },
-        employment: {
-          type: 'object',
-          title: 'Employment',
-          properties: {
-            company: {
-              type: 'string',
-              title: 'Company Name',
-            },
-            position: {
-              type: 'string',
-              title: 'Position',
-            },
-            startDate: {
-              type: 'string',
-              title: 'Start Date',
-              format: 'date',
+              title: 'Phone',
             },
           },
         },
       },
     };
 
-    return (
-      <JsonSchemaFormRenderer
-        components={{
-          fields: defaultComponentRegistry,
-        }}
-        schema={schema}
-      ></JsonSchemaFormRenderer>
-    );
+    return <JsonSchemaFormBasic schema={schema}></JsonSchemaFormBasic>;
   },
 };

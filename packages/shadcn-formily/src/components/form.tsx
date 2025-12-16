@@ -26,7 +26,7 @@ export function Form({
   onSubmit,
   onAutoSubmit,
   itemProps,
-  objectContainerProps,
+  objectContainer,
   density,
   settings,
 }: IFormProps) {
@@ -45,12 +45,12 @@ export function Form({
   const formSettings = React.useMemo(() => {
     const sett: FormContextStatesRequired = {
       itemProps: itemProps!,
-      objectContainerProps: objectContainerProps!,
+      objectContainer: objectContainer!,
       density: density!,
       settings: settings!,
     };
     return sett;
-  }, [itemProps, objectContainerProps, density, settings]);
+  }, [itemProps, objectContainer, density, settings]);
 
   return (
     <FormContextContextProvider value={formSettings}>
