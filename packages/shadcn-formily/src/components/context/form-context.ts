@@ -3,7 +3,8 @@ import type {
   IconProvider,
   RichTextEditorProps,
 } from '@pixpilot/shadcn-ui';
-import type { FormSpace } from '../../types';
+import type { FormSpace } from '../../types/form';
+import type { DescriptionPlacement } from '../../types/form-item';
 import React from 'react';
 
 export interface FomFileUpload {
@@ -32,6 +33,8 @@ export interface FormConfigProps {
 }
 
 export interface FormContextStates extends FormSpace {
+  /** Default description placement for FormItem decorators. */
+  descriptionPlacement?: DescriptionPlacement;
   itemProps?: {
     classes?: {
       label?: string;
@@ -53,7 +56,9 @@ export interface FormContextStates extends FormSpace {
 }
 
 export type FormContextStatesRequired = {
-  [K in keyof FormContextStates]-?: FormContextStates[K];
+  [K in Exclude<keyof FormContextStates, 'descriptionPlacement'>]-?: FormContextStates[K];
+} & {
+  descriptionPlacement?: DescriptionPlacement;
 };
 
 export const FormContext = React.createContext<FormContextStates>(
