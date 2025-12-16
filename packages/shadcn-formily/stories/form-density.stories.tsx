@@ -55,7 +55,7 @@ export const CompactDensity: Story = {
       <p className="mb-4 text-sm text-gray-600">
         Smallest gaps and text size - ideal for dense information displays
       </p>
-      <JsonSchemaForm schema={baseSchema} density="compact" />
+      <JsonSchemaForm schema={baseSchema} layout={{ density: 'compact' }} />
     </div>
   ),
 };
@@ -67,7 +67,7 @@ export const NormalDensity: Story = {
       <p className="mb-4 text-sm text-gray-600">
         Balanced spacing - default and recommended for most use cases
       </p>
-      <JsonSchemaForm schema={baseSchema} density="normal" />
+      <JsonSchemaForm schema={baseSchema} layout={{ density: 'normal' }} />
     </div>
   ),
 };
@@ -79,7 +79,7 @@ export const ComfortableDensity: Story = {
       <p className="mb-4 text-sm text-gray-600">
         Larger gaps and text size - ideal for accessibility and readability
       </p>
-      <JsonSchemaForm schema={baseSchema} density="comfortable" />
+      <JsonSchemaForm schema={baseSchema} layout={{ density: 'comfortable' }} />
     </div>
   ),
 };
@@ -92,7 +92,7 @@ export const ResponsiveDensity: Story = {
         Automatically adjusts based on screen size - compact on mobile, comfortable on
         desktop
       </p>
-      <JsonSchemaForm schema={baseSchema} density="responsive" />
+      <JsonSchemaForm schema={baseSchema} layout={{ density: 'responsive' }} />
     </div>
   ),
 };
@@ -102,22 +102,22 @@ export const AllDensitiesComparison: Story = {
     <div className="space-y-8">
       <div>
         <h4 className="mb-2 font-semibold">Compact</h4>
-        <JsonSchemaForm schema={baseSchema} density="compact" />
+        <JsonSchemaForm schema={baseSchema} layout={{ density: 'compact' }} />
       </div>
 
       <div className="border-t pt-8">
         <h4 className="mb-2 font-semibold">Normal</h4>
-        <JsonSchemaForm schema={baseSchema} density="normal" />
+        <JsonSchemaForm schema={baseSchema} layout={{ density: 'normal' }} />
       </div>
 
       <div className="border-t pt-8">
         <h4 className="mb-2 font-semibold">Comfortable</h4>
-        <JsonSchemaForm schema={baseSchema} density="comfortable" />
+        <JsonSchemaForm schema={baseSchema} layout={{ density: 'comfortable' }} />
       </div>
 
       <div className="border-t pt-8">
         <h4 className="mb-2 font-semibold">Responsive</h4>
-        <JsonSchemaForm schema={baseSchema} density="responsive" />
+        <JsonSchemaForm schema={baseSchema} layout={{ density: 'responsive' }} />
       </div>
     </div>
   ),
@@ -164,7 +164,7 @@ export const NestedObjectsDensity: Story = {
         <h3 className="mb-4 text-lg font-semibold">
           Nested Objects - Comfortable Density
         </h3>
-        <JsonSchemaForm schema={nestedSchema} density="comfortable" />
+        <JsonSchemaForm schema={nestedSchema} layout={{ density: 'comfortable' }} />
       </div>
     );
   },

@@ -7,14 +7,7 @@ const meta: Meta<typeof JsonSchemaForm> = {
   component: JsonSchemaForm,
 
   tags: ['autodocs'],
-  argTypes: {
-    density: {
-      control: { type: 'select' },
-      options: ['responsive', 'compact', 'normal', 'comfortable'],
-      description:
-        'Space density mode. "responsive" uses responsive breakpoints: compact on mobile, normal on tablet, comfortable on desktop',
-    },
-  },
+
   decorators: [
     (Story) => (
       <div className="w-full ">
@@ -29,7 +22,9 @@ type Story = StoryObj<typeof JsonSchemaForm>;
 
 export const JsonSchema: Story = {
   args: {
-    density: 'responsive',
+    layout: {
+      density: 'responsive',
+    },
   },
   render: (args) => {
     const schema: ISchema = {
@@ -59,7 +54,9 @@ export const JsonSchema: Story = {
 
 export const ShouldNotHaveLabel: Story = {
   args: {
-    density: 'responsive',
+    layout: {
+      density: 'responsive',
+    },
   },
   render: (args) => {
     const schema: ISchema = {

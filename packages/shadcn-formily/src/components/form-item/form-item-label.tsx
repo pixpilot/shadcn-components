@@ -38,10 +38,10 @@ export function FormItemLabel({
       )}
     >
       <span className="inline-flex items-center gap-1">
+        <span>{label}</span>
         {descriptionInPopover && description != null && (
           <FormItemDescriptionPopover description={description} />
         )}
-        <span>{label}</span>
       </span>
       {asterisk && (
         <span className="text-destructive ml-1" aria-label="required">

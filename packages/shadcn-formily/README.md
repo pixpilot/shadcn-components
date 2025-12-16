@@ -56,7 +56,11 @@ const schema = {
 
 function MyForm() {
   return (
-    <Form form={form} onSubmit={(values) => console.log(values)}>
+    <Form
+      form={form}
+      layout={{ density: 'comfortable' }}
+      onSubmit={(values) => console.log(values)}
+    >
       <SchemaField schema={schema} />
       <button type="submit">Submit</button>
     </Form>
@@ -150,6 +154,17 @@ import {
 - `x-decorator-props`: Props passed to the decorator
 
 ## Documentation
+
+### [Form Layout Options](./docs/form-layout-options.md)
+
+Learn how to configure form layout and visual settings using the `FormLayoutOptions` interface:
+
+- **Density** - Control spacing between form elements (compact, normal, comfortable, responsive)
+- **Description Placement** - Configure where field descriptions appear (top, bottom, popover)
+- **Label Placement** - Set label position relative to inputs (top, bottom, start, end)
+- **Custom Classes** - Apply custom CSS classes to form elements
+
+[Read the full documentation →](./docs/form-layout-options.md)
 
 ### [JSON Schema Form: Headless vs Default Pattern](./docs/json-schema-form-headless-vs-default.md)
 

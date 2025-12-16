@@ -8,11 +8,14 @@ export type {
 export { ArrayBase } from './components/array-base';
 
 export * from './components/array-cards';
-export * from './components/array-collapse';
 
+export * from './components/array-collapse';
 export { Checkbox } from './components/checkbox';
+
 export { Column } from './components/column';
 export { Combobox } from './components/combobox';
+// Context and configuration types
+export type { FormLayoutOptions } from './components/context';
 export { DatePicker } from './components/date-picker';
 export { FileUpload, FileUploadInline } from './components/file-upload';
 // Core components

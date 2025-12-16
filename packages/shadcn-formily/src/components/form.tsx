@@ -25,11 +25,8 @@ export function Form({
   children,
   onSubmit,
   onAutoSubmit,
-  itemProps,
-  objectContainer,
-  density,
+  layout,
   settings,
-  descriptionPlacement,
 }: IFormProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,14 +42,11 @@ export function Form({
 
   const formSettings = React.useMemo(() => {
     const sett: FormContextStatesRequired = {
-      itemProps: itemProps!,
-      objectContainer: objectContainer!,
-      density: density!,
+      layout: layout!,
       settings: settings!,
-      ...(descriptionPlacement !== undefined ? { descriptionPlacement } : {}),
     };
     return sett;
-  }, [itemProps, objectContainer, density, settings, descriptionPlacement]);
+  }, [layout, settings]);
 
   return (
     <FormContextContextProvider value={formSettings}>

@@ -39,9 +39,9 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
 
   const effectiveLabel = useLabel(label);
 
-  const { itemProps, descriptionPlacement: contextDescriptionPlacement } =
-    useFormContext();
-  const { classes } = itemProps || {};
+  const { layout } = useFormContext();
+  const { classes } = layout?.itemProps || {};
+  const contextDescriptionPlacement = layout?.descriptionPlacement;
 
   // eslint-disable-next-line ts/no-unsafe-assignment
   const effectiveLabelPlacement: LabelPlacement =

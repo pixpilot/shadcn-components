@@ -343,7 +343,7 @@ export const GlobalDescriptionPlacement: Story = {
       <Form
         form={form}
         className="w-[400px]"
-        descriptionPlacement="popover"
+        layout={{ descriptionPlacement: 'popover' }}
         onSubmit={(values) => {
           console.log('Form submitted:', values);
           alert(JSON.stringify(values, null, INDENT_SIZE));

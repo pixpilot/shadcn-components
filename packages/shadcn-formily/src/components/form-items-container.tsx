@@ -11,7 +11,8 @@ export interface FormItemContainerProps extends React.ComponentProps<'div'> {
 const FormItemContainer: React.FC<FormItemContainerProps> = (props) => {
   const { as: Component = 'div', className, ...rest } = props;
 
-  const { density } = useFormContext();
+  const { layout } = useFormContext();
+  const { density } = layout || {};
   const spaceClass = resolveResponsiveSpaceClass({ density });
 
   return <Component {...rest} className={cn(spaceClass, className)} />;

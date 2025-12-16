@@ -4,7 +4,7 @@ import type {
   RichTextEditorProps,
 } from '@pixpilot/shadcn-ui';
 import type { FormSpace } from '../../types/form';
-import type { DescriptionPlacement } from '../../types/form-item';
+import type { DescriptionPlacement, LabelPlacement } from '../../types/form-item';
 import React from 'react';
 
 export interface FomFileUpload {
@@ -32,9 +32,18 @@ export interface FormConfigProps {
   richTextEditor?: RichTextEditorProps;
 }
 
-export interface FormContextStates extends FormSpace {
-  /** Default description placement for FormItem decorators. */
+/**
+ * Layout configuration options for form components.
+ * Groups all visual and layout-related settings.
+ */
+export interface FormLayoutOptions {
+  /** Form density - affects spacing between elements */
+  density?: FormSpace['density'];
+  /** Default description placement for FormItem decorators */
   descriptionPlacement?: DescriptionPlacement;
+  /** Default label placement for FormItem decorators */
+  labelPlacement?: LabelPlacement;
+  /** Custom class names for FormItem elements */
   itemProps?: {
     classes?: {
       label?: string;
@@ -43,6 +52,7 @@ export interface FormContextStates extends FormSpace {
       errorMessage?: string;
     };
   };
+  /** Custom class names for ObjectContainer elements */
   objectContainer?: {
     classes?: {
       card?: string;
@@ -52,14 +62,16 @@ export interface FormContextStates extends FormSpace {
       content?: string;
     };
   };
+}
+
+export interface FormContextStates {
+  /** Layout configuration options */
+  layout?: FormLayoutOptions;
+  /** Form-level configuration settings */
   settings?: FormConfigProps;
 }
 
-export type FormContextStatesRequired = {
-  [K in Exclude<keyof FormContextStates, 'descriptionPlacement'>]-?: FormContextStates[K];
-} & {
-  descriptionPlacement?: DescriptionPlacement;
-};
+export type FormContextStatesRequired = Required<FormContextStates>;
 
 export const FormContext = React.createContext<FormContextStates>(
   {} as FormContextStates,

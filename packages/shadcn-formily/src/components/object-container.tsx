@@ -57,7 +57,8 @@ export const ObjectContainer: React.FC<ObjectContainerProps> = ({
   const effectiveLabel = useLabel(label);
   const desc = useDescription(description);
 
-  const { objectContainer, density } = useFormContext();
+  const { layout } = useFormContext();
+  const { objectContainer, density } = layout || {};
 
   const gapClass = resolveResponsiveGapClass({ density });
   const headerGapClass = resolveSpacingClass(density, headerConfig);
