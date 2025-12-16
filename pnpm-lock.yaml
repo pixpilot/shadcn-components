@@ -107,8 +107,8 @@ catalogs:
       specifier: ^6.0.2
       version: 6.0.2
     '@pixpilot/env':
-      specifier: ^0.2.1
-      version: 0.2.1
+      specifier: ^0.2.2
+      version: 0.2.2
     '@pixpilot/hash':
       specifier: ^0.0.0
       version: 0.0.0
@@ -454,7 +454,7 @@ importers:
         version: 6.0.2(react@19.2.0)
       '@pixpilot/env':
         specifier: catalog:prod
-        version: 0.2.1
+        version: 0.2.2
       '@pixpilot/shadcn':
         specifier: workspace:*
         version: link:../shadcn
@@ -1910,8 +1910,8 @@ packages:
   '@pixpilot/dev-config@3.17.0':
     resolution: {integrity: sha512-HsTg9d2qWWIeZN6B/NY+D3mt/3zdVjhmI5w7/IK2gx1adZAcTY8HAgQRrBYxw7SlC+8Oj2U+s48fzVTPMEmhGA==}
 
-  '@pixpilot/env@0.2.1':
-    resolution: {integrity: sha512-UzsHdRKCB2ngEPLVAgt3jcBfjpprHEnSrHaL/UaeNCZaKLiEJ/r5q2U2KFvixQ8KHbf1C8xjkW6GWTgnigO0lA==}
+  '@pixpilot/env@0.2.2':
+    resolution: {integrity: sha512-UiW4NafGNz3bnYbV/cHxtWSjGeZTWS2eFQujjb3kCsZdQIsmlQ+PufmqzBvd2kiwn7bQAbciaauy9J5vJDuxBA==}
 
   '@pixpilot/eslint-config-react@0.4.6':
     resolution: {integrity: sha512-9U25vL/4obluAr5FghRaoYA/W0gjSm4sMt3DhSTVdTUmQ4uxgPfPA6hiGdzPhR0ivrKgAdtpS/SMmRINfacX6w==}
@@ -8754,7 +8754,7 @@ snapshots:
 
   '@pixpilot/dev-config@3.17.0': {}
 
-  '@pixpilot/env@0.2.1': {}
+  '@pixpilot/env@0.2.2': {}
 
   '@pixpilot/eslint-config-react@0.4.6(@next/eslint-plugin-next@15.4.3)(eslint-plugin-turbo@2.5.6(eslint@9.39.2(jiti@2.6.1))(turbo@2.6.3))(eslint@9.39.2(jiti@2.6.1))(ts-api-utils@2.1.0(typescript@5.9.3))(typescript@5.9.3)(vitest@3.2.4)':
     dependencies:

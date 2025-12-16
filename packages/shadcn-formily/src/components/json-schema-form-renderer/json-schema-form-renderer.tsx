@@ -4,7 +4,7 @@ import type { FormConfigProps } from '../context';
 import type { JsonSchemaFormRendererProps } from './types';
 import { createForm } from '@formily/core';
 import { createSchemaField } from '@formily/react';
-import { isDevelopment } from '@pixpilot/env';
+import { isDevelopment } from '@pixpilot/env/is-dev';
 import React, { useMemo } from 'react';
 import {
   extractFieldsDecorators,
