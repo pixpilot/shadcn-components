@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.11.1
+
+### Patch Changes
+
+- update `@pixpilot/env` version to 0.2.2
+
 ## 0.11.0
 
 ### Minor Changes
