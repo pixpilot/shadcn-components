@@ -68,7 +68,7 @@
     "@internal/tsconfig": "workspace:*",
     "@internal/tsdown-config": "workspace:*",
     "@internal/vitest-config": "workspace:*",
-    "@storybook/react": "^10.1.8",
+    "@storybook/react": "^10.1.9",
     "@testing-library/react": "catalog:dev",
     "@types/node": "catalog:dev",
     "@types/react": "^19.2.7",
