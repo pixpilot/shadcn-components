@@ -1,5 +1,12 @@
 # @pixpilot/formily-shadcn
 
+## 0.11.0
+
+### Minor Changes
+
+- add spacing configuration for description placement
+- introduce `JsonSchemaForm` component for enhanced form rendering
+
 ## 0.10.0
 
 ### Minor Changes
