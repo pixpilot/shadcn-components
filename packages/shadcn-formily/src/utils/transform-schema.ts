@@ -39,7 +39,15 @@ export function transformSchema(
   schema: ISchema,
   fieldsDecorators?: Record<string, string | undefined>,
 ): ISchema {
-  traverse(schema, {
+  // IMPORTANT: don't mutate the input schema in-place.
+  // In Next.js dev (React StrictMode) components may render more than once,
+  // and mutating shared schema objects can cause server/client markup to diverge.
+  const normalizedSchema = (
+    typeof structuredClone === 'function'
+      ? structuredClone(schema)
+      : JSON.parse(JSON.stringify(schema))
+  ) as ISchema;
+  traverse(normalizedSchema, {
     allKeys: true,
     cb: (currentSchema) => {
       const { type } = currentSchema;
@@ -76,5 +84,5 @@ export function transformSchema(
     },
   });
 
-  return schema;
+  return normalizedSchema;
 }

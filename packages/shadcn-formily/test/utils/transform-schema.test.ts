@@ -400,7 +400,7 @@ describe('transformSchema', () => {
       ).toBeUndefined();
     });
 
-    it('should mutate schema in place and return it', () => {
+    it('should not mutate the original schema and return a transformed clone', () => {
       const schema: ISchema = {
         type: 'object',
         properties: {
@@ -408,9 +408,16 @@ describe('transformSchema', () => {
         },
       };
 
+      const originalSchemaString = JSON.stringify(schema);
+
       const result = transformSchema(schema);
-      expect(result).toBe(schema);
-      expect((schema.properties as any).name['x-component']).toBe('Input');
+
+      // Original schema should be unchanged
+      expect(JSON.stringify(schema)).toBe(originalSchemaString);
+      expect(result).not.toBe(schema);
+
+      // Result should have the transformations
+      expect((result.properties as any).name['x-component']).toBe('Input');
     });
   });
 
