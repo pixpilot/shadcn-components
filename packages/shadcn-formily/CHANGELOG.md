@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.11.2
+
+### Patch Changes
+
+- prevent mutation of the original schema
+
 ## 0.11.1
 
 ### Patch Changes
