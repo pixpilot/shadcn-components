@@ -1,14 +1,14 @@
 import React, { useMemo } from 'react';
 import { getGlobalStyles } from './styles';
 
-export const SpinnerSize = {
+export const CircleLoaderSize = {
   sm: 24,
   md: 40, // default
   lg: 64,
   xl: 96,
 } as const;
 
-export type SpinnerSizeKey = keyof typeof SpinnerSize;
+export type CircleLoaderSizeKey = keyof typeof CircleLoaderSize;
 
 const DEFAULT_SIZE = 40; // Keep original default
 const MIN_STROKE_WIDTH = 2;
@@ -20,12 +20,12 @@ const PERCENT_MULTIPLIER = 100;
 
 let spinnerIdCounter = 0;
 
-export interface SpinnerProps {
+export interface CircleLoaderProps {
   /**
    * Size of the spinner - can be a preset ('sm', 'md', 'lg', 'xl') or a number in pixels
    * @default 'md' (40px)
    */
-  size?: SpinnerSizeKey | number;
+  size?: CircleLoaderSizeKey | number;
   /**
    * Width of the spinner stroke in pixels
    * If not provided, automatically calculated as 10% of size (minimum 2px)
@@ -54,7 +54,7 @@ export interface SpinnerProps {
   className?: string;
 }
 
-export const Spinner: React.FC<SpinnerProps> = ({
+export const CircleLoader: React.FC<CircleLoaderProps> = ({
   size: sizeProp = DEFAULT_SIZE,
   strokeWidth: strokeWidthProp,
   speed = DEFAULT_SPEED,
@@ -63,7 +63,7 @@ export const Spinner: React.FC<SpinnerProps> = ({
   className = '',
 }) => {
   // Resolve size to a number
-  const size = typeof sizeProp === 'string' ? SpinnerSize[sizeProp] : sizeProp;
+  const size = typeof sizeProp === 'string' ? CircleLoaderSize[sizeProp] : sizeProp;
 
   // Calculate stroke width automatically if not provided (10% of size, minimum 2)
   const strokeWidth =
@@ -132,4 +132,4 @@ export const Spinner: React.FC<SpinnerProps> = ({
   );
 };
 
-Spinner.displayName = 'Spinner';
+CircleLoader.displayName = 'CircleLoader';

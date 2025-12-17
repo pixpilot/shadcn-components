@@ -1,6 +1,6 @@
-import type { SpinnerProps } from './spinner';
+import type { CircleLoaderProps } from './circle-loader';
 
-interface Options extends SpinnerProps {
+interface Options extends CircleLoaderProps {
   uniqueId: string;
 }
 

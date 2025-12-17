@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Spinner } from '../src/spinner';
+import { CircleLoader } from '../src/circle-loader';
 
 /**
  * A customizable SVG spinner component with various sizes, colors, and animation speeds.
  * Supports single color or color-changing animations.
  */
 const meta = {
-  title: 'shadcn-ui/Spinner',
-  component: Spinner,
+  title: 'shadcn-ui/CircleLoader',
+  component: CircleLoader,
   parameters: {
     layout: 'centered',
   },
@@ -31,7 +31,7 @@ const meta = {
       description: 'Width of the spinner stroke in pixels',
     },
   },
-} satisfies Meta<typeof Spinner>;
+} satisfies Meta<typeof CircleLoader>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
