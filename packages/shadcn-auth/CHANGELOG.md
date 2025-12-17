@@ -1,5 +1,12 @@
 # @pixpilot/shadcn-auth
 
+## 0.1.4
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn-ui@0.8.0
+
 ## 0.1.3
 
 ### Patch Changes
