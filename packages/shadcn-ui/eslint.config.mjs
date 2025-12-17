@@ -10,6 +10,7 @@ const config = Array.isArray(baseConfig)
         files: ['**/*.ts', '**/*.tsx'],
         rules: {
           'custom/no-typeof-shadcn-components': 'off',
+          'react/no-forward-ref': 'off',
         },
       },
     ]
