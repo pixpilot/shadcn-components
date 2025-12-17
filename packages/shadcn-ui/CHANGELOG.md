@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.7.0
+
+### Minor Changes
+
+- renames Spinner to CircleLoader
+
 ## 0.6.0
 
 ### Minor Changes
