@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.13.1
+
+### Patch Changes
+
+- remove field label by setting empty title
+
 ## 0.13.0
 
 ### Minor Changes
