@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.13.0
+
+### Minor Changes
+
+- export `FileUploadProgressCallBacks` type from `@pixpilot/shadcn-ui`
+
 ## 0.12.0
 
 ### Minor Changes
