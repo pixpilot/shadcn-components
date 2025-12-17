@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.13.2
+
+### Patch Changes
+
+- remove unnecessary grid-cols-3 class
+
 ## 0.13.1
 
 ### Patch Changes
