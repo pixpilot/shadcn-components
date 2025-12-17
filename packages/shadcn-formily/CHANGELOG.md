@@ -1,5 +1,15 @@
 # @pixpilot/formily-shadcn
 
+## 0.13.0
+
+### Minor Changes
+
+- export `FileUploadProgressCallBacks` type from `@pixpilot/shadcn-ui`
+
+### Patch Changes
+
+- correct import path for `FileUploadProgressCallBacks`
+
 ## 0.12.0
 
 ### Minor Changes
