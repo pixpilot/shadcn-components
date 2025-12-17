@@ -7,6 +7,9 @@ function shouldHaveLabel(value: any) {
   if (typeof value === 'boolean' && value === false) {
     return false;
   }
+  if (value === '') {
+    return false;
+  }
   return true;
 }
 
@@ -18,7 +21,7 @@ export function useLabel(label?: SyncReactNode): SyncReactNode | null {
   const config = useFormConfig();
   const { useFieldNameAsLabel } = config.label || {};
 
-  if (!shouldHaveLabel(label) || !shouldHaveLabel(title) || title === '') {
+  if (!shouldHaveLabel(label) || !shouldHaveLabel(title)) {
     return null;
   }
 
