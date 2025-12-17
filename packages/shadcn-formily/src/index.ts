@@ -17,7 +17,7 @@ export { Combobox } from './components/combobox';
 // Context and configuration types
 export type { FormLayoutOptions } from './components/context';
 export { DatePicker } from './components/date-picker';
-export { FileUpload, FileUploadInline } from './components/file-upload';
+export { AvatarUpload, FileUpload, FileUploadInline } from './components/file-upload';
 // Core components
 export { Form } from './components/form';
 export { FormGrid } from './components/form-grid';

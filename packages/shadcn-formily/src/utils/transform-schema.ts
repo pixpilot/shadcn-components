@@ -42,11 +42,17 @@ export function transformSchema(
   // IMPORTANT: don't mutate the input schema in-place.
   // In Next.js dev (React StrictMode) components may render more than once,
   // and mutating shared schema objects can cause server/client markup to diverge.
-  const normalizedSchema = (
-    typeof structuredClone === 'function'
-      ? structuredClone(schema)
-      : JSON.parse(JSON.stringify(schema))
-  ) as ISchema;
+  let normalizedSchema: ISchema;
+  try {
+    normalizedSchema = (
+      typeof structuredClone === 'function'
+        ? structuredClone(schema)
+        : JSON.parse(JSON.stringify(schema))
+    ) as ISchema;
+  } catch {
+    // Fallback to JSON clone if structuredClone fails (e.g., due to functions)
+    normalizedSchema = JSON.parse(JSON.stringify(schema)) as ISchema;
+  }
   traverse(normalizedSchema, {
     allKeys: true,
     cb: (currentSchema) => {

@@ -5,10 +5,12 @@ import { ChevronDownIcon } from 'lucide-react';
 import React from 'react';
 import { useArray, useIndex } from '../array-context';
 
-export const ArrayMoveDown = React.forwardRef<
-  HTMLButtonElement,
-  IArrayBaseOperationProps & { index?: number }
->((props, ref) => {
+export function ArrayMoveDown({
+  ref,
+  ...props
+}: IArrayBaseOperationProps & { index?: number } & {
+  ref?: React.RefObject<HTMLButtonElement | null>;
+}) {
   const index = useIndex(props.index);
   const self = useField();
   const array = useArray();
@@ -42,6 +44,6 @@ export const ArrayMoveDown = React.forwardRef<
       {props.icon !== undefined ? props.icon : <ChevronDownIcon className="size-4" />}
     </Button>
   );
-});
+}
 
 ArrayMoveDown.displayName = 'ArrayMoveDown';

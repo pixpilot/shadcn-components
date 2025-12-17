@@ -2,13 +2,14 @@ import type { FormComponentConfig } from '../../types/form';
 import { createSchemaField } from '@formily/react';
 
 import { extractComponents } from '../../utils/extract-components';
-import { FileUpload, FileUploadInline } from '../file-upload';
+import { AvatarUpload, FileUpload, FileUploadInline } from '../file-upload';
 import { IconPicker } from '../icon-picker';
 import { RichTextEditor } from '../rich-text-editor';
 import { defaultComponentRegistry } from '../schema-field';
 
 export const extendedComponentRegistry = {
   ...defaultComponentRegistry,
+  AvatarUpload: { component: AvatarUpload, decorator: 'FormItem' },
   FileUploadInline: { component: FileUploadInline, decorator: 'FormItem' },
   IconPicker: { component: IconPicker, decorator: 'FormItem' },
   FileUpload: { component: FileUpload, decorator: 'FormItem' },

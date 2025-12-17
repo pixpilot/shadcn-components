@@ -5,10 +5,10 @@ import { EditIcon } from 'lucide-react';
 import React from 'react';
 import { useArray, useIndex } from '../array-context';
 
-export const ArrayEditButton = React.forwardRef<
-  HTMLButtonElement,
-  IArrayBaseOperationProps
->((props, ref) => {
+export function ArrayEditButton({
+  ref,
+  ...props
+}: IArrayBaseOperationProps & { ref?: React.RefObject<HTMLButtonElement | null> }) {
   const index = useIndex(props.index);
   const self = useField();
   const array = useArray();
@@ -38,5 +38,5 @@ export const ArrayEditButton = React.forwardRef<
       {props.icon !== undefined ? props.icon : <EditIcon className="size-4" />}
     </Button>
   );
-});
+}
 ArrayEditButton.displayName = 'ArrayEditButton';

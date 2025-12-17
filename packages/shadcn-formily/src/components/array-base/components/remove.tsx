@@ -5,10 +5,12 @@ import { Trash2Icon } from 'lucide-react';
 import React from 'react';
 import { useArray, useIndex } from '../array-context';
 
-export const ArrayRemove = React.forwardRef<
-  HTMLButtonElement,
-  IArrayBaseOperationProps & { index?: number }
->((props, ref) => {
+export function ArrayRemove({
+  ref,
+  ...props
+}: IArrayBaseOperationProps & { index?: number } & {
+  ref?: React.RefObject<HTMLButtonElement | null>;
+}) {
   const index = useIndex(props.index);
   const self = useField();
   const array = useArray();
@@ -40,6 +42,6 @@ export const ArrayRemove = React.forwardRef<
       {props.icon !== undefined ? props.icon : <Trash2Icon className="size-4" />}
     </Button>
   );
-});
+}
 
 ArrayRemove.displayName = 'ArrayRemove';

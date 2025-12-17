@@ -16,11 +16,7 @@ type RadioProps = {
   options?: RadioGroupOption[];
   value?: string;
   onChange?: (value: string) => void;
-} & Omit<
-  // eslint-disable-next-line custom/no-typeof-shadcn-components
-  React.ComponentType<typeof RadioGroup>,
-  'value' | 'onValueChange' | 'children'
->;
+} & Omit<React.ComponentType<typeof RadioGroup>, 'value' | 'onValueChange' | 'children'>;
 
 /**
  * Radio component with options rendering

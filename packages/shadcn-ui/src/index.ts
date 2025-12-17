@@ -8,6 +8,7 @@ import { FileUpload } from './file-upload';
 
 export * from './AbsoluteFill';
 export * from './Alert';
+export * from './avatar-upload';
 export * from './Button';
 export * from './CloseButtonAbsolute';
 export * from './CloseButtonRounded';
