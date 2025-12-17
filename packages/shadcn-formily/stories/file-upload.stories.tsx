@@ -343,6 +343,7 @@ export const WithFormFieldSetting: Story = {
 
 export const WithJsonSchemaFormRenderer: Story = {
   render: () => {
+    const form = createForm();
     const schema = {
       type: 'object',
       properties: {
@@ -356,6 +357,7 @@ export const WithJsonSchemaFormRenderer: Story = {
 
     return (
       <JsonSchemaFormRenderer
+        form={form}
         schema={schema}
         className="w-[400px]"
         components={{

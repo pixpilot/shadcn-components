@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ISchema } from '../src';
-import { defaultComponentRegistry, JsonSchemaFormRenderer } from '../src';
+import { createForm, defaultComponentRegistry, JsonSchemaFormRenderer } from '../src';
 import { ObjectContainer } from '../src/components/object-container';
 
 const meta: Meta<typeof ObjectContainer> = {
@@ -24,6 +24,7 @@ type Story = StoryObj<typeof ObjectContainer>;
 
 export const JsonSchemaForm: Story = {
   render: () => {
+    const form = createForm();
     const schema: ISchema = {
       type: 'object',
       properties: {
@@ -43,6 +44,7 @@ export const JsonSchemaForm: Story = {
 
     return (
       <JsonSchemaFormRenderer
+        form={form}
         components={{
           fields: defaultComponentRegistry,
         }}
@@ -54,6 +56,7 @@ export const JsonSchemaForm: Story = {
 
 export const NestedObject: Story = {
   render: () => {
+    const form = createForm();
     const schema: ISchema = {
       type: 'object',
       properties: {
@@ -101,6 +104,7 @@ export const NestedObject: Story = {
 
     return (
       <JsonSchemaFormRenderer
+        form={form}
         components={{
           fields: defaultComponentRegistry,
         }}
@@ -112,6 +116,7 @@ export const NestedObject: Story = {
 
 export const withoutObject: Story = {
   render: () => {
+    const form = createForm();
     const schema: ISchema = {
       type: 'object',
       properties: {
@@ -126,6 +131,7 @@ export const withoutObject: Story = {
       <div>
         <h5 className="pb-5">Should not wrap with object container</h5>
         <JsonSchemaFormRenderer
+          form={form}
           components={{
             fields: defaultComponentRegistry,
           }}
@@ -138,6 +144,7 @@ export const withoutObject: Story = {
 
 export const CompactDensity: Story = {
   render: () => {
+    const form = createForm();
     const schema: ISchema = {
       type: 'object',
       properties: {
@@ -164,6 +171,7 @@ export const CompactDensity: Story = {
 
     return (
       <JsonSchemaFormRenderer
+        form={form}
         components={{
           fields: defaultComponentRegistry,
         }}
@@ -175,6 +183,7 @@ export const CompactDensity: Story = {
 
 export const NormalDensity: Story = {
   render: () => {
+    const form = createForm();
     const schema: ISchema = {
       type: 'object',
       properties: {
@@ -201,6 +210,7 @@ export const NormalDensity: Story = {
 
     return (
       <JsonSchemaFormRenderer
+        form={form}
         components={{
           fields: defaultComponentRegistry,
         }}
@@ -212,6 +222,7 @@ export const NormalDensity: Story = {
 
 export const ComfortableDensity: Story = {
   render: () => {
+    const form = createForm();
     const schema: ISchema = {
       type: 'object',
       properties: {
@@ -238,6 +249,7 @@ export const ComfortableDensity: Story = {
 
     return (
       <JsonSchemaFormRenderer
+        form={form}
         components={{
           fields: defaultComponentRegistry,
         }}
@@ -249,6 +261,7 @@ export const ComfortableDensity: Story = {
 
 export const ResponsiveDensity: Story = {
   render: () => {
+    const form = createForm();
     const schema: ISchema = {
       type: 'object',
       properties: {
@@ -275,6 +288,7 @@ export const ResponsiveDensity: Story = {
 
     return (
       <JsonSchemaFormRenderer
+        form={form}
         components={{
           fields: defaultComponentRegistry,
         }}

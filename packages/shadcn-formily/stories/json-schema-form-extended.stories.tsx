@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import { Form } from '../src';
+import { createForm, Form } from '../src';
 import { JsonSchemaFormExtended } from '../src/components/json-schema-form-renderer';
 import { handleUpload } from './utils/file-upload';
 import { iconProviders } from './utils/icon-providers';
@@ -26,6 +26,7 @@ type Story = StoryObj<typeof Form>;
 
 export const ExtendedForm: Story = {
   render: () => {
+    const form = createForm();
     const schema = {
       type: 'object',
       properties: {
@@ -85,6 +86,7 @@ export const ExtendedForm: Story = {
 
     return (
       <JsonSchemaFormExtended
+        form={form}
         settings={{
           fileUpload: {
             onUpload: handleUpload,
@@ -101,6 +103,7 @@ export const ExtendedForm: Story = {
 
 export const FormWithAdvancedComponents: Story = {
   render: () => {
+    const form = createForm();
     const schema = {
       type: 'object',
       properties: {
@@ -148,6 +151,7 @@ export const FormWithAdvancedComponents: Story = {
 
     return (
       <JsonSchemaFormExtended
+        form={form}
         settings={{
           fileUpload: {
             onUpload: handleUpload,
@@ -164,6 +168,7 @@ export const FormWithAdvancedComponents: Story = {
 
 export const CompleteForm: Story = {
   render: () => {
+    const form = createForm();
     const schema = {
       type: 'object',
       properties: {
@@ -258,6 +263,7 @@ export const CompleteForm: Story = {
 
     return (
       <JsonSchemaFormExtended
+        form={form}
         settings={{
           fileUpload: {
             onUpload: handleUpload,

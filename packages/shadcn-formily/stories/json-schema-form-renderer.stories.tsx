@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import { defaultComponentRegistry, Form } from '../src';
+import { createForm, defaultComponentRegistry, Form } from '../src';
 import { JsonSchemaFormRenderer } from '../src/components/json-schema-form-renderer';
 
 const meta: Meta<typeof Form> = {
@@ -24,6 +24,7 @@ type Story = StoryObj<typeof Form>;
 
 export const BasicJsonSchemaForm: Story = {
   render: () => {
+    const form = createForm();
     const schema = {
       type: 'object',
       properties: {
@@ -59,6 +60,7 @@ export const BasicJsonSchemaForm: Story = {
 
     return (
       <JsonSchemaFormRenderer
+        form={form}
         components={{
           fields: defaultComponentRegistry,
         }}
@@ -70,6 +72,7 @@ export const BasicJsonSchemaForm: Story = {
 
 export const AdvancedJsonSchemaForm: Story = {
   render: () => {
+    const form = createForm();
     const schema = {
       type: 'object',
       properties: {
@@ -120,6 +123,7 @@ export const AdvancedJsonSchemaForm: Story = {
 
     return (
       <JsonSchemaFormRenderer
+        form={form}
         components={{
           fields: defaultComponentRegistry,
         }}
@@ -131,6 +135,7 @@ export const AdvancedJsonSchemaForm: Story = {
 
 export const NestedObjectsForm: Story = {
   render: () => {
+    const form = createForm();
     const schema = {
       type: 'object',
       properties: {
@@ -199,6 +204,7 @@ export const NestedObjectsForm: Story = {
 
     return (
       <JsonSchemaFormRenderer
+        form={form}
         components={{
           fields: defaultComponentRegistry,
         }}

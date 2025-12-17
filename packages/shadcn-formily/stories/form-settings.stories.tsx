@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ISchema } from '../src';
-import { JsonSchemaForm } from '../src';
+import { createForm, JsonSchemaForm } from '../src';
 
 const meta: Meta<typeof JsonSchemaForm> = {
   title: 'Formily/Form Settings',
@@ -27,6 +27,7 @@ export const JsonSchema: Story = {
     },
   },
   render: (args) => {
+    const form = createForm();
     const schema: ISchema = {
       type: 'object',
       properties: {
@@ -48,7 +49,7 @@ export const JsonSchema: Story = {
       },
     };
 
-    return <JsonSchemaForm {...args} schema={schema}></JsonSchemaForm>;
+    return <JsonSchemaForm {...args} schema={schema} form={form}></JsonSchemaForm>;
   },
 };
 
@@ -59,6 +60,7 @@ export const ShouldNotHaveLabel: Story = {
     },
   },
   render: (args) => {
+    const form = createForm();
     const schema: ISchema = {
       type: 'object',
       properties: {
@@ -80,6 +82,6 @@ export const ShouldNotHaveLabel: Story = {
       },
     };
 
-    return <JsonSchemaForm {...args} schema={schema}></JsonSchemaForm>;
+    return <JsonSchemaForm {...args} schema={schema} form={form}></JsonSchemaForm>;
   },
 };

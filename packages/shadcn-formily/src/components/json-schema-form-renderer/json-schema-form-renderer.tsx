@@ -2,7 +2,6 @@ import type { FormComponentRecord } from '../../types/form';
 import type { FormConfigProps } from '../context';
 
 import type { JsonSchemaFormRendererProps } from './types';
-import { createForm } from '@formily/core';
 import { createSchemaField } from '@formily/react';
 import { isDevelopment } from '@pixpilot/env/is-dev';
 import React, { useMemo } from 'react';
@@ -20,17 +19,9 @@ const JsonSchemaFormRenderer: React.FC<JsonSchemaFormRendererProps> = (props) =>
     children,
     settings: configProp,
     components: componentsProp,
-    values,
+    form,
     ...rest
   } = props;
-
-  const form = useMemo(
-    () =>
-      createForm({
-        values: values || {},
-      }),
-    [values],
-  );
 
   const formSchema = useMemo(() => {
     // Extract decorator mappings from fields for transformSchema

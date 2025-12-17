@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import { Form } from '../src';
+import { createForm, Form } from '../src';
 import { JsonSchemaForm } from '../src/components/json-schema-form-renderer';
 
 const meta: Meta<typeof Form> = {
@@ -24,6 +24,7 @@ type Story = StoryObj<typeof Form>;
 
 export const DefaultForm: Story = {
   render: () => {
+    const form = createForm();
     const schema = {
       type: 'object',
       properties: {
@@ -81,12 +82,13 @@ export const DefaultForm: Story = {
       },
     };
 
-    return <JsonSchemaForm schema={schema}></JsonSchemaForm>;
+    return <JsonSchemaForm form={form} schema={schema}></JsonSchemaForm>;
   },
 };
 
 export const FormWithArrays: Story = {
   render: () => {
+    const form = createForm();
     const schema = {
       type: 'object',
       properties: {
@@ -140,12 +142,13 @@ export const FormWithArrays: Story = {
       },
     };
 
-    return <JsonSchemaForm schema={schema}></JsonSchemaForm>;
+    return <JsonSchemaForm form={form} schema={schema}></JsonSchemaForm>;
   },
 };
 
 export const ContactForm: Story = {
   render: () => {
+    const form = createForm();
     const schema = {
       type: 'object',
       properties: {
@@ -207,6 +210,6 @@ export const ContactForm: Story = {
       },
     };
 
-    return <JsonSchemaForm schema={schema}></JsonSchemaForm>;
+    return <JsonSchemaForm form={form} schema={schema}></JsonSchemaForm>;
   },
 };

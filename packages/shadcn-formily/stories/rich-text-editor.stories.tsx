@@ -61,6 +61,7 @@ export const Declarative: Story = {
 
 export const JsonSchemaForm: Story = {
   render: () => {
+    const form = createForm();
     const schema: ISchema = {
       type: 'object',
       properties: {
@@ -75,6 +76,7 @@ export const JsonSchemaForm: Story = {
 
     return (
       <JsonSchemaFormRenderer
+        form={form}
         schema={schema}
         components={{
           fields: {
@@ -93,6 +95,7 @@ export const JsonSchemaForm: Story = {
 
 export const withFormConfig: Story = {
   render: () => {
+    const form = createForm();
     const schema: ISchema = {
       type: 'object',
       properties: {
@@ -107,6 +110,7 @@ export const withFormConfig: Story = {
 
     return (
       <JsonSchemaFormRenderer
+        form={form}
         schema={schema}
         components={{
           fields: {
@@ -137,6 +141,7 @@ export const withFormConfig: Story = {
 
 export const withFieldConfig: Story = {
   render: () => {
+    const form = createForm();
     const schema: ISchema = {
       type: 'object',
       properties: {
@@ -161,6 +166,7 @@ export const withFieldConfig: Story = {
 
     return (
       <JsonSchemaFormRenderer
+        form={form}
         schema={schema}
         components={{
           fields: {

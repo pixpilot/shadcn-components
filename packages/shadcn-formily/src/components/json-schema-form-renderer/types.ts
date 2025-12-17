@@ -1,5 +1,5 @@
 import type { ISchema } from '@formily/react';
-import type { Form } from '../form';
+import type { Form as FormilyForm } from '../form';
 
 export interface JsonSchemaFormComponent {
   component: React.ComponentType<any>;
@@ -11,13 +11,11 @@ export interface JsonSchemaFormComponents {
   decorators?: Record<string, React.ComponentType<any>>;
 }
 
-export interface JsonSchemaFormRendererProps extends Omit<
-  React.ComponentProps<typeof Form>,
-  'form'
+export interface JsonSchemaFormRendererProps extends React.ComponentProps<
+  typeof FormilyForm
 > {
   schema: ISchema;
   children?: React.ReactNode;
-  values?: Record<string, any>;
   components: Partial<JsonSchemaFormComponents>;
 }
 

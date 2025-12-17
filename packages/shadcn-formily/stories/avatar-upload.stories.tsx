@@ -159,6 +159,17 @@ export const WithSize: Story = {
 
 export const WithValue: Story = {
   render: () => {
+    const form = createForm({
+      initialValues: {
+        profilePicture: {
+          name: 'avatar.png',
+          size: 1024,
+          type: 'image/png',
+          url: `${window.location.origin}/avatar.png`,
+          lastModified: 1625247600000,
+        },
+      },
+    });
     const schema = {
       type: 'object',
       properties: {
@@ -193,16 +204,8 @@ export const WithValue: Story = {
 
     return (
       <JsonSchemaFormExtended
+        form={form}
         schema={schema}
-        values={{
-          profilePicture: {
-            name: 'avatar.png',
-            size: 1024,
-            type: 'image/png',
-            url: `${window.location.origin}/avatar.png`,
-            lastModified: 1625247600000,
-          },
-        }}
         settings={{
           fileUpload: {
             onUpload: handleUpload,

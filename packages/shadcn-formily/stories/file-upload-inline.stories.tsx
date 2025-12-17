@@ -5,9 +5,11 @@ import {
   createForm,
   FileUploadInline,
   Form,
+  FormItem,
   JsonSchemaFormRenderer,
   SchemaFieldExtended,
 } from '../src';
+import { ObjectContainer } from '../src/components/object-container';
 import { handleUpload } from './utils/file-upload';
 
 const meta: Meta<typeof Form> = {
@@ -362,6 +364,7 @@ export const WithFormFieldSetting: Story = {
 
 export const WithJsonSchemaFormRenderer: Story = {
   render: () => {
+    const form = createForm();
     const schema = {
       type: 'object',
       properties: {
@@ -378,10 +381,17 @@ export const WithJsonSchemaFormRenderer: Story = {
 
     return (
       <JsonSchemaFormRenderer
+        form={form}
         components={{
           fields: {
             FileUploadInline: {
               component: FileUploadInline,
+            },
+            ObjectContainer: {
+              component: ObjectContainer,
+            },
+            FormItem: {
+              component: FormItem,
             },
           },
         }}
