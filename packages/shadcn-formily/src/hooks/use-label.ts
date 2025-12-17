@@ -18,7 +18,7 @@ export function useLabel(label?: SyncReactNode): SyncReactNode | null {
   const config = useFormConfig();
   const { useFieldNameAsLabel } = config.label || {};
 
-  if (!shouldHaveLabel(label) || !shouldHaveLabel(title)) {
+  if (!shouldHaveLabel(label) || !shouldHaveLabel(title) || title === '') {
     return null;
   }
 
