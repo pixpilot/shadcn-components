@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.6.0
+
+### Minor Changes
+
+- add Formily-connected AvatarUpload component
+
 ## 0.5.1
 
 ### Patch Changes
