@@ -1,5 +1,14 @@
 # @pixpilot/formily-shadcn
 
+## 0.14.1
+
+### Patch Changes
+
+- update buttonText handling for file upload
+- Updated dependencies
+- Updated dependencies
+  - @pixpilot/shadcn-ui@0.9.0
+
 ## 0.14.0
 
 ### Minor Changes
