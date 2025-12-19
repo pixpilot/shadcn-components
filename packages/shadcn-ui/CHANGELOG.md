@@ -1,5 +1,15 @@
 # @pixpilot/shadcn-ui
 
+## 0.9.0
+
+### Minor Changes
+
+- enhanced schema fields
+
+### Patch Changes
+
+- update buttonText handling for file upload
+
 ## 0.8.0
 
 ### Minor Changes
