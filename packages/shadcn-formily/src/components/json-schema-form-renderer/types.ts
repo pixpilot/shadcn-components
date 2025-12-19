@@ -16,7 +16,7 @@ export interface JsonSchemaFormRendererProps extends React.ComponentProps<
 > {
   schema: ISchema;
   children?: React.ReactNode;
-  components: Partial<JsonSchemaFormComponents>;
+  components?: Partial<JsonSchemaFormComponents>;
 }
 
 export interface JsonSchemaFormProps extends Omit<

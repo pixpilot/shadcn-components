@@ -1,5 +1,6 @@
 import type { JsonSchemaFormProps } from './types';
 import React from 'react';
+import { useMergedSchemaComponents } from '../../hooks/use-merged-schema-components';
 import { extendedComponentRegistry } from '../schema-field/schema-field-extended';
 import { JsonSchemaFormRenderer } from './json-schema-form-renderer';
 
@@ -12,15 +13,10 @@ import { JsonSchemaFormRenderer } from './json-schema-form-renderer';
 export const JsonSchemaFormExtended: React.FC<JsonSchemaFormProps> = (props) => {
   const { components, ...rest } = props;
 
-  const mergedComponents = React.useMemo(() => {
-    return {
-      fields: {
-        ...extendedComponentRegistry,
-        ...(components?.fields || {}),
-      },
-      decorators: components?.decorators,
-    };
-  }, [components?.decorators, components?.fields]);
+  const mergedComponents = useMergedSchemaComponents(
+    extendedComponentRegistry,
+    components,
+  );
 
   return <JsonSchemaFormRenderer {...rest} components={mergedComponents} />;
 };
