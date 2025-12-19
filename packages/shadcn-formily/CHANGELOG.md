@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.14.2
+
+### Patch Changes
+
+- enhanced the FormItem component to determine required fields based on schema
+
 ## 0.14.1
 
 ### Patch Changes
