@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.8.0
+
+### Minor Changes
+
+- add Layout, LayoutHeader, LayoutFooter, and LayoutMain components
+
 ## 0.7.0
 
 ### Minor Changes
