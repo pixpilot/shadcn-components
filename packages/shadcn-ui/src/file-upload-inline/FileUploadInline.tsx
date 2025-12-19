@@ -26,12 +26,15 @@ export function FileUploadInline(props: FileUploadInlineProps) {
     className,
     disabled = defaultOptions.disabled,
     multiple = defaultOptions.multiple,
-    buttonText = 'Click to upload files',
+    buttonText: buttonTextProp,
     showIcon = defaultOptions.showIcon,
     onAccept,
     preventDuplicates,
     ...rest
   } = props;
+
+  const buttonText =
+    buttonTextProp ?? (multiple ? 'Click to upload files' : 'Click to upload a file');
 
   const {
     handleAccept,
