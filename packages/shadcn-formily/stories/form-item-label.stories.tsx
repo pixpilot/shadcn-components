@@ -127,6 +127,65 @@ export const RequiredLabel: Story = {
   },
 };
 
+export const RequiredArrayLabel: Story = {
+  render: () => {
+    const form = createForm();
+
+    const schema = {
+      type: 'object',
+      required: ['firstName', 'lastName'],
+      properties: {
+        firstName: {
+          type: 'string',
+          title: 'First Name',
+          'x-decorator': 'FormItem',
+          'x-component': 'Input',
+          'x-component-props': {
+            placeholder: 'Enter your first name',
+          },
+        },
+        lastName: {
+          type: 'string',
+          title: 'Last Name',
+          'x-decorator': 'FormItem',
+          'x-component': 'Input',
+          'x-component-props': {
+            placeholder: 'Enter your last name',
+          },
+        },
+        bio: {
+          type: 'string',
+          title: 'Bio',
+          'x-decorator': 'FormItem',
+          'x-component': 'Textarea',
+          'x-component-props': {
+            placeholder: 'Tell us about yourself (optional)',
+          },
+        },
+      },
+    };
+
+    return (
+      <Form
+        form={form}
+        className="w-[400px]"
+        onSubmit={(values) => {
+          console.log('Form submitted:', values);
+          alert(JSON.stringify(values, null, INDENT_SIZE));
+        }}
+      >
+        <SchemaField schema={schema} />
+        <button
+          type="submit"
+          className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+        >
+          Submit
+        </button>
+      </Form>
+    );
+  },
+};
+
 export const LabelPlacementTop: Story = {
   render: () => {
     const form = createForm();

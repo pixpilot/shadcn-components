@@ -1,6 +1,6 @@
 import type { SyncReactNode } from '../../types';
 import { isVoidField } from '@formily/core';
-import { connect, mapProps } from '@formily/react';
+import { connect, mapProps, useFieldSchema } from '@formily/react';
 
 import { BaseFormItem } from './base-form-item';
 
@@ -11,6 +11,8 @@ import { BaseFormItem } from './base-form-item';
 export const FormItem = connect(
   BaseFormItem,
   mapProps((props, field) => {
+    const schema = useFieldSchema();
+
     if (isVoidField(field)) {
       return {
         label: (field.title ?? props.label) as SyncReactNode,
@@ -37,6 +39,14 @@ export const FormItem = connect(
     };
 
     const takeAsterisk = (): boolean => {
+      if (
+        schema.parent &&
+        Array.isArray(schema.parent.required) &&
+        schema.parent.required.includes(schema.name as string)
+      ) {
+        return true;
+      }
+
       if (field.required && field.pattern !== 'readPretty') {
         return true;
       }
