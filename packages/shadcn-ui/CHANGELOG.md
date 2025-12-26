@@ -1,5 +1,16 @@
 # @pixpilot/shadcn-ui
 
+## 0.10.0
+
+### Minor Changes
+
+- add Tabs component with variants and stories
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn@0.5.0
+
 ## 0.9.1
 
 ### Patch Changes

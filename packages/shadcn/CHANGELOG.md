@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 0.5.0
+
+### Minor Changes
+
+- add Tabs component with variants and stories
+
 ## 0.4.0
 
 ### Minor Changes

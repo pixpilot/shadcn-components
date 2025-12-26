@@ -1,7 +1,7 @@
 {
   "name": "@pixpilot/shadcn",
   "type": "module",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "packageManager": "pnpm@10.25.0",
   "description": "A collection of reusable UI components built with shadcn/ui and Radix UI primitives.",
   "author": "m.doaie <m.doaie@hotmail.com>",
