@@ -1,7 +1,7 @@
 {
   "name": "@pixpilot/shadcn-auth",
   "type": "module",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "packageManager": "pnpm@10.25.0",
   "description": "Authentication forms and components built with shadcn/ui.",
   "author": "m.doaie <m.doaie@hotmail.com>",
