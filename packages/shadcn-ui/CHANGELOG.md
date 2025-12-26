@@ -1,5 +1,12 @@
 # @pixpilot/shadcn-ui
 
+## 0.11.0
+
+### Minor Changes
+
+- add ScaledPreview component with customizable scaling
+- introduce TabsContext for variant management
+
 ## 0.10.0
 
 ### Minor Changes
