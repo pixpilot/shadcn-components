@@ -1,4 +1,5 @@
 {
+  "tailwindCSS.experimental.configFile": ".vscode/tailwind.extention.config.cjs",
   "editor.formatOnSave": true,
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
