@@ -11,7 +11,7 @@ export interface TabsListProps extends Omit<
 }
 
 const TabsList: React.FC<TabsListProps> = (props) => {
-  const { variant, children, className, ...rest } = props;
+  const { variant, children, ...rest } = props;
 
   // Memoize the context value to avoid recreating the object on every render
   const contextValue = React.useMemo(() => ({ variant }), [variant]);
@@ -24,7 +24,7 @@ const TabsList: React.FC<TabsListProps> = (props) => {
           {...rest}
           className={cn(
             'bg-transparent p-0 h-auto rounded-none border-b border-border w-full',
-            className,
+            rest.className,
           )}
         >
           {children}
