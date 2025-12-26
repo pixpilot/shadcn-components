@@ -1,13 +1,16 @@
-import type { BaseTabsTriggerProps, TabsTriggerVariant } from './types';
+import type { BaseTabsTriggerProps, TabsVariant } from './types';
 import { TabsTrigger as BaseTabsTrigger, cn } from '@pixpilot/shadcn';
 import React from 'react';
+import { useTabsContext } from './TabsContext';
 
 export interface TabsTriggerProps extends Omit<BaseTabsTriggerProps, 'variant'> {
-  variant?: TabsTriggerVariant;
+  variant?: TabsVariant;
 }
 
 const TabsTrigger: React.FC<TabsTriggerProps> = (props) => {
-  const { variant, ...rest } = props;
+  const { variant: propVariant, ...rest } = props;
+  const context = useTabsContext();
+  const variant = propVariant || context?.variant;
 
   const underlineClasses = cn(
     'data-[state=active]:border-primary m-0 mb-[-1px] rounded-none border-0 border-b-2 bg-transparent py-2 px-3 shadow-none',

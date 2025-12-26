@@ -206,15 +206,9 @@ export const Outline: Story = {
     children: (
       <>
         <TabsList variant="outline">
-          <TabsTrigger variant="outline" value="tab1">
-            Overview
-          </TabsTrigger>
-          <TabsTrigger variant="outline" value="tab2">
-            Analytics
-          </TabsTrigger>
-          <TabsTrigger variant="outline" value="tab3">
-            Settings
-          </TabsTrigger>
+          <TabsTrigger value="tab1">Overview</TabsTrigger>
+          <TabsTrigger value="tab2">Analytics</TabsTrigger>
+          <TabsTrigger value="tab3">Settings</TabsTrigger>
         </TabsList>
         <TabsContent value="tab1">
           <div className="p-4">
@@ -248,15 +242,9 @@ export const Ghost: Story = {
     children: (
       <>
         <TabsList variant="ghost">
-          <TabsTrigger variant="ghost" value="tab1">
-            Dashboard
-          </TabsTrigger>
-          <TabsTrigger variant="ghost" value="tab2">
-            Projects
-          </TabsTrigger>
-          <TabsTrigger variant="ghost" value="tab3">
-            Team
-          </TabsTrigger>
+          <TabsTrigger value="tab1">Dashboard</TabsTrigger>
+          <TabsTrigger value="tab2">Projects</TabsTrigger>
+          <TabsTrigger value="tab3">Team</TabsTrigger>
         </TabsList>
         <TabsContent value="tab1">
           <div className="p-4">
@@ -290,15 +278,9 @@ export const Pill: Story = {
     children: (
       <>
         <TabsList variant="pill">
-          <TabsTrigger variant="pill" value="tab1">
-            Home
-          </TabsTrigger>
-          <TabsTrigger variant="pill" value="tab2">
-            About
-          </TabsTrigger>
-          <TabsTrigger variant="pill" value="tab3">
-            Contact
-          </TabsTrigger>
+          <TabsTrigger value="tab1">Home</TabsTrigger>
+          <TabsTrigger value="tab2">About</TabsTrigger>
+          <TabsTrigger value="tab3">Contact</TabsTrigger>
         </TabsList>
         <TabsContent value="tab1">
           <div className="p-4">
