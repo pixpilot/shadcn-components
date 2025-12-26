@@ -7,7 +7,7 @@
   "author": "m.doaie <m.doaie@hotmail.com>",
   "license": "MIT",
   "scripts": {
-    "storybook": "storybook dev -p 6006 --no-open",
+    "storybook": "storybook dev -p 6007 --no-open",
     "build-storybook": "storybook build",
     "clean": "git clean -xdf .cache storybook-static",
     "clean:all": "git clean -xdf .cache storybook-static node_modules"

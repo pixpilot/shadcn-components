@@ -28,6 +28,7 @@ export * from './rich-text-editor';
 export * from './Select';
 export * from './Slider';
 export * from './Slider';
+export * from './tabs';
 export * from './tags-input';
 export * from './theme-provider';
 export * from './ThemeToggle';
