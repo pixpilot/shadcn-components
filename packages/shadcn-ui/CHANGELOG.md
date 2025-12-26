@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.9.1
+
+### Patch Changes
+
+- enhance tooltip functionality for disabled buttons
+
 ## 0.9.0
 
 ### Minor Changes
