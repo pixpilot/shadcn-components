@@ -1,5 +1,5 @@
 import type { TabsVariant } from './types';
-import { TabsList as BaseTabsList } from '@pixpilot/shadcn';
+import { TabsList as BaseTabsList, cn } from '@pixpilot/shadcn';
 import React from 'react';
 import { TabsContext } from './TabsContext';
 
@@ -11,7 +11,7 @@ export interface TabsListProps extends Omit<
 }
 
 const TabsList: React.FC<TabsListProps> = (props) => {
-  const { variant, children, ...rest } = props;
+  const { variant, children, className, ...rest } = props;
 
   // Memoize the context value to avoid recreating the object on every render
   const contextValue = React.useMemo(() => ({ variant }), [variant]);
@@ -22,7 +22,10 @@ const TabsList: React.FC<TabsListProps> = (props) => {
       <TabsContext value={contextValue}>
         <BaseTabsList
           {...rest}
-          className="bg-transparent p-0 h-auto rounded-none border-b border-border"
+          className={cn(
+            'bg-transparent p-0 h-auto rounded-none border-b border-border w-full',
+            className,
+          )}
         >
           {children}
         </BaseTabsList>
