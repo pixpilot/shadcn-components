@@ -1,3 +1,4 @@
+import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 
 /**
@@ -8,7 +9,13 @@ import React from 'react';
 export function AbsoluteFill(
   props: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> },
 ) {
-  const { ref, ...rest } = props;
-  return <div ref={ref} className="absolute top-0 right-0 bottom-0 left-0" {...rest} />;
+  const { ref, className, ...rest } = props;
+  return (
+    <div
+      ref={ref}
+      {...rest}
+      className={cn('absolute top-0 right-0 bottom-0 left-0', className)}
+    />
+  );
 }
 AbsoluteFill.displayName = 'StretchedElement';
