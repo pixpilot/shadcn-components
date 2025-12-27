@@ -13,16 +13,34 @@ const SliderBase: React.FC<SliderProps> = (props) => {
  */
 export const Slider = connect(
   SliderBase,
-  mapProps((props, field) => {
-    // eslint-disable-next-line ts/no-unsafe-assignment
-    const fieldValue = (field as Field).value;
-    const value = typeof fieldValue === 'number' ? [fieldValue] : [0];
-    return {
-      ...props,
-      value,
-      onValueChange: (newValue: number[]) => {
-        (field as Field).setValue(newValue[0]);
-      },
-    };
-  }),
+  mapProps(
+    {
+      value: true,
+      onInput: true,
+    },
+    (props, field) => {
+      // eslint-disable-next-line ts/no-unsafe-assignment
+      const fieldValue = (field as Field).value;
+      let value: number[];
+      if (Array.isArray(fieldValue)) {
+        value = fieldValue as number[];
+      } else if (typeof fieldValue === 'number') {
+        value = [fieldValue];
+      } else {
+        value = [0];
+      }
+
+      return {
+        ...props,
+        value,
+        onValueChange: (newValue: number[]) => {
+          if (Array.isArray((field as Field).value)) {
+            (field as Field).onInput(newValue).catch(() => {});
+          } else {
+            (field as Field).onInput(newValue[0]).catch(() => {});
+          }
+        },
+      };
+    },
+  ),
 );
