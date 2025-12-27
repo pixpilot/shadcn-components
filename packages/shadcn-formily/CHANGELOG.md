@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.15.0
+
+### Minor Changes
+
+- enhance Slider component with improved value handling
+
 ## 0.14.6
 
 ### Patch Changes
