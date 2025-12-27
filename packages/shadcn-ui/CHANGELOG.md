@@ -1,5 +1,15 @@
 # @pixpilot/shadcn-ui
 
+## 0.12.0
+
+### Minor Changes
+
+- enhance TabsList with customizable className support
+
+### Patch Changes
+
+- correct className handling in TabsList component
+
 ## 0.11.0
 
 ### Minor Changes
