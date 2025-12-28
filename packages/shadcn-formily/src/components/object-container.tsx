@@ -69,7 +69,9 @@ export const ObjectContainer: React.FC<ObjectContainerProps> = ({
   return (
     <Card
       {...rest}
+      slot="form-object-container"
       className={cn(
+        'form-object-container',
         'bg-transparent',
         gapClass,
         cardPaddingClass,
