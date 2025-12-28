@@ -13,6 +13,8 @@ export * from './Button';
 export * from './circle-loader';
 export * from './CloseButtonAbsolute';
 export * from './CloseButtonRounded';
+export * from './ColorPicker';
+export * from './ColorPickerBase';
 export * from './Combobox';
 export * from './confirmation-dialog';
 export * from './ContentCard';

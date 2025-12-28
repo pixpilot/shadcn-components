@@ -19,6 +19,9 @@ const config = [
       'jsx-a11y': jsxA11yPlugin,
     },
     rules: {
+      'regexp/no-unused-capturing-group': 'off',
+      'require-unicode-regexp': 'off',
+      'prefer-named-capture-group': 'off',
       'ts/no-use-before-define': 'warn',
       'ts/strict-boolean-expressions': 'warn',
       'jsx-a11y/anchor-has-content': 'warn',

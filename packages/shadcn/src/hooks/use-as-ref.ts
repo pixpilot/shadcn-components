@@ -1,0 +1,16 @@
+import * as React from 'react';
+
+import { useIsomorphicLayoutEffect } from '@/hooks/use-isomorphic-layout-effect';
+
+// eslint-disable-next-line ts/explicit-module-boundary-types
+function useAsRef<T>(props: T) {
+  const ref = React.useRef<T>(props);
+
+  useIsomorphicLayoutEffect(() => {
+    ref.current = props;
+  });
+
+  return ref;
+}
+
+export { useAsRef };
