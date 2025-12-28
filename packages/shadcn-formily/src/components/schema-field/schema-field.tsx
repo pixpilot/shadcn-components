@@ -7,6 +7,7 @@ import { TagsInput } from '@pixpilot/shadcn-ui';
 import { useFormSchema } from '../../hooks/use-form-schema';
 import { useMergedSchemaComponents } from '../../hooks/use-merged-schema-components';
 import { extractComponents } from '../../utils/extract-components';
+import { ColorPicker } from '../color-picker';
 import { Combobox } from '../combobox';
 import { Slider } from '../slider';
 import { TagsInputInLine } from '../tags-input-inline';
@@ -18,6 +19,7 @@ export const defaultComponentRegistry = {
   TagsInput: { component: TagsInput, decorator: 'FormItem' },
   TagsInputInLine: { component: TagsInputInLine, decorator: 'FormItem' },
   Slider: { component: Slider, decorator: 'FormItem' },
+  ColorPicker: { component: ColorPicker, decorator: 'FormItem' },
 } satisfies Record<string, FormComponentConfig>;
 
 export const defaultComponents = extractComponents(defaultComponentRegistry);
