@@ -67,3 +67,26 @@ if (globalThis.DataTransfer === undefined) {
 
   globalThis.DataTransfer = DataTransfer as typeof globalThis.DataTransfer;
 }
+
+/*
+ * Polyfill for ResizeObserver for jsdom testing.
+ * Radix Slider relies on it via @radix-ui/react-use-size.
+ */
+if (globalThis.ResizeObserver === undefined) {
+  class ResizeObserver {
+    observe() {
+      // no-op
+    }
+
+    unobserve() {
+      // no-op
+    }
+
+    disconnect() {
+      // no-op
+    }
+  }
+
+  globalThis.ResizeObserver =
+    ResizeObserver as unknown as typeof globalThis.ResizeObserver;
+}

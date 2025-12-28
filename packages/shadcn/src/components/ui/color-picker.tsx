@@ -97,6 +97,16 @@ function rgbToHex(color: ColorValue): string {
   return `#${toHex(color.r)}${toHex(color.g)}${toHex(color.b)}`;
 }
 
+function rgbToHexWithAlpha(color: ColorValue): string {
+  const toHex = (n: number) => {
+    const hex = Math.round(n).toString(16);
+    return hex.length === 1 ? `0${hex}` : hex;
+  };
+
+  const alphaByte = Math.min(255, Math.max(0, Math.round((color.a ?? 1) * 255)));
+  return `#${toHex(color.r)}${toHex(color.g)}${toHex(color.b)}${toHex(alphaByte)}`;
+}
+
 function rgbToHsv(color: ColorValue): HSVColorValue {
   const r = color.r / 255;
   const g = color.g / 255;
@@ -204,7 +214,9 @@ function hsvToRgb(hsv: HSVColorValue): ColorValue {
 function colorToString(color: ColorValue, format: ColorFormat = 'hex'): string {
   switch (format) {
     case 'hex':
-      return rgbToHex(color);
+      // In hex format we still need a stable round-trip for alpha changes in controlled mode.
+      // Emit 8-digit hex when alpha is not 1.
+      return color.a < 1 ? rgbToHexWithAlpha(color) : rgbToHex(color);
     case 'rgb':
       return color.a < 1
         ? `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
@@ -313,9 +325,33 @@ function parseColorString(value: string): ColorValue | null {
 
   // Parse hex colors
   if (trimmed.startsWith('#')) {
-    const hexMatch = trimmed.match(/^#([a-f0-9]{3}|[a-f0-9]{6})$/i);
+    const hexMatch = trimmed.match(
+      /^#([a-f0-9]{3}|[a-f0-9]{4}|[a-f0-9]{6}|[a-f0-9]{8})$/i,
+    );
     if (hexMatch) {
-      return hexToRgb(trimmed);
+      const hex = (hexMatch[1] ?? '').toLowerCase();
+
+      // #RGB / #RGBA
+      if (hex.length === 3 || hex.length === 4) {
+        const r = Number.parseInt(hex[0] ? `${hex[0]}${hex[0]}` : '00', 16);
+        const g = Number.parseInt(hex[1] ? `${hex[1]}${hex[1]}` : '00', 16);
+        const b = Number.parseInt(hex[2] ? `${hex[2]}${hex[2]}` : '00', 16);
+        const a =
+          hex.length === 4
+            ? Number.parseInt(hex[3] ? `${hex[3]}${hex[3]}` : 'ff', 16) / 255
+            : 1;
+        return { r, g, b, a };
+      }
+
+      // #RRGGBB / #RRGGBBAA
+      if (hex.length === 6 || hex.length === 8) {
+        const r = Number.parseInt(hex.slice(0, 2) || '00', 16);
+        const g = Number.parseInt(hex.slice(2, 4) || '00', 16);
+        const b = Number.parseInt(hex.slice(4, 6) || '00', 16);
+        const a =
+          hex.length === 8 ? Number.parseInt(hex.slice(6, 8) || 'ff', 16) / 255 : 1;
+        return { r, g, b, a };
+      }
     }
   }
 
@@ -572,7 +608,16 @@ function ColorPicker(props: ColorPickerProps) {
       syncFromValueProp: (value: string) => {
         const currentState = stateRef.current;
         const parsed = parseColorString(value);
-        const nextColor = parsed || { r: 0, g: 0, b: 0, a: currentState.color.a };
+        let color = parsed || { r: 0, g: 0, b: 0, a: currentState.color.a };
+        if (parsed && typeof currentState.color.a === 'number') {
+          const trimmed = value.trim().toLowerCase();
+          const isHexWithoutAlpha =
+            trimmed.startsWith('#') && (trimmed.length === 4 || trimmed.length === 7);
+          if (isHexWithoutAlpha && parsed.a === 1 && currentState.color.a !== 1) {
+            color = { ...parsed, a: currentState.color.a };
+          }
+        }
+        const nextColor = color;
         const nextHsv = rgbToHsv(nextColor);
 
         const didChangeColor = !areColorsEqual(currentState.color, nextColor);
@@ -1295,7 +1340,12 @@ function HexInput(props: FormatInputProps) {
       const { value } = event.target;
       const parsedColor = parseColorString(value);
       if (parsedColor) {
-        onColorChange({ ...parsedColor, a: color?.a ?? 1 });
+        const trimmed = value.trim().toLowerCase();
+        const isHexWithoutAlpha =
+          trimmed.startsWith('#') && (trimmed.length === 4 || trimmed.length === 7);
+        onColorChange(
+          isHexWithoutAlpha ? { ...parsedColor, a: color?.a ?? 1 } : parsedColor,
+        );
       }
     },
     [color, onColorChange],
