@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.13.0
+
+### Minor Changes
+
+- adds ColorPicker component
+
 ## 0.12.0
 
 ### Minor Changes
