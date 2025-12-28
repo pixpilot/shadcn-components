@@ -4,7 +4,8 @@ import { PaletteButton } from './PaletteButton';
 export const PaletteSwatch: React.FC<{
   color?: string;
   onSelect?: (color: string) => void;
-}> = ({ color, onSelect }) => {
+  className?: string;
+}> = ({ color, onSelect, className }) => {
   const handleClick = useCallback(() => {
     if (onSelect) {
       onSelect(color ?? 'transparent');
@@ -22,5 +23,5 @@ export const PaletteSwatch: React.FC<{
       }
     : { backgroundColor: color };
 
-  return <PaletteButton style={style} onClick={handleClick} />;
+  return <PaletteButton style={style} className={className} onClick={handleClick} />;
 };

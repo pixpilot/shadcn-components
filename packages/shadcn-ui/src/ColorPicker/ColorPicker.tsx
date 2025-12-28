@@ -2,15 +2,25 @@
 
 import type { ColorPickerBaseProps } from '../ColorPickerBase';
 
-import { cn, InputGroup, InputGroupAddon, InputGroupInput } from '@pixpilot/shadcn';
+import {
+  cn,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+  InputGroupText,
+} from '@pixpilot/shadcn';
 
-import { ChevronDownIcon } from 'lucide-react';
+import { ChevronDownIcon, ChevronUpIcon } from 'lucide-react';
 import { ColorPickerBase } from '../ColorPickerBase';
 import { PaletteSwatch } from '../ColorPickerBase/PaletteSwatch';
 
 export interface ColorPickerProps extends Omit<ColorPickerBaseProps, 'children'> {
   variant?: 'button' | 'input';
   placeholder?: string;
+}
+
+function Swatch(props: { color: string | undefined }) {
+  return <PaletteSwatch color={props.color} className="rounded-sm" />;
 }
 
 const ColorPicker: React.FC<ColorPickerProps> = (props) => {
@@ -23,7 +33,7 @@ const ColorPicker: React.FC<ColorPickerProps> = (props) => {
           return (
             <InputGroup>
               <InputGroupAddon align="inline-start" className="pl-1">
-                <PaletteSwatch color={value} />
+                <Swatch color={value} />
               </InputGroupAddon>
               <InputGroupInput
                 value={value ?? ''}
@@ -45,18 +55,25 @@ const ColorPicker: React.FC<ColorPickerProps> = (props) => {
         }
 
         return (
-          <button
-            type="button"
+          <InputGroup
             className={cn(
-              'border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*="text-"])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-full items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 h-9',
+              'dark:hover:bg-input/50 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer',
             )}
           >
-            <div className="flex items-center gap-2">
-              <PaletteSwatch color={value} />
-              <span className="text-foreground">{value ?? placeholder}</span>
-            </div>
-            <ChevronDownIcon className="size-4 opacity-50" />
-          </button>
+            <InputGroupAddon align="inline-start" className="pl-1">
+              <Swatch color={value} />
+            </InputGroupAddon>
+            <InputGroupText className="flex-1 text-left text-foreground pl-2">
+              {value ?? placeholder}
+            </InputGroupText>
+            <InputGroupAddon align="inline-end" className="pr-1">
+              {isPickerOpen ? (
+                <ChevronUpIcon className="size-4 opacity-50" />
+              ) : (
+                <ChevronDownIcon className="size-4 opacity-50" />
+              )}
+            </InputGroupAddon>
+          </InputGroup>
         );
       }}
     </ColorPickerBase>
