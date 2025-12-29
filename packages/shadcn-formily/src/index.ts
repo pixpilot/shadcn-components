@@ -35,7 +35,7 @@ export { Row } from './components/row';
 export * from './components/schema-field';
 export { Select } from './components/select';
 export { Separator } from './components/separator';
-export { Slider } from './components/slider';
+export * from './components/slider';
 export { Switch } from './components/switch';
 export { TagsInputInLine } from './components/tags-input-inline';
 

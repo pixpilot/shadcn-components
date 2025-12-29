@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import { Slider } from '../src/Slider';
+import { Slider } from '../src/slider';
 
 /**
  * A customizable slider component for selecting values within a range.
@@ -51,6 +51,7 @@ type Story = StoryObj<typeof meta>;
 const DEFAULT_VALUE = 50;
 const RANGE_MIN = 25;
 const RANGE_MAX = 75;
+const DECIMAL_DEFAULT = 0.75;
 
 /**
  * Default slider with basic configuration
@@ -107,4 +108,16 @@ export const Vertical: Story = {
       </div>
     ),
   ],
+};
+
+/**
+ * Slider with decimal step for precise control
+ */
+export const DecimalStep: Story = {
+  args: {
+    defaultValue: [DECIMAL_DEFAULT],
+    min: 0,
+    max: 1,
+    step: 0.01,
+  },
 };

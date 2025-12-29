@@ -9,17 +9,18 @@ import { useMergedSchemaComponents } from '../../hooks/use-merged-schema-compone
 import { extractComponents } from '../../utils/extract-components';
 import { ColorPicker } from '../color-picker';
 import { Combobox } from '../combobox';
-import { Slider } from '../slider';
+import { Slider, SliderInput } from '../slider';
 import { TagsInputInLine } from '../tags-input-inline';
 import { basicComponentRegistry } from './schema-field-basics';
 
 export const defaultComponentRegistry = {
   ...basicComponentRegistry,
+  ColorPicker: { component: ColorPicker, decorator: 'FormItem' },
   Combobox: { component: Combobox, decorator: 'FormItem' },
+  Slider: { component: Slider, decorator: 'FormItem' },
+  SliderInput: { component: SliderInput, decorator: 'FormItem' },
   TagsInput: { component: TagsInput, decorator: 'FormItem' },
   TagsInputInLine: { component: TagsInputInLine, decorator: 'FormItem' },
-  Slider: { component: Slider, decorator: 'FormItem' },
-  ColorPicker: { component: ColorPicker, decorator: 'FormItem' },
 } satisfies Record<string, FormComponentConfig>;
 
 export const defaultComponents = extractComponents(defaultComponentRegistry);
