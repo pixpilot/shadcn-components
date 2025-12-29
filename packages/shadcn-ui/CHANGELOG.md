@@ -1,5 +1,13 @@
 # @pixpilot/shadcn-ui
 
+## 0.15.1
+
+### Patch Changes
+
+- fix npm installation issue
+- Updated dependencies [82285a5]
+  - @pixpilot/shadcn@0.6.1
+
 ## 0.15.0
 
 ### Minor Changes

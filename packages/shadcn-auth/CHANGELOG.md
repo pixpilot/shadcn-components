@@ -1,5 +1,15 @@
 # @pixpilot/shadcn-auth
 
+## 0.1.13
+
+### Patch Changes
+
+- 82285a5: update pnpm lock file
+- Updated dependencies
+- Updated dependencies [82285a5]
+  - @pixpilot/shadcn-ui@0.15.1
+  - @pixpilot/shadcn@0.6.1
+
 ## 0.1.12
 
 ### Patch Changes

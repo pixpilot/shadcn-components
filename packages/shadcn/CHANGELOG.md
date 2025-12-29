@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 0.6.1
+
+### Patch Changes
+
+- 82285a5: update pnpm lock file
+
 ## 0.6.0
 
 ### Minor Changes
