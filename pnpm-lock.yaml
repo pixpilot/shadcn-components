@@ -565,9 +565,6 @@ importers:
       '@iconify/react':
         specifier: catalog:prod
         version: 6.0.2(react@19.2.0)
-      '@internal/hooks':
-        specifier: workspace:*
-        version: link:../hooks
       '@pixpilot/hash':
         specifier: catalog:prod
         version: 0.0.0
@@ -611,6 +608,9 @@ importers:
       '@internal/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
+      '@internal/hooks':
+        specifier: workspace:*
+        version: link:../hooks
       '@internal/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
