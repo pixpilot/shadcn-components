@@ -1,5 +1,12 @@
 # @pixpilot/shadcn-ui
 
+## 0.14.0
+
+### Minor Changes
+
+- add ColorPicker component with Formily integration
+- add slot and className to Card component
+
 ## 0.13.0
 
 ### Minor Changes

@@ -1,5 +1,18 @@
 # @pixpilot/formily-shadcn
 
+## 0.16.0
+
+### Minor Changes
+
+- add WithButtonVariant story and enhance ColorPicker component
+- add slot and className to Card component
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+  - @pixpilot/shadcn-ui@0.14.0
+
 ## 0.15.1
 
 ### Patch Changes
