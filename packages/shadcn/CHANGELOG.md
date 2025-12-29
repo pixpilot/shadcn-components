@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 0.6.0
+
+### Minor Changes
+
+- enhance color parsing and alpha handling
+
 ## 0.5.0
 
 ### Minor Changes

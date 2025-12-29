@@ -1,5 +1,16 @@
 # @pixpilot/shadcn-ui
 
+## 0.15.0
+
+### Minor Changes
+
+- enhance color parsing and alpha handling
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn@0.6.0
+
 ## 0.14.0
 
 ### Minor Changes
