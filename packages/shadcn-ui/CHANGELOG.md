@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.16.0
+
+### Minor Changes
+
+- implement Slider and SliderInput components
+
 ## 0.15.1
 
 ### Patch Changes
