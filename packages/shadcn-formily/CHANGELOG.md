@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.17.0
+
+### Minor Changes
+
+- support minimum/maximum from schema for slider and number input
+
 ## 0.16.5
 
 ### Patch Changes
