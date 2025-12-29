@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.16.1
+
+### Patch Changes
+
+- update input prop type in SliderInput
+
 ## 0.16.0
 
 ### Minor Changes
