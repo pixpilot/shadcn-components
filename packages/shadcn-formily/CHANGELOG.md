@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.16.2
+
+### Patch Changes
+
+- update `lucide-react` and `@storybook/react` dependencies
+
 ## 0.16.1
 
 ### Patch Changes
