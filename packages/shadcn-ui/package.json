@@ -51,7 +51,6 @@
     "@iconify-json/fa": "catalog:prod",
     "@iconify-json/mdi": "catalog:prod",
     "@iconify/react": "catalog:prod",
-    "@internal/hooks": "workspace:*",
     "@pixpilot/hash": "catalog:prod",
     "@pixpilot/shadcn": "workspace:*",
     "@tailwindcss/typography": "^0.5.19",
@@ -68,6 +67,7 @@
   },
   "devDependencies": {
     "@internal/eslint-config": "workspace:*",
+    "@internal/hooks": "workspace:*",
     "@internal/prettier-config": "workspace:*",
     "@internal/tsconfig": "workspace:*",
     "@internal/tsdown-config": "workspace:*",
