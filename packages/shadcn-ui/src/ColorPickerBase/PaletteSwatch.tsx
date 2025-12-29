@@ -8,20 +8,14 @@ export const PaletteSwatch: React.FC<{
 }> = ({ color, onSelect, className }) => {
   const handleClick = useCallback(() => {
     if (onSelect) {
-      onSelect(color ?? 'transparent');
+      onSelect(color ?? 'rgb(0,0,0,0)');
     }
   }, [color, onSelect]);
 
-  const isTransparent = color == null || color === 'transparent';
-  const style = isTransparent
-    ? {
-        backgroundColor: 'transparent',
-        backgroundImage:
-          'linear-gradient(45deg, #ccc 25%, transparent 25%), linear-gradient(-45deg, #ccc 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ccc 75%), linear-gradient(-45deg, transparent 75%, #ccc 75%)',
-        backgroundSize: '4px 4px',
-        backgroundPosition: '0 0, 0 2px, 2px -2px, -2px 0px',
-      }
-    : { backgroundColor: color };
+  const style = {
+    backgroundImage: `linear-gradient(${color}, ${color}), repeating-conic-gradient(#ccc 0% 25%, #fff 0% 50%)`,
+    backgroundSize: 'auto, 8px 8px',
+  };
 
   return <PaletteButton style={style} className={className} onClick={handleClick} />;
 };

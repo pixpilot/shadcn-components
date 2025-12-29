@@ -4,6 +4,7 @@ import type { ColorPickerBaseProps } from '../ColorPickerBase';
 
 import {
   cn,
+  ColorPickerSwatch,
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
@@ -12,15 +13,19 @@ import {
 
 import { ChevronDownIcon, ChevronUpIcon } from 'lucide-react';
 import { ColorPickerBase } from '../ColorPickerBase';
-import { PaletteSwatch } from '../ColorPickerBase/PaletteSwatch';
 
 export interface ColorPickerProps extends Omit<ColorPickerBaseProps, 'children'> {
   variant?: 'button' | 'input';
   placeholder?: string;
 }
 
-function Swatch(props: { color: string | undefined }) {
-  return <PaletteSwatch color={props.color} className="rounded-sm" />;
+function Swatch(props: { color: string | undefined; className?: string }) {
+  return (
+    <ColorPickerSwatch
+      color={props.color}
+      className={cn('rounded-sm w-6.5 h-6.5 p-0 -ml-1 cursor-pointer', props.className)}
+    />
+  );
 }
 
 const ColorPicker: React.FC<ColorPickerProps> = (props) => {
@@ -32,7 +37,7 @@ const ColorPicker: React.FC<ColorPickerProps> = (props) => {
         if (variant === 'input') {
           return (
             <InputGroup>
-              <InputGroupAddon align="inline-start" className="pl-1">
+              <InputGroupAddon align="inline-start" className="pl-0">
                 <Swatch color={value} />
               </InputGroupAddon>
               <InputGroupInput
@@ -60,7 +65,7 @@ const ColorPicker: React.FC<ColorPickerProps> = (props) => {
               'dark:hover:bg-input/50 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer',
             )}
           >
-            <InputGroupAddon align="inline-start" className="pl-1">
+            <InputGroupAddon align="inline-start" className="pl-0">
               <Swatch color={value} />
             </InputGroupAddon>
             <InputGroupText className="flex-1 text-left text-foreground pl-2">

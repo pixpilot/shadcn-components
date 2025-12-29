@@ -1,14 +1,15 @@
 'use client';
 
 import type { ColorPickerBaseProps } from './types';
-import { useControlled } from '@internal/hooks';
 import { ColorPicker, ColorPickerTrigger } from '@pixpilot/shadcn';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { ColorPickerCompact } from './ColorPickerCompact';
 import { ColorPickerFull } from './ColorPickerFull';
+import { useColorPickerBaseSwatch } from './hooks/use-color-picker-base-swatch';
+import { useColorPickerBaseValue } from './hooks/use-color-picker-base-value';
 
 const commonColors = [
-  'transparent',
+  '#00000000', // Transparent
   '#000000', // Black
   '#FFFFFF', // White
   '#808080', // Gray
@@ -34,61 +35,30 @@ const ColorPickerBase: React.FC<ColorPickerBaseProps> = (props) => {
     onValueChange,
     layout = 'full',
     presetColors,
+    format,
+    defaultFormat = 'hex',
+    onFormatChange,
     children,
     ...rest
   } = props;
 
-  const [currentValue, setCurrentValue] = useControlled({
-    controlled: propValue,
-    default: DEFAULT_COLOR,
-    name: 'ColorPickerBase',
-    state: 'value',
+  const { currentValue, handleValueChange } = useColorPickerBaseValue({
+    value: propValue,
+    defaultValue: DEFAULT_COLOR,
+    onChange,
+    onValueChange,
   });
 
+  const { valueForPicker, handleFormatChange, handleSwatchSelect } =
+    useColorPickerBaseSwatch({
+      currentValue,
+      format,
+      defaultFormat,
+      onFormatChange,
+      handleValueChange,
+    });
+
   const [open, setOpen] = useState<boolean>(false);
-
-  /**
-   * Prevent "Maximum update depth exceeded" in controlled mode.
-   *
-   * The underlying @pixpilot/shadcn ColorPicker calls onValueChange inside a layout-effect
-   * when syncing a controlled 'value' prop (it calls both store.setColor() and store.setHsv(),
-   * each of which emits onValueChange). This can create a feedback loop if the parent
-   * re-renders and passes back the same normalized value, causing infinite re-renders
-   * during fast pointer moves.
-   *
-   * We guard against this by:
-   * - Ignoring onValueChange events that occur immediately after a prop change.
-   * - Deduping repeated notifications of the same value.
-   */
-  const isApplyingControlledValueRef = useRef(false);
-  const lastPropValueRef = useRef(propValue);
-  const lastNotifiedValueRef = useRef<string | undefined>(undefined);
-
-  if (propValue !== lastPropValueRef.current) {
-    lastPropValueRef.current = propValue;
-    isApplyingControlledValueRef.current = true;
-  }
-
-  useEffect(() => {
-    isApplyingControlledValueRef.current = false;
-  }, [propValue]);
-
-  const handleValueChange = useCallback(
-    (value: string) => {
-      if (isApplyingControlledValueRef.current) return;
-
-      if (lastNotifiedValueRef.current === value) {
-        setCurrentValue(value);
-        return;
-      }
-
-      setCurrentValue(value);
-      onChange?.(value);
-      onValueChange?.(value);
-      lastNotifiedValueRef.current = value;
-    },
-    [setCurrentValue, onChange, onValueChange],
-  );
 
   let colors = presetColors || commonColors;
 
@@ -103,7 +73,10 @@ const ColorPickerBase: React.FC<ColorPickerBaseProps> = (props) => {
   return (
     <ColorPicker
       {...rest}
-      value={currentValue}
+      format={format}
+      defaultFormat={defaultFormat}
+      onFormatChange={handleFormatChange}
+      value={valueForPicker}
       onValueChange={handleValueChange}
       onOpenChange={handleOpen}
     >
@@ -119,13 +92,13 @@ const ColorPickerBase: React.FC<ColorPickerBaseProps> = (props) => {
       </ColorPickerTrigger>
       {layout === 'compact' ? (
         <ColorPickerCompact
-          onValueChange={handleValueChange}
+          onValueChange={handleSwatchSelect}
           layout={layout}
           presetColors={colors}
         />
       ) : (
         <ColorPickerFull
-          onValueChange={handleValueChange}
+          onValueChange={handleSwatchSelect}
           layout={layout}
           presetColors={colors}
         />

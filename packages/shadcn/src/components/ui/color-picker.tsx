@@ -1692,6 +1692,11 @@ function HsbInput(props: HsbInputProps) {
   );
 }
 
+const colorUtils = {
+  colorToString,
+  parseColorString,
+};
+
 export {
   ColorPicker,
   ColorPickerAlphaSlider,
@@ -1705,6 +1710,8 @@ export {
   type ColorPickerProps,
   ColorPickerSwatch,
   ColorPickerTrigger,
+  colorUtils,
+
   //
   useStore as useColorPicker,
 };
