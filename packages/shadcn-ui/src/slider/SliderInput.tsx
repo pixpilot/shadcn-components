@@ -5,7 +5,7 @@ import { Slider as ShadcnSlider } from './Slider';
 
 export interface SliderInputProps extends React.ComponentProps<typeof ShadcnSlider> {
   showInput?: boolean;
-  input?: { className?: string };
+  input?: React.ComponentProps<'input'>;
   slider?: { className?: string };
 }
 
@@ -83,15 +83,15 @@ const SliderInput: React.FC<SliderInputProps> = (props) => {
         Array.isArray(currentValue) &&
         currentValue.map((v, i) => (
           <Input
-            {...input}
             id={id ?? `${id}-input-${i}`}
+            disabled={disabled}
+            {...input}
             key={inputKeysRef.current[i]}
             type="number"
             value={v}
             min={min}
             max={max}
             step={step}
-            disabled={disabled}
             onChange={(e) => {
               const nextNumber = e.currentTarget.valueAsNumber;
               if (Number.isNaN(nextNumber)) return;
