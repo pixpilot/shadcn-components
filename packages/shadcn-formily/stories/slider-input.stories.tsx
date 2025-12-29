@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable no-alert */
 /* eslint-disable no-magic-numbers */
+import type { ISchema } from '@formily/react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { onFieldInputValueChange } from '@formily/core';
 import { observer } from '@formily/react';
@@ -403,6 +404,70 @@ export const SliderInputWithDecimalStep: Story = {
               min: 0,
               max: 100,
               step: 0.5,
+            },
+          },
+        },
+      };
+
+      return (
+        <Form
+          form={form}
+          className="w-[400px]"
+          onSubmit={(values) => {
+            console.log('Form submitted:', values);
+            alert(JSON.stringify(values, null, 2));
+          }}
+        >
+          <SchemaField schema={schema} />
+          <pre className="mt-4 text-sm">{JSON.stringify(form.values, null, 2)}</pre>
+          <button
+            type="submit"
+            className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+          >
+            Submit
+          </button>
+        </Form>
+      );
+    });
+    return <Component />;
+  },
+};
+
+export const WithSchemaMinMax: Story = {
+  render: () => {
+    const Component = observer(() => {
+      const form = useMemo(() => createForm(), []);
+
+      const schema: ISchema = {
+        type: 'object',
+        properties: {
+          opacity: {
+            type: 'number',
+            title: 'Opacity',
+            minimum: 0,
+            maximum: 1,
+            default: 0.1,
+            'x-decorator': 'FormItem',
+            'x-component': 'SliderInput',
+            'x-component-props': {
+              step: 0.01,
+            },
+          },
+          /**
+           * Should override schema min/max with component props
+           */
+          percentage: {
+            type: 'number',
+            title: 'Percentage (%)',
+            minimum: 0,
+            maximum: 100,
+            default: 0.5,
+            'x-decorator': 'FormItem',
+            'x-component': 'SliderInput',
+            'x-component-props': {
+              step: 0.01,
+              min: 0,
+              max: 1,
             },
           },
         },

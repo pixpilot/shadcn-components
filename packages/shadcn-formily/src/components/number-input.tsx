@@ -1,4 +1,4 @@
-import { connect, mapProps } from '@formily/react';
+import { connect, mapProps, useFieldSchema } from '@formily/react';
 import { Input } from '@pixpilot/shadcn';
 
 /**
@@ -7,9 +7,9 @@ import { Input } from '@pixpilot/shadcn';
 export const NumberInput = connect(
   Input,
   mapProps((props) => {
-    return {
-      ...props,
-      type: 'number',
-    };
+    const schema = useFieldSchema();
+    const min = schema?.minimum;
+    const max = schema?.maximum;
+    return { min, max, ...props, type: 'number' };
   }),
 );

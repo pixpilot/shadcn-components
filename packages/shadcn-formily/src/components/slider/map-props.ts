@@ -1,6 +1,6 @@
 import type { Field } from '@formily/core';
 import type { Slider } from '@pixpilot/shadcn-ui';
-import { mapProps } from '@formily/react';
+import { mapProps, useFieldSchema } from '@formily/react';
 
 // eslint-disable-next-line custom/no-typeof-shadcn-components
 export const sliderMapProps = mapProps<typeof Slider>(
@@ -9,6 +9,8 @@ export const sliderMapProps = mapProps<typeof Slider>(
     onInput: 'onValueChange',
   },
   (props, field) => {
+    const schema = useFieldSchema();
+
     // eslint-disable-next-line ts/no-unsafe-assignment
     const fieldValue = (field as Field).value;
     let value: number[];
@@ -20,7 +22,12 @@ export const sliderMapProps = mapProps<typeof Slider>(
       value = [0];
     }
 
+    const min = schema?.minimum;
+    const max = schema?.maximum;
+
     return {
+      min,
+      max,
       ...props,
       value,
       onValueChange: (newValue: number[]) => {
