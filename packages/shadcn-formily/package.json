@@ -59,7 +59,7 @@
     "@pixpilot/shadcn-ui": "workspace:*",
     "@pixpilot/string": "catalog:prod",
     "json-schema-traverse": "^1.0.0",
-    "lucide-react": "^0.554.0",
+    "lucide-react": "^0.562.0",
     "pretty-bytes": "catalog:prod"
   },
   "devDependencies": {
@@ -68,7 +68,7 @@
     "@internal/tsconfig": "workspace:*",
     "@internal/tsdown-config": "workspace:*",
     "@internal/vitest-config": "workspace:*",
-    "@storybook/react": "^10.1.8",
+    "@storybook/react": "catalog:dev",
     "@testing-library/react": "catalog:dev",
     "@types/node": "catalog:dev",
     "@types/react": "^19.2.7",
