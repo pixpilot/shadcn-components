@@ -150,7 +150,7 @@ export const ObjectContainer: React.FC<ObjectContainerProps> = ({
       <FormItemContainer
         {...mergedContentProps}
         as={CardContent}
-        className={cn('form-object-container', mergedContentProps.className)}
+        className={cn('form-object-content', mergedContentProps.className)}
       >
         {children}
       </FormItemContainer>
