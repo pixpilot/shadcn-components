@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.18.0
+
+### Minor Changes
+
+- enhance NumberInput with min/max validation and improved onChange handling
+
 ## 0.17.0
 
 ### Minor Changes
