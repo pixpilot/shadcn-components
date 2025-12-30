@@ -19,8 +19,8 @@ catalogs:
       specifier: ^8.6.14
       version: 8.6.14
     '@storybook/addon-themes':
-      specifier: ^8.6.14
-      version: 8.6.14
+      specifier: ^10.1.11
+      version: 10.1.11
     '@storybook/blocks':
       specifier: ^8.6.14
       version: 8.6.14
@@ -741,7 +741,7 @@ importers:
         version: 8.6.14(react@19.2.0)(storybook@8.6.14(prettier@3.7.4))
       '@storybook/addon-themes':
         specifier: catalog:dev
-        version: 8.6.14(storybook@8.6.14(prettier@3.7.4))
+        version: 10.1.11(storybook@8.6.14(prettier@3.7.4))
       '@storybook/blocks':
         specifier: catalog:dev
         version: 8.6.14(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(storybook@8.6.14(prettier@3.7.4))
@@ -2868,10 +2868,10 @@ packages:
     peerDependencies:
       storybook: ^8.6.14
 
-  '@storybook/addon-themes@8.6.14':
-    resolution: {integrity: sha512-/HJCgskA3OFGectuoLEBQ3JX1nQhE7lnpSv5gH13CWyyaMEk/mP8JYF1uO25YQqwGuSgL2gaEox+aK7UmglAmQ==}
+  '@storybook/addon-themes@10.1.11':
+    resolution: {integrity: sha512-tUX5C1ms+W4GFK8UBWd3Fq4irkLc3h092BqW90tZghcoOmGY/sfKR+PlcLhoaTs/kkHQSSHPrz8HSFR1AXVbHA==}
     peerDependencies:
-      storybook: ^8.6.14
+      storybook: ^10.1.11
 
   '@storybook/addon-toolbars@8.6.14':
     resolution: {integrity: sha512-W/wEXT8h3VyZTVfWK/84BAcjAxTdtRiAkT2KAN0nbSHxxB5KEM1MjKpKu2upyzzMa3EywITqbfy4dP6lpkVTwQ==}
@@ -7416,6 +7416,7 @@ packages:
   whatwg-encoding@3.1.1:
     resolution: {integrity: sha512-6qN4hJdMwfYBtE3YBTTHhoeuUrDBPZmbQaxWAqSALV/MeEnR5z1xd8UKud2RAkFoPkmB+hli1TZSnyi84xz1vQ==}
     engines: {node: '>=18'}
+    deprecated: Use @exodus/bytes instead for a more spec-conformant and faster implementation
 
   whatwg-mimetype@3.0.0:
     resolution: {integrity: sha512-nt+N2dzIutVRxARx1nghPKGv1xHikU7HKdfafKkLNLindmPU/ch3U31NOCGGA/dmPcmb1VlofO0vnKAcsm0o/Q==}
@@ -9655,7 +9656,7 @@ snapshots:
       storybook: 8.6.14(prettier@3.7.4)
       ts-dedent: 2.2.0
 
-  '@storybook/addon-themes@8.6.14(storybook@8.6.14(prettier@3.7.4))':
+  '@storybook/addon-themes@10.1.11(storybook@8.6.14(prettier@3.7.4))':
     dependencies:
       storybook: 8.6.14(prettier@3.7.4)
       ts-dedent: 2.2.0
