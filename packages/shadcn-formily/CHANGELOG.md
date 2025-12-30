@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.19.0
+
+### Minor Changes
+
+- enhance layout options with flexible slot props
+
 ## 0.18.1
 
 ### Patch Changes
