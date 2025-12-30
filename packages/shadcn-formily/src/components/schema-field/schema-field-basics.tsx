@@ -16,7 +16,7 @@ import { FormGrid } from '../form-grid';
 import { FormItem } from '../form-item';
 import { Hidden } from '../hidden';
 import { Input } from '../input';
-import { NumberInput } from '../number-input';
+import { NumberInput } from '../number';
 import { ObjectContainer } from '../object-container';
 import { ConnectedRadio as Radio } from '../radio';
 import { Row } from '../row';

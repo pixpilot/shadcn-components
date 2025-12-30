@@ -28,7 +28,7 @@ export { IconPicker } from './components/icon-picker';
 
 export { Input } from './components/input';
 export * from './components/json-schema-form-renderer';
-export { NumberInput } from './components/number-input';
+export { NumberInput } from './components/number';
 export { ConnectedRadio, Radio } from './components/radio';
 export { RichTextEditor } from './components/rich-text-editor';
 export { Row } from './components/row';

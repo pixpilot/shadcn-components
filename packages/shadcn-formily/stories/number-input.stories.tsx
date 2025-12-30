@@ -273,13 +273,13 @@ export const WithSchemaMinMax: Story = {
             'x-decorator': 'FormItem',
             'x-component': 'NumberInput',
             'x-component-props': {
-              step: 0.01,
+              step: 0.1,
             },
           },
           /**
            * Should override schema min/max with component props
            */
-          percentage: {
+          opacity2: {
             type: 'number',
             title: 'Percentage (%)',
             minimum: 0,
@@ -288,7 +288,7 @@ export const WithSchemaMinMax: Story = {
             'x-decorator': 'FormItem',
             'x-component': 'NumberInput',
             'x-component-props': {
-              step: 0.01,
+              step: 0.1,
               min: 0,
               max: 1,
             },
