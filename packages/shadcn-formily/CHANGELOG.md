@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.19.1
+
+### Patch Changes
+
+- make ObjectContainer class names optional
+
 ## 0.19.0
 
 ### Minor Changes
