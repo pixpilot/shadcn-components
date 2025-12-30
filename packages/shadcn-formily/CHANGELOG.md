@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.19.2
+
+### Patch Changes
+
+- update class name for FormItemContainer
+
 ## 0.19.1
 
 ### Patch Changes
