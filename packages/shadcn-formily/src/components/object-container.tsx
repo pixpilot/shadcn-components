@@ -69,9 +69,8 @@ export const ObjectContainer: React.FC<ObjectContainerProps> = ({
   return (
     <Card
       {...rest}
-      slot="form-object-card"
       className={cn(
-        'form-object-container',
+        'form-object-card',
         'bg-transparent',
         gapClass,
         cardPaddingClass,
@@ -80,19 +79,23 @@ export const ObjectContainer: React.FC<ObjectContainerProps> = ({
       )}
     >
       {(effectiveLabel != null || desc != null) && (
-        <CardHeader
-          slot="form-object-card"
-          className={cn(headerGapClass, classes?.header)}
-        >
+        <CardHeader className={cn('form-object-header', headerGapClass, classes?.header)}>
           {effectiveLabel != null && (
-            <CardTitle className={classes?.title}>{effectiveLabel}</CardTitle>
+            <CardTitle className={cn('form-object-title', classes?.title)}>
+              {effectiveLabel}
+            </CardTitle>
           )}
           {desc != null && (
-            <CardDescription className={classes?.description}>{desc}</CardDescription>
+            <CardDescription className={cn('form-object-desc', classes?.description)}>
+              {desc}
+            </CardDescription>
           )}
         </CardHeader>
       )}
-      <FormItemContainer as={CardContent} className={classes?.content}>
+      <FormItemContainer
+        as={CardContent}
+        className={cn('form-object-container', classes?.content)}
+      >
         {children}
       </FormItemContainer>
     </Card>
