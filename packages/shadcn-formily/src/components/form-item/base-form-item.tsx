@@ -41,7 +41,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
   const effectiveLabel = useLabel(label);
 
   const { layout } = useFormContext();
-  const { classes } = layout?.itemProps || {};
+  const itemComponentsProps = layout?.itemProps || {};
   const contextDescriptionPlacement = layout?.descriptionPlacement;
 
   // eslint-disable-next-line ts/no-unsafe-assignment
@@ -83,12 +83,13 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
 
   const labelElement = effectiveLabel != null && (
     <FormItemLabel
+      {...itemComponentsProps.label}
       id={id}
       label={effectiveLabel}
       asterisk={asterisk}
       error={feedbackStatus === 'error'}
       shrink={effectiveLabelPlacement === 'end' || effectiveLabelPlacement === 'start'}
-      labelClassName={cn(spacingConfig.label, classes?.label)}
+      labelClassName={cn(spacingConfig.label, itemComponentsProps.label?.className)}
       description={description}
       descriptionInPopover={
         resolvedDescriptionPlacement === 'popover' && description != null
@@ -97,7 +98,10 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
   );
 
   const inputElement = (
-    <div className={cn('relative', classes?.inputWrapper)}>
+    <div
+      {...itemComponentsProps.inputWrapper}
+      className={cn('relative', itemComponentsProps.inputWrapper?.className)}
+    >
       {React.isValidElement(children)
         ? React.cloneElement(children, {
             id,
@@ -110,11 +114,12 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
 
   const descriptionElement = descriptionRenderedInline ? (
     <p
+      {...itemComponentsProps.description}
       id={descriptionId}
       className={cn(
         'text-muted-foreground text-[0.8rem]',
         spacingConfig.description,
-        classes?.description,
+        itemComponentsProps.description?.className,
       )}
     >
       {description}
@@ -148,11 +153,21 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
   );
 
   return (
-    <div data-slot="form-item" className={cn('flex flex-col ', className)} {...props}>
+    <div
+      data-slot="form-item"
+      {...itemComponentsProps.container}
+      {...props}
+      className={cn(
+        'flex flex-col ',
+        className,
+        itemComponentsProps.container?.className,
+      )}
+    >
       {contentElement}
 
       {Boolean(feedbackText) && (
         <p
+          {...itemComponentsProps.error}
           id={feedbackId}
           className={cn(
             'text-[0.8rem]',
@@ -160,7 +175,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
             feedbackStatus === 'error' && 'text-destructive font-medium',
             feedbackStatus === 'warning' && 'text-amber-600',
             feedbackStatus === 'success' && 'text-green-600',
-            classes?.errorMessage,
+            itemComponentsProps.error?.className,
           )}
         >
           {typeof feedbackText === 'string'

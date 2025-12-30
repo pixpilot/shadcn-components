@@ -19,6 +19,13 @@ import { FormItemContainer } from './form-items-container';
 export interface ObjectContainerProps extends React.ComponentProps<'div'> {
   label?: SyncReactNode;
   description?: SyncReactNode;
+  slotProps?: {
+    card?: React.ComponentProps<typeof Card>;
+    header?: React.ComponentProps<typeof CardHeader>;
+    title?: React.ComponentProps<typeof CardTitle>;
+    description?: React.ComponentProps<typeof CardDescription>;
+    content?: React.ComponentProps<typeof CardContent>;
+  };
 }
 
 /**
@@ -52,6 +59,7 @@ export const ObjectContainer: React.FC<ObjectContainerProps> = ({
   children,
   label,
   description,
+  slotProps,
   ...rest
 }) => {
   const effectiveLabel = useLabel(label);
@@ -64,10 +72,44 @@ export const ObjectContainer: React.FC<ObjectContainerProps> = ({
   const headerGapClass = resolveSpacingClass(density, headerConfig);
   const cardPaddingClass = resolveSpacingClass(density, cardPaddingConfig);
 
-  const { classes } = objectContainer || {};
+  const {
+    card,
+    content,
+    description: contextDesc,
+    header,
+    title,
+  } = objectContainer || {};
+
+  const mergedCardProps = {
+    ...card,
+    ...slotProps?.card,
+    className: cn(card?.className, slotProps?.card?.className),
+  };
+  const mergedHeaderProps = {
+    ...header,
+    ...slotProps?.header,
+    className: cn(header?.className, slotProps?.header?.className),
+  };
+  const mergedTitleProps = {
+    ...title,
+    ...slotProps?.title,
+    className: cn(title?.className, slotProps?.title?.className),
+  };
+  const mergedDescProps = {
+    ...contextDesc,
+    ...slotProps?.description,
+    className: cn(contextDesc?.className, slotProps?.description?.className),
+  };
+
+  const mergedContentProps = {
+    ...content,
+    ...slotProps?.content,
+    className: cn(content?.className, slotProps?.content?.className),
+  };
 
   return (
     <Card
+      {...mergedCardProps}
       {...rest}
       className={cn(
         'form-object-card',
@@ -75,26 +117,40 @@ export const ObjectContainer: React.FC<ObjectContainerProps> = ({
         gapClass,
         cardPaddingClass,
         className,
-        classes?.card,
+        mergedCardProps.className,
       )}
     >
       {(effectiveLabel != null || desc != null) && (
-        <CardHeader className={cn('form-object-header', headerGapClass, classes?.header)}>
+        <CardHeader
+          {...mergedHeaderProps}
+          className={cn(
+            'form-object-header',
+            headerGapClass,
+            mergedHeaderProps.className,
+          )}
+        >
           {effectiveLabel != null && (
-            <CardTitle className={cn('form-object-title', classes?.title)}>
+            <CardTitle
+              {...mergedTitleProps}
+              className={cn('form-object-title', mergedTitleProps.className)}
+            >
               {effectiveLabel}
             </CardTitle>
           )}
           {desc != null && (
-            <CardDescription className={cn('form-object-desc', classes?.description)}>
+            <CardDescription
+              {...mergedDescProps}
+              className={cn('form-object-desc', mergedDescProps.className)}
+            >
               {desc}
             </CardDescription>
           )}
         </CardHeader>
       )}
       <FormItemContainer
+        {...mergedContentProps}
         as={CardContent}
-        className={cn('form-object-container', classes?.content)}
+        className={cn('form-object-container', mergedContentProps.className)}
       >
         {children}
       </FormItemContainer>

@@ -45,22 +45,19 @@ export interface FormLayoutOptions {
   labelPlacement?: LabelPlacement;
   /** Custom class names for FormItem elements */
   itemProps?: {
-    classes?: {
-      label?: string;
-      description?: string;
-      inputWrapper?: string;
-      errorMessage?: string;
-    };
+    label?: React.HTMLAttributes<HTMLDivElement>;
+    description?: React.HTMLAttributes<HTMLDivElement>;
+    inputWrapper?: React.HTMLAttributes<HTMLDivElement>;
+    error?: React.HTMLAttributes<HTMLDivElement>;
+    container?: React.HTMLAttributes<HTMLDivElement>;
   };
   /** Custom class names for ObjectContainer elements */
   objectContainer?: {
-    classes?: {
-      card?: string;
-      header?: string;
-      title?: string;
-      description?: string;
-      content?: string;
-    };
+    card: React.HTMLAttributes<HTMLDivElement>;
+    header: React.HTMLAttributes<HTMLDivElement>;
+    title: React.HTMLAttributes<HTMLDivElement>;
+    description: React.HTMLAttributes<HTMLDivElement>;
+    content: React.HTMLAttributes<HTMLDivElement>;
   };
 }
 
