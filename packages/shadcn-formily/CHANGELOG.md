@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.18.1
+
+### Patch Changes
+
+- adds class names for object card and remove unnecessary slots
+
 ## 0.18.0
 
 ### Minor Changes
