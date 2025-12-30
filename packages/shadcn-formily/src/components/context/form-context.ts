@@ -53,11 +53,11 @@ export interface FormLayoutOptions {
   };
   /** Custom class names for ObjectContainer elements */
   objectContainer?: {
-    card: React.HTMLAttributes<HTMLDivElement>;
-    header: React.HTMLAttributes<HTMLDivElement>;
-    title: React.HTMLAttributes<HTMLDivElement>;
-    description: React.HTMLAttributes<HTMLDivElement>;
-    content: React.HTMLAttributes<HTMLDivElement>;
+    card?: React.HTMLAttributes<HTMLDivElement>;
+    header?: React.HTMLAttributes<HTMLDivElement>;
+    title?: React.HTMLAttributes<HTMLDivElement>;
+    description?: React.HTMLAttributes<HTMLDivElement>;
+    content?: React.HTMLAttributes<HTMLDivElement>;
   };
 }
 
