@@ -118,6 +118,10 @@ const SliderSelect: React.FC<SliderSelectProps> = (props) => {
         <div className={cn('w-28', selectContainerClassName)}>
           <Select
             {...selectProps}
+            contentProps={{
+              position: 'item-aligned',
+              ...selectProps.contentProps,
+            }}
             options={normalizedOptions.map((o) => ({
               value: o.value,
               label: o.label,
