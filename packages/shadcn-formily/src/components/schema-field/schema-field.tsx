@@ -9,7 +9,7 @@ import { useMergedSchemaComponents } from '../../hooks/use-merged-schema-compone
 import { extractComponents } from '../../utils/extract-components';
 import { ColorPicker } from '../color-picker';
 import { Combobox } from '../combobox';
-import { Slider, SliderInput } from '../slider';
+import { Slider, SliderInput, SliderSelect } from '../slider';
 import { TagsInputInLine } from '../tags-input-inline';
 import { basicComponentRegistry } from './schema-field-basics';
 
@@ -19,6 +19,7 @@ export const defaultComponentRegistry = {
   Combobox: { component: Combobox, decorator: 'FormItem' },
   Slider: { component: Slider, decorator: 'FormItem' },
   SliderInput: { component: SliderInput, decorator: 'FormItem' },
+  SliderSelect: { component: SliderSelect, decorator: 'FormItem' },
   TagsInput: { component: TagsInput, decorator: 'FormItem' },
   TagsInputInLine: { component: TagsInputInLine, decorator: 'FormItem' },
 } satisfies Record<string, FormComponentConfig>;
