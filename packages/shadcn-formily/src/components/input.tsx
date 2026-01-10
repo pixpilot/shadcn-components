@@ -1,6 +1,6 @@
 import type { Field } from '@formily/core';
 import { connect, mapProps } from '@formily/react';
-import { Input as ShadcnInput } from '@pixpilot/shadcn';
+import { Input as ShadcnInput } from '@pixpilot/shadcn-ui';
 
 /**
  * Formily-connected Input component

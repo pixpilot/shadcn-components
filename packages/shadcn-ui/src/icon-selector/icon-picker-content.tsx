@@ -2,10 +2,11 @@ import type { FC } from 'react';
 
 import type { IconProvider, IconProviderProps } from './types';
 
-import { Input, Tabs, TabsContent, TabsList, TabsTrigger } from '@pixpilot/shadcn';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@pixpilot/shadcn';
 import { X } from 'lucide-react';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Input } from '../input';
 import { LoadingOverlay } from '../LoadingOverlay';
 import { useAsyncProviders } from './use-async-providers';
 import VirtualizedIconGrid from './virtualized-icon-grid';
