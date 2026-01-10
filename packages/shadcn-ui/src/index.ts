@@ -23,6 +23,7 @@ export * from './file-upload-inline';
 export * from './file-upload/types';
 export * from './hooks';
 export * from './icon-selector';
+export * from './input';
 export * from './layout';
 export * from './LoadingOverlay';
 export * from './pagination';
