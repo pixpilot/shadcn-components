@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 0.7.0
+
+### Minor Changes
+
+- add contentProps support to Select component
+
 ## 0.6.1
 
 ### Patch Changes
