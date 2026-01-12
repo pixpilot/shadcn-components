@@ -1,5 +1,16 @@
 # @pixpilot/shadcn-ui
 
+## 0.17.0
+
+### Minor Changes
+
+- add SliderSelect component and related functionality
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn@0.7.0
+
 ## 0.16.1
 
 ### Patch Changes

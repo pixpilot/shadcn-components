@@ -1,5 +1,19 @@
 # @pixpilot/formily-shadcn
 
+## 0.20.0
+
+### Minor Changes
+
+- add SliderSelect component and related functionality
+
+### Patch Changes
+
+- update import path for Input component
+- Updated dependencies
+- Updated dependencies
+  - @pixpilot/shadcn@0.7.0
+  - @pixpilot/shadcn-ui@0.17.0
+
 ## 0.19.2
 
 ### Patch Changes
