@@ -1,11 +1,13 @@
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 
-export interface LayoutFooterProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface LayoutFooterProps extends React.HTMLAttributes<HTMLDivElement> {
+  as?: React.ElementType;
+}
 
 const LayoutFooter = React.forwardRef<HTMLDivElement, LayoutFooterProps>(
-  ({ className, ...props }, ref) => (
-    <div {...props} className={cn(className)} ref={ref} />
+  ({ className, as: Component = 'div', ...props }, ref) => (
+    <Component {...props} className={cn(className)} ref={ref} />
   ),
 );
 

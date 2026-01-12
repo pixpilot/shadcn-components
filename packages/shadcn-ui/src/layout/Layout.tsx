@@ -1,12 +1,14 @@
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 
-export interface LayoutProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface LayoutProps extends React.HTMLAttributes<HTMLDivElement> {
+  as?: React.ElementType;
+}
 
 const Layout = React.forwardRef<HTMLDivElement, LayoutProps>(
-  ({ className, ...props }, ref) => {
+  ({ className, as: Component = 'div', ...props }, ref) => {
     return (
-      <div
+      <Component
         ref={ref}
         className={cn(
           'flex w-full flex-col overflow-hidden',
