@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.20.0
+
+### Minor Changes
+
+- add ColorSelect component for color selection
+
 ## 0.19.0
 
 ### Minor Changes
