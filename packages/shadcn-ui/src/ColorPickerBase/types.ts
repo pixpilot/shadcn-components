@@ -1,5 +1,10 @@
 import type { ColorPickerProps } from '@pixpilot/shadcn';
 
+export interface PresetColor {
+  label: string;
+  value: string;
+}
+
 export interface ColorPickerBaseProps extends Omit<
   ColorPickerProps,
   'onChange' | 'children'
@@ -7,7 +12,7 @@ export interface ColorPickerBaseProps extends Omit<
   // options?: ColorPikerOptions;
   value?: string;
   onChange?: (value: string) => void;
-  presetColors?: string[];
+  presetColors?: PresetColor[];
   layout?: 'full' | 'compact';
   children: (props: {
     value?: string;

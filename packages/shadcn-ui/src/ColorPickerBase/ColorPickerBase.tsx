@@ -1,6 +1,6 @@
 'use client';
 
-import type { ColorPickerBaseProps } from './types';
+import type { ColorPickerBaseProps, PresetColor } from './types';
 import { ColorPicker, ColorPickerTrigger } from '@pixpilot/shadcn';
 import { useCallback, useState } from 'react';
 import { ColorPickerCompact } from './ColorPickerCompact';
@@ -8,23 +8,23 @@ import { ColorPickerFull } from './ColorPickerFull';
 import { useColorPickerBaseSwatch } from './hooks/use-color-picker-base-swatch';
 import { useColorPickerBaseValue } from './hooks/use-color-picker-base-value';
 
-const commonColors = [
-  '#00000000', // Transparent
-  '#000000', // Black
-  '#FFFFFF', // White
-  '#808080', // Gray
-  '#FF0000', // Red
-  '#FFA500', // Orange
-  '#FFFF00', // Yellow
-  '#84CC16', // Lime
-  '#22C55E', // Green
-  '#14B8A6', // Teal
-  '#00FFFF', // Cyan
-  '#3B82F6', // Blue
-  '#6366F1', // Indigo
-  '#A855F7', // Purple
-  '#EC4899', // Pink
-  '#A52A2A', // Brown
+const commonColors: PresetColor[] = [
+  { label: 'Transparent', value: '#00000000' },
+  { label: 'Black', value: '#000000' },
+  { label: 'White', value: '#FFFFFF' },
+  { label: 'Gray', value: '#808080' },
+  { label: 'Red', value: '#FF0000' },
+  { label: 'Orange', value: '#FFA500' },
+  { label: 'Yellow', value: '#FFFF00' },
+  { label: 'Lime', value: '#84CC16' },
+  { label: 'Green', value: '#22C55E' },
+  { label: 'Teal', value: '#14B8A6' },
+  { label: 'Cyan', value: '#00FFFF' },
+  { label: 'Blue', value: '#3B82F6' },
+  { label: 'Indigo', value: '#6366F1' },
+  { label: 'Purple', value: '#A855F7' },
+  { label: 'Pink', value: '#EC4899' },
+  { label: 'Brown', value: '#A52A2A' },
 ];
 const DEFAULT_COLOR = '#000000';
 

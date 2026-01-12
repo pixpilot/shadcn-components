@@ -120,7 +120,14 @@ export const Uncontrolled = () => <UncontrolledColorPicker />;
 export const CompactWithCustomSwatches: Story = {
   args: {
     layout: 'compact',
-    presetColors: ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD'],
+    presetColors: [
+      { label: 'Coral', value: '#FF6B6B' },
+      { label: 'Teal', value: '#4ECDC4' },
+      { label: 'Sky Blue', value: '#45B7D1' },
+      { label: 'Sage', value: '#96CEB4' },
+      { label: 'Cream', value: '#FFEAA7' },
+      { label: 'Plum', value: '#DDA0DD' },
+    ],
     children: DefaultChild,
   },
 };

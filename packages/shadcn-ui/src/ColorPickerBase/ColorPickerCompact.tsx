@@ -37,7 +37,7 @@ const ColorPickerCompact: React.FC<ColorPickerContentFullProps> = React.memo((pr
       )}
       <div className="gap-2  flex flex-wrap">
         {presetColors.map((color) => (
-          <PaletteSwatch key={color} color={color} onSelect={onValueChange} />
+          <PaletteSwatch key={color.value} color={color} onSelect={onValueChange} />
         ))}
         {layout === 'compact' && (
           <PaletteButton
