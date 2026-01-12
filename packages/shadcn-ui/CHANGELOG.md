@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.19.0
+
+### Minor Changes
+
+- add keyboard navigation support for cycle mode
+
 ## 0.18.0
 
 ### Minor Changes
