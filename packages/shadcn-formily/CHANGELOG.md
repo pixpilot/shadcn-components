@@ -1,5 +1,16 @@
 # @pixpilot/formily-shadcn
 
+## 0.21.0
+
+### Minor Changes
+
+- add ColorSelect component for color selection
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn-ui@0.20.0
+
 ## 0.20.2
 
 ### Patch Changes

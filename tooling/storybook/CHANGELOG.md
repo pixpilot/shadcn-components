@@ -1,5 +1,15 @@
 # @internal/storybook
 
+## 0.0.62
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+  - @pixpilot/formily-shadcn@0.21.0
+  - @pixpilot/shadcn-ui@0.20.0
+  - @pixpilot/shadcn-auth@0.1.19
+
 ## 0.0.61
 
 ### Patch Changes
