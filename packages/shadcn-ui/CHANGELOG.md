@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.18.0
+
+### Minor Changes
+
+- add `as` prop to Layout components for flexible element rendering
+
 ## 0.17.0
 
 ### Minor Changes
