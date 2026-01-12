@@ -12,6 +12,7 @@ export * from './components/array-cards';
 export * from './components/array-collapse';
 
 export { Checkbox } from './components/checkbox';
+export { ColorSelect } from './components/color-select';
 export { Column } from './components/column';
 
 export { Combobox } from './components/combobox';

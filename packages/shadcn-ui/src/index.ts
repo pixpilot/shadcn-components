@@ -15,6 +15,7 @@ export * from './CloseButtonAbsolute';
 export * from './CloseButtonRounded';
 export * from './ColorPicker';
 export * from './ColorPickerBase';
+export * from './ColorSelect';
 export * from './Combobox';
 export * from './confirmation-dialog';
 export * from './ContentCard';

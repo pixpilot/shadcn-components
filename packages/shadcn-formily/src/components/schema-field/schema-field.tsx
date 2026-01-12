@@ -8,6 +8,7 @@ import { useFormSchema } from '../../hooks/use-form-schema';
 import { useMergedSchemaComponents } from '../../hooks/use-merged-schema-components';
 import { extractComponents } from '../../utils/extract-components';
 import { ColorPicker } from '../color-picker';
+import { ColorSelect } from '../color-select';
 import { Combobox } from '../combobox';
 import { Slider, SliderInput, SliderSelect } from '../slider';
 import { TagsInputInLine } from '../tags-input-inline';
@@ -17,6 +18,7 @@ export const defaultComponentRegistry = {
   ...basicComponentRegistry,
   ColorPicker: { component: ColorPicker, decorator: 'FormItem' },
   Combobox: { component: Combobox, decorator: 'FormItem' },
+  ColorSelect: { component: ColorSelect, decorator: 'FormItem' },
   Slider: { component: Slider, decorator: 'FormItem' },
   SliderInput: { component: SliderInput, decorator: 'FormItem' },
   SliderSelect: { component: SliderSelect, decorator: 'FormItem' },
