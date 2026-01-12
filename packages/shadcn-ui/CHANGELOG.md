@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.21.0
+
+### Minor Changes
+
+- enhance color picker with preset colors and tooltips
+
 ## 0.20.0
 
 ### Minor Changes
