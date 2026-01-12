@@ -22,6 +22,12 @@ const meta = {
       control: 'text',
       description: 'Placeholder text when no value is selected',
     },
+    keyboardMode: {
+      control: { type: 'radio' },
+      options: ['dropdown', 'cycle'],
+      description:
+        'Keyboard behavior: dropdown opens first (default) or ArrowUp/ArrowDown cycles selection when closed.',
+    },
   },
   decorators: [
     (Story) => (
@@ -89,5 +95,33 @@ export const NumericValues: Story = {
     const [value, setValue] = useState<string>('');
 
     return <Select {...args} value={value} onChange={setValue} />;
+  },
+};
+
+/**
+ * In cycle mode, when the dropdown is closed, ArrowUp/ArrowDown cycles the value
+ * directly (with wrap-around) without opening the dropdown.
+ */
+export const KeyboardCycle: Story = {
+  args: {
+    options: [
+      { value: 'alpha', label: 'Alpha' },
+      { value: 'bravo', label: 'Bravo' },
+      { value: 'charlie', label: 'Charlie' },
+    ],
+    placeholder: 'Use Arrow keys',
+    keyboardMode: 'cycle',
+  },
+  render: function KeyboardCycleSelect(args) {
+    const [value, setValue] = useState<string>('alpha');
+
+    return (
+      <div>
+        <Select {...args} value={value} onChange={setValue} />
+        <div style={{ marginTop: '1rem', fontSize: '0.875rem', color: '#666' }}>
+          Selected: <strong>{value}</strong>
+        </div>
+      </div>
+    );
   },
 };
