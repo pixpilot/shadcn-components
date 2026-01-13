@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.22.0
+
+### Minor Changes
+
+- add formatDisplayValue prop and enhance ColorPicker stories
+
 ## 0.21.0
 
 ### Minor Changes
