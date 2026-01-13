@@ -1,2 +1,6 @@
 export * from './ColorPickerBase';
-export { type ColorPickerBaseProps, type PresetColor } from './types';
+export {
+  type ColorPickerBaseProps,
+  type ColorPickerBaseSection,
+  type PresetColor,
+} from './types';

@@ -33,6 +33,12 @@ const meta = {
       description:
         'Display mode: full shows all controls, compact hides advanced controls by default',
     },
+    sections: {
+      control: { type: 'check' },
+      options: ['swatch', 'picker', 'format-select', 'input'],
+      description:
+        'Controls which UI sections render in the picker content (defaults to all)',
+    },
   },
 } satisfies Meta<typeof ColorPickerBase>;
 
@@ -74,6 +80,17 @@ export const Full: Story = {
   args: {
     children: DefaultChild,
     layout: 'full',
+  },
+};
+
+/**
+ * Minimal picker: swatches only (no picker UI, no format select, no input)
+ */
+export const SwatchesOnly: Story = {
+  args: {
+    children: DefaultChild,
+    layout: 'compact',
+    sections: ['swatch'],
   },
 };
 function ControlledColorPicker() {

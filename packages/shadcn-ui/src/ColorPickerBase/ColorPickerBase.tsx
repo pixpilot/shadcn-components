@@ -1,6 +1,6 @@
 'use client';
 
-import type { ColorPickerBaseProps, PresetColor } from './types';
+import type { ColorPickerBaseProps, ColorPickerBaseSection, PresetColor } from './types';
 import { ColorPicker, ColorPickerTrigger } from '@pixpilot/shadcn';
 import { useCallback, useState } from 'react';
 import { ColorPickerCompact } from './ColorPickerCompact';
@@ -28,6 +28,8 @@ const commonColors: PresetColor[] = [
 ];
 const DEFAULT_COLOR = '#000000';
 
+const DEFAULT_SECTIONS = ['swatch', 'picker', 'format-select', 'input'] as const;
+
 const ColorPickerBase: React.FC<ColorPickerBaseProps> = (props) => {
   const {
     value: propValue,
@@ -35,6 +37,7 @@ const ColorPickerBase: React.FC<ColorPickerBaseProps> = (props) => {
     onValueChange,
     layout = 'full',
     presetColors,
+    sections,
     format,
     defaultFormat = 'hex',
     onFormatChange,
@@ -59,6 +62,9 @@ const ColorPickerBase: React.FC<ColorPickerBaseProps> = (props) => {
     });
 
   const [open, setOpen] = useState<boolean>(false);
+
+  const resolvedSections = (sections ??
+    DEFAULT_SECTIONS) as ReadonlyArray<ColorPickerBaseSection>;
 
   let colors = presetColors || commonColors;
 
@@ -95,12 +101,14 @@ const ColorPickerBase: React.FC<ColorPickerBaseProps> = (props) => {
           onValueChange={handleSwatchSelect}
           layout={layout}
           presetColors={colors}
+          sections={resolvedSections}
         />
       ) : (
         <ColorPickerFull
           onValueChange={handleSwatchSelect}
           layout={layout}
           presetColors={colors}
+          sections={resolvedSections}
         />
       )}
     </ColorPicker>

@@ -7,12 +7,11 @@ export interface ColorPickerContentProps extends React.ComponentProps<
 > {}
 
 const ColorPickerContent: React.FC<ColorPickerContentProps> = (props) => {
+  const { children, className, ...rest } = props;
+
   return (
-    <BaseColorPickerContent
-      {...props}
-      className={cn('w-[280px] xs:w-[300px]', props.className)}
-    >
-      {/* Content goes here */}
+    <BaseColorPickerContent {...rest} className={cn('w-[280px] xs:w-[300px]', className)}>
+      {children}
     </BaseColorPickerContent>
   );
 };

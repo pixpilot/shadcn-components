@@ -17,13 +17,22 @@ import { PaletteSwatch } from './PaletteSwatch';
 export interface ColorPickerContentFullProps extends ColorPickerContentProps {}
 
 const ColorPickerCompact: React.FC<ColorPickerContentFullProps> = React.memo((props) => {
-  const { onValueChange, layout = 'full', presetColors } = props;
+  const { onValueChange, layout = 'full', presetColors, sections } = props;
+
+  const enabledSections = new Set(sections);
+  const showPicker = enabledSections.has('picker');
+  const showSwatch = enabledSections.has('swatch');
+  const showFormatSelect = enabledSections.has('format-select');
+  const showInput = enabledSections.has('input');
 
   const [showFullPicker, setShowFullPicker] = useState(false);
 
+  const shouldShowPickerUi = showPicker && (showSwatch ? showFullPicker : true);
+  const canTogglePickerUi = showPicker && showSwatch && layout === 'compact';
+
   return (
     <ColorPickerContent className="w-[280px] xs:w-[300px]">
-      {showFullPicker && (
+      {shouldShowPickerUi && (
         <>
           <ColorPickerArea />
           <div className="flex items-center gap-2">
@@ -35,24 +44,30 @@ const ColorPickerCompact: React.FC<ColorPickerContentFullProps> = React.memo((pr
           </div>
         </>
       )}
-      <div className="gap-2  flex flex-wrap">
-        {presetColors.map((color) => (
-          <PaletteSwatch key={color.value} color={color} onSelect={onValueChange} />
-        ))}
-        {layout === 'compact' && (
-          <PaletteButton
-            onClick={() => setShowFullPicker(!showFullPicker)}
-            aria-label="Toggle full color picker"
-            className="flex items-center justify-center border-input bg-input hover:bg-accent hover:text-accent-foreground"
-          >
-            <Droplet className="h-4 w-4" />
-          </PaletteButton>
-        )}
-      </div>
-      <div className="flex items-center gap-2 w-full">
-        <ColorPickerFormatSelect />
-        <ColorPickerInput />
-      </div>
+
+      {showSwatch && (
+        <div className="gap-2  flex flex-wrap">
+          {presetColors.map((color) => (
+            <PaletteSwatch key={color.value} color={color} onSelect={onValueChange} />
+          ))}
+          {canTogglePickerUi && (
+            <PaletteButton
+              onClick={() => setShowFullPicker(!showFullPicker)}
+              aria-label="Toggle full color picker"
+              className="flex items-center justify-center border-input bg-input hover:bg-accent hover:text-accent-foreground"
+            >
+              <Droplet className="h-4 w-4" />
+            </PaletteButton>
+          )}
+        </div>
+      )}
+
+      {(showFormatSelect || showInput) && (
+        <div className="flex items-center gap-2 w-full">
+          {showFormatSelect && <ColorPickerFormatSelect />}
+          {showInput && <ColorPickerInput />}
+        </div>
+      )}
     </ColorPickerContent>
   );
 });
