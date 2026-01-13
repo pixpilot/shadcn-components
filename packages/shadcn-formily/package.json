@@ -1,7 +1,7 @@
 {
   "name": "@pixpilot/formily-shadcn",
   "type": "module",
-  "version": "0.21.2",
+  "version": "0.21.3",
   "packageManager": "pnpm@10.25.0",
   "description": "Formily integration for shadcn/ui components",
   "author": "m.doaie <m.doaie@hotmail.com>",

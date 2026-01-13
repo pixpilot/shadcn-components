@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.23.0
+
+### Minor Changes
+
+- add sections prop to control UI rendering
+
 ## 0.22.0
 
 ### Minor Changes
