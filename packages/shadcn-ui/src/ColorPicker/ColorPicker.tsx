@@ -17,6 +17,7 @@ import { ColorPickerBase } from '../ColorPickerBase';
 export interface ColorPickerProps extends Omit<ColorPickerBaseProps, 'children'> {
   variant?: 'button' | 'input';
   placeholder?: string;
+  formatDisplayValue?: (value: string) => React.ReactNode;
 }
 
 function Swatch(props: { color: string | undefined; className?: string }) {
@@ -29,16 +30,32 @@ function Swatch(props: { color: string | undefined; className?: string }) {
 }
 
 const ColorPicker: React.FC<ColorPickerProps> = (props) => {
-  const { variant = 'input', placeholder = 'Pick a color', ...rest } = props;
+  const {
+    variant = 'input',
+    placeholder = 'Pick a color',
+    formatDisplayValue,
+    ...rest
+  } = props;
 
   return (
     <ColorPickerBase {...rest}>
       {({ value, onValueChange, isPickerOpen }) => {
+        const swatchColor = value != null && value !== '' ? value : undefined;
+
+        const renderSwatch = (): React.ReactNode => {
+          return <Swatch color={swatchColor} />;
+        };
+
+        const renderDisplayValue = (): React.ReactNode => {
+          if (value == null || value === '') return placeholder;
+          return formatDisplayValue != null ? formatDisplayValue(value) : value;
+        };
+
         if (variant === 'input') {
           return (
             <InputGroup>
               <InputGroupAddon align="inline-start" className="pl-0">
-                <Swatch color={value} />
+                {renderSwatch()}
               </InputGroupAddon>
               <InputGroupInput
                 value={value ?? ''}
@@ -66,10 +83,10 @@ const ColorPicker: React.FC<ColorPickerProps> = (props) => {
             )}
           >
             <InputGroupAddon align="inline-start" className="pl-0">
-              <Swatch color={value} />
+              {renderSwatch()}
             </InputGroupAddon>
             <InputGroupText className="flex-1 text-left text-foreground pl-2">
-              {value ?? placeholder}
+              {renderDisplayValue()}
             </InputGroupText>
             <InputGroupAddon align="inline-end" className="pr-1">
               {isPickerOpen ? (
