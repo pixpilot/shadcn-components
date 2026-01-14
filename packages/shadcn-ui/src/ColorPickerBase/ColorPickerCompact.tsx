@@ -17,7 +17,7 @@ import { PaletteSwatch } from './PaletteSwatch';
 export interface ColorPickerContentFullProps extends ColorPickerContentProps {}
 
 const ColorPickerCompact: React.FC<ColorPickerContentFullProps> = React.memo((props) => {
-  const { onValueChange, presetColors, sections, currentValue } = props;
+  const { onValueChange, presetColors, sections, currentValue, ...rest } = props;
 
   const enabledSections = new Set(sections);
   const showPicker = enabledSections.has('picker');
@@ -31,7 +31,7 @@ const ColorPickerCompact: React.FC<ColorPickerContentFullProps> = React.memo((pr
   const canTogglePickerUi = showPicker && showSwatch;
 
   return (
-    <ColorPickerContent>
+    <ColorPickerContent {...rest}>
       {shouldShowPickerUi && (
         <>
           <ColorPickerArea />
