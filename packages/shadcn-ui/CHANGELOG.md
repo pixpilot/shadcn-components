@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.25.0
+
+### Minor Changes
+
+- add contentProps for customization and new story
+
 ## 0.24.0
 
 ### Minor Changes
