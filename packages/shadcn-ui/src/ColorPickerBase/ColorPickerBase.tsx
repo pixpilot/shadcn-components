@@ -41,6 +41,7 @@ const ColorPickerBase: React.FC<ColorPickerBaseProps> = (props) => {
     format,
     defaultFormat = 'hex',
     onFormatChange,
+    contentProps,
     children,
     ...rest
   } = props;
@@ -98,17 +99,19 @@ const ColorPickerBase: React.FC<ColorPickerBaseProps> = (props) => {
       </ColorPickerTrigger>
       {layout === 'compact' ? (
         <ColorPickerCompact
+          {...contentProps}
           onValueChange={handleSwatchSelect}
-          layout={layout}
           presetColors={colors}
           sections={resolvedSections}
+          currentValue={currentValue}
         />
       ) : (
         <ColorPickerFull
+          {...contentProps}
           onValueChange={handleSwatchSelect}
-          layout={layout}
           presetColors={colors}
           sections={resolvedSections}
+          currentValue={currentValue}
         />
       )}
     </ColorPicker>

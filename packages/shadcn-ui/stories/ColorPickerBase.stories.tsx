@@ -39,6 +39,10 @@ const meta = {
       description:
         'Controls which UI sections render in the picker content (defaults to all)',
     },
+    contentProps: {
+      control: 'object',
+      description: 'Additional props for the ColorPickerContent component',
+    },
   },
 } satisfies Meta<typeof ColorPickerBase>;
 
@@ -146,5 +150,15 @@ export const CompactWithCustomSwatches: Story = {
       { label: 'Plum', value: '#DDA0DD' },
     ],
     children: DefaultChild,
+  },
+};
+
+/**
+ * Compact color picker with custom swatch colors
+ */
+export const WithContentWidth: Story = {
+  args: {
+    children: DefaultChild,
+    contentProps: { width: 180 },
   },
 };

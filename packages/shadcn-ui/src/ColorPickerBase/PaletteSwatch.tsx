@@ -1,5 +1,11 @@
 import type { PresetColor } from './types';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@pixpilot/shadcn';
+import {
+  cn,
+  colorUtils,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@pixpilot/shadcn';
 import { useCallback } from 'react';
 import { PaletteButton } from './PaletteButton';
 
@@ -7,9 +13,24 @@ export const PaletteSwatch: React.FC<{
   color?: PresetColor;
   onSelect?: (color: string) => void;
   className?: string;
-}> = ({ color, onSelect, className }) => {
+  selectedValue?: string;
+}> = ({ color, onSelect, className, selectedValue }) => {
   const colorValue = color?.value ?? 'rgb(0,0,0,0)';
   const colorLabel = color?.label;
+
+  const normalizeColor = useCallback((value: string): string | null => {
+    const parsed = colorUtils.parseColorString(value);
+    if (!parsed) return null;
+    return colorUtils.colorToString(parsed, 'hex').trim().toLowerCase();
+  }, []);
+
+  const isSelected = (() => {
+    if (selectedValue === undefined || selectedValue.trim() === '') return false;
+    const a = normalizeColor(selectedValue);
+    const b = normalizeColor(colorValue);
+    if (a === null || b === null) return false;
+    return a === b;
+  })();
 
   const handleClick = useCallback(() => {
     if (onSelect) {
@@ -23,7 +44,15 @@ export const PaletteSwatch: React.FC<{
   };
 
   const button = (
-    <PaletteButton style={style} className={className} onClick={handleClick} />
+    <PaletteButton
+      style={style}
+      className={cn(
+        className,
+        isSelected && 'ring-2 ring-ring ring-offset-2 ring-offset-background border-ring',
+      )}
+      onClick={handleClick}
+      aria-pressed={isSelected}
+    />
   );
 
   if (colorLabel === null || colorLabel === undefined || colorLabel === '') {

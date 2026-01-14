@@ -1,4 +1,7 @@
-import type { ColorPickerProps } from '@pixpilot/shadcn';
+import type {
+  ColorPickerContent as BaseColorPickerContent,
+  ColorPickerProps,
+} from '@pixpilot/shadcn';
 
 export interface PresetColor {
   label: string;
@@ -8,6 +11,19 @@ export interface PresetColor {
 export type ColorPickerBaseSection = 'swatch' | 'picker' | 'format-select' | 'input';
 
 export type ColorPickerBaseSections = ReadonlyArray<ColorPickerBaseSection>;
+
+export interface ColorPickerContentWrapperProps extends React.ComponentProps<
+  typeof BaseColorPickerContent
+> {
+  width?: number | string;
+}
+
+export type ColorPickerContentProps = Required<
+  Pick<ColorPickerBaseProps, 'onValueChange' | 'presetColors' | 'sections'>
+> & {
+  currentValue: string;
+  contentProps?: Partial<ColorPickerContentWrapperProps>;
+};
 
 export interface ColorPickerBaseProps extends Omit<
   ColorPickerProps,
@@ -23,14 +39,10 @@ export interface ColorPickerBaseProps extends Omit<
    * Defaults to all sections: ['swatch', 'picker', 'format-select', 'input'].
    */
   sections?: ColorPickerBaseSections;
+  contentProps?: Partial<ColorPickerContentWrapperProps>;
   children: (props: {
     value?: string;
     onValueChange: (value: string) => void;
     isPickerOpen: boolean;
   }) => React.ReactNode;
 }
-
-export type ColorPickerContentProps = Required<
-  Pick<ColorPickerBaseProps, 'onValueChange' | 'layout' | 'presetColors'>
-> &
-  Pick<ColorPickerBaseProps, 'sections'>;

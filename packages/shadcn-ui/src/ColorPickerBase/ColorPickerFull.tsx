@@ -16,7 +16,7 @@ import { PaletteSwatch } from './PaletteSwatch';
 export interface ColorPickerContentFullProps extends ColorPickerContentProps {}
 
 const ColorPickerFull: React.FC<ColorPickerContentFullProps> = React.memo((props) => {
-  const { onValueChange, presetColors, sections } = props;
+  const { onValueChange, presetColors, sections, currentValue, ...rest } = props;
 
   const enabledSections = new Set(sections);
   const showPicker = enabledSections.has('picker');
@@ -25,7 +25,7 @@ const ColorPickerFull: React.FC<ColorPickerContentFullProps> = React.memo((props
   const showInput = enabledSections.has('input');
 
   return (
-    <ColorPickerContent>
+    <ColorPickerContent {...rest}>
       {showPicker && (
         <>
           <ColorPickerArea />
@@ -42,7 +42,12 @@ const ColorPickerFull: React.FC<ColorPickerContentFullProps> = React.memo((props
       {showSwatch && (
         <div className="gap-2  flex flex-wrap">
           {presetColors.map((color) => (
-            <PaletteSwatch key={color.value} color={color} onSelect={onValueChange} />
+            <PaletteSwatch
+              key={color.value}
+              color={color}
+              onSelect={onValueChange}
+              selectedValue={currentValue}
+            />
           ))}
         </div>
       )}
