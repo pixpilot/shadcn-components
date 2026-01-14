@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.25.1
+
+### Patch Changes
+
+- spread `rest` props to `ColorPickerContent`
+
 ## 0.25.0
 
 ### Minor Changes
