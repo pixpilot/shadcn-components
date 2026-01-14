@@ -153,9 +153,6 @@ export const CompactWithCustomSwatches: Story = {
   },
 };
 
-/**
- * Compact color picker with custom swatch colors
- */
 export const WithContentWidth: Story = {
   args: {
     children: DefaultChild,

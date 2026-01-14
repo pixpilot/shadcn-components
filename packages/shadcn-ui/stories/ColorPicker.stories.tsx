@@ -40,6 +40,10 @@ const meta = {
       description:
         'Display variant: inline shows the picker directly, button shows a trigger button',
     },
+    contentProps: {
+      control: 'object',
+      description: 'Props to customize the color picker content wrapper',
+    },
   },
   decorators: [
     (Story) => (
@@ -214,4 +218,10 @@ export const CustomDisplayFormat: React.FC = () => {
       formatDisplayValue={(value: string) => `Color: ${value.toUpperCase()}`}
     />
   );
+};
+
+export const WithContentWidth: Story = {
+  args: {
+    contentProps: { width: 180 },
+  },
 };
