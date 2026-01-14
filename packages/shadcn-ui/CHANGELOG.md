@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.24.0
+
+### Minor Changes
+
+- fix focus issue and adds contentProps-width
+
 ## 0.23.0
 
 ### Minor Changes
