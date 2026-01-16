@@ -22,15 +22,6 @@ const meta: Meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  decorators: [
-    (Story) => (
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <div className="flex items-center gap-4">
-          <Story />
-        </div>
-      </ThemeProvider>
-    ),
-  ],
 };
 
 export default meta;
@@ -40,24 +31,47 @@ type Story = StoryObj<typeof meta>;
 export const DropdownSelect: Story = {
   name: 'ThemeModeDropdown (Light/Dark/System)',
   render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { theme, setTheme, resolvedTheme } = useTheme();
     return (
-      <ThemeModeDropdown
-        theme={theme}
-        setTheme={setTheme}
-        resolvedTheme={resolvedTheme}
-      />
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <DropdownWithHook />
+      </ThemeProvider>
     );
   },
 };
+
+function DropdownWithHook() {
+  // NOTE: This is a Storybook-specific workaround. In real apps, you can use useTheme directly.
+  //
+  // The problem: Storybook's global ThemeSync in Wrapper.tsx syncs the toolbar with next-themes,
+  // but it only handles "light" and "dark", not "system". When you select "system" in the dropdown,
+  // the toolbar doesn't understand it and forces it back to "light" or "dark".
+  //
+  // The solution: Keep local state for the dropdown's selection (which can be "system"),
+  // and also call setTheme to update the actual theme. The local state preserves the "system"
+  // selection even when the global theme changes.
+  const { setTheme, resolvedTheme } = useTheme();
+  const [themeSelection, setThemeSelection] = React.useState<string>('system');
+
+  const handleThemeChange = (newTheme: string) => {
+    setThemeSelection(newTheme); // Keep local state
+    setTheme(newTheme); // Update global theme
+  };
+
+  return (
+    <ThemeModeDropdown
+      themeValue={themeSelection}
+      onChange={handleThemeChange}
+      value={resolvedTheme}
+    />
+  );
+}
 
 export const ToggleButton: Story = {
   name: 'ThemeModeToggleButton (Light/Dark)',
   render: () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const { setTheme, resolvedTheme } = useTheme();
-    return <ThemeModeToggleButton setTheme={setTheme} resolvedTheme={resolvedTheme} />;
+    return <ThemeModeToggleButton onChange={setTheme} value={resolvedTheme} />;
   },
 };
 
@@ -66,7 +80,7 @@ export const SwitchIconsOutside: Story = {
   render: () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const { setTheme, resolvedTheme } = useTheme();
-    return <ThemeModeSwitchOutside setTheme={setTheme} resolvedTheme={resolvedTheme} />;
+    return <ThemeModeSwitchOutside onChange={setTheme} value={resolvedTheme} />;
   },
 };
 
@@ -75,13 +89,7 @@ export const SwitchIconsInside: Story = {
   render: (args) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const { setTheme, resolvedTheme } = useTheme();
-    return (
-      <ThemeModeSwitchInside
-        {...args}
-        setTheme={setTheme}
-        resolvedTheme={resolvedTheme}
-      />
-    );
+    return <ThemeModeSwitchInside {...args} onChange={setTheme} value={resolvedTheme} />;
   },
   args: {
     size: 'md',

@@ -14,24 +14,24 @@ import React from 'react';
 export interface ThemeModeDropdownProps {
   align?: 'start' | 'center' | 'end';
   className?: string;
-  /** Current theme value ("light" | "dark" | "system") */
-  theme?: string;
+  /** Current theme selection ("light" | "dark" | "system") */
+  themeValue?: string;
   /** Function to change the theme */
-  setTheme?: (theme: string) => void;
-  /** The resolved theme ("light" | "dark") */
-  resolvedTheme?: string;
+  onChange?: (theme: string) => void;
+  /** The resolved theme value ("light" | "dark") */
+  value?: string;
   disabled?: boolean;
 }
 
 /**
  * Theme mode selector dropdown.
  * Provides Light / Dark / System options.
- * Pure component - requires theme and setTheme props.
+ * Pure component - requires themeValue and onChange props.
  */
 export function ThemeModeDropdown(props: ThemeModeDropdownProps) {
-  const { align = 'end', className, theme, setTheme, resolvedTheme, disabled } = props;
+  const { align = 'end', className, themeValue, onChange, value, disabled } = props;
 
-  const isDark = resolvedTheme === 'dark';
+  const isDark = value === 'dark';
 
   return (
     <DropdownMenu>
@@ -58,20 +58,20 @@ export function ThemeModeDropdown(props: ThemeModeDropdownProps) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align={align}>
-        <DropdownMenuItem onClick={() => setTheme?.('light')}>
+        <DropdownMenuItem onClick={() => onChange?.('light')}>
           <Sun className="h-4 w-4 mr-2" />
           <span className="flex-1">Light</span>
-          {theme === 'light' && <Check className="h-4 w-4 ml-2" />}
+          {themeValue === 'light' && <Check className="h-4 w-4 ml-2" />}
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme?.('dark')}>
+        <DropdownMenuItem onClick={() => onChange?.('dark')}>
           <Moon className="h-4 w-4 mr-2" />
           <span className="flex-1">Dark</span>
-          {theme === 'dark' && <Check className="h-4 w-4 ml-2" />}
+          {themeValue === 'dark' && <Check className="h-4 w-4 ml-2" />}
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme?.('system')}>
+        <DropdownMenuItem onClick={() => onChange?.('system')}>
           <Monitor className="h-4 w-4 mr-2" />
           <span className="flex-1">System</span>
-          {theme === 'system' && <Check className="h-4 w-4 ml-2" />}
+          {themeValue === 'system' && <Check className="h-4 w-4 ml-2" />}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

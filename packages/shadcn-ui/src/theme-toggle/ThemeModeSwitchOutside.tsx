@@ -17,16 +17,16 @@ export interface ThemeModeSwitchOutsideProps {
   switchClassName?: string;
   disabled?: boolean;
   ariaLabel?: string;
-  /** The resolved theme ("light" | "dark") */
-  resolvedTheme?: string;
+  /** The resolved theme value ("light" | "dark") */
+  value?: string;
   /** Function to change the theme */
-  setTheme?: (theme: string) => void;
+  onChange?: (theme: string) => void;
 }
 
 /**
  * Light/Dark theme switch with icons outside the switch.
  * Icons flank the switch control on either side.
- * Pure component - requires resolvedTheme and setTheme props.
+ * Pure component - requires value and onChange props.
  */
 export function ThemeModeSwitchOutside(props: ThemeModeSwitchOutsideProps) {
   const {
@@ -36,14 +36,14 @@ export function ThemeModeSwitchOutside(props: ThemeModeSwitchOutsideProps) {
     switchClassName,
     disabled,
     ariaLabel = 'Toggle theme',
-    resolvedTheme,
-    setTheme,
+    value,
+    onChange,
   } = props;
 
-  const isDark = resolvedTheme === 'dark';
+  const isDark = value === 'dark';
 
   const onCheckedChange = (checked: boolean) => {
-    setTheme?.(checked ? 'dark' : 'light');
+    onChange?.(checked ? 'dark' : 'light');
   };
 
   if (!showIcons) {

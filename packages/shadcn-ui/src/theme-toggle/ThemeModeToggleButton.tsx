@@ -6,10 +6,10 @@ import React from 'react';
 
 export interface ThemeModeToggleButtonProps {
   className?: string;
-  /** The resolved theme ("light" | "dark") */
-  resolvedTheme?: string;
+  /** The resolved theme value ("light" | "dark") */
+  value?: string;
   /** Function to change the theme */
-  setTheme?: (theme: string) => void;
+  onChange?: (theme: string) => void;
   disabled?: boolean;
 }
 
@@ -18,16 +18,16 @@ export interface ThemeModeToggleButtonProps {
  * Pure component - toggles between light and dark.
  */
 export function ThemeModeToggleButton(props: ThemeModeToggleButtonProps) {
-  const { className, resolvedTheme, setTheme, disabled } = props;
+  const { className, value, onChange, disabled } = props;
 
   const toggleTheme = React.useCallback(() => {
-    if (resolvedTheme === 'dark') {
-      setTheme?.('light');
+    if (value === 'dark') {
+      onChange?.('light');
       return;
     }
 
-    setTheme?.('dark');
-  }, [resolvedTheme, setTheme]);
+    onChange?.('dark');
+  }, [value, onChange]);
 
   return (
     <Button

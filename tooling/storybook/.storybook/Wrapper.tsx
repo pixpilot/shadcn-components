@@ -8,34 +8,38 @@ export interface WrapperProps {
 }
 
 /**
- * Inner component that syncs Storybook's theme changes with next-themes.
+ * Inner component that syncs Storybook's toolbar theme button with next-themes.
  *
- * This is necessary because Storybook's withThemeByClassName decorator
- * directly manipulates the HTML element's class, but next-themes needs
- * to be notified of these changes to properly sync the color-scheme style.
+ * This watches for changes to the HTML element's class (from Storybook's toolbar)
+ * and updates next-themes accordingly. It only syncs from Storybook -> next-themes,
+ * not the reverse, to allow components to control their own theme.
  */
 const ThemeSync: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { setTheme } = useTheme();
-  const setThemeRef = useRef(setTheme);
-
-  // Keep the ref updated
-  useEffect(() => {
-    setThemeRef.current = setTheme;
-  }, [setTheme]);
+  const { theme, setTheme } = useTheme();
+  const isInitialMount = useRef(true);
 
   useEffect(() => {
-    // Get the initial theme from the html element class
     const htmlElement = document.documentElement;
-    const initialTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
-    setThemeRef.current(initialTheme);
 
-    // Watch for class changes on the html element (from Storybook's withThemeByClassName)
+    // Set initial theme from HTML class
+    if (isInitialMount.current) {
+      const initialTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+      if (theme !== initialTheme) {
+        setTheme(initialTheme);
+      }
+      isInitialMount.current = false;
+    }
+
+    // Watch for class changes from Storybook's toolbar
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
           const isDark = htmlElement.classList.contains('dark');
           const newTheme = isDark ? 'dark' : 'light';
-          setThemeRef.current(newTheme);
+          // Only update if different to avoid unnecessary re-renders
+          if (theme !== newTheme) {
+            setTheme(newTheme);
+          }
         }
       });
     });
@@ -48,7 +52,7 @@ const ThemeSync: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return () => {
       observer.disconnect();
     };
-  }, []); // Empty dependency array - only run once
+  }, [theme, setTheme]);
 
   return <>{children}</>;
 };
@@ -57,7 +61,12 @@ const Wrapper: React.FC<WrapperProps> = (props) => {
   const { children } = props;
 
   return (
-    <ThemeProvider>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
       <ThemeSync>{children}</ThemeSync>
     </ThemeProvider>
   );

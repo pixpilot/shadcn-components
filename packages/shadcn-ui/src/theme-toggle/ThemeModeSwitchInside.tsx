@@ -54,16 +54,16 @@ export interface ThemeModeSwitchInsideProps {
   switchClassName?: string;
   disabled?: boolean;
   ariaLabel?: string;
-  /** The resolved theme ("light" | "dark") */
-  resolvedTheme?: string;
+  /** The resolved theme value ("light" | "dark") */
+  value?: string;
   /** Function to change the theme */
-  setTheme?: (theme: string) => void;
+  onChange?: (theme: string) => void;
 }
 
 /**
  * Light/Dark theme switch with icons inside the switch.
  * Icons are embedded within the switch control.
- * Pure component - requires resolvedTheme and setTheme props.
+ * Pure component - requires value and onChange props.
  */
 export function ThemeModeSwitchInside(props: ThemeModeSwitchInsideProps) {
   const {
@@ -74,17 +74,17 @@ export function ThemeModeSwitchInside(props: ThemeModeSwitchInsideProps) {
     switchClassName,
     disabled,
     ariaLabel = 'Toggle theme',
-    resolvedTheme,
-    setTheme,
+    value,
+    onChange,
   } = props;
 
   const sizeStyles = SIZE_STYLES[size];
   const iconSize = iconSizeProp ?? sizeStyles.defaultIconSize ?? DEFAULT_ICON_SIZE;
 
-  const isDark = resolvedTheme === 'dark';
+  const isDark = value === 'dark';
 
   const onCheckedChange = (checked: boolean) => {
-    setTheme?.(checked ? 'dark' : 'light');
+    onChange?.(checked ? 'dark' : 'light');
   };
 
   if (!showIcons) {
