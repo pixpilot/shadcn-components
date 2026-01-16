@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ThemeProvider } from '../src/theme-provider';
-import { ThemeToggle } from '../src/ThemeToggle';
+import { ThemeToggle } from '../src/theme-toggle';
 
 /**
  * A theme toggle button that cycles through light, dark, and system themes.

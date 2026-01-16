@@ -1,8 +1,6 @@
 'use client';
 
-import { useTheme } from 'next-themes';
-
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 // Simple icon components (can be replaced with your preferred icon library)
 function SunIcon() {
@@ -62,36 +60,28 @@ function SystemIcon() {
   );
 }
 
-export function ThemeToggle() {
-  const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+export interface ThemeToggleProps {
+  /** Current theme value ("light" | "dark" | "system") */
+  theme?: string;
+  /** Function to change the theme */
+  setTheme?: (theme: string) => void;
+  disabled?: boolean;
+}
 
-  // Only render after mounting to avoid hydration mismatch
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setMounted(true);
-    }, 0);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
-
-  if (!mounted) {
-    return (
-      <div className="flex h-9 w-9 items-center justify-center rounded-md border border-gray-200 dark:border-gray-700">
-        <div className="h-5 w-5 animate-pulse rounded bg-gray-300 dark:bg-gray-600"></div>
-      </div>
-    );
-  }
+/**
+ * Theme toggle button that cycles through light -> dark -> system.
+ * Pure component - requires theme and setTheme props.
+ */
+export function ThemeToggle(props: ThemeToggleProps) {
+  const { theme, setTheme, disabled } = props;
 
   const toggleTheme = () => {
     if (theme === 'light') {
-      setTheme('dark');
+      setTheme?.('dark');
     } else if (theme === 'dark') {
-      setTheme('system');
+      setTheme?.('system');
     } else {
-      setTheme('light');
+      setTheme?.('light');
     }
   };
 
@@ -120,9 +110,10 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="flex h-9 w-9 items-center justify-center rounded-md border border-gray-200 bg-white text-gray-900 transition-colors hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:hover:bg-gray-800"
+      className="flex h-9 w-9 items-center justify-center rounded-md border border-gray-200 bg-white text-gray-900 transition-colors hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50"
       title={getTitle()}
       type="button"
+      disabled={disabled}
     >
       {getIcon()}
     </button>

@@ -35,7 +35,7 @@ export * from './slider';
 export * from './tabs';
 export * from './tags-input';
 export * from './theme-provider';
-export * from './ThemeToggle';
+export * from './theme-toggle';
 export * from './toast';
 
 export {
