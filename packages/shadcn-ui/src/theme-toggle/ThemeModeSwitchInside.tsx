@@ -24,9 +24,9 @@ const SIZE_STYLES: Record<
   { wrapper: string; iconPadding: string; defaultIconSize: number }
 > = {
   sm: {
-    wrapper: 'h-8',
+    wrapper: 'h-7',
     iconPadding: 'p-1',
-    defaultIconSize: 22,
+    defaultIconSize: 20,
   },
   // Match common input height (~34px)
   md: {
