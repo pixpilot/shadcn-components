@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.28.0
+
+### Minor Changes
+
+- remove ThemeToggle component and related stories
+
 ## 0.27.0
 
 ### Minor Changes
