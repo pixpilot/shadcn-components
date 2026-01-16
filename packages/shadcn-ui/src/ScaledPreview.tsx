@@ -51,6 +51,7 @@ export const ScaledPreview: React.FC<ScaledPreviewProps> = ({
   return (
     <div
       {...rest}
+      data-slot="scaled-preview"
       style={{
         width: calculatedPreviewBoxSize.width,
         height: calculatedPreviewBoxSize.height,
@@ -59,6 +60,7 @@ export const ScaledPreview: React.FC<ScaledPreviewProps> = ({
       }}
     >
       <div
+        data-slot="scaled-preview-content"
         className="absolute top-1/2 left-1/2"
         style={{
           width: baseSize.width,

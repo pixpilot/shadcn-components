@@ -7,7 +7,7 @@ export interface LayoutHeaderProps extends React.HTMLAttributes<HTMLDivElement> 
 
 const LayoutHeader = React.forwardRef<HTMLDivElement, LayoutHeaderProps>(
   ({ className, as: Component = 'div', ...props }, ref) => (
-    <Component {...props} className={cn(className)} ref={ref} />
+    <Component data-slot="layout-header" {...props} className={cn(className)} ref={ref} />
   ),
 );
 

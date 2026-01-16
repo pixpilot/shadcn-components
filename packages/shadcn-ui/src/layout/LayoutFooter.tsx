@@ -7,7 +7,7 @@ export interface LayoutFooterProps extends React.HTMLAttributes<HTMLDivElement> 
 
 const LayoutFooter = React.forwardRef<HTMLDivElement, LayoutFooterProps>(
   ({ className, as: Component = 'div', ...props }, ref) => (
-    <Component {...props} className={cn(className)} ref={ref} />
+    <Component data-slot="layout-footer" {...props} className={cn(className)} ref={ref} />
   ),
 );
 

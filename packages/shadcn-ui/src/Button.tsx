@@ -108,6 +108,7 @@ function Button(props: ButtonProps & { ref?: React.Ref<HTMLButtonElement> }) {
 
   const Loader = (
     <div
+      data-slot="button-loader"
       className={cn(
         'flex items-center justify-center',
         loaderPlacement === 'center' && 'rounded-0 absolute inset-0',

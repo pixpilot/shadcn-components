@@ -9,6 +9,7 @@ const Layout = React.forwardRef<HTMLDivElement, LayoutProps>(
   ({ className, as: Component = 'div', ...props }, ref) => {
     return (
       <Component
+        data-slot="layout"
         ref={ref}
         className={cn(
           'flex w-full flex-col overflow-hidden',
