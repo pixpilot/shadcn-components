@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.26.0
+
+### Minor Changes
+
+- add data-slot attributes for improved accessibility
+
 ## 0.25.1
 
 ### Patch Changes
