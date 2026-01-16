@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.27.0
+
+### Minor Changes
+
+- add theme toggle components and update exports
+
 ## 0.26.0
 
 ### Minor Changes
