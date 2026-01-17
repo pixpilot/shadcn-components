@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.22.1
+
+### Patch Changes
+
+- update default message from 'No Data' to 'No items'
+
 ## 0.22.0
 
 ### Minor Changes
