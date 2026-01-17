@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.29.0
+
+### Minor Changes
+
+- refactor theme props in dropdown and switch components
+
 ## 0.28.0
 
 ### Minor Changes
