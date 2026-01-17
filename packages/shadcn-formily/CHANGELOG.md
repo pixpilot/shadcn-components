@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.22.0
+
+### Minor Changes
+
+- add variant prop for visual style customization
+
 ## 0.21.10
 
 ### Patch Changes
