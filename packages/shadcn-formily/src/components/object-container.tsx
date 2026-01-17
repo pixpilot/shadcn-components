@@ -16,15 +16,23 @@ import {
 } from '../utils/resolve-responsive-space';
 import { FormItemContainer } from './form-items-container';
 
+export type ObjectContainerVariant = 'grouped' | 'flat';
+
 export interface ObjectContainerProps extends React.ComponentProps<'div'> {
   label?: SyncReactNode;
   description?: SyncReactNode;
+  /**
+   * Visual style variant.
+   * - `grouped`: Card has padding, creating a visually distinct group (default)
+   * - `flat`: No horizontal padding - fields align flush with surrounding form
+   */
+  variant?: ObjectContainerVariant;
   slotProps?: {
-    card?: React.ComponentProps<typeof Card>;
-    header?: React.ComponentProps<typeof CardHeader>;
-    title?: React.ComponentProps<typeof CardTitle>;
-    description?: React.ComponentProps<typeof CardDescription>;
-    content?: React.ComponentProps<typeof CardContent>;
+    card?: React.ComponentProps<'div'>;
+    header?: React.ComponentProps<'div'>;
+    title?: React.ComponentProps<'div'>;
+    description?: React.ComponentProps<'div'>;
+    content?: React.ComponentProps<'div'>;
   };
 }
 
@@ -59,11 +67,14 @@ export const ObjectContainer: React.FC<ObjectContainerProps> = ({
   children,
   label,
   description,
+  variant = 'grouped',
   slotProps,
   ...rest
 }) => {
   const effectiveLabel = useLabel(label);
   const desc = useDescription(description);
+
+  const isFlat = variant === 'flat';
 
   const { layout } = useFormContext();
   const { objectContainer, density } = layout || {};
@@ -116,6 +127,7 @@ export const ObjectContainer: React.FC<ObjectContainerProps> = ({
         'bg-transparent',
         gapClass,
         cardPaddingClass,
+        isFlat && 'border-0 shadow-none !py-0',
         className,
         mergedCardProps.className,
       )}
@@ -127,6 +139,7 @@ export const ObjectContainer: React.FC<ObjectContainerProps> = ({
             'form-object-header',
             headerGapClass,
             mergedHeaderProps.className,
+            isFlat && 'px-0',
           )}
         >
           {effectiveLabel != null && (
@@ -150,7 +163,11 @@ export const ObjectContainer: React.FC<ObjectContainerProps> = ({
       <FormItemContainer
         {...mergedContentProps}
         as={CardContent}
-        className={cn('form-object-content', mergedContentProps.className)}
+        className={cn(
+          'form-object-content',
+          mergedContentProps.className,
+          isFlat && 'px-0',
+        )}
       >
         {children}
       </FormItemContainer>
