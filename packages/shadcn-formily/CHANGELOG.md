@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.23.0
+
+### Minor Changes
+
+- add className support for Array components
+
 ## 0.22.1
 
 ### Patch Changes
