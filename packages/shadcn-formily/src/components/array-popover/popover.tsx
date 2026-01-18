@@ -4,7 +4,8 @@ import type { Schema } from '@formily/react';
 import type { ActiveItemManager } from '../array-common';
 import { observer, RecursionField, useField } from '@formily/react';
 
-import { Button, Popover, PopoverContent, PopoverTrigger } from '@pixpilot/shadcn';
+import { Button, cn, Popover, PopoverContent, PopoverTrigger } from '@pixpilot/shadcn';
+import { getXComponentProps } from '../../utils';
 
 export interface ArrayItemsEditPopoverProps {
   /**
@@ -41,6 +42,9 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
       onCancel(activeIndex as number);
     };
 
+    const itemWrapperProps = getXComponentProps(schema);
+    const { className: itemWrapperClassName, ...itemWrapperRestProps } = itemWrapperProps;
+
     return (
       <Popover open={open} onOpenChange={handleOpenChange}>
         {children !== undefined && <PopoverTrigger asChild>{children}</PopoverTrigger>}
@@ -58,7 +62,10 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
             </div>
 
             {activeIndex != null && (
-              <div className="space-y-4">
+              <div
+                {...itemWrapperRestProps}
+                className={cn('space-y-4', itemWrapperClassName)}
+              >
                 <RecursionField
                   basePath={arrayField.address.concat(activeIndex)}
                   schema={schema}

@@ -116,6 +116,7 @@ const ArrayItemsCollapseBase = observer((props: Props) => {
     >
       <ArrayItemsContainer
         {...otherProps}
+        className={className}
         basePath={fieldAddress}
         schema={schema}
         hasItems={dataSource.length > 0}

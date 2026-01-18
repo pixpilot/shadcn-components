@@ -7,6 +7,7 @@ import { RecursionField, useField, useFieldSchema } from '@formily/react';
 import { cn } from '@pixpilot/shadcn';
 import { ChevronDownIcon } from 'lucide-react';
 import React from 'react';
+import { getXComponentProps } from '../../utils';
 import { validateArrayItemFields } from '../../utils/validate-array-item-fields';
 import { ArrayBase, useArrayComponents } from '../array-base';
 import { ItemWrapper } from '../array-common';
@@ -33,6 +34,10 @@ const ArrayCollapseItemBase = React.memo((props: ArrayCollapseItemProps) => {
     ? (schema.items[0] ?? schema.items)
     : schema.items;
 
+  // When using onlyRenderProperties, Formily won't mount an object-level wrapper
+  // (e.g. schema items with x-component-props). Apply its props manually.
+  const itemWrapperProps = getXComponentProps(items);
+
   React.useEffect(() => {
     if (isNewItem(index)) {
       formCollapse.addActiveKey(itemId);
@@ -45,7 +50,7 @@ const ArrayCollapseItemBase = React.memo((props: ArrayCollapseItemProps) => {
       index={index}
       record={() => field.value?.[index] as unknown}
     >
-      <ItemWrapper index={index}>
+      <ItemWrapper {...itemWrapperProps} index={index}>
         {/* Header */}
         <div className="flex items-center gap-2 px-3">
           {/* Center: Expand/collapse button with item label */}

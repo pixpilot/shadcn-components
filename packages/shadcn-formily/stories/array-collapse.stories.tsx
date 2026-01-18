@@ -79,6 +79,84 @@ export const EmptyArray: Story = {
 };
 
 /**
+ * Verifies that ArrayCollapse applies `x-component-props.className` to a real DOM node,
+ * and that item-level schema `x-component-props.className` is respected even though
+ * we render `onlyRenderProperties`.
+ */
+export const WithComponentClassName: Story = {
+  render: () => {
+    const form = createForm({
+      values: {
+        contacts: [
+          { name: 'John Doe', email: 'john@example.com' },
+          { name: 'Jane Smith', email: 'jane@example.com' },
+        ],
+      },
+    });
+
+    const schema = {
+      type: 'object',
+      properties: {
+        contacts: {
+          type: 'array',
+          'x-component': 'ArrayCollapse',
+          'x-component-props': {
+            className: 'space-y-4 bg-slate-200 p-3 rounded-md',
+          },
+          items: {
+            type: 'object',
+            'x-component': 'ArrayCollapse.Item',
+            'x-component-props': {
+              className: 'bg-slate-500 text-white',
+            },
+            properties: {
+              name: {
+                type: 'string',
+                title: 'Name',
+                required: true,
+                'x-decorator': 'FormItem',
+                'x-component': 'Input',
+                'x-component-props': {
+                  placeholder: 'Enter name',
+                },
+              },
+              email: {
+                type: 'string',
+                title: 'Email',
+                required: true,
+                'x-decorator': 'FormItem',
+                'x-component': 'Input',
+                'x-component-props': {
+                  placeholder: 'Enter email',
+                  type: 'email',
+                },
+              },
+            },
+          },
+          properties: {
+            addition: {
+              type: 'void',
+              title: 'Add Contact',
+              'x-component': 'ArrayCollapse.Addition',
+            },
+          },
+        },
+      },
+    };
+
+    return (
+      <Form form={form} className="space-y-6">
+        <div className="space-y-4">
+          <h2 className="text-2xl font-bold">ArrayCollapse (ClassName propagation)</h2>
+        </div>
+
+        <SchemaField schema={schema} />
+      </Form>
+    );
+  },
+};
+
+/**
  * Array items with Collapse for inline editing
  * Items are displayed in a collapsible collapse format
  * Click on an item to expand and edit its fields inline

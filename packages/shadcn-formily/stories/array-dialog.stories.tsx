@@ -79,6 +79,95 @@ export const EmptyArray: Story = {
   },
 };
 
+/**
+ * Verifies that ArrayDialog forwards `x-component-props.className` to the list container
+ * and that item-level schema `x-component-props.className` is applied inside the editor
+ * even though it uses `onlyRenderProperties`.
+ */
+export const WithComponentClassName: Story = {
+  render: () => {
+    const form = createForm({
+      values: {
+        users: [
+          { name: 'John Doe', email: 'john@example.com' },
+          { name: 'Jane Smith', email: 'jane@example.com' },
+        ],
+      },
+    });
+
+    const schema = {
+      type: 'object',
+      properties: {
+        users: {
+          type: 'array',
+          'x-component': 'ArrayDialog',
+          'x-component-props': {
+            className: 'space-y-4 bg-slate-200 p-3 rounded-md',
+          },
+          items: {
+            type: 'object',
+            'x-component-props': {
+              className: 'bg-slate-50 p-3 rounded-md',
+            },
+            properties: {
+              name: {
+                type: 'string',
+                title: 'Name',
+                required: true,
+                'x-decorator': 'FormItem',
+                'x-component': 'Input',
+                'x-component-props': {
+                  placeholder: 'Enter name',
+                },
+              },
+              email: {
+                type: 'string',
+                title: 'Email',
+                required: true,
+                'x-decorator': 'FormItem',
+                'x-component': 'Input',
+                'x-component-props': {
+                  placeholder: 'Enter email',
+                  type: 'email',
+                },
+              },
+            },
+          },
+          properties: {
+            addition: {
+              type: 'void',
+              title: 'Add User',
+              'x-component': 'ArrayDialog.Addition',
+            },
+          },
+        },
+      },
+    };
+
+    return (
+      <Form form={form} className="space-y-6">
+        <div className="space-y-4">
+          <h2 className="text-2xl font-bold">ArrayDialog (ClassName propagation)</h2>
+          <p className="text-muted-foreground">
+            Open an item to verify the editor wrapper styling.
+          </p>
+        </div>
+
+        <SchemaField schema={schema} />
+
+        <div className="pt-4">
+          <Button
+            type="button"
+            onClick={() => alert(JSON.stringify(form.values, null, 2))}
+          >
+            View Values
+          </Button>
+        </div>
+      </Form>
+    );
+  },
+};
+
 export const Declarative: Story = {
   render: () => {
     const form = createForm({

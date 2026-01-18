@@ -4,6 +4,7 @@ export * from './extract-fields-decorators';
 export * from './for-each-schema';
 export * from './get-array-item-info';
 export * from './get-default-value';
+export * from './get-x-component-props';
 export * from './has-array-item-errors';
 export * from './has-error';
 export * from './resolve-responsive-space';

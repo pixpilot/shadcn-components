@@ -336,6 +336,87 @@ export const WithCustomComponentJsonSchema: Story = {
   },
 };
 
+export const WithComponentClassName: Story = {
+  render: () => {
+    const form = createForm({
+      values: {
+        contacts: Array.from({ length: 2 }).map((_, i) => ({
+          name: `Contact ${i + 1}`,
+        })),
+      },
+    });
+
+    const schema = {
+      type: 'object',
+      properties: {
+        contacts: {
+          type: 'array',
+          'x-component': 'ArrayCards',
+          'x-component-props': {
+            className: 'bg-slate-400',
+            title: ' Custom Contacts',
+            operations: false,
+          },
+          items: {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+                title: 'Name',
+                required: true,
+                'x-decorator': 'FormItem',
+                'x-component': 'Input',
+                'x-component-props': {
+                  placeholder: 'Enter name',
+                },
+              },
+            },
+            'x-component': 'div',
+            'x-component-props': {
+              className: 'bg-slate-500',
+            },
+          },
+          properties: {
+            addition: {
+              type: 'void',
+              title: 'Add New Name',
+              'x-component': 'ArrayCards.Addition',
+            },
+          },
+        },
+      },
+    };
+
+    const JSON_INDENT = 2;
+
+    return (
+      <Form
+        form={form}
+        className="w-[600px] "
+        onSubmit={(values) => {
+          // eslint-disable-next-line no-console
+          console.log('Form submitted:', values);
+          // eslint-disable-next-line no-alert
+          alert(JSON.stringify(values, null, JSON_INDENT));
+        }}
+      >
+        <div className="space-y-4">
+          <h3 className="text-lg font-medium">Contacts (Custom JSON Schema)</h3>
+
+          <SchemaField schema={schema} />
+        </div>
+
+        <button
+          type="submit"
+          className="mt-6 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground"
+        >
+          Submit
+        </button>
+      </Form>
+    );
+  },
+};
+
 export const WithJSONSchema: Story = {
   render: () => {
     const form = createForm({

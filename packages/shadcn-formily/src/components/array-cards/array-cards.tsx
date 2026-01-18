@@ -61,6 +61,7 @@ const ArrayCardsBase: React.FC<ArrayComponentProps> = observer((props) => {
     >
       <ArrayItemsContainer
         {...otherProps}
+        className={className}
         basePath={fieldAddress}
         schema={schema}
         hasItems={dataSource.length > 0}

@@ -5,6 +5,7 @@ import type { ActiveItemManager } from '../array-common';
 import { observer, RecursionField, useField } from '@formily/react';
 import {
   Button,
+  cn,
   Dialog,
   DialogContent,
   DialogDescription,
@@ -12,6 +13,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@pixpilot/shadcn';
+import { getXComponentProps } from '../../utils';
 
 export interface ArrayItemsEditDialogProps {
   schema: Schema;
@@ -42,6 +44,9 @@ export const EditDialog = observer(
       onCancel(itemIndex);
     };
 
+    const itemWrapperProps = getXComponentProps(schema);
+    const { className: itemWrapperClassName, ...itemWrapperRestProps } = itemWrapperProps;
+
     return (
       <Dialog
         open={open}
@@ -68,7 +73,10 @@ export const EditDialog = observer(
           Component registry from SchemaField is preserved through the Dialog portal.
           basePath ensures fields are rendered at the correct array item address.
         */}
-          <div className="grid gap-4 py-4">
+          <div
+            {...itemWrapperRestProps}
+            className={cn('grid gap-4 py-4', itemWrapperClassName)}
+          >
             {itemIndex != null && (
               <RecursionField
                 basePath={arrayField.address.concat(itemIndex)}

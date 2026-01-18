@@ -1,5 +1,6 @@
 import type { ArrayField as FormilyArrayField } from '@formily/core';
 import { observer, useField, useFieldSchema } from '@formily/react';
+import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 import { getArrayItemInfo } from '../../utils';
 import { useArrayComponents } from '../array-base';
@@ -25,7 +26,7 @@ export interface ArrayItemsListProps {
  * Displays items with move up/down, edit, and remove controls
  */
 export const ArrayItemsList: React.FC<ArrayItemsListProps> = observer(
-  ({ isNewItem, children }) => {
+  ({ isNewItem, children, className, containerProps }) => {
     const field = useField<FormilyArrayField>();
     const schema = useFieldSchema();
 
@@ -35,6 +36,8 @@ export const ArrayItemsList: React.FC<ArrayItemsListProps> = observer(
 
     return (
       <ArrayItemsContainer
+        {...containerProps}
+        className={cn(containerProps?.className, className)}
         schema={schema}
         basePath={field.address.toString()}
         hasItems={dataSource.length > 0}
