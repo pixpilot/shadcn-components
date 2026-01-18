@@ -78,6 +78,51 @@ export const BasicIconPicker: Story = {
   },
 };
 
+export const BasicIconPickerButton: Story = {
+  render: () => {
+    const form = createForm();
+
+    const schema = {
+      type: 'object',
+      properties: {
+        icon: {
+          type: 'string',
+          title: 'Select Icon',
+          'x-decorator': 'FormItem',
+          'x-component': 'IconPicker',
+          'x-component-props': {
+            variant: 'icon-button',
+          },
+        },
+      },
+    };
+
+    return (
+      <Form
+        form={form}
+        className="w-[500px]"
+        settings={{
+          iconPicker: {
+            providers: iconProviders,
+          },
+        }}
+        onSubmit={(values) => {
+          console.log('Form submitted:', values);
+          alert(JSON.stringify(values, null, JSON_INDENT));
+        }}
+      >
+        <SchemaFieldExtended schema={schema} />
+        <button
+          type="submit"
+          className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+        >
+          Submit
+        </button>
+      </Form>
+    );
+  },
+};
+
 export const IconPickerWithPreselect: Story = {
   render: () => {
     const form = createForm({
