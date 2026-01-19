@@ -1,8 +1,7 @@
-import type { ArrayField } from '@formily/core';
 import type { Schema } from '@formily/react';
 
 import type { ActiveItemManager } from '../array-common';
-import { observer, RecursionField, useField } from '@formily/react';
+import { observer, RecursionField } from '@formily/react';
 import {
   Button,
   cn,
@@ -29,7 +28,6 @@ export interface ArrayItemsEditDialogProps {
  */
 export const EditDialog = observer(
   ({ schema, onSave, onCancel, activeItemManager }: ArrayItemsEditDialogProps) => {
-    const arrayField = useField<ArrayField>();
     const itemIndex = activeItemManager.activeItem;
     const { isNew } = activeItemManager;
     const open = itemIndex !== undefined;
@@ -77,13 +75,7 @@ export const EditDialog = observer(
             {...itemWrapperRestProps}
             className={cn('grid gap-4 py-4', itemWrapperClassName)}
           >
-            {itemIndex != null && (
-              <RecursionField
-                basePath={arrayField.address.concat(itemIndex)}
-                schema={schema}
-                onlyRenderProperties
-              />
-            )}
+            {itemIndex != null && <RecursionField schema={schema} name={itemIndex} />}
           </div>
 
           <DialogFooter>

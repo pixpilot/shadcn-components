@@ -34,8 +34,7 @@ const ArrayCollapseItemBase = React.memo((props: ArrayCollapseItemProps) => {
     ? (schema.items[0] ?? schema.items)
     : schema.items;
 
-  // When using onlyRenderProperties, Formily won't mount an object-level wrapper
-  // (e.g. schema items with x-component-props). Apply its props manually.
+  // Get x-component-props from items schema to apply to the wrapper
   const itemWrapperProps = getXComponentProps(items);
 
   React.useEffect(() => {
@@ -50,6 +49,11 @@ const ArrayCollapseItemBase = React.memo((props: ArrayCollapseItemProps) => {
       index={index}
       record={() => field.value?.[index] as unknown}
     >
+      {/* Render hidden RecursionField to create field instances for the array item */}
+      <div style={{ display: 'none' }}>
+        <RecursionField schema={items as Schema} name={index} />
+      </div>
+
       <ItemWrapper {...itemWrapperProps} index={index}>
         {/* Header */}
         <div className="flex items-center gap-2 px-3">
@@ -99,11 +103,7 @@ const ArrayCollapseItemBase = React.memo((props: ArrayCollapseItemProps) => {
         {isOpen && items && (
           <div className="border-t px-3 pb-4">
             <div className="space-y-4 pt-4">
-              <RecursionField
-                basePath={field.address.concat(index)}
-                schema={items as Schema}
-                onlyRenderProperties
-              />
+              <RecursionField schema={items as Schema} name={index} />
             </div>
           </div>
         )}

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { Button } from '@pixpilot/shadcn-ui';
 import { createForm, Form, SchemaField } from '../src';
 
 const meta: Meta<typeof Form> = {
@@ -739,6 +740,92 @@ export const NestedArraysDeclarative: Story = {
         >
           Submit
         </button>
+      </Form>
+    );
+  },
+};
+
+export const WithItemReactionTitle: Story = {
+  render: () => {
+    const form = createForm({
+      values: {
+        users: [
+          { name: 'John Doe', email: 'john@example.com' },
+          { name: 'Jane Smith', email: 'jane@example.com' },
+        ],
+      },
+    });
+
+    const schema = {
+      type: 'object',
+      properties: {
+        users: {
+          type: 'array',
+          'x-component': 'ArrayCards',
+          items: {
+            type: 'object',
+            'x-reactions': {
+              fulfill: {
+                state: {
+                  title: "{{$self.value?.name || 'User'}}",
+                },
+              },
+            },
+            properties: {
+              name: {
+                type: 'string',
+                title: 'Name',
+                required: true,
+                'x-decorator': 'FormItem',
+                'x-component': 'Input',
+                'x-component-props': {
+                  placeholder: 'Enter name',
+                },
+              },
+              email: {
+                type: 'string',
+                title: 'Email',
+                required: true,
+                'x-decorator': 'FormItem',
+                'x-component': 'Input',
+                'x-component-props': {
+                  placeholder: 'Enter email',
+                  type: 'email',
+                },
+              },
+            },
+          },
+          properties: {
+            addition: {
+              type: 'void',
+              title: 'Add User',
+              'x-component': 'ArrayCards.Addition',
+            },
+          },
+        },
+      },
+    };
+
+    return (
+      <Form form={form} className="space-y-6">
+        <div className="space-y-4">
+          <h2 className="text-2xl font-bold">ArrayPopover (ClassName propagation)</h2>
+          <p className="text-muted-foreground">
+            Open the editor to verify the wrapper styling.
+          </p>
+        </div>
+
+        <SchemaField schema={schema} />
+
+        <div className="pt-4">
+          <Button
+            type="button"
+            // eslint-disable-next-line no-alert
+            onClick={() => alert(JSON.stringify(form.values, null, 2))}
+          >
+            View Values
+          </Button>
+        </div>
       </Form>
     );
   },

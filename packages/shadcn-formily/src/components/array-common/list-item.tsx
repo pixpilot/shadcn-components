@@ -1,4 +1,5 @@
-import { useFieldSchema } from '@formily/react';
+import type { ISchema } from '@formily/react';
+import { RecursionField, useFieldSchema } from '@formily/react';
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 import { ArrayBase, useArrayComponents } from '../array-base';
@@ -38,6 +39,11 @@ export const ListItem: React.FC<ListItemProps> = React.memo(
 
     return (
       <ArrayBase.Item key={itemKey} index={index} record={record}>
+        {/* Render hidden RecursionField to create field instances for the array item */}
+        <div style={{ display: 'none' }}>
+          <RecursionField schema={schema.items as ISchema} name={index} />
+        </div>
+
         {/* Hide temporary item visually but keep it in DOM for form state */}
         <ItemWrapper
           className={cn('flex px-3 pl-4 py-2', isNewItem && 'hidden')}
