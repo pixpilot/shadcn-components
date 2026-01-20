@@ -198,7 +198,11 @@ export const LabelPlacementTop: Story = {
           title: 'Username (Top)',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            labelPlacement: 'top',
+            slots: {
+              label: {
+                placement: 'top',
+              },
+            },
           },
           'x-component': 'Input',
           'x-component-props': {
@@ -234,7 +238,11 @@ export const LabelPlacementStart: Story = {
           title: 'Username (Start)',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            labelPlacement: 'start',
+            slots: {
+              label: {
+                placement: 'start',
+              },
+            },
           },
           'x-component': 'Input',
           'x-component-props': {
@@ -246,7 +254,11 @@ export const LabelPlacementStart: Story = {
           title: 'Email (Start)',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            labelPlacement: 'start',
+            slots: {
+              label: {
+                placement: 'start',
+              },
+            },
           },
           'x-component': 'Input',
           'x-component-props': {
@@ -283,7 +295,11 @@ export const LabelPlacementEnd: Story = {
           title: 'I agree to the terms',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            labelPlacement: 'end',
+            slots: {
+              label: {
+                placement: 'end',
+              },
+            },
           },
           'x-component': 'Checkbox',
         },
@@ -292,7 +308,11 @@ export const LabelPlacementEnd: Story = {
           title: 'Subscribe to newsletter',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            labelPlacement: 'end',
+            slots: {
+              label: {
+                placement: 'end',
+              },
+            },
           },
           'x-component': 'Checkbox',
         },

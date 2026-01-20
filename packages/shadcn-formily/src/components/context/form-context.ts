@@ -45,10 +45,10 @@ export interface FormLayoutOptions {
   labelPlacement?: LabelPlacement;
   /** Custom class names for FormItem elements */
   itemProps?: {
-    label?: React.HTMLAttributes<HTMLDivElement>;
-    description?: React.HTMLAttributes<HTMLDivElement>;
+    label?: React.LabelHTMLAttributes<HTMLLabelElement>;
+    description?: React.HTMLAttributes<HTMLParagraphElement>;
     inputWrapper?: React.HTMLAttributes<HTMLDivElement>;
-    error?: React.HTMLAttributes<HTMLDivElement>;
+    error?: React.HTMLAttributes<HTMLParagraphElement>;
     container?: React.HTMLAttributes<HTMLDivElement>;
   };
   /** Custom class names for ObjectContainer elements */

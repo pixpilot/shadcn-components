@@ -1,6 +1,8 @@
 import { connect, mapProps } from '@formily/react';
 import { Switch as ShadcnSwitch } from '@pixpilot/shadcn';
 
+import { setCheckboxDefaultDecoratorProps } from '../utils/formily-decorator';
+
 /**
  * Formily-connected Switch component
  * Toggle switch for boolean values
@@ -13,8 +15,8 @@ export const Switch = connect(
       onInput: 'onCheckedChange',
     },
     (props, field) => {
-      // eslint-disable-next-line no-param-reassign
-      field.decoratorProps.labelPlacement = 'end';
+      setCheckboxDefaultDecoratorProps(field);
+
       return props;
     },
   ),

@@ -2,7 +2,9 @@
 
 import type {
   DescriptionPlacement,
+  FormItemLabelProps,
   FormItemProps,
+  FormItemSlots,
   LabelPlacement,
 } from './form-item-types';
 import { useField } from '@formily/react';
@@ -32,25 +34,44 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
   asterisk,
   feedbackStatus,
   feedbackText,
-  labelPlacement = 'top',
+  slots,
   ...props
 }) => {
   const field = useField();
-  const fieldProps = field?.componentProps ?? {};
+  const fieldDecoratorProps = (field as unknown as { decoratorProps?: unknown })
+    ?.decoratorProps as Record<string, unknown> | undefined;
+  const fieldComponentProps = (field as unknown as { componentProps?: unknown })
+    ?.componentProps as Record<string, unknown> | undefined;
+
+  const fieldDecoratorSlots = fieldDecoratorProps?.slots as FormItemSlots | undefined;
+  const fieldComponentSlots = fieldComponentProps?.slots as FormItemSlots | undefined;
+
+  const fieldLabelProps: FormItemLabelProps | undefined =
+    fieldDecoratorSlots?.label ??
+    (fieldDecoratorProps?.labelProps as FormItemLabelProps | undefined) ??
+    fieldComponentSlots?.label ??
+    (fieldComponentProps?.labelProps as FormItemLabelProps | undefined);
 
   const effectiveLabel = useLabel(label);
 
   const { layout } = useFormContext();
   const itemComponentsProps = layout?.itemProps || {};
   const contextDescriptionPlacement = layout?.descriptionPlacement;
+  const contextLabelPlacement = layout?.labelPlacement;
 
-  // eslint-disable-next-line ts/no-unsafe-assignment
+  const fieldLabelPlacement: LabelPlacement | undefined =
+    fieldLabelProps?.placement ??
+    (fieldDecoratorProps?.labelPlacement as LabelPlacement | undefined) ??
+    (fieldComponentProps?.labelPlacement as LabelPlacement | undefined);
+
+  const propLabelPlacement: LabelPlacement | undefined = slots?.label?.placement;
+
   const effectiveLabelPlacement: LabelPlacement =
-    fieldProps.labelPlacement ?? labelPlacement;
+    fieldLabelPlacement ?? propLabelPlacement ?? contextLabelPlacement ?? 'top';
 
-  // eslint-disable-next-line ts/no-unsafe-assignment
   const fieldDescriptionPlacement: DescriptionPlacement | undefined =
-    fieldProps.descriptionPlacement;
+    (fieldComponentProps?.descriptionPlacement as DescriptionPlacement | undefined) ??
+    (fieldDecoratorProps?.descriptionPlacement as DescriptionPlacement | undefined);
 
   const effectiveDescriptionPlacement: DescriptionPlacement | undefined =
     fieldDescriptionPlacement ?? descriptionPlacement ?? contextDescriptionPlacement;
@@ -83,13 +104,22 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
 
   const labelElement = effectiveLabel != null && (
     <FormItemLabel
-      {...itemComponentsProps.label}
       id={id}
       label={effectiveLabel}
       asterisk={asterisk}
       error={feedbackStatus === 'error'}
       shrink={effectiveLabelPlacement === 'end' || effectiveLabelPlacement === 'start'}
-      labelClassName={cn(spacingConfig.label, itemComponentsProps.label?.className)}
+      labelProps={{
+        ...fieldLabelProps,
+        ...itemComponentsProps.label,
+        ...slots?.label,
+        className: cn(
+          effectiveLabelPlacement === 'top' ? spacingConfig.label : 'mb-0',
+          fieldLabelProps?.className,
+          itemComponentsProps.label?.className,
+          slots?.label?.className,
+        ),
+      }}
       description={description}
       descriptionInPopover={
         resolvedDescriptionPlacement === 'popover' && description != null
@@ -100,7 +130,12 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
   const inputElement = (
     <div
       {...itemComponentsProps.inputWrapper}
-      className={cn('relative', itemComponentsProps.inputWrapper?.className)}
+      {...slots?.inputWrapper}
+      className={cn(
+        'relative',
+        itemComponentsProps.inputWrapper?.className,
+        slots?.inputWrapper?.className,
+      )}
     >
       {React.isValidElement(children)
         ? React.cloneElement(children, {
@@ -115,11 +150,13 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
   const descriptionElement = descriptionRenderedInline ? (
     <p
       {...itemComponentsProps.description}
+      {...slots?.description}
       id={descriptionId}
       className={cn(
         'text-muted-foreground text-[0.8rem]',
         spacingConfig.description,
         itemComponentsProps.description?.className,
+        slots?.description?.className,
       )}
     >
       {description}
@@ -156,11 +193,13 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
     <div
       data-slot="form-item"
       {...itemComponentsProps.container}
+      {...slots?.container}
       {...props}
       className={cn(
         'flex flex-col ',
         className,
         itemComponentsProps.container?.className,
+        slots?.container?.className,
       )}
     >
       {contentElement}
@@ -168,6 +207,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
       {Boolean(feedbackText) && (
         <p
           {...itemComponentsProps.error}
+          {...slots?.error}
           id={feedbackId}
           className={cn(
             'text-[0.8rem]',
@@ -176,6 +216,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
             feedbackStatus === 'warning' && 'text-amber-600',
             feedbackStatus === 'success' && 'text-green-600',
             itemComponentsProps.error?.className,
+            slots?.error?.className,
           )}
         >
           {typeof feedbackText === 'string'

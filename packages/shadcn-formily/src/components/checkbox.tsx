@@ -1,6 +1,8 @@
 import { connect, mapProps } from '@formily/react';
 import { Checkbox as ShadcnCheckbox } from '@pixpilot/shadcn';
 
+import { setCheckboxDefaultDecoratorProps } from '../utils/formily-decorator';
+
 /**
  * Formily-connected Checkbox component
  * Maps Formily field checked state to shadcn Checkbox
@@ -13,8 +15,7 @@ export const Checkbox = connect(
       onInput: 'onCheckedChange',
     },
     (props, field) => {
-      // eslint-disable-next-line no-param-reassign
-      field.decoratorProps.labelPlacement = 'end';
+      setCheckboxDefaultDecoratorProps(field);
 
       return {
         ...props,
@@ -22,9 +23,3 @@ export const Checkbox = connect(
     },
   ),
 );
-
-/**
- * Default label placement for checkbox
- * Used by FormItem to determine label positioning
- */
-(Checkbox as typeof Checkbox & { labelPlacement?: string }).labelPlacement = 'right';

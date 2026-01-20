@@ -1,4 +1,5 @@
 import type { SyncReactNode } from '../../types';
+import type { FormItemLabelProps as LabelProps } from './form-item-types';
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 
@@ -10,7 +11,7 @@ export interface FormItemLabelProps {
   asterisk?: boolean;
   error?: boolean;
   shrink?: boolean;
-  labelClassName?: string;
+  labelProps?: LabelProps;
   description?: SyncReactNode;
   descriptionInPopover?: boolean;
 }
@@ -21,20 +22,23 @@ export function FormItemLabel({
   asterisk,
   error,
   shrink,
-  labelClassName,
+  labelProps,
   description,
   descriptionInPopover,
 }: FormItemLabelProps) {
+  const { className, placement: _placement, ...restLabelProps } = labelProps ?? {};
+
   return (
     <label
       htmlFor={id}
       data-slot="form-label"
       data-error={Boolean(error)}
+      {...restLabelProps}
       className={cn(
         'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
         error && 'text-destructive',
         shrink && 'shrink-0',
-        labelClassName,
+        className,
       )}
     >
       <span className="inline-flex items-center gap-1">
