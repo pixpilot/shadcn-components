@@ -34,6 +34,8 @@ export interface IconPickerProps {
   providers: IconProvider[];
   isLoading?: boolean;
   onProvidersLoaded?: (providers: Array<{ prefix: string; name: string }>) => void;
+  showValueText?: boolean;
+  emptyText?: string;
 }
 
 export const IconPicker: FC<IconPickerProps> = ({
@@ -44,6 +46,8 @@ export const IconPicker: FC<IconPickerProps> = ({
   popover,
   variant = 'default',
   providers: providersProp,
+  showValueText = true,
+  emptyText = '—',
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -63,7 +67,7 @@ export const IconPicker: FC<IconPickerProps> = ({
   const displayIcon = hasValue ? (
     <Icon icon={value} width="20" height="20" />
   ) : (
-    <span className="text-sm text-muted-foreground">No icon selected</span>
+    <span className="text-sm text-muted-foreground">{emptyText}</span>
   );
 
   const selectorContent = (
@@ -98,7 +102,7 @@ export const IconPicker: FC<IconPickerProps> = ({
     <Icon icon={value} width="20" height="20" />
   ) : (
     <span aria-hidden="true" className="text-muted-foreground text-lg">
-      +
+      {emptyText}
     </span>
   );
 
@@ -127,7 +131,9 @@ export const IconPicker: FC<IconPickerProps> = ({
     <div className="flex items-center gap-2">
       <div className="flex items-center gap-2 rounded-md border border-input bg-background px-3 py-2">
         {displayIcon}
-        {hasValue && <span className="text-sm text-muted-foreground">{value}</span>}
+        {showValueText && hasValue && (
+          <span className="text-sm text-muted-foreground">{value}</span>
+        )}
       </div>
 
       <IconPickerContainer

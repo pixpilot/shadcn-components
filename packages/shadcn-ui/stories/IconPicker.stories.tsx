@@ -69,6 +69,14 @@ const meta = {
       control: 'boolean',
       description: 'Show loading state overlay',
     },
+    showValueText: {
+      control: 'boolean',
+      description: 'Toggle rendering the selected icon text label',
+    },
+    emptyText: {
+      control: 'text',
+      description: 'Text to display when no icon is selected',
+    },
   },
 } satisfies Meta<typeof IconPicker>;
 
@@ -176,6 +184,34 @@ export const WithSelectedIcon: Story = {
     providers: createMockProviders(),
   },
   render: function WithSelectedIconStory(args) {
+    const [value, setValue] = useState<string>(args.value ?? '');
+
+    return (
+      <IconPicker
+        {...args}
+        value={value}
+        onChange={(newValue) => {
+          setValue(newValue);
+          args.onChange?.(newValue);
+        }}
+      />
+    );
+  },
+};
+
+/**
+ * Hide value text and show dash when empty
+ */
+export const HideValueTextAndDash: Story = {
+  args: {
+    value: '',
+    pickerMode: 'dialog',
+    variant: 'default',
+    providers: createMockProviders(),
+    showValueText: false,
+    emptyText: '-',
+  },
+  render: function HideValueTextAndDashStory(args) {
     const [value, setValue] = useState<string>(args.value ?? '');
 
     return (
