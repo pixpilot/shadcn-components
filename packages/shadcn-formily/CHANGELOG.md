@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.27.0
+
+### Minor Changes
+
+- implement workaround for Formily's required array handling
+
 ## 0.26.0
 
 ### Minor Changes
