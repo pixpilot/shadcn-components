@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.31.1
+
+### Patch Changes
+
+- rename `popover` prop to `popoverProps` for consistency
+
 ## 0.31.0
 
 ### Minor Changes
