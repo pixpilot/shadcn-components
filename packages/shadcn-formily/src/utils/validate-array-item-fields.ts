@@ -3,7 +3,6 @@ import { fieldsHasError } from './has-error';
 
 /**
  * Validates all child fields of a specific array item asynchronously.
- * @param form - The Formily form instance
  * @param arrayField - The array field containing the item
  * @param index - The index of the array item to validate
  * @throws Error if any field has validation errors
