@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.26.0
+
+### Minor Changes
+
+- enhance FormItem and Checkbox components with slot support
+
 ## 0.25.2
 
 ### Patch Changes
