@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.24.0
+
+### Minor Changes
+
+- enhance Array components with item title reactions
+
 ## 0.23.0
 
 ### Minor Changes
