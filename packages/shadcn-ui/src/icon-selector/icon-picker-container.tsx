@@ -62,6 +62,9 @@ export const IconPickerContainer: FC<IconPickerProps> = ({
               popover?.className,
             )}
           >
+            <div className="mb-4">
+              <h3 className="text-lg font-semibold">Select an Icon</h3>
+            </div>
             {selectorContent}
           </PopoverContent>
         </Popover>
