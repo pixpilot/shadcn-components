@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.31.0
+
+### Minor Changes
+
+- enhance icon picker with improved button styling and icon display
+
 ## 0.30.0
 
 ### Minor Changes
