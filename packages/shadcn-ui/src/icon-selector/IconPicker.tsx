@@ -29,7 +29,7 @@ export interface IconPickerProps {
   onChange?: (value: string) => void;
   onOpenChange?: (open: boolean) => void;
   pickerMode?: MountType;
-  popover?: Partial<React.ComponentProps<typeof PopoverContent>>;
+  popoverProps?: Partial<React.ComponentProps<typeof PopoverContent>>;
   variant?: IconPickerVariant;
   providers: IconProvider[];
   isLoading?: boolean;
@@ -54,7 +54,7 @@ export const IconPicker: FC<IconPickerProps> = ({
   onChange,
   onOpenChange,
   pickerMode = 'dialog',
-  popover,
+  popoverProps,
   variant = 'default',
   providers: providersProp,
   showValueText = true,
@@ -141,7 +141,7 @@ export const IconPicker: FC<IconPickerProps> = ({
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         selectorContent={selectorContent}
-        popover={popover}
+        popover={popoverProps}
       >
         <Button
           type="button"
@@ -198,7 +198,7 @@ export const IconPicker: FC<IconPickerProps> = ({
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         selectorContent={selectorContent}
-        popover={popover}
+        popover={popoverProps}
       >
         <Button
           type="button"

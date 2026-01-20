@@ -62,7 +62,7 @@ const meta = {
     providers: {
       description: 'Array of icon providers with available icons',
     },
-    popover: {
+    popoverProps: {
       description: 'Popover configuration options (Partial<PopoverContent props>)',
     },
     isLoading: {
@@ -447,7 +447,7 @@ export const WithPopoverConfig: Story = {
     pickerMode: 'popover',
     variant: 'default',
     providers: createMockProviders(),
-    popover: {
+    popoverProps: {
       align: 'start',
       side: 'right',
     },
