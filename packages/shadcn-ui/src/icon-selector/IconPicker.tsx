@@ -4,6 +4,8 @@ import type { FC } from 'react';
 import type { IconProvider } from './types';
 
 import { Icon } from '@iconify/react';
+import { cn } from '@pixpilot/shadcn';
+import { X } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { Button } from '../Button';
 import { useMediaQuery } from '../hooks';
@@ -35,7 +37,8 @@ export interface IconPickerProps {
   isLoading?: boolean;
   onProvidersLoaded?: (providers: Array<{ prefix: string; name: string }>) => void;
   showValueText?: boolean;
-  emptyText?: string;
+  emptyText?: React.ReactNode;
+  showClearButton?: boolean;
 }
 
 export const IconPicker: FC<IconPickerProps> = ({
@@ -47,7 +50,8 @@ export const IconPicker: FC<IconPickerProps> = ({
   variant = 'default',
   providers: providersProp,
   showValueText = true,
-  emptyText = '—',
+  emptyText = '+',
+  showClearButton = true,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -62,13 +66,33 @@ export const IconPicker: FC<IconPickerProps> = ({
     [onChange, onOpenChange],
   );
 
+  const handleClearIcon = useCallback(() => {
+    onChange?.('');
+    setIsOpen(false);
+    onOpenChange?.(false);
+  }, [onChange, onOpenChange]);
+
   const hasValue = typeof value === 'string' && value.length > 0;
 
-  const displayIcon = hasValue ? (
-    <Icon icon={value} width="20" height="20" />
-  ) : (
-    <span className="text-sm text-muted-foreground">{emptyText}</span>
-  );
+  const renderIconDisplay = (emptyClassName: string, ariaHidden?: boolean) => {
+    if (hasValue) {
+      return <Icon icon={value} width="20" height="20" />;
+    }
+
+    return (
+      <span
+        aria-hidden={ariaHidden}
+        className={cn(
+          'min-w-6 text-muted-foreground flex items-center justify-center',
+          emptyClassName,
+        )}
+      >
+        {emptyText}
+      </span>
+    );
+  };
+
+  const displayIcon = renderIconDisplay('text-sm');
 
   const selectorContent = (
     <IconPickerContent
@@ -97,14 +121,9 @@ export const IconPicker: FC<IconPickerProps> = ({
 
   const isIconButtonVariant = variant === 'icon-button';
   const iconButtonLabel = hasValue ? `Change selected icon (${value})` : 'Select an icon';
+  const shouldShowClearButton = showClearButton && hasValue;
 
-  const iconButtonContent = hasValue ? (
-    <Icon icon={value} width="20" height="20" />
-  ) : (
-    <span aria-hidden="true" className="text-muted-foreground text-lg">
-      {emptyText}
-    </span>
-  );
+  const iconButtonContent = renderIconDisplay('text-lg', true);
 
   if (isIconButtonVariant) {
     return (
@@ -115,14 +134,35 @@ export const IconPicker: FC<IconPickerProps> = ({
         selectorContent={selectorContent}
         popover={popover}
       >
-        <Button
-          type="button"
-          variant="outline"
-          className="p-2"
-          aria-label={iconButtonLabel}
-        >
-          {iconButtonContent}
-        </Button>
+        <span className="relative inline-flex">
+          <Button
+            type="button"
+            variant="outline"
+            className="p-2"
+            aria-label={iconButtonLabel}
+          >
+            {iconButtonContent}
+          </Button>
+          {shouldShowClearButton && (
+            <Button
+              type="button"
+              title="Clear selected icon"
+              className={cn(
+                'absolute -right-1 -top-1 inline-flex h-4 w-4 items-center justify-center rounded-full !p-1',
+                'border border-border bg-background text-foreground',
+                'hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+              )}
+              aria-label="Clear icon"
+              onClick={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                handleClearIcon();
+              }}
+            >
+              <X className="!h-3 !w-3" />
+            </Button>
+          )}
+        </span>
       </IconPickerContainer>
     );
   }
@@ -147,6 +187,17 @@ export const IconPicker: FC<IconPickerProps> = ({
           {hasValue ? 'Change Icon' : 'Select Icon'}
         </Button>
       </IconPickerContainer>
+
+      {shouldShowClearButton && (
+        <Button
+          type="button"
+          variant="outline"
+          className="whitespace-nowrap"
+          onClick={handleClearIcon}
+        >
+          Clear
+        </Button>
+      )}
     </div>
   );
 };

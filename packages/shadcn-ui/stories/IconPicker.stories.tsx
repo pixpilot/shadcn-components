@@ -77,6 +77,10 @@ const meta = {
       control: 'text',
       description: 'Text to display when no icon is selected',
     },
+    showClearButton: {
+      control: 'boolean',
+      description: 'Toggle the clear button when an icon is selected',
+    },
   },
 } satisfies Meta<typeof IconPicker>;
 
@@ -275,6 +279,44 @@ export const IconButtonWithIcon: Story = {
           args.onChange?.(newValue);
         }}
       />
+    );
+  },
+};
+
+/**
+ * Clear button visible when value exists
+ */
+export const ClearButton: Story = {
+  args: {
+    pickerMode: 'dialog',
+    variant: 'default',
+    providers: createMockProviders(),
+    showClearButton: true,
+  },
+  render: function ClearButtonStory(args) {
+    const [defaultValue, setDefaultValue] = useState<string>('mdi:heart');
+    const [iconButtonValue, setIconButtonValue] = useState<string>('mdi:star');
+
+    return (
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <IconPicker
+          {...args}
+          value={defaultValue}
+          onChange={(newValue) => {
+            setDefaultValue(newValue);
+            args.onChange?.(newValue);
+          }}
+        />
+        <IconPicker
+          {...args}
+          variant="icon-button"
+          value={iconButtonValue}
+          onChange={(newValue) => {
+            setIconButtonValue(newValue);
+            args.onChange?.(newValue);
+          }}
+        />
+      </div>
     );
   },
 };
