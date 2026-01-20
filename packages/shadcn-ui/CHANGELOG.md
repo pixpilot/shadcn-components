@@ -1,5 +1,12 @@
 # @pixpilot/shadcn-ui
 
+## 0.30.0
+
+### Minor Changes
+
+- add showValueText and emptyText props
+- add tooltips to Array operation buttons
+
 ## 0.29.0
 
 ### Minor Changes

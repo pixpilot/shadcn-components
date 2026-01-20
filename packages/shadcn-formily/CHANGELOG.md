@@ -1,5 +1,18 @@
 # @pixpilot/formily-shadcn
 
+## 0.25.0
+
+### Minor Changes
+
+- add clear button functionality and props
+- add tooltips to Array operation buttons
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+  - @pixpilot/shadcn-ui@0.30.0
+
 ## 0.24.0
 
 ### Minor Changes
