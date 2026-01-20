@@ -24,6 +24,7 @@ export function ArrayMoveDown({
     <Button
       type="button"
       variant="ghost"
+      tooltip="Move Down"
       size="icon"
       {...props}
       disabled={self?.disabled || array.props?.disabled || isLast}

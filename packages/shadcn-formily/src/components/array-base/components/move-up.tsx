@@ -24,6 +24,7 @@ export function ArrayMoveUp({
     <Button
       type="button"
       variant="ghost"
+      tooltip="Move Up"
       size="icon"
       {...props}
       disabled={self?.disabled || array.props?.disabled || isFirst}

@@ -22,6 +22,7 @@ export function ArrayCopy({
       type="button"
       variant="ghost"
       size="icon"
+      tooltip="Copy"
       {...props}
       disabled={self?.disabled || array.props?.disabled}
       ref={ref}

@@ -22,6 +22,7 @@ export function ArrayRemove({
     <Button
       type="button"
       variant="ghost"
+      tooltip="Remove"
       size="icon"
       {...props}
       disabled={self?.disabled || array.props?.disabled}

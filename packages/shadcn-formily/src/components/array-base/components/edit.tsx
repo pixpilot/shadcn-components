@@ -20,6 +20,7 @@ export function ArrayEditButton({
       type="button"
       variant="ghost"
       size="icon"
+      tooltip="Edit"
       {...props}
       disabled={self?.disabled || array.props?.disabled}
       ref={ref}
