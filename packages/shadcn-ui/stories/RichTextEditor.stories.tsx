@@ -28,9 +28,9 @@ const meta = {
       description: 'Whether to show the formatting toolbar',
       defaultValue: true,
     },
-    toolbarOptions: {
+    toolbarItems: {
       control: 'object',
-      description: 'Array of toolbar options to display',
+      description: 'Array of toolbar items to display',
     },
   },
 } satisfies Meta<typeof RichTextEditor>;
@@ -83,7 +83,7 @@ export const WithoutToolbar: Story = {
 export const LimitedToolbar: Story = {
   args: {
     value: '<p>This editor only shows bold and italic buttons.</p>',
-    toolbarOptions: ['bold', 'italic'],
+    toolbarItems: ['bold', 'italic'],
   },
 };
 
@@ -93,7 +93,7 @@ export const LimitedToolbar: Story = {
 export const CustomToolbar: Story = {
   args: {
     value: '<p>This editor has custom buttons including a save button.</p>',
-    toolbarOptions: [
+    toolbarItems: [
       'bold',
       'italic',
       '|',

@@ -21,7 +21,7 @@ export interface PredefinedToolbarOption {
   isActive?: (editor: Editor) => boolean;
 }
 
-export const predefinedToolbarOptions: Record<string, PredefinedToolbarOption> = {
+export const predefinedToolbarItems: Record<string, PredefinedToolbarOption> = {
   bold: {
     icon: <Bold className="h-4 w-4" />,
     tooltip: 'Bold',

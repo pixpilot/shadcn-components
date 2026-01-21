@@ -1,17 +1,17 @@
 import type { Editor, Extension } from '@tiptap/core';
 import type { UseEditorOptions } from '@tiptap/react';
-import type { PredefinedToolbarOption } from './predefined-toolbar-options';
+import type { PredefinedToolbarOption } from './predefined-toolbar-items';
 import { cn } from '@pixpilot/shadcn';
 import { EditorContent, useEditor } from '@tiptap/react';
 
 import StarterKit from '@tiptap/starter-kit';
 import React from 'react';
-import { predefinedToolbarOptions } from './predefined-toolbar-options';
+import { predefinedToolbarItems } from './predefined-toolbar-items';
 import { ToolbarButton } from './ToolbarButton';
 
 type EditorProps = Editor['options']['editorProps'];
 
-export type ToolbarOption =
+export type ToolbarItems =
   | string
   | '|'
   | {
@@ -74,10 +74,10 @@ export interface RichTextEditorProps {
    */
   showToolbar?: boolean;
   /**
-   * Array of toolbar options to display. If provided, only these options will be shown.
+   * Array of toolbar items to display. If provided, only these items will be shown.
    * Can be strings for predefined commands or objects for custom buttons.
    */
-  toolbarOptions?: ToolbarOption[];
+  toolbarItems?: ToolbarItems[];
   /**
    * Custom editor props to pass to the editor
    */
@@ -93,7 +93,7 @@ export interface RichTextEditorProps {
 
 const defaultExtensions: Extension[] = [];
 
-const defaultToolbarOptions: ToolbarOption[] = [
+const defaultToolbarItems: ToolbarItems[] = [
   'bold',
   'italic',
   'underline',
@@ -118,7 +118,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   editable = true,
   slots,
   showToolbar = true,
-  toolbarOptions = defaultToolbarOptions,
+  toolbarItems = defaultToolbarItems,
   editorProps: customEditorProps,
   immediatelyRender = false,
 }) => {
@@ -239,7 +239,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
           slots?.toolbar?.className,
         )}
       >
-        {toolbarOptions.map((option) => {
+        {toolbarItems.map((option) => {
           if (option === '|') {
             separatorCount += 1;
             return (
@@ -254,7 +254,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
           }
 
           if (typeof option === 'string') {
-            const predefinedOption = predefinedToolbarOptions[option];
+            const predefinedOption = predefinedToolbarItems[option];
             if (!predefinedOption) return null;
 
             return (

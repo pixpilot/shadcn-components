@@ -161,7 +161,7 @@ export const withFormConfig: Story = {
         }}
         settings={{
           richTextEditor: {
-            toolbarOptions: [
+            toolbarItems: [
               'bold',
               'italic',
               'underline',
@@ -191,7 +191,7 @@ export const withFieldConfig: Story = {
           'x-decorator': 'FormItem',
           'x-component': 'RichTextEditor',
           'x-component-props': {
-            toolbarOptions: [
+            toolbarItems: [
               'bold',
               'italic',
               'underline',
@@ -255,7 +255,7 @@ export const WithCustomToolbarButton: Story = {
           'x-decorator': 'FormItem',
           'x-component': 'RichTextEditor',
           'x-component-props': {
-            toolbarOptions: [
+            toolbarItems: [
               'bold',
               'italic',
               'underline',
@@ -329,7 +329,7 @@ export const WithMultipleCustomButtons: Story = {
           'x-decorator': 'FormItem',
           'x-component': 'RichTextEditor',
           'x-component-props': {
-            toolbarOptions: [
+            toolbarItems: [
               'bold',
               'italic',
               'underline',
@@ -446,7 +446,7 @@ export const WithCustomButtonsInFormSettings: Story = {
         }}
         settings={{
           richTextEditor: {
-            toolbarOptions: [
+            toolbarItems: [
               'bold',
               'italic',
               '|',
