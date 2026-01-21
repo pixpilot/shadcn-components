@@ -1,5 +1,16 @@
 # @pixpilot/formily-shadcn
 
+## 0.29.0
+
+### Minor Changes
+
+- rename toolbarOptions to toolbarItems and update related functionality
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn-ui@0.34.0
+
 ## 0.28.0
 
 ### Minor Changes
