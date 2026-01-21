@@ -1,7 +1,8 @@
 import { ThemeProvider } from '@pixpilot/shadcn-ui';
 import { useTheme } from 'next-themes';
-
 import React, { useEffect, useRef } from 'react';
+
+import { Toaster } from 'sonner';
 
 export interface WrapperProps {
   children: React.ReactNode;
@@ -67,7 +68,10 @@ const Wrapper: React.FC<WrapperProps> = (props) => {
       enableSystem
       disableTransitionOnChange
     >
-      <ThemeSync>{children}</ThemeSync>
+      <ThemeSync>
+        {children}
+        <Toaster />
+      </ThemeSync>
     </ThemeProvider>
   );
 };
