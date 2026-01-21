@@ -1,13 +1,11 @@
-import type { Editor, Extension } from '@tiptap/core';
+import type { Editor, EditorEvents, Extension } from '@tiptap/core';
 import type { UseEditorOptions } from '@tiptap/react';
-import type { PredefinedToolbarOption } from './predefined-toolbar-items';
 import { cn } from '@pixpilot/shadcn';
 import { EditorContent, useEditor } from '@tiptap/react';
 
 import StarterKit from '@tiptap/starter-kit';
 import React from 'react';
-import { predefinedToolbarItems } from './predefined-toolbar-items';
-import { ToolbarButton } from './ToolbarButton';
+import { RichTextEditorToolbar } from './RichTextEditorToolbar';
 
 type EditorProps = Editor['options']['editorProps'];
 
@@ -111,6 +109,52 @@ const defaultToolbarItems: ToolbarItems[] = [
   'codeBlock',
 ];
 
+function useEditorProps(
+  slots?: RichTextEditorSlots,
+  customEditorProps?: EditorProps,
+): EditorProps {
+  const defaultEditorProps: EditorProps = React.useMemo(
+    () => ({
+      attributes: {
+        class: cn(
+          'min-h-[200px] p-4 text-sm leading-relaxed focus:outline-none',
+          '[&_h1]:text-3xl [&_h1]:font-bold [&_h1]:leading-tight [&_h1]:mt-8 [&_h1]:mb-4 [&_h1:first-child]:mt-0',
+          '[&_h2]:text-2xl [&_h2]:font-bold [&_h2]:leading-tight [&_h2]:mt-6 [&_h2]:mb-3 [&_h2:first-child]:mt-0',
+          '[&_h3]:text-xl [&_h3]:font-bold [&_h3]:leading-tight [&_h3]:mt-4 [&_h3]:mb-2 [&_h3:first-child]:mt-0',
+          '[&_p]:mb-3',
+          '[&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-3',
+          '[&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-3',
+          '[&_blockquote]:border-l-4 [&_blockquote]:border-border [&_blockquote]:pl-4 [&_blockquote]:mb-4 [&_blockquote]:italic [&_blockquote:first-child]:mt-0',
+          '[&_code]:bg-muted [&_code]:px-1 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-[0.875em] [&_code]:font-mono',
+          '[&_pre]:bg-muted [&_pre]:p-4 [&_pre]:rounded [&_pre]:overflow-x-auto [&_pre]:font-mono [&_pre]:mb-4',
+          '[&_*:last-child]:mb-0',
+          slots?.content?.className,
+        ),
+      },
+    }),
+    [slots],
+  );
+
+  const mergedEditorProps: EditorProps = React.useMemo(
+    () => ({
+      ...defaultEditorProps,
+      ...customEditorProps,
+
+      attributes: {
+        ...defaultEditorProps.attributes,
+        ...customEditorProps?.attributes,
+        class: cn(
+          (defaultEditorProps.attributes as { class: string }).class,
+          (customEditorProps?.attributes as { class: string })?.class,
+        ),
+      },
+    }),
+    [defaultEditorProps, customEditorProps],
+  );
+
+  return mergedEditorProps;
+}
+
 const RichTextEditor: React.FC<RichTextEditorProps> = ({
   value,
   onChange,
@@ -125,48 +169,22 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   // TipTap editor state (selection/active marks) changes without React re-rendering.
   // Force a re-render on selection/transaction updates so toolbar buttons
   // correctly reflect the current cursor/selection formatting.
-  const [, forceRender] = React.useReducer((x: number) => x + 1, 0);
+  const [renderTick, forceRender] = React.useReducer((x: number) => x + 1, 0);
 
-  const defaultEditorProps: EditorProps = {
-    attributes: {
-      class: cn(
-        'min-h-[200px] p-4 text-sm leading-relaxed focus:outline-none',
-        '[&_h1]:text-3xl [&_h1]:font-bold [&_h1]:leading-tight [&_h1]:mt-8 [&_h1]:mb-4 [&_h1:first-child]:mt-0',
-        '[&_h2]:text-2xl [&_h2]:font-bold [&_h2]:leading-tight [&_h2]:mt-6 [&_h2]:mb-3 [&_h2:first-child]:mt-0',
-        '[&_h3]:text-xl [&_h3]:font-bold [&_h3]:leading-tight [&_h3]:mt-4 [&_h3]:mb-2 [&_h3:first-child]:mt-0',
-        '[&_p]:mb-3',
-        '[&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-3',
-        '[&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-3',
-        '[&_blockquote]:border-l-4 [&_blockquote]:border-border [&_blockquote]:pl-4 [&_blockquote]:mb-4 [&_blockquote]:italic [&_blockquote:first-child]:mt-0',
-        '[&_code]:bg-muted [&_code]:px-1 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-[0.875em] [&_code]:font-mono',
-        '[&_pre]:bg-muted [&_pre]:p-4 [&_pre]:rounded [&_pre]:overflow-x-auto [&_pre]:font-mono [&_pre]:mb-4',
-        '[&_*:last-child]:mb-0',
-        slots?.content?.className,
-      ),
-    },
-  };
+  const mergedEditorProps = useEditorProps(slots, customEditorProps);
 
-  const mergedEditorProps: EditorProps = {
-    ...defaultEditorProps,
-    ...customEditorProps,
+  const onChangeRef = React.useRef(onChange);
+  onChangeRef.current = onChange;
 
-    attributes: {
-      ...defaultEditorProps.attributes,
-      ...customEditorProps?.attributes,
-      class: cn(
-        (defaultEditorProps.attributes as { class: string }).class,
-        (customEditorProps?.attributes as { class: string })?.class,
-      ),
-    },
-  };
+  const handleChange = React.useCallback((props: EditorEvents['update']) => {
+    onChangeRef.current?.(props.editor.getHTML());
+  }, []);
 
   const editorInstance = useEditor({
     extensions: [StarterKit].concat(extensions),
     content: value,
     editable,
-    onUpdate: ({ editor: updatedEditor }) => {
-      onChange?.(updatedEditor.getHTML());
-    },
+    onUpdate: handleChange,
     immediatelyRender,
     editorProps: mergedEditorProps,
   });
@@ -216,89 +234,15 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
     );
   }
 
-  const handleCommand = (commandFn: () => any) => {
-    try {
-      commandFn();
-    } catch {
-      // Ignore command errors
-    }
-  };
-
-  const renderToolbar = () => {
-    if (!showToolbar) return null;
-
-    const isEditorFocused = editorInstance.isFocused;
-
-    let separatorCount = 0;
-    let customCount = 0;
-
-    return (
-      <div
-        className={cn(
-          'flex flex-wrap items-center gap-1 border-b p-2',
-          slots?.toolbar?.className,
-        )}
-      >
-        {toolbarItems.map((option) => {
-          if (option === '|') {
-            separatorCount += 1;
-            return (
-              <div
-                key={`separator-${separatorCount}`}
-                className={cn(
-                  'mx-1 h-6 w-px bg-border',
-                  slots?.toolbar?.separator?.className,
-                )}
-              />
-            );
-          }
-
-          if (typeof option === 'string') {
-            const predefinedOption = predefinedToolbarItems[option];
-            if (!predefinedOption) return null;
-
-            return (
-              <ToolbarButton
-                key={option}
-                onClick={() =>
-                  handleCommand(() => predefinedOption.onClick(editorInstance))
-                }
-                isActive={
-                  isEditorFocused &&
-                  (predefinedOption.isActive?.(editorInstance) ?? false)
-                }
-                tooltip={predefinedOption.tooltip}
-                className={slots?.toolbar?.button?.className}
-              >
-                {predefinedOption.icon}
-              </ToolbarButton>
-            );
-          }
-
-          // Custom option object
-          const customOption = option as PredefinedToolbarOption;
-          customCount += 1;
-          return (
-            <ToolbarButton
-              key={`custom-${customCount}-${customOption.tooltip}`}
-              onClick={() => handleCommand(() => customOption.onClick(editorInstance))}
-              isActive={
-                isEditorFocused && (customOption.isActive?.(editorInstance) ?? false)
-              }
-              tooltip={customOption.tooltip}
-              className={slots?.toolbar?.button?.className}
-            >
-              {customOption.icon}
-            </ToolbarButton>
-          );
-        })}
-      </div>
-    );
-  };
-
   return (
     <div className={cn('border rounded-md bg-background', slots?.root?.className)}>
-      {renderToolbar()}
+      <RichTextEditorToolbar
+        editor={editorInstance}
+        toolbarItems={toolbarItems}
+        slots={slots}
+        showToolbar={showToolbar}
+        renderTick={renderTick}
+      />
       <EditorContent editor={editorInstance} />
     </div>
   );
