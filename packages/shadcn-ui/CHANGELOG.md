@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.34.0
+
+### Minor Changes
+
+- rename toolbarOptions to toolbarItems and update related functionality
+
 ## 0.33.0
 
 ### Minor Changes
