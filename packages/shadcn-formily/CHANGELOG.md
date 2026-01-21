@@ -1,5 +1,16 @@
 # @pixpilot/formily-shadcn
 
+## 0.28.0
+
+### Minor Changes
+
+- enhance editor functionality and add ToolbarButton component
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn-ui@0.33.0
+
 ## 0.27.1
 
 ### Patch Changes
