@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.33.0
+
+### Minor Changes
+
+- enhance editor functionality and add ToolbarButton component
+
 ## 0.32.0
 
 ### Minor Changes
