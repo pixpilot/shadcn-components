@@ -1,49 +1,13 @@
 import type { Editor, Extension } from '@tiptap/core';
+import type { UseEditorOptions } from '@tiptap/react';
 import type { PredefinedToolbarOption } from './predefined-toolbar-options';
-import { Button, cn, Tooltip, TooltipContent, TooltipTrigger } from '@pixpilot/shadcn';
+import { cn } from '@pixpilot/shadcn';
 import { EditorContent, useEditor } from '@tiptap/react';
 
 import StarterKit from '@tiptap/starter-kit';
 import React from 'react';
 import { predefinedToolbarOptions } from './predefined-toolbar-options';
-
-interface ToolbarButtonProps {
-  onClick: () => void;
-  isActive?: boolean;
-  disabled?: boolean;
-  children: React.ReactNode;
-  tooltip: string;
-}
-
-const ToolbarButton: React.FC<ToolbarButtonProps> = ({
-  onClick,
-  isActive,
-  disabled,
-  children,
-  tooltip,
-}) => (
-  <Tooltip>
-    <TooltipTrigger asChild>
-      <Button
-        type="button"
-        variant={isActive ? 'default' : 'ghost'}
-        size="sm"
-        onMouseDown={(event) => {
-          // Prevent the toolbar button from taking focus away from the editor.
-          event.preventDefault();
-        }}
-        onClick={onClick}
-        disabled={disabled}
-        className="h-8 w-8 p-0"
-      >
-        {children}
-      </Button>
-    </TooltipTrigger>
-    <TooltipContent>
-      <p>{tooltip}</p>
-    </TooltipContent>
-  </Tooltip>
-);
+import { ToolbarButton } from './ToolbarButton';
 
 type EditorProps = Editor['options']['editorProps'];
 
@@ -57,11 +21,30 @@ export type ToolbarOption =
       isActive?: (editor: any) => boolean;
     };
 
+export interface RichTextEditorSlots {
+  root?: {
+    className?: string;
+  };
+  toolbar?: {
+    className?: string;
+    button?: {
+      className?: string;
+    };
+    separator?: {
+      className?: string;
+    };
+  };
+  content?: {
+    className?: string;
+  };
+}
+
 export interface RichTextEditorProps {
   /**
-   * The initial content of the editor
+   * The HTML value of the editor.
+   * TipTap uses `content` internally, but this component follows React input conventions.
    */
-  content?: string;
+  value?: string;
   /**
    * Callback when the content changes
    */
@@ -76,13 +59,15 @@ export interface RichTextEditorProps {
    */
   editable?: boolean;
   /**
-   * Custom class name for the editor container
+   * Slots for styling different parts of the editor.
+   *
+   * - `slots.root.className`: outer container
+   * - `slots.toolbar.className`: toolbar wrapper
+   * - `slots.toolbar.button.className`: each toolbar button
+   * - `slots.toolbar.separator.className`: separators (`|`)
+   * - `slots.content.className`: editor content area (merged into TipTap `editorProps.attributes.class`)
    */
-  className?: string;
-  /**
-   * Custom class name for the editor content
-   */
-  contentClassName?: string;
+  slots?: RichTextEditorSlots;
   /**
    * Whether to show the toolbar
    * @default true
@@ -97,6 +82,13 @@ export interface RichTextEditorProps {
    * Custom editor props to pass to the editor
    */
   editorProps?: EditorProps;
+
+  /**
+   * If true, the editor will render immediately on mount.
+   * This can help with SSR or hydration issues in some cases.
+   * @default false
+   */
+  immediatelyRender?: UseEditorOptions['immediatelyRender'];
 }
 
 const defaultExtensions: Extension[] = [];
@@ -120,15 +112,15 @@ const defaultToolbarOptions: ToolbarOption[] = [
 ];
 
 const RichTextEditor: React.FC<RichTextEditorProps> = ({
-  content,
+  value,
   onChange,
   extensions = defaultExtensions,
   editable = true,
-  className,
-  contentClassName,
+  slots,
   showToolbar = true,
   toolbarOptions = defaultToolbarOptions,
   editorProps: customEditorProps,
+  immediatelyRender = false,
 }) => {
   // TipTap editor state (selection/active marks) changes without React re-rendering.
   // Force a re-render on selection/transaction updates so toolbar buttons
@@ -148,7 +140,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
         '[&_blockquote]:border-l-4 [&_blockquote]:border-border [&_blockquote]:pl-4 [&_blockquote]:my-2 [&_blockquote]:italic',
         '[&_code]:bg-muted [&_code]:px-1 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-[0.875em] [&_code]:font-mono',
         '[&_pre]:bg-muted [&_pre]:p-4 [&_pre]:rounded [&_pre]:overflow-x-auto [&_pre]:font-mono',
-        contentClassName,
+        slots?.content?.className,
       ),
     },
   };
@@ -169,11 +161,12 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
 
   const editorInstance = useEditor({
     extensions: [StarterKit].concat(extensions),
-    content,
+    content: value,
     editable,
     onUpdate: ({ editor: updatedEditor }) => {
       onChange?.(updatedEditor.getHTML());
     },
+    immediatelyRender,
     editorProps: mergedEditorProps,
   });
 
@@ -201,11 +194,23 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
 
   if (editorInstance == null) {
     return (
-      <div className={cn('border rounded-md bg-background', className)}>
+      <div className={cn('border rounded-md bg-background', slots?.root?.className)}>
         {showToolbar && (
-          <div className="flex flex-wrap items-center gap-1 border-b p-2 h-10" />
+          <div
+            className={cn(
+              'flex flex-wrap items-center gap-1 border-b p-2 h-10',
+              slots?.toolbar?.className,
+            )}
+          />
         )}
-        <div className="min-h-[200px] p-4 text-sm leading-relaxed">Loading editor...</div>
+        <div
+          className={cn(
+            'min-h-[200px] p-4 text-sm leading-relaxed',
+            slots?.content?.className,
+          )}
+        >
+          Loading editor...
+        </div>
       </div>
     );
   }
@@ -223,12 +228,28 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
 
     const isEditorFocused = editorInstance.isFocused;
 
+    let separatorCount = 0;
+    let customCount = 0;
+
     return (
-      <div className="flex flex-wrap items-center gap-1 border-b p-2">
-        {toolbarOptions.map((option, index) => {
+      <div
+        className={cn(
+          'flex flex-wrap items-center gap-1 border-b p-2',
+          slots?.toolbar?.className,
+        )}
+      >
+        {toolbarOptions.map((option) => {
           if (option === '|') {
-            // eslint-disable-next-line react/no-array-index-key
-            return <div key={`separator-${index}`} className="mx-1 h-6 w-px bg-border" />;
+            separatorCount += 1;
+            return (
+              <div
+                key={`separator-${separatorCount}`}
+                className={cn(
+                  'mx-1 h-6 w-px bg-border',
+                  slots?.toolbar?.separator?.className,
+                )}
+              />
+            );
           }
 
           if (typeof option === 'string') {
@@ -246,6 +267,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
                   (predefinedOption.isActive?.(editorInstance) ?? false)
                 }
                 tooltip={predefinedOption.tooltip}
+                className={slots?.toolbar?.button?.className}
               >
                 {predefinedOption.icon}
               </ToolbarButton>
@@ -254,15 +276,16 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
 
           // Custom option object
           const customOption = option as PredefinedToolbarOption;
+          customCount += 1;
           return (
             <ToolbarButton
-              // eslint-disable-next-line react/no-array-index-key
-              key={`custom-${index}-${customOption.tooltip}`}
+              key={`custom-${customCount}-${customOption.tooltip}`}
               onClick={() => handleCommand(() => customOption.onClick(editorInstance))}
               isActive={
                 isEditorFocused && (customOption.isActive?.(editorInstance) ?? false)
               }
               tooltip={customOption.tooltip}
+              className={slots?.toolbar?.button?.className}
             >
               {customOption.icon}
             </ToolbarButton>
@@ -273,7 +296,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   };
 
   return (
-    <div className={cn('border rounded-md bg-background', className)}>
+    <div className={cn('border rounded-md bg-background', slots?.root?.className)}>
       {renderToolbar()}
       <EditorContent editor={editorInstance} />
     </div>

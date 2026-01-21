@@ -20,6 +20,10 @@ export const RichTextEditor: FC = connect(
       ...props,
       // eslint-disable-next-line ts/no-unsafe-assignment
       value: (field as Field).value ?? '',
+      onChange: (nextHtml: string) => {
+        (field as Field).onInput(nextHtml).catch(() => {});
+        props.onChange?.(nextHtml);
+      },
     };
   }),
 );

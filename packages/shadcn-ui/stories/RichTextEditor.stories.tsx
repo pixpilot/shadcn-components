@@ -14,7 +14,7 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
-    content: {
+    value: {
       control: 'text',
       description: 'Initial HTML content',
     },
@@ -43,7 +43,7 @@ type Story = StoryObj<typeof meta>;
  */
 export const Default: Story = {
   args: {
-    content: '<p>Start typing here...</p>',
+    value: '<p>Start typing here...</p>',
   },
 };
 
@@ -52,7 +52,7 @@ export const Default: Story = {
  */
 export const WithContent: Story = {
   args: {
-    content:
+    value:
       '<h1>Welcome</h1><p>This is a <strong>rich text</strong> editor with <em>formatting</em> capabilities.</p><ul><li>Bullet points</li><li>More bullets</li></ul>',
   },
 };
@@ -62,7 +62,7 @@ export const WithContent: Story = {
  */
 export const ReadOnly: Story = {
   args: {
-    content: '<p>This editor is read-only and cannot be edited.</p>',
+    value: '<p>This editor is read-only and cannot be edited.</p>',
     editable: false,
   },
 };
@@ -72,7 +72,7 @@ export const ReadOnly: Story = {
  */
 export const WithoutToolbar: Story = {
   args: {
-    content: '<p>This editor has no toolbar - just plain text editing.</p>',
+    value: '<p>This editor has no toolbar - just plain text editing.</p>',
     showToolbar: false,
   },
 };
@@ -82,7 +82,7 @@ export const WithoutToolbar: Story = {
  */
 export const LimitedToolbar: Story = {
   args: {
-    content: '<p>This editor only shows bold and italic buttons.</p>',
+    value: '<p>This editor only shows bold and italic buttons.</p>',
     toolbarOptions: ['bold', 'italic'],
   },
 };
@@ -92,13 +92,13 @@ export const LimitedToolbar: Story = {
  */
 export const CustomToolbar: Story = {
   args: {
-    content: '<p>This editor has custom buttons including a save button.</p>',
+    value: '<p>This editor has custom buttons including a save button.</p>',
     toolbarOptions: [
       'bold',
       'italic',
       '|',
       {
-        icon: <span className="text-xs font-bold">💾</span>,
+        icon: '💾',
         tooltip: 'Save',
         onClick: () => {
           console.warn('Save button clicked!');
@@ -117,7 +117,7 @@ export const Interactive: Story = {
 
     return (
       <div className="space-y-4">
-        <RichTextEditor content={content} onChange={setContent} />
+        <RichTextEditor value={content} onChange={setContent} />
         <div className="p-4 border rounded bg-muted">
           <h3 className="font-semibold mb-2">HTML Output:</h3>
           <pre className="text-sm whitespace-pre-wrap">{content}</pre>
