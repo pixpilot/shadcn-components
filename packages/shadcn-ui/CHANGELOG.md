@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.32.0
+
+### Minor Changes
+
+- add AlertToast stories
+
 ## 0.31.1
 
 ### Patch Changes
