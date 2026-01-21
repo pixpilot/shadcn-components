@@ -54,7 +54,7 @@
     "@pixpilot/hash": "catalog:prod",
     "@pixpilot/shadcn": "workspace:*",
     "@tailwindcss/typography": "^0.5.19",
-    "@tanstack/react-virtual": "^3.13.13",
+    "@tanstack/react-virtual": "^3.13.18",
     "@tiptap/core": "^3.13.0",
     "@tiptap/react": "^3.13.0",
     "@tiptap/starter-kit": "^3.13.0",
