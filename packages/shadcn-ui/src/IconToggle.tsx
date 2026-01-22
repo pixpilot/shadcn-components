@@ -42,6 +42,15 @@ export interface IconToggleProps extends Omit<
    * @default 'default'
    */
   variant?: 'default' | 'outline' | 'ghost';
+
+  /**
+   * Icon size for both React SVG icons (e.g. lucide-react) and SVG string masks.
+   * Provide any valid CSS length (e.g. `'16px'`, `'1.25rem'`) or a number (px).
+   *
+   * Note: This is independent of `font-size` (e.g. `text-lg`).
+   * @default '1rem'
+   */
+  iconSize?: string | number;
 }
 
 /**
@@ -60,13 +69,17 @@ export const IconToggle = React.forwardRef<HTMLButtonElement, IconToggleProps>(
       uncheckedIcon,
       size = 'default',
       variant = 'default',
+      iconSize = '1rem',
       className,
       disabled,
+      style: styleProp,
       ...props
     },
     ref,
   ) => {
     const [uncontrolledChecked, setUncontrolledChecked] = React.useState(defaultChecked);
+
+    const resolvedIconSize = typeof iconSize === 'number' ? `${iconSize}px` : iconSize;
 
     // Determine if component is controlled
     const isControlled = controlledChecked !== undefined;
@@ -99,8 +112,10 @@ export const IconToggle = React.forwardRef<HTMLButtonElement, IconToggleProps>(
           <span
             data-slot="svg-mask"
             aria-hidden="true"
-            className="inline-block size-[1.2em]"
+            className="inline-block"
             style={{
+              width: 'var(--icon-toggle-icon-size)',
+              height: 'var(--icon-toggle-icon-size)',
               backgroundColor: 'currentColor',
               WebkitMaskImage: svgMarkupToMaskUrl(icon),
               maskImage: svgMarkupToMaskUrl(icon),
@@ -145,11 +160,15 @@ export const IconToggle = React.forwardRef<HTMLButtonElement, IconToggleProps>(
         disabled={disabled}
         className={cn(
           'inline-flex items-center justify-center rounded-md text-sm font-medium transition-all outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50',
-          '[&_svg]:pointer-events-none [&_svg:not([class*="size-"])]:size-[1.2em] [&_svg]:shrink-0',
+          '[&_svg]:pointer-events-none [&_svg:not([class*="size-"])]:size-[var(--icon-toggle-icon-size)] [&_svg]:shrink-0',
           sizeClasses[size],
           variantClasses[variant],
           className,
         )}
+        style={{
+          ...(styleProp ?? {}),
+          ['--icon-toggle-icon-size' as any]: resolvedIconSize,
+        }}
         onClick={handleClick}
         {...props}
       >
