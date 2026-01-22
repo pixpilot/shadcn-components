@@ -1,5 +1,6 @@
 import type { Editor, EditorEvents, Extension } from '@tiptap/core';
 import type { UseEditorOptions } from '@tiptap/react';
+import type { ToolbarButtonTooltipMode } from './ToolbarButton';
 import { cn } from '@pixpilot/shadcn';
 import Link from '@tiptap/extension-link';
 import TextAlign from '@tiptap/extension-text-align';
@@ -88,6 +89,12 @@ export interface RichTextEditorProps {
    * @default false
    */
   immediatelyRender?: UseEditorOptions['immediatelyRender'];
+
+  /**
+   * Tooltip mode for toolbar buttons
+   * @default 'native'
+   */
+  tooltipMode?: ToolbarButtonTooltipMode;
 }
 
 const defaultExtensions: Extension[] = [];
@@ -172,6 +179,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   toolbarItems = defaultToolbarItems,
   editorProps: customEditorProps,
   immediatelyRender = false,
+  tooltipMode = 'native',
 }) => {
   // TipTap editor state (selection/active marks) changes without React re-rendering.
   // Force a re-render on selection/transaction updates so toolbar buttons
@@ -257,6 +265,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
         slots={slots}
         showToolbar={showToolbar}
         renderTick={renderTick}
+        tooltipMode={tooltipMode}
       />
       <EditorContent editor={editorInstance} />
     </div>

@@ -2,6 +2,7 @@ import type { Editor } from '@tiptap/core';
 import type { PredefinedToolbarOption } from './predefined-toolbar-items';
 import type { RichTextEditorSlots, ToolbarItems } from './RichTextEditor';
 
+import type { ToolbarButtonTooltipMode } from './ToolbarButton';
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 import { predefinedToolbarItems } from './predefined-toolbar-items';
@@ -17,6 +18,7 @@ export interface RichTextEditorToolbarProps {
    * This ensures the memoized toolbar re-renders to reflect active formatting.
    */
   renderTick: number;
+  tooltipMode?: ToolbarButtonTooltipMode;
 }
 
 const RichTextEditorToolbarComponent: React.FC<RichTextEditorToolbarProps> = ({
@@ -25,6 +27,7 @@ const RichTextEditorToolbarComponent: React.FC<RichTextEditorToolbarProps> = ({
   slots,
   showToolbar,
   renderTick,
+  tooltipMode,
 }) => {
   if (!showToolbar) return null;
 
@@ -74,6 +77,7 @@ const RichTextEditorToolbarComponent: React.FC<RichTextEditorToolbarProps> = ({
               isActive={isEditorFocused && (predefinedOption.isActive?.(editor) ?? false)}
               tooltip={predefinedOption.tooltip}
               className={slots?.toolbar?.button?.className}
+              tooltipMode={tooltipMode}
             >
               {predefinedOption.icon}
             </ToolbarButton>
@@ -90,6 +94,7 @@ const RichTextEditorToolbarComponent: React.FC<RichTextEditorToolbarProps> = ({
             isActive={isEditorFocused && (customOption.isActive?.(editor) ?? false)}
             tooltip={customOption.tooltip}
             className={slots?.toolbar?.button?.className}
+            tooltipMode={tooltipMode}
           >
             {customOption.icon}
           </ToolbarButton>
