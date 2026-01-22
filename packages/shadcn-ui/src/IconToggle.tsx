@@ -99,7 +99,7 @@ export const IconToggle = React.forwardRef<HTMLButtonElement, IconToggleProps>(
           <span
             data-slot="svg-mask"
             aria-hidden="true"
-            className="inline-block h-4 w-4"
+            className="inline-block size-full"
             style={{
               backgroundColor: 'currentColor',
               WebkitMaskImage: svgMarkupToMaskUrl(icon),
