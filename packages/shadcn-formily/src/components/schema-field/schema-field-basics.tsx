@@ -15,6 +15,7 @@ import { DatePicker } from '../date-picker';
 import { FormGrid } from '../form-grid';
 import { FormItem } from '../form-item';
 import { Hidden } from '../hidden';
+import { IconToggle } from '../icon-toggle';
 import { Input } from '../input';
 import { NumberInput } from '../number';
 import { ObjectContainer } from '../object-container';
@@ -36,6 +37,7 @@ export const basicComponentRegistry = {
   FormGrid: { component: FormGrid },
   FormItem: { component: FormItem },
   Hidden: { component: Hidden },
+  IconToggle: { component: IconToggle, decorator: 'FormItem' },
   Input: { component: Input, decorator: 'FormItem' },
   NumberInput: { component: NumberInput, decorator: 'FormItem' },
   ObjectContainer: { component: ObjectContainer, decorator: 'FormItem' },

@@ -27,6 +27,8 @@ export { FormItem } from './components/form-item';
 // Input components
 export { IconPicker } from './components/icon-picker';
 
+export { IconToggle } from './components/icon-toggle';
+
 export { Input } from './components/input';
 export * from './components/json-schema-form-renderer';
 export { NumberInput } from './components/number';

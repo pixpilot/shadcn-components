@@ -123,6 +123,7 @@ export const ObjectContainer: React.FC<ObjectContainerProps> = ({
       {...mergedCardProps}
       {...rest}
       className={cn(
+        'relative',
         'form-object-card',
         'bg-transparent',
         gapClass,

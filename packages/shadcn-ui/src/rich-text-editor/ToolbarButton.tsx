@@ -1,6 +1,7 @@
 import { Button, cn, Tooltip, TooltipContent, TooltipTrigger } from '@pixpilot/shadcn';
 
 import React from 'react';
+import { isSvgMarkupString, svgMarkupToMaskUrl } from '../utils';
 
 interface ToolbarButtonProps {
   onClick: () => void;
@@ -9,20 +10,6 @@ interface ToolbarButtonProps {
   className?: string;
   children: React.ReactNode;
   tooltip: string;
-}
-
-function isSvgMarkupString(value: unknown): value is string {
-  if (typeof value !== 'string') return false;
-
-  const trimmed = value.trim();
-  return trimmed.startsWith('<svg') && trimmed.endsWith('</svg>');
-}
-
-function svgMarkupToMaskUrl(svgMarkup: string): string {
-  const encoded = encodeURIComponent(svgMarkup)
-    .replace(/'/gu, '%27')
-    .replace(/"/gu, '%22');
-  return `url("data:image/svg+xml,${encoded}")`;
 }
 
 export const ToolbarButton: React.FC<ToolbarButtonProps> = ({
