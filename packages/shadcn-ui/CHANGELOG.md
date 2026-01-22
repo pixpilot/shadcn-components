@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.36.0
+
+### Minor Changes
+
+- add link and text alignment support
+
 ## 0.35.0
 
 ### Minor Changes
