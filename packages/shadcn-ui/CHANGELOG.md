@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.37.2
+
+### Patch Changes
+
+- update SVG mask class for improved sizing
+
 ## 0.37.1
 
 ### Patch Changes
