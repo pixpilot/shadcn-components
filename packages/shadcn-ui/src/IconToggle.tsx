@@ -99,7 +99,7 @@ export const IconToggle = React.forwardRef<HTMLButtonElement, IconToggleProps>(
           <span
             data-slot="svg-mask"
             aria-hidden="true"
-            className="inline-block size-full"
+            className="inline-block size-[1.2em]"
             style={{
               backgroundColor: 'currentColor',
               WebkitMaskImage: svgMarkupToMaskUrl(icon),
@@ -145,7 +145,7 @@ export const IconToggle = React.forwardRef<HTMLButtonElement, IconToggleProps>(
         disabled={disabled}
         className={cn(
           'inline-flex items-center justify-center rounded-md text-sm font-medium transition-all outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50',
-          '[&_svg]:pointer-events-none [&_svg:not([class*="size-"])]:size-4 [&_svg]:shrink-0',
+          '[&_svg]:pointer-events-none [&_svg:not([class*="size-"])]:size-[1.2em] [&_svg]:shrink-0',
           sizeClasses[size],
           variantClasses[variant],
           className,
