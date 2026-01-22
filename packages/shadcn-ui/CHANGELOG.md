@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.37.0
+
+### Minor Changes
+
+- add IconToggle component with customizable icons
+
 ## 0.36.0
 
 ### Minor Changes
