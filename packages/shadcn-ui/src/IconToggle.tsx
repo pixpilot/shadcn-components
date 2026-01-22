@@ -151,13 +151,15 @@ export const IconToggle = React.forwardRef<HTMLButtonElement, IconToggleProps>(
 
     return (
       <button
-        ref={ref}
         type="button"
         role="switch"
-        aria-checked={checked}
-        data-state={checked ? 'checked' : 'unchecked'}
         data-slot="icon-toggle"
+        {...props}
         disabled={disabled}
+        ref={ref}
+        aria-checked={checked}
+        onClick={handleClick}
+        data-state={checked ? 'checked' : 'unchecked'}
         className={cn(
           'inline-flex items-center justify-center rounded-md text-sm font-medium transition-all outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50',
           '[&_svg]:pointer-events-none [&_svg:not([class*="size-"])]:size-[var(--icon-toggle-icon-size)] [&_svg]:shrink-0',
@@ -169,8 +171,6 @@ export const IconToggle = React.forwardRef<HTMLButtonElement, IconToggleProps>(
           ...(styleProp ?? {}),
           ['--icon-toggle-icon-size' as any]: resolvedIconSize,
         }}
-        onClick={handleClick}
-        {...props}
       >
         {checked ? renderIcon(checkedIcon) : renderIcon(uncheckedIcon)}
       </button>
