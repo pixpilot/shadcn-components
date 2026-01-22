@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 0.7.1
+
+### Patch Changes
+
+- 2792697: new release
+
 ## 0.7.0
 
 ### Minor Changes
