@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.35.0
+
+### Minor Changes
+
+- refactor editor component and add toolbar
+
 ## 0.34.0
 
 ### Minor Changes
