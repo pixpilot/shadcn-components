@@ -1,5 +1,15 @@
 # @pixpilot/shadcn-ui
 
+## 0.38.0
+
+### Minor Changes
+
+- add `iconSize` prop for customizable icon dimensions
+
+### Patch Changes
+
+- update SVG mask class for improved sizing
+
 ## 0.37.1
 
 ### Patch Changes
