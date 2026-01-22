@@ -1,8 +1,9 @@
 import type { Editor, EditorEvents, Extension } from '@tiptap/core';
 import type { UseEditorOptions } from '@tiptap/react';
 import { cn } from '@pixpilot/shadcn';
+import Link from '@tiptap/extension-link';
+import TextAlign from '@tiptap/extension-text-align';
 import { EditorContent, useEditor } from '@tiptap/react';
-
 import StarterKit from '@tiptap/starter-kit';
 import React from 'react';
 import { RichTextEditorToolbar } from './RichTextEditorToolbar';
@@ -95,8 +96,13 @@ const defaultToolbarItems: ToolbarItems[] = [
   'bold',
   'italic',
   'underline',
+  'link',
   'strike',
   'code',
+  '|',
+  'alignLeft',
+  'alignCenter',
+  'alignRight',
   '|',
   'heading1',
   'heading2',
@@ -127,6 +133,7 @@ function useEditorProps(
           '[&_blockquote]:border-l-4 [&_blockquote]:border-border [&_blockquote]:pl-4 [&_blockquote]:mb-4 [&_blockquote]:italic [&_blockquote:first-child]:mt-0',
           '[&_code]:bg-muted [&_code]:px-1 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-[0.875em] [&_code]:font-mono',
           '[&_pre]:bg-muted [&_pre]:p-4 [&_pre]:rounded [&_pre]:overflow-x-auto [&_pre]:font-mono [&_pre]:mb-4',
+          '[&_a]:text-blue-500 [&_a]:hover:text-blue-600 [&_a]:cursor-pointer [&_a]:underline [&_a]:underline-offset-2 ',
           '[&_*:last-child]:mb-0',
           slots?.content?.className,
         ),
@@ -180,8 +187,16 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
     onChangeRef.current?.(props.editor.getHTML());
   }, []);
 
+  const memoizedExtensions = React.useMemo(
+    () =>
+      [StarterKit, Link, TextAlign.configure({ types: ['heading', 'paragraph'] })].concat(
+        extensions,
+      ) as Extension[],
+    [extensions],
+  );
+
   const editorInstance = useEditor({
-    extensions: [StarterKit].concat(extensions),
+    extensions: memoizedExtensions,
     content: value,
     editable,
     onUpdate: handleChange,

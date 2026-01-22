@@ -1,5 +1,8 @@
 import type { Editor } from '@tiptap/core';
 import {
+  AlignCenter,
+  AlignLeft,
+  AlignRight,
   Bold,
   Code,
   Code2,
@@ -7,6 +10,7 @@ import {
   Heading2,
   Heading3,
   Italic,
+  Link as LinkIcon,
   List,
   ListOrdered,
   Quote,
@@ -39,6 +43,12 @@ export const predefinedToolbarItems: Record<string, PredefinedToolbarOption> = {
     tooltip: 'Underline',
     onClick: (editor) => editor.chain().focus().toggleUnderline().run(),
     isActive: (editor) => editor.isActive('underline'),
+  },
+  link: {
+    icon: <LinkIcon className="h-4 w-4" />,
+    tooltip: 'Link',
+    onClick: (editor) => editor.chain().focus().toggleLink().run(),
+    isActive: (editor) => editor.isActive('link'),
   },
   strike: {
     icon: <Strikethrough className="h-4 w-4" />,
@@ -93,5 +103,23 @@ export const predefinedToolbarItems: Record<string, PredefinedToolbarOption> = {
     tooltip: 'Code Block',
     onClick: (editor) => editor.chain().focus().toggleCodeBlock().run(),
     isActive: (editor) => editor.isActive('codeBlock'),
+  },
+  alignLeft: {
+    icon: <AlignLeft className="h-4 w-4" />,
+    tooltip: 'Align Left',
+    onClick: (editor) => editor.chain().focus().setTextAlign('left').run(),
+    isActive: (editor) => editor.isActive({ textAlign: 'left' }),
+  },
+  alignCenter: {
+    icon: <AlignCenter className="h-4 w-4" />,
+    tooltip: 'Align Center',
+    onClick: (editor) => editor.chain().focus().setTextAlign('center').run(),
+    isActive: (editor) => editor.isActive({ textAlign: 'center' }),
+  },
+  alignRight: {
+    icon: <AlignRight className="h-4 w-4" />,
+    tooltip: 'Align Right',
+    onClick: (editor) => editor.chain().focus().setTextAlign('right').run(),
+    isActive: (editor) => editor.isActive({ textAlign: 'right' }),
   },
 };
