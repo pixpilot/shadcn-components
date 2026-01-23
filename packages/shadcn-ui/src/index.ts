@@ -30,6 +30,7 @@ export * from './input';
 export * from './layout';
 export * from './LoadingOverlay';
 export * from './pagination';
+export * from './popover';
 export * from './rich-text-editor';
 export * from './ScaledPreview';
 export * from './Select';

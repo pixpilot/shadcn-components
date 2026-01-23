@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Popover, PopoverTrigger } from '@pixpilot/shadcn';
 import { Button } from '../src/Button';
-import { PopoverContent } from '../src/PopoverContent';
+import { Popover, PopoverContent, PopoverTrigger } from '../src/popover';
 
 /**
  * A styled popover content component with responsive width constraints.
@@ -78,6 +77,30 @@ export const WithForm: Story = {
             </div>
             <Button className="w-full">Save Changes</Button>
           </div>
+        </div>
+      </PopoverContent>
+    </Popover>
+  ),
+};
+
+export const LongContent: Story = {
+  render: () => (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline">Open Long Content Popover</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <div className="p-4  overflow-y-auto w-100">
+          <h3 className="font-semibold mb-4">Long Content</h3>
+
+          {Array.from({ length: 20 }).map((_, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <p key={index} className="text-sm text-muted-foreground mb-2">
+              This is line {index + 1} of the long content inside the popover. It
+              demonstrates how the popover handles overflow and scrolling behavior when
+              the content exceeds the maximum height.
+            </p>
+          ))}
         </div>
       </PopoverContent>
     </Popover>
