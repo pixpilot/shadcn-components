@@ -1,5 +1,18 @@
 # @pixpilot/formily-shadcn
 
+## 0.31.0
+
+### Minor Changes
+
+- refactor dialog components and add new LongDialog story
+
+### Patch Changes
+
+- ensure proper button functionality and accessibility
+- Updated dependencies
+- Updated dependencies
+  - @pixpilot/shadcn-ui@0.39.0
+
 ## 0.30.5
 
 ### Patch Changes
