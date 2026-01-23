@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.32.0
+
+### Minor Changes
+
+- implement ArrayItemHeaderRow component and refactor item components
+
 ## 0.31.1
 
 ### Patch Changes
