@@ -28,7 +28,7 @@ export const ArrayItemLabel: React.FC<ArrayItemLabelProps> = observer(() => {
   const fullLabel = `${displayLabel}${indexSuffix}`;
 
   return (
-    <span className="truncate font-medium" title={fullLabel}>
+    <span className="truncate font-medium block max-w-full" title={fullLabel}>
       {displayLabel}
       {indexSuffix}
     </span>

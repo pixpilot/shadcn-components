@@ -493,9 +493,84 @@ export const WithItemReactionTitle: Story = {
     return (
       <Form form={form} className="space-y-6">
         <div className="space-y-4">
-          <h2 className="text-2xl font-bold">ArrayPopover (ClassName propagation)</h2>
+          <h2 className="text-2xl font-bold">ArrayCollapse (ClassName propagation)</h2>
           <p className="text-muted-foreground">
             Open the editor to verify the wrapper styling.
+          </p>
+        </div>
+
+        <SchemaField schema={schema} />
+
+        <div className="pt-4">
+          <Button
+            type="button"
+            onClick={() => alert(JSON.stringify(form.values, null, 2))}
+          >
+            View Values
+          </Button>
+        </div>
+      </Form>
+    );
+  },
+};
+
+export const WithTruncatedLabels: Story = {
+  render: () => {
+    const form = createForm({
+      values: {
+        items: [
+          { name: 'This is a very long item name that should be truncated properly' },
+          { name: 'Another extremely lengthy item name to test truncation' },
+        ],
+      },
+    });
+
+    const schema = {
+      type: 'object',
+      properties: {
+        items: {
+          type: 'array',
+          'x-component': 'ArrayCollapse',
+          items: {
+            type: 'object',
+            'x-reactions': {
+              fulfill: {
+                state: {
+                  title: "{{$self.value?.name || 'Item'}}",
+                },
+              },
+            },
+            properties: {
+              name: {
+                type: 'string',
+                title: 'Name',
+                required: true,
+                'x-decorator': 'FormItem',
+                'x-component': 'Input',
+                'x-component-props': {
+                  placeholder: 'Enter name',
+                  className: 'w-64',
+                },
+              },
+            },
+          },
+          properties: {
+            addition: {
+              type: 'void',
+              title: 'Add Item',
+              'x-component': 'ArrayCollapse.Addition',
+            },
+          },
+        },
+      },
+    };
+
+    return (
+      <Form form={form} className="space-y-6 w-80">
+        <div className="space-y-4">
+          <h2 className="text-2xl font-bold">ArrayCollapse (Truncated Labels)</h2>
+          <p className="text-muted-foreground">
+            Open the editor to verify that long labels are truncated with ellipsis.
           </p>
         </div>
 

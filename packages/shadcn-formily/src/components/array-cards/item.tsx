@@ -5,13 +5,11 @@ import { cn } from '@pixpilot/shadcn-ui';
 import React from 'react';
 import { getXComponentProps } from '../../utils';
 import { ArrayBase } from '../array-base';
-import { useArrayComponents } from '../array-base/component-context';
 import { isOperationComponent } from '../array-base/utils/is-array-component';
+import { ArrayItemHeaderRow } from '../array-common';
 
 const ArrayItem = React.memo(({ index, record }: ArrayItemProps) => {
   const schema = useFieldSchema();
-
-  const Components = useArrayComponents();
 
   const items = schema?.items as Schema;
 
@@ -26,17 +24,7 @@ const ArrayItem = React.memo(({ index, record }: ArrayItemProps) => {
         {...itemWrapperRestProps}
         className={cn('border rounded-lg p-4 space-y-2', itemWrapperClassName)}
       >
-        <div className="flex">
-          <div className="flex-1">
-            <Components.ItemLabel index={index} schema={schema.items as Schema} />
-          </div>
-          <div>
-            <Components.OperationComponents
-              index={index}
-              schema={schema.items as Schema}
-            />
-          </div>
-        </div>
+        <ArrayItemHeaderRow schema={schema.items as Schema} index={index} />
         <div className="space-y-4">
           <RecursionField
             schema={items}

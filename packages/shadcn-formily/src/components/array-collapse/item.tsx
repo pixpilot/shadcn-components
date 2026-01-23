@@ -9,8 +9,8 @@ import { ChevronDownIcon } from 'lucide-react';
 import React from 'react';
 import { getXComponentProps } from '../../utils';
 import { validateArrayItemFields } from '../../utils/validate-array-item-fields';
-import { ArrayBase, useArrayComponents } from '../array-base';
-import { ItemWrapper } from '../array-common';
+import { ArrayBase } from '../array-base';
+import { ArrayItemHeaderRow, ItemWrapper } from '../array-common';
 
 interface ArrayCollapseItemProps extends ArrayItemProps {
   index: number;
@@ -27,8 +27,6 @@ const ArrayCollapseItemBase = React.memo((props: ArrayCollapseItemProps) => {
   const { index, itemId, formCollapse, isOpen, isNewItem, onClick } = props;
   const field = useField<FormilyArrayField>();
   const schema = useFieldSchema();
-
-  const { ItemLabel, OperationComponents } = useArrayComponents();
 
   const items = Array.isArray(schema.items)
     ? (schema.items[0] ?? schema.items)
@@ -56,11 +54,21 @@ const ArrayCollapseItemBase = React.memo((props: ArrayCollapseItemProps) => {
 
       <ItemWrapper {...itemWrapperProps} index={index}>
         {/* Header */}
-        <div className="flex items-center gap-2 px-3">
-          {/* Center: Expand/collapse button with item label */}
-          <button
-            type="button"
-            onClick={() => {
+        <ArrayItemHeaderRow
+          className="px-3"
+          schema={schema}
+          index={index}
+          contentClassName="hover:no-underline py-4 text-sm font-medium transition-all text-foreground"
+          leading={
+            <ChevronDownIcon
+              className={cn(
+                'size-4 shrink-0 transition-transform duration-200',
+                isOpen && 'rotate-180',
+              )}
+            />
+          }
+          buttonProps={{
+            onClick: () => {
               onClick?.();
               const isCurrentlyOpen = formCollapse.hasActiveKey(itemId);
 
@@ -79,25 +87,9 @@ const ArrayCollapseItemBase = React.memo((props: ArrayCollapseItemProps) => {
                 // Opening - no validation needed
                 formCollapse.addActiveKey(itemId);
               }
-            }}
-            className="hover:no-underline flex flex-1 items-center justify-between py-4 text-sm font-medium transition-all"
-          >
-            <div className="text-foreground flex items-center gap-2 font-medium">
-              <ChevronDownIcon
-                className={cn(
-                  'size-4 shrink-0 transition-transform duration-200',
-                  isOpen && 'rotate-180',
-                )}
-              />
-              <ItemLabel schema={schema} index={index} />
-            </div>
-          </button>
-
-          {/* Right: Remove button */}
-          <div className="flex items-center gap-1">
-            <OperationComponents schema={schema} index={index} />
-          </div>
-        </div>
+            },
+          }}
+        />
 
         {/* Content with form fields */}
         {isOpen && items && (

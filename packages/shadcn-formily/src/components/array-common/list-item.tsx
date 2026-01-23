@@ -2,7 +2,8 @@ import type { ISchema } from '@formily/react';
 import { RecursionField, useFieldSchema } from '@formily/react';
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
-import { ArrayBase, useArrayComponents } from '../array-base';
+import { ArrayBase } from '../array-base';
+import { ArrayItemHeaderRow } from './array-item-header-row';
 import { ItemWrapper } from './item-wrapper';
 
 export interface ListItemProps {
@@ -32,7 +33,6 @@ export const ListItem: React.FC<ListItemProps> = React.memo(
   ({ itemKey, index, record, isNew }) => {
     const schema = useFieldSchema();
     // const field = useField<ArrayField>();
-    const { OperationComponents, ItemLabel } = useArrayComponents();
     // const fieldAddress = field.address.toString();
 
     const isNewItem = isNew;
@@ -46,18 +46,14 @@ export const ListItem: React.FC<ListItemProps> = React.memo(
 
         {/* Hide temporary item visually but keep it in DOM for form state */}
         <ItemWrapper
-          className={cn('flex px-3 pl-4 py-2', isNewItem && 'hidden')}
+          className={cn('px-3 pl-4 py-2', isNewItem && 'hidden')}
           index={index}
         >
-          <div className="text-foreground flex-1 font-medium">
-            <ItemLabel schema={schema} index={index} />
-          </div>
-
-          {/* Right: Edit and Remove buttons */}
-          <div className="flex items-center gap-1">
-            {/* {renderEditButton?.(index)} */}
-            <OperationComponents schema={schema} index={index} />
-          </div>
+          <ArrayItemHeaderRow
+            schema={schema}
+            index={index}
+            contentClassName="text-foreground font-medium"
+          />
         </ItemWrapper>
       </ArrayBase.Item>
     );
