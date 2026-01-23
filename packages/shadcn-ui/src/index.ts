@@ -20,6 +20,7 @@ export * from './Combobox';
 export * from './confirmation-dialog';
 export * from './ContentCard';
 export * from './DatePicker';
+export * from './dialog';
 export * from './file-upload-inline';
 export * from './file-upload/types';
 export * from './hooks';

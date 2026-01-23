@@ -6,12 +6,13 @@ import {
   Button,
   cn,
   Dialog,
+  DialogBody,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@pixpilot/shadcn';
+} from '@pixpilot/shadcn-ui';
 import { getXComponentProps } from '../../utils';
 
 export interface ArrayItemsEditDialogProps {
@@ -71,12 +72,12 @@ export const EditDialog = observer(
           Component registry from SchemaField is preserved through the Dialog portal.
           basePath ensures fields are rendered at the correct array item address.
         */}
-          <div
+          <DialogBody
             {...itemWrapperRestProps}
             className={cn('grid gap-4 py-4', itemWrapperClassName)}
           >
             {itemIndex != null && <RecursionField schema={schema} name={itemIndex} />}
-          </div>
+          </DialogBody>
 
           <DialogFooter>
             <Button type="button" variant="outline" onClick={handleCancelClick}>
