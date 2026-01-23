@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.40.0
+
+### Minor Changes
+
+- add Popover component and related functionality
+
 ## 0.39.0
 
 ### Minor Changes
