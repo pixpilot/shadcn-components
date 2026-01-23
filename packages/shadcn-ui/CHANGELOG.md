@@ -1,5 +1,15 @@
 # @pixpilot/shadcn-ui
 
+## 0.39.0
+
+### Minor Changes
+
+- add tooltip mode for toolbar buttons
+
+### Patch Changes
+
+- ensure proper button functionality and accessibility
+
 ## 0.38.1
 
 ### Patch Changes
