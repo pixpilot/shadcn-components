@@ -1,7 +1,8 @@
+/* eslint-disable no-alert */
+
 import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from '@pixpilot/shadcn-ui';
-import { Anchor, InfoIcon, PinIcon } from 'lucide-react';
 import { createForm, Form, SchemaField } from '../src';
+import { createStories } from './array-stories';
 
 const meta: Meta<typeof Form> = {
   title: 'Formily/Array Cards',
@@ -15,317 +16,32 @@ const meta: Meta<typeof Form> = {
 export default meta;
 type Story = StoryObj<typeof Form>;
 
-export const EmptyArray: Story = {
-  render: () => {
-    const form = createForm({});
-
-    const JSON_INDENT = 2;
-
-    return (
-      <Form
-        form={form}
-        className="w-[600px]"
-        onSubmit={(values) => {
-          // eslint-disable-next-line no-console
-          console.log('Form submitted:', values);
-          // eslint-disable-next-line no-alert
-          alert(JSON.stringify(values, null, JSON_INDENT));
-        }}
-      >
-        <div className="space-y-4">
-          <h3 className="text-lg font-medium">Contacts</h3>
-
-          <SchemaField>
-            <SchemaField.Array
-              name="contacts"
-              title="Contacts"
-              x-component="ArrayCards"
-              x-component-props={{
-                className: 'space-y-4',
-              }}
-            >
-              <SchemaField.Object>
-                <SchemaField.String
-                  name="name"
-                  title="Name"
-                  required
-                  x-decorator="FormItem"
-                  x-component="Input"
-                  x-component-props={{ placeholder: 'Enter name' }}
-                />
-              </SchemaField.Object>
-            </SchemaField.Array>
-          </SchemaField>
-        </div>
-
-        <button
-          type="submit"
-          className="mt-6 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground"
-        >
-          Submit
-        </button>
-      </Form>
-    );
+const storyConfig = {
+  componentName: 'ArrayCards',
+  displayTitle: 'ArrayCards',
+  componentProps: {
+    className: 'space-y-4',
   },
 };
 
-export const WithHeaderActions: Story = {
-  render: () => {
-    const form = createForm({
-      values: {
-        contacts: [
-          { name: 'Bob Builder', email: 'bob@example.com', pinned: true },
-          { name: 'Jane Smith', email: 'jane@example.com' },
-        ],
-      },
-    });
+const {
+  EmptyArray,
+  WithActions,
+  Declarative,
+  WithTruncatedLabels,
+  WithJSONSchema,
+  WithItemReactionTitle,
+  WithComponentClassName,
+} = createStories(storyConfig);
 
-    const JSON_INDENT = 2;
-
-    return (
-      <Form
-        form={form}
-        className="w-[700px] space-y-6"
-        settings={{
-          array: {
-            item: {
-              actions: [
-                {
-                  type: 'toggle',
-                  key: 'pin',
-                  inactiveTooltip: 'Pin item',
-                  activeTooltip: 'Unpin item',
-                  icon: <PinIcon className="size-4" />,
-                  activeIcon: <PinIcon className="size-4" fill="currentColor" />,
-                  isActive: ({ record }) => {
-                    return Boolean((record as { pinned?: boolean } | null)?.pinned);
-                  },
-                  onToggle: ({ array, index }, nextActive) => {
-                    const currentValue = array.field.value;
-                    const currentArray = Array.isArray(currentValue)
-                      ? (currentValue as unknown[])
-                      : [];
-                    const nextValue = [...currentArray];
-
-                    const currentItem = (nextValue[index] ?? {}) as Record<
-                      string,
-                      unknown
-                    >;
-
-                    nextValue[index] = {
-                      ...currentItem,
-                      pinned: nextActive,
-                    };
-
-                    array.field.setValue(nextValue as any[]);
-                  },
-                },
-                {
-                  key: 'info',
-                  tooltip: 'Show info',
-                  icon: <InfoIcon className="size-4" />,
-                  onClick: ({ index, itemField }) => {
-                    const address = (
-                      itemField as { address?: { toString?: () => string } } | null
-                    )?.address;
-
-                    // eslint-disable-next-line no-alert
-                    alert(
-                      `Info clicked for index ${index}\nField: ${String(
-                        address?.toString?.() ?? '',
-                      )}`,
-                    );
-                  },
-                },
-              ],
-            },
-          },
-        }}
-      >
-        <div className="space-y-2">
-          <h2 className="text-2xl font-bold">ArrayCards (Header actions)</h2>
-          <p className="text-muted-foreground">
-            Custom actions are shared and render in the card header next to default
-            operations.
-          </p>
-        </div>
-
-        <SchemaField>
-          <SchemaField.Array
-            name="contacts"
-            x-component="ArrayCards"
-            x-component-props={{
-              className: 'space-y-4',
-            }}
-          >
-            <SchemaField.Object>
-              <SchemaField.String
-                name="name"
-                title="Name"
-                required
-                x-decorator="FormItem"
-                x-component="Input"
-                x-component-props={{ placeholder: 'Enter name' }}
-              />
-              <SchemaField.String
-                name="email"
-                title="Email"
-                required
-                x-decorator="FormItem"
-                x-component="Input"
-                x-component-props={{ placeholder: 'Enter email' }}
-              />
-            </SchemaField.Object>
-            <SchemaField.Void x-component="ArrayCards.Addition" title="Add Contact" />
-          </SchemaField.Array>
-        </SchemaField>
-
-        <div className="pt-4">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() => {
-              // eslint-disable-next-line no-alert
-              alert(JSON.stringify(form.values, null, JSON_INDENT));
-            }}
-          >
-            View Values
-          </Button>
-        </div>
-      </Form>
-    );
-  },
-};
-
-export const WithMixedHeaderActions: Story = {
-  render: () => {
-    const form = createForm({
-      values: {
-        contacts: [
-          { name: 'Bob Builder', email: 'bob@example.com', pinned: true },
-          { name: 'Jane Smith', email: 'jane@example.com' },
-        ],
-      },
-    });
-
-    const JSON_INDENT = 2;
-
-    return (
-      <Form
-        form={form}
-        className="w-[700px] space-y-6"
-        settings={{
-          array: {
-            item: {
-              actions: [
-                'edit',
-                {
-                  key: 'info',
-                  tooltip: 'Global info action',
-                  icon: <InfoIcon className="size-4" />,
-                  onClick: ({ index }) => {
-                    // eslint-disable-next-line no-alert
-                    alert(`Global info clicked for index ${index}`);
-                  },
-                },
-                {
-                  key: 'anchor',
-                  tooltip: 'Global anchor action',
-                  icon: <Anchor className="size-4" />,
-                  onClick: ({ index }) => {
-                    // eslint-disable-next-line no-alert
-                    alert(`Global anchor clicked for index ${index}`);
-                  },
-                },
-              ],
-            },
-          },
-        }}
-      >
-        <div className="space-y-2">
-          <h2 className="text-2xl font-bold">ArrayCards (Mixed header actions)</h2>
-          <p className="text-muted-foreground">
-            Global Form actions + per-array actions are merged (appended).
-          </p>
-        </div>
-
-        <SchemaField>
-          <SchemaField.Array
-            name="contacts"
-            x-component="ArrayCards"
-            x-component-props={{
-              className: 'space-y-4',
-              actions: [
-                {
-                  type: 'toggle',
-                  key: 'pin',
-                  inactiveTooltip: 'Pin item (array-level)',
-                  activeTooltip: 'Unpin item (array-level)',
-                  icon: <PinIcon className="size-4" />,
-                  activeIcon: <PinIcon className="size-4" fill="currentColor" />,
-                  isActive: ({ record }) => {
-                    return Boolean((record as { pinned?: boolean } | null)?.pinned);
-                  },
-                  onToggle: ({ array, index }, nextActive) => {
-                    const currentValue = array.field.value;
-                    const currentArray = Array.isArray(currentValue)
-                      ? (currentValue as unknown[])
-                      : [];
-                    const nextValue = [...currentArray];
-
-                    const currentItem = (nextValue[index] ?? {}) as Record<
-                      string,
-                      unknown
-                    >;
-
-                    nextValue[index] = {
-                      ...currentItem,
-                      pinned: nextActive,
-                    };
-
-                    array.field.setValue(nextValue as any[]);
-                  },
-                },
-              ],
-            }}
-          >
-            <SchemaField.Object>
-              <SchemaField.String
-                name="name"
-                title="Name"
-                required
-                x-decorator="FormItem"
-                x-component="Input"
-                x-component-props={{ placeholder: 'Enter name' }}
-              />
-              <SchemaField.String
-                name="email"
-                title="Email"
-                required
-                x-decorator="FormItem"
-                x-component="Input"
-                x-component-props={{ placeholder: 'Enter email' }}
-              />
-            </SchemaField.Object>
-            <SchemaField.Void x-component="ArrayCards.Addition" title="Add Contact" />
-          </SchemaField.Array>
-        </SchemaField>
-
-        <div className="pt-4">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() => {
-              // eslint-disable-next-line no-alert
-              alert(JSON.stringify(form.values, null, JSON_INDENT));
-            }}
-          >
-            View Values
-          </Button>
-        </div>
-      </Form>
-    );
-  },
+export {
+  Declarative,
+  EmptyArray,
+  WithActions,
+  WithComponentClassName,
+  WithItemReactionTitle,
+  WithJSONSchema,
+  WithTruncatedLabels,
 };
 
 export const WithCustomComponent: Story = {
@@ -347,7 +63,7 @@ export const WithCustomComponent: Story = {
         onSubmit={(values) => {
           // eslint-disable-next-line no-console
           console.log('Form submitted:', values);
-          // eslint-disable-next-line no-alert
+
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
@@ -436,7 +152,7 @@ export const WithOverrideComponent: Story = {
         onSubmit={(values) => {
           // eslint-disable-next-line no-console
           console.log('Form submitted:', values);
-          // eslint-disable-next-line no-alert
+
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
@@ -574,183 +290,12 @@ export const WithCustomComponentJsonSchema: Story = {
         onSubmit={(values) => {
           // eslint-disable-next-line no-console
           console.log('Form submitted:', values);
-          // eslint-disable-next-line no-alert
+
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
         <div className="space-y-4">
           <h3 className="text-lg font-medium">Contacts (Custom JSON Schema)</h3>
-
-          <SchemaField schema={schema} />
-        </div>
-
-        <button
-          type="submit"
-          className="mt-6 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground"
-        >
-          Submit
-        </button>
-      </Form>
-    );
-  },
-};
-
-export const WithComponentClassName: Story = {
-  render: () => {
-    const form = createForm({
-      values: {
-        contacts: Array.from({ length: 2 }).map((_, i) => ({
-          name: `Contact ${i + 1}`,
-        })),
-      },
-    });
-
-    const schema = {
-      type: 'object',
-      properties: {
-        contacts: {
-          type: 'array',
-          'x-component': 'ArrayCards',
-          'x-component-props': {
-            className: 'bg-slate-400',
-            title: ' Custom Contacts',
-            actions: false,
-          },
-          items: {
-            type: 'object',
-            properties: {
-              name: {
-                type: 'string',
-                title: 'Name',
-                required: true,
-                'x-decorator': 'FormItem',
-                'x-component': 'Input',
-                'x-component-props': {
-                  placeholder: 'Enter name',
-                },
-              },
-            },
-            'x-component': 'div',
-            'x-component-props': {
-              className: 'bg-slate-500',
-            },
-          },
-          properties: {
-            addition: {
-              type: 'void',
-              title: 'Add New Name',
-              'x-component': 'ArrayCards.Addition',
-            },
-          },
-        },
-      },
-    };
-
-    const JSON_INDENT = 2;
-
-    return (
-      <Form
-        form={form}
-        className="w-[600px] "
-        onSubmit={(values) => {
-          // eslint-disable-next-line no-console
-          console.log('Form submitted:', values);
-          // eslint-disable-next-line no-alert
-          alert(JSON.stringify(values, null, JSON_INDENT));
-        }}
-      >
-        <div className="space-y-4">
-          <h3 className="text-lg font-medium">Contacts (Custom JSON Schema)</h3>
-
-          <SchemaField schema={schema} />
-        </div>
-
-        <button
-          type="submit"
-          className="mt-6 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground"
-        >
-          Submit
-        </button>
-      </Form>
-    );
-  },
-};
-
-export const WithJSONSchema: Story = {
-  render: () => {
-    const form = createForm({
-      values: {
-        contacts: [
-          { name: 'John Doe', email: 'john@example.com' },
-          { name: 'Jane Smith', email: 'jane@example.com' },
-        ],
-      },
-    });
-
-    const schema = {
-      type: 'object',
-      properties: {
-        contacts: {
-          type: 'array',
-          'x-component': 'ArrayCards',
-          'x-component-props': {
-            className: 'space-y-4',
-          },
-          items: {
-            type: 'object',
-            properties: {
-              name: {
-                type: 'string',
-                title: 'Name',
-                required: true,
-                'x-decorator': 'FormItem',
-                'x-component': 'Input',
-                'x-component-props': {
-                  placeholder: 'Enter name',
-                },
-              },
-              email: {
-                type: 'string',
-                title: 'Email',
-                required: true,
-                'x-decorator': 'FormItem',
-                'x-component': 'Input',
-                'x-component-props': {
-                  placeholder: 'Enter email',
-                  type: 'email',
-                },
-              },
-            },
-          },
-          properties: {
-            addition: {
-              type: 'void',
-              title: 'Add Contact',
-              'x-component': 'ArrayCards.Addition',
-              'x-component-props': {
-                defaultValue: { name: '', email: '' },
-              },
-            },
-          },
-        },
-      },
-    };
-
-    const JSON_INDENT = 2;
-
-    return (
-      <Form
-        form={form}
-        className="w-[600px]"
-        onSubmit={(values) => {
-          // eslint-disable-next-line no-console
-          console.log('Form submitted:', values);
-          // eslint-disable-next-line no-alert
-          alert(JSON.stringify(values, null, JSON_INDENT));
-        }}
-      >
-        <div className="space-y-4">
-          <h3 className="text-lg font-medium">Contacts (JSON Schema)</h3>
 
           <SchemaField schema={schema} />
         </div>
@@ -885,7 +430,7 @@ export const NestedArraysJsonSchema: Story = {
         onSubmit={(values) => {
           // eslint-disable-next-line no-console
           console.log('Form submitted:', values);
-          // eslint-disable-next-line no-alert
+
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
@@ -934,7 +479,7 @@ export const NestedArraysDeclarative: Story = {
         onSubmit={(values) => {
           // eslint-disable-next-line no-console
           console.log('Form submitted:', values);
-          // eslint-disable-next-line no-alert
+
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
@@ -998,94 +543,6 @@ export const NestedArraysDeclarative: Story = {
         >
           Submit
         </button>
-      </Form>
-    );
-  },
-};
-
-export const WithItemReactionTitle: Story = {
-  render: () => {
-    const form = createForm({
-      values: {
-        users: [
-          { name: 'John Doe', email: 'john@example.com' },
-          { name: 'Jane Smith', email: 'jane@example.com' },
-        ],
-      },
-    });
-
-    const JSON_INDENT = 2;
-
-    const schema = {
-      type: 'object',
-      properties: {
-        users: {
-          type: 'array',
-          'x-component': 'ArrayCards',
-          items: {
-            type: 'object',
-            'x-reactions': {
-              fulfill: {
-                state: {
-                  title: "{{$self.value?.name || 'User'}}",
-                },
-              },
-            },
-            properties: {
-              name: {
-                type: 'string',
-                title: 'Name',
-                required: true,
-                'x-decorator': 'FormItem',
-                'x-component': 'Input',
-                'x-component-props': {
-                  placeholder: 'Enter name',
-                },
-              },
-              email: {
-                type: 'string',
-                title: 'Email',
-                required: true,
-                'x-decorator': 'FormItem',
-                'x-component': 'Input',
-                'x-component-props': {
-                  placeholder: 'Enter email',
-                  type: 'email',
-                },
-              },
-            },
-          },
-          properties: {
-            addition: {
-              type: 'void',
-              title: 'Add User',
-              'x-component': 'ArrayCards.Addition',
-            },
-          },
-        },
-      },
-    };
-
-    return (
-      <Form form={form} className="space-y-6">
-        <div className="space-y-4">
-          <h2 className="text-2xl font-bold">ArrayPopover (ClassName propagation)</h2>
-          <p className="text-muted-foreground">
-            Open the editor to verify the wrapper styling.
-          </p>
-        </div>
-
-        <SchemaField schema={schema} />
-
-        <div className="pt-4">
-          <Button
-            type="button"
-            // eslint-disable-next-line no-alert
-            onClick={() => alert(JSON.stringify(form.values, null, JSON_INDENT))}
-          >
-            View Values
-          </Button>
-        </div>
       </Form>
     );
   },
