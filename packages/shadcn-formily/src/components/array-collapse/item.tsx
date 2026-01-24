@@ -58,7 +58,12 @@ const ArrayCollapseItemBase = React.memo((props: ArrayCollapseItemProps) => {
           className="px-3"
           schema={schema}
           index={index}
-          contentClassName="hover:no-underline py-4 text-sm font-medium transition-all text-foreground"
+          slots={{
+            content: {
+              className:
+                'hover:no-underline py-4 text-sm font-medium transition-all text-foreground',
+            },
+          }}
           leading={
             <ChevronDownIcon
               className={cn(
