@@ -1,18 +1,12 @@
 import type { Schema } from '@formily/react';
-import type {
-  ActionContext,
-  ActionItem,
-  BuiltInOperation,
-  CustomAction,
-  OperationOverride,
-  ToggleAction,
-} from '../array-base';
+import type { ActionContext, ActionItem, BuiltInOperation } from '../array-base';
 import { RecursionField } from '@formily/react';
-import { Button, cn } from '@pixpilot/shadcn-ui';
+import { cn } from '@pixpilot/shadcn-ui';
 import React from 'react';
 import { useFormConfig } from '../../hooks';
 import { resolveActions, useArrayComponents } from '../array-base';
 import { useArray, useArrayContext, useRecord } from '../array-base/array-context';
+
 import { DEFAULT_ACTIONS, DEFAULT_ACTIONS_WITH_EDIT } from '../array-base/constants';
 import {
   isCopyComponent,
@@ -21,9 +15,9 @@ import {
   isMoveUpComponent,
   isRemoveComponent,
 } from '../array-base/utils/is-array-component';
-import { RenderBuiltInOperation } from './render-built-in-operation';
-import { ToggleActionButton } from './toggle-action-button';
-import { hasEditAction } from './utils';
+import { RenderAction } from './render-action';
+
+import { hasEditAction, isDisabled, isHidden } from './utils';
 
 export interface ArrayItemHeaderRowSlots {
   content?: React.HTMLAttributes<HTMLDivElement>;
@@ -73,104 +67,9 @@ export const ArrayItemHeaderRow: React.FC<ArrayItemHeaderRowProps> = React.memo(
           }
         : null;
 
-    const isHidden = (
-      hidden:
-        | OperationOverride['hidden']
-        | CustomAction['hidden']
-        | ToggleAction['hidden'],
-      ctx: ActionContext,
-    ) => {
-      if (hidden === undefined) return false;
-      return typeof hidden === 'function' ? hidden(ctx) : hidden;
-    };
+    // isHidden is now imported from util/is-hidden
 
-    const isDisabled = (
-      disabled:
-        | OperationOverride['disabled']
-        | CustomAction['disabled']
-        | ToggleAction['disabled'],
-      ctx: ActionContext,
-    ) => {
-      if (array?.props?.disabled) return true;
-      if (disabled === undefined) return false;
-      return typeof disabled === 'function' ? disabled(ctx) : disabled;
-    };
-
-    const renderAction = (action: ActionItem, ctx: ActionContext) => {
-      if (typeof action === 'string') {
-        return (
-          <RenderBuiltInOperation
-            operation={action}
-            override={undefined}
-            ctx={ctx}
-            index={index}
-            array={array}
-            schema={schema}
-            isHidden={isHidden}
-            isDisabled={isDisabled}
-          />
-        );
-      }
-
-      if (action.type === 'toggle') {
-        if (isHidden(action.hidden, ctx)) return null;
-        const disabled = isDisabled(action.disabled, ctx);
-        return (
-          <ToggleActionButton
-            key={action.key}
-            action={action}
-            actionContext={ctx}
-            disabled={disabled}
-          />
-        );
-      }
-
-      if (
-        action.type === 'up' ||
-        action.type === 'down' ||
-        action.type === 'copy' ||
-        action.type === 'remove' ||
-        action.type === 'edit'
-      ) {
-        return (
-          <RenderBuiltInOperation
-            operation={action.type}
-            override={action}
-            ctx={ctx}
-            index={index}
-            array={array}
-            schema={schema}
-            isHidden={isHidden}
-            isDisabled={isDisabled}
-          />
-        );
-      }
-
-      const customAction = action as CustomAction;
-      if (isHidden(customAction.hidden, ctx)) return null;
-
-      const disabled = isDisabled(customAction.disabled, ctx);
-      const tooltip = customAction.tooltip ?? customAction.buttonProps?.tooltip;
-
-      return (
-        <Button
-          key={customAction.key}
-          type="button"
-          variant="ghost"
-          size="icon"
-          tooltip={tooltip}
-          {...customAction.buttonProps}
-          disabled={disabled}
-          onClick={(e) => {
-            e.stopPropagation();
-            if (disabled) return;
-            customAction.onClick(ctx);
-          }}
-        >
-          {customAction.icon}
-        </Button>
-      );
-    };
+    // isDisabled is now imported from util/is-disabled
 
     const labelNode = label ?? <ItemLabel schema={schema} index={index} />;
 
@@ -233,7 +132,21 @@ export const ArrayItemHeaderRow: React.FC<ArrayItemHeaderRowProps> = React.memo(
       array?.props?.actions === false ? (
         <>{schemaOperationsNode}</>
       ) : (
-        <>{resolvedActions.map((a) => renderAction(a, actionContext!))}</>
+        <>
+          {resolvedActions.map((a, i) => (
+            <RenderAction
+              // eslint-disable-next-line react/no-array-index-key
+              key={i}
+              action={a}
+              ctx={actionContext!}
+              isHidden={isHidden}
+              isDisabled={isDisabled}
+              index={index}
+              array={array!}
+              schema={schema}
+            />
+          ))}
+        </>
       );
 
     const content = (
