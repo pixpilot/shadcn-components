@@ -5,7 +5,6 @@ import { observer, useFieldSchema } from '@formily/react';
 
 import React from 'react';
 import { ArrayBase, ArrayComponentProvider, useArrayComponents } from '../array-base';
-import { DEFAULT_EDITABLE_OPERATIONS } from '../array-base/constants';
 import { ArrayItemsList, useArrayEditor } from '../array-common';
 
 import { EditDialog } from './edit-dialog';
@@ -22,7 +21,17 @@ type Props = ArrayComponentProps;
 const ArrayDialogBase = observer((props: Props) => {
   const schema = useFieldSchema();
 
-  const { onAdd, onRemove, onMoveDown, onMoveUp, onEdit, className } = props;
+  const {
+    onAdd,
+    onRemove,
+    onMoveDown,
+    onMoveUp,
+    onEdit,
+    className,
+    disabled,
+    actions,
+    transformActions,
+  } = props;
 
   const {
     activeItemManager,
@@ -41,6 +50,9 @@ const ArrayDialogBase = observer((props: Props) => {
 
   return (
     <ArrayBase
+      disabled={disabled}
+      actions={actions}
+      transformActions={transformActions}
       onAdd={handleAdd}
       onRemove={onRemove}
       onMoveUp={onMoveUp}
@@ -60,12 +72,9 @@ const ArrayDialogBase = observer((props: Props) => {
   );
 });
 
-const ArrayItemsCollapseComponent: React.FC<Props> = ({
-  operations = DEFAULT_EDITABLE_OPERATIONS,
-  ...rest
-}) => {
+const ArrayItemsCollapseComponent: React.FC<Props> = (rest) => {
   return (
-    <ArrayComponentProvider allowedOperationsComponentNames={operations}>
+    <ArrayComponentProvider>
       <ArrayDialogBase {...rest} />
     </ArrayComponentProvider>
   );

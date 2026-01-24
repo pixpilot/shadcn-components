@@ -12,6 +12,7 @@ import { forEachSchema } from '../../../utils';
 import {
   isAdditionComponent,
   isCopyComponent,
+  isEditComponent,
   isEmptyComponent,
   isIndexComponent,
   isLabelComponent,
@@ -53,6 +54,7 @@ const componentChecks: Array<{
   { type: 'MoveDown', check: isMoveDownComponent },
   { type: 'MoveUp', check: isMoveUpComponent },
   { type: 'Copy', check: isCopyComponent },
+  { type: 'Edit', check: isEditComponent },
   { type: 'Label', check: isLabelComponent },
 ];
 

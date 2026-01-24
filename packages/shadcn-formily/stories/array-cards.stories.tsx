@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from '@pixpilot/shadcn-ui';
+import { Anchor, InfoIcon, PinIcon } from 'lucide-react';
 import { createForm, Form, SchemaField } from '../src';
 
 const meta: Meta<typeof Form> = {
@@ -68,6 +69,265 @@ export const EmptyArray: Story = {
   },
 };
 
+export const WithHeaderActions: Story = {
+  render: () => {
+    const form = createForm({
+      values: {
+        contacts: [
+          { name: 'Bob Builder', email: 'bob@example.com', pinned: true },
+          { name: 'Jane Smith', email: 'jane@example.com' },
+        ],
+      },
+    });
+
+    const JSON_INDENT = 2;
+
+    return (
+      <Form
+        form={form}
+        className="w-[700px] space-y-6"
+        settings={{
+          array: {
+            item: {
+              actions: [
+                {
+                  type: 'toggle',
+                  key: 'pin',
+                  inactiveTooltip: 'Pin item',
+                  activeTooltip: 'Unpin item',
+                  icon: <PinIcon className="size-4" />,
+                  activeIcon: <PinIcon className="size-4" fill="currentColor" />,
+                  isActive: ({ record }) => {
+                    return Boolean((record as { pinned?: boolean } | null)?.pinned);
+                  },
+                  onToggle: ({ array, index }, nextActive) => {
+                    const currentValue = array.field.value;
+                    const currentArray = Array.isArray(currentValue)
+                      ? (currentValue as unknown[])
+                      : [];
+                    const nextValue = [...currentArray];
+
+                    const currentItem = (nextValue[index] ?? {}) as Record<
+                      string,
+                      unknown
+                    >;
+
+                    nextValue[index] = {
+                      ...currentItem,
+                      pinned: nextActive,
+                    };
+
+                    array.field.setValue(nextValue as any[]);
+                  },
+                },
+                {
+                  key: 'info',
+                  tooltip: 'Show info',
+                  icon: <InfoIcon className="size-4" />,
+                  onClick: ({ index, itemField }) => {
+                    const address = (
+                      itemField as { address?: { toString?: () => string } } | null
+                    )?.address;
+
+                    // eslint-disable-next-line no-alert
+                    alert(
+                      `Info clicked for index ${index}\nField: ${String(
+                        address?.toString?.() ?? '',
+                      )}`,
+                    );
+                  },
+                },
+              ],
+            },
+          },
+        }}
+      >
+        <div className="space-y-2">
+          <h2 className="text-2xl font-bold">ArrayCards (Header actions)</h2>
+          <p className="text-muted-foreground">
+            Custom actions are shared and render in the card header next to default
+            operations.
+          </p>
+        </div>
+
+        <SchemaField>
+          <SchemaField.Array
+            name="contacts"
+            x-component="ArrayCards"
+            x-component-props={{
+              className: 'space-y-4',
+            }}
+          >
+            <SchemaField.Object>
+              <SchemaField.String
+                name="name"
+                title="Name"
+                required
+                x-decorator="FormItem"
+                x-component="Input"
+                x-component-props={{ placeholder: 'Enter name' }}
+              />
+              <SchemaField.String
+                name="email"
+                title="Email"
+                required
+                x-decorator="FormItem"
+                x-component="Input"
+                x-component-props={{ placeholder: 'Enter email' }}
+              />
+            </SchemaField.Object>
+            <SchemaField.Void x-component="ArrayCards.Addition" title="Add Contact" />
+          </SchemaField.Array>
+        </SchemaField>
+
+        <div className="pt-4">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => {
+              // eslint-disable-next-line no-alert
+              alert(JSON.stringify(form.values, null, JSON_INDENT));
+            }}
+          >
+            View Values
+          </Button>
+        </div>
+      </Form>
+    );
+  },
+};
+
+export const WithMixedHeaderActions: Story = {
+  render: () => {
+    const form = createForm({
+      values: {
+        contacts: [
+          { name: 'Bob Builder', email: 'bob@example.com', pinned: true },
+          { name: 'Jane Smith', email: 'jane@example.com' },
+        ],
+      },
+    });
+
+    const JSON_INDENT = 2;
+
+    return (
+      <Form
+        form={form}
+        className="w-[700px] space-y-6"
+        settings={{
+          array: {
+            item: {
+              actions: [
+                'edit',
+                {
+                  key: 'info',
+                  tooltip: 'Global info action',
+                  icon: <InfoIcon className="size-4" />,
+                  onClick: ({ index }) => {
+                    // eslint-disable-next-line no-alert
+                    alert(`Global info clicked for index ${index}`);
+                  },
+                },
+                {
+                  key: 'anchor',
+                  tooltip: 'Global anchor action',
+                  icon: <Anchor className="size-4" />,
+                  onClick: ({ index }) => {
+                    // eslint-disable-next-line no-alert
+                    alert(`Global anchor clicked for index ${index}`);
+                  },
+                },
+              ],
+            },
+          },
+        }}
+      >
+        <div className="space-y-2">
+          <h2 className="text-2xl font-bold">ArrayCards (Mixed header actions)</h2>
+          <p className="text-muted-foreground">
+            Global Form actions + per-array actions are merged (appended).
+          </p>
+        </div>
+
+        <SchemaField>
+          <SchemaField.Array
+            name="contacts"
+            x-component="ArrayCards"
+            x-component-props={{
+              className: 'space-y-4',
+              actions: [
+                {
+                  type: 'toggle',
+                  key: 'pin',
+                  inactiveTooltip: 'Pin item (array-level)',
+                  activeTooltip: 'Unpin item (array-level)',
+                  icon: <PinIcon className="size-4" />,
+                  activeIcon: <PinIcon className="size-4" fill="currentColor" />,
+                  isActive: ({ record }) => {
+                    return Boolean((record as { pinned?: boolean } | null)?.pinned);
+                  },
+                  onToggle: ({ array, index }, nextActive) => {
+                    const currentValue = array.field.value;
+                    const currentArray = Array.isArray(currentValue)
+                      ? (currentValue as unknown[])
+                      : [];
+                    const nextValue = [...currentArray];
+
+                    const currentItem = (nextValue[index] ?? {}) as Record<
+                      string,
+                      unknown
+                    >;
+
+                    nextValue[index] = {
+                      ...currentItem,
+                      pinned: nextActive,
+                    };
+
+                    array.field.setValue(nextValue as any[]);
+                  },
+                },
+              ],
+            }}
+          >
+            <SchemaField.Object>
+              <SchemaField.String
+                name="name"
+                title="Name"
+                required
+                x-decorator="FormItem"
+                x-component="Input"
+                x-component-props={{ placeholder: 'Enter name' }}
+              />
+              <SchemaField.String
+                name="email"
+                title="Email"
+                required
+                x-decorator="FormItem"
+                x-component="Input"
+                x-component-props={{ placeholder: 'Enter email' }}
+              />
+            </SchemaField.Object>
+            <SchemaField.Void x-component="ArrayCards.Addition" title="Add Contact" />
+          </SchemaField.Array>
+        </SchemaField>
+
+        <div className="pt-4">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => {
+              // eslint-disable-next-line no-alert
+              alert(JSON.stringify(form.values, null, JSON_INDENT));
+            }}
+          >
+            View Values
+          </Button>
+        </div>
+      </Form>
+    );
+  },
+};
+
 export const WithCustomComponent: Story = {
   render: () => {
     const form = createForm({
@@ -101,7 +361,8 @@ export const WithCustomComponent: Story = {
               x-component-props={{
                 className: 'space-y-4',
                 title: ' Custom Contacts',
-                operations: false,
+                // Disable default built-in header actions, and render operations from schema.
+                actions: false,
               }}
             >
               <SchemaField.Object>
@@ -129,7 +390,6 @@ export const WithCustomComponent: Story = {
                     icon: <span>Del</span>,
                   }}
                 />
-
                 <SchemaField.Void x-component="ArrayCards.Index" />
 
                 <SchemaField.String
@@ -190,16 +450,13 @@ export const WithOverrideComponent: Story = {
               x-component-props={{
                 className: 'space-y-4',
                 title: ' Custom Contacts',
+                transformActions: (actions) =>
+                  actions.map((a) =>
+                    a === 'remove' ? { type: 'remove', icon: <span>Del</span> } : a,
+                  ),
               }}
             >
               <SchemaField.Object>
-                <SchemaField.Void
-                  x-component="ArrayCards.Remove"
-                  x-component-props={{
-                    icon: <span>Del</span>,
-                  }}
-                />
-
                 <SchemaField.String
                   name="name"
                   title="Name"
@@ -226,7 +483,7 @@ export const WithOverrideComponent: Story = {
 };
 
 /**
- * Array field using JSON Schema with custom operations (similar to WithCustomComponent)
+ * Array field using JSON Schema with custom actions (similar to WithCustomComponent)
  */
 export const WithCustomComponentJsonSchema: Story = {
   render: () => {
@@ -247,7 +504,8 @@ export const WithCustomComponentJsonSchema: Story = {
           'x-component-props': {
             className: 'space-y-4',
             title: ' Custom Contacts',
-            operations: false,
+            // Disable default built-in header actions, and render operations from schema.
+            actions: false,
           },
           items: {
             type: 'object',
@@ -356,7 +614,7 @@ export const WithComponentClassName: Story = {
           'x-component-props': {
             className: 'bg-slate-400',
             title: ' Custom Contacts',
-            operations: false,
+            actions: false,
           },
           items: {
             type: 'object',
@@ -756,6 +1014,8 @@ export const WithItemReactionTitle: Story = {
       },
     });
 
+    const JSON_INDENT = 2;
+
     const schema = {
       type: 'object',
       properties: {
@@ -821,7 +1081,7 @@ export const WithItemReactionTitle: Story = {
           <Button
             type="button"
             // eslint-disable-next-line no-alert
-            onClick={() => alert(JSON.stringify(form.values, null, 2))}
+            onClick={() => alert(JSON.stringify(form.values, null, JSON_INDENT))}
           >
             View Values
           </Button>

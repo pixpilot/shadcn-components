@@ -1,7 +1,60 @@
 import type { ButtonProps } from '@pixpilot/shadcn-ui';
 import type { IArrayBaseContext } from './array-context';
 
-import type { ArrayBaseComponents, ArrayOperationTypes } from './components/types';
+import type { ArrayBaseComponents } from './components/types';
+
+export interface ActionContext {
+  index: number;
+  record: unknown;
+  array: IArrayBaseContext;
+  itemField: unknown;
+}
+
+export interface TransformContext extends ActionContext {}
+
+export type BuiltInOperation = 'up' | 'down' | 'copy' | 'edit' | 'remove';
+
+export interface OperationOverride {
+  type: BuiltInOperation;
+  icon?: React.ReactNode;
+  tooltip?: string;
+  onClick?: (context: ActionContext) => void;
+  hidden?: boolean | ((context: ActionContext) => boolean);
+  disabled?: boolean | ((context: ActionContext) => boolean);
+}
+
+export interface CustomAction {
+  /** Stable key for React rendering and transforms. */
+  key: string;
+  type?: 'button';
+  icon: React.ReactNode;
+  tooltip?: string;
+  onClick: (ctx: ActionContext) => void;
+  hidden?: boolean | ((ctx: ActionContext) => boolean);
+  disabled?: boolean | ((ctx: ActionContext) => boolean);
+  buttonProps?: Omit<ButtonProps, 'children' | 'onClick'>;
+}
+
+export interface ToggleAction {
+  type: 'toggle';
+  key: string;
+  icon: React.ReactNode;
+  activeIcon?: React.ReactNode;
+  activeTooltip?: string;
+  inactiveTooltip?: string;
+  tooltip?: string;
+  isActive: (ctx: ActionContext) => boolean;
+  onToggle: (ctx: ActionContext, nextActive: boolean) => void;
+  hidden?: boolean | ((ctx: ActionContext) => boolean);
+  disabled?: boolean | ((ctx: ActionContext) => boolean);
+  buttonProps?: Omit<ButtonProps, 'children' | 'onClick'>;
+}
+
+export type ActionItem =
+  | BuiltInOperation
+  | CustomAction
+  | ToggleAction
+  | OperationOverride;
 
 export interface ArrayBaseMixins extends ArrayBaseComponents {
   useArray: () => IArrayBaseContext | null;
@@ -17,6 +70,20 @@ export interface IArrayBaseProps {
   onMoveUp?: (index: number) => void;
   onEdit?: (index: number) => void;
   onCopy?: (index: number) => void;
+
+  /**
+   * Unified item actions.
+   * - Use built-in operation strings ('up' | 'down' | 'copy' | 'remove')
+   * - Or custom/toggle actions.
+   * - Set to false to disable all actions (including global defaults).
+   */
+  actions?: ActionItem[] | false;
+
+  /**
+   * Optional transform hook applied after merging global + local actions.
+   * Runs per item render (context includes index/record/etc).
+   */
+  transformActions?: (actions: ActionItem[], context: TransformContext) => ActionItem[];
 }
 
 export interface IArrayBaseOperationProps extends ButtonProps {
@@ -26,23 +93,13 @@ export interface IArrayBaseOperationProps extends ButtonProps {
 }
 
 export type ComposedArrayProps<T = Record<string, unknown>> = React.FC<
-  React.PropsWithChildren<
-    React.HTMLAttributes<HTMLDivElement> &
-      IArrayBaseProps & {
-        /**
-         * Array of operation types to display as default buttons. Set to false to disable all default operations.
-         * @default 'MoveDown', 'MoveUp', 'Remove'
-         */
-        operations?: ArrayOperationTypes[] | false;
-      } & T
-  >
+  React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement> & IArrayBaseProps & T>
 > &
   ArrayBaseMixins;
 
 export interface ArrayComponentProps extends React.PropsWithChildren<
   React.HTMLAttributes<HTMLDivElement> &
     IArrayBaseProps & {
-      operations?: ArrayOperationTypes[] | false;
       title?: string;
     }
 > {}

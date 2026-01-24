@@ -54,6 +54,10 @@ export function isCopyComponent(schema: ISchema): boolean {
   return isComponent(schema, '.Copy');
 }
 
+export function isEditComponent(schema: ISchema): boolean {
+  return isComponent(schema, '.Edit');
+}
+
 export function isLabelComponent(schema: ISchema): boolean {
   return isComponent(schema, '.Label');
 }
@@ -68,6 +72,7 @@ export function isOperationComponent(schema: ISchema): boolean {
     isMoveDownComponent(schema) ||
     isMoveUpComponent(schema) ||
     isCopyComponent(schema) ||
+    isEditComponent(schema) ||
     isIndexComponent(schema)
   );
 }

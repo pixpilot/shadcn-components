@@ -27,10 +27,19 @@ export function ArrayMoveDown({
       tooltip="Move Down"
       size="icon"
       {...props}
-      disabled={self?.disabled || array.props?.disabled || isLast}
+      disabled={
+        self?.disabled || array.props?.disabled || Boolean(props.disabled) || isLast
+      }
       ref={ref}
       onClick={(e) => {
-        if (self?.disabled || array.props?.disabled || isLast) return;
+        if (
+          self?.disabled ||
+          array.props?.disabled ||
+          Boolean(props.disabled) ||
+          isLast
+        ) {
+          return;
+        }
         e.stopPropagation();
         if (props.onClick) {
           props.onClick(e);

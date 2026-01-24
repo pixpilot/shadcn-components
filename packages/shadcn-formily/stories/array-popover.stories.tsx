@@ -4,6 +4,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from '@pixpilot/shadcn';
 
+import { Anchor, InfoIcon, PinIcon } from 'lucide-react';
 import React from 'react';
 import { createForm, Form, SchemaField } from '../src';
 
@@ -74,6 +75,240 @@ export const EmptyArray: Story = {
         >
           Submit
         </button>
+      </Form>
+    );
+  },
+};
+
+export const WithHeaderActions: Story = {
+  render: () => {
+    const form = createForm({
+      values: {
+        contacts: [
+          { name: 'Bob Builder', email: 'bob@example.com', pinned: true },
+          { name: 'Jane Smith', email: 'jane@example.com' },
+        ],
+      },
+    });
+
+    return (
+      <Form
+        form={form}
+        className="space-y-6 w-[700px]"
+        settings={{
+          array: {
+            item: {
+              actions: [
+                {
+                  type: 'toggle',
+                  key: 'pin',
+                  inactiveTooltip: 'Pin item',
+                  activeTooltip: 'Unpin item',
+                  icon: <PinIcon className="size-4" />,
+                  activeIcon: <PinIcon className="size-4" fill="currentColor" />,
+                  isActive: ({ record }) => {
+                    return Boolean((record as { pinned?: boolean } | null)?.pinned);
+                  },
+                  onToggle: ({ array, index }, nextActive) => {
+                    const currentValue = array.field.value;
+                    const currentArray = Array.isArray(currentValue)
+                      ? (currentValue as unknown[])
+                      : [];
+                    const nextValue = [...currentArray];
+
+                    const currentItem = (nextValue[index] ?? {}) as Record<
+                      string,
+                      unknown
+                    >;
+
+                    nextValue[index] = {
+                      ...currentItem,
+                      pinned: nextActive,
+                    };
+
+                    array.field.setValue(nextValue as any[]);
+                  },
+                },
+                {
+                  key: 'info',
+                  tooltip: 'Show info',
+                  icon: <InfoIcon className="size-4" />,
+                  onClick: ({ index, itemField }) => {
+                    const address = (
+                      itemField as { address?: { toString?: () => string } } | null
+                    )?.address;
+                    alert(
+                      `Info clicked for index ${index}\nField: ${String(
+                        address?.toString?.() ?? '',
+                      )}`,
+                    );
+                  },
+                },
+              ],
+            },
+          },
+        }}
+      >
+        <div className="space-y-2">
+          <h2 className="text-2xl font-bold">ArrayPopover (Header actions)</h2>
+          <p className="text-muted-foreground">
+            The list items use the shared header row, so custom actions render here too.
+          </p>
+        </div>
+
+        <SchemaField>
+          <SchemaField.Array name="contacts" x-component="ArrayPopover">
+            <SchemaField.Object>
+              <SchemaField.String
+                name="name"
+                title="Name"
+                required
+                x-decorator="FormItem"
+                x-component="Input"
+                x-component-props={{ placeholder: 'Enter name' }}
+              />
+              <SchemaField.String
+                name="email"
+                title="Email"
+                required
+                x-decorator="FormItem"
+                x-component="Input"
+                x-component-props={{ placeholder: 'Enter email' }}
+              />
+            </SchemaField.Object>
+          </SchemaField.Array>
+        </SchemaField>
+
+        <div className="pt-4">
+          <Button
+            type="button"
+            onClick={() => alert(JSON.stringify(form.values, null, 2))}
+          >
+            View Values
+          </Button>
+        </div>
+      </Form>
+    );
+  },
+};
+
+export const WithMixedHeaderActions: Story = {
+  render: () => {
+    const form = createForm({
+      values: {
+        contacts: [
+          { name: 'Bob Builder', email: 'bob@example.com', pinned: true },
+          { name: 'Jane Smith', email: 'jane@example.com' },
+        ],
+      },
+    });
+
+    return (
+      <Form
+        form={form}
+        className="space-y-6 w-[700px]"
+        settings={{
+          array: {
+            item: {
+              actions: [
+                'up',
+                {
+                  key: 'info',
+                  tooltip: 'Global info action',
+                  icon: <InfoIcon className="size-4" />,
+                  onClick: ({ index }) => {
+                    alert(`Global info clicked for index ${index}`);
+                  },
+                },
+                {
+                  key: 'anchor',
+                  tooltip: 'Global anchor action',
+                  icon: <Anchor className="size-4" />,
+                  onClick: ({ index }) => {
+                    alert(`Global anchor clicked for index ${index}`);
+                  },
+                },
+              ],
+            },
+          },
+        }}
+      >
+        <div className="space-y-2">
+          <h2 className="text-2xl font-bold">ArrayPopover (Mixed header actions)</h2>
+          <p className="text-muted-foreground">
+            Global Form actions + per-array actions are merged (per-array overrides by
+            key).
+          </p>
+        </div>
+
+        <SchemaField>
+          <SchemaField.Array
+            name="contacts"
+            x-component="ArrayPopover"
+            x-component-props={{
+              actions: [
+                {
+                  type: 'toggle',
+                  key: 'pin',
+                  inactiveTooltip: 'Pin item (array-level)',
+                  activeTooltip: 'Unpin item (array-level)',
+                  icon: <PinIcon className="size-4" />,
+                  activeIcon: <PinIcon className="size-4" fill="currentColor" />,
+                  isActive: ({ record }) => {
+                    return Boolean((record as { pinned?: boolean } | null)?.pinned);
+                  },
+                  onToggle: ({ array, index }, nextActive) => {
+                    const currentValue = array.field.value;
+                    const currentArray = Array.isArray(currentValue)
+                      ? (currentValue as unknown[])
+                      : [];
+                    const nextValue = [...currentArray];
+
+                    const currentItem = (nextValue[index] ?? {}) as Record<
+                      string,
+                      unknown
+                    >;
+
+                    nextValue[index] = {
+                      ...currentItem,
+                      pinned: nextActive,
+                    };
+
+                    array.field.setValue(nextValue as any[]);
+                  },
+                },
+              ],
+            }}
+          >
+            <SchemaField.Object>
+              <SchemaField.String
+                name="name"
+                title="Name"
+                required
+                x-decorator="FormItem"
+                x-component="Input"
+                x-component-props={{ placeholder: 'Enter name' }}
+              />
+              <SchemaField.String
+                name="email"
+                title="Email"
+                required
+                x-decorator="FormItem"
+                x-component="Input"
+                x-component-props={{ placeholder: 'Enter email' }}
+              />
+            </SchemaField.Object>
+          </SchemaField.Array>
+        </SchemaField>
+
+        <div className="pt-4">
+          <Button
+            type="button"
+            onClick={() => alert(JSON.stringify(form.values, null, 2))}
+          >
+            View Values
+          </Button>
+        </div>
       </Form>
     );
   },

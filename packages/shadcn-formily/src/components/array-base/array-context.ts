@@ -8,6 +8,7 @@ export interface IArrayBaseContext {
   props: IArrayBaseProps;
   field: ArrayField;
   schema: Schema;
+  showEditAction?: boolean;
 }
 
 export interface IArrayBaseItemProps {
@@ -35,4 +36,7 @@ export function useIndex(index?: number): number | undefined {
 export function useRecord(record?: number): any {
   const ctx = use(ItemContext);
   return takeRecord(ctx ? ctx.record : record, ctx?.index);
+}
+export function useArrayContext(): IArrayBaseContext {
+  return use(ArrayBaseContext) as IArrayBaseContext;
 }

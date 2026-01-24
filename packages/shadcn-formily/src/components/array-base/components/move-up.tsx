@@ -27,10 +27,19 @@ export function ArrayMoveUp({
       tooltip="Move Up"
       size="icon"
       {...props}
-      disabled={self?.disabled || array.props?.disabled || isFirst}
+      disabled={
+        self?.disabled || array.props?.disabled || Boolean(props.disabled) || isFirst
+      }
       ref={ref}
       onClick={(e) => {
-        if (self?.disabled || array.props?.disabled || isFirst) return;
+        if (
+          self?.disabled ||
+          array.props?.disabled ||
+          Boolean(props.disabled) ||
+          isFirst
+        ) {
+          return;
+        }
         e.stopPropagation();
         if (props.onClick) {
           props.onClick(e);

@@ -6,7 +6,6 @@ import { observer, useField, useFieldSchema } from '@formily/react';
 import React, { useMemo } from 'react';
 import { createPanelStateManager, getArrayItemInfo } from '../../utils';
 import { ArrayBase, ArrayComponentProvider, useArrayComponents } from '../array-base';
-import { DEFAULT_OPERATIONS } from '../array-base/constants';
 import { ArrayCollapseItem } from './item';
 
 type Props = ArrayComponentProps & {
@@ -29,6 +28,9 @@ const ArrayItemsCollapseBase = observer((props: Props) => {
     onEdit,
     className,
     children,
+    disabled,
+    actions,
+    transformActions,
     defaultActiveKey,
     mode = 'multiple',
     ...otherProps
@@ -108,6 +110,9 @@ const ArrayItemsCollapseBase = observer((props: Props) => {
 
   return (
     <ArrayBase
+      disabled={disabled}
+      actions={actions}
+      transformActions={transformActions}
       onAdd={handleAddNew}
       onRemove={onRemove}
       onMoveUp={handleMoveUp}
@@ -128,12 +133,9 @@ const ArrayItemsCollapseBase = observer((props: Props) => {
   );
 });
 
-const ArrayItemsCollapseComponent: React.FC<Props> = ({
-  operations = DEFAULT_OPERATIONS,
-  ...rest
-}) => {
+const ArrayItemsCollapseComponent: React.FC<Props> = (rest) => {
   return (
-    <ArrayComponentProvider allowedOperationsComponentNames={operations}>
+    <ArrayComponentProvider>
       <ArrayItemsCollapseBase {...rest} />
     </ArrayComponentProvider>
   );

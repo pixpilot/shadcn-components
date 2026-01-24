@@ -24,12 +24,12 @@ export function ArrayCopy({
       size="icon"
       tooltip="Copy"
       {...props}
-      disabled={self?.disabled || array.props?.disabled}
+      disabled={self?.disabled || array.props?.disabled || Boolean(props.disabled)}
       ref={ref}
       onClick={(e) => {
         if (self?.disabled) return;
         e.stopPropagation();
-        if (array.props?.disabled) return;
+        if (array.props?.disabled || Boolean(props.disabled)) return;
         if (props.onClick) {
           props.onClick(e);
           if (e.defaultPrevented) return;

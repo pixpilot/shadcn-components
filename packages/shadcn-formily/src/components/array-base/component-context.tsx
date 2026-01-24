@@ -1,4 +1,3 @@
-import type { ArrayOperationTypes } from './components/types';
 import type { ArrayComponents } from './components/use-array-components-registry';
 import { useFieldSchema } from '@formily/react';
 import React from 'react';
@@ -14,15 +13,14 @@ export function useArrayComponents() {
 }
 
 export interface ComponentContextProps {
-  allowedOperationsComponentNames?: ArrayOperationTypes[] | false;
   children?: React.ReactNode;
 }
 
 export const ArrayComponentProvider: React.FC<ComponentContextProps> = (props) => {
-  const { allowedOperationsComponentNames, children } = props;
+  const { children } = props;
   const schema = useFieldSchema();
 
-  const components = useArrayComponentRegistry(schema, allowedOperationsComponentNames);
+  const components = useArrayComponentRegistry(schema);
 
   return <Provider value={components}>{children}</Provider>;
 };

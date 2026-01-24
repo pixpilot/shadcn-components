@@ -7,13 +7,10 @@ import { observer, useField, useFieldSchema } from '@formily/react';
 import React from 'react';
 import { getArrayItemInfo } from '../../utils';
 import { ArrayBase } from '../array-base';
-
 import {
   ArrayComponentProvider,
   useArrayComponents,
 } from '../array-base/component-context';
-
-import { DEFAULT_OPERATIONS } from '../array-base/constants';
 import ArrayItem from './item';
 
 const ArrayCardsBase: React.FC<ArrayComponentProps> = observer((props) => {
@@ -25,10 +22,12 @@ const ArrayCardsBase: React.FC<ArrayComponentProps> = observer((props) => {
     onRemove,
     onMoveDown,
     onMoveUp,
+    disabled,
+    actions,
+    transformActions,
     className,
     title: titleProp,
     children,
-    operations,
     ...otherProps
   } = props;
 
@@ -53,6 +52,9 @@ const ArrayCardsBase: React.FC<ArrayComponentProps> = observer((props) => {
 
   return (
     <ArrayBase
+      disabled={disabled}
+      actions={actions}
+      transformActions={transformActions}
       onAdd={onAdd}
       onCopy={onCopy}
       onRemove={onRemove}
@@ -74,9 +76,8 @@ const ArrayCardsBase: React.FC<ArrayComponentProps> = observer((props) => {
 });
 
 function ArrayCardsComponent(props: ArrayComponentProps) {
-  const { operations: allowDefaultOperations = DEFAULT_OPERATIONS } = props;
   return (
-    <ArrayComponentProvider allowedOperationsComponentNames={allowDefaultOperations}>
+    <ArrayComponentProvider>
       <ArrayCardsBase {...props} />
     </ArrayComponentProvider>
   );

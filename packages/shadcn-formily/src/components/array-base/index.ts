@@ -1,3 +1,4 @@
 export * from './array-base';
 export * from './component-context';
+export * from './resolve-actions';
 export * from './types';

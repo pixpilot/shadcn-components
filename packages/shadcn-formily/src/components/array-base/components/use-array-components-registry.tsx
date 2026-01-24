@@ -4,14 +4,9 @@ import type { IArrayBaseAdditionProps } from './addition';
 import type { ArrayItemLabelProps } from './array-item-label';
 import type { ArrayEmptyProps } from './empty';
 
-import type {
-  ArrayItemComponentRegistryProps,
-  ArrayOperationTypes,
-  FieldComponentProps,
-} from './types';
+import type { ArrayItemComponentRegistryProps, FieldComponentProps } from './types';
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
-import { filterAndSortComponents } from '../utils/filter-and-sort-components';
 import { getArrayComponents } from './get-array-components';
 
 type ArrayItemsContainerProps = FieldComponentProps &
@@ -23,7 +18,6 @@ type ArrayItemsContainerProps = FieldComponentProps &
 type AdditionProps = Pick<FieldComponentProps, 'schema'> & IArrayBaseAdditionProps;
 
 interface ArrayComponentsProps {
-  OperationComponents: ArrayItemComponentRegistryProps;
   AddButton: AdditionProps;
   EmptyArray: ArrayEmptyProps;
   ItemIndex: ArrayItemComponentRegistryProps;
@@ -32,7 +26,6 @@ interface ArrayComponentsProps {
 }
 
 export interface ArrayComponents {
-  OperationComponents: React.FC<ArrayComponentsProps['OperationComponents']>;
   AddButton: React.FC<ArrayComponentsProps['AddButton']>;
   EmptyArray: React.FC<ArrayComponentsProps['EmptyArray']>;
   ItemIndex: React.FC<ArrayComponentsProps['ItemIndex']>;
@@ -40,32 +33,15 @@ export interface ArrayComponents {
   ItemLabel: React.FC<ArrayComponentsProps['ItemLabel']>;
 }
 
-export function useArrayComponentRegistry(
-  rootSchema: Schema,
-  operations?: ArrayOperationTypes[] | false,
-): ArrayComponents {
+export function useArrayComponentRegistry(rootSchema: Schema): ArrayComponents {
   return React.useMemo(() => {
     const schemaComponents = getArrayComponents(rootSchema);
-    const componentToRender = filterAndSortComponents(schemaComponents, operations);
 
     const EmptyArray = schemaComponents.get('Empty')?.Component;
 
     const AddButton = schemaComponents.get('Addition')?.Component;
 
     return {
-      OperationComponents: React.memo(
-        (props: ArrayComponentsProps['OperationComponents']) => {
-          return (
-            <>
-              {componentToRender.map(([key, { Component }]) => (
-                <React.Fragment key={key}>
-                  <Component {...props} />
-                </React.Fragment>
-              ))}
-            </>
-          );
-        },
-      ),
       AddButton: (props: ArrayComponentsProps['AddButton']) => {
         if (!AddButton) return null;
         return <AddButton {...props} />;
@@ -109,5 +85,5 @@ export function useArrayComponentRegistry(
         );
       },
     };
-  }, [operations, rootSchema]);
+  }, [rootSchema]);
 }

@@ -25,10 +25,10 @@ export function ArrayRemove({
       tooltip="Remove"
       size="icon"
       {...props}
-      disabled={self?.disabled || array.props?.disabled}
+      disabled={self?.disabled || array.props?.disabled || Boolean(props.disabled)}
       ref={ref}
       onClick={(e) => {
-        if (self?.disabled || array.props?.disabled) return;
+        if (self?.disabled || array.props?.disabled || Boolean(props.disabled)) return;
         e.stopPropagation();
         if (props.onClick) {
           props.onClick(e);

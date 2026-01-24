@@ -4,15 +4,25 @@ import { observer } from '@formily/react';
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 import { ArrayBase, ArrayComponentProvider } from '../array-base';
-import { DEFAULT_EDITABLE_OPERATIONS } from '../array-base/constants';
 import { ArrayItemsList, useArrayEditor } from '../array-common';
 import { ArrayItemsEditPopover } from './popover';
 
 type Props = ArrayComponentProps;
 
 const ArrayPopoverBase = observer((props: Props) => {
-  const { onAdd, onRemove, onMoveDown, onMoveUp, onEdit, className, children, ...rest } =
-    props;
+  const {
+    onAdd,
+    onRemove,
+    onMoveDown,
+    onMoveUp,
+    onEdit,
+    className,
+    children,
+    disabled,
+    actions,
+    transformActions,
+    ...rest
+  } = props;
 
   const {
     activeItemManager,
@@ -27,6 +37,9 @@ const ArrayPopoverBase = observer((props: Props) => {
 
   return (
     <ArrayBase
+      disabled={disabled}
+      actions={actions}
+      transformActions={transformActions}
       onAdd={handleAdd}
       onRemove={onRemove}
       onMoveUp={onMoveUp}
@@ -51,12 +64,9 @@ const ArrayPopoverBase = observer((props: Props) => {
   );
 });
 
-export const ArrayPopover: React.FC<Props> = ({
-  operations = DEFAULT_EDITABLE_OPERATIONS,
-  ...rest
-}) => {
+export const ArrayPopover: React.FC<Props> = (rest) => {
   return (
-    <ArrayComponentProvider allowedOperationsComponentNames={operations}>
+    <ArrayComponentProvider>
       <ArrayPopoverBase {...rest} />
     </ArrayComponentProvider>
   );

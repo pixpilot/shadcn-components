@@ -26,7 +26,7 @@ export const ArrayBase: ComposedArrayBase = (props) => {
   const field = useField<ArrayField>();
   const schema = useFieldSchema();
   const contextValue = React.useMemo(
-    () => ({ field, schema, props }),
+    () => ({ field, schema, props, showEditAction: props.onEdit !== undefined }),
     [field, schema, props],
   );
   return <ArrayBaseContext value={contextValue}>{props.children}</ArrayBaseContext>;
