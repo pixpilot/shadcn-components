@@ -1,5 +1,15 @@
 # @pixpilot/formily-shadcn
 
+## 0.34.0
+
+### Minor Changes
+
+- add x-reactions to SchemaField.Object for dynamic title updates
+
+### Patch Changes
+
+- rename remaining component files to PascalCase
+
 ## 0.33.0
 
 ### Minor Changes
