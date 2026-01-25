@@ -61,7 +61,6 @@ const ArrayCollapseItemBase = React.memo((props: ArrayCollapseItemProps) => {
             className="px-3"
             schema={schema}
             index={index}
-            sortableId={itemKey}
             slots={{
               content: {
                 className:

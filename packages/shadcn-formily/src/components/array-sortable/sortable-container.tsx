@@ -18,14 +18,11 @@ import {
 import { useField } from '@formily/react';
 import React from 'react';
 import { useFormConfig } from '../../hooks';
+import { getArrayItemInfo } from '../../utils';
 import { useArrayContext } from '../array-base/array-context';
+import { useArrayDataSource } from '../array-common';
 
 export interface SortableContainerProps {
-  /**
-   * Array of item IDs for sorting
-   */
-  items: Array<string | number>;
-
   /**
    * Whether sorting is disabled
    */
@@ -49,7 +46,6 @@ const ACTIVATION_DISTANCE = 8;
  * Provides drag and drop context and handles reordering in Formily
  */
 export const SortableContainer: React.FC<SortableContainerProps> = ({
-  items,
   disabled,
   children,
   onSortEnd,
@@ -57,6 +53,13 @@ export const SortableContainer: React.FC<SortableContainerProps> = ({
   const { array } = useFormConfig();
   const field = useField<FormilyArrayField>();
   const { sortable } = useArrayContext();
+
+  const dataSource = useArrayDataSource();
+
+  const items = dataSource.map((_, index) => {
+    const { itemKey } = getArrayItemInfo(field, index);
+    return itemKey;
+  });
 
   const isSortableEnabled = array?.sortable !== false && !disabled && sortable !== false;
 

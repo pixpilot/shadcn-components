@@ -1,14 +1,9 @@
-import { useSortable } from '@dnd-kit/sortable';
 import { Button } from '@pixpilot/shadcn-ui';
 import { GripVerticalIcon } from 'lucide-react';
 import React from 'react';
+import { useSortableItemContext } from './sortable-item';
 
 export interface DragHandleProps {
-  /**
-   * ID of the sortable item
-   */
-  id: string | number;
-
   /**
    * Whether the drag handle is disabled
    */
@@ -23,11 +18,11 @@ export interface DragHandleProps {
 /**
  * Reusable drag handle component for sortable array items
  * Shows a grip icon that users can drag to reorder items
+ * Must be used within a SortableItem component
  */
-export const DragHandle: React.FC<DragHandleProps> = ({ id, disabled, className }) => {
-  const { attributes, listeners, setActivatorNodeRef, isDragging } = useSortable({
-    id,
-  });
+export const DragHandle: React.FC<DragHandleProps> = ({ disabled, className }) => {
+  const { attributes, listeners, setActivatorNodeRef, isDragging } =
+    useSortableItemContext();
 
   return (
     <Button

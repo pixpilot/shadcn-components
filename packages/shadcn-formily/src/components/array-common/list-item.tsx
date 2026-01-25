@@ -54,7 +54,6 @@ export const ListItem: React.FC<ListItemProps> = React.memo(
             <ArrayItemHeaderRow
               schema={schema}
               index={index}
-              sortableId={itemKey}
               slots={{
                 content: {
                   content: 'text-foreground font-medium',

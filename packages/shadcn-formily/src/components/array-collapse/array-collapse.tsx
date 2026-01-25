@@ -6,6 +6,7 @@ import { observer, useField, useFieldSchema } from '@formily/react';
 import React, { useMemo } from 'react';
 import { createPanelStateManager, getArrayItemInfo } from '../../utils';
 import { ArrayBase, ArrayComponentProvider, useArrayComponents } from '../array-base';
+import { useArrayDataSource } from '../array-common';
 import { SortableContainer } from '../array-sortable';
 import { ArrayCollapseItem } from './item';
 
@@ -41,11 +42,7 @@ const ArrayItemsCollapseBase = observer((props: Props) => {
     return createPanelStateManager(defaultActiveKey, mode === 'accordion');
   }, [defaultActiveKey, mode]);
 
-  const dataSource = React.useMemo(
-    // eslint-disable-next-line ts/no-unsafe-return
-    () => (Array.isArray(field.value) ? field.value : []),
-    [field.value],
-  );
+  const dataSource = useArrayDataSource();
 
   const newItemIndex = React.useRef<number>(null);
 
@@ -68,13 +65,6 @@ const ArrayItemsCollapseBase = observer((props: Props) => {
   const arrayComponents = useArrayComponents();
 
   const { ArrayItemsContainer, AddButton } = arrayComponents;
-
-  const itemKeys = React.useMemo(() => {
-    return dataSource.map((_, index) => {
-      const { itemKey } = getArrayItemInfo(field, index);
-      return itemKey;
-    });
-  }, [dataSource, field]);
 
   const renderItems = () => {
     return dataSource.map((_item, index) => {
@@ -136,7 +126,7 @@ const ArrayItemsCollapseBase = observer((props: Props) => {
         schema={schema}
         hasItems={dataSource.length > 0}
       >
-        <SortableContainer items={itemKeys}>{renderItems()}</SortableContainer>
+        <SortableContainer>{renderItems()}</SortableContainer>
         <AddButton schema={schema} />
       </ArrayItemsContainer>
     </ArrayBase>

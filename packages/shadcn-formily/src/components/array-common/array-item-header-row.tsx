@@ -44,15 +44,10 @@ export interface ArrayItemHeaderRowProps {
   buttonProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
 
   slots?: ArrayItemHeaderRowSlots;
-
-  /**
-   * ID for the sortable item (required if showDragHandle is true)
-   */
-  sortableId?: string | number;
 }
 
 export const ArrayItemHeaderRow: React.FC<ArrayItemHeaderRowProps> = React.memo(
-  ({ schema, index, className, leading, label, buttonProps, slots, sortableId }) => {
+  ({ schema, index, className, leading, label, buttonProps, slots }) => {
     const { ItemLabel } = useArrayComponents();
     const { showEditAction } = useArrayContext();
 
@@ -159,12 +154,8 @@ export const ArrayItemHeaderRow: React.FC<ArrayItemHeaderRowProps> = React.memo(
     const formSortable = formConfig.array?.sortable;
 
     const dragHandleNode =
-      sortableId != null && arraySortable !== false && formSortable !== false ? (
-        <DragHandle
-          id={sortableId}
-          className="-ml-2"
-          disabled={array?.field?.pattern !== 'editable'}
-        />
+      arraySortable !== false && formSortable !== false ? (
+        <DragHandle className="-ml-2" disabled={array?.field?.pattern !== 'editable'} />
       ) : null;
 
     const content = (

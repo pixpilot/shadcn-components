@@ -21,15 +21,40 @@ export interface SortableItemProps {
 
 const OPACITY_DRAGGING = 0.5;
 
+interface SortableItemContextValue {
+  listeners: ReturnType<typeof useSortable>['listeners'];
+  setActivatorNodeRef: ReturnType<typeof useSortable>['setActivatorNodeRef'];
+  attributes: ReturnType<typeof useSortable>['attributes'];
+  isDragging: boolean;
+}
+
+const SortableItemContext = React.createContext<SortableItemContextValue | null>(null);
+
+export function useSortableItemContext() {
+  const context = React.use(SortableItemContext);
+  if (context == null) {
+    throw new Error('useSortableItemContext must be used within a SortableItem');
+  }
+  return context;
+}
+
 /**
  * Reusable sortable item wrapper component
  * Wraps any array item content to make it sortable
  */
 export const SortableItem: React.FC<SortableItemProps> = ({ id, disabled, children }) => {
-  const { attributes, setNodeRef, transform, transition, isDragging } = useSortable({
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    setActivatorNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
     id,
     disabled,
-    transition: null,
+    // transition: null,
   });
 
   const style: React.CSSProperties = {
@@ -38,15 +63,26 @@ export const SortableItem: React.FC<SortableItemProps> = ({ id, disabled, childr
     opacity: isDragging ? OPACITY_DRAGGING : 1,
   };
 
+  const contextValue = React.useMemo(
+    () => ({
+      listeners,
+      setActivatorNodeRef,
+      attributes,
+      isDragging,
+    }),
+    [listeners, setActivatorNodeRef, attributes, isDragging],
+  );
+
   return (
-    <div
-      ref={setNodeRef as React.Ref<HTMLDivElement>}
-      style={style}
-      {...attributes}
-      // Don't spread listeners here - they should be on the drag handle
-    >
-      {children}
-    </div>
+    <SortableItemContext value={contextValue}>
+      <div
+        ref={setNodeRef as React.Ref<HTMLDivElement>}
+        style={style}
+        // Don't spread attributes or listeners here - they should be on the drag handle
+      >
+        {children}
+      </div>
+    </SortableItemContext>
   );
 };
 

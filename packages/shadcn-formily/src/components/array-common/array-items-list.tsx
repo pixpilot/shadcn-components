@@ -6,6 +6,7 @@ import { getArrayItemInfo } from '../../utils';
 import { useArrayComponents } from '../array-base';
 import { SortableContainer } from '../array-sortable';
 import { ListItem } from './list-item';
+import { useArrayDataSource } from './use-array-data-source';
 
 export interface ArrayItemsListProps {
   /**
@@ -31,20 +32,8 @@ export const ArrayItemsList: React.FC<ArrayItemsListProps> = observer(
     const field = useField<FormilyArrayField>();
     const schema = useFieldSchema();
 
-    const dataSource = React.useMemo(
-      // eslint-disable-next-line ts/no-unsafe-return
-      () => (Array.isArray(field.value) ? field.value : []),
-      [field.value],
-    );
-
+    const dataSource = useArrayDataSource();
     const { ArrayItemsContainer } = useArrayComponents();
-
-    const itemKeys = React.useMemo(() => {
-      return dataSource.map((_, index) => {
-        const { itemKey } = getArrayItemInfo(field, index);
-        return itemKey;
-      });
-    }, [dataSource, field]);
 
     return (
       <ArrayItemsContainer
@@ -54,7 +43,7 @@ export const ArrayItemsList: React.FC<ArrayItemsListProps> = observer(
         basePath={field.address.toString()}
         hasItems={dataSource.length > 0}
       >
-        <SortableContainer items={itemKeys}>
+        <SortableContainer>
           {dataSource.map((_item, index) => {
             const { itemKey, record } = getArrayItemInfo(field, index);
             const isNew = isNewItem?.(index);

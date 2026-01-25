@@ -33,11 +33,7 @@ const ArrayItem = React.memo(({ index, record, itemKey }: ArrayCardItemProps) =>
           {...itemWrapperRestProps}
           className={cn('border rounded-lg p-4 space-y-2', itemWrapperClassName)}
         >
-          <ArrayItemHeaderRow
-            schema={schema.items as Schema}
-            index={index}
-            sortableId={itemKey}
-          />
+          <ArrayItemHeaderRow schema={schema.items as Schema} index={index} />
           <div className="space-y-4">
             <RecursionField
               schema={items}
