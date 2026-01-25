@@ -79,7 +79,15 @@ export function createEmptyArrayStory(config: StoryConfig): Story {
                   ...config.componentProps,
                 }}
               >
-                <SchemaField.Object>
+                <SchemaField.Object
+                  x-reactions={{
+                    fulfill: {
+                      state: {
+                        title: "{{$self.value?.name || 'User'}}",
+                      },
+                    },
+                  }}
+                >
                   <SchemaField.String
                     name="name"
                     title="Name"
@@ -203,7 +211,15 @@ export function createWithActions(config: StoryConfig): Story {
 
           <SchemaField>
             <SchemaField.Array name="users" x-component={componentName}>
-              <SchemaField.Object>
+              <SchemaField.Object
+                x-reactions={{
+                  fulfill: {
+                    state: {
+                      title: "{{$self.value?.name || 'User'}}",
+                    },
+                  },
+                }}
+              >
                 <SchemaField.String
                   name="name"
                   title="Name"
@@ -222,7 +238,15 @@ export function createWithActions(config: StoryConfig): Story {
                 actions: ['up', 'down', 'edit', 'remove'],
               }}
             >
-              <SchemaField.Object>
+              <SchemaField.Object
+                x-reactions={{
+                  fulfill: {
+                    state: {
+                      title: "{{$self.value?.name || 'User'}}",
+                    },
+                  },
+                }}
+              >
                 <SchemaField.String
                   name="name"
                   title="Name"
@@ -280,6 +304,13 @@ export function createWithComponentClassNameStory(config: StoryConfig): Story {
               'x-component': itemComponent,
               'x-component-props': {
                 className: 'bg-slate-500 text-white',
+              },
+              'x-reactions': {
+                fulfill: {
+                  state: {
+                    title: "{{$self.value?.name || 'User'}}",
+                  },
+                },
               },
               properties: {
                 name: {
@@ -374,7 +405,15 @@ export function createDeclarativeStory(config: StoryConfig): Story {
               x-component={componentName}
               x-component-props={config.componentProps}
             >
-              <SchemaField.Object>
+              <SchemaField.Object
+                x-reactions={{
+                  fulfill: {
+                    state: {
+                      title: "{{$self.value?.name || 'User'}}",
+                    },
+                  },
+                }}
+              >
                 <SchemaField.String
                   name="name"
                   title="Name"
@@ -460,6 +499,13 @@ export function createWithJsonSchemaStory(config: StoryConfig): Story {
             'x-component-props': config.componentProps,
             items: {
               type: 'object',
+              'x-reactions': {
+                fulfill: {
+                  state: {
+                    title: "{{$self.value?.name || 'User'}}",
+                  },
+                },
+              },
               properties: {
                 name: {
                   type: 'string',
@@ -746,7 +792,7 @@ export function createSortableStory(config: StoryConfig): Story {
                 {
                   fulfill: {
                     state: {
-                      title: '{{$self.value?.title}}',
+                      title: "{{$self.value?.title || 'Task'}}",
                     },
                   },
                 },
@@ -860,7 +906,15 @@ export function createSortableNestedStory(config: StoryConfig): Story {
               x-component={componentName}
               x-component-props={config.componentProps}
             >
-              <SchemaField.Object>
+              <SchemaField.Object
+                x-reactions={{
+                  fulfill: {
+                    state: {
+                      title: "{{$self.value?.name || 'Project'}}",
+                    },
+                  },
+                }}
+              >
                 <SchemaField.String
                   name="name"
                   title="Project Name"
@@ -875,7 +929,15 @@ export function createSortableNestedStory(config: StoryConfig): Story {
                   x-component={componentName}
                   x-component-props={config.componentProps}
                 >
-                  <SchemaField.Object>
+                  <SchemaField.Object
+                    x-reactions={{
+                      fulfill: {
+                        state: {
+                          title: "{{$self.value?.title || 'Task'}}",
+                        },
+                      },
+                    }}
+                  >
                     <SchemaField.String
                       name="title"
                       title="Task Title"
@@ -960,7 +1022,15 @@ export function createSortableDisabledInFormStory(config: StoryConfig): Story {
               x-component={componentName}
               x-component-props={config.componentProps}
             >
-              <SchemaField.Object>
+              <SchemaField.Object
+                x-reactions={{
+                  fulfill: {
+                    state: {
+                      title: "{{$self.value?.title || 'Task'}}",
+                    },
+                  },
+                }}
+              >
                 <SchemaField.String
                   name="title"
                   title="Task Title"
@@ -1044,7 +1114,15 @@ export function createSortableDisabledForArrayStory(config: StoryConfig): Story 
                 actions: ['up', 'down', 'remove'],
               }}
             >
-              <SchemaField.Object>
+              <SchemaField.Object
+                x-reactions={{
+                  fulfill: {
+                    state: {
+                      title: "{{$self.value?.title || 'Task'}}",
+                    },
+                  },
+                }}
+              >
                 <SchemaField.String
                   name="title"
                   title="Task Title"

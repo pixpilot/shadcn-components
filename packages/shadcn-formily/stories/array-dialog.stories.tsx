@@ -83,6 +83,13 @@ export const LongDialog: Story = {
           },
           items: {
             type: 'object',
+            'x-reactions': {
+              fulfill: {
+                state: {
+                  title: "{{$self.value?.name || 'Item'}}",
+                },
+              },
+            },
             properties: {
               ...Array.from({ length: 30 }, (_, i) => ({
                 [`field${i + 1}`]: {
