@@ -102,6 +102,11 @@ export interface ArrayComponentProps extends React.PropsWithChildren<
   React.HTMLAttributes<HTMLDivElement> &
     IArrayBaseProps & {
       title?: string;
+      /**
+       * When true, array item editors (popover/dialog) commit changes live.
+       * When false (default), they only commit on Save.
+       */
+      autoSave?: boolean;
     }
 > {}
 

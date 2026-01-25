@@ -16,6 +16,7 @@ const ArrayPopoverBase = observer((props: Props) => {
     onMoveDown,
     onMoveUp,
     onEdit,
+    autoSave = true,
     className,
     children,
     transformActions,
@@ -29,8 +30,9 @@ const ArrayPopoverBase = observer((props: Props) => {
     isNewItem,
     handleEdit,
     handleSaveClick,
+    handleLiveChange,
     handleCancelClick,
-  } = useArrayEditor({ onAdd, onEdit });
+  } = useArrayEditor({ onAdd, onEdit, autoSave });
 
   return (
     <ArrayBase
@@ -49,6 +51,8 @@ const ArrayPopoverBase = observer((props: Props) => {
           <ArrayItemsEditPopover
             activeItemManager={activeItemManager}
             onCancel={handleCancelClick}
+            onAutoSave={handleLiveChange}
+            autoSave={autoSave}
             schema={items as Schema}
             onSave={handleSaveClick}
           >

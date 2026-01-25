@@ -24,14 +24,17 @@ const ArrayDialogBase = observer((props: Props) => {
   const { onAdd, onRemove, onMoveDown, onMoveUp, onEdit, className, transformActions } =
     props;
 
+  const { autoSave } = props;
+
   const {
     activeItemManager,
     handleAdd,
     handleEdit,
     isNewItem,
     handleSaveClick,
+    handleLiveChange,
     handleCancelClick,
-  } = useArrayEditor({ onAdd, onEdit });
+  } = useArrayEditor({ onAdd, onEdit, autoSave });
 
   const { AddButton } = useArrayComponents();
 
@@ -54,9 +57,11 @@ const ArrayDialogBase = observer((props: Props) => {
       </ArrayItemsList>
       <EditDialog
         onSave={handleSaveClick}
+        onAutoSave={handleLiveChange}
         onCancel={handleCancelClick}
         activeItemManager={activeItemManager}
         schema={items as Schema}
+        autoSave={autoSave}
       />
     </ArrayBase>
   );

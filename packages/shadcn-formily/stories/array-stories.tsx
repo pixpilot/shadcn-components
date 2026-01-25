@@ -7,6 +7,7 @@
  */
 
 import type { StoryObj } from '@storybook/react';
+import type { ISchema } from '../src';
 import { Button } from '@pixpilot/shadcn';
 import { InfoIcon, PinIcon } from 'lucide-react';
 import { createForm, Form, SchemaField } from '../src';
@@ -43,6 +44,8 @@ export function createStories(config: StoryConfig) {
     SortableNested: createSortableNestedStory(config),
     SortableDisabledInForm: createSortableDisabledInFormStory(config),
     SortableDisabledForArray: createSortableDisabledForArrayStory(config),
+    AutoSave: createAutoSaveStory(config),
+    ManualSave: createManualSaveStory(config),
   };
 }
 
@@ -488,13 +491,14 @@ export function createWithJsonSchemaStory(config: StoryConfig): Story {
         },
       });
 
-      const schema = {
+      const schema: ISchema = {
         type: 'object',
         properties: {
           contacts: {
             type: 'array',
             title: 'Contacts',
             maxItems: 10,
+            description: 'List of user contacts',
             'x-component': componentName,
             'x-component-props': config.componentProps,
             items: {
@@ -1159,6 +1163,251 @@ export function createSortableDisabledForArrayStory(config: StoryConfig): Story 
             >
               View Values
             </Button>
+          </div>
+        </Form>
+      );
+    },
+  };
+}
+
+/**
+ * Creates an AutoSave story for Dialog/Popover components with immediate changes
+ */
+export function createAutoSaveStory(config: StoryConfig): Story {
+  const { componentName, displayTitle } = config;
+
+  // Only applicable for ArrayDialog and ArrayPopover
+  if (!componentName.includes('Dialog') && !componentName.includes('Popover')) {
+    return {
+      render: () => (
+        <div className="p-4">
+          <p className="text-muted-foreground">
+            AutoSave is only applicable for ArrayDialog and ArrayPopover components.
+          </p>
+        </div>
+      ),
+    };
+  }
+
+  return {
+    render: () => {
+      const form = createForm({
+        values: {
+          contacts: [
+            { name: 'Alice Johnson', email: 'alice@example.com', role: 'Admin' },
+            { name: 'Bob Smith', email: 'bob@example.com', role: 'User' },
+          ],
+        },
+      });
+
+      return (
+        <Form
+          form={form}
+          className="w-[700px]"
+          onSubmit={(values) => {
+            // eslint-disable-next-line no-console
+            console.log('Form submitted:', values);
+            alert(JSON.stringify(values, null, JSON_INDENT));
+          }}
+        >
+          <div className="space-y-4">
+            <div>
+              <h2 className="text-2xl font-bold">{displayTitle} (Auto-Save Mode)</h2>
+              <p className="text-muted-foreground mt-2">
+                Changes are applied immediately as you type. No Save/Cancel buttons are
+                shown. The dialog/popover stays open until you click outside or press ESC.
+              </p>
+            </div>
+
+            <SchemaField>
+              <SchemaField.Array
+                name="contacts"
+                x-component={componentName}
+                x-component-props={{
+                  autoSave: true,
+                  ...config.componentProps,
+                }}
+              >
+                <SchemaField.Object
+                  x-reactions={{
+                    fulfill: {
+                      state: {
+                        title: "{{$self.value?.name || 'Contact'}}",
+                      },
+                    },
+                  }}
+                >
+                  <SchemaField.String
+                    name="name"
+                    title="Name"
+                    required
+                    x-decorator="FormItem"
+                    x-component="Input"
+                    x-component-props={{ placeholder: 'Enter name' }}
+                  />
+                  <SchemaField.String
+                    name="email"
+                    title="Email"
+                    required
+                    x-decorator="FormItem"
+                    x-component="Input"
+                    x-component-props={{
+                      placeholder: 'Enter email',
+                      type: 'email',
+                    }}
+                  />
+                  <SchemaField.String
+                    name="role"
+                    title="Role"
+                    x-decorator="FormItem"
+                    x-component="Select"
+                    enum={[
+                      { label: 'Admin', value: 'Admin' },
+                      { label: 'User', value: 'User' },
+                      { label: 'Guest', value: 'Guest' },
+                    ]}
+                  />
+                </SchemaField.Object>
+              </SchemaField.Array>
+            </SchemaField>
+
+            <div className="border-t pt-4">
+              <Button
+                type="button"
+                onClick={() => {
+                  alert(JSON.stringify(form.values, null, JSON_INDENT));
+                }}
+              >
+                View Current Values
+              </Button>
+            </div>
+          </div>
+        </Form>
+      );
+    },
+  };
+}
+
+/**
+ * Creates a ManualSave story for Dialog/Popover components with Save/Cancel buttons
+ */
+export function createManualSaveStory(config: StoryConfig): Story {
+  const { componentName, displayTitle } = config;
+
+  // Only applicable for ArrayDialog and ArrayPopover
+  if (!componentName.includes('Dialog') && !componentName.includes('Popover')) {
+    return {
+      render: () => (
+        <div className="p-4">
+          <p className="text-muted-foreground">
+            Manual Save is only applicable for ArrayDialog and ArrayPopover components.
+          </p>
+        </div>
+      ),
+    };
+  }
+
+  return {
+    render: () => {
+      const form = createForm({
+        values: {
+          tasks: [
+            {
+              title: 'Complete project proposal',
+              description: 'Write and submit the Q1 project proposal',
+              priority: 'High',
+            },
+            {
+              title: 'Review code changes',
+              description: 'Review pull requests from team members',
+              priority: 'Medium',
+            },
+          ],
+        },
+      });
+
+      return (
+        <Form
+          form={form}
+          className="w-[700px]"
+          onSubmit={(values) => {
+            // eslint-disable-next-line no-console
+            console.log('Form submitted:', values);
+            alert(JSON.stringify(values, null, JSON_INDENT));
+          }}
+        >
+          <div className="space-y-4">
+            <div>
+              <h2 className="text-2xl font-bold">{displayTitle} (Manual Save Mode)</h2>
+              <p className="text-muted-foreground mt-2">
+                Changes are only applied when you click the Save button. The
+                dialog/popover will shake if you try to close with unsaved changes. Click
+                Cancel to discard changes.
+              </p>
+            </div>
+
+            <SchemaField>
+              <SchemaField.Array
+                name="tasks"
+                x-component={componentName}
+                x-component-props={{
+                  autoSave: false,
+                  ...config.componentProps,
+                }}
+              >
+                <SchemaField.Object
+                  x-reactions={{
+                    fulfill: {
+                      state: {
+                        title: "{{$self.value?.title || 'Task'}}",
+                      },
+                    },
+                  }}
+                >
+                  <SchemaField.String
+                    name="title"
+                    title="Title"
+                    required
+                    x-decorator="FormItem"
+                    x-component="Input"
+                    x-component-props={{ placeholder: 'Enter task title' }}
+                  />
+                  <SchemaField.String
+                    name="description"
+                    title="Description"
+                    x-decorator="FormItem"
+                    x-component="Textarea"
+                    x-component-props={{
+                      placeholder: 'Enter task description',
+                      rows: 3,
+                    }}
+                  />
+                  <SchemaField.String
+                    name="priority"
+                    title="Priority"
+                    required
+                    x-decorator="FormItem"
+                    x-component="Select"
+                    enum={[
+                      { label: 'High', value: 'High' },
+                      { label: 'Medium', value: 'Medium' },
+                      { label: 'Low', value: 'Low' },
+                    ]}
+                  />
+                </SchemaField.Object>
+              </SchemaField.Array>
+            </SchemaField>
+
+            <div className="border-t pt-4">
+              <Button
+                type="button"
+                onClick={() => {
+                  alert(JSON.stringify(form.values, null, JSON_INDENT));
+                }}
+              >
+                View Current Values
+              </Button>
+            </div>
           </div>
         </Form>
       );

@@ -40,11 +40,15 @@ const {
   WithComponentClassName,
   Sortable,
   SortableNested,
+  AutoSave,
+  ManualSave,
 } = createStories(storyConfig);
 
 export {
+  AutoSave,
   Declarative,
   EmptyArray,
+  ManualSave,
   Sortable,
   SortableNested,
   WithActions,

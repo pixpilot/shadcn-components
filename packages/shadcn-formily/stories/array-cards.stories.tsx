@@ -36,11 +36,15 @@ const {
   WithItemReactionTitle,
   WithJSONSchema,
   WithTruncatedLabels,
+  AutoSave,
+  ManualSave,
 } = createStories(storyConfig);
 
 export {
+  AutoSave,
   Declarative,
   EmptyArray,
+  ManualSave,
   Sortable,
   SortableDisabledForArray,
   SortableDisabledInForm,

@@ -1,7 +1,8 @@
+import type { ArrayField } from '@formily/core';
 import type { Schema } from '@formily/react';
 
-import type { ActiveItemManager } from '../array-common';
-import { observer, RecursionField } from '@formily/react';
+import type { ActiveItemManager } from '../array-common/create-active-item-manager';
+import { observer, useField } from '@formily/react';
 import {
   Button,
   cn,
@@ -13,13 +14,26 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@pixpilot/shadcn-ui';
-import { getXComponentProps } from '../../utils';
+import React from 'react';
+import { ArrayItemDraftFields } from '../array-common/ArrayItemDraftFields';
+import { getEditDescription } from '../array-common/get-edit-description';
+import { ShakeStyles } from '../array-common/ShakeStyles';
+import { useArrayItemDraftForm } from '../array-common/use-array-item-draft-form';
+import { useEditHandlers } from '../array-common/use-edit-handlers';
+import { useShakeAnimation } from '../array-common/use-shake-animation';
 
 export interface ArrayItemsEditDialogProps {
   schema: Schema;
-  onSave: (index: number) => void;
+  onSave: (index: number, value: unknown) => void;
+  onAutoSave?: (index: number, value: unknown) => void;
   onCancel: (index: number) => void;
   activeItemManager: ActiveItemManager;
+
+  /**
+   * If true, changes are committed live and Save/Cancel buttons are hidden.
+   * If false (default), changes only commit on Save.
+   */
+  autoSave?: boolean;
 }
 
 /**
@@ -28,43 +42,72 @@ export interface ArrayItemsEditDialogProps {
  * RecursionField inherits component registry from parent SchemaField context (preserved through Radix Portal)
  */
 export const EditDialog = observer(
-  ({ schema, onSave, onCancel, activeItemManager }: ArrayItemsEditDialogProps) => {
+  ({
+    schema,
+    onSave,
+    onAutoSave,
+    onCancel,
+    activeItemManager,
+    autoSave,
+  }: ArrayItemsEditDialogProps) => {
+    const arrayField = useField<ArrayField>();
     const itemIndex = activeItemManager.activeItem;
     const { isNew } = activeItemManager;
     const open = itemIndex !== undefined;
 
-    const handleSaveClick = () => {
-      if (itemIndex === undefined) return;
-      onSave(itemIndex);
-    };
+    const handleDraftChange = React.useCallback(
+      (nextValue: unknown) => {
+        if (!autoSave) return;
+        if (itemIndex === undefined) return;
+        onAutoSave?.(itemIndex, nextValue);
+      },
+      [itemIndex, autoSave, onAutoSave],
+    );
 
-    const handleCancelClick = () => {
-      if (itemIndex === undefined) return;
-      onCancel(itemIndex);
-    };
+    const draftForm = useArrayItemDraftForm({
+      arrayField,
+      index: itemIndex,
+      autoSave,
+      onDraftChange: autoSave ? handleDraftChange : undefined,
+    });
 
-    const itemWrapperProps = getXComponentProps(schema);
-    const { className: itemWrapperClassName, ...itemWrapperRestProps } = itemWrapperProps;
+    const isDirty = !autoSave && draftForm.modified;
+
+    const { shouldShake, triggerShake } = useShakeAnimation();
+    const { handleSave, handleCancel } = useEditHandlers({
+      itemIndex,
+      draftForm,
+      onSave,
+      onCancel,
+    });
+
+    const description = React.useMemo(() => {
+      return getEditDescription(isNew, autoSave ?? false);
+    }, [isNew, autoSave]);
 
     return (
       <Dialog
         open={open}
         onOpenChange={(isOpen) => {
           if (!isOpen) {
-            handleCancelClick();
+            handleCancel();
           }
         }}
       >
-        <DialogContent className="sm:max-w-[525px]">
+        <DialogContent
+          className={cn('sm:max-w-[525px]', shouldShake && 'pp-shake')}
+          onInteractOutside={(event) => {
+            if (!isDirty) return;
+            event.preventDefault();
+            triggerShake();
+          }}
+        >
+          <ShakeStyles />
           <DialogHeader>
             <DialogTitle>
               {isNew ? 'Add New Item' : `Edit Item #${(itemIndex ?? 0) + 1}`}
             </DialogTitle>
-            <DialogDescription>
-              {isNew
-                ? "Fill in the details for the new item. Click save when you're done."
-                : "Make changes to the item. Click save when you're done."}
-            </DialogDescription>
+            <DialogDescription>{description}</DialogDescription>
           </DialogHeader>
 
           {/*
@@ -72,21 +115,25 @@ export const EditDialog = observer(
           Component registry from SchemaField is preserved through the Dialog portal.
           basePath ensures fields are rendered at the correct array item address.
         */}
-          <DialogBody
-            {...itemWrapperRestProps}
-            className={cn('grid gap-4 py-4', itemWrapperClassName)}
-          >
-            {itemIndex != null && <RecursionField schema={schema} name={itemIndex} />}
-          </DialogBody>
+          {itemIndex != null && (
+            <ArrayItemDraftFields
+              as={DialogBody}
+              schema={schema}
+              form={draftForm}
+              className={cn('grid gap-4 py-4')}
+            />
+          )}
 
-          <DialogFooter>
-            <Button type="button" variant="outline" onClick={handleCancelClick}>
-              Cancel
-            </Button>
-            <Button type="button" onClick={handleSaveClick}>
-              Save Changes
-            </Button>
-          </DialogFooter>
+          {!autoSave && (
+            <DialogFooter>
+              <Button type="button" variant="outline" onClick={handleCancel}>
+                Cancel
+              </Button>
+              <Button type="button" onClick={handleSave}>
+                Save Changes
+              </Button>
+            </DialogFooter>
+          )}
         </DialogContent>
       </Dialog>
     );
