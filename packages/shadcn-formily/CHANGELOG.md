@@ -1,5 +1,14 @@
 # @pixpilot/formily-shadcn
 
+## 0.33.0
+
+### Minor Changes
+
+- generate stable unique IDs for array items
+- add drag-and-drop functionality for sortable arrays
+- refactor array popover stories to use shared story generation functions
+- add customizable header actions for array components
+
 ## 0.32.0
 
 ### Minor Changes
