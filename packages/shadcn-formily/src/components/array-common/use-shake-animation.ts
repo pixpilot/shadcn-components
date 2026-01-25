@@ -6,7 +6,7 @@ const SHAKE_RESET_DELAY_MS = 320;
  * Hook to trigger a shake animation effect
  * Returns state and trigger function for shake animation
  */
-export function useShakeAnimation() {
+export function useShakeAnimation(): { shouldShake: boolean; triggerShake: () => void } {
   const [shouldShake, setShouldShake] = React.useState(false);
   const shakeTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -19,21 +19,23 @@ export function useShakeAnimation() {
 
     requestAnimationFrame(() => {
       setShouldShake(true);
-      shakeTimeoutRef.current = setTimeout(() => {
+      function resetShake() {
         setShouldShake(false);
         shakeTimeoutRef.current = null;
-      }, SHAKE_RESET_DELAY_MS);
+      }
+      shakeTimeoutRef.current = setTimeout(resetShake, SHAKE_RESET_DELAY_MS);
     });
   }, []);
 
-  React.useEffect(() => {
-    return () => {
+  React.useEffect(
+    () => () => {
       if (shakeTimeoutRef.current != null) {
         clearTimeout(shakeTimeoutRef.current);
         shakeTimeoutRef.current = null;
       }
-    };
-  }, []);
+    },
+    [],
+  );
 
   return { shouldShake, triggerShake };
 }
