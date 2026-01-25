@@ -16,7 +16,7 @@ import {
   isRemoveComponent,
 } from '../array-base/utils/is-array-component';
 import { DragHandle } from '../array-sortable';
-import { RenderAction } from './render-action';
+import { RenderAction } from './RenderAction';
 
 import { hasEditAction, isDisabled, isHidden } from './utils';
 

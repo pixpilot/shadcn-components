@@ -2,7 +2,7 @@ import type { JsonSchemaFormProps } from './types';
 import React from 'react';
 import { useMergedSchemaComponents } from '../../hooks/use-merged-schema-components';
 import { defaultComponentRegistry } from '.././schema-field';
-import { JsonSchemaFormRenderer } from './json-schema-form-renderer';
+import { JsonSchemaFormRenderer } from './JsonSchemaFormRenderer';
 
 /**
  * JsonSchemaForm is the "batteries-included" version that automatically provides

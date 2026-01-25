@@ -7,7 +7,7 @@ import React from 'react';
 import { ArrayBase, ArrayComponentProvider, useArrayComponents } from '../array-base';
 import { ArrayItemsList, useArrayEditor } from '../array-common';
 
-import { EditDialog } from './edit-dialog';
+import { EditDialog } from './EditDialog';
 
 type Props = ArrayComponentProps;
 

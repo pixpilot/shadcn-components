@@ -1,1 +1,1 @@
-export * from './array-collapse';
+export * from './ArrayCollapse';

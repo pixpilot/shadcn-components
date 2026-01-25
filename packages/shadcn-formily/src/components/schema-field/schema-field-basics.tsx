@@ -9,22 +9,22 @@ import { ArrayCards } from '../array-cards';
 import { ArrayCollapse } from '../array-collapse';
 import { ArrayDialog } from '../array-dialog';
 import { ArrayPopover } from '../array-popover';
-import { Checkbox } from '../checkbox';
-import { Column } from '../column';
-import { DatePicker } from '../date-picker';
-import { FormGrid } from '../form-grid';
+import { Checkbox } from '../Checkbox';
+import { Column } from '../Column';
+import { DatePicker } from '../DatePicker';
 import { FormItem } from '../form-item';
-import { Hidden } from '../hidden';
-import { IconToggle } from '../icon-toggle';
-import { Input } from '../input';
+import { FormGrid } from '../FormGrid';
+import { Hidden } from '../Hidden';
+import { IconToggle } from '../IconToggle';
+import { Input } from '../Input';
 import { NumberInput } from '../number';
-import { ObjectContainer } from '../object-container';
-import { ConnectedRadio as Radio } from '../radio';
-import { Row } from '../row';
-import { Select } from '../select';
-import { Separator } from '../separator';
-import { Switch } from '../switch';
-import { Textarea } from '../textarea';
+import { ObjectContainer } from '../ObjectContainer';
+import { ConnectedRadio as Radio } from '../Radio';
+import { Row } from '../Row';
+import { Select } from '../Select';
+import { Separator } from '../Separator';
+import { Switch } from '../Switch';
+import { Textarea } from '../Textarea';
 
 export const basicComponentRegistry = {
   ArrayCards: { component: ArrayCards, decorator: 'FormItem' },

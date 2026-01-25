@@ -1,13 +1,13 @@
 import type { ArrayComponentTypes, ArrayOperationTypes } from './types';
-import { ArrayAddition } from './addition';
-import { ArrayCopy } from './array-copy';
-import { ArrayIndex } from './array-index';
-import { ArrayItemLabel } from './array-item-label';
-import { ArrayEditButton } from './edit';
-import { ArrayEmpty } from './empty';
-import { ArrayMoveDown } from './move-down';
-import { ArrayMoveUp } from './move-up';
-import { ArrayRemove } from './remove';
+import { ArrayAddition } from './Addition';
+import { ArrayCopy } from './ArrayCopy';
+import { ArrayIndex } from './ArrayIndex';
+import { ArrayItemLabel } from './ArrayItemLabel';
+import { ArrayEditButton } from './Edit';
+import { ArrayEmpty } from './Empty';
+import { ArrayMoveDown } from './MoveDown';
+import { ArrayMoveUp } from './MoveUp';
+import { ArrayRemove } from './Remove';
 
 export const defaultOperationComponents: Record<ArrayOperationTypes, React.FC> = {
   Remove: ArrayRemove,

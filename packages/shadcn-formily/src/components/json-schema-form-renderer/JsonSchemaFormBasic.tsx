@@ -2,7 +2,7 @@ import type { JsonSchemaFormProps } from './types';
 import React from 'react';
 import { useMergedSchemaComponents } from '../../hooks/use-merged-schema-components';
 import { basicComponentRegistry } from '../schema-field/schema-field-basics';
-import { JsonSchemaFormRenderer } from './json-schema-form-renderer';
+import { JsonSchemaFormRenderer } from './JsonSchemaFormRenderer';
 
 /**
  * JsonSchemaFormBasic is the basic version that provides only the essential components

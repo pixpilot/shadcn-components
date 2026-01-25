@@ -7,8 +7,8 @@ import { useFormSchema } from '../../hooks/use-form-schema';
 import { useMergedSchemaComponents } from '../../hooks/use-merged-schema-components';
 import { extractComponents } from '../../utils/extract-components';
 import { AvatarUpload, FileUpload, FileUploadInline } from '../file-upload';
-import { IconPicker } from '../icon-picker';
-import { RichTextEditor } from '../rich-text-editor';
+import { IconPicker } from '../IconPicker';
+import { RichTextEditor } from '../RichTextEditor';
 import { defaultComponentRegistry } from '../schema-field';
 
 export const extendedComponentRegistry = {

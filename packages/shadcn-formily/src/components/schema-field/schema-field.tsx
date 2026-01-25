@@ -7,11 +7,11 @@ import { TagsInput } from '@pixpilot/shadcn-ui';
 import { useFormSchema } from '../../hooks/use-form-schema';
 import { useMergedSchemaComponents } from '../../hooks/use-merged-schema-components';
 import { extractComponents } from '../../utils/extract-components';
-import { ColorPicker } from '../color-picker';
-import { ColorSelect } from '../color-select';
-import { Combobox } from '../combobox';
+import { ColorPicker } from '../color-picker/ColorPicker';
+import { ColorSelect } from '../ColorSelect';
+import { Combobox } from '../Combobox';
 import { Slider, SliderInput, SliderSelect } from '../slider';
-import { TagsInputInLine } from '../tags-input-inline';
+import { TagsInputInLine } from '../TagsInputInline';
 import { basicComponentRegistry } from './schema-field-basics';
 
 export const defaultComponentRegistry = {

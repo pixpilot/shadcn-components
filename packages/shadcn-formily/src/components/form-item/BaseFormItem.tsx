@@ -12,7 +12,7 @@ import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 
 import { useFormContext, useLabel } from '../../hooks';
-import { FormItemLabel } from './form-item-label';
+import { FormItemLabel } from './FormItemLabel';
 import { getSpacingConfig } from './spacing-config';
 
 function resolveLegacyDescriptionPlacement(

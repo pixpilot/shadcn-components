@@ -1,5 +1,5 @@
-export * from './avatar-upload';
-export * from './file-upload';
-export * from './file-upload-inline';
+export * from './AvatarUpload';
+export * from './FileUpload';
+export * from './FileUploadInline';
 
 export type { FileUploadProgressCallBacks } from '@pixpilot/shadcn-ui';

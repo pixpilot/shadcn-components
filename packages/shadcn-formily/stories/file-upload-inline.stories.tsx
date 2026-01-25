@@ -9,7 +9,7 @@ import {
   JsonSchemaFormRenderer,
   SchemaFieldExtended,
 } from '../src';
-import { ObjectContainer } from '../src/components/object-container';
+import { ObjectContainer } from '../src/components/ObjectContainer';
 import { handleUpload } from './utils/file-upload';
 
 const meta: Meta<typeof Form> = {

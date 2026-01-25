@@ -14,7 +14,7 @@ import {
 
 import { useArrayDataSource } from '../array-common';
 import { SortableContainer } from '../array-sortable';
-import ArrayItem from './item';
+import ArrayItem from './Item';
 
 const ArrayCardsBase: React.FC<ArrayComponentProps> = observer((props) => {
   const field = useField<FormilyArrayField>();

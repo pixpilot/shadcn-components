@@ -2,7 +2,7 @@ import type { JsonSchemaFormProps } from './types';
 import React from 'react';
 import { useMergedSchemaComponents } from '../../hooks/use-merged-schema-components';
 import { extendedComponentRegistry } from '../schema-field/schema-field-extended';
-import { JsonSchemaFormRenderer } from './json-schema-form-renderer';
+import { JsonSchemaFormRenderer } from './JsonSchemaFormRenderer';
 
 /**
  * JsonSchemaFormExtended is the extended version that provides all components

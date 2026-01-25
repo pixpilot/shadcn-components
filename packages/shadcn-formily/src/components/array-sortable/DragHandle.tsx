@@ -1,7 +1,7 @@
 import { Button } from '@pixpilot/shadcn-ui';
 import { GripVerticalIcon } from 'lucide-react';
 import React from 'react';
-import { useSortableItemContext } from './sortable-item';
+import { useSortableItemContext } from './SortableItem';
 
 export interface DragHandleProps {
   /**

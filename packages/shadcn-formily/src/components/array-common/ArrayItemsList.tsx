@@ -5,7 +5,7 @@ import React from 'react';
 import { getArrayItemInfo } from '../../utils';
 import { useArrayComponents } from '../array-base';
 import { SortableContainer } from '../array-sortable';
-import { ListItem } from './list-item';
+import { ListItem } from './ListItem';
 import { useArrayDataSource } from './use-array-data-source';
 
 export interface ArrayItemsListProps {

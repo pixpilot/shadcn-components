@@ -1,1 +1,1 @@
-export * from './array-cards';
+export * from './ArrayCards';

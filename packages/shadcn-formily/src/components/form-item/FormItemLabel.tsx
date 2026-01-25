@@ -1,9 +1,8 @@
 import type { SyncReactNode } from '../../types';
 import type { FormItemLabelProps as LabelProps } from './form-item-types';
 import { cn } from '@pixpilot/shadcn';
-import React from 'react';
 
-import { FormItemDescriptionPopover } from './form-item-description-popover';
+import { FormItemDescriptionPopover } from './FormItemDescriptionPopover';
 
 export interface FormItemLabelProps {
   id: string;

@@ -18,38 +18,38 @@ export * from './components/array-popover';
 // Array sortable components
 export { DragHandle, SortableContainer, SortableItem } from './components/array-sortable';
 
-export { Checkbox } from './components/checkbox';
-export { ColorSelect } from './components/color-select';
-export { Column } from './components/column';
+export { Checkbox } from './components/Checkbox';
+export { ColorSelect } from './components/ColorSelect';
+export { Column } from './components/Column';
 
-export { Combobox } from './components/combobox';
+export { Combobox } from './components/Combobox';
 // Context and configuration types
 export type { FormLayoutOptions } from './components/context';
-export { DatePicker } from './components/date-picker';
+export { DatePicker } from './components/DatePicker';
 export { AvatarUpload, FileUpload, FileUploadInline } from './components/file-upload';
 // Core components
-export { Form } from './components/form';
-export { FormGrid } from './components/form-grid';
+export { Form } from './components/Form';
 export { FormItem } from './components/form-item';
+export { FormGrid } from './components/FormGrid';
 // Input components
-export { IconPicker } from './components/icon-picker';
+export { IconPicker } from './components/IconPicker';
 
-export { IconToggle } from './components/icon-toggle';
+export { IconToggle } from './components/IconToggle';
 
-export { Input } from './components/input';
+export { Input } from './components/Input';
 export * from './components/json-schema-form-renderer';
 export { NumberInput } from './components/number';
-export { ConnectedRadio, Radio } from './components/radio';
-export { RichTextEditor } from './components/rich-text-editor';
-export { Row } from './components/row';
+export { ConnectedRadio, Radio } from './components/Radio';
+export { RichTextEditor } from './components/RichTextEditor';
+export { Row } from './components/Row';
 export * from './components/schema-field';
-export { Select } from './components/select';
-export { Separator } from './components/separator';
+export { Select } from './components/Select';
+export { Separator } from './components/Separator';
 export * from './components/slider';
-export { Switch } from './components/switch';
-export { TagsInputInLine } from './components/tags-input-inline';
+export { Switch } from './components/Switch';
+export { TagsInputInLine } from './components/TagsInputInline';
 
-export { Textarea } from './components/textarea';
+export { Textarea } from './components/Textarea';
 
 export { transformSchema } from './utils';
 // Re-export Formily core exports for convenience

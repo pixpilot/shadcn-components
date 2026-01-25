@@ -1,8 +1,8 @@
 import type { Schema } from '@formily/react';
 
 import type { IArrayBaseOperationProps } from '../types';
-import type { IArrayBaseAdditionProps } from './addition';
-import type { ArrayEmptyProps } from './empty';
+import type { IArrayBaseAdditionProps } from './Addition';
+import type { ArrayEmptyProps } from './Empty';
 
 export interface ArrayBaseComponents {
   Addition: React.FC<React.PropsWithChildren<IArrayBaseAdditionProps>>;

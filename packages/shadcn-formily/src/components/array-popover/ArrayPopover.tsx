@@ -5,7 +5,7 @@ import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 import { ArrayBase, ArrayComponentProvider } from '../array-base';
 import { ArrayItemsList, useArrayEditor } from '../array-common';
-import { ArrayItemsEditPopover } from './popover';
+import { ArrayItemsEditPopover } from './Popover';
 
 type Props = ArrayComponentProps;
 

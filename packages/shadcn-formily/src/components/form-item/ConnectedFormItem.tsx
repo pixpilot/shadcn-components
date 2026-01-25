@@ -2,7 +2,7 @@ import type { SyncReactNode } from '../../types';
 import { isVoidField } from '@formily/core';
 import { connect, mapProps, useFieldSchema } from '@formily/react';
 
-import { BaseFormItem } from './base-form-item';
+import { BaseFormItem } from './BaseFormItem';
 
 /**
  * FormItem component connected to Formily field state.

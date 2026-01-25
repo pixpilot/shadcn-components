@@ -1,1 +1,1 @@
-export * from './array-popover';
+export * from './ArrayPopover';

@@ -1,1 +1,1 @@
-export * from './array-dialog';
+export * from './ArrayDialog';

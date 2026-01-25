@@ -4,7 +4,7 @@ import { FormProvider } from '@formily/react';
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 import { FormContextContextProvider } from './context';
-import { FormItemContainer } from './form-items-container';
+import { FormItemContainer } from './FormItemContainer';
 
 export interface IFormProps extends FormContextStates {
   form: IForm;

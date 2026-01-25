@@ -1,8 +1,8 @@
 import type { Schema } from '@formily/react';
-import type { IArrayBaseAdditionProps } from './addition';
+import type { IArrayBaseAdditionProps } from './Addition';
 
-import type { ArrayItemLabelProps } from './array-item-label';
-import type { ArrayEmptyProps } from './empty';
+import type { ArrayItemLabelProps } from './ArrayItemLabel';
+import type { ArrayEmptyProps } from './Empty';
 
 import type { ArrayItemComponentRegistryProps, FieldComponentProps } from './types';
 import { cn } from '@pixpilot/shadcn';

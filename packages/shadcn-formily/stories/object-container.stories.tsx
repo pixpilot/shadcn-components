@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ISchema } from '../src';
 import { createForm, defaultComponentRegistry, JsonSchemaFormRenderer } from '../src';
-import { ObjectContainer } from '../src/components/object-container';
+import { ObjectContainer } from '../src/components/ObjectContainer';
 
 const meta: Meta<typeof ObjectContainer> = {
   title: 'Formily/Object Container',

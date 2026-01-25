@@ -14,7 +14,7 @@ import {
   resolveResponsiveGapClass,
   resolveSpacingClass,
 } from '../utils/resolve-responsive-space';
-import { FormItemContainer } from './form-items-container';
+import { FormItemContainer } from './FormItemContainer';
 
 export type ObjectContainerVariant = 'grouped' | 'flat';
 

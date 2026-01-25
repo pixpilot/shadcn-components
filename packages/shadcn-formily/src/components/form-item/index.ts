@@ -1,4 +1,3 @@
-export * from './form-item';
 export type {
   DescriptionPlacement,
   FormItemLabelProps,
@@ -6,3 +5,4 @@ export type {
   FormItemSlots,
   LabelPlacement,
 } from './form-item-types';
+export * from './FormItem';

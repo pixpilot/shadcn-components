@@ -9,8 +9,8 @@ import type {
 import type { IArrayBaseContext } from '../array-base/array-context';
 import { Button } from '@pixpilot/shadcn-ui';
 import React from 'react';
-import { RenderBuiltInOperation } from './render-built-in-operation';
-import { ToggleActionButton } from './toggle-action-button';
+import { RenderBuiltInOperation } from './RenderBuiltInOperation';
+import { ToggleActionButton } from './ToggleActionButton';
 
 export interface RenderActionProps {
   action: ActionItem;

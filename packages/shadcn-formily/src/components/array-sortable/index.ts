@@ -1,3 +1,3 @@
-export * from './drag-handle';
-export * from './sortable-container';
-export * from './sortable-item';
+export * from './DragHandle';
+export * from './SortableContainer';
+export * from './SortableItem';

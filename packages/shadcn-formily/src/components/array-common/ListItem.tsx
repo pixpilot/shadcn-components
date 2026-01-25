@@ -4,8 +4,8 @@ import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 import { ArrayBase } from '../array-base';
 import { SortableItem } from '../array-sortable';
-import { ArrayItemHeaderRow } from './array-item-header-row';
-import { ItemWrapper } from './item-wrapper';
+import { ArrayItemHeaderRow } from './ArrayItemHeaderRow';
+import { ItemWrapper } from './ItemWrapper';
 
 export interface ListItemProps {
   /**

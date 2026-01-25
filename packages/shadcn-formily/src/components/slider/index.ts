@@ -1,3 +1,3 @@
-export * from './slider';
-export * from './slider-input';
-export * from './slider-select';
+export * from './Slider';
+export * from './SliderInput';
+export * from './SliderSelect';

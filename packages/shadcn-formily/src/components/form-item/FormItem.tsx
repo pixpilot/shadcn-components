@@ -1,5 +1,5 @@
-import { BaseFormItem } from './base-form-item';
-import { FormItem } from './connected-form-item';
+import { BaseFormItem } from './BaseFormItem';
+import { FormItem } from './ConnectedFormItem';
 
 export { BaseFormItem, FormItem };
 export type {

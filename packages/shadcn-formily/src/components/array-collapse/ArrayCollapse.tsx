@@ -8,7 +8,7 @@ import { createPanelStateManager, getArrayItemInfo } from '../../utils';
 import { ArrayBase, ArrayComponentProvider, useArrayComponents } from '../array-base';
 import { useArrayDataSource } from '../array-common';
 import { SortableContainer } from '../array-sortable';
-import { ArrayCollapseItem } from './item';
+import { ArrayCollapseItem } from './Item';
 
 type Props = ArrayComponentProps & {
   defaultActiveKey?: Array<string | number>;
