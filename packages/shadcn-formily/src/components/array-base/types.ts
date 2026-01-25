@@ -70,6 +70,7 @@ export interface IArrayBaseProps {
   onMoveUp?: (index: number) => void;
   onEdit?: (index: number) => void;
   onCopy?: (index: number) => void;
+  sortable?: boolean;
 
   /**
    * Unified item actions.
