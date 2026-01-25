@@ -11,6 +11,13 @@ export * from './components/array-cards';
 
 export * from './components/array-collapse';
 
+export * from './components/array-dialog';
+
+export * from './components/array-popover';
+
+// Array sortable components
+export { DragHandle, SortableContainer, SortableItem } from './components/array-sortable';
+
 export { Checkbox } from './components/checkbox';
 export { ColorSelect } from './components/color-select';
 export { Column } from './components/column';

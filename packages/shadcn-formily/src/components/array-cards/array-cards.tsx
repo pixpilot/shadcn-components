@@ -11,6 +11,7 @@ import {
   ArrayComponentProvider,
   useArrayComponents,
 } from '../array-base/component-context';
+import { SortableContainer } from '../array-sortable';
 import ArrayItem from './item';
 
 const ArrayCardsBase: React.FC<ArrayComponentProps> = observer((props) => {
@@ -31,11 +32,22 @@ const ArrayCardsBase: React.FC<ArrayComponentProps> = observer((props) => {
     ...otherProps
   } = props;
 
-  const dataSource = Array.isArray(field.value) ? field.value : [];
+  const dataSource = React.useMemo(
+    // eslint-disable-next-line ts/no-unsafe-return
+    () => (Array.isArray(field.value) ? field.value : []),
+    [field.value],
+  );
 
   const arrayComponents = useArrayComponents();
 
   const { ArrayItemsContainer, AddButton } = arrayComponents;
+
+  const itemKeys = React.useMemo(() => {
+    return dataSource.map((_, index) => {
+      const { itemKey } = getArrayItemInfo(field, index);
+      return itemKey;
+    });
+  }, [dataSource, field]);
 
   /*
    * Render array items with their operation components
@@ -44,7 +56,15 @@ const ArrayCardsBase: React.FC<ArrayComponentProps> = observer((props) => {
   const renderItems = () => {
     return dataSource.map((_item, index) => {
       const { itemKey, record } = getArrayItemInfo(field, index);
-      return <ArrayItem key={itemKey} index={index} title={titleProp} record={record} />;
+      return (
+        <ArrayItem
+          key={itemKey}
+          itemKey={itemKey}
+          index={index}
+          title={titleProp}
+          record={record}
+        />
+      );
     });
   };
 
@@ -68,7 +88,7 @@ const ArrayCardsBase: React.FC<ArrayComponentProps> = observer((props) => {
         schema={schema}
         hasItems={dataSource.length > 0}
       >
-        {renderItems()}
+        <SortableContainer items={itemKeys}>{renderItems()}</SortableContainer>
         <AddButton schema={schema} />
       </ArrayItemsContainer>
     </ArrayBase>

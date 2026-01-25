@@ -32,18 +32,26 @@ const storyConfig = {
 };
 
 const {
-  EmptyArray,
-  WithActions,
   Declarative,
-  WithTruncatedLabels,
-  WithJSONSchema,
-  WithItemReactionTitle,
+  EmptyArray,
+  Sortable,
+  SortableDisabledInForm,
+  SortableNested,
+  SortableDisabledForArray,
+  WithActions,
   WithComponentClassName,
+  WithItemReactionTitle,
+  WithJSONSchema,
+  WithTruncatedLabels,
 } = createStories(storyConfig);
 
 export {
   Declarative,
   EmptyArray,
+  Sortable,
+  SortableDisabledForArray,
+  SortableDisabledInForm,
+  SortableNested,
   WithActions,
   WithComponentClassName,
   WithItemReactionTitle,

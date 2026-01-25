@@ -9,6 +9,7 @@ export interface IArrayBaseContext {
   field: ArrayField;
   schema: Schema;
   showEditAction?: boolean;
+  sortable?: boolean;
 }
 
 export interface IArrayBaseItemProps {

@@ -38,11 +38,15 @@ const {
   WithJSONSchema,
   WithItemReactionTitle,
   WithComponentClassName,
+  Sortable,
+  SortableNested,
 } = createStories(storyConfig);
 
 export {
   Declarative,
   EmptyArray,
+  Sortable,
+  SortableNested,
   WithActions,
   WithComponentClassName,
   WithItemReactionTitle,

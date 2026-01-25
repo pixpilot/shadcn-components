@@ -11,10 +11,12 @@ import { getXComponentProps } from '../../utils';
 import { validateArrayItemFields } from '../../utils/validate-array-item-fields';
 import { ArrayBase } from '../array-base';
 import { ArrayItemHeaderRow, ItemWrapper } from '../array-common';
+import { SortableItem } from '../array-sortable';
 
 interface ArrayCollapseItemProps extends ArrayItemProps {
   index: number;
   itemId: number;
+  itemKey: string | number;
 
   formCollapse: PanelStateManager;
   isOpen: boolean;
@@ -24,7 +26,7 @@ interface ArrayCollapseItemProps extends ArrayItemProps {
 }
 
 const ArrayCollapseItemBase = React.memo((props: ArrayCollapseItemProps) => {
-  const { index, itemId, formCollapse, isOpen, isNewItem, onClick } = props;
+  const { index, itemId, itemKey, formCollapse, isOpen, isNewItem, onClick } = props;
   const field = useField<FormilyArrayField>();
   const schema = useFieldSchema();
 
@@ -47,64 +49,67 @@ const ArrayCollapseItemBase = React.memo((props: ArrayCollapseItemProps) => {
       index={index}
       record={() => field.value?.[index] as unknown}
     >
-      {/* Render hidden RecursionField to create field instances for the array item */}
-      <div style={{ display: 'none' }}>
-        <RecursionField schema={items as Schema} name={index} />
-      </div>
+      <SortableItem id={itemKey}>
+        {/* Render hidden RecursionField to create field instances for the array item */}
+        <div style={{ display: 'none' }}>
+          <RecursionField schema={items as Schema} name={index} />
+        </div>
 
-      <ItemWrapper {...itemWrapperProps} index={index}>
-        {/* Header */}
-        <ArrayItemHeaderRow
-          className="px-3"
-          schema={schema}
-          index={index}
-          slots={{
-            content: {
-              className:
-                'hover:no-underline py-4 text-sm font-medium transition-all text-foreground',
-            },
-          }}
-          leading={
-            <ChevronDownIcon
-              className={cn(
-                'size-4 shrink-0 transition-transform duration-200',
-                isOpen && 'rotate-180',
-              )}
-            />
-          }
-          buttonProps={{
-            onClick: () => {
-              onClick?.();
-              const isCurrentlyOpen = formCollapse.hasActiveKey(itemId);
+        <ItemWrapper {...itemWrapperProps} index={index}>
+          {/* Header */}
+          <ArrayItemHeaderRow
+            className="px-3"
+            schema={schema}
+            index={index}
+            sortableId={itemKey}
+            slots={{
+              content: {
+                className:
+                  'hover:no-underline py-4 text-sm font-medium transition-all text-foreground',
+              },
+            }}
+            leading={
+              <ChevronDownIcon
+                className={cn(
+                  'size-4 shrink-0 transition-transform duration-200',
+                  isOpen && 'rotate-180',
+                )}
+              />
+            }
+            buttonProps={{
+              onClick: () => {
+                onClick?.();
+                const isCurrentlyOpen = formCollapse.hasActiveKey(itemId);
 
-              if (isCurrentlyOpen) {
-                // Validate before closing
-                validateArrayItemFields(field, index)
-                  .then(() => {
-                    // Validation passed, proceed with closing
-                    formCollapse.removeActiveKey(itemId);
-                  })
-                  .catch(() => {
-                    // Validation failed - don't close the collapse
-                    // Form will show validation errors
-                  });
-              } else {
-                // Opening - no validation needed
-                formCollapse.addActiveKey(itemId);
-              }
-            },
-          }}
-        />
+                if (isCurrentlyOpen) {
+                  // Validate before closing
+                  validateArrayItemFields(field, index)
+                    .then(() => {
+                      // Validation passed, proceed with closing
+                      formCollapse.removeActiveKey(itemId);
+                    })
+                    .catch(() => {
+                      // Validation failed - don't close the collapse
+                      // Form will show validation errors
+                    });
+                } else {
+                  // Opening - no validation needed
+                  formCollapse.addActiveKey(itemId);
+                }
+              },
+            }}
+          />
 
-        {/* Content with form fields */}
-        {isOpen && items && (
-          <div className="border-t px-3 pb-4">
-            <div className="space-y-4 pt-4">
-              <RecursionField schema={items as Schema} name={index} />
+          {/* Content with form fields */}
+          {isOpen && items && (
+            <div className="border-t px-3 pb-4">
+              <div className="space-y-4 pt-4">
+                <RecursionField schema={items as Schema} name={index} />
+              </div>
             </div>
-          </div>
-        )}
-      </ItemWrapper>
+          )}
+        </ItemWrapper>
+      </SortableItem>
     </ArrayBase.Item>
   );
 });

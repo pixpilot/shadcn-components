@@ -6,6 +6,7 @@ import { observer, useField, useFieldSchema } from '@formily/react';
 import React, { useMemo } from 'react';
 import { createPanelStateManager, getArrayItemInfo } from '../../utils';
 import { ArrayBase, ArrayComponentProvider, useArrayComponents } from '../array-base';
+import { SortableContainer } from '../array-sortable';
 import { ArrayCollapseItem } from './item';
 
 type Props = ArrayComponentProps & {
@@ -28,8 +29,6 @@ const ArrayItemsCollapseBase = observer((props: Props) => {
     onEdit,
     className,
     children,
-    disabled,
-    actions,
     transformActions,
     defaultActiveKey,
     mode = 'multiple',
@@ -42,7 +41,11 @@ const ArrayItemsCollapseBase = observer((props: Props) => {
     return createPanelStateManager(defaultActiveKey, mode === 'accordion');
   }, [defaultActiveKey, mode]);
 
-  const dataSource = Array.isArray(field.value) ? field.value : [];
+  const dataSource = React.useMemo(
+    // eslint-disable-next-line ts/no-unsafe-return
+    () => (Array.isArray(field.value) ? field.value : []),
+    [field.value],
+  );
 
   const newItemIndex = React.useRef<number>(null);
 
@@ -66,6 +69,13 @@ const ArrayItemsCollapseBase = observer((props: Props) => {
 
   const { ArrayItemsContainer, AddButton } = arrayComponents;
 
+  const itemKeys = React.useMemo(() => {
+    return dataSource.map((_, index) => {
+      const { itemKey } = getArrayItemInfo(field, index);
+      return itemKey;
+    });
+  }, [dataSource, field]);
+
   const renderItems = () => {
     return dataSource.map((_item, index) => {
       const itemId = index;
@@ -78,6 +88,7 @@ const ArrayItemsCollapseBase = observer((props: Props) => {
       return (
         <ArrayCollapseItem
           key={itemKey}
+          itemKey={itemKey}
           record={record}
           index={index}
           itemId={itemId}
@@ -110,8 +121,7 @@ const ArrayItemsCollapseBase = observer((props: Props) => {
 
   return (
     <ArrayBase
-      disabled={disabled}
-      actions={actions}
+      {...props}
       transformActions={transformActions}
       onAdd={handleAddNew}
       onRemove={onRemove}
@@ -126,7 +136,7 @@ const ArrayItemsCollapseBase = observer((props: Props) => {
         schema={schema}
         hasItems={dataSource.length > 0}
       >
-        {renderItems()}
+        <SortableContainer items={itemKeys}>{renderItems()}</SortableContainer>
         <AddButton schema={schema} />
       </ArrayItemsContainer>
     </ArrayBase>

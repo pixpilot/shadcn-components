@@ -18,8 +18,6 @@ const ArrayPopoverBase = observer((props: Props) => {
     onEdit,
     className,
     children,
-    disabled,
-    actions,
     transformActions,
     ...rest
   } = props;
@@ -27,7 +25,6 @@ const ArrayPopoverBase = observer((props: Props) => {
   const {
     activeItemManager,
     items,
-    // field,
     handleAdd,
     isNewItem,
     handleEdit,
@@ -37,8 +34,7 @@ const ArrayPopoverBase = observer((props: Props) => {
 
   return (
     <ArrayBase
-      disabled={disabled}
-      actions={actions}
+      {...props}
       transformActions={transformActions}
       onAdd={handleAdd}
       onRemove={onRemove}

@@ -4,6 +4,7 @@ import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 import { getArrayItemInfo } from '../../utils';
 import { useArrayComponents } from '../array-base';
+import { SortableContainer } from '../array-sortable';
 import { ListItem } from './list-item';
 
 export interface ArrayItemsListProps {
@@ -30,9 +31,20 @@ export const ArrayItemsList: React.FC<ArrayItemsListProps> = observer(
     const field = useField<FormilyArrayField>();
     const schema = useFieldSchema();
 
-    const dataSource = Array.isArray(field.value) ? field.value : [];
+    const dataSource = React.useMemo(
+      // eslint-disable-next-line ts/no-unsafe-return
+      () => (Array.isArray(field.value) ? field.value : []),
+      [field.value],
+    );
 
     const { ArrayItemsContainer } = useArrayComponents();
+
+    const itemKeys = React.useMemo(() => {
+      return dataSource.map((_, index) => {
+        const { itemKey } = getArrayItemInfo(field, index);
+        return itemKey;
+      });
+    }, [dataSource, field]);
 
     return (
       <ArrayItemsContainer
@@ -42,19 +54,21 @@ export const ArrayItemsList: React.FC<ArrayItemsListProps> = observer(
         basePath={field.address.toString()}
         hasItems={dataSource.length > 0}
       >
-        {dataSource.map((_item, index) => {
-          const { itemKey, record } = getArrayItemInfo(field, index);
-          const isNew = isNewItem?.(index);
-          return (
-            <ListItem
-              key={itemKey}
-              itemKey={itemKey}
-              index={index}
-              record={record}
-              isNew={isNew}
-            />
-          );
-        })}
+        <SortableContainer items={itemKeys}>
+          {dataSource.map((_item, index) => {
+            const { itemKey, record } = getArrayItemInfo(field, index);
+            const isNew = isNewItem?.(index);
+            return (
+              <ListItem
+                key={itemKey}
+                itemKey={itemKey}
+                index={index}
+                record={record}
+                isNew={isNew}
+              />
+            );
+          })}
+        </SortableContainer>
         {children}
       </ArrayItemsContainer>
     );

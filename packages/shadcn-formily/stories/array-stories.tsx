@@ -30,6 +30,22 @@ interface StoryConfig {
 
 const JSON_INDENT = 2;
 
+export function createStories(config: StoryConfig) {
+  return {
+    EmptyArray: createEmptyArrayStory(config),
+    WithActions: createWithActions(config),
+    WithComponentClassName: createWithComponentClassNameStory(config),
+    Declarative: createDeclarativeStory(config),
+    WithJSONSchema: createWithJsonSchemaStory(config),
+    WithItemReactionTitle: createWithItemReactionTitleStory(config),
+    WithTruncatedLabels: createWithTruncatedLabelsStory(config),
+    Sortable: createSortableStory(config),
+    SortableNested: createSortableNestedStory(config),
+    SortableDisabledInForm: createSortableDisabledInFormStory(config),
+    SortableDisabledForArray: createSortableDisabledForArrayStory(config),
+  };
+}
+
 /**
  * Creates an EmptyArray story for the given array component
  */
@@ -697,14 +713,377 @@ export function createWithTruncatedLabelsStory(config: StoryConfig): Story {
   };
 }
 
-export function createStories(config: StoryConfig) {
+/**
+ * Creates a Sortable story for the given array component
+ * Demonstrates drag-and-drop reordering with a simple array
+ */
+export function createSortableStory(config: StoryConfig): Story {
+  const { componentName, displayTitle } = config;
+
   return {
-    EmptyArray: createEmptyArrayStory(config),
-    WithActions: createWithActions(config),
-    WithComponentClassName: createWithComponentClassNameStory(config),
-    Declarative: createDeclarativeStory(config),
-    WithJSONSchema: createWithJsonSchemaStory(config),
-    WithItemReactionTitle: createWithItemReactionTitleStory(config),
-    WithTruncatedLabels: createWithTruncatedLabelsStory(config),
+    render: () => {
+      const form = createForm({
+        values: {
+          tasks: [
+            { title: 'Design homepage mockup', priority: 'High' },
+            { title: 'Implement user authentication', priority: 'High' },
+            { title: 'Write unit tests', priority: 'Medium' },
+            { title: 'Update documentation', priority: 'Low' },
+            { title: 'Review pull requests', priority: 'Medium' },
+          ],
+        },
+      });
+
+      const schema = {
+        type: 'object',
+        properties: {
+          tasks: {
+            type: 'array',
+            'x-component': componentName,
+            'x-component-props': config.componentProps,
+            items: {
+              'x-reactions': [
+                {
+                  fulfill: {
+                    state: {
+                      title: '{{$self.value?.title}}',
+                    },
+                  },
+                },
+              ],
+              type: 'object',
+              properties: {
+                title: {
+                  type: 'string',
+                  title: 'Task Title',
+                  required: true,
+                  'x-decorator': 'FormItem',
+                  'x-component': 'Input',
+                  'x-component-props': { placeholder: 'Enter task title' },
+                },
+                priority: {
+                  type: 'string',
+                  title: 'Priority',
+                  required: true,
+                  'x-decorator': 'FormItem',
+                  'x-component': 'Select',
+                  enum: [
+                    { label: 'High', value: 'High' },
+                    { label: 'Medium', value: 'Medium' },
+                    { label: 'Low', value: 'Low' },
+                  ],
+                },
+              },
+            },
+            properties: {
+              addition: {
+                type: 'void',
+                title: 'Add Task',
+                'x-component': `${componentName}.Addition`,
+              },
+            },
+          },
+        },
+      };
+
+      return (
+        <Form form={form} className="space-y-6 w-[700px]">
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">{displayTitle} (Sortable)</h2>
+            <p className="text-muted-foreground">
+              Drag items using the grip icon on the left to reorder. Changes are
+              immediately reflected in the form state.
+            </p>
+          </div>
+
+          <SchemaField schema={schema} />
+
+          <div className="border-t pt-4">
+            <Button
+              onClick={() => {
+                alert(JSON.stringify(form.values, null, 2));
+              }}
+            >
+              View Values
+            </Button>
+          </div>
+        </Form>
+      );
+    },
+  };
+}
+
+/**
+ * Creates a SortableNested story for the given array component
+ * Demonstrates drag-and-drop reordering with nested arrays
+ */
+export function createSortableNestedStory(config: StoryConfig): Story {
+  const { componentName, displayTitle } = config;
+
+  return {
+    render: () => {
+      const form = createForm({
+        values: {
+          projects: [
+            {
+              name: 'Website Redesign',
+              tasks: [
+                { title: 'Create wireframes' },
+                { title: 'Design mockups' },
+                { title: 'Implement frontend' },
+              ],
+            },
+            {
+              name: 'Mobile App',
+              tasks: [
+                { title: 'Setup project structure' },
+                { title: 'Implement navigation' },
+              ],
+            },
+          ],
+        },
+      });
+
+      return (
+        <Form form={form} className="space-y-6 w-[800px]">
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">{displayTitle} (Sortable Nested)</h2>
+            <p className="text-muted-foreground">
+              Drag to reorder both projects and tasks within each project. Each level has
+              independent sorting.
+            </p>
+          </div>
+
+          <SchemaField>
+            <SchemaField.Array
+              name="projects"
+              x-component={componentName}
+              x-component-props={config.componentProps}
+            >
+              <SchemaField.Object>
+                <SchemaField.String
+                  name="name"
+                  title="Project Name"
+                  required
+                  x-decorator="FormItem"
+                  x-component="Input"
+                  x-component-props={{ placeholder: 'Enter project name' }}
+                />
+                <SchemaField.Array
+                  name="tasks"
+                  title="Tasks"
+                  x-component={componentName}
+                  x-component-props={config.componentProps}
+                >
+                  <SchemaField.Object>
+                    <SchemaField.String
+                      name="title"
+                      title="Task Title"
+                      required
+                      x-decorator="FormItem"
+                      x-component="Input"
+                      x-component-props={{ placeholder: 'Enter task title' }}
+                    />
+                  </SchemaField.Object>
+                  <SchemaField.Void
+                    x-component={`${componentName}.Addition`}
+                    title="Add Task"
+                  />
+                </SchemaField.Array>
+              </SchemaField.Object>
+              <SchemaField.Void
+                x-component={`${componentName}.Addition`}
+                title="Add Project"
+              />
+            </SchemaField.Array>
+          </SchemaField>
+
+          <div className="border-t pt-4">
+            <Button
+              onClick={() => {
+                alert(JSON.stringify(form.values, null, 2));
+              }}
+            >
+              View Values
+            </Button>
+          </div>
+        </Form>
+      );
+    },
+  };
+}
+
+/**
+ * Creates a SortableDisabledInForm story for the given array component
+ * Demonstrates disabling sortable functionality using form settings
+ */
+export function createSortableDisabledInFormStory(config: StoryConfig): Story {
+  const { componentName, displayTitle } = config;
+
+  return {
+    render: () => {
+      const form = createForm({
+        values: {
+          tasks: [
+            { title: 'Design homepage mockup', priority: 'High' },
+            { title: 'Implement user authentication', priority: 'High' },
+            { title: 'Write unit tests', priority: 'Medium' },
+            { title: 'Update documentation', priority: 'Low' },
+            { title: 'Review pull requests', priority: 'Medium' },
+          ],
+        },
+      });
+
+      return (
+        <Form
+          form={form}
+          className="space-y-6 w-[700px]"
+          settings={{
+            array: {
+              sortable: false,
+              item: {
+                actions: ['up', 'down', 'edit', 'remove'],
+              },
+            },
+          }}
+        >
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">{displayTitle} (Sortable Disabled)</h2>
+            <p className="text-muted-foreground">
+              Sorting is disabled via form settings. No drag handles are shown.
+            </p>
+          </div>
+
+          <SchemaField>
+            <SchemaField.Array
+              name="tasks"
+              x-component={componentName}
+              x-component-props={config.componentProps}
+            >
+              <SchemaField.Object>
+                <SchemaField.String
+                  name="title"
+                  title="Task Title"
+                  required
+                  x-decorator="FormItem"
+                  x-component="Input"
+                  x-component-props={{ placeholder: 'Enter task title' }}
+                />
+                <SchemaField.String
+                  name="priority"
+                  title="Priority"
+                  required
+                  x-decorator="FormItem"
+                  x-component="Select"
+                  enum={[
+                    { label: 'High', value: 'High' },
+                    { label: 'Medium', value: 'Medium' },
+                    { label: 'Low', value: 'Low' },
+                  ]}
+                />
+              </SchemaField.Object>
+              <SchemaField.Void
+                x-component={`${componentName}.Addition`}
+                title="Add Task"
+              />
+            </SchemaField.Array>
+          </SchemaField>
+
+          <div className="border-t pt-4">
+            <Button
+              onClick={() => {
+                alert(JSON.stringify(form.values, null, 2));
+              }}
+            >
+              View Values
+            </Button>
+          </div>
+        </Form>
+      );
+    },
+  };
+}
+
+/**
+ * Creates a SortableDisabledForArray story for the given array component
+ * Demonstrates disabling sortable and using up/down actions instead
+ */
+export function createSortableDisabledForArrayStory(config: StoryConfig): Story {
+  const { componentName, displayTitle } = config;
+
+  return {
+    render: () => {
+      const form = createForm({
+        values: {
+          tasks: [
+            { title: 'Design homepage mockup', priority: 'High' },
+            { title: 'Implement user authentication', priority: 'High' },
+            { title: 'Write unit tests', priority: 'Medium' },
+            { title: 'Update documentation', priority: 'Low' },
+            { title: 'Review pull requests', priority: 'Medium' },
+          ],
+        },
+      });
+
+      return (
+        <Form form={form} className="space-y-6 w-[700px]">
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">{displayTitle} (Up/Down Actions)</h2>
+            <p className="text-muted-foreground">
+              Sorting is disabled, but up/down buttons are provided for reordering.
+            </p>
+          </div>
+
+          <SchemaField>
+            <SchemaField.Array
+              name="tasks"
+              x-component={componentName}
+              x-component-props={{
+                ...config.componentProps,
+                sortable: false,
+                actions: ['up', 'down', 'remove'],
+              }}
+            >
+              <SchemaField.Object>
+                <SchemaField.String
+                  name="title"
+                  title="Task Title"
+                  required
+                  x-decorator="FormItem"
+                  x-component="Input"
+                  x-component-props={{ placeholder: 'Enter task title' }}
+                />
+                <SchemaField.String
+                  name="priority"
+                  title="Priority"
+                  required
+                  x-decorator="FormItem"
+                  x-component="Select"
+                  enum={[
+                    { label: 'High', value: 'High' },
+                    { label: 'Medium', value: 'Medium' },
+                    { label: 'Low', value: 'Low' },
+                  ]}
+                />
+              </SchemaField.Object>
+              <SchemaField.Void
+                x-component={`${componentName}.Addition`}
+                title="Add Task"
+              />
+            </SchemaField.Array>
+          </SchemaField>
+
+          <div className="border-t pt-4">
+            <Button
+              onClick={() => {
+                alert(JSON.stringify(form.values, null, 2));
+              }}
+            >
+              View Values
+            </Button>
+          </div>
+        </Form>
+      );
+    },
   };
 }

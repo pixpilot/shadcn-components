@@ -7,8 +7,16 @@ import { getXComponentProps } from '../../utils';
 import { ArrayBase } from '../array-base';
 import { isOperationComponent } from '../array-base/utils/is-array-component';
 import { ArrayItemHeaderRow } from '../array-common';
+import { SortableItem } from '../array-sortable';
 
-const ArrayItem = React.memo(({ index, record }: ArrayItemProps) => {
+export interface ArrayCardItemProps extends ArrayItemProps {
+  /**
+   * Unique key for the sortable item
+   */
+  itemKey: string | number;
+}
+
+const ArrayItem = React.memo(({ index, record, itemKey }: ArrayCardItemProps) => {
   const schema = useFieldSchema();
 
   const items = schema?.items as Schema;
@@ -20,22 +28,28 @@ const ArrayItem = React.memo(({ index, record }: ArrayItemProps) => {
 
   return (
     <ArrayBase.Item index={index} record={record ?? {}}>
-      <div
-        {...itemWrapperRestProps}
-        className={cn('border rounded-lg p-4 space-y-2', itemWrapperClassName)}
-      >
-        <ArrayItemHeaderRow schema={schema.items as Schema} index={index} />
-        <div className="space-y-4">
-          <RecursionField
-            schema={items}
-            name={index}
-            filterProperties={(s) => {
-              if (isOperationComponent(s)) return false;
-              return true;
-            }}
+      <SortableItem id={itemKey}>
+        <div
+          {...itemWrapperRestProps}
+          className={cn('border rounded-lg p-4 space-y-2', itemWrapperClassName)}
+        >
+          <ArrayItemHeaderRow
+            schema={schema.items as Schema}
+            index={index}
+            sortableId={itemKey}
           />
+          <div className="space-y-4">
+            <RecursionField
+              schema={items}
+              name={index}
+              filterProperties={(s) => {
+                if (isOperationComponent(s)) return false;
+                return true;
+              }}
+            />
+          </div>
         </div>
-      </div>
+      </SortableItem>
     </ArrayBase.Item>
   );
 });

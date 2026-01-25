@@ -1,7 +1,7 @@
 import type { ArrayField } from '@formily/core';
 import type { JSXComponent } from '@formily/react';
 
-import type { IArrayBaseItemProps } from './array-context';
+import type { IArrayBaseContext, IArrayBaseItemProps } from './array-context';
 
 import type { ArrayBaseMixins, IArrayBaseProps } from './types';
 
@@ -17,6 +17,7 @@ import {
 import { arrayComponentMap } from './components/components';
 
 type ComposedArrayBase = React.FC<React.PropsWithChildren<IArrayBaseProps>> &
+  Pick<IArrayBaseContext, 'sortable'> &
   ArrayBaseMixins & {
     Item: React.FC<React.PropsWithChildren<IArrayBaseItemProps>>;
     mixin: <T extends JSXComponent>(target: T) => T & ArrayBaseMixins;
@@ -25,10 +26,16 @@ type ComposedArrayBase = React.FC<React.PropsWithChildren<IArrayBaseProps>> &
 export const ArrayBase: ComposedArrayBase = (props) => {
   const field = useField<ArrayField>();
   const schema = useFieldSchema();
-  const contextValue = React.useMemo(
-    () => ({ field, schema, props, showEditAction: props.onEdit !== undefined }),
-    [field, schema, props],
-  );
+  const contextValue = React.useMemo(() => {
+    const ctx: IArrayBaseContext = {
+      field,
+      schema,
+      props,
+      showEditAction: props.onEdit !== undefined,
+      sortable: props.sortable,
+    };
+    return ctx;
+  }, [field, schema, props]);
   return <ArrayBaseContext value={contextValue}>{props.children}</ArrayBaseContext>;
 };
 

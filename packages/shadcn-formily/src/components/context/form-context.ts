@@ -37,6 +37,7 @@ export interface FormConfigProps {
    * Component-level props (e.g. x-component-props) still override these values.
    */
   array?: {
+    sortable?: boolean;
     item?: {
       /** Extra icon actions rendered in each array item header */
       actions?: ActionItem[] | false;

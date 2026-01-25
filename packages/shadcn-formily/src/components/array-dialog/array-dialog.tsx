@@ -21,17 +21,8 @@ type Props = ArrayComponentProps;
 const ArrayDialogBase = observer((props: Props) => {
   const schema = useFieldSchema();
 
-  const {
-    onAdd,
-    onRemove,
-    onMoveDown,
-    onMoveUp,
-    onEdit,
-    className,
-    disabled,
-    actions,
-    transformActions,
-  } = props;
+  const { onAdd, onRemove, onMoveDown, onMoveUp, onEdit, className, transformActions } =
+    props;
 
   const {
     activeItemManager,
@@ -50,8 +41,7 @@ const ArrayDialogBase = observer((props: Props) => {
 
   return (
     <ArrayBase
-      disabled={disabled}
-      actions={actions}
+      {...props}
       transformActions={transformActions}
       onAdd={handleAdd}
       onRemove={onRemove}

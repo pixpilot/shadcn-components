@@ -3,6 +3,7 @@ import { RecursionField, useFieldSchema } from '@formily/react';
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 import { ArrayBase } from '../array-base';
+import { SortableItem } from '../array-sortable';
 import { ArrayItemHeaderRow } from './array-item-header-row';
 import { ItemWrapper } from './item-wrapper';
 
@@ -39,26 +40,29 @@ export const ListItem: React.FC<ListItemProps> = React.memo(
 
     return (
       <ArrayBase.Item key={itemKey} index={index} record={record}>
-        {/* Render hidden RecursionField to create field instances for the array item */}
-        <div style={{ display: 'none' }}>
-          <RecursionField schema={schema.items as ISchema} name={index} />
-        </div>
+        <SortableItem id={itemKey}>
+          {/* Render hidden RecursionField to create field instances for the array item */}
+          <div style={{ display: 'none' }}>
+            <RecursionField schema={schema.items as ISchema} name={index} />
+          </div>
 
-        {/* Hide temporary item visually but keep it in DOM for form state */}
-        <ItemWrapper
-          className={cn('px-3 pl-4 py-2', isNewItem && 'hidden')}
-          index={index}
-        >
-          <ArrayItemHeaderRow
-            schema={schema}
+          {/* Hide temporary item visually but keep it in DOM for form state */}
+          <ItemWrapper
+            className={cn('px-3 pl-4 py-2', isNewItem && 'hidden')}
             index={index}
-            slots={{
-              content: {
-                content: 'text-foreground font-medium',
-              },
-            }}
-          />
-        </ItemWrapper>
+          >
+            <ArrayItemHeaderRow
+              schema={schema}
+              index={index}
+              sortableId={itemKey}
+              slots={{
+                content: {
+                  content: 'text-foreground font-medium',
+                },
+              }}
+            />
+          </ItemWrapper>
+        </SortableItem>
       </ArrayBase.Item>
     );
   },

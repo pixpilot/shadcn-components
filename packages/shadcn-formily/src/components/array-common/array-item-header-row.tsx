@@ -15,6 +15,7 @@ import {
   isMoveUpComponent,
   isRemoveComponent,
 } from '../array-base/utils/is-array-component';
+import { DragHandle } from '../array-sortable';
 import { RenderAction } from './render-action';
 
 import { hasEditAction, isDisabled, isHidden } from './utils';
@@ -43,10 +44,15 @@ export interface ArrayItemHeaderRowProps {
   buttonProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
 
   slots?: ArrayItemHeaderRowSlots;
+
+  /**
+   * ID for the sortable item (required if showDragHandle is true)
+   */
+  sortableId?: string | number;
 }
 
 export const ArrayItemHeaderRow: React.FC<ArrayItemHeaderRowProps> = React.memo(
-  ({ schema, index, className, leading, label, buttonProps, slots }) => {
+  ({ schema, index, className, leading, label, buttonProps, slots, sortableId }) => {
     const { ItemLabel } = useArrayComponents();
     const { showEditAction } = useArrayContext();
 
@@ -149,8 +155,21 @@ export const ArrayItemHeaderRow: React.FC<ArrayItemHeaderRowProps> = React.memo(
         </>
       );
 
+    const arraySortable = (array?.props as Record<string, unknown>)?.sortable;
+    const formSortable = formConfig.array?.sortable;
+
+    const dragHandleNode =
+      sortableId != null && arraySortable !== false && formSortable !== false ? (
+        <DragHandle
+          id={sortableId}
+          className="-ml-2"
+          disabled={array?.field?.pattern !== 'editable'}
+        />
+      ) : null;
+
     const content = (
       <>
+        {dragHandleNode}
         {leading}
         <div className="min-w-0 flex-1">{labelNode}</div>
       </>
