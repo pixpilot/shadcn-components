@@ -16,13 +16,41 @@ export interface SelectOption {
   label: string;
 }
 
+export type SelectContentProps = React.ComponentProps<typeof SelectContent>;
+
 type BaseSelectProps = {
+  /**
+   * Array of options to display in the select dropdown
+   */
   options?: SelectOption[];
-  contentProps?: React.ComponentProps<typeof SelectContent>;
+  /**
+   * Additional props to pass to the SelectContent component
+   */
+  contentProps?: SelectContentProps;
+  /**
+   * The currently selected value
+   */
   value?: string;
+  /**
+   * Callback function called when the selected value changes
+   */
   onChange?: (value: string) => void;
+  /**
+   * Placeholder text to display when no value is selected
+   */
   placeholder?: string;
+  /**
+   * Keyboard navigation mode
+   * - "cycle": Cycles through options with arrow keys
+   * - "dropdown": Opens dropdown on arrow keys
+   */
   keyboardMode?: 'cycle' | 'dropdown';
+  /**
+   * Controls how the dropdown is positioned
+   * - "item-aligned": Aligns with the trigger button
+   * - "popper": Uses floating-ui positioning
+   */
+  position?: SelectContentProps['position'];
 } & Omit<ComponentProps<typeof ShadcnSelect>, 'value' | 'onValueChange' | 'children'>;
 
 function Select(props: BaseSelectProps) {
@@ -35,6 +63,7 @@ function Select(props: BaseSelectProps) {
     keyboardMode = 'dropdown',
     open: openProp,
     onOpenChange: onOpenChangeProp,
+    position,
     ...restProps
   } = props;
 
@@ -69,7 +98,7 @@ function Select(props: BaseSelectProps) {
       <SelectTrigger className="w-full" onKeyDown={handleTriggerKeyDown}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
-      <SelectContent {...contentProps}>
+      <SelectContent position={position} {...contentProps}>
         {options?.map((option) => (
           <SelectItem key={option.value} value={String(option.value)}>
             {option.label}
