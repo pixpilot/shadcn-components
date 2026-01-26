@@ -36,6 +36,7 @@ export function createStories(config: StoryConfig) {
     EmptyArray: createEmptyArrayStory(config),
     WithActions: createWithActions(config),
     WithComponentClassName: createWithComponentClassNameStory(config),
+    WithDescription: createWithDescriptionStory(config),
     Declarative: createDeclarativeStory(config),
     WithJSONSchema: createWithJsonSchemaStory(config),
     WithItemReactionTitle: createWithItemReactionTitleStory(config),
@@ -367,6 +368,137 @@ export function createWithComponentClassNameStory(config: StoryConfig): Story {
 }
 
 /**
+ * Creates a WithDescription story for the given array component
+ */
+export function createWithDescriptionStory(config: StoryConfig): Story {
+  const { componentName } = config;
+
+  return {
+    render: () => {
+      const form = createForm({
+        values: {
+          contacts: [
+            {
+              name: 'John Doe',
+              email: 'john@example.com',
+              phones: [
+                {
+                  number: '555-0100',
+                  type: 'home',
+                },
+              ],
+            },
+          ],
+        },
+      });
+
+      const schema: ISchema = {
+        type: 'object',
+        properties: {
+          contacts: {
+            type: 'array',
+            title: 'Contact List',
+            description: 'Add multiple contacts with their details',
+            'x-decorator': 'FormItem',
+            'x-component': componentName,
+            'x-component-props': config.componentProps,
+            items: {
+              type: 'object',
+              title: 'Contact',
+              description:
+                'Enter contact information including name, email, and phone numbers',
+              'x-reactions': {
+                fulfill: {
+                  state: {
+                    title: "{{$self.value?.name || 'User'}}",
+                  },
+                },
+              },
+              properties: {
+                name: {
+                  type: 'string',
+                  title: 'Name',
+                  'x-decorator': 'FormItem',
+                  'x-component': 'Input',
+                  'x-component-props': { placeholder: 'Enter name' },
+                  required: true,
+                },
+                email: {
+                  type: 'string',
+                  title: 'Email',
+                  'x-decorator': 'FormItem',
+                  'x-component': 'Input',
+                  'x-component-props': { placeholder: 'Enter email', type: 'email' },
+                },
+                phones: {
+                  type: 'array',
+                  title: 'Phone Numbers',
+                  description: 'Add multiple phone numbers for this contact',
+                  'x-decorator': 'FormItem',
+                  'x-component': componentName,
+                  'x-component-props': config.componentProps,
+                  items: {
+                    type: 'object',
+                    title: 'Phone Number',
+                    description: 'Enter phone number and type',
+                    properties: {
+                      number: {
+                        type: 'string',
+                        title: 'Phone Number',
+                        'x-decorator': 'FormItem',
+                        'x-component': 'Input',
+                        'x-component-props': { placeholder: 'Enter phone number' },
+                      },
+                      type: {
+                        type: 'string',
+                        title: 'Type',
+                        'x-decorator': 'FormItem',
+                        'x-component': 'Select',
+                        enum: [
+                          { label: 'Home', value: 'home' },
+                          { label: 'Work', value: 'work' },
+                          { label: 'Mobile', value: 'mobile' },
+                        ],
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      };
+
+      return (
+        <Form
+          form={form}
+          className="w-[600px]"
+          onSubmit={(values) => {
+            // eslint-disable-next-line no-console
+            console.log('Form submitted:', values);
+
+            alert(JSON.stringify(values, null, JSON_INDENT));
+          }}
+        >
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium">Contacts</h3>
+
+            <SchemaField schema={schema} />
+          </div>
+
+          <button
+            type="submit"
+            className="mt-6 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground"
+          >
+            Submit
+          </button>
+        </Form>
+      );
+    },
+  };
+}
+
+/**
  * Creates a WithJSXSchema/Declarative story for the given array component
  */
 export function createDeclarativeStory(config: StoryConfig): Story {
@@ -499,6 +631,7 @@ export function createWithJsonSchemaStory(config: StoryConfig): Story {
             title: 'Contacts',
             maxItems: 10,
             description: 'List of user contacts',
+            'x-decorator': 'FormItem',
             'x-component': componentName,
             'x-component-props': config.componentProps,
             items: {

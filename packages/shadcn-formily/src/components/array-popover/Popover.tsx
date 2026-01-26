@@ -6,9 +6,9 @@ import { observer, useField } from '@formily/react';
 import { Button, Popover, PopoverContent, PopoverTrigger } from '@pixpilot/shadcn';
 import React from 'react';
 import { ArrayItemDraftFields } from '../array-common/ArrayItemDraftFields';
-import { getEditDescription } from '../array-common/get-edit-description';
 import { ShakeStyles } from '../array-common/ShakeStyles';
 import { useArrayItemDraftForm } from '../array-common/use-array-item-draft-form';
+import { useArrayItemEditLabels } from '../array-common/use-array-item-edit-labels';
 import { useEditHandlers } from '../array-common/use-edit-handlers';
 import { useShakeAnimation } from '../array-common/use-shake-animation';
 
@@ -73,7 +73,12 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
       }
     };
 
-    const description = getEditDescription(isNewItem, autoSave ?? false);
+    const { title, description } = useArrayItemEditLabels({
+      schema,
+      isNew: isNewItem,
+      autoSave,
+      itemIndex: activeIndex,
+    });
 
     return (
       <Popover open={open} onOpenChange={handleOpenChange}>
@@ -90,9 +95,7 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
           <ShakeStyles />
           <div className="space-y-4">
             <div className="space-y-2">
-              <h4 className="font-medium leading-none">
-                {isNewItem ? 'Add New Item' : `Edit Item`}
-              </h4>
+              <h4 className="font-medium leading-none">{title}</h4>
               <p className="text-muted-foreground text-sm">{description}</p>
             </div>
 

@@ -31,6 +31,7 @@ const ArrayCardsBase: React.FC<ArrayComponentProps> = observer((props) => {
     className,
     title: titleProp,
     children,
+    description,
     ...otherProps
   } = props;
 
@@ -60,7 +61,7 @@ const ArrayCardsBase: React.FC<ArrayComponentProps> = observer((props) => {
   };
 
   const fieldAddress = field.address.toString();
-
+  // console.log(props);
   return (
     <ArrayBase
       disabled={disabled}

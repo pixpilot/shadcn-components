@@ -85,6 +85,8 @@ export interface IArrayBaseProps {
    * Runs per item render (context includes index/record/etc).
    */
   transformActions?: (actions: ActionItem[], context: TransformContext) => ActionItem[];
+
+  description?: React.ReactNode;
 }
 
 export interface IArrayBaseOperationProps extends ButtonProps {

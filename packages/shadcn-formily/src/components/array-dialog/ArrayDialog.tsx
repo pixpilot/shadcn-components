@@ -1,11 +1,9 @@
-import type { Schema } from '@formily/react';
-
 import type { ArrayComponentProps } from '../array-base';
 import { observer, useFieldSchema } from '@formily/react';
 
 import React from 'react';
 import { ArrayBase, ArrayComponentProvider, useArrayComponents } from '../array-base';
-import { ArrayItemsList, useArrayEditor } from '../array-common';
+import { ArrayItemsList, useArrayEditor, useArrayItemSchema } from '../array-common';
 
 import { EditDialog } from './EditDialog';
 
@@ -38,9 +36,7 @@ const ArrayDialogBase = observer((props: Props) => {
 
   const { AddButton } = useArrayComponents();
 
-  const items = Array.isArray(schema.items)
-    ? (schema.items[0] ?? schema.items)
-    : schema.items;
+  const items = useArrayItemSchema();
 
   return (
     <ArrayBase
@@ -60,7 +56,7 @@ const ArrayDialogBase = observer((props: Props) => {
         onAutoSave={handleLiveChange}
         onCancel={handleCancelClick}
         activeItemManager={activeItemManager}
-        schema={items as Schema}
+        schema={items}
         autoSave={autoSave}
       />
     </ArrayBase>

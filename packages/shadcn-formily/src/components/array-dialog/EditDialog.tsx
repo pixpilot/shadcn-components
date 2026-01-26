@@ -16,9 +16,9 @@ import {
 } from '@pixpilot/shadcn-ui';
 import React from 'react';
 import { ArrayItemDraftFields } from '../array-common/ArrayItemDraftFields';
-import { getEditDescription } from '../array-common/get-edit-description';
 import { ShakeStyles } from '../array-common/ShakeStyles';
 import { useArrayItemDraftForm } from '../array-common/use-array-item-draft-form';
+import { useArrayItemEditLabels } from '../array-common/use-array-item-edit-labels';
 import { useEditHandlers } from '../array-common/use-edit-handlers';
 import { useShakeAnimation } from '../array-common/use-shake-animation';
 
@@ -81,9 +81,12 @@ export const EditDialog = observer(
       onCancel,
     });
 
-    const description = React.useMemo(() => {
-      return getEditDescription(isNew, autoSave ?? false);
-    }, [isNew, autoSave]);
+    const { title, description } = useArrayItemEditLabels({
+      schema,
+      isNew,
+      autoSave,
+      itemIndex,
+    });
 
     return (
       <Dialog
@@ -104,9 +107,7 @@ export const EditDialog = observer(
         >
           <ShakeStyles />
           <DialogHeader>
-            <DialogTitle>
-              {isNew ? 'Add New Item' : `Edit Item #${(itemIndex ?? 0) + 1}`}
-            </DialogTitle>
+            <DialogTitle>{title}</DialogTitle>
             <DialogDescription>{description}</DialogDescription>
           </DialogHeader>
 

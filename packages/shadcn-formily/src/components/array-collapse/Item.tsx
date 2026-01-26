@@ -1,5 +1,4 @@
 import type { ArrayField as FormilyArrayField } from '@formily/core';
-import type { Schema } from '@formily/react';
 import type { PanelStateManager } from '../../utils';
 
 import type { ArrayItemProps } from '../array-base';
@@ -10,7 +9,7 @@ import React from 'react';
 import { getXComponentProps } from '../../utils';
 import { validateArrayItemFields } from '../../utils/validate-array-item-fields';
 import { ArrayBase } from '../array-base';
-import { ArrayItemHeaderRow, ItemWrapper } from '../array-common';
+import { ArrayItemHeaderRow, ItemWrapper, useArrayItemSchema } from '../array-common';
 import { SortableItem } from '../array-sortable';
 
 interface ArrayCollapseItemProps extends ArrayItemProps {
@@ -30,9 +29,7 @@ const ArrayCollapseItemBase = React.memo((props: ArrayCollapseItemProps) => {
   const field = useField<FormilyArrayField>();
   const schema = useFieldSchema();
 
-  const items = Array.isArray(schema.items)
-    ? (schema.items[0] ?? schema.items)
-    : schema.items;
+  const items = useArrayItemSchema();
 
   // Get x-component-props from items schema to apply to the wrapper
   const itemWrapperProps = getXComponentProps(items);
@@ -52,7 +49,7 @@ const ArrayCollapseItemBase = React.memo((props: ArrayCollapseItemProps) => {
       <SortableItem id={itemKey}>
         {/* Render hidden RecursionField to create field instances for the array item */}
         <div style={{ display: 'none' }}>
-          <RecursionField schema={items as Schema} name={index} />
+          <RecursionField schema={items} name={index} />
         </div>
 
         <ItemWrapper {...itemWrapperProps} index={index}>
@@ -100,10 +97,10 @@ const ArrayCollapseItemBase = React.memo((props: ArrayCollapseItemProps) => {
           />
 
           {/* Content with form fields */}
-          {isOpen && items && (
+          {isOpen && (
             <div className="border-t px-3 pb-4">
               <div className="space-y-4 pt-4">
-                <RecursionField schema={items as Schema} name={index} />
+                <RecursionField schema={items} name={index} />
               </div>
             </div>
           )}

@@ -1,5 +1,5 @@
 import type { ArrayField } from '@formily/core';
-import { useField, useFieldSchema } from '@formily/react';
+import { useField } from '@formily/react';
 import React from 'react';
 import { createActiveItemManager } from './create-active-item-manager';
 
@@ -49,7 +49,7 @@ function setArrayItemValue(arrayField: ArrayField, index: number, value: unknown
 export function useArrayEditor(props: ArrayItemEditorProps) {
   const { onAdd, onEdit, autoSave } = props;
   const field = useField<ArrayField>();
-  const schema = useFieldSchema();
+
   const activeItemManager = React.useMemo(() => createActiveItemManager(), []);
 
   const handleEdit = (index: number) => {
@@ -83,10 +83,6 @@ export function useArrayEditor(props: ArrayItemEditorProps) {
     [activeItemManager],
   );
 
-  const items = Array.isArray(schema.items)
-    ? (schema.items[0] ?? schema.items)
-    : schema.items;
-
   return {
     activeItemManager,
     handleEdit,
@@ -95,7 +91,6 @@ export function useArrayEditor(props: ArrayItemEditorProps) {
     handleLiveChange,
     handleCancelClick,
     field,
-    items,
     isNewItem,
   };
 }

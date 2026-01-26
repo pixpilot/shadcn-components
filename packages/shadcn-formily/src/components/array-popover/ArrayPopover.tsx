@@ -1,10 +1,9 @@
-import type { Schema } from '@formily/react';
 import type { ArrayComponentProps } from '../array-base';
 import { observer } from '@formily/react';
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 import { ArrayBase, ArrayComponentProvider } from '../array-base';
-import { ArrayItemsList, useArrayEditor } from '../array-common';
+import { ArrayItemsList, useArrayEditor, useArrayItemSchema } from '../array-common';
 import { ArrayItemsEditPopover } from './Popover';
 
 type Props = ArrayComponentProps;
@@ -25,7 +24,6 @@ const ArrayPopoverBase = observer((props: Props) => {
 
   const {
     activeItemManager,
-    items,
     handleAdd,
     isNewItem,
     handleEdit,
@@ -33,6 +31,8 @@ const ArrayPopoverBase = observer((props: Props) => {
     handleLiveChange,
     handleCancelClick,
   } = useArrayEditor({ onAdd, onEdit, autoSave });
+
+  const schema = useArrayItemSchema();
 
   return (
     <ArrayBase
@@ -53,7 +53,7 @@ const ArrayPopoverBase = observer((props: Props) => {
             onCancel={handleCancelClick}
             onAutoSave={handleLiveChange}
             autoSave={autoSave}
-            schema={items as Schema}
+            schema={schema}
             onSave={handleSaveClick}
           >
             <ArrayBase.Addition />

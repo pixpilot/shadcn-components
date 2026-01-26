@@ -34,7 +34,6 @@ describe('useArrayEditor', () => {
     const { result } = renderHook(() => useArrayEditor({}));
 
     expect(result.current.field).toBe(mockField);
-    expect(result.current.items).toBe(mockSchema.items);
     expect(typeof result.current.handleEdit).toBe('function');
     expect(typeof result.current.handleAdd).toBe('function');
     expect(typeof result.current.handleSaveClick).toBe('function');

@@ -9,5 +9,7 @@ export * from './ShakeStyles';
 export * from './use-array-data-source';
 export * from './use-array-editor';
 export * from './use-array-item-draft-form';
+export * from './use-array-item-edit-labels';
+export * from './use-array-item-schema';
 export * from './use-edit-handlers';
 export * from './use-shake-animation';
