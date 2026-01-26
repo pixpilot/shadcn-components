@@ -29,7 +29,7 @@ export interface CustomAction {
   type?: 'button';
   icon: React.ReactNode;
   tooltip?: string;
-  onClick: (ctx: ActionContext) => void;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>, ctx: ActionContext) => void;
   hidden?: boolean | ((ctx: ActionContext) => boolean);
   disabled?: boolean | ((ctx: ActionContext) => boolean);
   buttonProps?: Omit<ButtonProps, 'children' | 'onClick'>;
@@ -44,7 +44,8 @@ export interface ToggleAction {
   inactiveTooltip?: string;
   tooltip?: string;
   isActive: (ctx: ActionContext) => boolean;
-  onToggle: (ctx: ActionContext, nextActive: boolean) => void;
+  onToggle?: (ctx: ActionContext, nextActive: boolean) => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>, context: ActionContext) => void;
   hidden?: boolean | ((ctx: ActionContext) => boolean);
   disabled?: boolean | ((ctx: ActionContext) => boolean);
   buttonProps?: Omit<ButtonProps, 'children' | 'onClick'>;

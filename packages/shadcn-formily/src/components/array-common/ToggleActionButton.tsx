@@ -31,8 +31,10 @@ export const ToggleActionButton: React.FC<{
         e.stopPropagation();
         if (disabled) return;
 
+        action.onClick?.(e, actionContext);
+
         const nextActive = !active;
-        action.onToggle(actionContext, nextActive);
+        action.onToggle?.(actionContext, nextActive);
       }}
     >
       {iconNode}

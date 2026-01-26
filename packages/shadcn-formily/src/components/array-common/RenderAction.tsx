@@ -107,7 +107,7 @@ export const RenderAction: React.FC<RenderActionProps> = ({
       onClick={(e) => {
         e.stopPropagation();
         if (disabled) return;
-        customAction.onClick(ctx);
+        customAction.onClick?.(e, ctx);
       }}
     >
       {customAction.icon}

@@ -186,7 +186,7 @@ export function createWithActions(config: StoryConfig): Story {
                     key: 'info',
                     tooltip: 'Show info',
                     icon: <InfoIcon className="size-4" />,
-                    onClick: ({ index, itemField }) => {
+                    onClick: (_e, { index, itemField }) => {
                       const address = (
                         itemField as { address?: { toString?: () => string } } | null
                       )?.address;
