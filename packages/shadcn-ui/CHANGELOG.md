@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.42.0
+
+### Minor Changes
+
+- improve clearable button positioning in Select component
+
 ## 0.41.0
 
 ### Minor Changes
