@@ -1,5 +1,17 @@
 # @pixpilot/formily-shadcn
 
+## 0.36.0
+
+### Minor Changes
+
+- add ArrayTags component for managing simple arrays
+- add TagsInput component for inline tag management
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn-ui@0.43.0
+
 ## 0.35.1
 
 ### Patch Changes
