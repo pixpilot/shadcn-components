@@ -14,9 +14,7 @@ describe('useArrayItemEditLabels', () => {
     );
 
     expect(result.current.title).toBe('Add New Item');
-    expect(result.current.description).toBe(
-      "Fill in the details for the new item. Click save when you're done.",
-    );
+    expect(result.current.description).toBe('Enter details, then click save.');
   });
 
   it('should return default title and description for existing item without schema', () => {
@@ -30,9 +28,7 @@ describe('useArrayItemEditLabels', () => {
     );
 
     expect(result.current.title).toBe('Edit Item #3');
-    expect(result.current.description).toBe(
-      "Make changes to the item. Click save when you're done.",
-    );
+    expect(result.current.description).toBe('Edit details, then click save.');
   });
 
   it('should use schema title for new item', () => {
@@ -116,9 +112,7 @@ describe('useArrayItemEditLabels', () => {
       }),
     );
 
-    expect(result.current.description).toBe(
-      "Fill in the details for the new item. Click save when you're done.",
-    );
+    expect(result.current.description).toBe('Enter details, then click save.');
   });
 
   it('should handle whitespace-only schema description', () => {
@@ -132,9 +126,7 @@ describe('useArrayItemEditLabels', () => {
       }),
     );
 
-    expect(result.current.description).toBe(
-      "Fill in the details for the new item. Click save when you're done.",
-    );
+    expect(result.current.description).toBe('Enter details, then click save.');
   });
 
   it('should handle non-string schema title', () => {
@@ -162,9 +154,7 @@ describe('useArrayItemEditLabels', () => {
       }),
     );
 
-    expect(result.current.description).toBe(
-      "Fill in the details for the new item. Click save when you're done.",
-    );
+    expect(result.current.description).toBe('Enter details, then click save.');
   });
 
   it('should use autoSave description for new item', () => {
@@ -177,9 +167,7 @@ describe('useArrayItemEditLabels', () => {
       }),
     );
 
-    expect(result.current.description).toBe(
-      'Fill in the details for the new item. Changes are applied immediately.',
-    );
+    expect(result.current.description).toBe('Enter details. Changes apply instantly.');
   });
 
   it('should use autoSave description for existing item', () => {
@@ -192,9 +180,7 @@ describe('useArrayItemEditLabels', () => {
       }),
     );
 
-    expect(result.current.description).toBe(
-      'Make changes to the item. Changes are applied immediately.',
-    );
+    expect(result.current.description).toBe('Edit details. Changes apply instantly.');
   });
 
   it('should handle undefined itemIndex for existing item', () => {
