@@ -99,7 +99,7 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
               <p className="text-muted-foreground text-sm">{description}</p>
             </div>
 
-            {activeIndex != null && (
+            {activeIndex != null && open && (
               <ArrayItemDraftFields
                 schema={schema}
                 form={draftForm}
