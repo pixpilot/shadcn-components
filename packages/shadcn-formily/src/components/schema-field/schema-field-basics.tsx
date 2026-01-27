@@ -1,3 +1,5 @@
+/* eslint-disable react-refresh/only-export-components */
+
 import type { ISchema } from '@formily/react';
 import type { FormComponentConfig } from '../../types/form';
 import type { JsonSchemaFormComponents } from '../json-schema-form-renderer';
@@ -9,6 +11,7 @@ import { ArrayCards } from '../array-cards';
 import { ArrayCollapse } from '../array-collapse';
 import { ArrayDialog } from '../array-dialog';
 import { ArrayPopover } from '../array-popover';
+import { ArrayTags } from '../array-tags';
 import { Checkbox } from '../Checkbox';
 import { Column } from '../Column';
 import { DatePicker } from '../DatePicker';
@@ -31,6 +34,7 @@ export const basicComponentRegistry = {
   ArrayCollapse: { component: ArrayCollapse, decorator: 'FormItem' },
   ArrayDialog: { component: ArrayDialog, decorator: 'FormItem' },
   ArrayPopover: { component: ArrayPopover, decorator: 'FormItem' },
+  ArrayTags: { component: ArrayTags, decorator: 'FormItem' },
   Checkbox: { component: Checkbox, decorator: 'FormItem' },
   Column: { component: Column },
   DatePicker: { component: DatePicker, decorator: 'FormItem' },

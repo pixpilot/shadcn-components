@@ -18,6 +18,8 @@ export * from './components/array-popover';
 // Array sortable components
 export { DragHandle, SortableContainer, SortableItem } from './components/array-sortable';
 
+export * from './components/array-tags';
+
 export { Checkbox } from './components/Checkbox';
 export { ColorSelect } from './components/ColorSelect';
 export { Column } from './components/Column';
