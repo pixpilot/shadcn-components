@@ -101,31 +101,26 @@ function Select(props: BaseSelectProps) {
       onOpenChange={handleOpenChange}
       {...restProps}
     >
-      <SelectTrigger className="w-full" onKeyDown={handleTriggerKeyDown}>
-        <div className="flex items-center justify-between gap-2 flex-1 w-full min-w-0">
-          <span className="flex-1 truncate text-left">
-            <SelectValue placeholder={placeholder} />
-          </span>
+      <div className="relative w-full">
+        <SelectTrigger className="w-full" onKeyDown={handleTriggerKeyDown}>
+          <SelectValue placeholder={placeholder} />
+        </SelectTrigger>
 
-          {clearable && value !== '' && (
-            <button
-              type="button"
-              /* ml-auto ensures it sticks to the right if flex-1 above fails,
-           but justify-between handles it mostly. */
-              className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-sm opacity-50 hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none"
-              onPointerDown={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                onChange?.('');
-                handleOpenChange(false);
-              }}
-              aria-label="Clear selection"
-            >
-              <XIcon className="h-4 w-4" />
-            </button>
-          )}
-        </div>
-      </SelectTrigger>
+        {clearable && value !== '' && (
+          <button
+            type="button"
+            className="absolute right-8 top-1/2 -translate-y-1/2 flex h-6 w-6 items-center justify-center rounded-sm opacity-40 hover:opacity-100 z-10"
+            onClick={(e) => {
+              e.preventDefault();
+              onChange?.('');
+              handleOpenChange(false);
+            }}
+            aria-label="Clear selection"
+          >
+            <XIcon className="h-4 w-4" />
+          </button>
+        )}
+      </div>
 
       <SelectContent position={position} {...contentProps}>
         {options?.map((option) => (
