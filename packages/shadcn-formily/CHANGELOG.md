@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.37.1
+
+### Patch Changes
+
+- 79c3c54: new release
+
 ## 0.37.0
 
 ### Minor Changes
