@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import type { TagsInputProps } from '../src/tags-input';
+import type { TagsInputProps } from '../src/TagsInput';
 import { useState } from 'react';
-import { TagsInput } from '../src/tags-input';
+import { TagsInput } from '../src/TagsInput';
 
 /**
  * An inline tags input component with dropdown suggestions and free-form entry.
