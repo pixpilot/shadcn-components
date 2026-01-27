@@ -160,7 +160,6 @@ export const ArrayItemHeaderRow: React.FC<ArrayItemHeaderRowProps> = React.memo(
 
     const content = (
       <>
-        {dragHandleNode}
         {leading}
         <div className="min-w-0 flex-1">{labelNode}</div>
       </>
@@ -168,6 +167,7 @@ export const ArrayItemHeaderRow: React.FC<ArrayItemHeaderRowProps> = React.memo(
 
     return (
       <div className={cn('flex items-center gap-2', className)}>
+        {dragHandleNode}
         {buttonProps ? (
           <button
             {...buttonProps}
