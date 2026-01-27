@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.43.0
+
+### Minor Changes
+
+- add TagsInput component for inline tag management
+
 ## 0.42.0
 
 ### Minor Changes
