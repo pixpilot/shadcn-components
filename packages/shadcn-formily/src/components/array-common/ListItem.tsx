@@ -1,10 +1,10 @@
-import type { ISchema } from '@formily/react';
 import { RecursionField, useFieldSchema } from '@formily/react';
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 import { ArrayBase } from '../array-base';
 import { SortableItem } from '../array-sortable';
 import { ArrayItemHeaderRow } from './ArrayItemHeaderRow';
+import { getHiddenItemSchema } from './get-hidden-item-schema';
 import { ItemWrapper } from './ItemWrapper';
 
 export interface ListItemProps {
@@ -36,15 +36,21 @@ export const ListItem: React.FC<ListItemProps> = React.memo(
     // const field = useField<ArrayField>();
     // const fieldAddress = field.address.toString();
 
+    const hiddenItemSchema = React.useMemo(() => {
+      return getHiddenItemSchema(schema.items as unknown);
+    }, [schema.items]);
+
     const isNewItem = isNew;
 
     return (
       <ArrayBase.Item key={itemKey} index={index} record={record}>
         <SortableItem id={itemKey}>
-          {/* Render hidden RecursionField to create field instances for the array item */}
-          <div style={{ display: 'none' }}>
-            <RecursionField schema={schema.items as ISchema} name={index} />
-          </div>
+          {/* Render hidden RecursionField to create the array item field instance */}
+          {hiddenItemSchema ? (
+            <div style={{ display: 'none' }}>
+              <RecursionField schema={hiddenItemSchema} name={index} />
+            </div>
+          ) : null}
 
           {/* Hide temporary item visually but keep it in DOM for form state */}
           <ItemWrapper

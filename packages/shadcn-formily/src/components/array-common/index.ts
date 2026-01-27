@@ -3,6 +3,7 @@ export * from './ArrayItemHeaderRow';
 export * from './ArrayItemsList';
 export * from './create-active-item-manager';
 export * from './get-edit-description';
+export * from './get-hidden-item-schema';
 export * from './ItemWrapper';
 export * from './ListItem';
 export * from './ShakeStyles';

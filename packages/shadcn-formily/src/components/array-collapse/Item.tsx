@@ -1,6 +1,6 @@
 import type { ArrayField as FormilyArrayField } from '@formily/core';
-import type { PanelStateManager } from '../../utils';
 
+import type { PanelStateManager } from '../../utils';
 import type { ArrayItemProps } from '../array-base';
 import { RecursionField, useField, useFieldSchema } from '@formily/react';
 import { cn } from '@pixpilot/shadcn';
@@ -10,6 +10,7 @@ import { getXComponentProps } from '../../utils';
 import { validateArrayItemFields } from '../../utils/validate-array-item-fields';
 import { ArrayBase } from '../array-base';
 import { ArrayItemHeaderRow, ItemWrapper, useArrayItemSchema } from '../array-common';
+import { getHiddenItemSchema } from '../array-common/get-hidden-item-schema';
 import { SortableItem } from '../array-sortable';
 
 interface ArrayCollapseItemProps extends ArrayItemProps {
@@ -31,6 +32,10 @@ const ArrayCollapseItemBase = React.memo((props: ArrayCollapseItemProps) => {
 
   const items = useArrayItemSchema();
 
+  const hiddenItemSchema = React.useMemo(() => {
+    return getHiddenItemSchema(items as unknown);
+  }, [items]);
+
   // Get x-component-props from items schema to apply to the wrapper
   const itemWrapperProps = getXComponentProps(items);
 
@@ -48,9 +53,11 @@ const ArrayCollapseItemBase = React.memo((props: ArrayCollapseItemProps) => {
     >
       <SortableItem id={itemKey}>
         {/* Render hidden RecursionField to create field instances for the array item */}
-        <div style={{ display: 'none' }}>
-          <RecursionField schema={items} name={index} />
-        </div>
+        {hiddenItemSchema ? (
+          <div style={{ display: 'none' }}>
+            <RecursionField schema={hiddenItemSchema} name={index} />
+          </div>
+        ) : null}
 
         <ItemWrapper {...itemWrapperProps} index={index}>
           {/* Header */}

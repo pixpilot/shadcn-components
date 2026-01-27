@@ -88,8 +88,6 @@ export const EditDialog = observer(
       itemIndex,
     });
 
-    if (!open) return null;
-
     return (
       <Dialog
         open={open}
