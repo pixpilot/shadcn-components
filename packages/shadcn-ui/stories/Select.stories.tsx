@@ -22,6 +22,10 @@ const meta = {
       control: 'text',
       description: 'Placeholder text when no value is selected',
     },
+    clearable: {
+      control: 'boolean',
+      description: 'Whether to show a clear button when a value is selected',
+    },
     keyboardMode: {
       control: { type: 'radio' },
       options: ['dropdown', 'cycle'],
@@ -99,29 +103,21 @@ export const NumericValues: Story = {
 };
 
 /**
- * In cycle mode, when the dropdown is closed, ArrowUp/ArrowDown cycles the value
- * directly (with wrap-around) without opening the dropdown.
+ * Select with clear button enabled
  */
-export const KeyboardCycle: Story = {
+export const Clearable: Story = {
   args: {
     options: [
-      { value: 'alpha', label: 'Alpha' },
-      { value: 'bravo', label: 'Bravo' },
-      { value: 'charlie', label: 'Charlie' },
+      { value: 'apple', label: 'Apple' },
+      { value: 'banana', label: 'Banana' },
+      { value: 'cherry', label: 'Cherry' },
     ],
-    placeholder: 'Use Arrow keys',
-    keyboardMode: 'cycle',
+    placeholder: 'Choose a fruit',
+    clearable: true,
   },
-  render: function KeyboardCycleSelect(args) {
-    const [value, setValue] = useState<string>('alpha');
+  render: function ClearableSelect(args) {
+    const [value, setValue] = useState<string>('banana');
 
-    return (
-      <div>
-        <Select {...args} value={value} onChange={setValue} />
-        <div style={{ marginTop: '1rem', fontSize: '0.875rem', color: '#666' }}>
-          Selected: <strong>{value}</strong>
-        </div>
-      </div>
-    );
+    return <Select {...args} value={value} onChange={setValue} />;
   },
 };

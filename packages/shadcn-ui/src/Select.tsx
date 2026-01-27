@@ -7,6 +7,7 @@ import {
   SelectValue,
   Select as ShadcnSelect,
 } from '@pixpilot/shadcn';
+import { XIcon } from 'lucide-react';
 import React from 'react';
 
 import { useSelectKeyboard } from './hooks/use-select-keyboard';
@@ -51,6 +52,10 @@ type BaseSelectProps = {
    * - "popper": Uses floating-ui positioning
    */
   position?: SelectContentProps['position'];
+  /**
+   * Whether to show a clear button when a value is selected
+   */
+  clearable?: boolean;
 } & Omit<ComponentProps<typeof ShadcnSelect>, 'value' | 'onValueChange' | 'children'>;
 
 function Select(props: BaseSelectProps) {
@@ -64,6 +69,7 @@ function Select(props: BaseSelectProps) {
     open: openProp,
     onOpenChange: onOpenChangeProp,
     position,
+    clearable = false,
     ...restProps
   } = props;
 
@@ -96,8 +102,31 @@ function Select(props: BaseSelectProps) {
       {...restProps}
     >
       <SelectTrigger className="w-full" onKeyDown={handleTriggerKeyDown}>
-        <SelectValue placeholder={placeholder} />
+        <div className="flex items-center justify-between gap-2 flex-1 w-full min-w-0">
+          <span className="flex-1 truncate text-left">
+            <SelectValue placeholder={placeholder} />
+          </span>
+
+          {clearable && value !== '' && (
+            <button
+              type="button"
+              /* ml-auto ensures it sticks to the right if flex-1 above fails,
+           but justify-between handles it mostly. */
+              className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-sm opacity-50 hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none"
+              onPointerDown={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onChange?.('');
+                handleOpenChange(false);
+              }}
+              aria-label="Clear selection"
+            >
+              <XIcon className="h-4 w-4" />
+            </button>
+          )}
+        </div>
       </SelectTrigger>
+
       <SelectContent position={position} {...contentProps}>
         {options?.map((option) => (
           <SelectItem key={option.value} value={String(option.value)}>
