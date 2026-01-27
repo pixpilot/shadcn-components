@@ -67,11 +67,42 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
       onCancel,
     });
 
-    const handleOpenChange = (isOpen: boolean) => {
-      if (!isOpen) {
-        handleCancel();
+    const handleDiscard = React.useCallback(() => {
+      if (activeIndex === undefined) return;
+
+      // In autoSave mode, new items are created immediately.
+      // Users still need a way to abandon the new item.
+      if (autoSave && isNewItem) {
+        arrayField.remove?.(activeIndex).catch(console.error);
       }
-    };
+
+      handleCancel();
+    }, [activeIndex, arrayField, autoSave, handleCancel, isNewItem]);
+
+    const validateAndClose = React.useCallback(() => {
+      if (activeIndex === undefined) return;
+
+      if (isDirty) {
+        triggerShake();
+        return;
+      }
+
+      Promise.resolve(draftForm.validate())
+        .then(() => {
+          handleCancel();
+        })
+        .catch(() => {
+          triggerShake();
+        });
+    }, [activeIndex, draftForm, handleCancel, isDirty, triggerShake]);
+
+    const handleOpenChange = React.useCallback(
+      (isOpen: boolean) => {
+        if (isOpen) return;
+        validateAndClose();
+      },
+      [validateAndClose],
+    );
 
     const { title, description } = useArrayItemEditLabels({
       schema,
@@ -87,9 +118,26 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
           className={shouldShake ? 'w-96 pp-shake' : 'w-96'}
           side="top"
           onInteractOutside={(event) => {
-            if (!isDirty) return;
+            if (isDirty) {
+              event.preventDefault();
+              triggerShake();
+              return;
+            }
+
+            // Ensure validation runs before closing (autoSave or manual-save mode).
             event.preventDefault();
-            triggerShake();
+            validateAndClose();
+          }}
+          onEscapeKeyDown={(event) => {
+            if (isDirty) {
+              event.preventDefault();
+              triggerShake();
+              return;
+            }
+
+            // Ensure validation runs before closing (autoSave or manual-save mode).
+            event.preventDefault();
+            validateAndClose();
           }}
         >
           <ShakeStyles />
@@ -114,6 +162,17 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
                 </Button>
                 <Button type="button" size="sm" onClick={handleSave}>
                   Save
+                </Button>
+              </div>
+            )}
+
+            {autoSave && isNewItem && (
+              <div className="flex justify-end gap-2">
+                <Button type="button" variant="outline" size="sm" onClick={handleDiscard}>
+                  Discard
+                </Button>
+                <Button type="button" size="sm" onClick={validateAndClose}>
+                  Done
                 </Button>
               </div>
             )}
