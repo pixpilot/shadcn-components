@@ -1,5 +1,15 @@
 # @pixpilot/formily-shadcn
 
+## 0.37.0
+
+### Minor Changes
+
+- add discard and validation handling for new items
+
+### Patch Changes
+
+- prevent rendering when dialog is closed
+
 ## 0.36.0
 
 ### Minor Changes
