@@ -1,5 +1,12 @@
 # @pixpilot/shadcn-ui
 
+## 0.41.0
+
+### Minor Changes
+
+- enhance Select component with position prop for SelectContent
+- enhance array item editing with titles and descriptions
+
 ## 0.40.0
 
 ### Minor Changes

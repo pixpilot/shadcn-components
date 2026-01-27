@@ -1,5 +1,19 @@
 # @pixpilot/formily-shadcn
 
+## 0.35.0
+
+### Minor Changes
+
+- add clearable option to Select component
+- enhance array item editing with titles and descriptions
+
+### Patch Changes
+
+- update default descriptions in useArrayItemEditLabels tests
+- Updated dependencies
+- Updated dependencies
+  - @pixpilot/shadcn-ui@0.41.0
+
 ## 0.34.1
 
 ### Patch Changes
