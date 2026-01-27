@@ -1,5 +1,15 @@
 # @pixpilot/formily-shadcn
 
+## 0.38.0
+
+### Minor Changes
+
+- implement hidden item schema for optimized rendering
+
+### Patch Changes
+
+- restore drag handle node position
+
 ## 0.37.1
 
 ### Patch Changes
