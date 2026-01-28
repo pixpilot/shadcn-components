@@ -36,6 +36,7 @@ const ArrayInlineItem = React.memo(({ index, record, itemKey }: ArrayInlineItemP
       <SortableItem id={itemKey}>
         <div
           {...itemWrapperRestProps}
+          data-slot="item-wrapper"
           className={cn(
             'flex items-end gap-2 rounded-md border bg-background px-3 py-2',
             itemWrapperClassName,
@@ -43,7 +44,7 @@ const ArrayInlineItem = React.memo(({ index, record, itemKey }: ArrayInlineItemP
         >
           <ArrayDragHandle className="-ml-1 self-center" />
 
-          <div className="flex flex-1 flex-wrap items-end gap-3">
+          <div data-slot="item-content" className="flex flex-1 flex-wrap items-end gap-3">
             <RecursionField
               schema={items}
               name={index}
@@ -54,7 +55,10 @@ const ArrayInlineItem = React.memo(({ index, record, itemKey }: ArrayInlineItemP
             />
           </div>
 
-          <div className="flex shrink-0 items-center gap-1 self-center">
+          <div
+            data-slot="item-actions"
+            className="flex shrink-0 items-center gap-1 self-center"
+          >
             <ArrayItemOperations
               schema={schema}
               index={index}

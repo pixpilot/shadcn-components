@@ -76,6 +76,7 @@ export const SortableItem: React.FC<SortableItemProps> = ({ id, disabled, childr
   return (
     <SortableItemContext value={contextValue}>
       <div
+        data-slot="sortable-item"
         ref={setNodeRef as React.Ref<HTMLDivElement>}
         style={style}
         // Don't spread attributes or listeners here - they should be on the drag handle

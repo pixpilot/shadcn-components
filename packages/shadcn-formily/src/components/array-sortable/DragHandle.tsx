@@ -34,6 +34,7 @@ export const DragHandle: React.FC<DragHandleProps> = ({ disabled, className }) =
       ref={setActivatorNodeRef as React.Ref<HTMLButtonElement>}
       {...attributes}
       {...listeners}
+      data-slot="drag-handle"
       style={{
         cursor: isDragging ? 'grabbing' : 'grab',
         touchAction: 'none',
