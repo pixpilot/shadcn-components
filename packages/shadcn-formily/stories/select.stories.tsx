@@ -64,6 +64,66 @@ export const BasicSelect: Story = {
   },
 };
 
+export const SelectWithOwnOptions: Story = {
+  render: () => {
+    const form = createForm({
+      initialValues: {
+        priority: 'medium',
+      },
+    });
+
+    const schema = {
+      type: 'object',
+      properties: {
+        priority: {
+          type: 'string',
+          title: 'Priority Level',
+          enum: [
+            'full-time',
+            'part-time',
+            'contract',
+            'freelance',
+            'internship',
+            'temporary',
+          ],
+          'x-decorator': 'FormItem',
+          'x-component': 'Select',
+          'x-component-props': {
+            placeholder: 'Select employment type',
+            options: [
+              { label: 'Full-time', value: 'full-time' },
+              { label: 'Part-time', value: 'part-time' },
+              { label: 'Contract', value: 'contract' },
+              { label: 'Freelance', value: 'freelance' },
+              { label: 'Internship', value: 'internship' },
+              { label: 'Temporary', value: 'temporary' },
+            ],
+          },
+        },
+      },
+    };
+
+    return (
+      <Form
+        form={form}
+        className="w-[400px]"
+        onSubmit={(values) => {
+          console.log('Form submitted:', values);
+          alert(JSON.stringify(values, null, JSON_INDENT));
+        }}
+      >
+        <SchemaField schema={schema} />
+        <button
+          type="submit"
+          className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+        >
+          Submit
+        </button>
+      </Form>
+    );
+  },
+};
+
 export const SelectWithDefaultValue: Story = {
   render: () => {
     const form = createForm({
