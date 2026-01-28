@@ -520,3 +520,46 @@ export const WithInitialValue: Story = {
     );
   },
 };
+
+/**
+ * Story demonstrating the RichTextEditor with a placeholder text.
+ *
+ * The placeholder is displayed when the editor is empty and provides guidance to users.
+ */
+export const WithPlaceholder: Story = {
+  render: () => {
+    const form = createForm();
+    const schema: ISchema = {
+      type: 'object',
+      properties: {
+        richText: {
+          type: 'string',
+          title: 'Rich Text Editor with Placeholder',
+          'x-decorator': 'FormItem',
+          'x-component': 'RichTextEditor',
+          'x-component-props': {
+            placeholder: 'Start typing your rich text content here...',
+          },
+        },
+      },
+    };
+
+    return (
+      <JsonSchemaFormRenderer
+        form={form}
+        schema={schema}
+        components={{
+          fields: {
+            ...defaultComponentRegistry,
+            RichTextEditor: {
+              component: RichTextEditor,
+            },
+          },
+        }}
+        onSubmit={(values) => {
+          alert(JSON.stringify(values, null, 2));
+        }}
+      ></JsonSchemaFormRenderer>
+    );
+  },
+};
