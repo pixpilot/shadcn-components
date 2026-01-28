@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.40.0
+
+### Minor Changes
+
+- enhance Select component with dynamic options handling
+
 ## 0.39.0
 
 ### Minor Changes
