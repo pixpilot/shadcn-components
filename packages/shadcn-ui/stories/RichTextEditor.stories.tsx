@@ -18,6 +18,10 @@ const meta = {
       control: 'text',
       description: 'Initial HTML content',
     },
+    placeholder: {
+      control: 'text',
+      description: 'Placeholder text shown when editor is empty',
+    },
     editable: {
       control: 'boolean',
       description: 'Whether the editor is editable',
@@ -105,6 +109,15 @@ export const CustomToolbar: Story = {
         },
       },
     ],
+  },
+};
+
+/**
+ * Editor with placeholder text
+ */
+export const WithPlaceholder: Story = {
+  args: {
+    placeholder: 'Start writing your amazing content here...',
   },
 };
 

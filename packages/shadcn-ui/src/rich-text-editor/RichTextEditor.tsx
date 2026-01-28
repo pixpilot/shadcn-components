@@ -3,6 +3,7 @@ import type { UseEditorOptions } from '@tiptap/react';
 import type { ToolbarButtonTooltipMode } from './ToolbarButton';
 import { cn } from '@pixpilot/shadcn';
 import Link from '@tiptap/extension-link';
+import Placeholder from '@tiptap/extension-placeholder';
 import TextAlign from '@tiptap/extension-text-align';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
@@ -95,6 +96,11 @@ export interface RichTextEditorProps {
    * @default 'native'
    */
   tooltipMode?: ToolbarButtonTooltipMode;
+
+  /**
+   * Placeholder text to show when the editor is empty
+   */
+  placeholder?: string;
 }
 
 const defaultExtensions: Extension[] = [];
@@ -142,6 +148,8 @@ function useEditorProps(
           '[&_pre]:bg-muted [&_pre]:p-4 [&_pre]:rounded [&_pre]:overflow-x-auto [&_pre]:font-mono [&_pre]:mb-4',
           '[&_a]:text-blue-500 [&_a]:hover:text-blue-600 [&_a]:cursor-pointer [&_a]:underline [&_a]:underline-offset-2 ',
           '[&_*:last-child]:mb-0',
+          // Placeholder styling
+          '[&_.is-editor-empty:first-child::before]:content-[attr(data-placeholder)] [&_.is-editor-empty:first-child::before]:float-left [&_.is-editor-empty:first-child::before]:text-muted-foreground [&_.is-editor-empty:first-child::before]:pointer-events-none [&_.is-editor-empty:first-child::before]:h-0',
           slots?.content?.className,
         ),
       },
@@ -180,6 +188,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   editorProps: customEditorProps,
   immediatelyRender = false,
   tooltipMode = 'native',
+  placeholder,
 }) => {
   // TipTap editor state (selection/active marks) changes without React re-rendering.
   // Force a re-render on selection/transaction updates so toolbar buttons
@@ -195,13 +204,18 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
     onChangeRef.current?.(props.editor.getHTML());
   }, []);
 
-  const memoizedExtensions = React.useMemo(
-    () =>
-      [StarterKit, Link, TextAlign.configure({ types: ['heading', 'paragraph'] })].concat(
-        extensions,
-      ) as Extension[],
-    [extensions],
-  );
+  const memoizedExtensions = React.useMemo(() => {
+    const baseExtensions = [
+      StarterKit,
+      Link,
+      TextAlign.configure({ types: ['heading', 'paragraph'] }),
+    ] as Extension[];
+    if (placeholder != null) {
+      // eslint-disable-next-line ts/no-unsafe-call, ts/no-unsafe-member-access
+      baseExtensions.push(Placeholder.configure({ placeholder }) as Extension);
+    }
+    return baseExtensions.concat(extensions);
+  }, [extensions, placeholder]);
 
   const editorInstance = useEditor({
     extensions: memoizedExtensions,
