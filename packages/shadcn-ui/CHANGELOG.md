@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.44.0
+
+### Minor Changes
+
+- add placeholder support to RichTextEditor
+
 ## 0.43.0
 
 ### Minor Changes
