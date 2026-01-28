@@ -13,6 +13,8 @@ export * from './components/array-collapse';
 
 export * from './components/array-dialog';
 
+export * from './components/array-inline';
+
 export * from './components/array-popover';
 
 // Array sortable components

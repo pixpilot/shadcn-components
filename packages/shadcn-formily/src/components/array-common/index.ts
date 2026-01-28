@@ -1,5 +1,7 @@
+export * from './ArrayDragHandle';
 export * from './ArrayItemDraftFields';
 export * from './ArrayItemHeaderRow';
+export * from './ArrayItemOperations';
 export * from './ArrayItemsList';
 export * from './create-active-item-manager';
 export * from './get-edit-description';
@@ -9,6 +11,7 @@ export * from './ListItem';
 export * from './ShakeStyles';
 export * from './use-array-data-source';
 export * from './use-array-editor';
+export * from './use-array-item-actions';
 export * from './use-array-item-draft-form';
 export * from './use-array-item-edit-labels';
 export * from './use-array-item-schema';

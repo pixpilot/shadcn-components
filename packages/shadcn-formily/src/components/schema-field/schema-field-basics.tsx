@@ -10,6 +10,7 @@ import { extractComponents } from '../../utils/extract-components';
 import { ArrayCards } from '../array-cards';
 import { ArrayCollapse } from '../array-collapse';
 import { ArrayDialog } from '../array-dialog';
+import { ArrayInline } from '../array-inline';
 import { ArrayPopover } from '../array-popover';
 import { ArrayTags } from '../array-tags';
 import { Checkbox } from '../Checkbox';
@@ -33,6 +34,7 @@ export const basicComponentRegistry = {
   ArrayCards: { component: ArrayCards, decorator: 'FormItem' },
   ArrayCollapse: { component: ArrayCollapse, decorator: 'FormItem' },
   ArrayDialog: { component: ArrayDialog, decorator: 'FormItem' },
+  ArrayInline: { component: ArrayInline, decorator: 'FormItem' },
   ArrayPopover: { component: ArrayPopover, decorator: 'FormItem' },
   ArrayTags: { component: ArrayTags, decorator: 'FormItem' },
   Checkbox: { component: Checkbox, decorator: 'FormItem' },
