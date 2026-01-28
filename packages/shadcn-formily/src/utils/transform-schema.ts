@@ -91,6 +91,20 @@ export function transformSchema(
         }
       }
 
+      // Handle enum: if type is string and has enum, use Select component
+      if (
+        type === 'string' &&
+        Array.isArray(currentSchema.enum) &&
+        currentSchema.enum.length > 0
+      ) {
+        if (
+          currentSchema['x-component'] == null ||
+          currentSchema['x-component'] === 'Input'
+        ) {
+          currentSchema['x-component'] = 'Select';
+        }
+      }
+
       // Apply decorator with priority: existing > user-provided > type mapping > nothing
       if (!['Hidden', 'hidden'].includes(currentSchema['x-component'] as string)) {
         if (currentSchema['x-decorator'] == null) {

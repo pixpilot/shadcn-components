@@ -115,6 +115,34 @@ describe('transformSchema', () => {
       );
       expect((transformedSchema.properties as any).nested['x-decorator']).toBeUndefined();
     });
+
+    it('should transform string with enum to Select component', () => {
+      const schema: ISchema = {
+        type: 'object',
+        properties: {
+          employmentType: {
+            type: 'string',
+            title: 'Employment Type',
+            enum: [
+              'full-time',
+              'part-time',
+              'contract',
+              'freelance',
+              'internship',
+              'temporary',
+            ],
+          },
+        },
+      };
+
+      const transformedSchema = transformSchema(schema);
+      expect((transformedSchema.properties as any).employmentType['x-component']).toBe(
+        'Select',
+      );
+      expect((transformedSchema.properties as any).employmentType['x-decorator']).toBe(
+        'FormItem',
+      );
+    });
   });
 
   describe('nested properties', () => {
