@@ -8,7 +8,6 @@ import { useMergedSchemaComponents } from '../../hooks/use-merged-schema-compone
 import { extractComponents } from '../../utils/extract-components';
 import { AvatarUpload, FileUpload, FileUploadInline } from '../file-upload';
 import { IconPicker } from '../IconPicker';
-import { Rating } from '../Rating';
 import { RichTextEditor } from '../RichTextEditor';
 import { defaultComponentRegistry } from '../schema-field';
 
@@ -18,7 +17,6 @@ export const extendedComponentRegistry = {
   FileUploadInline: { component: FileUploadInline, decorator: 'FormItem' },
   IconPicker: { component: IconPicker, decorator: 'FormItem' },
   FileUpload: { component: FileUpload, decorator: 'FormItem' },
-  Rating: { component: Rating, decorator: 'FormItem' },
   RichTextEditor: { component: RichTextEditor, decorator: 'FormItem' },
 } satisfies Record<string, FormComponentConfig>;
 

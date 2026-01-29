@@ -10,6 +10,7 @@ import { extractComponents } from '../../utils/extract-components';
 import { ColorPicker } from '../color-picker/ColorPicker';
 import { ColorSelect } from '../ColorSelect';
 import { Combobox } from '../Combobox';
+import { Rating } from '../Rating';
 import { Slider, SliderInput, SliderSelect } from '../slider';
 import { TagsInputInLine } from '../TagsInputInline';
 import { basicComponentRegistry } from './schema-field-basics';
@@ -19,6 +20,7 @@ export const defaultComponentRegistry = {
   ColorPicker: { component: ColorPicker, decorator: 'FormItem' },
   Combobox: { component: Combobox, decorator: 'FormItem' },
   ColorSelect: { component: ColorSelect, decorator: 'FormItem' },
+  Rating: { component: Rating, decorator: 'FormItem' },
   Slider: { component: Slider, decorator: 'FormItem' },
   SliderInput: { component: SliderInput, decorator: 'FormItem' },
   SliderSelect: { component: SliderSelect, decorator: 'FormItem' },
