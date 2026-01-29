@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.41.0
+
+### Minor Changes
+
+- add ArrayInline component with inline editing and sorting
+
 ## 0.40.1
 
 ### Patch Changes
