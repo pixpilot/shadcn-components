@@ -45,21 +45,14 @@ const sizePixels: Record<NonNullable<RatingSize>, number> = {
 };
 
 const colorClasses: Record<RatingColor, string> = {
-  default:
-    '[&_svg]:!fill-yellow-400 [&_svg]:!text-yellow-400 dark:[&_svg]:!fill-yellow-500 dark:[&_svg]:!text-yellow-500 [&_svg.fill-transparent]:!fill-transparent [&_svg.fill-transparent]:!text-foreground/30',
-  primary:
-    '[&_svg]:!fill-primary [&_svg]:!text-primary [&_svg.fill-transparent]:!fill-transparent [&_svg.fill-transparent]:!text-foreground/30',
-  secondary:
-    '[&_svg]:!fill-secondary [&_svg]:!text-secondary-foreground [&_svg.fill-transparent]:!fill-transparent [&_svg.fill-transparent]:!text-foreground/30',
-  destructive:
-    '[&_svg]:!fill-destructive [&_svg]:!text-destructive [&_svg.fill-transparent]:!fill-transparent [&_svg.fill-transparent]:!text-foreground/30',
-  foreground:
-    '[&_svg]:!fill-foreground [&_svg]:!text-foreground [&_svg.fill-transparent]:!fill-transparent',
-  accent:
-    '[&_svg]:!fill-accent [&_svg]:!text-accent-foreground [&_svg.fill-transparent]:!fill-transparent [&_svg.fill-transparent]:!text-foreground/30',
-  muted:
-    '[&_svg]:!fill-muted [&_svg]:!text-muted-foreground [&_svg.fill-transparent]:!fill-transparent [&_svg.fill-transparent]:!text-foreground/30',
-  ring: '[&_svg]:!fill-ring [&_svg]:!text-ring [&_svg.fill-transparent]:!fill-transparent [&_svg.fill-transparent]:!text-foreground/30',
+  default: 'text-yellow-400 dark:text-yellow-500',
+  primary: 'text-primary',
+  secondary: 'text-secondary',
+  destructive: 'text-destructive',
+  foreground: 'text-foreground',
+  accent: 'text-accent',
+  muted: 'text-muted',
+  ring: 'text-ring',
 };
 
 type IconType = 'star' | 'circle';
@@ -227,7 +220,7 @@ function RatingButton({ index, className, ...props }: RatingButtonProps) {
       <Icon
         className={cn(
           'transition-all',
-          isFilled ? 'fill-current text-current' : 'fill-transparent text-foreground/30',
+          isFilled ? 'fill-current' : 'fill-transparent text-muted-foreground/50',
         )}
         size={size}
         aria-hidden="true"
