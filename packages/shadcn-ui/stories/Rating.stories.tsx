@@ -4,7 +4,7 @@ import { Rating } from '../src/Rating';
 
 /**
  * A customizable rating component for displaying and collecting user ratings.
- * Supports stars or circles, custom labels, hover previews, and various sizes.
+ * Supports stars or circles, custom options, hover previews, and various sizes.
  */
 const meta = {
   title: 'shadcn-ui/Rating',
@@ -98,17 +98,23 @@ export const Interactive: Story = {
 };
 
 /**
- * Rating with custom labels that appear on hover
+ * Rating with custom option labels that appear on hover
  */
 export const WithLabels: Story = {
   render: function WithLabelsRating() {
     const [rating, setRating] = React.useState(0);
-    const labels = ['Terrible', 'Bad', 'Okay', 'Good', 'Excellent'];
+    const options = [
+      { label: 'Terrible', value: 1 },
+      { label: 'Bad', value: 2 },
+      { label: 'Okay', value: 3 },
+      { label: 'Good', value: 4 },
+      { label: 'Excellent', value: 5 },
+    ];
     return (
       <div className="flex flex-col items-center gap-4">
-        <Rating value={rating} onValueChange={setRating} labels={labels} />
+        <Rating value={rating} onValueChange={setRating} options={options} />
         <p className="text-sm text-muted-foreground">
-          {rating > 0 ? labels[rating - 1] : 'Hover over stars to see labels'}
+          {rating > 0 ? options[rating - 1]?.label : 'Hover over stars to see labels'}
         </p>
       </div>
     );
@@ -247,15 +253,23 @@ export const ColorComparison: Story = {
 export const Complete: Story = {
   render: function CompleteRating() {
     const [rating, setRating] = React.useState(0);
-    const labels = ['Very Poor', 'Poor', 'Average', 'Good', 'Excellent'];
+    const options = [
+      { label: 'Very Poor', value: 1 },
+      { label: 'Poor', value: 2 },
+      { label: 'Average', value: 3 },
+      { label: 'Good', value: 4 },
+      { label: 'Excellent', value: 5 },
+    ];
 
     return (
       <div className="flex flex-col items-center gap-6 p-8">
         <div className="flex flex-col items-center gap-2">
           <h3 className="text-lg font-semibold">Rate your experience</h3>
-          <Rating value={rating} onValueChange={setRating} labels={labels} size="lg" />
+          <Rating value={rating} onValueChange={setRating} options={options} size="lg" />
           {rating > 0 && (
-            <p className="text-sm font-medium text-primary">{labels[rating - 1]}</p>
+            <p className="text-sm font-medium text-primary">
+              {options[rating - 1]?.label}
+            </p>
           )}
         </div>
       </div>

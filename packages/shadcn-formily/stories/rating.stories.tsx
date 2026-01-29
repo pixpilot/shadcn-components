@@ -138,6 +138,12 @@ export const RatingWithLabels: Story = {
   render: () => {
     const form = createForm();
 
+    const makeOptions = (labels: string[]) =>
+      labels.map((label, index) => ({
+        label,
+        value: index + 1,
+      }));
+
     const schema = {
       type: 'object',
       properties: {
@@ -147,13 +153,13 @@ export const RatingWithLabels: Story = {
           'x-decorator': 'FormItem',
           'x-component': 'Rating',
           'x-component-props': {
-            labels: [
+            options: makeOptions([
               'Very Dissatisfied',
               'Dissatisfied',
               'Neutral',
               'Satisfied',
               'Very Satisfied',
-            ],
+            ]),
           },
         },
       },
@@ -288,6 +294,20 @@ export const MultipleRatings: Story = {
   render: () => {
     const form = createForm();
 
+    const makeOptions = (labels: string[]) =>
+      labels.map((label, index) => ({
+        label,
+        value: index + 1,
+      }));
+
+    const defaultOptions = makeOptions([
+      'Poor',
+      'Fair',
+      'Good',
+      'Very Good',
+      'Excellent',
+    ]);
+
     const schema = {
       type: 'object',
       properties: {
@@ -297,7 +317,7 @@ export const MultipleRatings: Story = {
           'x-decorator': 'FormItem',
           'x-component': 'Rating',
           'x-component-props': {
-            labels: ['Poor', 'Fair', 'Good', 'Very Good', 'Excellent'],
+            options: defaultOptions,
           },
         },
         customerService: {
@@ -306,7 +326,7 @@ export const MultipleRatings: Story = {
           'x-decorator': 'FormItem',
           'x-component': 'Rating',
           'x-component-props': {
-            labels: ['Poor', 'Fair', 'Good', 'Very Good', 'Excellent'],
+            options: defaultOptions,
           },
         },
         shippingSpeed: {
@@ -315,7 +335,7 @@ export const MultipleRatings: Story = {
           'x-decorator': 'FormItem',
           'x-component': 'Rating',
           'x-component-props': {
-            labels: ['Poor', 'Fair', 'Good', 'Very Good', 'Excellent'],
+            options: defaultOptions,
           },
         },
         valueForMoney: {
@@ -324,7 +344,7 @@ export const MultipleRatings: Story = {
           'x-decorator': 'FormItem',
           'x-component': 'Rating',
           'x-component-props': {
-            labels: ['Poor', 'Fair', 'Good', 'Very Good', 'Excellent'],
+            options: defaultOptions,
           },
         },
       },
@@ -470,6 +490,20 @@ export const CompleteReviewForm: Story = {
       },
     });
 
+    const makeOptions = (labels: string[]) =>
+      labels.map((label, index) => ({
+        label,
+        value: index + 1,
+      }));
+
+    const qualityOptions = makeOptions([
+      'Poor',
+      'Fair',
+      'Good',
+      'Very Good',
+      'Excellent',
+    ]);
+
     const schema = {
       type: 'object',
       properties: {
@@ -514,7 +548,13 @@ export const CompleteReviewForm: Story = {
               'x-decorator': 'FormItem',
               'x-component': 'Rating',
               'x-component-props': {
-                labels: ['Terrible', 'Poor', 'Average', 'Good', 'Excellent'],
+                options: makeOptions([
+                  'Terrible',
+                  'Poor',
+                  'Average',
+                  'Good',
+                  'Excellent',
+                ]),
                 size: 'lg',
               },
               'x-validator': [
@@ -530,7 +570,7 @@ export const CompleteReviewForm: Story = {
               'x-decorator': 'FormItem',
               'x-component': 'Rating',
               'x-component-props': {
-                labels: ['Poor', 'Fair', 'Good', 'Very Good', 'Excellent'],
+                options: qualityOptions,
               },
             },
             service: {
@@ -539,7 +579,7 @@ export const CompleteReviewForm: Story = {
               'x-decorator': 'FormItem',
               'x-component': 'Rating',
               'x-component-props': {
-                labels: ['Poor', 'Fair', 'Good', 'Very Good', 'Excellent'],
+                options: qualityOptions,
               },
             },
           },
