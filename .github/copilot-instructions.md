@@ -25,3 +25,28 @@ This project uses Vitest for testing.
 ## Component Types from @pixpilot/shadcn and @pixpilot/shadcn-ui
 
 **CRITICAL: Never use `typeof Component` with components from @pixpilot/shadcn\* packages.** This causes tsdown to inline broken type references like `typeof void 0`. Instead, import and use the exported `*Props` types (e.g., `DatePickerProps` instead of `typeof ShadcnDatePicker`). The ESLint rule `custom/no-typeof-shadcn-components` will catch this.
+
+## Creating Components
+
+- **packages/shadcn**: Use only for shadcn components installed via shadcn CLI.
+- **packages/shadcn-ui**: Implement custom components here. Create a story in `packages/shadcn-ui/stories` for every new component.
+- **packages/shadcn-formily**: For new fields, follow Formily pattern:
+  ```
+  export const Checkbox = connect(
+    ShadcnCheckbox,
+    mapProps(
+      {
+        value: 'checked',
+        onInput: 'onCheckedChange',
+      },
+      (props, field) => {
+        return props;
+      },
+    ),
+  );
+  ```
+  Add a story in `packages/shadcn-formily/stories` with JSON schema, JsonSchemaForm, and declarative form (e.g., SchemaField with x-decorator and x-component).
+
+## Code Quality
+
+- Prevent long files and code duplication by refactoring to reusable components, hooks, or utils.
