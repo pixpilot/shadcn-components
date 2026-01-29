@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.46.0
+
+### Minor Changes
+
+- refactor to use options instead of labels for rating component
+
 ## 0.45.0
 
 ### Minor Changes
