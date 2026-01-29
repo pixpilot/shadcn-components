@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.42.0
+
+### Minor Changes
+
+- prevent automatic setting of x-component for array items
+
 ## 0.41.0
 
 ### Minor Changes
