@@ -1,5 +1,16 @@
 # @pixpilot/shadcn-ui
 
+## 0.45.0
+
+### Minor Changes
+
+- add Rating component to shadcn-ui and shadcn-formily packages
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn@0.8.0
+
 ## 0.44.0
 
 ### Minor Changes
