@@ -1,5 +1,18 @@
 # @pixpilot/formily-shadcn
 
+## 0.43.0
+
+### Minor Changes
+
+- add `Rating` component to default component registry
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+  - @pixpilot/shadcn@0.8.0
+  - @pixpilot/shadcn-ui@0.45.0
+
 ## 0.42.0
 
 ### Minor Changes
