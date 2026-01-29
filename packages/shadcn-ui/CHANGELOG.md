@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.46.1
+
+### Patch Changes
+
+- simplify color classes for better readability
+
 ## 0.46.0
 
 ### Minor Changes
