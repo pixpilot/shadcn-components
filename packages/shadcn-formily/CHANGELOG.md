@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.44.0
+
+### Minor Changes
+
+- enhance Formily-connected Rating component
+
 ## 0.43.0
 
 ### Minor Changes
