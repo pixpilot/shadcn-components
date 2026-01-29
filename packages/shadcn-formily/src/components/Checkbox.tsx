@@ -17,9 +17,7 @@ export const Checkbox = connect(
     (props, field) => {
       setCheckboxDefaultDecoratorProps(field);
 
-      return {
-        ...props,
-      };
+      return props;
     },
   ),
 );

@@ -19,6 +19,7 @@ export * from './OrContinueWithSeparator';
 export * from './pagination';
 export * from './popover';
 export * from './radio-group';
+export * from './rating';
 export * from './select';
 export * from './separator';
 export * from './shadcn-io/tags';
