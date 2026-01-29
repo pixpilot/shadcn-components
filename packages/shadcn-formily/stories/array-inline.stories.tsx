@@ -45,6 +45,7 @@ const {
   WithDescription,
   WithItemReactionTitle,
   WithJSONSchema,
+  WithJsonSchemaForm,
   WithTruncatedLabels,
   AutoSave,
   ManualSave,
@@ -64,6 +65,7 @@ export {
   WithDescription,
   WithItemReactionTitle,
   WithJSONSchema,
+  WithJsonSchemaForm,
   WithTruncatedLabels,
 };
 

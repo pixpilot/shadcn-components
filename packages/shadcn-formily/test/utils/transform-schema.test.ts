@@ -241,6 +241,74 @@ describe('transformSchema', () => {
       const itemsSchema = (transformedSchema.properties as any).items.items;
       expect(itemsSchema.properties.name['x-component']).toBe('Input');
     });
+
+    it('should not set x-component on array items unless explicitly set', () => {
+      const schema: ISchema = {
+        type: 'object',
+        properties: {
+          contacts: {
+            type: 'array',
+            title: 'Contacts',
+            maxItems: 10,
+            description: 'List of user contacts',
+            'x-decorator': 'FormItem',
+            'x-component': 'ArrayInline',
+            'x-component-props': { className: 'space-y-2' },
+            items: {
+              type: 'object',
+              'x-reactions': {
+                fulfill: {
+                  state: {
+                    title: "{{$self.value?.name || 'User'}}",
+                  },
+                },
+              },
+              properties: {
+                name: {
+                  type: 'string',
+                  title: 'Name',
+                  'x-decorator': 'FormItem',
+                  'x-component': 'Input',
+                  'x-component-props': { placeholder: 'Enter name' },
+                  required: true,
+                },
+                email: {
+                  type: 'string',
+                  title: 'Email',
+                  'x-decorator': 'FormItem',
+                  'x-component': 'Input',
+                  'x-component-props': { type: 'email', placeholder: 'Enter email' },
+                  required: true,
+                },
+                phone: {
+                  type: 'string',
+                  title: 'Phone',
+                  'x-decorator': 'FormItem',
+                  'x-component': 'Input',
+                  'x-component-props': { placeholder: 'Enter phone' },
+                },
+              },
+            },
+            properties: {
+              addition: {
+                type: 'void',
+                title: 'Add Contact',
+                'x-component': 'ArrayInline.Addition',
+              },
+            },
+          },
+        },
+      };
+
+      const transformedSchema = transformSchema(schema);
+      const itemsSchema = (transformedSchema.properties as any).contacts.items;
+      // The items object should not have x-component set automatically
+      expect(itemsSchema['x-component']).toBeUndefined();
+      // But properties inside should have components
+      expect(itemsSchema.properties.name['x-component']).toBe('Input');
+      expect(itemsSchema.properties.email['x-component']).toBe('Input');
+      expect(itemsSchema.properties.phone['x-component']).toBe('Input');
+    });
   });
 
   describe('respect existing x-component', () => {

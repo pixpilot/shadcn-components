@@ -37,6 +37,7 @@ const {
   WithDescription,
   WithTruncatedLabels,
   WithJSONSchema,
+  WithJsonSchemaForm,
   WithItemReactionTitle,
   WithComponentClassName,
   Sortable,
@@ -57,6 +58,7 @@ export {
   WithDescription,
   WithItemReactionTitle,
   WithJSONSchema,
+  WithJsonSchemaForm,
   WithTruncatedLabels,
 };
 

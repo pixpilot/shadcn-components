@@ -10,7 +10,7 @@ import type { StoryObj } from '@storybook/react';
 import type { ISchema } from '../src';
 import { Button } from '@pixpilot/shadcn';
 import { InfoIcon, PinIcon } from 'lucide-react';
-import { createForm, Form, SchemaField } from '../src';
+import { createForm, Form, JsonSchemaFormExtended, SchemaField } from '../src';
 
 type Story = StoryObj<typeof Form>;
 
@@ -39,6 +39,7 @@ export function createStories(config: StoryConfig) {
     WithDescription: createWithDescriptionStory(config),
     Declarative: createDeclarativeStory(config),
     WithJSONSchema: createWithJsonSchemaStory(config),
+    WithJsonSchemaForm: createWithJsonSchemaFormStory(config),
     WithItemReactionTitle: createWithItemReactionTitleStory(config),
     WithTruncatedLabels: createWithTruncatedLabelsStory(config),
     Sortable: createSortableStory(config),
@@ -715,6 +716,116 @@ export function createWithJsonSchemaStory(config: StoryConfig): Story {
             </Button>
           </div>
         </Form>
+      );
+    },
+  };
+}
+
+/**
+ * Creates a WithJsonSchemaForm story for the given array component using JsonSchemaFormRenderer
+ */
+export function createWithJsonSchemaFormStory(config: StoryConfig): Story {
+  const { componentName, displayTitle } = config;
+
+  return {
+    render: () => {
+      const form = createForm({
+        values: {
+          contacts: [
+            {
+              name: 'John Doe',
+              email: 'john@example.com',
+              phone: '555-0100',
+            },
+          ],
+        },
+      });
+
+      const schema: ISchema = {
+        type: 'object',
+        properties: {
+          contacts: {
+            type: 'array',
+            title: 'Contacts',
+            maxItems: 10,
+            description: 'List of user contacts',
+            'x-decorator': 'FormItem',
+            'x-component': componentName,
+            'x-component-props': config.componentProps,
+            items: {
+              type: 'object',
+              'x-reactions': {
+                fulfill: {
+                  state: {
+                    title: "{{$self.value?.name || 'User'}}",
+                  },
+                },
+              },
+              properties: {
+                name: {
+                  type: 'string',
+                  title: 'Name',
+                  'x-decorator': 'FormItem',
+                  'x-component': 'Input',
+                  'x-component-props': { placeholder: 'Enter name' },
+                  required: true,
+                },
+                email: {
+                  type: 'string',
+                  title: 'Email',
+                  'x-decorator': 'FormItem',
+                  'x-component': 'Input',
+                  'x-component-props': { type: 'email', placeholder: 'Enter email' },
+                  required: true,
+                },
+                phone: {
+                  type: 'string',
+                  title: 'Phone',
+                  'x-decorator': 'FormItem',
+                  'x-component': 'Input',
+                  'x-component-props': { placeholder: 'Enter phone' },
+                },
+              },
+            },
+            properties: {
+              addition: {
+                type: 'void',
+                title: 'Add Contact',
+                'x-component': `${componentName}.Addition`,
+              },
+            },
+          },
+        },
+      };
+
+      return (
+        <JsonSchemaFormExtended
+          form={form}
+          schema={schema}
+          className="space-y-6"
+          onSubmit={(values) => {
+            // eslint-disable-next-line no-console
+            console.log('Form submitted:', values);
+            alert(JSON.stringify(values, null, JSON_INDENT));
+          }}
+        >
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">
+              JSON Schema Form Renderer {displayTitle}
+            </h2>
+            <p className="text-muted-foreground">
+              This form uses JsonSchemaFormRenderer to render an array with{' '}
+              {componentName} component.
+            </p>
+          </div>
+
+          <button
+            type="submit"
+            className="mt-6 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground"
+          >
+            Submit
+          </button>
+        </JsonSchemaFormExtended>
       );
     },
   };

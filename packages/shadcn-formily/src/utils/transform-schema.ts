@@ -55,7 +55,15 @@ export function transformSchema(
   }
   traverse(normalizedSchema, {
     allKeys: true,
-    cb: (currentSchema) => {
+    cb: (
+      currentSchema,
+      _jsonPtr,
+      _rootSchema,
+      _parentJSONPtr,
+      parentKeyword,
+      _parentSchema,
+      _keyIndex,
+    ) => {
       const { type } = currentSchema;
       const xComponent = currentSchema['x-component'] as string | undefined;
 
@@ -87,7 +95,10 @@ export function transformSchema(
       if (typeof type === 'string' && type in inputSchemaMap) {
         const mapping = inputSchemaMap[type]!;
         if (currentSchema['x-component'] == null) {
-          currentSchema['x-component'] = mapping['x-component'];
+          // Don't set x-component for array items unless explicitly set
+          if (parentKeyword !== 'items') {
+            currentSchema['x-component'] = mapping['x-component'];
+          }
         }
       }
 

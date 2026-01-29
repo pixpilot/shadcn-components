@@ -10,6 +10,19 @@ const Select = () => null;
 const CustomComponent = () => null;
 const FormItem = () => null;
 
+// Mock array components with nested subcomponents (simulating ArrayBase.mixin behavior)
+const ArrayPopover = Object.assign(() => null, {
+  Addition: () => null,
+  Remove: () => null,
+  Item: () => null,
+});
+
+const ArrayCards = Object.assign(() => null, {
+  Addition: () => null,
+  Remove: () => null,
+  Item: () => null,
+});
+
 describe('validateSchemaComponents', () => {
   it('should be defined', () => {
     expect(validateSchemaComponents).toBeDefined();
@@ -434,6 +447,255 @@ describe('validateSchemaComponents', () => {
       };
 
       expect(() => validateSchemaComponents(schema, components)).toThrow();
+    });
+  });
+
+  describe('dotted component names (nested subcomponents)', () => {
+    it('should pass validation for dotted component name like ArrayPopover.Addition', () => {
+      const schema: ISchema = {
+        type: 'object',
+        properties: {
+          contacts: {
+            type: 'array',
+            'x-component': 'ArrayPopover',
+            items: {
+              type: 'object',
+              properties: {
+                name: {
+                  type: 'string',
+                  'x-component': 'Input',
+                },
+              },
+            },
+            properties: {
+              addition: {
+                type: 'void',
+                'x-component': 'ArrayPopover.Addition',
+              },
+            },
+          },
+        },
+      };
+
+      const components = {
+        Input,
+        ArrayPopover,
+      };
+
+      expect(() => validateSchemaComponents(schema, components)).not.toThrow();
+    });
+
+    it('should pass validation for multiple dotted component names', () => {
+      const schema: ISchema = {
+        type: 'object',
+        properties: {
+          contacts: {
+            type: 'array',
+            'x-component': 'ArrayPopover',
+            items: {
+              type: 'object',
+              'x-component': 'ArrayPopover.Item',
+              properties: {
+                name: {
+                  type: 'string',
+                  'x-component': 'Input',
+                },
+              },
+            },
+            properties: {
+              addition: {
+                type: 'void',
+                'x-component': 'ArrayPopover.Addition',
+              },
+              remove: {
+                type: 'void',
+                'x-component': 'ArrayPopover.Remove',
+              },
+            },
+          },
+        },
+      };
+
+      const components = {
+        Input,
+        ArrayPopover,
+      };
+
+      expect(() => validateSchemaComponents(schema, components)).not.toThrow();
+    });
+
+    it('should pass validation for different array components with dotted names', () => {
+      const schema: ISchema = {
+        type: 'object',
+        properties: {
+          contacts: {
+            type: 'array',
+            'x-component': 'ArrayCards',
+            items: {
+              type: 'object',
+              properties: {
+                name: {
+                  type: 'string',
+                  'x-component': 'Input',
+                },
+              },
+            },
+            properties: {
+              addition: {
+                type: 'void',
+                'x-component': 'ArrayCards.Addition',
+              },
+            },
+          },
+        },
+      };
+
+      const components = {
+        Input,
+        ArrayCards,
+      };
+
+      expect(() => validateSchemaComponents(schema, components)).not.toThrow();
+    });
+
+    it('should throw error when dotted component base does not exist', () => {
+      const schema: ISchema = {
+        type: 'object',
+        properties: {
+          contacts: {
+            type: 'array',
+            properties: {
+              addition: {
+                type: 'void',
+                'x-component': 'UnknownComponent.Addition',
+              },
+            },
+          },
+        },
+      };
+
+      const components = {
+        Input,
+      };
+
+      expect(() => validateSchemaComponents(schema, components)).toThrow(
+        /Component 'UnknownComponent.Addition'.*is not registered/u,
+      );
+    });
+
+    it('should throw error when dotted component subproperty does not exist', () => {
+      const schema: ISchema = {
+        type: 'object',
+        properties: {
+          contacts: {
+            type: 'array',
+            'x-component': 'ArrayPopover',
+            properties: {
+              addition: {
+                type: 'void',
+                'x-component': 'ArrayPopover.NonExistentSubComponent',
+              },
+            },
+          },
+        },
+      };
+
+      const components = {
+        ArrayPopover,
+      };
+
+      expect(() => validateSchemaComponents(schema, components)).toThrow(
+        /Component 'ArrayPopover.NonExistentSubComponent'.*is not registered/u,
+      );
+    });
+
+    it('should pass validation for deeply nested dotted components', () => {
+      // This tests potential future cases where components might have deeper nesting
+      const DeepComponent = Object.assign(() => null, {
+        Level1: Object.assign(() => null, {
+          Level2: () => null,
+        }),
+      });
+
+      const schema: ISchema = {
+        type: 'object',
+        properties: {
+          field: {
+            type: 'void',
+            'x-component': 'DeepComponent.Level1.Level2',
+          },
+        },
+      };
+
+      const components = {
+        DeepComponent,
+      };
+
+      expect(() => validateSchemaComponents(schema, components)).not.toThrow();
+    });
+
+    it('should pass validation when mixing flat and dotted component names', () => {
+      const schema: ISchema = {
+        type: 'object',
+        properties: {
+          name: {
+            type: 'string',
+            'x-component': 'Input',
+            'x-decorator': 'FormItem',
+          },
+          contacts: {
+            type: 'array',
+            'x-component': 'ArrayPopover',
+            items: {
+              type: 'object',
+              properties: {
+                email: {
+                  type: 'string',
+                  'x-component': 'Input',
+                },
+              },
+            },
+            properties: {
+              addition: {
+                type: 'void',
+                'x-component': 'ArrayPopover.Addition',
+              },
+            },
+          },
+        },
+      };
+
+      const components = {
+        Input,
+        FormItem,
+        ArrayPopover,
+      };
+
+      expect(() => validateSchemaComponents(schema, components)).not.toThrow();
+    });
+
+    it('should pass validation for dotted decorator names', () => {
+      const CustomDecorator = Object.assign(() => null, {
+        Wrapper: () => null,
+      });
+
+      const schema: ISchema = {
+        type: 'object',
+        properties: {
+          field: {
+            type: 'string',
+            'x-component': 'Input',
+            'x-decorator': 'CustomDecorator.Wrapper',
+          },
+        },
+      };
+
+      const components = {
+        Input,
+        CustomDecorator,
+      };
+
+      expect(() => validateSchemaComponents(schema, components)).not.toThrow();
     });
   });
 });
