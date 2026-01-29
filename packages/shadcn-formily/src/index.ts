@@ -22,10 +22,11 @@ export { DragHandle, SortableContainer, SortableItem } from './components/array-
 
 export * from './components/array-tags';
 
+export * from './components/array-toggle-group';
+
 export { Checkbox } from './components/Checkbox';
 export { ColorSelect } from './components/ColorSelect';
 export { Column } from './components/Column';
-
 export { Combobox } from './components/Combobox';
 // Context and configuration types
 export type { FormLayoutOptions } from './components/context';
@@ -37,10 +38,10 @@ export { FormItem } from './components/form-item';
 export { FormGrid } from './components/FormGrid';
 // Input components
 export { IconPicker } from './components/IconPicker';
-
 export { IconToggle } from './components/IconToggle';
 
 export { Input } from './components/Input';
+
 export * from './components/json-schema-form-renderer';
 export { NumberInput } from './components/number';
 export { ConnectedRadio, Radio } from './components/Radio';
@@ -53,8 +54,9 @@ export { Separator } from './components/Separator';
 export * from './components/slider';
 export { Switch } from './components/Switch';
 export { TagsInputInLine } from './components/TagsInputInline';
-
 export { Textarea } from './components/Textarea';
+
+export { ToggleGroup } from './components/ToggleGroup';
 
 export { transformSchema } from './utils';
 // Re-export Formily core exports for convenience

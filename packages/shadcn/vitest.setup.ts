@@ -4,6 +4,8 @@
  * mock browser APIs that are not available in jsdom test environment.
  */
 
+import '@testing-library/jest-dom';
+
 if (globalThis.DataTransfer === undefined) {
   class DataTransfer {
     private fileList: File[] = [];

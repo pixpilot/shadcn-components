@@ -13,6 +13,7 @@ import { ArrayDialog } from '../array-dialog';
 import { ArrayInline } from '../array-inline';
 import { ArrayPopover } from '../array-popover';
 import { ArrayTags } from '../array-tags';
+import { ArrayToggleGroup } from '../array-toggle-group';
 import { Checkbox } from '../Checkbox';
 import { Column } from '../Column';
 import { DatePicker } from '../DatePicker';
@@ -29,6 +30,7 @@ import { Select } from '../Select';
 import { Separator } from '../Separator';
 import { Switch } from '../Switch';
 import { Textarea } from '../Textarea';
+import { ToggleGroup } from '../ToggleGroup';
 
 export const basicComponentRegistry = {
   ArrayCards: { component: ArrayCards, decorator: 'FormItem' },
@@ -37,6 +39,8 @@ export const basicComponentRegistry = {
   ArrayInline: { component: ArrayInline, decorator: 'FormItem' },
   ArrayPopover: { component: ArrayPopover, decorator: 'FormItem' },
   ArrayTags: { component: ArrayTags, decorator: 'FormItem' },
+  ArrayToggleGroup: { component: ArrayToggleGroup, decorator: 'FormItem' },
+  ToggleGroup: { component: ToggleGroup, decorator: 'FormItem' },
   Checkbox: { component: Checkbox, decorator: 'FormItem' },
   Column: { component: Column },
   DatePicker: { component: DatePicker, decorator: 'FormItem' },

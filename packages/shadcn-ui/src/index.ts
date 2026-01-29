@@ -10,6 +10,7 @@ export * from './AbsoluteFill';
 export * from './Alert';
 export * from './avatar-upload';
 export * from './Button';
+export * from './ButtonGroup';
 export * from './circle-loader';
 export * from './CloseButtonAbsolute';
 export * from './CloseButtonRounded';
@@ -41,6 +42,7 @@ export * from './TagsInput';
 export * from './theme-provider';
 export * from './theme-toggle';
 export * from './toast';
+export * from './ToggleGroup';
 export * from './utils';
 
 export {

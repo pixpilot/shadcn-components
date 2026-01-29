@@ -57,9 +57,18 @@ const LOADER_SIZE_LG = 20;
  * Get loader size based on button size
  */
 function getLoaderSize(
-  size?: 'default' | 'sm' | 'lg' | 'icon' | 'icon-sm' | 'icon-lg' | null,
+  size?:
+    | 'default'
+    | 'xs'
+    | 'sm'
+    | 'lg'
+    | 'icon'
+    | 'icon-xs'
+    | 'icon-sm'
+    | 'icon-lg'
+    | null,
 ): number {
-  if (size === 'sm' || size === 'icon-sm') {
+  if (size === 'xs' || size === 'sm' || size === 'icon-xs' || size === 'icon-sm') {
     return LOADER_SIZE_SM;
   }
   if (size === 'lg' || size === 'icon-lg') {

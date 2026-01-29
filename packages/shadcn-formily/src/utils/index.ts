@@ -7,6 +7,7 @@ export * from './get-default-value';
 export * from './get-x-component-props';
 export * from './has-array-item-errors';
 export * from './has-error';
+export * from './resolve-field-options';
 export * from './resolve-responsive-space';
 export * from './transform-schema';
 export * from './use-array-item-editor';
