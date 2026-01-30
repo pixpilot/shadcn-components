@@ -22,7 +22,10 @@ import { useArrayItemEditLabels } from '../array-common/use-array-item-edit-labe
 import { useEditHandlers } from '../array-common/use-edit-handlers';
 import { useShakeAnimation } from '../array-common/use-shake-animation';
 
-export interface ArrayItemsEditDialogProps {
+export interface ArrayItemsEditDialogProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  'autoSave'
+> {
   schema: Schema;
   onSave: (index: number, value: unknown) => void;
   onAutoSave?: (index: number, value: unknown) => void;
@@ -49,6 +52,7 @@ export const EditDialog = observer(
     onCancel,
     activeItemManager,
     autoSave,
+    ...rest
   }: ArrayItemsEditDialogProps) => {
     const arrayField = useField<ArrayField>();
     const itemIndex = activeItemManager.activeItem;
@@ -98,6 +102,7 @@ export const EditDialog = observer(
         }}
       >
         <DialogContent
+          {...rest}
           className={cn('sm:max-w-[525px]', shouldShake && 'pp-shake')}
           onInteractOutside={(event) => {
             if (!isDirty) return;

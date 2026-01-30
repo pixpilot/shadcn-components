@@ -19,26 +19,39 @@ export function ArrayAddition({
   ...props
 }: IArrayBaseAdditionProps & { ref?: React.RefObject<HTMLButtonElement | null> }) {
   const { fullWidth = true } = props;
-
   const self = useField();
   const array = useArray();
+
+  const currentLength = Array.isArray(array?.field?.value) ? array.field.value.length : 0;
+  const maxItems = array?.schema?.maxItems;
+  const isAtMax = typeof maxItems === 'number' && currentLength >= maxItems;
+  const isDisabled = Boolean(self?.disabled || array?.props?.disabled || isAtMax);
+
+  const tooltip = isAtMax ? `Maximum of ${maxItems} items reached` : props.tooltip;
 
   if (!array) return null;
   if (array.field?.pattern !== 'editable' && array.field?.pattern !== 'disabled')
     return null;
+
+  const defaultLabel: React.ReactNode =
+    props.title ?? (self.title as string) ?? props.children ?? 'Add Item';
+  const buttonLabel = isAtMax
+    ? `Limit Reached (${currentLength}/${maxItems})`
+    : defaultLabel;
 
   return (
     <Button
       type="button"
       variant={fullWidth ? 'ghost' : 'outline'}
       {...props}
-      disabled={self?.disabled || array.props?.disabled}
+      disabledTooltip={tooltip}
+      disabled={isDisabled}
       className={cn(props.className, {
         'w-full border border-dashed border-muted': fullWidth,
       })}
       ref={ref}
       onClick={(e) => {
-        if (array.props?.disabled) return;
+        if (array.props?.disabled || isAtMax) return;
         if (props.onClick) {
           props.onClick(e);
           if (e.defaultPrevented) return;
@@ -53,10 +66,10 @@ export function ArrayAddition({
         }
       }}
     >
-      {props.icon !== undefined ? props.icon : <PlusIcon className="mr-2 size-4" />}
-      {props.title ?? self.title ?? props.children ?? 'Add Item'}
+      {!isAtMax &&
+        (props.icon !== undefined ? props.icon : <PlusIcon className="mr-2 size-4" />)}
+      {buttonLabel}
     </Button>
   );
 }
-
 ArrayAddition.displayName = 'ArrayAddition';

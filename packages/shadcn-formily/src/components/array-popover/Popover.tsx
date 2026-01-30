@@ -12,7 +12,10 @@ import { useArrayItemEditLabels } from '../array-common/use-array-item-edit-labe
 import { useEditHandlers } from '../array-common/use-edit-handlers';
 import { useShakeAnimation } from '../array-common/use-shake-animation';
 
-export interface ArrayItemsEditPopoverProps {
+export interface ArrayItemsEditPopoverProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  'autoSave' | 'children'
+> {
   /**
    * The schema for the array item
    */
@@ -26,7 +29,7 @@ export interface ArrayItemsEditPopoverProps {
    * If true, changes are committed live and Save/Cancel buttons are hidden.
    * If false (default), changes only commit on Save.
    */
-  autoSave?: boolean;
+  autoSave?: boolean | string;
   /**
    * Custom trigger element. If not provided, uses Edit button
    */
@@ -34,30 +37,41 @@ export interface ArrayItemsEditPopoverProps {
 }
 
 export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = observer(
-  ({ schema, onSave, onAutoSave, onCancel, children, activeItemManager, autoSave }) => {
+  ({
+    schema,
+    onSave,
+    onAutoSave,
+    onCancel,
+    children,
+    activeItemManager,
+    autoSave,
+    ...rest
+  }) => {
     const arrayField = useField<ArrayField>();
     const activeIndex = activeItemManager.activeItem;
     const isNewItem = activeItemManager.isNew;
 
     const open = activeIndex !== undefined;
 
+    const normalizedAutoSave = autoSave !== false && autoSave !== 'false';
+
     const handleDraftChange = React.useCallback(
       (nextValue: unknown) => {
-        if (!autoSave) return;
+        if (!normalizedAutoSave) return;
         if (activeIndex === undefined) return;
         onAutoSave?.(activeIndex, nextValue);
       },
-      [activeIndex, autoSave, onAutoSave],
+      [activeIndex, normalizedAutoSave, onAutoSave],
     );
 
     const draftForm = useArrayItemDraftForm({
       arrayField,
       index: activeIndex,
-      autoSave,
-      onDraftChange: autoSave ? handleDraftChange : undefined,
+      autoSave: normalizedAutoSave,
+      onDraftChange: normalizedAutoSave ? handleDraftChange : undefined,
     });
 
-    const isDirty = !autoSave && draftForm.modified;
+    const isDirty = !normalizedAutoSave && draftForm.modified;
 
     const { shouldShake, triggerShake } = useShakeAnimation();
     const { handleSave, handleCancel } = useEditHandlers({
@@ -72,7 +86,7 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
 
       // In autoSave mode, new items are created immediately.
       // Users still need a way to abandon the new item.
-      if (autoSave && isNewItem) {
+      if (normalizedAutoSave && isNewItem) {
         arrayField.remove?.(activeIndex).catch(console.error);
       }
 
@@ -107,7 +121,7 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
     const { title, description } = useArrayItemEditLabels({
       schema,
       isNew: isNewItem,
-      autoSave,
+      autoSave: normalizedAutoSave,
       itemIndex: activeIndex,
     });
 
@@ -117,6 +131,7 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
         <PopoverContent
           className={shouldShake ? 'w-96 pp-shake' : 'w-96'}
           side="top"
+          {...rest}
           onInteractOutside={(event) => {
             if (isDirty) {
               event.preventDefault();
@@ -155,7 +170,7 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
               />
             )}
 
-            {!autoSave && (
+            {!normalizedAutoSave && (
               <div className="flex justify-end gap-2">
                 <Button type="button" variant="outline" size="sm" onClick={handleCancel}>
                   Cancel
@@ -166,7 +181,7 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
               </div>
             )}
 
-            {autoSave && isNewItem && (
+            {normalizedAutoSave && isNewItem && (
               <div className="flex justify-end gap-2">
                 <Button type="button" variant="outline" size="sm" onClick={handleDiscard}>
                   Discard

@@ -13,6 +13,7 @@ import { ArrayCollapseItem } from './Item';
 type Props = ArrayComponentProps & {
   defaultActiveKey?: Array<string | number>;
   mode?: 'accordion' | 'multiple';
+  collapseProps?: React.HTMLAttributes<HTMLDivElement>;
 };
 
 /**
@@ -33,6 +34,7 @@ const ArrayItemsCollapseBase = observer((props: Props) => {
     transformActions,
     defaultActiveKey,
     mode = 'multiple',
+    collapseProps,
     ...otherProps
   } = props;
   const field = useField<FormilyArrayField>();
@@ -86,6 +88,7 @@ const ArrayItemsCollapseBase = observer((props: Props) => {
           formCollapse={formCollapse}
           onAdd={onAdd}
           isNewItem={isNewItem}
+          collapseProps={collapseProps}
         />
       );
     });

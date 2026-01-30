@@ -1,9 +1,11 @@
+/* eslint-disable ts/no-unsafe-member-access */
 /* eslint-disable no-console */
 /* eslint-disable no-alert */
 /* eslint-disable no-magic-numbers */
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ISchema } from '../src';
 import { Button } from '@pixpilot/shadcn';
-import { createForm, Form, SchemaField } from '../src';
+import { createForm, Form, JsonSchemaFormExtended, SchemaField } from '../src';
 
 const meta: Meta<typeof Form> = {
   title: 'Formily/Array Tags',
@@ -67,9 +69,9 @@ export const Basic: Story = {
 
 /**
  * ArrayTags with max limit
- * Can only add up to 5 tags
+ * Can only add up to 3 tags
  */
-export const WithMaxTags: Story = {
+export const WithMinTagsRequired: Story = {
   render: () => {
     const form = createForm({
       values: {
@@ -82,13 +84,17 @@ export const WithMaxTags: Story = {
       properties: {
         skills: {
           type: 'array',
-          title: 'Skills (Max 5)',
-          description: 'Add up to 5 skills',
+          title: 'Skills (Min 1, Max 3)',
+          description: 'Add 1 to 3 skills',
+          minItems: 2,
+          // Formily's minItems validator (backed by the 'min' rule) intentionally skips validation
+          // for "empty" values like []. To enforce at least one item, we must set required: true.
+          // The minItems: 2 then ensures at least 2 items, and the x-validator provides a custom message.
+          required: true,
           'x-decorator': 'FormItem',
           'x-component': 'ArrayTags',
           'x-component-props': {
             placeholder: 'Add skills...',
-            maxTags: 5,
           },
         },
       },
@@ -99,8 +105,16 @@ export const WithMaxTags: Story = {
         form={form}
         className="w-[600px]"
         onSubmit={(values) => {
-          console.log('Form submitted:', values);
-          alert(JSON.stringify(values, null, JSON_INDENT));
+          // eslint-disable-next-line ts/no-unsafe-call
+          form
+            .validate()
+            .then(() => {
+              console.log('Form submitted:', values);
+              alert(JSON.stringify(values, null, JSON_INDENT));
+            })
+            .catch((error: any) => {
+              console.error('Validation failed:', error);
+            });
         }}
       >
         <SchemaField schema={schema} />
@@ -108,6 +122,73 @@ export const WithMaxTags: Story = {
           Submit
         </Button>
       </Form>
+    );
+  },
+};
+
+/**
+ * ArrayTags with schema maxItems and minItems
+ * Max and min tags defined in JSON schema
+ *
+ * Note: Formily's built-in `min` rule (which backs `minItems`) intentionally
+ * skips validation for "empty" values like `[]`. To enforce at least one
+ * item, mark the field as required.
+ */
+export const WithMaxMinItems: Story = {
+  render: () => {
+    const form = createForm({
+      values: {
+        categories: ['tech', 'news'],
+      },
+    });
+
+    const schema: ISchema = {
+      type: 'object',
+      properties: {
+        categories: {
+          type: 'array',
+          title: 'Categories (Min 1, Max 3 from schema)',
+          description: 'Min and max items defined in schema.minItems and schema.maxItems',
+          required: true,
+          minItems: 2,
+          maxItems: 3,
+          'x-decorator': 'FormItem',
+          'x-component': 'ArrayTags',
+          'x-component-props': {
+            placeholder: 'Add categories...',
+          },
+          'x-validator': [
+            {
+              required: true,
+              message: 'At least one item is required.',
+            },
+          ],
+        },
+      },
+    };
+
+    return (
+      <JsonSchemaFormExtended
+        form={form}
+        schema={schema}
+        className="w-[600px]"
+        onSubmit={(values) => {
+          // eslint-disable-next-line ts/no-unsafe-call
+          form
+            .validate()
+            .then(() => {
+              console.log('Form submitted:', values);
+              alert(JSON.stringify(values, null, JSON_INDENT));
+            })
+            .catch((error: any) => {
+              console.error('Validation failed:', error);
+            });
+        }}
+      >
+        <Button type="submit" className="mt-4 w-full">
+          Submit
+        </Button>
+      </JsonSchemaFormExtended>
     );
   },
 };

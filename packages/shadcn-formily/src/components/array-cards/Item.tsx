@@ -14,41 +14,49 @@ export interface ArrayCardItemProps extends ArrayItemProps {
    * Unique key for the sortable item
    */
   itemKey: string | number;
+  cardProps?: React.HTMLAttributes<HTMLDivElement>;
 }
 
-const ArrayItem = React.memo(({ index, record, itemKey }: ArrayCardItemProps) => {
-  const schema = useFieldSchema();
+const ArrayItem = React.memo(
+  ({ index, record, itemKey, cardProps }: ArrayCardItemProps) => {
+    const schema = useFieldSchema();
 
-  const items = schema?.items as Schema;
+    const items = schema?.items as Schema;
 
-  // Get x-component-props from items schema to apply to the wrapper div
-  // Since we're not using onlyRenderProperties, we manually extract these props
-  const itemWrapperProps = getXComponentProps(items);
-  const { className: itemWrapperClassName, ...itemWrapperRestProps } = itemWrapperProps;
+    // Get x-component-props from items schema to apply to the wrapper div
+    // Since we're not using onlyRenderProperties, we manually extract these props
+    const itemWrapperProps = getXComponentProps(items);
+    const { className: itemWrapperClassName, ...itemWrapperRestProps } = itemWrapperProps;
 
-  return (
-    <ArrayBase.Item index={index} record={record ?? {}}>
-      <SortableItem id={itemKey}>
-        <div
-          {...itemWrapperRestProps}
-          className={cn('border rounded-lg p-4 space-y-2', itemWrapperClassName)}
-        >
-          <ArrayItemHeaderRow schema={schema.items as Schema} index={index} />
-          <div className="space-y-4">
-            <RecursionField
-              schema={items}
-              name={index}
-              filterProperties={(s) => {
-                if (isOperationComponent(s)) return false;
-                return true;
-              }}
-            />
+    return (
+      <ArrayBase.Item index={index} record={record ?? {}}>
+        <SortableItem id={itemKey}>
+          <div
+            {...itemWrapperRestProps}
+            {...cardProps}
+            className={cn(
+              'border rounded-lg p-4 space-y-2',
+              itemWrapperClassName,
+              cardProps?.className,
+            )}
+          >
+            <ArrayItemHeaderRow schema={schema.items as Schema} index={index} />
+            <div className="space-y-4">
+              <RecursionField
+                schema={items}
+                name={index}
+                filterProperties={(s) => {
+                  if (isOperationComponent(s)) return false;
+                  return true;
+                }}
+              />
+            </div>
           </div>
-        </div>
-      </SortableItem>
-    </ArrayBase.Item>
-  );
-});
+        </SortableItem>
+      </ArrayBase.Item>
+    );
+  },
+);
 
 ArrayItem.displayName = 'ArrayItemContent';
 

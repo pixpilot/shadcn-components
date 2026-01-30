@@ -16,7 +16,9 @@ import { useArrayDataSource } from '../array-common';
 import { SortableContainer } from '../array-sortable';
 import ArrayItem from './Item';
 
-const ArrayCardsBase: React.FC<ArrayComponentProps> = observer((props) => {
+const ArrayCardsBase: React.FC<
+  ArrayComponentProps & { cardProps?: React.HTMLAttributes<HTMLDivElement> }
+> = observer((props) => {
   const field = useField<FormilyArrayField>();
   const schema = useFieldSchema();
   const {
@@ -32,6 +34,7 @@ const ArrayCardsBase: React.FC<ArrayComponentProps> = observer((props) => {
     title: titleProp,
     children,
     description,
+    cardProps,
     ...otherProps
   } = props;
 
@@ -55,6 +58,7 @@ const ArrayCardsBase: React.FC<ArrayComponentProps> = observer((props) => {
           index={index}
           title={titleProp}
           record={record}
+          cardProps={cardProps}
         />
       );
     });

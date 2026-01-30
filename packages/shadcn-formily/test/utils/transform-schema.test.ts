@@ -924,6 +924,41 @@ describe('transformSchema', () => {
     });
   });
 
+  describe('array minItems/maxItems validation', () => {
+    it('should add x-validator for minItems', () => {
+      const schema: ISchema = {
+        type: 'object',
+        properties: {
+          tags: {
+            type: 'array',
+            title: 'Tags',
+            minItems: 2,
+          },
+        },
+      };
+
+      const transformedSchema = transformSchema(schema);
+      expect((transformedSchema.properties as any).tags.required).toBe(true);
+    });
+
+    it('should add x-validator for both minItems and maxItems', () => {
+      const schema: ISchema = {
+        type: 'object',
+        properties: {
+          tags: {
+            type: 'array',
+            title: 'Tags',
+            minItems: 1,
+            maxItems: 10,
+          },
+        },
+      };
+
+      const transformedSchema = transformSchema(schema);
+      expect((transformedSchema.properties as any).tags.required).toBe(true);
+    });
+  });
+
   describe('fieldsDecorators parameter', () => {
     it('should apply decorator from fieldsDecorators when x-decorator is undefined', () => {
       const schema: ISchema = {

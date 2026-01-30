@@ -47,6 +47,7 @@ const {
   WithTruncatedLabels,
   AutoSave,
   ManualSave,
+  WithMaxMinItems,
 } = createStories(storyConfig);
 
 export {
@@ -64,6 +65,7 @@ export {
   WithItemReactionTitle,
   WithJSONSchema,
   WithJsonSchemaForm,
+  WithMaxMinItems,
   WithTruncatedLabels,
 };
 

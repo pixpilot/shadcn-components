@@ -6,7 +6,9 @@ import { ArrayBase, ArrayComponentProvider } from '../array-base';
 import { ArrayItemsList, useArrayEditor, useArrayItemSchema } from '../array-common';
 import { ArrayItemsEditPopover } from './Popover';
 
-type Props = ArrayComponentProps;
+type Props = ArrayComponentProps & {
+  popoverProps?: React.HTMLAttributes<HTMLDivElement>;
+};
 
 const ArrayPopoverBase = observer((props: Props) => {
   const {
@@ -15,12 +17,15 @@ const ArrayPopoverBase = observer((props: Props) => {
     onMoveDown,
     onMoveUp,
     onEdit,
-    autoSave = true,
+    autoSave: autoSaveProp,
     className,
     children,
     transformActions,
+    popoverProps,
     ...rest
   } = props;
+
+  const autoSave: boolean = autoSaveProp !== false;
 
   const {
     activeItemManager,
@@ -55,6 +60,7 @@ const ArrayPopoverBase = observer((props: Props) => {
             autoSave={autoSave}
             schema={schema}
             onSave={handleSaveClick}
+            {...popoverProps}
           >
             <ArrayBase.Addition />
           </ArrayItemsEditPopover>

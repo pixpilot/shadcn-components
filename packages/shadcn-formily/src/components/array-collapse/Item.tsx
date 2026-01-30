@@ -23,10 +23,20 @@ interface ArrayCollapseItemProps extends ArrayItemProps {
   onAdd?: (index: number) => void;
   isNewItem: (index: number) => boolean;
   onClick?: () => void;
+  collapseProps?: React.HTMLAttributes<HTMLDivElement>;
 }
 
 const ArrayCollapseItemBase = React.memo((props: ArrayCollapseItemProps) => {
-  const { index, itemId, itemKey, formCollapse, isOpen, isNewItem, onClick } = props;
+  const {
+    index,
+    itemId,
+    itemKey,
+    formCollapse,
+    isOpen,
+    isNewItem,
+    onClick,
+    collapseProps,
+  } = props;
   const field = useField<FormilyArrayField>();
   const schema = useFieldSchema();
 
@@ -59,7 +69,7 @@ const ArrayCollapseItemBase = React.memo((props: ArrayCollapseItemProps) => {
           </div>
         ) : null}
 
-        <ItemWrapper {...itemWrapperProps} index={index}>
+        <ItemWrapper {...itemWrapperProps} {...collapseProps} index={index}>
           {/* Header */}
           <ArrayItemHeaderRow
             className="px-3"

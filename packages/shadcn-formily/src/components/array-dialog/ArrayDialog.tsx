@@ -7,7 +7,7 @@ import { ArrayItemsList, useArrayEditor, useArrayItemSchema } from '../array-com
 
 import { EditDialog } from './EditDialog';
 
-type Props = ArrayComponentProps;
+type Props = ArrayComponentProps & { dialogProps?: React.HTMLAttributes<HTMLDivElement> };
 
 /**
  * ArrayItems component displays array items as a simple list with controls
@@ -19,8 +19,16 @@ type Props = ArrayComponentProps;
 const ArrayDialogBase = observer((props: Props) => {
   const schema = useFieldSchema();
 
-  const { onAdd, onRemove, onMoveDown, onMoveUp, onEdit, className, transformActions } =
-    props;
+  const {
+    onAdd,
+    onRemove,
+    onMoveDown,
+    onMoveUp,
+    onEdit,
+    className,
+    transformActions,
+    dialogProps,
+  } = props;
 
   const { autoSave } = props;
 
@@ -52,6 +60,7 @@ const ArrayDialogBase = observer((props: Props) => {
         <AddButton schema={schema} />
       </ArrayItemsList>
       <EditDialog
+        {...dialogProps}
         onSave={handleSaveClick}
         onAutoSave={handleLiveChange}
         onCancel={handleCancelClick}

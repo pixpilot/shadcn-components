@@ -44,18 +44,15 @@ export function transformSchema(
   // and mutating shared schema objects can cause server/client markup to diverge.
   let normalizedSchema: ISchema;
   try {
-    normalizedSchema = (
-      typeof structuredClone === 'function'
-        ? structuredClone(schema)
-        : JSON.parse(JSON.stringify(schema))
-    ) as ISchema;
+    normalizedSchema = JSON.parse(JSON.stringify(schema)) as ISchema;
   } catch {
     // Fallback to JSON clone if structuredClone fails (e.g., due to functions)
     normalizedSchema = JSON.parse(JSON.stringify(schema)) as ISchema;
   }
-  traverse(normalizedSchema, {
-    allKeys: true,
-    cb: (
+  traverse(
+    normalizedSchema,
+    { allKeys: true },
+    (
       currentSchema,
       _jsonPtr,
       _rootSchema,
@@ -137,8 +134,49 @@ export function transformSchema(
           }
         }
       }
+
+      // Handle array minItems/maxItems validation
+      if (type === 'array') {
+        const minItems = currentSchema.minItems as number | undefined;
+        // const maxItems = currentSchema.maxItems as number | undefined;
+
+        if (
+          typeof minItems === 'number' &&
+          minItems > 0 &&
+          currentSchema.required !== true
+        ) {
+          currentSchema.required = true;
+        }
+
+        // let xValidator: any[] = currentSchema['x-validator'] as any[];
+        // if (!Array.isArray(xValidator)) {
+        //   xValidator = [];
+        //   currentSchema['x-validator'] = xValidator;
+        // }
+
+        // const hasMinItemsValidator = xValidator.some(
+        //   (v) => typeof v === 'object' && v !== null && ('minItems' in v || 'min' in v),
+        // );
+        // const hasMaxItemsValidator = xValidator.some(
+        //   (v) => typeof v === 'object' && v !== null && ('maxItems' in v || 'max' in v),
+        // );
+
+        // if (minItems != null && !hasMinItemsValidator) {
+        //   xValidator.push({
+        //     minItems,
+        //     message: 'Minimum items required.',
+        //   });
+        // }
+
+        // if (maxItems != null && !hasMaxItemsValidator) {
+        //   xValidator.push({
+        //     maxItems,
+        //     message: 'Maximum items reached.',
+        //   });
+        // }
+      }
     },
-  });
+  );
 
   return normalizedSchema;
 }
