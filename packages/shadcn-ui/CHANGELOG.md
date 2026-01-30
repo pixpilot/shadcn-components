@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.48.0
+
+### Minor Changes
+
+- adds add button
+
 ## 0.47.0
 
 ### Minor Changes
