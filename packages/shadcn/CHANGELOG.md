@@ -1,5 +1,12 @@
 # @pixpilot/shadcn
 
+## 0.9.0
+
+### Minor Changes
+
+- add ButtonGroup and ToggleGroup components
+- enhance component creation guidelines
+
 ## 0.8.0
 
 ### Minor Changes

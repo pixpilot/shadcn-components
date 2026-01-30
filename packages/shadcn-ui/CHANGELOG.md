@@ -1,5 +1,18 @@
 # @pixpilot/shadcn-ui
 
+## 0.47.0
+
+### Minor Changes
+
+- add ButtonGroup and ToggleGroup components
+- enhance component creation guidelines
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+  - @pixpilot/shadcn@0.9.0
+
 ## 0.46.1
 
 ### Patch Changes
