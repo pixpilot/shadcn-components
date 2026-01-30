@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.45.0
+
+### Minor Changes
+
+- pass prop to array editable components
+
 ## 0.44.3
 
 ### Patch Changes
