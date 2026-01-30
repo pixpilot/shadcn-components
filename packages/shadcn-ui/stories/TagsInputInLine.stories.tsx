@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import type { TagsInputProps } from '../src/TagsInput';
+import type { TagsInputProps } from '../src/tags-input';
 import { useState } from 'react';
-import { TagsInput } from '../src/TagsInput';
+import { TagsInput } from '../src/tags-input';
 
 /**
  * An inline tags input component with dropdown suggestions and free-form entry.
@@ -50,6 +50,11 @@ const meta = {
     label: {
       control: 'text',
       description: 'Label for the input field',
+    },
+    addButtonVisibility: {
+      control: 'inline-radio',
+      options: ['always', 'touch', 'never'],
+      description: 'Controls when the Add button is visible',
     },
   },
   decorators: [
@@ -115,6 +120,7 @@ export const FreeForm: Story = {
     placeholder: 'Type and press Enter or comma...',
     freeSolo: true,
     addOnPaste: true,
+    addButtonVisibility: 'always',
   },
   render: function FreeFormTagsInputInline(args: TagsInputProps) {
     const [value, setValue] = useState<Array<string | number>>([]);

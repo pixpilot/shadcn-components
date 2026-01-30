@@ -38,7 +38,7 @@ export * from './ScaledPreview';
 export * from './Select';
 export * from './slider';
 export * from './tabs';
-export * from './TagsInput';
+export * from './tags-input';
 export * from './theme-provider';
 export * from './theme-toggle';
 export * from './toast';

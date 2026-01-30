@@ -1,22 +1,18 @@
 'use client';
 
-import type { CommandOptionListItem } from './CommandOptionList';
+import type { CommandOptionListItem } from '../CommandOptionList';
 import {
   cn,
   Command,
   Popover,
   PopoverContent,
   PopoverTrigger,
-  TagsInputInLineClear,
-  TagsInputInLineInput,
-  TagsInputInLineItem,
   TagsInputInLineLabel,
-  TagsInputInLineList,
-  TagsInputInLineRoot,
 } from '@pixpilot/shadcn';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { CommandOptionList } from './CommandOptionList';
+import { CommandOptionList } from '../CommandOptionList';
+import { TagsInputInline } from './TagsInputInline';
 
 export interface TagsInputProps {
   value?: Array<string | number>;
@@ -36,6 +32,7 @@ export interface TagsInputProps {
   addOnPaste?: boolean;
   addOnTab?: boolean;
   onValidate?: (value: string) => boolean;
+  addButtonVisibility?: 'always' | 'touch' | 'never';
 }
 
 const EMPTY_ARRAY: Array<string | number> = [];
@@ -75,9 +72,11 @@ export function TagsInput({
   addOnPaste = true,
   addOnTab = true,
   onValidate,
+  addButtonVisibility = 'touch',
 }: TagsInputProps) {
   const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+  const [freeInputValue, setFreeInputValue] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
   const hasOptions = options.length > 0;
@@ -128,6 +127,7 @@ export function TagsInput({
     (newTags: string[]) => {
       // Clear search when tags are added
       setSearchValue('');
+      setFreeInputValue('');
 
       // Convert back to original value types if we have options
       if (hasOptions) {
@@ -182,6 +182,39 @@ export function TagsInput({
     ],
   );
 
+  const handleAddCurrentInput = useCallback(() => {
+    if (disabled || readOnly) {
+      return;
+    }
+
+    const rawValue = hasOptions ? searchValue : freeInputValue;
+    const nextValue = rawValue.trim();
+
+    if (!nextValue) {
+      return;
+    }
+
+    if (!handleValidate(nextValue)) {
+      return;
+    }
+
+    handleValueChange([...stringValues, nextValue]);
+    inputRef.current?.focus();
+  }, [
+    disabled,
+    readOnly,
+    hasOptions,
+    searchValue,
+    freeInputValue,
+    handleValidate,
+    handleValueChange,
+    stringValues,
+  ]);
+
+  const currentInputValue = hasOptions ? searchValue : freeInputValue;
+  const canAddCurrentValue =
+    Boolean(currentInputValue.trim()) && handleValidate(currentInputValue.trim());
+
   const handleSelectOption = useCallback(
     (optionValue: string | number) => {
       // Toggle selection: add if not present, remove if present
@@ -205,9 +238,20 @@ export function TagsInput({
   );
 
   // Render mode without options dropdown (original behavior)
+  const inlineItems = useMemo(
+    () =>
+      (hasOptions ? value : stringValues).map((tag) => ({
+        key: String(tag),
+        value: String(tag),
+        label: hasOptions ? getLabel(tag) : String(tag),
+      })),
+    [getLabel, hasOptions, stringValues, value],
+  );
+
   if (!hasOptions) {
     return (
-      <TagsInputInLineRoot
+      <TagsInputInline
+        label={label}
         className={className}
         disabled={disabled}
         editable={editable}
@@ -219,20 +263,18 @@ export function TagsInput({
         delimiter={delimiter}
         addOnPaste={addOnPaste}
         addOnTab={addOnTab}
-      >
-        {label !== undefined && label !== '' ? (
-          <TagsInputInLineLabel>{label}</TagsInputInLineLabel>
-        ) : null}
-        <TagsInputInLineList>
-          {stringValues.map((tag) => (
-            <TagsInputInLineItem key={tag} value={tag}>
-              {tag}
-            </TagsInputInLineItem>
-          ))}
-          <TagsInputInLineInput placeholder={placeholder} />
-        </TagsInputInLineList>
-        {value.length > 0 && !disabled && !readOnly && <TagsInputInLineClear />}
-      </TagsInputInLineRoot>
+        items={inlineItems}
+        inputRef={inputRef}
+        inputPlaceholder={placeholder}
+        inputValue={freeInputValue}
+        onInputChange={(e) => {
+          setFreeInputValue(e.target.value);
+        }}
+        addButtonVisibility={addButtonVisibility}
+        canAddCurrentValue={canAddCurrentValue}
+        onAddCurrentInput={handleAddCurrentInput}
+        showClear={value.length > 0 && !disabled && !readOnly}
+      />
     );
   }
 
@@ -245,7 +287,9 @@ export function TagsInput({
       <Popover open={open && !disabled && !readOnly} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <div className="w-full">
-            <TagsInputInLineRoot
+            <TagsInputInline
+              label={label}
+              showLabel={false}
               disabled={disabled}
               editable={editable}
               max={maxTags}
@@ -256,76 +300,67 @@ export function TagsInput({
               delimiter={freeSolo ? delimiter : undefined}
               addOnPaste={freeSolo ? addOnPaste : false}
               addOnTab={freeSolo ? addOnTab : false}
-            >
-              <TagsInputInLineList
-                onClick={(e) => {
-                  if (!disabled && !readOnly) {
-                    e.stopPropagation();
-                    setOpen(true);
+              items={inlineItems}
+              onListClick={(e) => {
+                if (!disabled && !readOnly) {
+                  e.stopPropagation();
+                  setOpen(true);
+                }
+              }}
+              inputRef={inputRef}
+              inputPlaceholder={placeholder}
+              inputValue={searchValue}
+              onInputFocus={(e) => {
+                e.stopPropagation();
+                setOpen(true);
+              }}
+              onInputChange={(e) => {
+                e.stopPropagation();
+                setSearchValue(e.target.value);
+              }}
+              onInputKeyDown={(e) => {
+                // Allow normal TagsInput behavior for most keys
+                // But delegate arrow navigation to Command when popover is open
+                if (open && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
+                  e.preventDefault();
+                  e.stopPropagation();
+
+                  // Find the Command element and trigger navigation
+                  const command = document.querySelector('[cmdk-root]');
+                  if (command) {
+                    const event = new KeyboardEvent('keydown', {
+                      key: e.key,
+                      bubbles: true,
+                      cancelable: true,
+                    });
+                    command.dispatchEvent(event);
                   }
-                }}
-              >
-                {value.map((val) => {
-                  const displayLabel = getLabel(val);
-                  return (
-                    <TagsInputInLineItem key={String(val)} value={String(val)}>
-                      {displayLabel}
-                    </TagsInputInLineItem>
+                  return;
+                }
+
+                // For Enter key when popover is open, check if a Command item is selected
+                if (open && e.key === 'Enter') {
+                  const selectedItem = document.querySelector(
+                    '[cmdk-item][data-selected="true"]',
                   );
-                })}
-                <TagsInputInLineInput
-                  ref={inputRef}
-                  placeholder={placeholder}
-                  onFocus={(e) => {
+                  if (selectedItem) {
+                    e.preventDefault();
                     e.stopPropagation();
-                    setOpen(true);
-                  }}
-                  onChange={(e) => {
-                    e.stopPropagation();
-                    setSearchValue(e.target.value);
-                  }}
-                  onKeyDown={(e) => {
-                    // Allow normal TagsInput behavior for most keys
-                    // But delegate arrow navigation to Command when popover is open
-                    if (open && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
-                      e.preventDefault();
-                      e.stopPropagation();
+                    (selectedItem as HTMLElement).click();
+                    return;
+                  }
+                }
 
-                      // Find the Command element and trigger navigation
-                      const command = document.querySelector('[cmdk-root]');
-                      if (command) {
-                        const event = new KeyboardEvent('keydown', {
-                          key: e.key,
-                          bubbles: true,
-                          cancelable: true,
-                        });
-                        command.dispatchEvent(event);
-                      }
-                      return;
-                    }
-
-                    // For Enter key when popover is open, check if a Command item is selected
-                    if (open && e.key === 'Enter') {
-                      const selectedItem = document.querySelector(
-                        '[cmdk-item][data-selected="true"]',
-                      );
-                      if (selectedItem) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        (selectedItem as HTMLElement).click();
-                        return;
-                      }
-                    }
-
-                    e.stopPropagation();
-                  }}
-                  onMouseDown={(e) => {
-                    e.stopPropagation();
-                  }}
-                />
-              </TagsInputInLineList>
-              {value.length > 0 && !disabled && !readOnly && <TagsInputInLineClear />}
-            </TagsInputInLineRoot>
+                e.stopPropagation();
+              }}
+              onInputMouseDown={(e) => {
+                e.stopPropagation();
+              }}
+              addButtonVisibility={addButtonVisibility}
+              canAddCurrentValue={canAddCurrentValue}
+              onAddCurrentInput={handleAddCurrentInput}
+              showClear={value.length > 0 && !disabled && !readOnly}
+            />
           </div>
         </PopoverTrigger>
         <PopoverContent
