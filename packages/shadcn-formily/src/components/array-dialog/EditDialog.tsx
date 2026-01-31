@@ -52,6 +52,7 @@ export const EditDialog = observer(
     onCancel,
     activeItemManager,
     autoSave,
+    className,
     ...rest
   }: ArrayItemsEditDialogProps) => {
     const arrayField = useField<ArrayField>();
@@ -103,7 +104,7 @@ export const EditDialog = observer(
       >
         <DialogContent
           {...rest}
-          className={cn('sm:max-w-[525px]', shouldShake && 'pp-shake')}
+          className={cn('sm:max-w-[525px]', shouldShake && 'pp-shake', className)}
           onInteractOutside={(event) => {
             if (!isDirty) return;
             event.preventDefault();
