@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.46.0
+
+### Minor Changes
+
+- add className prop to DialogContent
+
 ## 0.45.1
 
 ### Patch Changes
