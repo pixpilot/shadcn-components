@@ -75,7 +75,7 @@
     "@storybook/react": "catalog:dev",
     "@testing-library/react": "catalog:dev",
     "@types/node": "catalog:dev",
-    "@types/react": "^19.2.7",
+    "@types/react": "^19.2.10",
     "@types/react-dom": "^19.2.3",
     "eslint": "catalog:dev",
     "react": "catalog:prod",

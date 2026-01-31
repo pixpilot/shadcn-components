@@ -94,7 +94,7 @@
     "@testing-library/jest-dom": "catalog:dev",
     "@testing-library/react": "catalog:dev",
     "@types/react": "catalog:dev",
-    "autoprefixer": "^10.4.23",
+    "autoprefixer": "^10.4.24",
     "eslint": "catalog:dev",
     "jsdom": "catalog:dev",
     "postcss": "^8.5.6",
