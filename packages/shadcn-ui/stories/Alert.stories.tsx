@@ -23,8 +23,8 @@ const meta = {
       description: 'Alert title',
     },
     description: {
-      control: 'text',
-      description: 'Alert description',
+      control: 'object',
+      description: 'Alert description (string or React node)',
     },
   },
 } satisfies Meta<typeof Alert>;
@@ -116,5 +116,36 @@ export const CustomStyle: Story = {
     title: 'Custom Alert',
     description: 'This alert has custom styling applied.',
     className: 'border-2 shadow-lg',
+  },
+};
+
+/**
+ * Alert with multiline description
+ */
+export const MultilineDescription: Story = {
+  args: {
+    variant: 'info',
+    title: 'Multiline Alert',
+    description:
+      'This is the first line.\nThis is the second line.\nAnd this is the third line.',
+  },
+};
+
+/**
+ * Alert with React component in description
+ */
+export const DescriptionWithComponent: Story = {
+  args: {
+    variant: 'warning',
+    title: 'Component in Description',
+    description: (
+      <div>
+        This alert contains a{' '}
+        <a href="https://example.com" className="underline">
+          link
+        </a>{' '}
+        and some <strong>bold text</strong>.
+      </div>
+    ),
   },
 };

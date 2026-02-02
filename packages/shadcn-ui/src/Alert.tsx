@@ -9,7 +9,7 @@ export type AlertVariant = 'error' | 'info' | 'warning' | 'success' | 'default';
 
 export interface AlertBaseProps {
   variant?: AlertVariant;
-  description?: string;
+  description?: React.ReactNode;
   duration?: number; // in milliseconds
   title?: string;
   className?: string;
@@ -107,7 +107,11 @@ const Alert: React.FC<AlertProps> = (props) => {
         )}
         {description != null && (
           <AlertDescription
-            className={cn(variantConfig.descClass, !hasTitle && variantConfig.textClass)}
+            className={cn(
+              variantConfig.descClass,
+              !hasTitle && variantConfig.textClass,
+              'whitespace-pre-wrap',
+            )}
           >
             {description}
           </AlertDescription>

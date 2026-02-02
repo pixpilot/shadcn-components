@@ -10,6 +10,7 @@ export const DEFAULT_ALERT_DURATION = 10_000;
 
 interface ToastProps extends AlertBaseProps {
   duration?: number;
+  description?: string;
 }
 
 // Track toast instances with counter
