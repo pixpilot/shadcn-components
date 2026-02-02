@@ -1,12 +1,8 @@
-import type { AlertProps } from '../Alert';
+import type { AlertToastProps } from './types';
 import { cn } from '@pixpilot/shadcn';
 import { XIcon } from 'lucide-react';
 import React from 'react';
 import { Alert } from '../Alert';
-
-export interface AlertToastProps extends AlertProps {
-  onClose?: () => void;
-}
 
 const AlertToast: React.FC<AlertToastProps> = (props) => {
   const { duration, onClose, ...rest } = props;

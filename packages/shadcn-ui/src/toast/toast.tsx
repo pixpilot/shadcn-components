@@ -1,7 +1,6 @@
 import type { AlertBaseProps, AlertVariant } from '@pixpilot/shadcn-ui';
 
-import type { AlertToastProps } from './AlertToast';
-
+import type { AlertToastProps } from './types';
 import { simpleHash } from '@pixpilot/hash';
 import { toast as sonnerToast } from 'sonner';
 import { AlertToast } from './AlertToast';
