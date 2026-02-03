@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.48.0
+
+### Minor Changes
+
+- replace overlay prop with modal behavior
+
 ## 0.47.0
 
 ### Minor Changes
