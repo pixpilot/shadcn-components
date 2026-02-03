@@ -34,6 +34,11 @@ export interface ArrayItemsEditPopoverProps extends Omit<
    * Custom trigger element. If not provided, uses Edit button
    */
   children?: React.ReactNode;
+  /**
+   * If true, adds an overlay to cover the entire page behind the popover.
+   * Default is true.
+   */
+  overlay?: boolean;
 }
 
 export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = observer(
@@ -45,6 +50,7 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
     children,
     activeItemManager,
     autoSave,
+    overlay = true,
     ...rest
   }) => {
     const arrayField = useField<ArrayField>();
@@ -91,7 +97,7 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
       }
 
       handleCancel();
-    }, [activeIndex, arrayField, autoSave, handleCancel, isNewItem]);
+    }, [activeIndex, arrayField, handleCancel, isNewItem, normalizedAutoSave]);
 
     const validateAndClose = React.useCallback(() => {
       if (activeIndex === undefined) return;
@@ -126,7 +132,7 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
     });
 
     return (
-      <Popover open={open} onOpenChange={handleOpenChange}>
+      <Popover open={open} onOpenChange={handleOpenChange} modal={overlay}>
         {children !== undefined && <PopoverTrigger asChild>{children}</PopoverTrigger>}
         <PopoverContent
           className={shouldShake ? 'w-96 pp-shake' : 'w-96'}
