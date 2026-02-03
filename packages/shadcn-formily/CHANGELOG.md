@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.47.0
+
+### Minor Changes
+
+- add overlay prop to ArrayItemsEditPopover
+
 ## 0.46.2
 
 ### Patch Changes
