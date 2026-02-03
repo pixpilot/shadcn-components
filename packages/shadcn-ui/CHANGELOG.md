@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.50.0
+
+### Minor Changes
+
+- add optional description prop to AlertToastProps
+
 ## 0.49.0
 
 ### Minor Changes
