@@ -67,7 +67,7 @@ export {
   WithTruncatedLabels,
 };
 
-export const WithOverlayDisabled: Story = {
+export const WithModalDisabled: Story = {
   render: () => {
     const form = createForm({});
 
@@ -82,7 +82,7 @@ export const WithOverlayDisabled: Story = {
           'x-component-props': {
             className: 'space-y-4',
             popoverProps: {
-              overlay: false,
+              modal: false,
             },
           },
           items: {

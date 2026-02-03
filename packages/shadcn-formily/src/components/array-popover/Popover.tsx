@@ -5,6 +5,7 @@ import { observer, useField } from '@formily/react';
 
 import { Button, Popover, PopoverContent, PopoverTrigger } from '@pixpilot/shadcn';
 import React from 'react';
+import { createPortal } from 'react-dom';
 import { ArrayItemDraftFields } from '../array-common/ArrayItemDraftFields';
 import { ShakeStyles } from '../array-common/ShakeStyles';
 import { useArrayItemDraftForm } from '../array-common/use-array-item-draft-form';
@@ -35,10 +36,10 @@ export interface ArrayItemsEditPopoverProps extends Omit<
    */
   children?: React.ReactNode;
   /**
-   * If true, adds an overlay to cover the entire page behind the popover.
+   * If true, the popover behaves like a modal (closes on outside interaction).
    * Default is true.
    */
-  overlay?: boolean;
+  modal?: boolean;
 }
 
 export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = observer(
@@ -50,7 +51,7 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
     children,
     activeItemManager,
     autoSave,
-    overlay = true,
+    modal = true,
     ...rest
   }) => {
     const arrayField = useField<ArrayField>();
@@ -132,8 +133,15 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
     });
 
     return (
-      <Popover open={open} onOpenChange={handleOpenChange} modal={overlay}>
+      <Popover open={open} onOpenChange={handleOpenChange} modal={modal}>
         {children !== undefined && <PopoverTrigger asChild>{children}</PopoverTrigger>}
+        {typeof document !== 'undefined' &&
+          open &&
+          modal &&
+          createPortal(
+            <div className="fixed inset-0 z-40 backdrop-brightness-90" />,
+            document.body,
+          )}
         <PopoverContent
           className={shouldShake ? 'w-96 pp-shake' : 'w-96'}
           side="top"
