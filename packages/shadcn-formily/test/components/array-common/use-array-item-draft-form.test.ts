@@ -58,6 +58,25 @@ describe('useArrayItemDraftForm', () => {
     expect(result.current).toBe(mockForm);
   });
 
+  it('should use initialDraftValue when index is out of bounds', () => {
+    const mockForm = { values: { draft: { name: 'seed' } } };
+    mockCreateForm.mockReturnValue(mockForm as any);
+
+    renderHook(() =>
+      useArrayItemDraftForm({
+        arrayField: mockArrayField as any,
+        index: -1 as any,
+        autoSave: false,
+        initialDraftValue: { name: 'seed' },
+      }),
+    );
+
+    expect(mockCreateForm).toHaveBeenCalledWith({
+      values: { draft: { name: 'seed' } },
+      effects: expect.any(Function),
+    });
+  });
+
   it('should create form with undefined draft for null index', () => {
     const mockForm = { values: { draft: undefined } };
     mockCreateForm.mockReturnValue(mockForm as any);

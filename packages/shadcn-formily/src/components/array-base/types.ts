@@ -65,7 +65,19 @@ export interface ArrayBaseMixins extends ArrayBaseComponents {
 
 export interface IArrayBaseProps {
   disabled?: boolean;
-  onAdd?: (index: number) => void;
+  /**
+   * When true, array editors (dialog/popover) commit changes live.
+   * When false/undefined, changes should only commit on Save.
+   */
+  autoSave?: boolean;
+  onAdd?: (
+    index: number,
+    options?: {
+      method?: 'push' | 'unshift';
+      initialDraftValue?: unknown;
+      mode?: 'inserted' | 'draft-only';
+    },
+  ) => void;
   onRemove?: (index: number) => void;
   onMoveDown?: (index: number) => void;
   onMoveUp?: (index: number) => void;

@@ -8,6 +8,7 @@
 
 import type { StoryObj } from '@storybook/react';
 import type { ISchema } from '../src';
+import { isArrayField, onFieldInputValueChange } from '@formily/core';
 import { Button } from '@pixpilot/shadcn';
 import { InfoIcon, PinIcon } from 'lucide-react';
 import { createForm, Form, JsonSchemaFormExtended, SchemaField } from '../src';
@@ -60,7 +61,17 @@ export function createEmptyArrayStory(config: StoryConfig): Story {
 
   return {
     render: () => {
-      const form = createForm({});
+      const form = createForm({
+        effects: () => {
+          onFieldInputValueChange('*', (field) => {
+            if (isArrayField(field)) {
+              // use console.warn to avoid eslint no-console error in stories
+              // eslint-disable-next-line no-console
+              console.warn(JSON.stringify(field.value, null, 2));
+            }
+          });
+        },
+      });
 
       return (
         <Form

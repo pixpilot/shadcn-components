@@ -1,4 +1,5 @@
 import type { ArrayField } from '@formily/core';
+import type { ActiveItemManager } from './create-active-item-manager';
 import { useField } from '@formily/react';
 import React from 'react';
 import { createActiveItemManager } from './create-active-item-manager';
@@ -11,6 +12,23 @@ export interface ArrayItemEditorProps {
    * Cancel/close should NOT remove newly-added items.
    */
   autoSave?: boolean;
+}
+
+export interface AddOptions {
+  mode?: 'inserted' | 'draft-only';
+  method?: 'push' | 'unshift';
+  initialDraftValue?: unknown;
+}
+
+export interface UseArrayEditorResult {
+  activeItemManager: ActiveItemManager;
+  handleEdit: (index: number) => void;
+  handleAdd: (index: number, options?: AddOptions) => void;
+  handleSaveClick: (itemIndex: number, nextValue: unknown) => void;
+  handleLiveChange: (itemIndex: number, nextValue: unknown) => void;
+  handleCancelClick: (itemIndex: number) => void;
+  field: ArrayField;
+  isNewItem: (index: number) => boolean;
 }
 
 function setArrayItemValue(arrayField: ArrayField, index: number, value: unknown) {
@@ -45,8 +63,7 @@ function setArrayItemValue(arrayField: ArrayField, index: number, value: unknown
   }
 }
 
-// eslint-disable-next-line ts/explicit-module-boundary-types
-export function useArrayEditor(props: ArrayItemEditorProps) {
+export function useArrayEditor(props: ArrayItemEditorProps): UseArrayEditorResult {
   const { onAdd, onEdit, autoSave } = props;
   const field = useField<ArrayField>();
 
@@ -57,12 +74,43 @@ export function useArrayEditor(props: ArrayItemEditorProps) {
     onEdit?.(index);
   };
 
-  const handleAdd = (index: number) => {
-    activeItemManager.setActiveItem(index, true);
+  const handleAdd = (index: number, options?: AddOptions) => {
+    const isAutoSave = autoSave === true;
+    const isDraftOnly = options?.mode === 'draft-only' || !isAutoSave;
+
+    if (isDraftOnly) {
+      const DRAFT_ONLY_INDEX = -1;
+
+      activeItemManager.setActiveItem(DRAFT_ONLY_INDEX, true, {
+        newItemMode: 'draft-only',
+        newItemMethod: options?.method,
+        draftInitialValue: options?.initialDraftValue,
+      });
+
+      onAdd?.(index);
+      return;
+    }
+
+    activeItemManager.setActiveItem(index, true, {
+      newItemMode: 'inserted',
+    });
     onAdd?.(index);
   };
 
   const handleSaveClick = (itemIndex: number, nextValue: unknown) => {
+    if (activeItemManager.isNew && activeItemManager.newItemMode === 'draft-only') {
+      const method = activeItemManager.newItemMethod ?? 'push';
+
+      if (method === 'unshift') {
+        field.unshift?.(nextValue).catch(console.error);
+      } else {
+        field.push?.(nextValue).catch(console.error);
+      }
+
+      activeItemManager.removeActiveItem(itemIndex);
+      return;
+    }
+
     setArrayItemValue(field, itemIndex, nextValue);
     activeItemManager.removeActiveItem(itemIndex);
   };
@@ -72,7 +120,11 @@ export function useArrayEditor(props: ArrayItemEditorProps) {
   };
 
   const handleCancelClick = (itemIndex: number) => {
-    if (!autoSave && activeItemManager.isNewItem(itemIndex)) {
+    if (
+      !autoSave &&
+      activeItemManager.isNewItem(itemIndex) &&
+      activeItemManager.newItemMode !== 'draft-only'
+    ) {
       field.remove?.(itemIndex).catch(console.error);
     }
     activeItemManager.removeActiveItem(itemIndex);

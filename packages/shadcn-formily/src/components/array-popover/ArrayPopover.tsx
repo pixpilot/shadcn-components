@@ -25,7 +25,7 @@ const ArrayPopoverBase = observer((props: Props) => {
     ...rest
   } = props;
 
-  const autoSave: boolean = autoSaveProp !== false;
+  const autoSave: boolean = autoSaveProp === true;
 
   const {
     activeItemManager,

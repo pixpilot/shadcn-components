@@ -57,6 +57,23 @@ export function ArrayAddition({
           if (e.defaultPrevented) return;
         }
         const defaultValue = getDefaultValue(props.defaultValue, array.schema);
+
+        // Draft-only mode (manual save): open editor without mutating the array.
+        // Only explicit `true` enables immediate insertion.
+        const isAutoSave =
+          (array.props as { autoSave?: boolean } | undefined)?.autoSave === true;
+        if (!isAutoSave) {
+          const method = props.method ?? 'push';
+          const insertionIndex = method === 'unshift' ? 0 : currentLength;
+
+          array.props?.onAdd?.(insertionIndex, {
+            mode: 'draft-only',
+            method,
+            initialDraftValue: defaultValue,
+          });
+          return;
+        }
+
         if (props.method === 'unshift') {
           array.field?.unshift?.(defaultValue).catch(console.error);
           array.props?.onAdd?.(0);

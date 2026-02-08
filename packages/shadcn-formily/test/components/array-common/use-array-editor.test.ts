@@ -17,6 +17,8 @@ describe('useArrayEditor', () => {
     },
     value: ['item1', 'item2'],
     remove: vi.fn().mockResolvedValue(undefined),
+    push: vi.fn().mockResolvedValue(undefined),
+    unshift: vi.fn().mockResolvedValue(undefined),
     setValue: vi.fn(),
   };
 
@@ -95,17 +97,50 @@ describe('useArrayEditor', () => {
     expect(mockField.remove).not.toHaveBeenCalled();
   });
 
-  it('should remove item on handleCancelClick for new item when autoSave is false', () => {
+  it('should not remove item on handleCancelClick for new item when autoSave is false', () => {
     const { result } = renderHook(() => useArrayEditor({ autoSave: false }));
 
-    // Add a new item
+    // Manual-save mode opens a draft-only new item (no array insertion).
     result.current.handleAdd(2);
 
-    expect(result.current.isNewItem(2)).toBe(true);
+    expect(result.current.isNewItem(-1)).toBe(true);
 
-    result.current.handleCancelClick(2);
+    result.current.handleCancelClick(-1);
 
-    expect(mockField.remove).toHaveBeenCalledWith(2);
+    expect(mockField.remove).not.toHaveBeenCalled();
+  });
+
+  it('should not remove anything on cancel for draft-only new item (manual-save)', () => {
+    const { result } = renderHook(() => useArrayEditor({ autoSave: false }));
+
+    result.current.handleAdd(2, {
+      mode: 'draft-only',
+      method: 'push',
+      initialDraftValue: { name: 'seed' },
+    });
+
+    // draft-only uses a sentinel index
+    result.current.handleCancelClick(-1);
+
+    expect(mockField.remove).not.toHaveBeenCalled();
+  });
+
+  it('should push the new item on save for draft-only new item (manual-save)', () => {
+    const { result } = renderHook(() => useArrayEditor({ autoSave: false }));
+
+    result.current.handleAdd(2, { mode: 'draft-only', method: 'push' });
+    result.current.handleSaveClick(-1, 'new item');
+
+    expect(mockField.push).toHaveBeenCalledWith('new item');
+  });
+
+  it('should unshift the new item on save for draft-only new item when method is unshift', () => {
+    const { result } = renderHook(() => useArrayEditor({ autoSave: false }));
+
+    result.current.handleAdd(2, { mode: 'draft-only', method: 'unshift' });
+    result.current.handleSaveClick(-1, 'new item');
+
+    expect(mockField.unshift).toHaveBeenCalledWith('new item');
   });
 
   it('should not remove item on handleCancelClick for new item when autoSave is true', () => {

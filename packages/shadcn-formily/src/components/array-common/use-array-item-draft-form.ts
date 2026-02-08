@@ -8,6 +8,11 @@ export interface UseArrayItemDraftFormOptions {
   index: number | undefined;
   autoSave?: boolean;
   onDraftChange?: (nextValue: unknown) => void;
+  /**
+   * Used when editing a draft-only new item (not yet inserted into arrayField.value).
+   * If index is out-of-bounds, this value is used as the initial draft.
+   */
+  initialDraftValue?: unknown;
 }
 
 export function useArrayItemDraftForm({
@@ -15,6 +20,7 @@ export function useArrayItemDraftForm({
   index,
   autoSave,
   onDraftChange,
+  initialDraftValue,
 }: UseArrayItemDraftFormOptions): IForm {
   const onDraftChangeRef = React.useRef(onDraftChange);
 
@@ -24,10 +30,14 @@ export function useArrayItemDraftForm({
 
   return React.useMemo(() => {
     const arrayValue: unknown = arrayField.value;
-    const currentItemValue =
-      index != null && Array.isArray(arrayValue)
-        ? (arrayValue as unknown[])[index]
-        : undefined;
+    const hasArray = Array.isArray(arrayValue);
+    const arrayLength = hasArray ? (arrayValue as unknown[]).length : 0;
+    const isIndexInBounds =
+      index != null && hasArray && index >= 0 && index < arrayLength;
+
+    const currentItemValue = isIndexInBounds
+      ? (arrayValue as unknown[])[index]
+      : initialDraftValue;
 
     let didSkipInitial = false;
 
@@ -47,5 +57,5 @@ export function useArrayItemDraftForm({
         });
       },
     });
-  }, [arrayField.value, index, autoSave, onDraftChange]);
+  }, [arrayField.value, index, autoSave, onDraftChange, initialDraftValue]);
 }

@@ -74,6 +74,7 @@ export const EditDialog = observer(
       index: itemIndex,
       autoSave,
       onDraftChange: autoSave ? handleDraftChange : undefined,
+      initialDraftValue: activeItemManager.draftInitialValue,
     });
 
     const isDirty = !autoSave && draftForm.modified;

@@ -60,7 +60,7 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
 
     const open = activeIndex !== undefined;
 
-    const normalizedAutoSave = autoSave !== false && autoSave !== 'false';
+    const normalizedAutoSave = autoSave === true || autoSave === 'true';
 
     const handleDraftChange = React.useCallback(
       (nextValue: unknown) => {
@@ -76,6 +76,7 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
       index: activeIndex,
       autoSave: normalizedAutoSave,
       onDraftChange: normalizedAutoSave ? handleDraftChange : undefined,
+      initialDraftValue: activeItemManager.draftInitialValue,
     });
 
     const isDirty = !normalizedAutoSave && draftForm.modified;
