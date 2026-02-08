@@ -67,7 +67,7 @@ export function createEmptyArrayStory(config: StoryConfig): Story {
             if (isArrayField(field)) {
               // use console.warn to avoid eslint no-console error in stories
               // eslint-disable-next-line no-console
-              console.warn(JSON.stringify(field.value, null, 2));
+              console.log(JSON.stringify(field.value, null, 2));
             }
           });
         },

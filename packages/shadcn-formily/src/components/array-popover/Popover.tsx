@@ -1,17 +1,13 @@
-import type { ArrayField } from '@formily/core';
 import type { Schema } from '@formily/react';
 import type { ActiveItemManager } from '../array-common/create-active-item-manager';
-import { observer, useField } from '@formily/react';
+import { observer } from '@formily/react';
 
 import { Button, Popover, PopoverContent, PopoverTrigger } from '@pixpilot/shadcn';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { ArrayItemDraftFields } from '../array-common/ArrayItemDraftFields';
 import { ShakeStyles } from '../array-common/ShakeStyles';
-import { useArrayItemDraftForm } from '../array-common/use-array-item-draft-form';
-import { useArrayItemEditLabels } from '../array-common/use-array-item-edit-labels';
-import { useEditHandlers } from '../array-common/use-edit-handlers';
-import { useShakeAnimation } from '../array-common/use-shake-animation';
+import { useArrayItemEditState } from '../array-common/use-array-item-edit-state';
 
 export interface ArrayItemsEditPopoverProps extends Omit<
   React.HTMLAttributes<HTMLDivElement>,
@@ -54,39 +50,27 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
     modal = true,
     ...rest
   }) => {
-    const arrayField = useField<ArrayField>();
-    const activeIndex = activeItemManager.activeItem;
-    const isNewItem = activeItemManager.isNew;
-
-    const open = activeIndex !== undefined;
-
-    const normalizedAutoSave = autoSave === true || autoSave === 'true';
-
-    const handleDraftChange = React.useCallback(
-      (nextValue: unknown) => {
-        if (!normalizedAutoSave) return;
-        if (activeIndex === undefined) return;
-        onAutoSave?.(activeIndex, nextValue);
-      },
-      [activeIndex, normalizedAutoSave, onAutoSave],
-    );
-
-    const draftForm = useArrayItemDraftForm({
+    const {
       arrayField,
-      index: activeIndex,
-      autoSave: normalizedAutoSave,
-      onDraftChange: normalizedAutoSave ? handleDraftChange : undefined,
-      initialDraftValue: activeItemManager.draftInitialValue,
-    });
-
-    const isDirty = !normalizedAutoSave && draftForm.modified;
-
-    const { shouldShake, triggerShake } = useShakeAnimation();
-    const { handleSave, handleCancel } = useEditHandlers({
-      itemIndex: activeIndex,
+      activeIndex,
+      isNewItem,
+      open,
+      normalizedAutoSave,
       draftForm,
+      isDirty,
+      title,
+      description,
+      shouldShake,
+      triggerShake,
+      handleSave,
+      handleCancel,
+    } = useArrayItemEditState({
+      schema,
+      activeItemManager,
       onSave,
       onCancel,
+      onAutoSave,
+      autoSave,
     });
 
     const handleDiscard = React.useCallback(() => {
@@ -125,13 +109,6 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
       },
       [validateAndClose],
     );
-
-    const { title, description } = useArrayItemEditLabels({
-      schema,
-      isNew: isNewItem,
-      autoSave: normalizedAutoSave,
-      itemIndex: activeIndex,
-    });
 
     return (
       <Popover open={open} onOpenChange={handleOpenChange} modal={modal}>
