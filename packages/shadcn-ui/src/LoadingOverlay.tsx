@@ -1,3 +1,4 @@
+/* eslint-disable ts/strict-boolean-expressions */
 'use client';
 import { cn } from '@pixpilot/shadcn';
 import { Loader2 } from 'lucide-react';
@@ -6,21 +7,68 @@ import React, { useEffect, useState } from 'react';
 const DEFAULT_DELAY = 0;
 const FADE_DURATION = 300;
 
-export interface LoaderProps {
+export interface LoadingOverlayProps {
+  /**
+   * Show semi-transparent backdrop
+   * @default true
+   */
   backdrop?: boolean;
+  /**
+   * Vertical alignment of the loader
+   * @default 'center'
+   */
   placement?: 'top' | 'bottom' | 'center';
+  /**
+   * Whether to show the loader
+   */
   loading: boolean;
+  /**
+   * Optional loading message to display below spinner
+   */
   message?: string;
+  /**
+   * Delay in milliseconds before showing the loader
+   * @default 0
+   */
   delay?: number;
+  /**
+   * Scope of the loader overlay
+   * - 'container': Fills parent container (requires parent with position: relative)
+   * - 'fullscreen': Covers entire viewport
+   * @default 'container'
+   */
+  scope?: 'container' | 'fullscreen';
+  /**
+   * Size of the spinner
+   * @default 'default'
+   */
+  size?: 'sm' | 'default' | 'lg';
+  /**
+   * Custom class name for the overlay wrapper
+   */
+  className?: string;
+  /**
+   * Custom class name for the spinner
+   */
+  spinnerClassName?: string;
+  /**
+   * Custom class name for the message
+   */
+  messageClassName?: string;
 }
 
-const LoadingOverlay: React.FC<LoaderProps> = (props) => {
+const LoadingOverlay: React.FC<LoadingOverlayProps> = (props) => {
   const {
     backdrop = true,
     placement = 'center',
     loading,
     delay = DEFAULT_DELAY,
     message,
+    scope = 'container ',
+    size = 'default',
+    className,
+    spinnerClassName,
+    messageClassName,
   } = props;
 
   const [mounted, setMounted] = useState(false);
@@ -53,13 +101,25 @@ const LoadingOverlay: React.FC<LoaderProps> = (props) => {
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [loading, delay, mounted]); // Add 'mounted' to dependencies
+  }, [loading, delay, mounted]);
 
   const positionClass = {
     top: 'items-start pt-[50px]',
     center: 'items-center',
     bottom: 'items-end pb-[50px]',
   }[placement];
+
+  const sizeClass = {
+    sm: 'h-6 w-6',
+    default: 'h-10 w-10',
+    lg: 'h-16 w-16',
+  }[size];
+
+  const messageSizeClass = {
+    sm: 'text-xs',
+    default: 'text-sm',
+    lg: 'text-base',
+  }[size];
 
   if (!mounted) {
     return null;
@@ -68,21 +128,43 @@ const LoadingOverlay: React.FC<LoaderProps> = (props) => {
   return (
     <div
       className={cn(
-        'fixed inset-0 z-[9999] flex justify-center transition-opacity',
+        'inset-0 z-[9999] flex justify-center transition-opacity',
+        scope === 'fullscreen' ? 'fixed' : 'absolute',
         positionClass,
         backdrop ? 'bg-black/50' : 'pointer-events-none',
         visible ? 'opacity-100' : 'opacity-0',
+        className,
       )}
       style={{
         transitionDuration: `${FADE_DURATION}ms`,
       }}
+      role="status"
+      aria-live="polite"
+      aria-busy={loading}
     >
-      <div className="flex flex-col items-center">
-        <Loader2 className="text-foreground h-10 w-10 animate-spin" />
-        {message != null && <div className="mt-2 text-foreground">{message}</div>}
+      <div className="flex flex-col items-center gap-2">
+        <Loader2
+          className={cn('text-foreground animate-spin', sizeClass, spinnerClassName)}
+          aria-hidden="true"
+        />
+        {message != null && (
+          <div
+            className={cn(
+              'text-foreground font-medium',
+              messageSizeClass,
+              messageClassName,
+            )}
+          >
+            {message}
+          </div>
+        )}
+        {/* Screen reader only text */}
+        <span className="sr-only">{message || 'Loading, please wait...'}</span>
       </div>
     </div>
   );
 };
+
+LoadingOverlay.displayName = 'LoadingOverlay';
 
 export { LoadingOverlay };

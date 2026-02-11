@@ -38,6 +38,11 @@ const meta = {
       control: 'number',
       description: 'Delay in milliseconds before showing the loader',
     },
+    scope: {
+      control: 'select',
+      options: ['container', 'fullscreen'],
+      description: 'Scope of the loader overlay',
+    },
   },
 } satisfies Meta<typeof LoadingOverlay>;
 
@@ -141,6 +146,70 @@ export const DelayedLoader: Story = {
 
     return (
       <div className="relative">
+        <Button onClick={() => setLoading(!loading)}>
+          {loading ? 'Stop Loading' : 'Start Loading'}
+        </Button>
+        <LoadingOverlay {...args} loading={loading} />
+      </div>
+    );
+  },
+};
+
+/**
+ * Fullscreen loader overlay
+ */
+export const Fullscreen: Story = {
+  args: {
+    loading: true,
+    backdrop: true,
+    placement: 'center',
+    scope: 'fullscreen',
+  },
+  render: function ContainerScope(args) {
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+      if (!loading) return;
+      const timeoutId = setTimeout(() => {
+        setLoading(false);
+      }, 4000);
+      // eslint-disable-next-line consistent-return
+      return () => clearTimeout(timeoutId);
+    }, [loading]);
+
+    return (
+      <div className="relative w-64 h-64 border">
+        <Button onClick={() => setLoading(!loading)}>
+          {loading ? 'Stop Loading' : 'Start Loading'}
+        </Button>
+        <LoadingOverlay {...args} loading={loading} />
+      </div>
+    );
+  },
+};
+
+/**
+ * Fullscreen loader overlay
+ */
+export const ContainerScope: Story = {
+  args: {
+    loading: true,
+    scope: 'container',
+  },
+  render: function ContainerScope(args) {
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+      if (!loading) return;
+      const timeoutId = setTimeout(() => {
+        setLoading(false);
+      }, 4000);
+      // eslint-disable-next-line consistent-return
+      return () => clearTimeout(timeoutId);
+    }, [loading]);
+
+    return (
+      <div className="relative w-64 h-64 border">
         <Button onClick={() => setLoading(!loading)}>
           {loading ? 'Stop Loading' : 'Start Loading'}
         </Button>
