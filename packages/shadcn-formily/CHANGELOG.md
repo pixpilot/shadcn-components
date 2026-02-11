@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.49.0
+
+### Minor Changes
+
+- implement draft-only mode for array item insertion
+
 ## 0.48.0
 
 ### Minor Changes
