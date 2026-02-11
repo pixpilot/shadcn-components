@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.51.0
+
+### Minor Changes
+
+- enhance component with additional props and fullscreen support
+
 ## 0.50.0
 
 ### Minor Changes
