@@ -12,7 +12,7 @@ const meta: Meta<typeof ObjectContainer> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <div className="w-full max-w-lg">
+      <div className="w-100">
         <Story />
       </div>
     ),
@@ -142,14 +142,13 @@ export const FlushLayout: Story = {
     return (
       <JsonSchemaFormRenderer
         form={form}
-        components={{
-          fields: {
-            ...defaultComponentRegistry,
-            ObjectContainer: {
-              component: (props) => <ObjectContainer {...props} variant="flat" />,
-              decorator: 'FormItem',
-            },
+        layout={{
+          objectContainer: {
+            variant: 'flat',
           },
+        }}
+        components={{
+          fields: defaultComponentRegistry,
         }}
         schema={schema}
       ></JsonSchemaFormRenderer>
@@ -194,14 +193,13 @@ export const FlushWithSurroundingFields: Story = {
     return (
       <JsonSchemaFormRenderer
         form={form}
-        components={{
-          fields: {
-            ...defaultComponentRegistry,
-            ObjectContainer: {
-              component: (props) => <ObjectContainer {...props} variant="flat" />,
-              decorator: 'FormItem',
-            },
+        layout={{
+          objectContainer: {
+            variant: 'flat',
           },
+        }}
+        components={{
+          fields: defaultComponentRegistry,
         }}
         schema={schema}
       ></JsonSchemaFormRenderer>
@@ -237,14 +235,13 @@ export const MultipleFlushObjects: Story = {
     return (
       <JsonSchemaFormRenderer
         form={form}
-        components={{
-          fields: {
-            ...defaultComponentRegistry,
-            ObjectContainer: {
-              component: (props) => <ObjectContainer {...props} variant="flat" />,
-              decorator: 'FormItem',
-            },
+        layout={{
+          objectContainer: {
+            variant: 'flat',
           },
+        }}
+        components={{
+          fields: defaultComponentRegistry,
         }}
         schema={schema}
       ></JsonSchemaFormRenderer>
@@ -552,6 +549,65 @@ export const ResponsiveDensity: Story = {
         form={form}
         components={{
           fields: defaultComponentRegistry,
+        }}
+        schema={schema}
+      ></JsonSchemaFormRenderer>
+    );
+  },
+};
+
+export const WithTitleChildren: Story = {
+  render: () => {
+    const form = createForm();
+    const schema: ISchema = {
+      type: 'object',
+      properties: {
+        userInfo: {
+          type: 'object',
+          title: 'User Profile',
+          description: 'Manage your personal information',
+          properties: {
+            firstName: {
+              type: 'string',
+              title: 'First Name',
+            },
+            lastName: {
+              type: 'string',
+              title: 'Last Name',
+            },
+          },
+        },
+      },
+    };
+
+    return (
+      <JsonSchemaFormRenderer
+        form={form}
+        components={{
+          fields: {
+            ...defaultComponentRegistry,
+            ObjectContainer: {
+              component: (props) => (
+                <ObjectContainer
+                  {...props}
+                  slotProps={{
+                    title: {
+                      children: (
+                        <div className="flex gap-2">
+                          <button className="px-2 py-1 bg-blue-500 text-white rounded text-sm">
+                            Edit
+                          </button>
+                          <button className="px-2 py-1 bg-red-500 text-white rounded text-sm">
+                            Delete
+                          </button>
+                        </div>
+                      ),
+                    },
+                  }}
+                />
+              ),
+            },
+          },
         }}
         schema={schema}
       ></JsonSchemaFormRenderer>

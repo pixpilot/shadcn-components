@@ -49,6 +49,15 @@ const headerConfig: SpacingConfig = {
   responsive: 'gap-1.5 text-lg md:gap-2 md:text-xl lg:gap-2.5 lg:text-2xl',
 };
 
+const headerConfigFlat: SpacingConfig = {
+  fixed: {
+    sm: headerConfig.fixed.sm,
+    md: headerConfig.fixed.md,
+    lg: `${headerConfig.fixed.lg} gap-2`,
+  },
+  responsive: `${headerConfig.responsive} lg:gap-2`,
+};
+
 /**
  * Card padding spacing configuration
  * Controls vertical padding of the Card component
@@ -62,26 +71,42 @@ const cardPaddingConfig: SpacingConfig = {
   responsive: 'py-5 md:py-6 lg:py-7',
 };
 
+const cardPaddingConfigFlat: SpacingConfig = {
+  fixed: {
+    sm: 'pt-6 first:!pt-0',
+    md: 'pt-7 first:!pt-0',
+    lg: 'pt-7 first:!pt-0',
+  },
+  responsive: 'py-0 pt-6 md:pt-7 first:!pt-0',
+};
+
 export const ObjectContainer: React.FC<ObjectContainerProps> = ({
   className,
   children,
   label,
   description,
-  variant = 'grouped',
+  variant: variantProp,
   slotProps,
   ...rest
 }) => {
   const effectiveLabel = useLabel(label);
   const desc = useDescription(description);
 
-  const isFlat = variant === 'flat';
-
   const { layout } = useFormContext();
   const { objectContainer, density } = layout || {};
 
+  const effectiveVariant = variantProp ?? objectContainer?.variant ?? 'grouped';
+  const isFlat = effectiveVariant === 'flat';
+
   const gapClass = resolveResponsiveGapClass({ density });
-  const headerGapClass = resolveSpacingClass(density, headerConfig);
-  const cardPaddingClass = resolveSpacingClass(density, cardPaddingConfig);
+  const headerGapClass = resolveSpacingClass(
+    density,
+    isFlat ? headerConfigFlat : headerConfig,
+  );
+  const cardPaddingClass = resolveSpacingClass(
+    density,
+    isFlat ? cardPaddingConfigFlat : cardPaddingConfig,
+  );
 
   const {
     card,
@@ -128,7 +153,7 @@ export const ObjectContainer: React.FC<ObjectContainerProps> = ({
         'bg-transparent',
         gapClass,
         cardPaddingClass,
-        isFlat && 'border-0 shadow-none !py-0',
+        isFlat && 'border-0 shadow-none ',
         className,
         mergedCardProps.className,
       )}
@@ -143,12 +168,26 @@ export const ObjectContainer: React.FC<ObjectContainerProps> = ({
             isFlat && 'px-0',
           )}
         >
-          {effectiveLabel != null && (
+          {((effectiveLabel != null && effectiveLabel !== '') ||
+            mergedTitleProps.children !== null) && (
             <CardTitle
               {...mergedTitleProps}
-              className={cn('form-object-title', mergedTitleProps.className)}
+              className={cn(
+                // w-full ensures the 'justify-between' hits the edges
+                'form-object-title flex items-center justify-between gap-4 w-full',
+                mergedTitleProps.className,
+              )}
             >
-              {effectiveLabel}
+              {effectiveLabel != null && effectiveLabel !== '' && (
+                <span className="flex-1 truncate">{effectiveLabel}</span>
+              )}
+
+              {/* This is where your buttons/icons will land */}
+              {mergedTitleProps.children != null && (
+                <div className="flex items-center gap-2 shrink-0">
+                  {mergedTitleProps.children}
+                </div>
+              )}
             </CardTitle>
           )}
           {desc != null && (

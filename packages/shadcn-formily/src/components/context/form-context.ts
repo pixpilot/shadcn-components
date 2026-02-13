@@ -66,6 +66,8 @@ export interface FormLayoutOptions {
   };
   /** Custom class names for ObjectContainer elements */
   objectContainer?: {
+    /** Default visual style variant for ObjectContainer */
+    variant?: 'grouped' | 'flat';
     card?: React.HTMLAttributes<HTMLDivElement>;
     header?: React.HTMLAttributes<HTMLDivElement>;
     title?: React.HTMLAttributes<HTMLDivElement>;
