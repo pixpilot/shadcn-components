@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.50.0
+
+### Minor Changes
+
+- add flat variant support and enhance spacing configurations
+
 ## 0.49.1
 
 ### Patch Changes
