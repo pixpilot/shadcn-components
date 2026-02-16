@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.52.0
+
+### Minor Changes
+
+- add variant methods for toast notifications
+
 ## 0.51.0
 
 ### Minor Changes
