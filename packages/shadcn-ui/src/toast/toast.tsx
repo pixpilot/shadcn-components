@@ -12,10 +12,22 @@ interface ToastProps extends AlertBaseProps {
   description?: string;
 }
 
+export type ToastMessage =
+  | string
+  | ({ title: string; description: string } & AlertToastProps);
+
+export interface ToastFunction {
+  (props: ToastProps): void;
+  error: (message: ToastMessage, duration?: number) => void;
+  success: (message: ToastMessage, duration?: number) => void;
+  warning: (message: ToastMessage, duration?: number) => void;
+  info: (message: ToastMessage, duration?: number) => void;
+}
+
 // Track toast instances with counter
 const toastInstances = new Map<string, { currentId: string; counter: number }>();
 
-export function toast(props: ToastProps) {
+const toast: ToastFunction = function (props: ToastProps) {
   const { duration, ...rest } = props;
 
   const baseId = `toast_${simpleHash(`${props.title ?? ''}::${props.description ?? ''}`)}`;
@@ -62,11 +74,7 @@ export function toast(props: ToastProps) {
       },
     },
   );
-}
-
-export type ToastMessage =
-  | string
-  | ({ title: string; description: string } & AlertToastProps);
+};
 
 function createToast(variant: AlertVariant, message: ToastMessage, duration?: number) {
   if (typeof message === 'string') {
@@ -76,18 +84,13 @@ function createToast(variant: AlertVariant, message: ToastMessage, duration?: nu
   }
 }
 
-export function toastInfo(message: ToastMessage, duration?: number) {
-  createToast('info', message, duration);
-}
-
-export function toastSuccess(message: ToastMessage, duration?: number) {
-  createToast('success', message, duration);
-}
-
-export function toastWarning(message: ToastMessage, duration?: number) {
-  createToast('warning', message, duration);
-}
-
-export function toastError(message: ToastMessage, duration?: number) {
+toast.error = (message: ToastMessage, duration?: number) =>
   createToast('error', message, duration);
-}
+toast.success = (message: ToastMessage, duration?: number) =>
+  createToast('success', message, duration);
+toast.warning = (message: ToastMessage, duration?: number) =>
+  createToast('warning', message, duration);
+toast.info = (message: ToastMessage, duration?: number) =>
+  createToast('info', message, duration);
+
+export { toast };

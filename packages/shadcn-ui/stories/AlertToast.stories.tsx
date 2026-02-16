@@ -1,13 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from '../src/Button';
-import {
-  toast,
-  Toaster,
-  toastError,
-  toastInfo,
-  toastSuccess,
-  toastWarning,
-} from '../src/toast';
+import { toast, Toaster } from '../src/toast';
 
 /**
  * AlertToast component for displaying toast notifications with different variants.
@@ -16,13 +9,13 @@ import {
  * To use the toast in your application:
  *
  * 1. Make sure you have the `<Toaster />` component from 'sonner' in your app layout/root
- * 2. Import the toast functions: `toast`, `toastInfo`, `toastSuccess`, `toastWarning`, `toastError`
+ * 2. Import the toast functions: `toast`, `toast.info`, `toast.success`, `toast.warning`, `toast.error`
  * 3. Call the appropriate function to show a toast notification
  *
  * @example
  * ```tsx
  * import { Toaster } from 'sonner';
- * import { toast, toastSuccess } from '@pixpilot/shadcn-ui';
+ * import { toast } from '@pixpilot/shadcn-ui';
  *
  * function App() {
  *   return (
@@ -41,9 +34,9 @@ import {
  *   duration: 5000, // optional, defaults to 10000ms
  * });
  *
- * // Or use the convenience functions
- * toastSuccess('Operation completed successfully');
- * toastError({ title: 'Error', description: 'Something went wrong' });
+ * // Or use the convenience methods
+ * toast.success('Operation completed successfully');
+ * toast.error({ title: 'Error', description: 'Something went wrong' });
  * ```
  */
 const meta = {
@@ -88,14 +81,14 @@ export const Default: Story = {
 
 /**
  * Info toast for informational messages.
- * Use `toastInfo()` helper for quick info messages.
+ * Use `toast.info()` helper for quick info messages.
  */
 export const Info: Story = {
   render: () => (
     <div className="flex flex-col gap-2">
       <Button
         onClick={() =>
-          toastInfo({
+          toast.info({
             title: 'Information',
             description: 'Here is some helpful information about this feature.',
           })
@@ -105,7 +98,7 @@ export const Info: Story = {
       </Button>
       <Button
         variant="outline"
-        onClick={() => toastInfo('This is a simple info message')}
+        onClick={() => toast.info('This is a simple info message')}
       >
         Show Simple Info
       </Button>
@@ -115,14 +108,14 @@ export const Info: Story = {
 
 /**
  * Success toast for positive feedback.
- * Use `toastSuccess()` for successful operations.
+ * Use `toast.success()` for successful operations.
  */
 export const Success: Story = {
   render: () => (
     <div className="flex flex-col gap-2">
       <Button
         onClick={() =>
-          toastSuccess({
+          toast.success({
             title: 'Success!',
             description: 'Your changes have been saved successfully.',
           })
@@ -130,7 +123,7 @@ export const Success: Story = {
       >
         Show Success Toast
       </Button>
-      <Button variant="outline" onClick={() => toastSuccess('Operation completed!')}>
+      <Button variant="outline" onClick={() => toast.success('Operation completed!')}>
         Show Simple Success
       </Button>
     </div>
@@ -139,14 +132,14 @@ export const Success: Story = {
 
 /**
  * Warning toast for cautionary messages.
- * Use `toastWarning()` for warnings and cautions.
+ * Use `toast.warning()` for warnings and cautions.
  */
 export const Warning: Story = {
   render: () => (
     <div className="flex flex-col gap-2">
       <Button
         onClick={() =>
-          toastWarning({
+          toast.warning({
             title: 'Warning',
             description: 'This action may have unintended consequences.',
           })
@@ -156,7 +149,7 @@ export const Warning: Story = {
       </Button>
       <Button
         variant="outline"
-        onClick={() => toastWarning('Please review before proceeding')}
+        onClick={() => toast.warning('Please review before proceeding')}
       >
         Show Simple Warning
       </Button>
@@ -166,7 +159,7 @@ export const Warning: Story = {
 
 /**
  * Error toast for critical messages.
- * Use `toastError()` for error notifications.
+ * Use `toast.error()` for error notifications.
  */
 export const Error: Story = {
   render: () => (
@@ -174,7 +167,7 @@ export const Error: Story = {
       <Button
         variant="destructive"
         onClick={() =>
-          toastError({
+          toast.error({
             title: 'Error',
             description: 'Something went wrong. Please try again later.',
           })
@@ -182,7 +175,7 @@ export const Error: Story = {
       >
         Show Error Toast
       </Button>
-      <Button variant="outline" onClick={() => toastError('An error occurred!')}>
+      <Button variant="outline" onClick={() => toast.error('An error occurred!')}>
         Show Simple Error
       </Button>
     </div>
@@ -240,9 +233,9 @@ export const MultipleToasts: Story = {
       <div className="flex flex-col gap-2">
         <Button
           onClick={() => {
-            toastSuccess('First toast');
-            setTimeout(() => toastInfo('Second toast'), SECOND_TOAST_DELAY);
-            setTimeout(() => toastWarning('Third toast'), THIRD_TOAST_DELAY);
+            toast.success('First toast');
+            setTimeout(() => toast.info('Second toast'), SECOND_TOAST_DELAY);
+            setTimeout(() => toast.warning('Third toast'), THIRD_TOAST_DELAY);
           }}
         >
           Show Multiple Different Toasts
@@ -250,9 +243,9 @@ export const MultipleToasts: Story = {
         <Button
           variant="outline"
           onClick={() => {
-            toastInfo('Duplicate message');
-            setTimeout(() => toastInfo('Duplicate message'), DUPLICATE_FIRST_DELAY);
-            setTimeout(() => toastInfo('Duplicate message'), DUPLICATE_SECOND_DELAY);
+            toast.info('Duplicate message');
+            setTimeout(() => toast.info('Duplicate message'), DUPLICATE_FIRST_DELAY);
+            setTimeout(() => toast.info('Duplicate message'), DUPLICATE_SECOND_DELAY);
           }}
         >
           Show Duplicate Toasts (Will Replace)
