@@ -112,6 +112,7 @@ function Button(props: ButtonProps & { ref?: React.Ref<HTMLButtonElement> }) {
   const hasDisabledTooltip = Boolean(disabledTooltip) && isDisabled;
   const showTooltip = hasTooltip || hasDisabledTooltip;
   const tooltipContent = hasDisabledTooltip ? (disabledTooltip ?? '') : (tooltip ?? '');
+  const hasArea = variant !== 'ghost' && variant !== 'link';
 
   const Loader = (
     <div
@@ -119,8 +120,8 @@ function Button(props: ButtonProps & { ref?: React.Ref<HTMLButtonElement> }) {
       className={cn(
         'flex items-center justify-center',
         loaderPlacement === 'center' && 'rounded-0 absolute inset-0',
-        loaderPlacement === 'start' && 'mr-1',
-        loaderPlacement === 'end' && 'ml-1',
+        hasArea && loaderPlacement === 'start' && 'mr-1',
+        hasArea && loaderPlacement === 'end' && 'ml-1',
       )}
     >
       <Loader2
