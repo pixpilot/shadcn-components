@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.50.2
+
+### Patch Changes
+
+- update package.json files for shadcn-auth, shadcn-formily, and shadcn-ui
+
 ## 0.50.1
 
 ### Patch Changes
