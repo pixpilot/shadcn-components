@@ -1,4 +1,4 @@
-import type { FormConfigProps } from '../context';
+import type { FormSettings } from '../context';
 
 import type { JsonSchemaFormRendererProps } from './types';
 import React, { useMemo } from 'react';
@@ -17,7 +17,7 @@ const JsonSchemaFormRenderer: React.FC<JsonSchemaFormRendererProps> = (props) =>
 
   const { formSchema, SchemaField } = useFormSchema(schema, componentsProp);
 
-  const config = useMemo((): FormConfigProps => {
+  const config = useMemo((): FormSettings => {
     return {
       ...configProp,
       label: {

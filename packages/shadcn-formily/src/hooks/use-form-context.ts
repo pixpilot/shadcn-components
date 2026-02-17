@@ -1,7 +1,7 @@
 import type {
   FomFileUpload,
-  FormConfigProps,
   FormContextStates,
+  FormSettings,
 } from '../components/context';
 import { use } from 'react';
 import { FormContext } from '../components/context';
@@ -16,7 +16,7 @@ export function useFormFileUpload(): FomFileUpload | undefined {
   return fileUploadConfig;
 }
 
-export function useFormConfig(): FormConfigProps {
+export function useFormConfig(): FormSettings {
   const { settings } = useFormContext();
   return settings || {};
 }

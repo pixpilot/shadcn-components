@@ -29,7 +29,7 @@ export { ColorSelect } from './components/ColorSelect';
 export { Column } from './components/Column';
 export { Combobox } from './components/Combobox';
 // Context and configuration types
-export type { FormLayoutOptions } from './components/context';
+export * from './components/context/types';
 export { DatePicker } from './components/DatePicker';
 export { AvatarUpload, FileUpload, FileUploadInline } from './components/file-upload';
 // Core components
