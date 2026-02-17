@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.52.1
+
+### Patch Changes
+
+- remove unnecessary class from Loader2 component
+
 ## 0.52.0
 
 ### Minor Changes
