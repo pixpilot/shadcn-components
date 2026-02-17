@@ -124,7 +124,7 @@ function Button(props: ButtonProps & { ref?: React.Ref<HTMLButtonElement> }) {
       )}
     >
       <Loader2
-        className="text-background animate-spin"
+        className="animate-spin"
         style={{ height: getLoaderSize(size), width: getLoaderSize(size) }}
       />
     </div>
