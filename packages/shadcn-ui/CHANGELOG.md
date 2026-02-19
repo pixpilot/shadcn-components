@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.53.0
+
+### Minor Changes
+
+- support React nodes for tooltips and enhance tooltip rendering
+
 ## 0.52.2
 
 ### Patch Changes
