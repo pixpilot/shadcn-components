@@ -26,11 +26,11 @@ export interface ButtonProps
   /**
    * Tooltip message to show when button is disabled
    */
-  disabledTooltip?: string;
+  disabledTooltip?: React.ReactNode;
   /**
    * Regular tooltip message
    */
-  tooltip?: string;
+  tooltip?: React.ReactNode;
   /**
    * Loading state
    */
@@ -77,6 +77,24 @@ function getLoaderSize(
   return LOADER_SIZE_DEFAULT;
 }
 
+/**
+ * Render tooltip content. If it's a string containing newlines, split into
+ * paragraphs; otherwise render the node as-is.
+ */
+async function renderTooltipContent(content: React.ReactNode | undefined) {
+  if (typeof content === 'string') {
+    return (
+      <>
+        {content.split('\n').map((line, i) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <p key={i}>{line}</p>
+        ))}
+      </>
+    );
+  }
+  return content;
+}
+
 function Button(props: ButtonProps & { ref?: React.Ref<HTMLButtonElement> }) {
   const {
     children,
@@ -111,7 +129,7 @@ function Button(props: ButtonProps & { ref?: React.Ref<HTMLButtonElement> }) {
   const hasTooltip = Boolean(tooltip);
   const hasDisabledTooltip = Boolean(disabledTooltip) && isDisabled;
   const showTooltip = hasTooltip || hasDisabledTooltip;
-  const tooltipContent = hasDisabledTooltip ? (disabledTooltip ?? '') : (tooltip ?? '');
+  const tooltipContent = hasDisabledTooltip ? disabledTooltip : tooltip;
   const hasArea = variant !== 'ghost' && variant !== 'link';
 
   const Loader = (
@@ -151,9 +169,7 @@ function Button(props: ButtonProps & { ref?: React.Ref<HTMLButtonElement> }) {
               style={{ pointerEvents: 'all', cursor: 'not-allowed' }}
             />
           </TooltipTrigger>
-          <TooltipContent>
-            <p>{disabledTooltip}</p>
-          </TooltipContent>
+          <TooltipContent>{renderTooltipContent(disabledTooltip)}</TooltipContent>
         </Tooltip>
       )}
 
@@ -169,9 +185,7 @@ function Button(props: ButtonProps & { ref?: React.Ref<HTMLButtonElement> }) {
     return (
       <Tooltip {...tooltipProps}>
         <TooltipTrigger asChild>{buttonContent}</TooltipTrigger>
-        <TooltipContent>
-          <p>{tooltipContent}</p>
-        </TooltipContent>
+        <TooltipContent>{renderTooltipContent(tooltipContent)}</TooltipContent>
       </Tooltip>
     );
   }

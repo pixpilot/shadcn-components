@@ -156,3 +156,43 @@ export const DisabledWithTooltip: Story = {
     children: 'Disabled with tooltip',
   },
 };
+
+/**
+ * Disabled button with tooltip and disabled overlay click handler
+ */
+export const DisabledClickableOverlay: Story = {
+  args: {
+    disabled: true,
+    disabledTooltip: 'Disabled reason line 1\nMore details here',
+    children: 'Disabled (click overlay)',
+  },
+};
+
+/**
+ * Multiline string tooltip — should split into paragraphs on newlines
+ */
+export const MultilineStringTooltip: Story = {
+  args: {
+    tooltip: 'First line\nSecond line\nThird line',
+    children: 'Multiline tooltip',
+  },
+};
+
+/**
+ * Tooltip provided as a React node
+ */
+export const TooltipWithNode: Story = {
+  render: (args) => (
+    <Button
+      {...args}
+      tooltip={
+        <>
+          <strong>Rich title</strong>
+          <p className="mt-1">Additional descriptive text as a node.</p>
+        </>
+      }
+    >
+      Tooltip node
+    </Button>
+  ),
+};
