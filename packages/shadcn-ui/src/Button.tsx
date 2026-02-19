@@ -46,7 +46,18 @@ export interface ButtonProps
   /**
    * Props to pass to the tooltip component
    */
-  tooltipProps?: Omit<React.ComponentProps<typeof Tooltip>, 'children' | 'delayDuration'>;
+  /**
+   * Slots to customize tooltip components and their props.
+   */
+  slots?: {
+    tooltip?: Omit<React.ComponentProps<typeof Tooltip>, 'children' | 'delayDuration'>;
+    tooltipTrigger?: Omit<React.ComponentProps<typeof TooltipTrigger>, 'children'>;
+    tooltipContent?: React.ComponentProps<typeof TooltipContent>;
+    /** Props applied to the loader container element */
+    loaderContainer?: React.HTMLAttributes<HTMLDivElement>;
+    /** Custom loader node to render instead of the default `Loader2` */
+    loader?: React.ReactNode;
+  };
 }
 
 const LOADER_SIZE_SM = 14;
@@ -106,7 +117,7 @@ function Button(props: ButtonProps & { ref?: React.Ref<HTMLButtonElement> }) {
     onDisabledClick,
     tooltip,
     title,
-    tooltipProps,
+    slots,
     className,
     variant,
     size,
@@ -141,11 +152,14 @@ function Button(props: ButtonProps & { ref?: React.Ref<HTMLButtonElement> }) {
         hasArea && loaderPlacement === 'start' && 'mr-1',
         hasArea && loaderPlacement === 'end' && 'ml-1',
       )}
+      {...slots?.loaderContainer}
     >
-      <Loader2
-        className="animate-spin"
-        style={{ height: getLoaderSize(size), width: getLoaderSize(size) }}
-      />
+      {slots?.loader ?? (
+        <Loader2
+          className="animate-spin"
+          style={{ height: getLoaderSize(size), width: getLoaderSize(size) }}
+        />
+      )}
     </div>
   );
 
@@ -162,14 +176,16 @@ function Button(props: ButtonProps & { ref?: React.Ref<HTMLButtonElement> }) {
     >
       {/* Disabled tooltip overlay - enables tooltip on disabled button */}
       {Boolean(disabledTooltip) && isDisabled && (
-        <Tooltip {...tooltipProps}>
-          <TooltipTrigger asChild>
+        <Tooltip {...slots?.tooltip}>
+          <TooltipTrigger asChild {...slots?.tooltipTrigger}>
             <AbsoluteFill
               onClick={onDisabledClick}
               style={{ pointerEvents: 'all', cursor: 'not-allowed' }}
             />
           </TooltipTrigger>
-          <TooltipContent>{renderTooltipContent(disabledTooltip)}</TooltipContent>
+          <TooltipContent {...slots?.tooltipContent}>
+            {renderTooltipContent(disabledTooltip)}
+          </TooltipContent>
         </Tooltip>
       )}
 
@@ -183,9 +199,13 @@ function Button(props: ButtonProps & { ref?: React.Ref<HTMLButtonElement> }) {
   // If there's a tooltip and button is not disabled (or no disabled tooltip), wrap with tooltip
   if (showTooltip && !(Boolean(disabledTooltip) && isDisabled)) {
     return (
-      <Tooltip {...tooltipProps}>
-        <TooltipTrigger asChild>{buttonContent}</TooltipTrigger>
-        <TooltipContent>{renderTooltipContent(tooltipContent)}</TooltipContent>
+      <Tooltip {...slots?.tooltip}>
+        <TooltipTrigger asChild {...slots?.tooltipTrigger}>
+          {buttonContent}
+        </TooltipTrigger>
+        <TooltipContent {...slots?.tooltipContent}>
+          {renderTooltipContent(tooltipContent)}
+        </TooltipContent>
       </Tooltip>
     );
   }
