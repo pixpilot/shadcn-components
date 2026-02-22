@@ -1,5 +1,15 @@
 # @pixpilot/shadcn-ui
 
+## 0.54.0
+
+### Minor Changes
+
+- add slots for customizable tooltip and loader props
+
+### Patch Changes
+
+- remove unnecessary file path from README
+
 ## 0.53.0
 
 ### Minor Changes
