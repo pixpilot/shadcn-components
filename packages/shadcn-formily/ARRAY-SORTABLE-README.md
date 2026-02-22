@@ -87,4 +87,3 @@ import { Form } from '@pixpilot/shadcn-formily';
 - `id`: Unique item identifier
 - `disabled?`: Disable sorting for this item
 - `children`: Item content</content>
-  <parameter name="filePath">z:\github\pixpilot\shadcn-components\packages\shadcn-formily\src\components\array-sortable\README.md
