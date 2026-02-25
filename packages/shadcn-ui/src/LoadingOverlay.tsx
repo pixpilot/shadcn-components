@@ -48,13 +48,16 @@ export interface LoadingOverlayProps {
    */
   className?: string;
   /**
-   * Custom class name for the spinner
+   * Slots for customizing inner elements' props (e.g. spinner/message)
    */
-  spinnerClassName?: string;
-  /**
-   * Custom class name for the message
-   */
-  messageClassName?: string;
+  slots?: {
+    /** Props forwarded to the spinner (`Loader2`) component */
+    spinner?: React.ComponentProps<typeof Loader2>;
+    /** Props forwarded to the message `div` element */
+    message?: React.HTMLAttributes<HTMLDivElement>;
+    /** Props forwarded to the inner content `div` (flex column wrapper) */
+    content?: React.HTMLAttributes<HTMLDivElement>;
+  };
 }
 
 const LoadingOverlay: React.FC<LoadingOverlayProps> = (props) => {
@@ -67,9 +70,10 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = (props) => {
     scope = 'container ',
     size = 'default',
     className,
-    spinnerClassName,
-    messageClassName,
+    slots,
   } = props;
+
+  const contentProps = slots?.content || {};
 
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -127,6 +131,7 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = (props) => {
 
   return (
     <div
+      data-slot="loading-overlay"
       className={cn(
         'inset-0 z-[9999] flex justify-center transition-opacity',
         scope === 'fullscreen' ? 'fixed' : 'absolute',
@@ -142,17 +147,27 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = (props) => {
       aria-live="polite"
       aria-busy={loading}
     >
-      <div className="flex flex-col items-center gap-2">
+      <div
+        data-slot="loading-overlay-content"
+        {...contentProps}
+        className={cn('flex flex-col items-center gap-2', contentProps.className)}
+      >
         <Loader2
-          className={cn('text-foreground animate-spin', sizeClass, spinnerClassName)}
+          data-slot="loading-overlay-spinner"
+          className={cn(
+            'text-foreground animate-spin',
+            sizeClass,
+            slots?.spinner?.className,
+          )}
           aria-hidden="true"
         />
         {message != null && (
           <div
+            data-slot="loading-overlay-message"
             className={cn(
               'text-foreground font-medium',
               messageSizeClass,
-              messageClassName,
+              slots?.message?.className,
             )}
           >
             {message}
