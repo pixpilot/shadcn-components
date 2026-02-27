@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.55.0
+
+### Minor Changes
+
+- add slots for customizable inner elements' props
+
 ## 0.54.0
 
 ### Minor Changes
