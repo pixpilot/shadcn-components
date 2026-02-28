@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 0.10.0
+
+### Minor Changes
+
+- 5fe21ce: new release
+
 ## 0.9.0
 
 ### Minor Changes
