@@ -189,6 +189,66 @@ export const Fullscreen: Story = {
 };
 
 /**
+ * Demonstrates that the loader shows immediately on mount (no fade-in) when
+ * delay is 0. Click "Show Component" to mount a container whose loader is
+ * active from the very first render, blocking the content instantly.
+ */
+export const LoadingOnMount: Story = {
+  args: {
+    loading: true,
+    backdrop: true,
+    placement: 'center',
+    scope: 'container',
+  },
+  render: function LoadingOnMountStory(args) {
+    const [show, setShow] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+    const handleShow = () => {
+      setLoading(true);
+      setShow(true);
+    };
+
+    return (
+      <div className="flex flex-col gap-4 items-start">
+        <div className="flex gap-2">
+          <Button onClick={handleShow} disabled={show}>
+            Show Component
+          </Button>
+          {show && (
+            <Button variant="outline" onClick={() => setLoading((v) => !v)}>
+              {loading ? 'Stop Loading' : 'Start Loading'}
+            </Button>
+          )}
+          {show && (
+            <Button
+              variant="outline"
+              onClick={() => {
+                setShow(false);
+                setLoading(true);
+              }}
+            >
+              Hide
+            </Button>
+          )}
+        </div>
+        {show && (
+          <div className="relative w-64 h-40 border rounded-md overflow-hidden">
+            <div className="p-4">
+              <p className="font-medium">Component content</p>
+              <p className="text-sm text-muted-foreground">
+                This content is blocked immediately on mount.
+              </p>
+            </div>
+            <LoadingOverlay {...args} loading={loading} />
+          </div>
+        )}
+      </div>
+    );
+  },
+};
+
+/**
  * Fullscreen loader overlay
  */
 export const ContainerScope: Story = {

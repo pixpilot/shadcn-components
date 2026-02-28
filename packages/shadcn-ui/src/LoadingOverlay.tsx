@@ -75,13 +75,24 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = (props) => {
 
   const contentProps = slots?.content || {};
 
-  const [mounted, setMounted] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const hasDelay = delay > 0;
+
+  // When loading starts as true with no delay, mount and show immediately
+  // to block content without any fade-in animation.
+  const [mounted, setMounted] = useState(() => !hasDelay && loading);
+  const [visible, setVisible] = useState(() => !hasDelay && loading);
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
 
     if (loading) {
+      /*
+       * Always mount via setTimeout + double-RAF so that subsequent
+       * loading=true toggles get a fade-in transition.
+       * When delay=0 and loading is true on the very first render,
+       * the lazy useState initializer already set mounted/visible=true,
+       * so these setters are no-ops and no flicker occurs.
+       */
       timeoutId = setTimeout(() => {
         setMounted(true);
         requestAnimationFrame(() => {
