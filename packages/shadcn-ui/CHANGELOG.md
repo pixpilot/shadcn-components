@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.57.0
+
+### Minor Changes
+
+- improve loading behavior with immediate mount option
+
 ## 0.56.0
 
 ### Minor Changes
