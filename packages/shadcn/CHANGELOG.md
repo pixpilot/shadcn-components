@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 0.10.1
+
+### Patch Changes
+
+- remove unused `form` export from index
+
 ## 0.10.0
 
 ### Minor Changes
