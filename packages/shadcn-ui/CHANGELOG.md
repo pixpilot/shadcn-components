@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.58.0
+
+### Minor Changes
+
+- introduce `FileUploadRoot` and refactor `FileUploadInline`
+
 ## 0.57.2
 
 ### Patch Changes
