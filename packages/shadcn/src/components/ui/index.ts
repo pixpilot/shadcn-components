@@ -12,6 +12,14 @@ export * from './command';
 export * from './dialog';
 export * from './dropdown-menu';
 export * from './file-upload';
+// INTENTIONALLY NOT EXPORTED: `form`
+// The `form` submodule is excluded from this barrel export on purpose.
+// Re-exporting it from the shared `ui` barrel previously caused
+// accidental public API surface expansion and subtle circular
+// dependency issues. Keep `form` exported only from the package
+// entrypoints that explicitly intend to expose it.
+// See `packages/shadcn/test/no-form-export.test.ts` for a test
+// that prevents this line from being reintroduced accidentally.
 export * from './input';
 export * from './input-group';
 export * from './label';

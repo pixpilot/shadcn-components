@@ -11,6 +11,7 @@
     "url": "https://github.com/pixpilot/shadcn-components.git",
     "directory": "packages/ui"
   },
+  "sideEffects": false,
   "exports": "./src/index.ts",
   "files": [
     "dist"
@@ -22,6 +23,10 @@
         "types": "./dist/index.d.ts",
         "import": "./dist/index.js",
         "require": "./dist/index.cjs"
+      },
+      "./form": {
+        "import": "./dist/form/index.js",
+        "require": "./dist/form/index.cjs"
       }
     },
     "main": "./dist/index.cjs",
