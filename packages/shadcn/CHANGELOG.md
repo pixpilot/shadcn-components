@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 0.11.0
+
+### Minor Changes
+
+- restructure form exports and prevent accidental re-export
+
 ## 0.10.1
 
 ### Patch Changes
