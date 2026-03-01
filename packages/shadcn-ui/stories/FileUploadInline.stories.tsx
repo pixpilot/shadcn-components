@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { FileMetadata, FileUploadProgressCallBacks } from '../src/file-upload/types';
 import { useState } from 'react';
-import { FileUploadInline } from '../src';
+import { Button, FileUploadInline } from '../src';
 import { delay, handleUpload } from './utils/file-upload';
 
 /**
@@ -64,6 +64,22 @@ export const CustomButtonText: Story = {
   },
   render: function CustomButtonFileUpload(args) {
     return <FileUploadInline {...args} onUpload={handleUpload} />;
+  },
+};
+
+/**
+ * File upload with custom trigger children
+ */
+export const CustomTrigger: Story = {
+  args: {
+    showIcon: true,
+  },
+  render: function CustomTriggerFileUpload(args) {
+    return (
+      <FileUploadInline {...args} onUpload={handleUpload}>
+        <Button size="sm">Custom trigger</Button>
+      </FileUploadInline>
+    );
   },
 };
 

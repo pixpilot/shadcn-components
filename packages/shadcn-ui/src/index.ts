@@ -23,6 +23,7 @@ export * from './ContentCard';
 export * from './DatePicker';
 export * from './dialog';
 export * from './file-upload-inline';
+export * from './file-upload-root';
 export * from './file-upload/types';
 export * from './hooks';
 export * from './icon-selector';
@@ -44,7 +45,6 @@ export * from './theme-toggle';
 export * from './toast';
 export * from './ToggleGroup';
 export * from './utils';
-
 export {
   cn,
   type FileMetadata,

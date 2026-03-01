@@ -1,4 +1,4 @@
-import type { FileUploadProps } from '../file-upload/types';
+import type { FileUploadRootProps } from '../file-upload-root';
 
 export interface FileUploadInlineBaseProps {
   /**
@@ -11,4 +11,4 @@ export interface FileUploadInlineBaseProps {
   showIcon?: boolean;
 }
 
-export type FileUploadInlineProps = FileUploadInlineBaseProps & FileUploadProps;
+export type FileUploadInlineProps = FileUploadInlineBaseProps & FileUploadRootProps;

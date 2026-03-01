@@ -1,20 +1,11 @@
 'use client';
 
-import type { UseFileUploadStoreResult } from '../file-upload/hooks/use-file-upload-store';
 import type { FileUploadInlineProps } from './types';
-import {
-  Button,
-  cn,
-  FileUpload,
-  FileUploadDropzone,
-  FileUploadList,
-  FileUploadTrigger,
-} from '@pixpilot/shadcn';
+import { Button, cn } from '@pixpilot/shadcn';
 import { CloudUpload } from 'lucide-react';
-import { useCallback } from 'react';
-import { useFileUploadStore } from '../file-upload';
+
+import { FileUploadRoot } from '../file-upload-root';
 import { defaultOptions } from './defaults';
-import { FileUploadInlineItem } from './FileUploadInlineItem';
 
 /**
  * FileUploadInline - An inline file upload component using FileUpload primitives
@@ -25,7 +16,6 @@ export function FileUploadInline(props: FileUploadInlineProps) {
     onChange,
     className,
     disabled = defaultOptions.disabled,
-    multiple = defaultOptions.multiple,
     buttonText: buttonTextProp,
     showIcon = defaultOptions.showIcon,
     onAccept,
@@ -33,85 +23,47 @@ export function FileUploadInline(props: FileUploadInlineProps) {
     ...rest
   } = props;
 
+  const multiple = props.multiple ?? defaultOptions.multiple;
+
   const buttonText =
     buttonTextProp ?? (multiple ? 'Click to upload files' : 'Click to upload a file');
 
-  const {
-    handleAccept,
-    displayFiles,
-    deleteFile,
-    getFile,
-    orgValue,
-  }: UseFileUploadStoreResult = useFileUploadStore({
-    value,
-    onChange,
-    multiple,
-    preventDuplicates,
-  });
-
-  const handleFileAccept = useCallback(
-    (files: File[]) => {
-      onAccept?.(files);
-      handleAccept(files);
-    },
-    [handleAccept, onAccept],
+  const dropzoneClassName = cn(
+    'rounded-md border border-input border-solid flex-row bg-background px-3 py-0 display-block w-full cursor-pointer',
+    'hover:bg-accent/50 transition-colors m-0',
+    disabled && 'cursor-not-allowed opacity-50',
   );
 
   return (
-    <FileUpload
+    <FileUploadRoot
       {...rest}
-      value={orgValue}
-      onAccept={handleFileAccept}
+      // eslint-disable-next-line ts/no-unsafe-assignment
+      value={value as any}
+      onAccept={onAccept}
       disabled={disabled}
-      multiple={multiple}
+      // eslint-disable-next-line ts/no-unsafe-assignment
+      multiple={multiple as any}
       className={cn('space-y-2', className)}
+      slots={{
+        trigger: {
+          className: dropzoneClassName,
+        },
+      }}
     >
-      <>
-        {(multiple || (!multiple && displayFiles.length === 0)) && (
-          <FileUploadDropzone
-            className={cn(
-              'rounded-md border border-input border-solid flex-row bg-background px-3 py-0 display-block w-full cursor-pointer',
-              'hover:bg-accent/50 transition-colors m-0',
-              disabled && 'cursor-not-allowed opacity-50',
-            )}
-          >
-            {showIcon && (
-              <CloudUpload className="h-4 w-4 shrink-0 mx-1 text-muted-foreground" />
-            )}
-
-            <FileUploadTrigger asChild>
-              <Button
-                variant="link"
-                size="sm"
-                className="h-auto py-2 px-0 text-sm text-muted-foreground hover:no-underline justify-start flex-1"
-                disabled={disabled}
-              >
-                {buttonText}
-              </Button>
-            </FileUploadTrigger>
-          </FileUploadDropzone>
+      <Button
+        variant="link"
+        size="sm"
+        className={cn(
+          'h-auto py-2 px-0 text-sm text-muted-foreground hover:no-underline  flex-1',
+          showIcon ? 'justify-start' : 'justify-center',
         )}
-
-        {displayFiles.length > 0 && (
-          <FileUploadList className="space-y-1 m-0" forceMount>
-            {displayFiles.map((data) => {
-              const { name, lastModified } = data;
-
-              const key = `${name}-${lastModified}`;
-
-              return (
-                <FileUploadInlineItem
-                  key={key}
-                  {...data}
-                  file={getFile(data)}
-                  disabled={disabled}
-                  onDelete={deleteFile}
-                />
-              );
-            })}
-          </FileUploadList>
+        disabled={disabled}
+      >
+        {showIcon && (
+          <CloudUpload className="h-4 w-4 shrink-0 mx-1 text-muted-foreground" />
         )}
-      </>
-    </FileUpload>
+        <span>{buttonText}</span>
+      </Button>
+    </FileUploadRoot>
   );
 }
