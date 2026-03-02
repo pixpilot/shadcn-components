@@ -93,6 +93,7 @@ const Alert: React.FC<AlertProps> = (props) => {
       variant="destructive"
       className={cn(
         'bg-card border-accent! flex justify-between rounded-sm border-0 border-l-4',
+        msgIcon ? 'flex-row' : 'flex-col',
         variantConfig.class,
         variantConfig.textClass,
         className,

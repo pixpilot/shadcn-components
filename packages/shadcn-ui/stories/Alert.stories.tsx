@@ -157,9 +157,23 @@ export const ChildrenOnly: Story = {
   args: {
     variant: 'default',
     children: (
-      <div>
-        <strong>Custom content:</strong> This alert is rendered via children only.
-      </div>
+      <>
+        <div>
+          <strong>Custom content:</strong> This alert is rendered via children only.
+        </div>
+        <div>
+          <strong>Custom content:</strong> This alert is rendered via children only.
+        </div>
+      </>
     ),
+  },
+};
+
+export const WithIcon: Story = {
+  args: {
+    variant: 'info',
+    title: 'Alert with Icon',
+    description: 'This alert includes an icon by default.',
+    icon: true,
   },
 };
