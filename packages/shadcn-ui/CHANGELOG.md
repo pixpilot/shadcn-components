@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.59.0
+
+### Minor Changes
+
+- add support for rendering alerts with children only
+
 ## 0.58.0
 
 ### Minor Changes
