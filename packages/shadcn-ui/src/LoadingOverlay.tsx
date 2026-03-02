@@ -25,7 +25,7 @@ export interface LoadingOverlayProps {
   /**
    * Optional loading message to display below spinner
    */
-  message?: string;
+  message?: string | React.ReactNode;
   /**
    * Delay in milliseconds before showing the loader
    * @default 0
