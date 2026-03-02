@@ -149,3 +149,17 @@ export const DescriptionWithComponent: Story = {
     ),
   },
 };
+
+/**
+ * Alert with children only (no `title` or `description` props)
+ */
+export const ChildrenOnly: Story = {
+  args: {
+    variant: 'default',
+    children: (
+      <div>
+        <strong>Custom content:</strong> This alert is rendered via children only.
+      </div>
+    ),
+  },
+};
