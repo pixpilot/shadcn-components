@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.60.0
+
+### Minor Changes
+
+- enhance alert component with icon support and improved children rendering
+
 ## 0.59.0
 
 ### Minor Changes
