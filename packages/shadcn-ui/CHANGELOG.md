@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.60.1
+
+### Patch Changes
+
+- update message prop type to support React nodes
+
 ## 0.60.0
 
 ### Minor Changes
