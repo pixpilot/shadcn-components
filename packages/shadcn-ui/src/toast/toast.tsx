@@ -105,11 +105,10 @@ function createToast(
   message: ToastMessage,
   options?: ToastOwnProps,
 ) {
-  const { duration, id } = options || {};
   if (typeof message === 'string') {
-    toast({ variant, description: message, duration, id });
+    toast({ ...options, variant, description: message });
   } else {
-    toast({ variant, ...message, duration, id });
+    toast({ ...options, ...message });
   }
 }
 
