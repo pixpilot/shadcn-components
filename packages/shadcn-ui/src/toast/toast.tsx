@@ -76,7 +76,7 @@ function getToastHandlers(baseId: string) {
 }
 
 const toast: ToastFunction = function (props: ToastProps) {
-  const { duration, id, dismissible, position, ...rest } = props;
+  const { duration, id, dismissible = true, position, ...rest } = props;
 
   const baseId =
     id ?? `toast_${simpleHash(`${props.title ?? ''}::${props.description ?? ''}`)}`;
@@ -85,7 +85,12 @@ const toast: ToastFunction = function (props: ToastProps) {
   const handlers = getToastHandlers(baseId);
 
   sonnerToast.custom(
-    (t) => <AlertToast {...rest} onClose={() => sonnerToast.dismiss(t)} />,
+    (t) => (
+      <AlertToast
+        {...rest}
+        onClose={dismissible ? () => sonnerToast.dismiss(t) : undefined}
+      />
+    ),
     {
       duration: duration ?? DEFAULT_ALERT_DURATION,
       id: toastId,

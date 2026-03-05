@@ -231,6 +231,27 @@ export const CustomDuration: Story = {
 };
 
 /**
+ * Non-dismissible toast example.
+ * Set `dismissible: false` to prevent manual dismissal.
+ */
+export const DismissibleFalse: Story = {
+  render: () => (
+    <Button
+      onClick={() =>
+        toast({
+          title: 'Non-dismissible Toast',
+          description: 'This toast cannot be dismissed manually.',
+          dismissible: false,
+          position: 'bottom-center',
+        })
+      }
+    >
+      Show Non-dismissible Toast
+    </Button>
+  ),
+};
+
+/**
  * Custom toast with React components.
  * Use `toast.custom()` to render custom React components in toasts.
  * This allows for fully customized toast content beyond the standard variants.
