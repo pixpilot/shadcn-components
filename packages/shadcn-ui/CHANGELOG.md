@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.64.0
+
+### Minor Changes
+
+- return ID from toast methods and update dismiss functionality
+
 ## 0.63.1
 
 ### Patch Changes
