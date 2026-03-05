@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.62.0
+
+### Minor Changes
+
+- add non-dismissible toast option
+
 ## 0.61.0
 
 ### Minor Changes
