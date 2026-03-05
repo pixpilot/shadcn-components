@@ -1,3 +1,4 @@
+import React from 'react';
 import { describe, expect, it, vi } from 'vitest';
 
 import { toast } from '../../src/toast';
@@ -22,13 +23,16 @@ describe('toast', () => {
       expect(typeof toast.success).toBe('function');
       expect(typeof toast.warning).toBe('function');
       expect(typeof toast.info).toBe('function');
+      expect(typeof toast.custom).toBe('function');
+      expect(typeof toast.remove).toBe('function');
+      expect(typeof toast.removeAll).toBe('function');
     });
 
     it('should call toast.error with string message', () => {
       const message = 'Test error message';
-      const duration = 5000;
+      const options = { duration: 5000 };
 
-      toast.error(message, duration);
+      toast.error(message, options);
 
       expect(typeof toast.error).toBe('function');
     });
@@ -66,6 +70,30 @@ describe('toast', () => {
     it('should call toast.info with string message', () => {
       toast.info('Info message');
       expect(typeof toast.info).toBe('function');
+    });
+
+    it('should call toast.remove with id', () => {
+      const id = 'test-id';
+      toast.remove(id);
+      expect(typeof toast.remove).toBe('function');
+    });
+
+    it('should call toast.removeAll', () => {
+      toast.removeAll();
+      expect(typeof toast.removeAll).toBe('function');
+    });
+
+    it('should call toast.custom with component', () => {
+      const component = <div>Custom Toast</div>;
+      toast.custom(component);
+      expect(typeof toast.custom).toBe('function');
+    });
+
+    it('should call toast.custom with component and options', () => {
+      const component = <div>Custom Toast</div>;
+      const options = { duration: 5000, id: 'custom-id' };
+      toast.custom(component, options);
+      expect(typeof toast.custom).toBe('function');
     });
   });
 
@@ -119,10 +147,15 @@ describe('toast', () => {
     });
 
     it('should accept duration parameter', () => {
-      toast.error('message', 3000);
-      toast.success('message', 5000);
-      toast.warning('message', 1000);
-      toast.info('message', 2000);
+      toast.error('message', { duration: 3000 });
+      toast.success('message', { duration: 5000 });
+      toast.warning('message', { duration: 1000 });
+      toast.info('message', { duration: 2000 });
+    });
+
+    it('should accept baseId parameter', () => {
+      toast.error('message', { id: 'custom-id' });
+      toast.success('message', { id: 'success-id', duration: 4000 });
     });
   });
 });

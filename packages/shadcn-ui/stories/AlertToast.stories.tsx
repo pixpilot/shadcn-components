@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 import { Button } from '../src/Button';
 import { toast, Toaster } from '../src/toast';
 
@@ -9,7 +10,7 @@ import { toast, Toaster } from '../src/toast';
  * To use the toast in your application:
  *
  * 1. Make sure you have the `<Toaster />` component from 'sonner' in your app layout/root
- * 2. Import the toast functions: `toast`, `toast.info`, `toast.success`, `toast.warning`, `toast.error`
+ * 2. Import the toast functions: `toast`, `toast.info`, `toast.success`, `toast.warning`, `toast.error`, `toast.custom`
  * 3. Call the appropriate function to show a toast notification
  *
  * @example
@@ -37,6 +38,18 @@ import { toast, Toaster } from '../src/toast';
  * // Or use the convenience methods
  * toast.success('Operation completed successfully');
  * toast.error({ title: 'Error', description: 'Something went wrong' });
+ *
+ * // Or use custom components
+ * toast.custom(
+ *   <div className="flex items-center gap-2">
+ *     <span>🚀</span>
+ *     <div>
+ *       <div className="font-semibold">Custom Toast!</div>
+ *       <div className="text-sm">Fully customizable content</div>
+ *     </div>
+ *   </div>,
+ *   { duration: 5000, id: 'my-custom-toast' }
+ * );
  * ```
  */
 const meta = {
@@ -218,39 +231,127 @@ export const CustomDuration: Story = {
 };
 
 /**
- * Multiple toasts example.
- * You can show multiple toasts at once, and they will stack.
- * Duplicate toasts (same title and description) will replace the previous one.
+ * Custom toast with React components.
+ * Use `toast.custom()` to render custom React components in toasts.
+ * This allows for fully customized toast content beyond the standard variants.
  */
-export const MultipleToasts: Story = {
-  render: () => {
-    const SECOND_TOAST_DELAY = 200;
-    const THIRD_TOAST_DELAY = 400;
-    const DUPLICATE_FIRST_DELAY = 500;
-    const DUPLICATE_SECOND_DELAY = 1000;
+export const CustomToast: Story = {
+  render: () => (
+    <div className="flex flex-col gap-2">
+      <Button
+        onClick={() =>
+          toast.custom(
+            <div className="flex items-center gap-2">
+              <span className="text-2xl">🚀</span>
+              <div>
+                <div className="font-semibold">Custom Toast!</div>
+                <div className="text-sm opacity-90">
+                  This is a fully custom toast component
+                </div>
+              </div>
+            </div>,
+            { duration: 5000 },
+          )
+        }
+      >
+        Show Custom Toast
+      </Button>
+      <Button
+        variant="outline"
+        onClick={() =>
+          toast.custom(
+            <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-4 rounded-lg">
+              <div className="font-bold text-lg">🎨 Styled Toast</div>
+              <div className="text-sm">With custom styling and colors</div>
+            </div>,
+            { duration: 7000, id: 'styled-toast' },
+          )
+        }
+      >
+        Show Styled Custom Toast
+      </Button>
+      <Button
+        variant="secondary"
+        onClick={() => {
+          // Show multiple custom toasts with same ID to demonstrate replacement
+          toast.custom(
+            <div className="flex items-center gap-2">
+              <span className="text-xl">🔄</span>
+              <div>
+                <div className="font-semibold">First Version</div>
+                <div className="text-sm opacity-90">This will be replaced</div>
+              </div>
+            </div>,
+            { id: 'replace-demo', duration: 3000 },
+          );
+          setTimeout(() => {
+            toast.custom(
+              <div className="flex items-center gap-2">
+                <span className="text-xl">✨</span>
+                <div>
+                  <div className="font-semibold">Updated Version</div>
+                  <div className="text-sm opacity-90">This replaced the previous one</div>
+                </div>
+              </div>,
+              { id: 'replace-demo', duration: 3000 },
+            );
+          }, 1000);
+        }}
+      >
+        Show Replacing Custom Toasts
+      </Button>
+    </div>
+  ),
+};
 
-    return (
-      <div className="flex flex-col gap-2">
-        <Button
-          onClick={() => {
-            toast.success('First toast');
-            setTimeout(() => toast.info('Second toast'), SECOND_TOAST_DELAY);
-            setTimeout(() => toast.warning('Third toast'), THIRD_TOAST_DELAY);
-          }}
+/**
+ * Position story
+ * Demonstrates different `Toaster` positions. Select a position and click the button to show the toast.
+ */
+function PositionStory() {
+  const [position, setPosition] = useState<
+    | 'top-left'
+    | 'top-right'
+    | 'top-center'
+    | 'bottom-left'
+    | 'bottom-right'
+    | 'bottom-center'
+  >('top-right');
+
+  return (
+    <div className="flex flex-col items-center gap-4">
+      <Toaster position={position} />
+      <div className="flex items-center gap-2">
+        <p className="mr-2">Position:</p>
+        <select
+          value={position}
+          // eslint-disable-next-line ts/no-unsafe-argument
+          onChange={(e) => setPosition(e.target.value as any)}
+          className="border rounded px-2 py-1"
         >
-          Show Multiple Different Toasts
-        </Button>
+          <option value="top-left">Top Left</option>
+          <option value="top-center">Top Center</option>
+          <option value="top-right">Top Right</option>
+          <option value="bottom-left">Bottom Left</option>
+          <option value="bottom-center">Bottom Center</option>
+          <option value="bottom-right">Bottom Right</option>
+        </select>
         <Button
-          variant="outline"
-          onClick={() => {
-            toast.info('Duplicate message');
-            setTimeout(() => toast.info('Duplicate message'), DUPLICATE_FIRST_DELAY);
-            setTimeout(() => toast.info('Duplicate message'), DUPLICATE_SECOND_DELAY);
-          }}
+          onClick={() =>
+            toast({
+              title: 'Positioned toast',
+              description: `This toast uses the "${position}" toaster position.`,
+              position,
+            })
+          }
         >
-          Show Duplicate Toasts (Will Replace)
+          Show Toast
         </Button>
       </div>
-    );
-  },
+    </div>
+  );
+}
+
+export const Position: Story = {
+  render: PositionStory,
 };
