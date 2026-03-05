@@ -21,14 +21,14 @@ export type ToastMessage =
   | ({ title: string; description: string } & AlertToastProps);
 
 export interface ToastFunction {
-  (props: ToastProps): void;
-  error: (message: ToastMessage, options?: ToastOwnProps) => void;
-  success: (message: ToastMessage, options?: ToastOwnProps) => void;
-  warning: (message: ToastMessage, options?: ToastOwnProps) => void;
-  info: (message: ToastMessage, options?: ToastOwnProps) => void;
-  custom: (component: React.ReactElement, options?: ToastOwnProps) => void;
-  remove: (id: string) => void;
-  removeAll: () => void;
+  (props: ToastProps): string;
+  error: (message: ToastMessage, options?: ToastOwnProps) => string;
+  success: (message: ToastMessage, options?: ToastOwnProps) => string;
+  warning: (message: ToastMessage, options?: ToastOwnProps) => string;
+  info: (message: ToastMessage, options?: ToastOwnProps) => string;
+  custom: (component: React.ReactElement, options?: ToastOwnProps) => string | number;
+  dismiss: (id: string) => void;
+  dismissAll: () => void;
 }
 
 // Track toast instances with counter
@@ -78,11 +78,18 @@ function getToastHandlers(baseId: string) {
 const toast: ToastFunction = function (props: ToastProps) {
   const { duration, id, dismissible = true, position, ...rest } = props;
 
-  const baseId =
-    id ?? `toast_${simpleHash(`${props.title ?? ''}::${props.description ?? ''}`)}`;
+  let toastId: string;
+  let handlers: ReturnType<typeof getToastHandlers> | undefined;
 
-  const toastId = getToastId(baseId);
-  const handlers = getToastHandlers(baseId);
+  if (id != null) {
+    // Use explicit ID directly - no tracking or counter
+    toastId = id;
+  } else {
+    // Auto-generated ID with tracking for replacement
+    const baseId = `toast_${simpleHash(`${props.title ?? ''}::${props.description ?? ''}`)}`;
+    toastId = getToastId(baseId);
+    handlers = getToastHandlers(baseId);
+  }
 
   sonnerToast.custom(
     (t) => (
@@ -98,6 +105,8 @@ const toast: ToastFunction = function (props: ToastProps) {
       ...handlers,
     },
   );
+
+  return toastId;
 };
 
 function createToast(
@@ -106,10 +115,9 @@ function createToast(
   options?: ToastOwnProps,
 ) {
   if (typeof message === 'string') {
-    toast({ ...options, variant, description: message });
-  } else {
-    toast({ ...options, ...message, variant });
+    return toast({ ...options, variant, description: message });
   }
+  return toast({ ...options, ...message, variant });
 }
 
 toast.error = (message: ToastMessage, options?: ToastOwnProps) =>
@@ -128,16 +136,16 @@ toast.custom = (component: React.ReactElement, options?: ToastOwnProps) => {
   // 2. No ID generation! (Sonner does this natively if `id` is missing)
   // 3. No counter suffixes!
 
-  sonnerToast.custom(() => component, {
+  return sonnerToast.custom(() => component, {
     duration: duration ?? DEFAULT_ALERT_DURATION,
     ...rest, // This passes 'id', 'position', etc., straight to Sonner
   });
 };
-toast.remove = (id: string) => {
+toast.dismiss = (id: string) => {
   sonnerToast.dismiss(id);
 };
 
-toast.removeAll = () => {
+toast.dismissAll = () => {
   sonnerToast.dismiss();
   toastInstances.clear();
 };

@@ -376,3 +376,78 @@ function PositionStory() {
 export const Position: Story = {
   render: PositionStory,
 };
+
+function IdRemoveStory() {
+  const [lastId, setLastId] = useState<string | null>(null);
+  const [returnedIds, setReturnedIds] = useState<string[]>([]);
+  const fixedId = 'removable-toast';
+
+  const addReturnedId = (id: string) => {
+    setReturnedIds((prev) => [...prev.slice(-4), id]); // Keep last 5 IDs
+  };
+
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="text-sm text-gray-600">
+        Returned IDs: {returnedIds.length > 0 ? returnedIds.join(', ') : 'None'}
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <Button
+          onClick={() => {
+            const id = toast({
+              id: fixedId,
+              variant: 'info',
+              title: 'Removable Toast',
+              description:
+                'This toast was created with an id and can be removed programmatically.',
+            });
+            setLastId(id);
+            addReturnedId(id);
+          }}
+        >
+          Show Toast With ID
+        </Button>
+
+        <Button variant="secondary" onClick={() => toast.dismiss(fixedId)}>
+          Remove Toast By ID
+        </Button>
+
+        <Button
+          variant="outline"
+          onClick={() => {
+            const gen = `custom-${Math.random().toString(36).slice(2, 8)}`;
+            const id = toast.custom(<div className="p-2">Custom toast id: {gen}</div>, {
+              id: gen,
+              duration: 5000,
+            });
+            setLastId(id as string);
+            addReturnedId(id as string);
+          }}
+        >
+          Show Custom Toast With ID
+        </Button>
+
+        <Button
+          variant="destructive"
+          onClick={() => lastId != null && toast.dismiss(lastId)}
+        >
+          Remove Last Shown Toast
+        </Button>
+
+        <Button
+          onClick={() => {
+            const id = toast.success('Success message with returned ID');
+            addReturnedId(id);
+          }}
+        >
+          Show Success With Returned ID
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+export const PassIdAndRemove: Story = {
+  render: IdRemoveStory,
+};

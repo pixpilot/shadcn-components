@@ -24,8 +24,8 @@ describe('toast', () => {
       expect(typeof toast.warning).toBe('function');
       expect(typeof toast.info).toBe('function');
       expect(typeof toast.custom).toBe('function');
-      expect(typeof toast.remove).toBe('function');
-      expect(typeof toast.removeAll).toBe('function');
+      expect(typeof toast.dismiss).toBe('function');
+      expect(typeof toast.dismissAll).toBe('function');
     });
 
     it('should call toast.error with string message', () => {
@@ -74,13 +74,13 @@ describe('toast', () => {
 
     it('should call toast.remove with id', () => {
       const id = 'test-id';
-      toast.remove(id);
-      expect(typeof toast.remove).toBe('function');
+      toast.dismiss(id);
+      expect(typeof toast.dismiss).toBe('function');
     });
 
     it('should call toast.removeAll', () => {
-      toast.removeAll();
-      expect(typeof toast.removeAll).toBe('function');
+      toast.dismissAll();
+      expect(typeof toast.dismissAll).toBe('function');
     });
 
     it('should call toast.custom with component', () => {

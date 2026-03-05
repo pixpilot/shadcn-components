@@ -21,12 +21,14 @@ describe('toast', () => {
   });
 
   it('passes variant and options for string messages', () => {
-    toast.success('Hello world', {
+    const returnedId = toast.success('Hello world', {
       id: 'my-id',
       duration: 1234,
       dismissible: true,
       position: 'top-center',
     });
+
+    expect(returnedId).toBe('my-id');
 
     expect(sonner.toast.custom as any).toHaveBeenCalledTimes(1);
 
@@ -36,7 +38,7 @@ describe('toast', () => {
 
     expect(opts.duration).toBe(1234);
     expect(opts.position).toBe('top-center');
-    expect(opts.id).toBe('my-id_0');
+    expect(opts.id).toBe('my-id');
 
     const element = renderFn({ id: opts.id });
     expect(element.props.variant).toBe('success');
@@ -45,7 +47,14 @@ describe('toast', () => {
 
   it('toast.custom passes options through without id suffix', () => {
     const comp = React.createElement('div', { 'data-testid': 'x' }, 'X');
-    toast.custom(comp, { id: 'custom-id', duration: 2000, position: 'bottom-center' });
+    (sonner.toast.custom as any).mockReturnValue('mocked-id');
+    const returnedId = toast.custom(comp, {
+      id: 'custom-id',
+      duration: 2000,
+      position: 'bottom-center',
+    });
+
+    expect(returnedId).toBe('mocked-id');
 
     expect(sonner.toast.custom as any).toHaveBeenCalledTimes(1);
     const call = (sonner.toast.custom as any).mock.calls[0];
