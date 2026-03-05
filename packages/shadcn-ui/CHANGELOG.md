@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.63.0
+
+### Minor Changes
+
+- simplify toast options handling
+
 ## 0.62.0
 
 ### Minor Changes
