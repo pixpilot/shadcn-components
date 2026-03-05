@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.63.1
+
+### Patch Changes
+
+- ensure variant is included in toast message options
+
 ## 0.63.0
 
 ### Minor Changes
