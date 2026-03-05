@@ -108,7 +108,7 @@ function createToast(
   if (typeof message === 'string') {
     toast({ ...options, variant, description: message });
   } else {
-    toast({ ...options, ...message });
+    toast({ ...options, ...message, variant });
   }
 }
 
