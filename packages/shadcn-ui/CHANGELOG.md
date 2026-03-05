@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.61.0
+
+### Minor Changes
+
+- enhance toast functionality with custom component support
+
 ## 0.60.1
 
 ### Patch Changes
