@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.53.0
+
+### Minor Changes
+
+- re-export all from `ObjectContainer`
+
 ## 0.52.0
 
 ### Minor Changes
