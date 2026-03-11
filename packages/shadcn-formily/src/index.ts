@@ -44,6 +44,7 @@ export { Input } from './components/Input';
 
 export * from './components/json-schema-form-renderer';
 export { NumberInput } from './components/number';
+export { ObjectContainer } from './components/ObjectContainer';
 export { ConnectedRadio, Radio } from './components/Radio';
 export { Rating } from './components/Rating';
 export { RichTextEditor } from './components/RichTextEditor';
@@ -54,14 +55,16 @@ export { Separator } from './components/Separator';
 export * from './components/slider';
 export { Switch } from './components/Switch';
 export { TagsInputInLine } from './components/TagsInputInline';
+
 export { Textarea } from './components/Textarea';
 
 export { ToggleGroup } from './components/ToggleGroup';
-
 export { transformSchema } from './utils';
 // Re-export Formily core exports for convenience
 export { createForm } from '@formily/core';
+
 export type { Form as IForm } from '@formily/core';
+
 export {
   Field,
   FormConsumer,
