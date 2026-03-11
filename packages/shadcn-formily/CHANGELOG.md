@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 0.52.0
+
+### Minor Changes
+
+- re-export `ObjectContainer` and `ToggleGroup` components
+
 ## 0.51.12
 
 ### Patch Changes
