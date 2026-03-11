@@ -44,7 +44,7 @@ export { Input } from './components/Input';
 
 export * from './components/json-schema-form-renderer';
 export { NumberInput } from './components/number';
-export { ObjectContainer } from './components/ObjectContainer';
+export * from './components/ObjectContainer';
 export { ConnectedRadio, Radio } from './components/Radio';
 export { Rating } from './components/Rating';
 export { RichTextEditor } from './components/RichTextEditor';
