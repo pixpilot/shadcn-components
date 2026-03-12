@@ -35,6 +35,15 @@ export function useColorPickerBaseValue(params: {
   if (propValue !== lastPropValueRef.current) {
     lastPropValueRef.current = propValue;
     isApplyingControlledValueRef.current = true;
+    /*
+     * Reset the last-notified sentinel whenever the controlled value changes
+     * from the outside (e.g. form.setValues()). Without this reset, a user who
+     * previously selected "#FFA500", then had the value externally changed to
+     * "#EF4444", would be unable to re-select "#FFA500" because
+     * lastNotifiedValueRef still holds "#FFA500" and the dedup guard would
+     * silently swallow the onChange/onValueChange call.
+     */
+    lastNotifiedValueRef.current = undefined;
   }
 
   useEffect(() => {

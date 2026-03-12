@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable no-console */
 /* eslint-disable no-alert */
 import type { Meta, StoryObj } from '@storybook/react';
 import { onFieldValueChange } from '@formily/core';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { createForm, Form, SchemaField } from '../src';
 
 const meta: Meta<typeof Form> = {
@@ -262,6 +263,59 @@ export const DeclarativeColorPicker: Story = {
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
           Submit
+        </button>
+      </Form>
+    );
+  },
+};
+
+export const SetValueWithForm: Story = {
+  render: () => {
+    const form = useMemo(() => {
+      return createForm({
+        initialValues: {
+          favoriteColor: '#10B981',
+        },
+        effects() {
+          // Listen for changes to the favoriteColor field
+          onFieldValueChange('*', (field) => {
+            console.log(field);
+          });
+        },
+      });
+    }, []);
+
+    const schema = {
+      type: 'object',
+      properties: {
+        favoriteColor: {
+          type: 'string',
+          title: 'Favorite Color',
+          'x-decorator': 'FormItem',
+          'x-component': 'ColorPicker',
+          'x-component-props': {
+            placeholder: 'Pick your favorite color',
+          },
+        },
+      },
+    };
+
+    return (
+      <Form
+        form={form}
+        className="w-[400px]"
+        onSubmit={(values) => {
+          console.log('Form submitted:', values);
+          alert(JSON.stringify(values, null, 2));
+        }}
+      >
+        <SchemaField schema={schema} />
+        <button
+          type="button"
+          className="mt-4 w-full rounded-md bg-secondary px-4 py-2 text-secondary-foreground hover:bg-secondary/90"
+          onClick={() => form.setValues({ favoriteColor: '#EF4444' })}
+        >
+          Set Favorite Color to Red
         </button>
       </Form>
     );

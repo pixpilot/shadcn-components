@@ -147,4 +147,52 @@ describe('useColorPickerBaseValue', () => {
     expect(onChange).not.toHaveBeenCalled();
     expect(onValueChange).not.toHaveBeenCalled();
   });
+
+  it('allows reselecting same value after external controlled change', async () => {
+    const onChange = vi.fn();
+    const onValueChange = vi.fn();
+
+    let api: any;
+
+    const { rerender } = render(
+      <Harness
+        value="#10B981"
+        defaultValue="#000000"
+        onChange={onChange}
+        onValueChange={onValueChange}
+        onReady={(next) => {
+          api = next;
+        }}
+      />,
+    );
+
+    // user selects #FFA500
+    act(() => {
+      api.handleValueChange('#FFA500');
+    });
+
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onValueChange).toHaveBeenCalledTimes(1);
+
+    // external controlled update (e.g. form.setValues)
+    rerender(
+      <Harness
+        value="#EF4444"
+        defaultValue="#000000"
+        onChange={onChange}
+        onValueChange={onValueChange}
+        onReady={() => {
+          // no-op
+        }}
+      />,
+    );
+
+    // user re-selects the previous palette value; should notify again
+    act(() => {
+      api.handleValueChange('#FFA500');
+    });
+
+    expect(onChange).toHaveBeenCalledTimes(2);
+    expect(onValueChange).toHaveBeenCalledTimes(2);
+  });
 });
