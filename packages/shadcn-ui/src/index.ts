@@ -10,6 +10,7 @@ export * from './AbsoluteFill';
 export * from './Alert';
 export * from './avatar-upload';
 export * from './Button';
+export * from './ButtonExtended';
 export * from './ButtonGroup';
 export * from './circle-loader';
 export * from './CloseButtonAbsolute';

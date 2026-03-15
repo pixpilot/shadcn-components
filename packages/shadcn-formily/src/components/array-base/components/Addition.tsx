@@ -1,6 +1,6 @@
-import type { ButtonProps as UiButtonProps } from '@pixpilot/shadcn-ui';
+import type { ButtonExtendedProps as UiButtonProps } from '@pixpilot/shadcn-ui';
 import { useField } from '@formily/react';
-import { Button, cn } from '@pixpilot/shadcn-ui';
+import { ButtonExtended, cn } from '@pixpilot/shadcn-ui';
 import { PlusIcon } from 'lucide-react';
 import React from 'react';
 import { getDefaultValue } from '../../../utils';
@@ -40,7 +40,7 @@ export function ArrayAddition({
     : defaultLabel;
 
   return (
-    <Button
+    <ButtonExtended
       type="button"
       variant={fullWidth ? 'ghost' : 'outline'}
       {...props}
@@ -86,7 +86,7 @@ export function ArrayAddition({
       {!isAtMax &&
         (props.icon !== undefined ? props.icon : <PlusIcon className="mr-2 size-4" />)}
       {buttonLabel}
-    </Button>
+    </ButtonExtended>
   );
 }
 ArrayAddition.displayName = 'ArrayAddition';

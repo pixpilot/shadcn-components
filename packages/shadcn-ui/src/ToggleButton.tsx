@@ -2,8 +2,8 @@
 
 import type { buttonVariants } from '@pixpilot/shadcn';
 import type { VariantProps } from 'class-variance-authority';
-import { Button } from '@pixpilot/shadcn';
 import React, { useCallback } from 'react';
+import { Button } from './Button';
 
 type ButtonBaseProps = React.ComponentProps<'button'> &
   VariantProps<typeof buttonVariants> & { asChild?: boolean };

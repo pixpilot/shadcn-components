@@ -1,4 +1,4 @@
-import type { ButtonProps } from '@pixpilot/shadcn-ui';
+import type { ButtonExtendedProps } from '@pixpilot/shadcn-ui';
 import type { IArrayBaseContext } from './array-context';
 
 import type { ArrayBaseComponents } from './components/types';
@@ -32,7 +32,7 @@ export interface CustomAction {
   onClick: (event: React.MouseEvent<HTMLButtonElement>, ctx: ActionContext) => void;
   hidden?: boolean | ((ctx: ActionContext) => boolean);
   disabled?: boolean | ((ctx: ActionContext) => boolean);
-  buttonProps?: Omit<ButtonProps, 'children' | 'onClick'>;
+  buttonProps?: Omit<ButtonExtendedProps, 'children' | 'onClick'>;
 }
 
 export interface ToggleAction {
@@ -48,7 +48,7 @@ export interface ToggleAction {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>, context: ActionContext) => void;
   hidden?: boolean | ((ctx: ActionContext) => boolean);
   disabled?: boolean | ((ctx: ActionContext) => boolean);
-  buttonProps?: Omit<ButtonProps, 'children' | 'onClick'>;
+  buttonProps?: Omit<ButtonExtendedProps, 'children' | 'onClick'>;
 }
 
 export type ActionItem =
@@ -102,7 +102,7 @@ export interface IArrayBaseProps {
   description?: React.ReactNode;
 }
 
-export interface IArrayBaseOperationProps extends ButtonProps {
+export interface IArrayBaseOperationProps extends ButtonExtendedProps {
   title?: string;
   index?: number;
   icon?: React.ReactNode;
