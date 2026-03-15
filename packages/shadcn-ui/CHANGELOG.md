@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.66.0
+
+### Minor Changes
+
+- introduce `ToggleButton` component and update `IconToggle`
+
 ## 0.65.0
 
 ### Minor Changes
