@@ -1,5 +1,14 @@
 # @pixpilot/shadcn-auth
 
+## 0.2.16
+
+### Patch Changes
+
+- ffaab2d: new release
+- Updated dependencies [ffaab2d]
+  - @pixpilot/shadcn@0.11.1
+  - @pixpilot/shadcn-ui@0.67.1
+
 ## 0.2.15
 
 ### Patch Changes

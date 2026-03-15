@@ -1,5 +1,13 @@
 # @pixpilot/shadcn-ui
 
+## 0.67.1
+
+### Patch Changes
+
+- ffaab2d: new release
+- Updated dependencies [ffaab2d]
+  - @pixpilot/shadcn@0.11.1
+
 ## 0.67.0
 
 ### Minor Changes
