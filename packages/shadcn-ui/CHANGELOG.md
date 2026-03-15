@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.67.0
+
+### Minor Changes
+
+- introduce `ButtonExtended` component and update related imports
+
 ## 0.66.0
 
 ### Minor Changes

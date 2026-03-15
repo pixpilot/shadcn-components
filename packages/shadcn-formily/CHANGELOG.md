@@ -1,5 +1,16 @@
 # @pixpilot/formily-shadcn
 
+## 0.54.0
+
+### Minor Changes
+
+- introduce `ButtonExtended` component and update related imports
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn-ui@0.67.0
+
 ## 0.53.2
 
 ### Patch Changes
