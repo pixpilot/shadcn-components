@@ -155,7 +155,7 @@ export const Controlled: Story = {
       <div className="flex flex-col items-center gap-4">
         <IconToggle
           checked={isVisible}
-          onCheckedChange={setIsVisible}
+          onChange={setIsVisible}
           checkedIcon={<Eye />}
           uncheckedIcon={<EyeOff />}
         />

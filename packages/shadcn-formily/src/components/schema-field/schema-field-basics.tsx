@@ -30,6 +30,7 @@ import { Select } from '../Select';
 import { Separator } from '../Separator';
 import { Switch } from '../Switch';
 import { Textarea } from '../Textarea';
+import { ToggleButton } from '../ToggleButton';
 import { ToggleGroup } from '../ToggleGroup';
 
 export const basicComponentRegistry = {
@@ -48,6 +49,7 @@ export const basicComponentRegistry = {
   FormItem: { component: FormItem },
   Hidden: { component: Hidden },
   IconToggle: { component: IconToggle, decorator: 'FormItem' },
+  ToggleButton: { component: ToggleButton, decorator: 'FormItem' },
   Input: { component: Input, decorator: 'FormItem' },
   NumberInput: { component: NumberInput, decorator: 'FormItem' },
   ObjectContainer: { component: ObjectContainer, decorator: 'FormItem' },

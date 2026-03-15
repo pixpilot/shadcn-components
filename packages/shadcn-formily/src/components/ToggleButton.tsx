@@ -1,5 +1,5 @@
 import { connect, mapProps } from '@formily/react';
-import { IconToggle as ShadcnIconToggle } from '@pixpilot/shadcn-ui';
+import { ToggleButton as ShadcnToggleButton } from '@pixpilot/shadcn-ui';
 
 import { setCheckboxDefaultDecoratorProps } from '../utils/formily-decorator';
 
@@ -7,8 +7,8 @@ import { setCheckboxDefaultDecoratorProps } from '../utils/formily-decorator';
  * Formily-connected IconToggle component
  * Toggle button with customizable icons for boolean values
  */
-export const IconToggle = connect(
-  ShadcnIconToggle,
+export const ToggleButton = connect(
+  ShadcnToggleButton,
   mapProps(
     {
       value: 'checked',

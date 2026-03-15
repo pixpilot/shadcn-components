@@ -39,10 +39,10 @@ export { FormGrid } from './components/FormGrid';
 // Input components
 export { IconPicker } from './components/IconPicker';
 export { IconToggle } from './components/IconToggle';
-
 export { Input } from './components/Input';
 
 export * from './components/json-schema-form-renderer';
+
 export { NumberInput } from './components/number';
 export * from './components/ObjectContainer';
 export { ConnectedRadio, Radio } from './components/Radio';
@@ -55,8 +55,9 @@ export { Separator } from './components/Separator';
 export * from './components/slider';
 export { Switch } from './components/Switch';
 export { TagsInputInLine } from './components/TagsInputInline';
-
 export { Textarea } from './components/Textarea';
+
+export { ToggleButton } from './components/ToggleButton';
 
 export { ToggleGroup } from './components/ToggleGroup';
 export { transformSchema } from './utils';

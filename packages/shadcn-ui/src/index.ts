@@ -43,6 +43,7 @@ export * from './tags-input';
 export * from './theme-provider';
 export * from './theme-toggle';
 export * from './toast';
+export * from './ToggleButton';
 export * from './ToggleGroup';
 export * from './utils';
 export {
