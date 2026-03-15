@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 0.65.0
+
+### Minor Changes
+
+- add `SetValueWithForm` story and improve controlled value handling
+
 ## 0.64.0
 
 ### Minor Changes
