@@ -39,6 +39,10 @@ export const FormItem = connect(
     };
 
     const takeAsterisk = (): boolean => {
+      if ('asterisk' in props) {
+        return Boolean(props.asterisk);
+      }
+
       if (
         schema.parent &&
         Array.isArray(schema.parent.required) &&
@@ -49,9 +53,6 @@ export const FormItem = connect(
 
       if (field.required && field.pattern !== 'readPretty') {
         return true;
-      }
-      if ('asterisk' in props) {
-        return Boolean(props.asterisk);
       }
       return false;
     };
