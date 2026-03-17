@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 1.0.0
+
+### Major Changes
+
+- 47dbbfb: new release
+
 ## 0.11.1
 
 ### Patch Changes
