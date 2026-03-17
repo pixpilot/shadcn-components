@@ -1,10 +1,13 @@
 import type { PresetColor } from '../types';
-import { cn } from '@pixpilot/shadcn';
+import { cn, ColorPickerEyeDropper } from '@pixpilot/shadcn';
 import { Droplet } from 'lucide-react';
 import React from 'react';
 import { useColorPickerContext } from '../color-picker-context';
-import { PaletteButton } from '../PaletteButton';
-import { PaletteSwatch } from './PaletteSwatch';
+import {
+  COLOR_PICKER_PALETTE_BUTTON_CLASSES,
+  ColorPickerPaletteButton,
+} from './PaletteButton';
+import { ColorPickerPaletteSwatch } from './PaletteSwatch';
 
 export const COMMON_COLORS: PresetColor[] = [
   { label: 'Transparent', value: '#00000000' },
@@ -31,22 +34,22 @@ export interface ColorPickerColorPaletteProps extends Omit<
 > {
   presetColors?: PresetColor[];
   onMoreColor?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  enableEyeDropper?: boolean;
 }
 
 const ColorPickerColorPalette: React.FC<ColorPickerColorPaletteProps> = (props) => {
-  const {
-    presetColors = COMMON_COLORS,
-
-    onMoreColor,
-    ...rest
-  } = props;
+  const { presetColors = COMMON_COLORS, enableEyeDropper, onMoreColor, ...rest } = props;
 
   const { value: selectedColor, onValueChange } = useColorPickerContext();
 
   return (
     <div {...rest} className={cn('gap-2 flex flex-wrap', rest.className)}>
+      {enableEyeDropper && (
+        <ColorPickerEyeDropper className={COLOR_PICKER_PALETTE_BUTTON_CLASSES} />
+      )}
+
       {presetColors.map((color) => (
-        <PaletteSwatch
+        <ColorPickerPaletteSwatch
           key={color.value}
           color={color}
           onSelect={onValueChange}
@@ -54,13 +57,13 @@ const ColorPickerColorPalette: React.FC<ColorPickerColorPaletteProps> = (props) 
         />
       ))}
       {onMoreColor && (
-        <PaletteButton
+        <ColorPickerPaletteButton
           onClick={onMoreColor}
           aria-label="Toggle full color picker"
           className="flex items-center justify-center border-input bg-input hover:bg-accent hover:text-accent-foreground"
         >
           <Droplet className="h-4 w-4" />
-        </PaletteButton>
+        </ColorPickerPaletteButton>
       )}
     </div>
   );

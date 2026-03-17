@@ -7,9 +7,9 @@ import {
   TooltipTrigger,
 } from '@pixpilot/shadcn';
 import { useCallback } from 'react';
-import { PaletteButton } from '../PaletteButton';
+import { ColorPickerPaletteButton } from './PaletteButton';
 
-export const PaletteSwatch: React.FC<{
+const ColorPickerPaletteSwatch: React.FC<{
   color?: PresetColor;
   onSelect?: (color: string) => void;
   className?: string;
@@ -44,7 +44,7 @@ export const PaletteSwatch: React.FC<{
   };
 
   const button = (
-    <PaletteButton
+    <ColorPickerPaletteButton
       style={style}
       className={cn(
         className,
@@ -68,3 +68,7 @@ export const PaletteSwatch: React.FC<{
     </Tooltip>
   );
 };
+
+ColorPickerPaletteSwatch.displayName = 'ColorPickerPaletteSwatch';
+
+export { ColorPickerPaletteSwatch };

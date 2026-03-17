@@ -1,1 +1,3 @@
-export * from './ColorPickerColorPalette';
+export * from './ColorPalette';
+export * from './PaletteButton';
+export * from './PaletteSwatch';
