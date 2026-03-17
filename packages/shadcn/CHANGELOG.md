@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 0.11.1
+
+### Patch Changes
+
+- ffaab2d: new release
+
 ## 0.11.0
 
 ### Minor Changes
