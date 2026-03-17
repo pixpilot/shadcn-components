@@ -20,16 +20,16 @@ export interface ColorPickerInputProps extends Omit<
 const ColorPickerInput: React.FC<ColorPickerInputProps> = (props) => {
   const { slots, onChange, ...rest } = props;
 
-  const { isPickerOpen, color, onColorChange } = useColorPickerContext();
+  const { isPickerOpen, value, onValueChange } = useColorPickerContext();
 
   // eslint-disable-next-line no-restricted-properties, node/prefer-global/process
   if (process.env.NODE_ENV !== 'production') {
-    if (onColorChange === undefined) {
+    if (onValueChange === undefined) {
       throw new Error('ColorPickerInput must be used within a ColorPickerRoot component');
     }
   }
 
-  const currentcolor = color != null && color !== '' ? color : undefined;
+  const currentcolor = value != null && value !== '' ? value : undefined;
   return (
     <ColorPickerTrigger asChild>
       <InputGroup className="w-full">
@@ -37,7 +37,7 @@ const ColorPickerInput: React.FC<ColorPickerInputProps> = (props) => {
           <ColorPickerSwatch color={currentcolor} {...slots?.swatch} />
         </InputGroupAddon>
         <InputGroupInput
-          value={color ?? ''}
+          value={value ?? ''}
           {...rest}
           onPointerDown={(e: React.PointerEvent<HTMLInputElement>) => {
             rest.onPointerDown?.(e);
@@ -50,7 +50,7 @@ const ColorPickerInput: React.FC<ColorPickerInputProps> = (props) => {
             e.stopPropagation();
           }}
           onChange={(e) => {
-            onColorChange(e.target.value);
+            onValueChange(e.target.value);
             onChange?.(e);
           }}
         />

@@ -2,7 +2,6 @@ import type { ColorPickerContentProps } from './types';
 
 import React from 'react';
 import { ColorPickerColorPalette } from './color-palette';
-import { useColorPickerContext } from './color-picker-context';
 import { ColorPickerContent } from './ColorPickerContent';
 import { ColorPickerControls } from './ColorPickerControls';
 import { ColorPickerFormatControls } from './ColorPickerFormatControls';
@@ -16,8 +15,6 @@ const ColorPickerFullControls: React.FC<ColorPickerFullControlsProps> = React.me
   (props) => {
     const { presetColors, sections, ...rest } = props;
 
-    const { onColorChange, color: currentColor } = useColorPickerContext();
-
     const enabledSections = new Set(sections);
     const showPicker = enabledSections.has('picker');
     const showSwatch = enabledSections.has('swatch');
@@ -30,11 +27,7 @@ const ColorPickerFullControls: React.FC<ColorPickerFullControlsProps> = React.me
 
         {showSwatch && (
           <div className="gap-2  flex flex-wrap">
-            <ColorPickerColorPalette
-              presetColors={presetColors}
-              onChange={onColorChange}
-              selectedColor={currentColor}
-            />
+            <ColorPickerColorPalette presetColors={presetColors} />
           </div>
         )}
 

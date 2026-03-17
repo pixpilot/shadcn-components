@@ -43,8 +43,8 @@ const ColorPickerRoot: React.FC<ColorPickerRootProps> = (props) => {
     <ColorPickerContextContextProvider
       value={{
         isPickerOpen: open,
-        color: currentValue,
-        onColorChange: handleValueChange,
+        value: currentValue,
+        onValueChange: handleValueChange,
         openPicker: setOpen,
       }}
     >

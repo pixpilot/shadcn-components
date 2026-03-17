@@ -2,6 +2,7 @@ import type { PresetColor } from '../types';
 import { cn } from '@pixpilot/shadcn';
 import { Droplet } from 'lucide-react';
 import React from 'react';
+import { useColorPickerContext } from '../color-picker-context';
 import { PaletteButton } from '../PaletteButton';
 import { PaletteSwatch } from './PaletteSwatch';
 
@@ -29,19 +30,18 @@ export interface ColorPickerColorPaletteProps extends Omit<
   'onChange'
 > {
   presetColors?: PresetColor[];
-  onChange?: (color: string) => void;
-  selectedColor?: string;
   onMoreColor?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 const ColorPickerColorPalette: React.FC<ColorPickerColorPaletteProps> = (props) => {
   const {
     presetColors = COMMON_COLORS,
-    onChange,
-    selectedColor,
+
     onMoreColor,
     ...rest
   } = props;
+
+  const { value: selectedColor, onValueChange } = useColorPickerContext();
 
   return (
     <div {...rest} className={cn('gap-2 flex flex-wrap', rest.className)}>
@@ -49,7 +49,7 @@ const ColorPickerColorPalette: React.FC<ColorPickerColorPaletteProps> = (props) 
         <PaletteSwatch
           key={color.value}
           color={color}
-          onSelect={onChange}
+          onSelect={onValueChange}
           selectedValue={selectedColor}
         />
       ))}

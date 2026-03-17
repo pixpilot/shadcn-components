@@ -24,11 +24,11 @@ export interface ColorPickerButtonProps extends Omit<
 const ColorPickerButton: React.FC<ColorPickerButtonProps> = (props) => {
   const { slots, formatDisplayValue, placeholder = 'Pick a color', ...rest } = props;
 
-  const { isPickerOpen, color, onColorChange } = useColorPickerContext();
+  const { isPickerOpen, value, onValueChange } = useColorPickerContext();
 
   // eslint-disable-next-line no-restricted-properties, node/prefer-global/process
   if (process.env.NODE_ENV !== 'production') {
-    if (onColorChange === undefined) {
+    if (onValueChange === undefined) {
       throw new Error(
         'ColorPickerButton must be used within a ColorPickerRoot component',
       );
@@ -36,11 +36,11 @@ const ColorPickerButton: React.FC<ColorPickerButtonProps> = (props) => {
   }
 
   const renderDisplayValue = (): React.ReactNode => {
-    if (color == null || color === '') return placeholder;
-    return formatDisplayValue != null ? formatDisplayValue(color) : color;
+    if (value == null || value === '') return placeholder;
+    return formatDisplayValue != null ? formatDisplayValue(value) : value;
   };
 
-  const currentcolor = color != null && color !== '' ? color : undefined;
+  const currentcolor = value != null && value !== '' ? value : undefined;
   return (
     <ColorPickerTrigger asChild>
       <InputGroup

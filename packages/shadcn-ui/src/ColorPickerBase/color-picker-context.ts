@@ -2,8 +2,8 @@ import React from 'react';
 
 export interface ColorPickerContextStates {
   isPickerOpen: boolean;
-  color: string;
-  onColorChange: (value: string) => void;
+  value: string;
+  onValueChange: (value: string) => void;
   openPicker: (open: boolean) => void;
 }
 
@@ -15,7 +15,7 @@ const { Provider, Consumer } = ColorPickerContext;
 export function useColorPickerContext(): ColorPickerContextStates {
   return React.use(ColorPickerContext);
 }
-
+ColorPickerContext.displayName = 'ColorPickerContext';
 export {
   ColorPickerContext,
   Consumer as ColorPickerContextContextConsumer,
