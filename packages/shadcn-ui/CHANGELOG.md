@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.1.1
+
+### Patch Changes
+
+- extract button classes to a constant
+
 ## 1.1.0
 
 ### Minor Changes
