@@ -30,7 +30,7 @@ export function FormItemLabel({
   return (
     <label
       htmlFor={id}
-      data-slot="form-label"
+      data-slot="form-item-label"
       data-error={Boolean(error)}
       {...restLabelProps}
       className={cn(
@@ -40,14 +40,21 @@ export function FormItemLabel({
         className,
       )}
     >
-      <span className="inline-flex items-center gap-1">
-        <span>{label}</span>
+      <span
+        data-slot="form-item-label-text-container"
+        className="inline-flex items-center gap-1"
+      >
+        <span data-slot="form-item-label-text">{label}</span>
         {descriptionInPopover && description != null && (
           <FormItemDescriptionPopover description={description} />
         )}
       </span>
       {asterisk && (
-        <span className="text-destructive ml-1" aria-label="required">
+        <span
+          data-slot="form-item-label-asterisk"
+          className="text-destructive ml-1"
+          aria-label="required"
+        >
           *
         </span>
       )}
