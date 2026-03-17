@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 1.0.3
+
+### Patch Changes
+
+- update data-slot attributes for consistency
+
 ## 1.0.2
 
 ### Patch Changes
