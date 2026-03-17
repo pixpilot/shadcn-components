@@ -6,7 +6,7 @@ import {
   toPickerValue,
 } from '../utils/color-picker-base-utils';
 
-export function useColorPickerBaseSwatch(params: {
+export function useColorPickerValueAdapter(params: {
   currentValue: string;
   format: ColorPickerBaseFormat | undefined;
   defaultFormat: ColorPickerBaseFormat;
@@ -15,7 +15,7 @@ export function useColorPickerBaseSwatch(params: {
 }): {
   valueForPicker: string;
   handleFormatChange: (format: ColorPickerBaseFormat) => void;
-  handleSwatchSelect: (value: string) => void;
+  handlePresetChange: (value: string) => void;
 } {
   const { currentValue, format, defaultFormat, onFormatChange, handleValueChange } =
     params;
@@ -35,7 +35,7 @@ export function useColorPickerBaseSwatch(params: {
     [onFormatChange],
   );
 
-  const handleSwatchSelect = useCallback(
+  const handlePresetChange = useCallback(
     (value: string) => {
       const desiredFormat = currentFormatRef.current;
       const result = getSwatchSelectionResult({
@@ -68,6 +68,6 @@ export function useColorPickerBaseSwatch(params: {
   return {
     valueForPicker,
     handleFormatChange,
-    handleSwatchSelect,
+    handlePresetChange,
   };
 }

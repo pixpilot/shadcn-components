@@ -25,6 +25,12 @@ export type ColorPickerContentProps = Required<
   contentProps?: Partial<ColorPickerContentWrapperProps>;
 };
 
+export interface ColorPickerRootProps extends Omit<ColorPickerProps, 'onChange'> {
+  // options?: ColorPikerOptions;
+  value?: string;
+  onChange?: (value: string) => void;
+}
+
 export interface ColorPickerBaseProps extends Omit<
   ColorPickerProps,
   'onChange' | 'children'
@@ -40,9 +46,11 @@ export interface ColorPickerBaseProps extends Omit<
    */
   sections?: ColorPickerBaseSections;
   contentProps?: Partial<ColorPickerContentWrapperProps>;
-  children: (props: {
-    value?: string;
-    onValueChange: (value: string) => void;
-    isPickerOpen: boolean;
-  }) => React.ReactNode;
+  children:
+    | React.ReactNode
+    | ((props: {
+        value?: string;
+        onValueChange: (value: string) => void;
+        isPickerOpen: boolean;
+      }) => React.ReactNode);
 }

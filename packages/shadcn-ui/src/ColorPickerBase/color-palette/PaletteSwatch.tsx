@@ -1,4 +1,4 @@
-import type { PresetColor } from './types';
+import type { PresetColor } from '../types';
 import {
   cn,
   colorUtils,
@@ -7,7 +7,7 @@ import {
   TooltipTrigger,
 } from '@pixpilot/shadcn';
 import { useCallback } from 'react';
-import { PaletteButton } from './PaletteButton';
+import { PaletteButton } from '../PaletteButton';
 
 export const PaletteSwatch: React.FC<{
   color?: PresetColor;

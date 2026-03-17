@@ -32,10 +32,6 @@ export const BasicToggle: Story = {
           title: 'Show Advanced',
           'x-decorator': 'FormItem',
           'x-component': 'ToggleButton',
-          'x-component-props': {
-            checkedContent: <span>On</span>,
-            uncheckedContent: <span>Off</span>,
-          },
         },
       },
     };

@@ -1,34 +1,14 @@
 'use client';
 
-import type { ColorPickerBaseProps, ColorPickerBaseSection, PresetColor } from './types';
-import { ColorPicker, ColorPickerTrigger } from '@pixpilot/shadcn';
+import type { ColorPickerBaseProps, ColorPickerBaseSection } from './types';
 import { useCallback, useState } from 'react';
-import { ColorPickerCompact } from './ColorPickerCompact';
-import { ColorPickerFull } from './ColorPickerFull';
-import { useColorPickerBaseSwatch } from './hooks/use-color-picker-base-swatch';
+import { COMMON_COLORS } from './color-palette';
+import { ColorPickerCompactControls } from './ColorPickerCompactControls';
+import { ColorPickerFullControls } from './ColorPickerFullControls';
+import { ColorPickerRoot } from './ColorPickerRoot';
+import { DEFAULT_COLOR, DEFAULT_SECTIONS } from './constants';
+import { useColorPickerValueAdapter } from './hooks/use-color-picker-base-swatch';
 import { useColorPickerBaseValue } from './hooks/use-color-picker-base-value';
-
-const commonColors: PresetColor[] = [
-  { label: 'Transparent', value: '#00000000' },
-  { label: 'Black', value: '#000000' },
-  { label: 'White', value: '#FFFFFF' },
-  { label: 'Gray', value: '#808080' },
-  { label: 'Red', value: '#FF0000' },
-  { label: 'Orange', value: '#FFA500' },
-  { label: 'Yellow', value: '#FFFF00' },
-  { label: 'Lime', value: '#84CC16' },
-  { label: 'Green', value: '#22C55E' },
-  { label: 'Teal', value: '#14B8A6' },
-  { label: 'Cyan', value: '#00FFFF' },
-  { label: 'Blue', value: '#3B82F6' },
-  { label: 'Indigo', value: '#6366F1' },
-  { label: 'Purple', value: '#A855F7' },
-  { label: 'Pink', value: '#EC4899' },
-  { label: 'Brown', value: '#A52A2A' },
-];
-const DEFAULT_COLOR = '#000000';
-
-const DEFAULT_SECTIONS = ['swatch', 'picker', 'format-select', 'input'] as const;
 
 const ColorPickerBase: React.FC<ColorPickerBaseProps> = (props) => {
   const {
@@ -53,21 +33,20 @@ const ColorPickerBase: React.FC<ColorPickerBaseProps> = (props) => {
     onValueChange,
   });
 
-  const { valueForPicker, handleFormatChange, handleSwatchSelect } =
-    useColorPickerBaseSwatch({
-      currentValue,
-      format,
-      defaultFormat,
-      onFormatChange,
-      handleValueChange,
-    });
+  const { valueForPicker, handleFormatChange } = useColorPickerValueAdapter({
+    currentValue,
+    format,
+    defaultFormat,
+    onFormatChange,
+    handleValueChange,
+  });
 
   const [open, setOpen] = useState<boolean>(false);
 
   const resolvedSections = (sections ??
     DEFAULT_SECTIONS) as ReadonlyArray<ColorPickerBaseSection>;
 
-  let colors = presetColors || commonColors;
+  let colors = presetColors || COMMON_COLORS;
 
   const handleOpen = useCallback((isOpen: boolean) => {
     setOpen(isOpen);
@@ -78,7 +57,7 @@ const ColorPickerBase: React.FC<ColorPickerBaseProps> = (props) => {
   }
 
   return (
-    <ColorPicker
+    <ColorPickerRoot
       {...rest}
       format={format}
       defaultFormat={defaultFormat}
@@ -87,34 +66,28 @@ const ColorPickerBase: React.FC<ColorPickerBaseProps> = (props) => {
       onValueChange={handleValueChange}
       onOpenChange={handleOpen}
     >
-      <ColorPickerTrigger
-        asChild
-        className="w-full flex items-center gap-1 border border-input bg-background px-3 py-2 rounded-md "
-      >
-        {children({
-          value: currentValue,
-          onValueChange: handleValueChange,
-          isPickerOpen: open,
-        })}
-      </ColorPickerTrigger>
+      {typeof children === 'function'
+        ? children({
+            value: currentValue,
+            onValueChange: handleValueChange,
+            isPickerOpen: open,
+          })
+        : children}
+
       {layout === 'compact' ? (
-        <ColorPickerCompact
+        <ColorPickerCompactControls
           {...contentProps}
-          onValueChange={handleSwatchSelect}
           presetColors={colors}
           sections={resolvedSections}
-          currentValue={currentValue}
         />
       ) : (
-        <ColorPickerFull
+        <ColorPickerFullControls
           {...contentProps}
-          onValueChange={handleSwatchSelect}
           presetColors={colors}
           sections={resolvedSections}
-          currentValue={currentValue}
         />
       )}
-    </ColorPicker>
+    </ColorPickerRoot>
   );
 };
 

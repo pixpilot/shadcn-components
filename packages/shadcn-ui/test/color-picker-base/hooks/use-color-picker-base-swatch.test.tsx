@@ -1,13 +1,13 @@
 import { act, renderHook } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import { useColorPickerBaseSwatch } from '../../../src/ColorPickerBase/hooks/use-color-picker-base-swatch';
+import { useColorPickerValueAdapter } from '../../../src/ColorPickerBase/hooks/use-color-picker-base-swatch';
 
-describe('useColorPickerBaseSwatch', () => {
+describe('useColorPickerValueAdapter', () => {
   it('uses defaultFormat when format is undefined', () => {
     const handleValueChange = vi.fn();
 
     const { result } = renderHook(() =>
-      useColorPickerBaseSwatch({
+      useColorPickerValueAdapter({
         currentValue: '#000000',
         format: undefined,
         defaultFormat: 'rgb',
@@ -17,7 +17,7 @@ describe('useColorPickerBaseSwatch', () => {
     );
 
     act(() => {
-      result.current.handleSwatchSelect('#ff0000');
+      result.current.handlePresetChange('#ff0000');
     });
 
     expect(handleValueChange).toHaveBeenCalledWith('rgb(255, 0, 0)');
@@ -29,7 +29,7 @@ describe('useColorPickerBaseSwatch', () => {
 
     const { result } = renderHook(
       ({ currentValue, format }) =>
-        useColorPickerBaseSwatch({
+        useColorPickerValueAdapter({
           currentValue,
           format,
           defaultFormat: 'hex',
@@ -51,7 +51,7 @@ describe('useColorPickerBaseSwatch', () => {
     expect(onFormatChange).toHaveBeenCalledWith('rgb');
 
     act(() => {
-      result.current.handleSwatchSelect('#ff0000');
+      result.current.handlePresetChange('#ff0000');
     });
 
     expect(handleValueChange).toHaveBeenCalledWith('rgb(255, 0, 0)');
@@ -61,7 +61,7 @@ describe('useColorPickerBaseSwatch', () => {
     const handleValueChange = vi.fn();
 
     const { result } = renderHook(() =>
-      useColorPickerBaseSwatch({
+      useColorPickerValueAdapter({
         currentValue: '#000000',
         format: 'rgb',
         defaultFormat: 'hex',
@@ -71,7 +71,7 @@ describe('useColorPickerBaseSwatch', () => {
     );
 
     act(() => {
-      result.current.handleSwatchSelect('not-a-color');
+      result.current.handlePresetChange('not-a-color');
     });
 
     expect(handleValueChange).toHaveBeenCalledWith('not-a-color');
@@ -82,7 +82,7 @@ describe('useColorPickerBaseSwatch', () => {
 
     const { result, rerender } = renderHook(
       ({ currentValue }) =>
-        useColorPickerBaseSwatch({
+        useColorPickerValueAdapter({
           currentValue,
           format: 'hex',
           defaultFormat: 'hex',
@@ -97,7 +97,7 @@ describe('useColorPickerBaseSwatch', () => {
     );
 
     act(() => {
-      result.current.handleSwatchSelect('#ff0000');
+      result.current.handlePresetChange('#ff0000');
     });
 
     // The public value is the base hex (no alpha).
@@ -118,7 +118,7 @@ describe('useColorPickerBaseSwatch', () => {
 
     const { result, rerender } = renderHook(
       ({ currentValue }) =>
-        useColorPickerBaseSwatch({
+        useColorPickerValueAdapter({
           currentValue,
           format: 'hex',
           defaultFormat: 'hex',
@@ -133,7 +133,7 @@ describe('useColorPickerBaseSwatch', () => {
     );
 
     act(() => {
-      result.current.handleSwatchSelect('#00ff00');
+      result.current.handlePresetChange('#00ff00');
     });
 
     rerender({ currentValue: '#00ff00' });

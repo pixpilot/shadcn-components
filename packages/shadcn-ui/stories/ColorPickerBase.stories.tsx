@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { ColorPickerTrigger } from '@pixpilot/shadcn';
 import React from 'react';
 import { ColorPickerBase } from '../src/ColorPickerBase';
 
@@ -52,9 +53,11 @@ type Story = StoryObj<typeof meta>;
 function DefaultChild(props: { value?: string }) {
   const { value } = props;
   return (
-    <div className="h-10 w-50" style={{ background: value }}>
-      {value}
-    </div>
+    <ColorPickerTrigger asChild>
+      <div className="h-10 w-50" style={{ background: value }}>
+        {value}
+      </div>
+    </ColorPickerTrigger>
   );
 }
 
@@ -105,9 +108,11 @@ function ControlledColorPicker() {
       <div className="text-sm font-medium">Current Value: {value}</div>
       <ColorPickerBase onChange={setValue} value={value} format="hsl">
         {(props) => (
-          <div className="h-10 w-50" style={{ background: props.value }}>
-            {props.value}
-          </div>
+          <ColorPickerTrigger asChild>
+            <div className="h-10 w-50" style={{ background: props.value }}>
+              {props.value}
+            </div>
+          </ColorPickerTrigger>
         )}
       </ColorPickerBase>
     </div>
@@ -122,9 +127,11 @@ function UncontrolledColorPicker() {
       <div className="text-sm font-medium">Current Value: {value}</div>
       <ColorPickerBase onChange={setValue}>
         {(props) => (
-          <div className="h-10 w-50" style={{ background: props.value }}>
-            {props.value}
-          </div>
+          <ColorPickerTrigger asChild>
+            <div className="h-10 w-50" style={{ background: props.value }}>
+              {props.value}
+            </div>
+          </ColorPickerTrigger>
         )}
       </ColorPickerBase>
     </div>
