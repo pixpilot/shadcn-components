@@ -3,6 +3,7 @@ export * from './color-picker-context';
 export * from './ColorPickerBase';
 export * from './ColorPickerButton';
 export * from './ColorPickerCompactControls';
+export * from './ColorPickerContent';
 export * from './ColorPickerControls';
 export * from './ColorPickerFormatControls';
 export * from './ColorPickerFormatInput';
