@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.1.0
+
+### Minor Changes
+
+- export ColorPickerContent component
+
 ## 1.0.0
 
 ### Major Changes
