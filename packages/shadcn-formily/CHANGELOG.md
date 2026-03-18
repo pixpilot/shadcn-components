@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 1.3.0
+
+### Minor Changes
+
+- set default type to "single" and spread item slots
+
 ## 1.2.0
 
 ### Minor Changes
