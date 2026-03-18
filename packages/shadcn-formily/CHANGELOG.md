@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 1.2.0
+
+### Minor Changes
+
+- enhance component with item slots and refactor props
+
 ## 1.1.0
 
 ### Minor Changes
