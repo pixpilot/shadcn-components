@@ -1,11 +1,5 @@
 import type { PresetColor } from '../types';
-import {
-  cn,
-  colorUtils,
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@pixpilot/shadcn';
+import { colorUtils, Tooltip, TooltipContent, TooltipTrigger } from '@pixpilot/shadcn';
 import { useCallback } from 'react';
 import { ColorPickerPaletteButton } from './PaletteButton';
 
@@ -46,12 +40,9 @@ const ColorPickerPaletteSwatch: React.FC<{
   const button = (
     <ColorPickerPaletteButton
       style={style}
-      className={cn(
-        className,
-        isSelected && 'ring-2 ring-ring ring-offset-2 ring-offset-background border-ring',
-      )}
+      className={className}
+      selected={isSelected}
       onClick={handleClick}
-      aria-pressed={isSelected}
     />
   );
 
