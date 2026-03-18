@@ -170,7 +170,7 @@ export function ToggleGroupBase({
  *
  * For multiple selection (array fields), use ArrayToggleGroup instead.
  *
- * Example usage:
+ * Example usage (schema enum):
  * ```tsx
  * const schema = {
  *   type: 'object',
@@ -187,6 +187,28 @@ export function ToggleGroupBase({
  *       'x-component': 'ToggleGroup',
  *       'x-component-props': {
  *         allowEmptySelection: false,
+ *       },
+ *     },
+ *   },
+ * };
+ * ```
+ *
+ * Example usage (pass options via `x-component-props` instead of `enum`):
+ * ```tsx
+ * const schema = {
+ *   type: 'object',
+ *   properties: {
+ *     period: {
+ *       type: 'string',
+ *       title: 'Select period',
+ *       'x-decorator': 'FormItem',
+ *       'x-component': 'ToggleGroup',
+ *       'x-component-props': {
+ *         options: [
+ *           { label: 'Day', value: 'day' },
+ *           { label: 'Week', value: 'week' },
+ *           { label: 'Month', value: 'month' },
+ *         ],
  *       },
  *     },
  *   },
