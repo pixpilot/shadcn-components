@@ -160,25 +160,28 @@ export const MultipleCheckbox: Story = {
     const [value, setValue] = React.useState<string[]>(['bold']);
 
     return (
-      <ToggleGroup
-        type="multiple"
-        variant={args.variant}
-        size={args.size}
-        spacing={args.spacing}
-        value={value}
-        onValueChange={setValue}
-      >
-        {args.options.map((option) => (
-          <ToggleGroupItem
-            key={option.value}
-            value={option.value}
-            aria-label={option.value}
-            disabled={option.disabled}
-          >
-            {option.label}
-          </ToggleGroupItem>
-        ))}
-      </ToggleGroup>
+      <div>
+        <ToggleGroup
+          type="multiple"
+          variant={args.variant}
+          size={args.size}
+          spacing={args.spacing}
+          value={value}
+          onValueChange={setValue}
+        >
+          {args.options.map((option) => (
+            <ToggleGroupItem
+              key={option.value}
+              value={option.value}
+              aria-label={option.value}
+              disabled={option.disabled}
+            >
+              {option.label}
+            </ToggleGroupItem>
+          ))}
+        </ToggleGroup>
+        [{value.join(', ')}]
+      </div>
     );
   },
 };
