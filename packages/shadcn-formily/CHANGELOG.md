@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 1.4.0
+
+### Minor Changes
+
+- add data attributes for slot identification
+
 ## 1.3.0
 
 ### Minor Changes
