@@ -106,6 +106,7 @@ export function ToggleGroupBase({
 
   return (
     <ShadcnToggleGroup
+      type="single"
       {...props}
       className={cn(
         {
@@ -114,7 +115,6 @@ export function ToggleGroupBase({
         props.className,
       )}
       ref={ref}
-      type="single"
       value={valueString}
       defaultValue={defaultValueString}
       variant={toVariant(variant)}
@@ -134,6 +134,7 @@ export function ToggleGroupBase({
     >
       {options.map((option) => (
         <ToggleGroupItem
+          {...slots?.item}
           key={String(option.value)}
           value={String(option.value)}
           aria-label={String(option.value)}
