@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.1.2
+
+### Patch Changes
+
+- enhance button selection handling and class management
+
 ## 1.1.1
 
 ### Patch Changes
