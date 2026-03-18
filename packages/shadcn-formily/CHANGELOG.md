@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 1.0.4
+
+### Patch Changes
+
+- improve asterisk handling logic
+
 ## 1.0.3
 
 ### Patch Changes
