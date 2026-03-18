@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.2.0
+
+### Minor Changes
+
+- add support for multiple selection and update props
+
 ## 1.1.2
 
 ### Patch Changes

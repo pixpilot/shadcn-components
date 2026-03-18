@@ -1,5 +1,16 @@
 # @pixpilot/formily-shadcn
 
+## 1.1.0
+
+### Minor Changes
+
+- add support for multiple selection and update props
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn-ui@1.2.0
+
 ## 1.0.5
 
 ### Patch Changes
