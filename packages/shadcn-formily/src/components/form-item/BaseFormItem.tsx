@@ -104,6 +104,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
 
   const labelElement = effectiveLabel != null && (
     <FormItemLabel
+      data-slot="form-item-label"
       id={id}
       label={effectiveLabel}
       asterisk={asterisk}
@@ -129,6 +130,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
 
   const inputElement = (
     <div
+      data-slot="form-item-input"
       {...itemComponentsProps.inputWrapper}
       {...slots?.inputWrapper}
       className={cn(
@@ -149,6 +151,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
 
   const descriptionElement = descriptionRenderedInline ? (
     <p
+      data-slot="form-item-description"
       {...itemComponentsProps.description}
       {...slots?.description}
       id={descriptionId}
@@ -171,6 +174,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
 
       {(effectiveLabelPlacement === 'start' || effectiveLabelPlacement === 'end') && (
         <div
+          data-slot="form-item-content"
           className={cn(
             'flex items-center gap-2',
             effectiveLabelPlacement === 'start' && 'flex-row',
@@ -206,6 +210,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
 
       {Boolean(feedbackText) && (
         <p
+          data-slot="form-item-feedback"
           {...itemComponentsProps.error}
           {...slots?.error}
           id={feedbackId}
