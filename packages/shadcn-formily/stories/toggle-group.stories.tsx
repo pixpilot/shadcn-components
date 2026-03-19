@@ -310,3 +310,56 @@ export const MultipleWithOptions: Story = {
     );
   },
 };
+
+export const MultipleWithDefault: Story = {
+  render: () => {
+    const form = createForm({
+      initialValues: {
+        features: ['feature_a', 'feature_c'],
+      },
+    });
+
+    /*
+     * Options passed via x-component-props also work for type: 'multiple'.
+     * No need for enum or items in the schema at all.
+     */
+    const schema = {
+      type: 'object',
+      properties: {
+        features: {
+          type: 'array',
+          title: 'Select features',
+          'x-decorator': 'FormItem',
+          'x-component': 'ToggleGroup',
+          'x-component-props': {
+            type: 'multiple',
+            options: [
+              { label: 'Feature A', value: 'feature_a' },
+              { label: 'Feature B', value: 'feature_b' },
+              { label: 'Feature C', value: 'feature_c' },
+            ],
+          },
+        },
+      },
+    };
+
+    return (
+      <Form
+        form={form}
+        className="w-[400px]"
+        onSubmit={(values) => {
+          console.log('Form submitted:', values);
+          alert(JSON.stringify(values, null, JSON_INDENT));
+        }}
+      >
+        <SchemaField schema={schema} />
+        <button
+          type="submit"
+          className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+        >
+          Submit
+        </button>
+      </Form>
+    );
+  },
+};
