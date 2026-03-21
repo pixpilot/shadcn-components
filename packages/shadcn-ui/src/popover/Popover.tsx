@@ -11,26 +11,36 @@ export interface PopoverContentProps extends React.ComponentProps<
   typeof RadixPopoverContent
 > {}
 
-const PopoverContent: React.FC<PopoverContentProps> = (props) => {
+const commonStyles = cn(
+  // sizing
+  'w-auto max-w-[var(--radix-popover-content-available-width)]',
+  'max-h-[var(--radix-popover-content-available-height)]',
+
+  // scrolling
+  'overflow-auto',
+);
+
+const PopoverContentUnstyled: React.FC<PopoverContentProps> = (props) => {
   return (
     <RadixPopoverContent
       {...props}
       className={cn(
-        // sizing
-        'w-auto max-w-[var(--radix-popover-content-available-width)]',
-        'max-h-[var(--radix-popover-content-available-height)]',
-
-        // scrolling
-        'overflow-auto',
-
-        // reset styles
+        // reset styles (moved here)
         'border-0 bg-transparent p-0',
-        props.className,
+        commonStyles,
       )}
     />
   );
 };
 
+const PopoverContent: React.FC<PopoverContentProps> = (props) => {
+  const { className, ...rest } = props;
+
+  return <RadixPopoverContent {...rest} className={cn(commonStyles)} />;
+};
+
+PopoverContentUnstyled.displayName = 'PopoverContentUnstyled';
+
 PopoverContent.displayName = 'PopoverContent';
 
-export { Popover, PopoverAnchor, PopoverContent, PopoverTrigger };
+export { Popover, PopoverAnchor, PopoverContent, PopoverContentUnstyled, PopoverTrigger };

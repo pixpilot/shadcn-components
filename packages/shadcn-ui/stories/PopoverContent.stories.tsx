@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from '../src/Button';
-import { Popover, PopoverContent, PopoverTrigger } from '../src/popover';
+import { Popover, PopoverContentUnstyled, PopoverTrigger } from '../src/popover';
 
 /**
  * A styled popover content component with responsive width constraints.
@@ -8,7 +8,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '../src/popover';
  */
 const meta = {
   title: 'shadcn-ui/PopoverContent',
-  component: PopoverContent,
+  component: PopoverContentUnstyled,
   parameters: {
     layout: 'centered',
     docs: {
@@ -19,7 +19,7 @@ const meta = {
     },
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof PopoverContent>;
+} satisfies Meta<typeof PopoverContentUnstyled>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -33,7 +33,7 @@ export const Default: Story = {
       <PopoverTrigger asChild>
         <Button variant="outline">Open Popover</Button>
       </PopoverTrigger>
-      <PopoverContent>
+      <PopoverContentUnstyled>
         <div className="p-4">
           <h3 className="font-semibold">Popover Title</h3>
           <p className="text-sm text-muted-foreground mt-2">
@@ -41,7 +41,7 @@ export const Default: Story = {
             width.
           </p>
         </div>
-      </PopoverContent>
+      </PopoverContentUnstyled>
     </Popover>
   ),
 };
@@ -55,7 +55,7 @@ export const WithForm: Story = {
       <PopoverTrigger asChild>
         <Button>Edit Profile</Button>
       </PopoverTrigger>
-      <PopoverContent>
+      <PopoverContentUnstyled>
         <div className="p-4 w-80">
           <h3 className="font-semibold mb-4">Edit Profile</h3>
           <div className="space-y-4">
@@ -78,7 +78,7 @@ export const WithForm: Story = {
             <Button className="w-full">Save Changes</Button>
           </div>
         </div>
-      </PopoverContent>
+      </PopoverContentUnstyled>
     </Popover>
   ),
 };
@@ -89,7 +89,7 @@ export const LongContent: Story = {
       <PopoverTrigger asChild>
         <Button variant="outline">Open Long Content Popover</Button>
       </PopoverTrigger>
-      <PopoverContent>
+      <PopoverContentUnstyled>
         <div className="p-4  overflow-y-auto w-100">
           <h3 className="font-semibold mb-4">Long Content</h3>
 
@@ -102,7 +102,7 @@ export const LongContent: Story = {
             </p>
           ))}
         </div>
-      </PopoverContent>
+      </PopoverContentUnstyled>
     </Popover>
   ),
 };
