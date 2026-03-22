@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.2.2
+
+### Patch Changes
+
+- ensure className is applied to PopoverContent
+
 ## 1.2.1
 
 ### Patch Changes
