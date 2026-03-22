@@ -182,4 +182,125 @@ describe('useArrayEditor', () => {
     // Should not crash, but since value is not array, setValue won't be called
     expect(fieldWithNonArray.setValue).not.toHaveBeenCalled();
   });
+
+  // -------------------------------------------------------------------------
+  // handleAdd routing: autoSave determines whether items are inserted
+  // immediately ('inserted') or opened as a draft for confirmation ('draft-only').
+  // -------------------------------------------------------------------------
+
+  describe('handleAdd draft-only routing', () => {
+    it('uses draft-only mode when autoSave is undefined (not passed)', () => {
+      const { result } = renderHook(() => useArrayEditor({}));
+
+      result.current.handleAdd(0);
+
+      /*
+       * When autoSave is not set, !isAutoSave is true, so handleAdd places a
+       * draft-only sentinel at DRAFT_ONLY_INDEX (-1), not at the real index.
+       */
+      expect(result.current.isNewItem(-1)).toBe(true);
+      expect(result.current.isNewItem(0)).toBe(false);
+    });
+
+    it('uses inserted mode when autoSave is true', () => {
+      const { result } = renderHook(() => useArrayEditor({ autoSave: true }));
+
+      result.current.handleAdd(3);
+
+      /*
+       * With autoSave=true the item is added immediately at the real index;
+       * the active item is set to that real index.
+       */
+      expect(result.current.isNewItem(3)).toBe(true);
+      expect(result.current.isNewItem(-1)).toBe(false);
+    });
+
+    it('uses draft-only mode when autoSave is false', () => {
+      const { result } = renderHook(() => useArrayEditor({ autoSave: false }));
+
+      result.current.handleAdd(1);
+
+      expect(result.current.isNewItem(-1)).toBe(true);
+      expect(result.current.isNewItem(1)).toBe(false);
+    });
+
+    it('forces draft-only when options.mode=draft-only regardless of autoSave', () => {
+      const { result } = renderHook(() => useArrayEditor({ autoSave: true }));
+
+      result.current.handleAdd(2, { mode: 'draft-only' });
+
+      expect(result.current.isNewItem(-1)).toBe(true);
+    });
+
+    it('isNewItem returns false after active item is cleared via save', () => {
+      const { result } = renderHook(() => useArrayEditor({ autoSave: true }));
+
+      result.current.handleAdd(0);
+      expect(result.current.isNewItem(0)).toBe(true);
+
+      result.current.handleSaveClick(0, 'saved');
+
+      expect(result.current.isNewItem(0)).toBe(false);
+    });
+
+    it('isNewItem returns false after active item is cleared via cancel', () => {
+      const { result } = renderHook(() => useArrayEditor({ autoSave: false }));
+
+      result.current.handleAdd(0);
+      expect(result.current.isNewItem(-1)).toBe(true);
+
+      result.current.handleCancelClick(-1);
+
+      expect(result.current.isNewItem(-1)).toBe(false);
+    });
+  });
+
+  describe('handleEdit', () => {
+    it('sets active item to the given index and marks it as NOT new', () => {
+      const { result } = renderHook(() => useArrayEditor({}));
+
+      result.current.handleEdit(5);
+
+      expect(result.current.isNewItem(5)).toBe(false);
+      expect(result.current.activeItemManager.activeItem).toBe(5);
+      expect(result.current.activeItemManager.isNew).toBe(false);
+    });
+
+    it('replaces a previously active item', () => {
+      const { result } = renderHook(() => useArrayEditor({}));
+
+      result.current.handleEdit(2);
+      result.current.handleEdit(4);
+
+      expect(result.current.activeItemManager.activeItem).toBe(4);
+    });
+  });
+
+  describe('handleSaveClick for existing items', () => {
+    it('persists value and removes the active item', () => {
+      const { result } = renderHook(() => useArrayEditor({}));
+
+      result.current.handleEdit(1);
+      result.current.handleSaveClick(1, 'updated');
+
+      expect(mockField.form.setValuesIn).toHaveBeenCalledWith(
+        'test.address.1',
+        'updated',
+      );
+      expect(result.current.activeItemManager.activeItem).toBeUndefined();
+    });
+  });
+
+  describe('handleLiveChange', () => {
+    it('persists value without clearing the active item', () => {
+      const { result } = renderHook(() => useArrayEditor({}));
+
+      result.current.handleEdit(0);
+      result.current.handleLiveChange(0, 'live');
+
+      expect(mockField.form.setValuesIn).toHaveBeenCalledWith('test.address.0', 'live');
+      // Active item should still be set after a live change
+      expect(result.current.activeItemManager.activeItem).toBe(0);
+    });
+  });
 });
