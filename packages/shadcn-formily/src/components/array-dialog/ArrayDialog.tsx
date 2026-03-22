@@ -49,6 +49,7 @@ const ArrayDialogBase = observer((props: Props) => {
   return (
     <ArrayBase
       {...props}
+      autoSave={autoSave ?? false}
       transformActions={transformActions}
       onAdd={handleAdd}
       onRemove={onRemove}

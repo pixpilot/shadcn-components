@@ -42,6 +42,7 @@ const ArrayPopoverBase = observer((props: Props) => {
   return (
     <ArrayBase
       {...props}
+      autoSave={autoSave}
       transformActions={transformActions}
       onAdd={handleAdd}
       onRemove={onRemove}
