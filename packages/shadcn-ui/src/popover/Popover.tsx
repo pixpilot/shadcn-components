@@ -28,6 +28,7 @@ const PopoverContentUnstyled: React.FC<PopoverContentProps> = (props) => {
         // reset styles (moved here)
         'border-0 bg-transparent p-0',
         commonStyles,
+        props.className,
       )}
     />
   );
@@ -36,7 +37,7 @@ const PopoverContentUnstyled: React.FC<PopoverContentProps> = (props) => {
 const PopoverContent: React.FC<PopoverContentProps> = (props) => {
   const { className, ...rest } = props;
 
-  return <RadixPopoverContent {...rest} className={cn(commonStyles)} />;
+  return <RadixPopoverContent {...rest} className={cn(commonStyles, className)} />;
 };
 
 PopoverContentUnstyled.displayName = 'PopoverContentUnstyled';
