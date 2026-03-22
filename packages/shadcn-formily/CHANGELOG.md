@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 1.4.4
+
+### Patch Changes
+
+- improve draft-only mode handling in ArrayAddition
+
 ## 1.4.3
 
 ### Patch Changes
