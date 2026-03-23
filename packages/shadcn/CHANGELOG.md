@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 1.1.0
+
+### Minor Changes
+
+- enhance dialog component with container support and backdrop click prevention
+
 ## 1.0.0
 
 ### Major Changes
