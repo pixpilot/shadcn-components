@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Label } from '@pixpilot/shadcn';
+import * as React from 'react';
 import { Button } from '../src/Button';
 import {
   Dialog,
@@ -147,4 +148,121 @@ export const LongDialog: Story = {
       </DialogContent>
     </Dialog>
   ),
+};
+
+interface ContainerDialogStoryProps {
+  title: string;
+  description: string;
+  buttonLabel: string;
+  bodyText: string;
+  preventBackdropClickClose?: boolean;
+}
+
+function ContainerDialogStoryContent({
+  title,
+  description,
+  buttonLabel,
+  bodyText,
+  preventBackdropClickClose = false,
+}: ContainerDialogStoryProps) {
+  const [container, setContainer] = React.useState<HTMLElement | null>(null);
+  const containerRef = React.useCallback((node: HTMLDivElement | null) => {
+    setContainer(node);
+  }, []);
+
+  return (
+    <div className="flex flex-col items-center gap-4">
+      <p className="text-muted-foreground text-sm">{description}</p>
+      {/* Container the dialog will be scoped to */}
+      <div
+        ref={containerRef}
+        className="relative overflow-hidden rounded-lg border w-[480px] h-[320px] flex items-center justify-center bg-muted/30"
+      >
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="outline">{buttonLabel}</Button>
+          </DialogTrigger>
+          <DialogContent
+            container={container}
+            className="sm:max-w-[360px]"
+            disableOutsideClick={preventBackdropClickClose}
+          >
+            <DialogHeader>
+              <DialogTitle>{title}</DialogTitle>
+              <DialogDescription>{bodyText}</DialogDescription>
+            </DialogHeader>
+            <DialogBody>
+              <p className="text-sm">
+                The overlay and dialog are clipped to the box above.
+              </p>
+            </DialogBody>
+            <DialogFooter>
+              <Button>Got it</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Dialog rendered inside a specific container element rather than the document
+ * body. The container needs `position: relative` and `overflow: hidden` so the
+ * overlay and content are clipped to it.
+ */
+export const InContainer: Story = {
+  render: () => (
+    <ContainerDialogStoryContent
+      title="In-Container Dialog"
+      description="The dialog opens inside the bordered box, not the full page."
+      buttonLabel="Open Dialog In Container"
+      bodyText="This dialog is scoped to its parent container, and outside clicks will close it."
+    />
+  ),
+};
+
+/**
+ * Dialog rendered inside a container and kept open when clicking the overlay.
+ */
+export const InContainerWithoutBackdropDismiss: Story = {
+  render: () => (
+    <ContainerDialogStoryContent
+      title="Persistent In-Container Dialog"
+      description="The dialog opens inside the bordered box and stays open when the backdrop is clicked."
+      buttonLabel="Open Persistent Dialog In Container"
+      bodyText="This dialog is scoped to its parent container, and outside clicks will not close it."
+      preventBackdropClickClose
+    />
+  ),
+};
+
+function PersistentDialogStoryContent() {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button variant="outline">Open Persistent Dialog</Button>
+      </DialogTrigger>
+      <DialogContent disableOutsideClick className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Persistent Dialog</DialogTitle>
+          <DialogDescription>
+            Clicking the backdrop will not close this dialog.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <Button onClick={() => setOpen(false)}>Close</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+/**
+ * Dialog that stays open when the backdrop is clicked.
+ */
+export const WithoutBackdropDismiss: Story = {
+  render: () => <PersistentDialogStoryContent />,
 };

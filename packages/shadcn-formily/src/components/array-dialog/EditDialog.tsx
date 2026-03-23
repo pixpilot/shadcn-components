@@ -14,6 +14,7 @@ import {
   DialogTitle,
 } from '@pixpilot/shadcn-ui';
 import React from 'react';
+import { useFormContext } from '../../hooks';
 import { ArrayItemDraftFields } from '../array-common/ArrayItemDraftFields';
 import { ShakeStyles } from '../array-common/ShakeStyles';
 import { useArrayItemEditState } from '../array-common/use-array-item-edit-state';
@@ -72,6 +73,9 @@ export const EditDialog = observer(
       autoSave,
     });
 
+    const { settings = {} } = useFormContext();
+    const dialogContentProps = { ...settings.dialog, ...rest };
+
     return (
       <Dialog
         open={open}
@@ -82,7 +86,7 @@ export const EditDialog = observer(
         }}
       >
         <DialogContent
-          {...rest}
+          {...dialogContentProps}
           className={cn('sm:max-w-[525px]', shouldShake && 'pp-shake', className)}
           onInteractOutside={(event) => {
             if (!isDirty) return;

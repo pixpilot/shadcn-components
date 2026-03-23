@@ -3,6 +3,7 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from '@pixpilot/shadcn';
+import React from 'react';
 
 import { createForm, Form, SchemaField } from '../src';
 import { createStories } from './array-stories';
@@ -166,6 +167,187 @@ export const LongDialog: Story = {
             View Data
           </Button>
         </div>
+      </Form>
+    );
+  },
+};
+
+function DialogInsideContainerSettingsContent() {
+  const [container, setContainer] = React.useState<HTMLElement | null>(null);
+  const containerRef = React.useCallback((node: HTMLDivElement | null) => {
+    setContainer(node);
+  }, []);
+
+  const form = React.useMemo(
+    () =>
+      createForm({
+        values: {
+          items: [
+            {
+              name: 'Container Item',
+              description: 'This dialog is rendered inside the bordered container.',
+            },
+          ],
+        },
+      }),
+    [],
+  );
+
+  const schema = {
+    type: 'object',
+    properties: {
+      items: {
+        type: 'array',
+        'x-component': 'ArrayDialog',
+        items: {
+          type: 'object',
+          'x-reactions': {
+            fulfill: {
+              state: {
+                title: "{{$self.value?.name || 'Item'}}",
+              },
+            },
+          },
+          properties: {
+            name: {
+              type: 'string',
+              title: 'Name',
+              'x-decorator': 'FormItem',
+              'x-component': 'Input',
+            },
+            description: {
+              type: 'string',
+              title: 'Description',
+              'x-decorator': 'FormItem',
+              'x-component': 'Textarea',
+              'x-component-props': {
+                rows: 4,
+              },
+            },
+          },
+        },
+        properties: {
+          addition: {
+            type: 'void',
+            title: 'Add Item',
+            'x-component': 'ArrayDialog.Addition',
+          },
+        },
+      },
+    },
+  };
+
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="space-y-2">
+        <h2 className="text-2xl font-bold">Array Dialog In Container</h2>
+        <p className="text-muted-foreground max-w-xl">
+          This story uses <code>settings.dialog.container</code> on the form so the dialog
+          portal mounts inside the bordered box instead of the document body.
+        </p>
+      </div>
+
+      <div
+        ref={containerRef}
+        className="relative h-[360px] overflow-hidden rounded-lg border bg-muted/20 p-4"
+      >
+        <Form
+          form={form}
+          className="space-y-4"
+          settings={{
+            dialog: {
+              container,
+            },
+          }}
+        >
+          <SchemaField schema={schema} />
+        </Form>
+      </div>
+    </div>
+  );
+}
+
+export const DialogInsideContainerSettings: Story = {
+  render: () => <DialogInsideContainerSettingsContent />,
+};
+
+export const PreventBackdropDismiss: Story = {
+  render: () => {
+    const form = createForm({
+      values: {
+        items: [
+          {
+            name: 'Locked Item',
+            description: 'Click the backdrop to verify the dialog stays open.',
+          },
+        ],
+      },
+    });
+
+    const schema = {
+      type: 'object',
+      properties: {
+        items: {
+          type: 'array',
+          'x-component': 'ArrayDialog',
+          items: {
+            type: 'object',
+            'x-reactions': {
+              fulfill: {
+                state: {
+                  title: "{{$self.value?.name || 'Item'}}",
+                },
+              },
+            },
+            properties: {
+              name: {
+                type: 'string',
+                title: 'Name',
+                'x-decorator': 'FormItem',
+                'x-component': 'Input',
+              },
+              description: {
+                type: 'string',
+                title: 'Description',
+                'x-decorator': 'FormItem',
+                'x-component': 'Textarea',
+                'x-component-props': {
+                  rows: 4,
+                },
+              },
+            },
+          },
+          properties: {
+            addition: {
+              type: 'void',
+              title: 'Add Item',
+              'x-component': 'ArrayDialog.Addition',
+            },
+          },
+        },
+      },
+    };
+
+    return (
+      <Form
+        form={form}
+        className="space-y-6 w-[720px]"
+        settings={{
+          dialog: {
+            disableOutsideClick: true,
+          },
+        }}
+      >
+        <div className="space-y-2">
+          <h2 className="text-2xl font-bold">Array Dialog Without Backdrop Dismiss</h2>
+          <p className="text-muted-foreground">
+            Open the item editor and click outside the dialog. The backdrop click should
+            not close it because the setting is enabled through
+            <code>settings.dialog.preventBackdropClickClose</code>.
+          </p>
+        </div>
+
+        <SchemaField schema={schema} />
       </Form>
     );
   },

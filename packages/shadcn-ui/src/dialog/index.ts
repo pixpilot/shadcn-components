@@ -7,6 +7,8 @@ import {
 } from '@pixpilot/shadcn';
 import { DialogBody, DialogContent, DialogFooter, DialogHeader } from './Dialog';
 
+export type { DialogContentProps } from './Dialog';
+
 export {
   Dialog,
   DialogBody,

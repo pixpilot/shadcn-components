@@ -1,4 +1,5 @@
 import type {
+  DialogContentProps,
   FileUploadProgressCallBacks,
   IconProvider,
   RichTextEditorProps,
@@ -42,6 +43,8 @@ export interface FormSettings {
       actions?: ActionItem[] | false;
     };
   };
+
+  dialog?: DialogContentProps;
 }
 
 /**

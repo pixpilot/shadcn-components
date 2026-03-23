@@ -1,9 +1,11 @@
 import { DialogContent as BaseDialogContent, cn } from '@pixpilot/shadcn';
 import * as React from 'react';
 
+export type DialogContentProps = React.ComponentPropsWithoutRef<typeof BaseDialogContent>;
+
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof BaseDialogContent>,
-  React.ComponentPropsWithoutRef<typeof BaseDialogContent>
+  DialogContentProps
 >(({ className, ...props }, ref) => (
   <BaseDialogContent
     ref={ref}
