@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 1.2.0
+
+### Minor Changes
+
+- enhance dialog component with container context and overlay behavior
+
 ## 1.1.0
 
 ### Minor Changes
