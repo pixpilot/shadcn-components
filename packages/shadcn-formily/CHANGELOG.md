@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 1.7.0
+
+### Minor Changes
+
+- add className prop to EditDialog and ArrayItemsEditPopover
+
 ## 1.6.0
 
 ### Minor Changes
