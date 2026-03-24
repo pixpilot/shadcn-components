@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 1.6.0
+
+### Minor Changes
+
+- integrate global autoSave settings for dialogs and popovers
+
 ## 1.5.0
 
 ### Minor Changes
