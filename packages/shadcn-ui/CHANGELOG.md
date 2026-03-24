@@ -1,5 +1,16 @@
 # @pixpilot/shadcn-ui
 
+## 1.3.0
+
+### Minor Changes
+
+- enhance dialog component with container support and backdrop click prevention
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn@1.1.0
+
 ## 1.2.2
 
 ### Patch Changes
