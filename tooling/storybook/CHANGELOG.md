@@ -1,5 +1,12 @@
 # @internal/storybook
 
+## 0.0.164
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/formily-shadcn@1.5.0
+
 ## 0.0.163
 
 ### Patch Changes
