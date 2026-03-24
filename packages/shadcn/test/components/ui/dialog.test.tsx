@@ -28,7 +28,10 @@
  *      the container rather than the whole viewport.
  *   3. The content class is similarly switched from `fixed` to `absolute` so
  *      it centres within the container.
- *   4. `preventBackdropClickClose` prevents the dialog from closing when the
+ *   4. Container-scoped dialogs do not disable outside pointer events on
+ *      `document.body`, so the page stays interactive outside the custom
+ *      portal root.
+ *   5. `preventBackdropClickClose` prevents the dialog from closing when the
  *      overlay is clicked, while keeping the default backdrop-close behavior
  *      intact when the prop is omitted.
  *
@@ -41,13 +44,16 @@
  *   - Pass `className={container ? 'absolute' : undefined}` to `<DialogOverlay>`.
  *   - Add `container && 'absolute'` to the `cn(...)` call on
  *     `<DialogPrimitive.Content>` (before the consumer `className`).
+ *   - Pass `disableOutsidePointerEvents={container ? false : undefined}` to
+ *     `<DialogPrimitive.Content>` so a custom container does not lock the
+ *     body with `pointer-events: none`.
  *   - Destructure `onInteractOutside` and prevent default when
  *     `preventBackdropClickClose` is true.
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
 import * as React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import {
   Dialog,
@@ -104,6 +110,43 @@ describe('dialogContent — container prop (custom, restore after shadcn update)
     expect(overlay?.className).not.toContain('absolute');
     expect(content?.className).toContain('fixed');
     expect(content?.className).not.toContain('absolute');
+  });
+
+  it('uses the same overlay base classes in both rendering modes', () => {
+    /*
+     * CUSTOM BEHAVIOUR — restore this after every shadcn update.
+     *
+     * The overlay styling should stay centralized so the fixed inset, z-index,
+     * background, and animation tokens stay consistent whether the dialog is
+     * portalled to document.body or to a custom container.
+     */
+    const containerEl = document.createElement('div');
+    document.body.appendChild(containerEl);
+
+    renderOpenDialog();
+    const defaultOverlay = document.querySelector('[data-slot="dialog-overlay"]');
+    expect(defaultOverlay).not.toBeNull();
+    expect(defaultOverlay?.className).toContain('data-[state=open]:animate-in');
+    expect(defaultOverlay?.className).toContain('data-[state=closed]:animate-out');
+    expect(defaultOverlay?.className).toContain('data-[state=closed]:fade-out-0');
+    expect(defaultOverlay?.className).toContain('data-[state=open]:fade-in-0');
+    expect(defaultOverlay?.className).toContain('fixed');
+    expect(defaultOverlay?.className).toContain('z-50');
+    expect(defaultOverlay?.className).toContain('bg-black/50');
+
+    renderOpenDialog(containerEl);
+    const containerOverlay = containerEl.querySelector('[data-slot="dialog-overlay"]');
+    expect(containerOverlay).not.toBeNull();
+    expect(containerOverlay?.className).toContain('data-[state=open]:animate-in');
+    expect(containerOverlay?.className).toContain('data-[state=closed]:animate-out');
+    expect(containerOverlay?.className).toContain('data-[state=closed]:fade-out-0');
+    expect(containerOverlay?.className).toContain('data-[state=open]:fade-in-0');
+    expect(containerOverlay?.className).toContain('z-50');
+    expect(containerOverlay?.className).toContain('bg-black/50');
+    expect(containerOverlay?.className).toContain('absolute');
+    expect(containerOverlay?.className).not.toContain('fixed');
+
+    document.body.removeChild(containerEl);
   });
 
   it('mounts the portal inside the given container element', () => {
@@ -164,6 +207,28 @@ describe('dialogContent — container prop (custom, restore after shadcn update)
     expect(content?.className).not.toContain('fixed');
 
     document.body.removeChild(containerEl);
+  });
+
+  it('does not lock body pointer events when a container is provided', async () => {
+    /*
+     * CUSTOM BEHAVIOUR — restore this after every shadcn update.
+     *
+     * Radix modal dialogs normally set `pointer-events: none` on the body.
+     * When the portal is scoped to a custom container, this wrapper must
+     * disable that lock so the rest of the page stays interactive.
+     */
+    const containerEl = document.createElement('div');
+    document.body.appendChild(containerEl);
+    document.body.style.pointerEvents = '';
+
+    renderOpenDialog(containerEl);
+
+    await waitFor(() => {
+      expect(document.body.style.pointerEvents).not.toBe('none');
+    });
+
+    document.body.removeChild(containerEl);
+    document.body.style.pointerEvents = '';
   });
 });
 

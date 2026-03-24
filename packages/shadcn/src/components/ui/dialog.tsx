@@ -4,8 +4,39 @@ import { XIcon } from 'lucide-react';
 
 import { cn } from '@/lib/index';
 
-function Dialog({ ...props }: React.ComponentProps<typeof DialogPrimitive.Root>) {
-  return <DialogPrimitive.Root data-slot="dialog" {...props} />;
+const dialogOverlayBaseClass =
+  'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50';
+
+const DialogContainerContext = React.createContext<{
+  hasContainer: boolean;
+  modal: boolean | undefined;
+  setHasContainer: React.Dispatch<React.SetStateAction<boolean>>;
+} | null>(null);
+
+const DialogContentPrimitive =
+  DialogPrimitive.Content as unknown as React.ForwardRefExoticComponent<
+    React.ComponentProps<typeof DialogPrimitive.Content> &
+      React.RefAttributes<HTMLDivElement> & {
+        disableOutsidePointerEvents?: boolean;
+      }
+  >;
+
+function Dialog({ modal, ...props }: React.ComponentProps<typeof DialogPrimitive.Root>) {
+  const [hasContainer, setHasContainer] = React.useState(false);
+  const contextValue = React.useMemo(
+    () => ({ hasContainer, modal, setHasContainer }),
+    [hasContainer, modal],
+  );
+
+  return (
+    <DialogContainerContext.Provider value={contextValue}>
+      <DialogPrimitive.Root
+        data-slot="dialog"
+        modal={hasContainer ? false : modal}
+        {...props}
+      />
+    </DialogContainerContext.Provider>
+  );
 }
 
 function DialogTrigger({
@@ -29,10 +60,7 @@ function DialogOverlay({
   return (
     <DialogPrimitive.Overlay
       data-slot="dialog-overlay"
-      className={cn(
-        'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50',
-        className,
-      )}
+      className={cn(dialogOverlayBaseClass, className)}
       {...props}
     />
   );
@@ -58,11 +86,31 @@ function DialogContent({
   disableOutsideClick?: boolean;
   container?: HTMLElement | null;
 }) {
+  const dialogContainer = React.use(DialogContainerContext);
+
+  React.useEffect(() => {
+    if (!dialogContainer) {
+      return;
+    }
+
+    dialogContainer.setHasContainer(Boolean(container));
+  }, [container, dialogContainer]);
+
   return (
     <DialogPortal container={container ?? undefined} data-slot="dialog-portal">
-      <DialogOverlay className={container ? 'absolute' : undefined} />
-      <DialogPrimitive.Content
+      {container ? (
+        <div
+          aria-hidden="true"
+          data-slot="dialog-overlay"
+          data-state="open"
+          className={cn(dialogOverlayBaseClass, 'absolute')}
+        />
+      ) : (
+        <DialogOverlay />
+      )}
+      <DialogContentPrimitive
         data-slot="dialog-content"
+        disableOutsidePointerEvents={container ? false : undefined}
         onPointerDownOutside={(event) => {
           onPointerDownOutside?.(event);
 
@@ -92,7 +140,7 @@ function DialogContent({
             <span className="sr-only">Close</span>
           </DialogPrimitive.Close>
         )}
-      </DialogPrimitive.Content>
+      </DialogContentPrimitive>
     </DialogPortal>
   );
 }
