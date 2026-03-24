@@ -40,7 +40,16 @@ export interface ArrayItemsEditPopoverProps extends Omit<
 }
 
 export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = observer(
-  ({ schema, onSave, onAutoSave, onCancel, activeItemManager, autoSave, ...rest }) => {
+  ({
+    schema,
+    onSave,
+    onAutoSave,
+    onCancel,
+    activeItemManager,
+    autoSave,
+    className,
+    ...rest
+  }) => {
     const {
       arrayField,
       activeIndex,
@@ -108,6 +117,7 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
         className={cn(
           shouldShake ? 'relative w-96 pp-shake' : 'relative w-96',
           contentProps.className,
+          className,
         )}
         onInteractOutside={(event) => {
           contentProps.onInteractOutside?.(event);

@@ -48,6 +48,7 @@ export const EditDialog = observer(
     onAutoSave: _onAutoSave,
     onCancel,
     activeItemManager,
+    className,
     autoSave,
     ...rest
   }: ArrayItemsEditDialogProps) => {
@@ -126,6 +127,7 @@ export const EditDialog = observer(
             'sm:max-w-[525px]',
             shouldShake && 'pp-shake',
             dialogContentProps.className,
+            className,
           )}
           onInteractOutside={(event) => {
             dialogContentProps.onInteractOutside?.(event);
