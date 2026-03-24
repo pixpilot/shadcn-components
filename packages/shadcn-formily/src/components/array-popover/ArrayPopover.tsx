@@ -2,6 +2,7 @@ import type { ArrayComponentProps } from '../array-base';
 import { observer } from '@formily/react';
 import { cn, Popover, PopoverTrigger } from '@pixpilot/shadcn';
 import React from 'react';
+import { useFormContext } from '../../hooks';
 import { ArrayBase, ArrayComponentProvider } from '../array-base';
 import { ArrayItemsList, useArrayEditor, useArrayItemSchema } from '../array-common';
 import { ArrayItemsEditPopover } from './Popover';
@@ -25,7 +26,10 @@ const ArrayPopoverBase = observer((props: Props) => {
     ...rest
   } = props;
 
-  const autoSave: boolean = autoSaveProp === true;
+  const { settings = {} } = useFormContext();
+  const { autoSave: globalAutoSave } = settings.popover || {};
+
+  const autoSave = autoSaveProp ?? globalAutoSave ?? true;
 
   const {
     activeItemManager,

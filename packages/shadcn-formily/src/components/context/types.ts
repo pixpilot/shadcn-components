@@ -2,6 +2,7 @@ import type {
   DialogContentProps,
   FileUploadProgressCallBacks,
   IconProvider,
+  PopoverContentProps,
   RichTextEditorProps,
 } from '@pixpilot/shadcn-ui';
 import type { FormSpace } from '../../types/form';
@@ -44,7 +45,9 @@ export interface FormSettings {
     };
   };
 
-  dialog?: DialogContentProps;
+  dialog?: DialogContentProps & { autoSave?: boolean };
+
+  popover?: PopoverContentProps & { autoSave?: boolean };
 }
 
 /**

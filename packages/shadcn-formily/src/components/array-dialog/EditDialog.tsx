@@ -49,7 +49,6 @@ export const EditDialog = observer(
     onCancel,
     activeItemManager,
     autoSave,
-    className,
     ...rest
   }: ArrayItemsEditDialogProps) => {
     const {
@@ -109,7 +108,8 @@ export const EditDialog = observer(
     }, [arrayField, handleCancel, isNewItem, itemIndex, normalizedAutoSave]);
 
     const { settings = {} } = useFormContext();
-    const dialogContentProps = { ...settings.dialog, ...rest };
+    const { autoSave: _globalAutoSave, ...dialogSettings } = settings.dialog || {};
+    const dialogContentProps = { ...dialogSettings, ...rest };
 
     return (
       <Dialog
@@ -122,8 +122,15 @@ export const EditDialog = observer(
       >
         <DialogContent
           {...dialogContentProps}
-          className={cn('sm:max-w-[525px]', shouldShake && 'pp-shake', className)}
+          className={cn(
+            'sm:max-w-[525px]',
+            shouldShake && 'pp-shake',
+            dialogContentProps.className,
+          )}
           onInteractOutside={(event) => {
+            dialogContentProps.onInteractOutside?.(event);
+            if (event.defaultPrevented) return;
+
             /*
              * Always intercept outside-click events and run validateAndClose
              * so that invalid fields are caught before the dialog dismisses.
@@ -133,6 +140,9 @@ export const EditDialog = observer(
             validateAndClose();
           }}
           onEscapeKeyDown={(event) => {
+            dialogContentProps.onEscapeKeyDown?.(event);
+            if (event.defaultPrevented) return;
+
             event.preventDefault();
             validateAndClose();
           }}

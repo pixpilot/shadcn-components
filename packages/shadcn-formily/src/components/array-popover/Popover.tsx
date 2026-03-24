@@ -2,9 +2,10 @@ import type { Schema } from '@formily/react';
 import type { ActiveItemManager } from '../array-common/create-active-item-manager';
 import { observer } from '@formily/react';
 
-import { Button, PopoverContent } from '@pixpilot/shadcn';
+import { Button, cn, PopoverContent } from '@pixpilot/shadcn';
 import { XIcon } from 'lucide-react';
 import React from 'react';
+import { useFormContext } from '../../hooks';
 import { ArrayItemDraftFields } from '../array-common/ArrayItemDraftFields';
 import { ShakeStyles } from '../array-common/ShakeStyles';
 import { useArrayItemEditState } from '../array-common/use-array-item-edit-state';
@@ -65,6 +66,12 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
       autoSave,
     });
 
+    const { settings = {} } = useFormContext();
+
+    const { autoSave: _globalAutoSave, ...popoverSettings } = settings.popover || {};
+
+    const contentProps = { ...popoverSettings, ...rest };
+
     const handleDiscard = React.useCallback(() => {
       if (activeIndex === undefined) return;
 
@@ -96,10 +103,16 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
 
     return (
       <PopoverContent
-        className={shouldShake ? 'relative w-96 pp-shake' : 'relative w-96'}
         side="top"
-        {...rest}
+        {...contentProps}
+        className={cn(
+          shouldShake ? 'relative w-96 pp-shake' : 'relative w-96',
+          contentProps.className,
+        )}
         onInteractOutside={(event) => {
+          contentProps.onInteractOutside?.(event);
+          if (event.defaultPrevented) return;
+
           if (isDirty) {
             event.preventDefault();
             triggerShake();
@@ -111,6 +124,9 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
           validateAndClose();
         }}
         onEscapeKeyDown={(event) => {
+          contentProps.onEscapeKeyDown?.(event);
+          if (event.defaultPrevented) return;
+
           if (isDirty) {
             event.preventDefault();
             triggerShake();

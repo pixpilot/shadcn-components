@@ -2,9 +2,10 @@ import type { ArrayComponentProps } from '../array-base';
 import { observer, useFieldSchema } from '@formily/react';
 
 import React from 'react';
+import { useFormContext } from '../../hooks';
 import { ArrayBase, ArrayComponentProvider, useArrayComponents } from '../array-base';
-import { ArrayItemsList, useArrayEditor, useArrayItemSchema } from '../array-common';
 
+import { ArrayItemsList, useArrayEditor, useArrayItemSchema } from '../array-common';
 import { EditDialog } from './EditDialog';
 
 type Props = ArrayComponentProps & { dialogProps?: React.HTMLAttributes<HTMLDivElement> };
@@ -30,7 +31,10 @@ const ArrayDialogBase = observer((props: Props) => {
     dialogProps,
   } = props;
 
-  const { autoSave } = props;
+  const { settings = {} } = useFormContext();
+  const { autoSave: globalAutoSave } = settings.dialog || {};
+
+  const autoSave = props.autoSave ?? globalAutoSave ?? false;
 
   const {
     activeItemManager,
@@ -49,7 +53,7 @@ const ArrayDialogBase = observer((props: Props) => {
   return (
     <ArrayBase
       {...props}
-      autoSave={autoSave ?? false}
+      autoSave={autoSave}
       transformActions={transformActions}
       onAdd={handleAdd}
       onRemove={onRemove}
@@ -73,7 +77,7 @@ const ArrayDialogBase = observer((props: Props) => {
   );
 });
 
-const ArrayItemsCollapseComponent: React.FC<Props> = (rest) => {
+const ArrayItemsComponent: React.FC<Props> = (rest) => {
   return (
     <ArrayComponentProvider>
       <ArrayDialogBase {...rest} />
@@ -81,7 +85,7 @@ const ArrayItemsCollapseComponent: React.FC<Props> = (rest) => {
   );
 };
 
-export const ArrayDialog = ArrayItemsCollapseComponent;
+export const ArrayDialog = ArrayItemsComponent;
 
 ArrayDialog.displayName = 'ArrayDialog';
 
