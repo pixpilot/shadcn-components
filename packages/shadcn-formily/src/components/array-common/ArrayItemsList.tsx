@@ -15,6 +15,7 @@ export interface ArrayItemsListProps {
   className?: string;
 
   isNewItem?: (index: number) => boolean;
+  activeIndex?: number;
   /**
    * Additional props to pass to the container
    */
@@ -28,7 +29,7 @@ export interface ArrayItemsListProps {
  * Displays items with move up/down, edit, and remove controls
  */
 export const ArrayItemsList: React.FC<ArrayItemsListProps> = observer(
-  ({ isNewItem, children, className, containerProps }) => {
+  ({ isNewItem, activeIndex, children, className, containerProps }) => {
     const field = useField<FormilyArrayField>();
     const schema = useFieldSchema();
 
@@ -54,6 +55,7 @@ export const ArrayItemsList: React.FC<ArrayItemsListProps> = observer(
                 index={index}
                 record={record}
                 isNew={isNew}
+                isAnchor={activeIndex === index && !isNew}
               />
             );
           })}

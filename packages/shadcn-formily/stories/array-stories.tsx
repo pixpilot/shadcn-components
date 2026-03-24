@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-alert */
 /* eslint-disable no-magic-numbers */
 
@@ -8,7 +9,7 @@
 
 import type { StoryObj } from '@storybook/react';
 import type { ISchema } from '../src';
-import { isArrayField, onFieldInputValueChange } from '@formily/core';
+import { onFieldInputValueChange, onFieldValueChange } from '@formily/core';
 import { Button } from '@pixpilot/shadcn';
 import { InfoIcon, PinIcon } from 'lucide-react';
 import { createForm, Form, JsonSchemaFormExtended, SchemaField } from '../src';
@@ -62,13 +63,12 @@ export function createEmptyArrayStory(config: StoryConfig): Story {
   return {
     render: () => {
       const form = createForm({
-        effects: () => {
+        effects() {
+          onFieldValueChange('*', (field) => {
+            console.log('Field value changed:', field.path, field.value);
+          });
           onFieldInputValueChange('*', (field) => {
-            if (isArrayField(field)) {
-              // use console.warn to avoid eslint no-console error in stories
-              // eslint-disable-next-line no-console
-              console.log(JSON.stringify(field.value, null, 2));
-            }
+            console.log('Input value changed:', field.path, field.value);
           });
         },
       });
@@ -78,7 +78,6 @@ export function createEmptyArrayStory(config: StoryConfig): Story {
           form={form}
           className="w-[600px]"
           onSubmit={(values) => {
-            // eslint-disable-next-line no-console
             console.log('Form submitted:', values);
 
             alert(JSON.stringify(values, null, JSON_INDENT));
@@ -487,7 +486,6 @@ export function createWithDescriptionStory(config: StoryConfig): Story {
           form={form}
           className="w-[600px]"
           onSubmit={(values) => {
-            // eslint-disable-next-line no-console
             console.log('Form submitted:', values);
 
             alert(JSON.stringify(values, null, JSON_INDENT));
@@ -816,7 +814,6 @@ export function createWithJsonSchemaFormStory(config: StoryConfig): Story {
           schema={schema}
           className="space-y-6"
           onSubmit={(values) => {
-            // eslint-disable-next-line no-console
             console.log('Form submitted:', values);
             alert(JSON.stringify(values, null, JSON_INDENT));
           }}
@@ -1454,6 +1451,14 @@ export function createAutoSaveStory(config: StoryConfig): Story {
             { name: 'Bob Smith', email: 'bob@example.com', role: 'User' },
           ],
         },
+        effects() {
+          onFieldValueChange('*', (field) => {
+            console.log('Field value changed:', field.path, field.value);
+          });
+          onFieldInputValueChange('*', (field) => {
+            console.log('Input value changed:', field.path, field.value);
+          });
+        },
       });
 
       return (
@@ -1461,7 +1466,6 @@ export function createAutoSaveStory(config: StoryConfig): Story {
           form={form}
           className="w-[700px]"
           onSubmit={(values) => {
-            // eslint-disable-next-line no-console
             console.log('Form submitted:', values);
             alert(JSON.stringify(values, null, JSON_INDENT));
           }}
@@ -1580,6 +1584,14 @@ export function createManualSaveStory(config: StoryConfig): Story {
             },
           ],
         },
+        effects() {
+          onFieldValueChange('*', (field) => {
+            console.log('Field value changed:', field.path, field.value);
+          });
+          onFieldInputValueChange('*', (field) => {
+            console.log('Input value changed:', field.path, field.value);
+          });
+        },
       });
 
       return (
@@ -1587,7 +1599,6 @@ export function createManualSaveStory(config: StoryConfig): Story {
           form={form}
           className="w-[700px]"
           onSubmit={(values) => {
-            // eslint-disable-next-line no-console
             console.log('Form submitted:', values);
             alert(JSON.stringify(values, null, JSON_INDENT));
           }}

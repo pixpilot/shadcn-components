@@ -1,5 +1,5 @@
 import { RecursionField, useFieldSchema } from '@formily/react';
-import { cn } from '@pixpilot/shadcn';
+import { cn, PopoverAnchor } from '@pixpilot/shadcn';
 import React from 'react';
 import { ArrayBase } from '../array-base';
 import { SortableItem } from '../array-sortable';
@@ -24,6 +24,10 @@ export interface ListItemProps {
    * Whether this is a temporary item being added
    */
   isNew?: boolean;
+  /**
+   * Whether this row should act as the popover anchor.
+   */
+  isAnchor?: boolean;
 }
 
 /**
@@ -31,7 +35,7 @@ export interface ListItemProps {
  * Displays an item with label and operation controls
  */
 export const ListItem: React.FC<ListItemProps> = React.memo(
-  ({ itemKey, index, record, isNew }) => {
+  ({ itemKey, index, record, isNew, isAnchor }) => {
     const schema = useFieldSchema();
     // const field = useField<ArrayField>();
     // const fieldAddress = field.address.toString();
@@ -45,28 +49,59 @@ export const ListItem: React.FC<ListItemProps> = React.memo(
     return (
       <ArrayBase.Item key={itemKey} index={index} record={record}>
         <SortableItem id={itemKey}>
-          {/* Render hidden RecursionField to create the array item field instance */}
-          {hiddenItemSchema ? (
-            <div style={{ display: 'none' }}>
-              <RecursionField schema={hiddenItemSchema} name={index} />
-            </div>
-          ) : null}
+          {isAnchor ? (
+            <PopoverAnchor asChild>
+              <div>
+                {/* Render hidden RecursionField to create the array item field instance */}
+                {hiddenItemSchema ? (
+                  <div style={{ display: 'none' }}>
+                    <RecursionField schema={hiddenItemSchema} name={index} />
+                  </div>
+                ) : null}
 
-          {/* Hide temporary item visually but keep it in DOM for form state */}
-          <ItemWrapper
-            className={cn('px-3 pl-4 py-2', isNewItem && 'hidden')}
-            index={index}
-          >
-            <ArrayItemHeaderRow
-              schema={schema}
-              index={index}
-              slots={{
-                content: {
-                  content: 'text-foreground font-medium',
-                },
-              }}
-            />
-          </ItemWrapper>
+                {/* Hide temporary item visually but keep it in DOM for form state */}
+                <ItemWrapper
+                  className={cn('px-3 pl-4 py-2', isNewItem && 'hidden')}
+                  index={index}
+                >
+                  <ArrayItemHeaderRow
+                    schema={schema}
+                    index={index}
+                    slots={{
+                      content: {
+                        content: 'text-foreground font-medium',
+                      },
+                    }}
+                  />
+                </ItemWrapper>
+              </div>
+            </PopoverAnchor>
+          ) : (
+            <>
+              {/* Render hidden RecursionField to create the array item field instance */}
+              {hiddenItemSchema ? (
+                <div style={{ display: 'none' }}>
+                  <RecursionField schema={hiddenItemSchema} name={index} />
+                </div>
+              ) : null}
+
+              {/* Hide temporary item visually but keep it in DOM for form state */}
+              <ItemWrapper
+                className={cn('px-3 pl-4 py-2', isNewItem && 'hidden')}
+                index={index}
+              >
+                <ArrayItemHeaderRow
+                  schema={schema}
+                  index={index}
+                  slots={{
+                    content: {
+                      content: 'text-foreground font-medium',
+                    },
+                  }}
+                />
+              </ItemWrapper>
+            </>
+          )}
         </SortableItem>
       </ArrayBase.Item>
     );

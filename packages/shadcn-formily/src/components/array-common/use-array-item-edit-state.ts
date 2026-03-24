@@ -1,9 +1,8 @@
-import type { ArrayField } from '@formily/core';
+import type { ArrayField, Form as IForm } from '@formily/core';
 import type { Schema } from '@formily/react';
 
 import type { ActiveItemManager } from './create-active-item-manager';
 import { useField } from '@formily/react';
-import React from 'react';
 import { useArrayItemDraftForm } from './use-array-item-draft-form';
 import { useArrayItemEditLabels } from './use-array-item-edit-labels';
 import { useEditHandlers } from './use-edit-handlers';
@@ -27,7 +26,24 @@ export interface UseArrayItemEditStateResult {
   isNewItem: boolean;
   open: boolean;
   normalizedAutoSave: boolean;
-  draftForm: ReturnType<typeof useArrayItemDraftForm>;
+  draftForm: IForm;
+  /**
+   * The name / basePath to pass to RecursionField inside ArrayItemDraftFields.
+   * Numeric item index in autoSave mode; 'draft' in non-autoSave mode.
+   */
+  basePath: string | number;
+  /**
+   * Glob pattern used to scope validate() calls to the edited item's own
+   * fields. Undefined in non-autoSave mode (the isolated draft form only
+   * contains the item's fields anyway).
+   */
+  validationPath: string | undefined;
+  /**
+   * Whether ArrayItemDraftFields should render inside its own FormProvider
+   * (true = non-autoSave / isolated) or directly in the parent form context
+   * (false = autoSave).
+   */
+  isolatedForm: boolean;
   isDirty: boolean;
   title: string;
   description: string;
@@ -42,7 +58,6 @@ export function useArrayItemEditState({
   activeItemManager,
   onSave,
   onCancel,
-  onAutoSave,
   autoSave,
 }: UseArrayItemEditStateOptions): UseArrayItemEditStateResult {
   const arrayField = useField<ArrayField>();
@@ -53,20 +68,15 @@ export function useArrayItemEditState({
 
   const normalizedAutoSave = autoSave === true || autoSave === 'true';
 
-  const handleDraftChange = React.useCallback(
-    (nextValue: unknown) => {
-      if (!normalizedAutoSave) return;
-      if (activeIndex === undefined) return;
-      onAutoSave?.(activeIndex, nextValue);
-    },
-    [activeIndex, normalizedAutoSave, onAutoSave],
-  );
-
-  const draftForm = useArrayItemDraftForm({
+  const {
+    form: draftForm,
+    basePath,
+    validationPath,
+    isolatedForm,
+  } = useArrayItemDraftForm({
     arrayField,
     index: activeIndex,
     autoSave: normalizedAutoSave,
-    onDraftChange: normalizedAutoSave ? handleDraftChange : undefined,
     initialDraftValue: activeItemManager.draftInitialValue,
   });
 
@@ -95,6 +105,9 @@ export function useArrayItemEditState({
     open,
     normalizedAutoSave,
     draftForm,
+    basePath,
+    validationPath,
+    isolatedForm,
     isDirty,
     title,
     description,

@@ -19,6 +19,7 @@ const ItemWrapper: React.FC<ItemWrapperProps> = (props) => {
   return (
     <div
       {...rest}
+      data-array-item-index={index}
       className={cn(
         'border-input bg-card rounded-md border  transition-colors items-center',
         hasErrors && 'border-destructive border-2',

@@ -2,9 +2,9 @@ import type { Schema } from '@formily/react';
 import type { ActiveItemManager } from '../array-common/create-active-item-manager';
 import { observer } from '@formily/react';
 
-import { Button, Popover, PopoverContent, PopoverTrigger } from '@pixpilot/shadcn';
+import { Button, PopoverContent } from '@pixpilot/shadcn';
+import { XIcon } from 'lucide-react';
 import React from 'react';
-import { createPortal } from 'react-dom';
 import { ArrayItemDraftFields } from '../array-common/ArrayItemDraftFields';
 import { ShakeStyles } from '../array-common/ShakeStyles';
 import { useArrayItemEditState } from '../array-common/use-array-item-edit-state';
@@ -39,24 +39,16 @@ export interface ArrayItemsEditPopoverProps extends Omit<
 }
 
 export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = observer(
-  ({
-    schema,
-    onSave,
-    onAutoSave,
-    onCancel,
-    children,
-    activeItemManager,
-    autoSave,
-    modal = true,
-    ...rest
-  }) => {
+  ({ schema, onSave, onAutoSave, onCancel, activeItemManager, autoSave, ...rest }) => {
     const {
       arrayField,
       activeIndex,
       isNewItem,
-      open,
       normalizedAutoSave,
       draftForm,
+      basePath,
+      validationPath,
+      isolatedForm,
       isDirty,
       title,
       description,
@@ -93,99 +85,93 @@ export const ArrayItemsEditPopover: React.FC<ArrayItemsEditPopoverProps> = obser
         return;
       }
 
-      Promise.resolve(draftForm.validate())
+      Promise.resolve(draftForm.validate(validationPath))
         .then(() => {
           handleCancel();
         })
         .catch(() => {
           triggerShake();
         });
-    }, [activeIndex, draftForm, handleCancel, isDirty, triggerShake]);
-
-    const handleOpenChange = React.useCallback(
-      (isOpen: boolean) => {
-        if (isOpen) return;
-        validateAndClose();
-      },
-      [validateAndClose],
-    );
+    }, [activeIndex, draftForm, handleCancel, isDirty, triggerShake, validationPath]);
 
     return (
-      <Popover open={open} onOpenChange={handleOpenChange} modal={modal}>
-        {children !== undefined && <PopoverTrigger asChild>{children}</PopoverTrigger>}
-        {typeof document !== 'undefined' &&
-          open &&
-          modal &&
-          createPortal(
-            <div className="fixed inset-0 z-40 backdrop-brightness-90" />,
-            document.body,
-          )}
-        <PopoverContent
-          className={shouldShake ? 'w-96 pp-shake' : 'w-96'}
-          side="top"
-          {...rest}
-          onInteractOutside={(event) => {
-            if (isDirty) {
-              event.preventDefault();
-              triggerShake();
-              return;
-            }
-
-            // Ensure validation runs before closing (autoSave or manual-save mode).
+      <PopoverContent
+        className={shouldShake ? 'relative w-96 pp-shake' : 'relative w-96'}
+        side="top"
+        {...rest}
+        onInteractOutside={(event) => {
+          if (isDirty) {
             event.preventDefault();
-            validateAndClose();
-          }}
-          onEscapeKeyDown={(event) => {
-            if (isDirty) {
-              event.preventDefault();
-              triggerShake();
-              return;
-            }
+            triggerShake();
+            return;
+          }
 
-            // Ensure validation runs before closing (autoSave or manual-save mode).
+          // Ensure validation runs before closing (autoSave or manual-save mode).
+          event.preventDefault();
+          validateAndClose();
+        }}
+        onEscapeKeyDown={(event) => {
+          if (isDirty) {
             event.preventDefault();
-            validateAndClose();
-          }}
+            triggerShake();
+            return;
+          }
+
+          // Ensure validation runs before closing (autoSave or manual-save mode).
+          event.preventDefault();
+          validateAndClose();
+        }}
+      >
+        <ShakeStyles />
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
+          className="absolute right-2 top-2 z-10 size-8"
+          aria-label="Close"
+          onClick={validateAndClose}
         >
-          <ShakeStyles />
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <h4 className="font-medium leading-none">{title}</h4>
-              <p className="text-muted-foreground text-sm">{description}</p>
-            </div>
-
-            {activeIndex != null && (
-              <ArrayItemDraftFields
-                schema={schema}
-                form={draftForm}
-                className="space-y-4"
-              />
-            )}
-
-            {!normalizedAutoSave && (
-              <div className="flex justify-end gap-2">
-                <Button type="button" variant="outline" size="sm" onClick={handleCancel}>
-                  Cancel
-                </Button>
-                <Button type="button" size="sm" onClick={handleSave}>
-                  Save
-                </Button>
-              </div>
-            )}
-
-            {normalizedAutoSave && isNewItem && (
-              <div className="flex justify-end gap-2">
-                <Button type="button" variant="outline" size="sm" onClick={handleDiscard}>
-                  Discard
-                </Button>
-                <Button type="button" size="sm" onClick={validateAndClose}>
-                  Done
-                </Button>
-              </div>
-            )}
+          <XIcon className="size-4" />
+        </Button>
+        <div className="space-y-4">
+          <div className="space-y-2">
+            <h4 className="font-medium leading-none">{title}</h4>
+            <p className="text-muted-foreground text-sm">{description}</p>
           </div>
-        </PopoverContent>
-      </Popover>
+
+          {activeIndex != null && (
+            <ArrayItemDraftFields
+              schema={schema}
+              form={draftForm}
+              basePath={basePath}
+              isolated={isolatedForm}
+              className="space-y-4"
+            />
+          )}
+
+          {!normalizedAutoSave && (
+            <div className="flex justify-end gap-2">
+              <Button type="button" variant="outline" size="sm" onClick={handleCancel}>
+                Cancel
+              </Button>
+              <Button type="button" size="sm" onClick={handleSave}>
+                Save
+              </Button>
+            </div>
+          )}
+
+          {normalizedAutoSave && isNewItem && (
+            <div className="flex justify-end gap-2">
+              <Button type="button" variant="outline" size="sm" onClick={handleDiscard}>
+                Discard
+              </Button>
+              <Button type="button" size="sm" onClick={validateAndClose}>
+                Done
+              </Button>
+            </div>
+          )}
+        </div>
+      </PopoverContent>
     );
   },
 );
