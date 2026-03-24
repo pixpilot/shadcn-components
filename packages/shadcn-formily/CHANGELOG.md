@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 1.5.0
+
+### Minor Changes
+
+- enhance array item editing with popover support
+
 ## 1.4.5
 
 ### Patch Changes
