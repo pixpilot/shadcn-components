@@ -1,4 +1,5 @@
 import type { ToggleButtonProps } from './ToggleButton';
+import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 import { ToggleButton } from './ToggleButton';
 import { isSvgMarkupString, svgMarkupToMaskUrl } from './utils';
@@ -9,9 +10,7 @@ export interface IconToggleProps extends Omit<
 > {
   checkedIcon?: React.ReactNode | string;
   uncheckedIcon?: React.ReactNode | string;
-
   size?: 'sm' | 'default' | 'lg';
-  iconSize?: string | number;
 }
 
 export const IconToggle = React.forwardRef<HTMLButtonElement, IconToggleProps>(
@@ -21,7 +20,7 @@ export const IconToggle = React.forwardRef<HTMLButtonElement, IconToggleProps>(
       uncheckedIcon,
       size = 'default',
       variant = 'outline',
-      iconSize,
+
       style,
       className,
       ...props
@@ -35,12 +34,10 @@ export const IconToggle = React.forwardRef<HTMLButtonElement, IconToggleProps>(
     };
 
     const sizeMap = {
-      sm: '14px',
-      default: '16px',
-      lg: '20px',
+      sm: 'size-3',
+      default: 'size-5',
+      lg: 'size-7',
     };
-
-    const resolvedIconSize = iconSize ?? sizeMap[size];
 
     const renderIcon = (icon: React.ReactNode | string | undefined): React.ReactNode => {
       if (icon == null) return null;
@@ -49,10 +46,8 @@ export const IconToggle = React.forwardRef<HTMLButtonElement, IconToggleProps>(
         return (
           <span
             aria-hidden="true"
-            className="inline-block"
+            className={cn('inline-block', sizeMap[size])}
             style={{
-              width: 'var(--icon-size)',
-              height: 'var(--icon-size)',
               flexShrink: 0,
               backgroundColor: 'currentColor',
               WebkitMaskImage: mask,
@@ -77,10 +72,6 @@ export const IconToggle = React.forwardRef<HTMLButtonElement, IconToggleProps>(
         checkedContent={renderIcon(checkedIcon)}
         uncheckedContent={renderIcon(uncheckedIcon)}
         variant={variant}
-        style={{
-          ...(style ?? {}),
-          ['--icon-size' as any]: resolvedIconSize,
-        }}
         className={[
           'inline-flex items-center justify-center rounded-md text-sm font-medium transition-all outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50',
           '[&_svg]:pointer-events-none [&_svg:not([class*="size-"])]:size-[var(--icon-size)] [&_svg]:shrink-0',

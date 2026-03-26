@@ -34,6 +34,10 @@ const meta = {
       control: 'boolean',
       description: 'Disables the toggle',
     },
+    checkedIcon: {
+      control: 'object',
+      description: 'Icon to display when checked (React node or SVG string)',
+    },
   },
 } satisfies Meta<typeof IconToggle>;
 
