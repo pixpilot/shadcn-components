@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.4.0
+
+### Minor Changes
+
+- removed iconSize
+
 ## 1.3.1
 
 ### Patch Changes
