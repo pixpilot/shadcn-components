@@ -45,7 +45,7 @@ const AvatarUpload: React.FC<AvatarUploadProps> = (props) => {
     messages,
     value,
     onAccept,
-    onChange,
+    onSuccess,
     onError,
     size = 'md',
     ...rest
@@ -92,7 +92,7 @@ const AvatarUpload: React.FC<AvatarUploadProps> = (props) => {
                 index={i}
                 currentSize={currentSize}
                 change={change}
-                onChange={onChange}
+                onSuccess={onSuccess}
                 onError={onError}
               />
             ))}

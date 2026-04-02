@@ -43,7 +43,7 @@ function Uploader(args: AvatarUploadProps) {
 
   return (
     <div className="flex flex-col items-center space-y-4">
-      <AvatarUpload {...args} onUpload={handleUpload} onChange={handleChange} />
+      <AvatarUpload {...args} onUpload={handleUpload} onSuccess={handleChange} />
       {files && (
         <div>
           <p className="text-sm text-muted-foreground">Selected file: {files.name}</p>
@@ -77,6 +77,35 @@ export const WithImage: Story = {
     },
   },
   render: Uploader,
+};
+
+export const WithUploadSuccess: Story = {
+  args: {},
+  render: function WithUploadSuccessAvatarUpload(args) {
+    const [successCount, setSuccessCount] = useState(0);
+    const [lastSuccess, setLastSuccess] = useState<FileMetadata | null>(null);
+
+    const handleSuccess = (fileMeta: FileMetadata) => {
+      setSuccessCount((count) => count + 1);
+      setLastSuccess(fileMeta);
+    };
+
+    return (
+      <div className="flex flex-col items-center space-y-4">
+        <AvatarUpload {...args} onUpload={handleUpload} onSuccess={handleSuccess} />
+        <div>
+          <p className="text-sm font-medium">
+            onSuccess called: {successCount} {successCount === 1 ? 'time' : 'times'}
+          </p>
+          {lastSuccess != null && (
+            <p className="text-xs text-muted-foreground">
+              {lastSuccess.name}, {lastSuccess.size} bytes, {lastSuccess.type}
+            </p>
+          )}
+        </div>
+      </div>
+    );
+  },
 };
 
 export const WithUploadError: Story = {

@@ -1,6 +1,7 @@
 'use client';
 
 import type { UseFileUploadStoreResult } from '../file-upload/hooks/use-file-upload-store';
+import type { MultiFileCallbacks, UseFileCallbacks } from '../file-upload/types';
 import type { FileUploadRootProps } from './types';
 import {
   cn,
@@ -20,16 +21,22 @@ export function FileUploadRoot(props: FileUploadRootProps) {
   const {
     value,
     onChange,
-    onError,
     className,
     disabled,
-    multiple = false,
     children,
     onAccept,
     preventDuplicates,
     slots,
+    onSuccess: singleOnSuccess,
+    onError: singleOnError,
+    onFileSuccess,
+    onFileError,
     ...rest
-  } = props;
+  } = props as FileUploadRootProps & Partial<UseFileCallbacks & MultiFileCallbacks>;
+
+  const multiple = props.multiple ?? false;
+  const onSuccess = multiple ? onFileSuccess : singleOnSuccess;
+  const onError = multiple ? onFileError : singleOnError;
 
   const {
     handleAccept,
@@ -100,6 +107,7 @@ export function FileUploadRoot(props: FileUploadRootProps) {
                   file={getFile(data)}
                   disabled={disabled}
                   onDelete={deleteFile}
+                  onSuccess={onSuccess}
                   onError={onError}
                   {...(slots?.fileItem || {})}
                 />

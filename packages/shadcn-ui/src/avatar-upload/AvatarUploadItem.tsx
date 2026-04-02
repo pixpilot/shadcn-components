@@ -1,4 +1,4 @@
-import type { FileMetadata } from '../file-upload';
+import type { UseFileCallbacks } from '../file-upload';
 
 import type { ComponentSize } from './types';
 
@@ -21,19 +21,17 @@ import {
   MessageComponent,
 } from './AvatarUploadComponents';
 
-interface AvatarUploadItemProps {
+interface AvatarUploadItemProps extends UseFileCallbacks {
   file: File;
   index: number;
   currentSize: ComponentSize;
   change: string;
-  onChange?: (file: FileMetadata) => void;
-  onError?: (file: File, error: string) => void;
 }
 
 const AvatarUploadItem: React.FC<AvatarUploadItemProps> = (props) => {
-  const { file, currentSize, change, onChange, onError } = props;
+  const { file, currentSize, change, onSuccess, onError } = props;
 
-  useFileUploadProgressCallbacks(file, { onChange, onError });
+  useFileUploadProgressCallbacks(file, { onSuccess, onError });
 
   const fileError = useFileError(file);
 

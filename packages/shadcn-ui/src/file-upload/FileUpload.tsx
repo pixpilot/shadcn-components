@@ -1,7 +1,7 @@
 'use client';
 
 import type { UseFileUploadStoreResult } from './hooks/use-file-upload-store';
-import type { FileUploadProps } from './types';
+import type { FileUploadProps, MultiFileCallbacks, UseFileCallbacks } from './types';
 import { cn, FileUploadDropzone, FileUpload as OrgFileUpload } from '@pixpilot/shadcn';
 import { Upload } from 'lucide-react';
 import * as React from 'react';
@@ -13,14 +13,20 @@ export function FileUpload(props: FileUploadProps) {
     value,
     onChange,
     className,
-    multiple = true,
     onAccept,
     maxFiles,
     preventDuplicates,
-    onError,
     onFileReject,
+    onSuccess: singleOnSuccess,
+    onError: singleOnError,
+    onFileSuccess,
+    onFileError,
     ...rest
-  } = props;
+  } = props as FileUploadProps & Partial<UseFileCallbacks & MultiFileCallbacks>;
+
+  const multiple = props.multiple ?? true;
+  const onSuccess = multiple ? onFileSuccess : singleOnSuccess;
+  const onError = multiple ? onFileError : singleOnError;
 
   const {
     handleAccept,
@@ -46,14 +52,17 @@ export function FileUpload(props: FileUploadProps) {
   const itemSize = 'size-22';
   const containerClasses = cn('p-1.5');
 
-  const handleError = React.useCallback((file: File, message: string) => {
-    if (onFileReject) {
-      onFileReject(file, message);
-    }
-    if (onError) {
-      onError(file, message);
-    }
-  }, []);
+  const handleError = React.useCallback(
+    (file: File, message: string) => {
+      if (onFileReject) {
+        onFileReject(file, message);
+      }
+      if (onError) {
+        onError(file, message);
+      }
+    },
+    [onError, onFileReject],
+  );
 
   return (
     <OrgFileUpload
@@ -82,6 +91,8 @@ export function FileUpload(props: FileUploadProps) {
             getFile={getFile}
             maxFiles={maxFiles}
             itemSize={itemSize}
+            onSuccess={onSuccess}
+            onError={onError}
             className={containerClasses}
           />
         )}

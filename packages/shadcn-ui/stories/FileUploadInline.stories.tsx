@@ -68,6 +68,56 @@ export const CustomButtonText: Story = {
 };
 
 /**
+ * File upload with success callback tracking
+ */
+export const WithUploadSuccess: Story = {
+  args: {
+    buttonText: 'Browse file',
+    showIcon: true,
+  },
+  render: function WithUploadSuccessFileUpload(args) {
+    const [successCount, setSuccessCount] = useState(0);
+    const [lastSuccess, setLastSuccess] = useState<FileMetadata | null>(null);
+
+    const handleSuccess = (fileMeta: FileMetadata) => {
+      setSuccessCount((count) => count + 1);
+      setLastSuccess(fileMeta);
+    };
+
+    return (
+      <>
+        <FileUploadInline
+          buttonText={args.buttonText}
+          showIcon={args.showIcon}
+          disabled={args.disabled}
+          multiple={true}
+          onUpload={handleUpload}
+          onFileSuccess={handleSuccess}
+        />
+        <div style={{ marginTop: 12 }}>
+          <div style={{ fontWeight: 'bold', marginBottom: 4 }}>
+            onSuccess called: {successCount} {successCount === 1 ? 'time' : 'times'}
+          </div>
+          {lastSuccess != null && (
+            <pre>
+              {JSON.stringify(
+                {
+                  name: lastSuccess.name,
+                  size: lastSuccess.size,
+                  type: lastSuccess.type,
+                },
+                null,
+                2,
+              )}
+            </pre>
+          )}
+        </div>
+      </>
+    );
+  },
+};
+
+/**
  * File upload with custom trigger children
  */
 export const CustomTrigger: Story = {

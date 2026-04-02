@@ -8,6 +8,16 @@ export interface FileMetadata {
   lastModified: number;
 }
 
+export interface UseFileCallbacks {
+  onSuccess?: (fileMeta: FileMetadata) => void;
+  onError?: (file: File, error: string) => void;
+}
+
+export interface MultiFileCallbacks {
+  onFileSuccess?: (fileMeta: FileMetadata) => void;
+  onFileError?: (file: File, error: string) => void;
+}
+
 export type OnChangeSingleFile = (file: FileMetadata | null) => void;
 export type OnChangeMultipleFiles = (files: FileMetadata[]) => void;
 
@@ -15,7 +25,6 @@ type MainFileUploadProps = Omit<OrgFileUploadProps, 'value' | 'onError'>;
 
 export interface FileUploadBaseProps extends MainFileUploadProps {
   preventDuplicates?: boolean;
-  onError?: (file: File, error: string) => void;
 }
 
 export type FileUploadProps =
@@ -23,21 +32,24 @@ export type FileUploadProps =
       multiple: true;
       value?: FileMetadata[];
       onChange?: OnChangeMultipleFiles;
-    } & FileUploadBaseProps)
+    } & FileUploadBaseProps &
+      MultiFileCallbacks)
   | ({
       multiple?: false; // defaults to single
       value?: FileMetadata | null;
       onChange?: OnChangeSingleFile;
-    } & FileUploadBaseProps);
+    } & FileUploadBaseProps &
+      UseFileCallbacks);
 
-export interface MultiFileUploadProps extends FileUploadBaseProps {
+export interface MultiFileUploadProps extends FileUploadBaseProps, MultiFileCallbacks {
   value?: FileMetadata[];
   onChange?: OnChangeMultipleFiles;
 }
 
-export interface SingleFileUploadProps extends Omit<FileUploadBaseProps, 'multiple'> {
+export interface SingleFileUploadProps
+  extends Omit<FileUploadBaseProps, 'multiple'>, UseFileCallbacks {
   value?: FileMetadata | null;
-  onChange?: (files: FileMetadata) => void;
+  onChange?: OnChangeSingleFile;
 }
 
 export interface FileUploadProgressCallBacks {
