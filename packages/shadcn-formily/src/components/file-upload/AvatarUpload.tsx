@@ -3,6 +3,7 @@ import type { AvatarUploadProps } from '@pixpilot/shadcn-ui';
 import { connect, mapProps } from '@formily/react';
 import { AvatarUpload as ShadcnAvatarUpload } from '@pixpilot/shadcn-ui';
 import React from 'react';
+import { mapUploadProps } from './map-upload-props';
 import { useFileUploadFeedback } from './use-file-upload-feedback';
 
 const BaseAvatarUpload: React.FC<AvatarUploadProps> = (props) => {
@@ -26,11 +27,5 @@ const BaseAvatarUpload: React.FC<AvatarUploadProps> = (props) => {
  */
 export const AvatarUpload = connect(
   BaseAvatarUpload,
-  mapProps((props, field) => {
-    return {
-      ...props,
-      // eslint-disable-next-line ts/no-unsafe-assignment
-      value: (field as Field).value ?? null,
-    };
-  }),
+  mapProps((props, field) => mapUploadProps(props, field as Field)),
 );

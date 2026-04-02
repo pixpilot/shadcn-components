@@ -1,9 +1,15 @@
 /* eslint-disable no-console */
 /* eslint-disable no-alert */
 import type { Meta, StoryObj } from '@storybook/react';
-import { createForm, FileUpload, Form, JsonSchemaFormRenderer } from '../src';
+import {
+  createForm,
+  FileUpload,
+  Form,
+  JsonSchemaFormExtended,
+  JsonSchemaFormRenderer,
+} from '../src';
 import { SchemaFieldExtended } from '../src/components/schema-field';
-import { handleUpload } from './utils/file-upload';
+import { handleUpload, handleUploadWithError } from './utils/file-upload';
 
 const meta: Meta<typeof Form> = {
   title: 'Formily/FileUpload',
@@ -385,6 +391,109 @@ export const WithJsonSchemaFormRenderer: Story = {
           Submit
         </button>
       </JsonSchemaFormRenderer>
+    );
+  },
+};
+
+/**
+ * Demonstrates that the form field value is only set **after** the upload
+ * completes (`onSuccess` fires).  Select a file, wait for the progress bar
+ * to finish, then click Submit — the logged values will contain the file
+ * metadata.  Submitting before completion leaves the field empty.
+ */
+export const UploadSuccess: Story = {
+  render: () => {
+    const form = createForm();
+
+    const schema = {
+      type: 'object',
+      properties: {
+        document: {
+          type: 'object',
+          title: 'Document',
+          required: true,
+          'x-decorator': 'FormItem',
+          'x-component': 'FileUpload',
+          'x-component-props': {
+            accept: '.pdf,.doc,.docx',
+          },
+        },
+      },
+    };
+
+    return (
+      <JsonSchemaFormExtended
+        form={form}
+        schema={schema}
+        settings={{
+          fileUpload: {
+            onUpload: handleUpload,
+          },
+        }}
+        className="w-[400px]"
+        onSubmit={(values) => {
+          console.log('Form submitted:', values);
+          alert(JSON.stringify(values, null, JSON_INDENT));
+        }}
+      >
+        <button
+          type="submit"
+          className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+        >
+          Submit
+        </button>
+      </JsonSchemaFormExtended>
+    );
+  },
+};
+
+/**
+ * Demonstrates the error path: the mock upload handler always fails, which
+ * triggers `field.setFeedback({ type: 'error', … })` via `mapUploadProps`.
+ * The field will display the error message beneath the file picker after
+ * the simulated failure completes.
+ */
+export const UploadFailure: Story = {
+  render: () => {
+    const form = createForm();
+
+    const schema = {
+      type: 'object',
+      properties: {
+        document: {
+          type: 'object',
+          title: 'Document',
+          'x-decorator': 'FormItem',
+          'x-component': 'FileUpload',
+          'x-component-props': {
+            accept: '.pdf,.doc,.docx',
+          },
+        },
+      },
+    };
+
+    return (
+      <JsonSchemaFormExtended
+        form={form}
+        schema={schema}
+        settings={{
+          fileUpload: {
+            onUpload: handleUploadWithError,
+          },
+        }}
+        className="w-[400px]"
+        onSubmit={(values) => {
+          console.log('Form submitted:', values);
+          alert(JSON.stringify(values, null, JSON_INDENT));
+        }}
+      >
+        <button
+          type="submit"
+          className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+        >
+          Submit
+        </button>
+      </JsonSchemaFormExtended>
     );
   },
 };
