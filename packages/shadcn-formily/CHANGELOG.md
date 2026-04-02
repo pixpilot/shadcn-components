@@ -1,5 +1,16 @@
 # @pixpilot/formily-shadcn
 
+## 1.9.0
+
+### Minor Changes
+
+- enhance file upload components with improved type handling and mapping
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn-ui@1.8.0
+
 ## 1.8.0
 
 ### Minor Changes

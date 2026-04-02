@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.8.0
+
+### Minor Changes
+
+- enhance file upload components with improved type handling and mapping
+
 ## 1.7.0
 
 ### Minor Changes
