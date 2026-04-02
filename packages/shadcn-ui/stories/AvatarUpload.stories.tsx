@@ -45,8 +45,8 @@ function Uploader(args: AvatarUploadProps) {
     <div className="flex flex-col items-center space-y-4">
       <AvatarUpload {...args} onUpload={handleUpload} onChange={handleChange} />
       {files && (
-        <div className="">
-          <p className="text-sm text-muted-foreground">Uploaded file: {files.name}</p>
+        <div>
+          <p className="text-sm text-muted-foreground">Selected file: {files.name}</p>
           <p className="text-xs text-muted-foreground">
             {files.size} bytes, {files.type}
           </p>
@@ -57,6 +57,11 @@ function Uploader(args: AvatarUploadProps) {
 }
 
 export const Default: Story = {
+  args: {},
+  render: Uploader,
+};
+
+export const ShowFileNameOnChange: Story = {
   args: {},
   render: Uploader,
 };
