@@ -40,7 +40,16 @@ const sizeClasses: ComponentSizes = {
 };
 
 const AvatarUpload: React.FC<AvatarUploadProps> = (props) => {
-  const { className, messages, value, onAccept, onChange, size = 'md', ...rest } = props;
+  const {
+    className,
+    messages,
+    value,
+    onAccept,
+    onChange,
+    onError,
+    size = 'md',
+    ...rest
+  } = props;
   const { upload = 'Upload', change = 'Change' } = messages || {};
 
   const currentSize = sizeClasses[size];
@@ -84,6 +93,7 @@ const AvatarUpload: React.FC<AvatarUploadProps> = (props) => {
                 currentSize={currentSize}
                 change={change}
                 onChange={onChange}
+                onError={onError}
               />
             ))}
           </FileUploadList>

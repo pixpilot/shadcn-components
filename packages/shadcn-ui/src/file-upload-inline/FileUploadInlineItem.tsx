@@ -66,6 +66,7 @@ interface FileItemProps extends Partial<FileMetadata> {
   file: File;
   disabled?: boolean;
   onDelete: (file: FileWithMetadata) => void;
+  onError?: (file: File, error: Error) => void;
 }
 
 export const FileUploadInlineItem: React.FC<FileItemProps> = React.memo(
@@ -77,8 +78,9 @@ export const FileUploadInlineItem: React.FC<FileItemProps> = React.memo(
     lastModified = 0,
     disabled = false,
     onDelete,
+    onError,
   }) => {
-    useFileUploadProgressCallbacks(file, { onChange: () => {} });
+    useFileUploadProgressCallbacks(file, { onChange: () => {}, onError });
     const fileError = useFileError(file);
 
     const isUploading = useFileUpload((store) => {

@@ -271,6 +271,8 @@ export const WithUploadError: Story = {
     showIcon: true,
   },
   render: function WithUploadErrorFileUpload(args) {
+    const [uploadError, setUploadError] = useState<Error | null>(null);
+
     function handleUploadWithError(
       uploadFiles: File[],
       options: FileUploadProgressCallBacks,
@@ -289,15 +291,23 @@ export const WithUploadError: Story = {
     }
 
     return (
-      <FileUploadInline
-        {...args}
-        value={null}
-        multiple={false}
-        onUpload={handleUploadWithError}
-        onChange={(_file: FileMetadata | null) => {
-          // handle single file change
-        }}
-      />
+      <div>
+        <FileUploadInline
+          {...args}
+          value={null}
+          multiple={false}
+          onUpload={handleUploadWithError}
+          onChange={(_file: FileMetadata | null) => {
+            // handle single file change
+          }}
+          onError={(_file, error) => {
+            setUploadError(error);
+          }}
+        />
+        {uploadError != null && (
+          <p className="mt-2 text-sm text-destructive">Error: {uploadError.message}</p>
+        )}
+      </div>
     );
   },
 };

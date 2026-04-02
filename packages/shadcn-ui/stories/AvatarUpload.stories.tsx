@@ -82,6 +82,8 @@ export const WithImage: Story = {
 export const WithUploadError: Story = {
   args: {},
   render: function WithUploadErrorFileUpload(args) {
+    const [uploadError, setUploadError] = useState<Error | null>(null);
+
     function handleUploadWithError(
       uploadFiles: File[],
       options: FileUploadProgressCallBacks,
@@ -99,6 +101,20 @@ export const WithUploadError: Story = {
       }
     }
 
-    return <AvatarUpload {...args} value={null} onUpload={handleUploadWithError} />;
+    return (
+      <div className="flex flex-col items-center space-y-4">
+        <AvatarUpload
+          {...args}
+          value={null}
+          onUpload={handleUploadWithError}
+          onError={(_file, error) => {
+            setUploadError(error);
+          }}
+        />
+        {uploadError != null && (
+          <p className="text-sm text-destructive">Error: {uploadError.message}</p>
+        )}
+      </div>
+    );
   },
 };

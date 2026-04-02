@@ -20,6 +20,7 @@ export function FileUploadRoot(props: FileUploadRootProps) {
   const {
     value,
     onChange,
+    onError,
     className,
     disabled,
     multiple = false,
@@ -99,6 +100,7 @@ export function FileUploadRoot(props: FileUploadRootProps) {
                   file={getFile(data)}
                   disabled={disabled}
                   onDelete={deleteFile}
+                  onError={onError}
                   {...(slots?.fileItem || {})}
                 />
               );

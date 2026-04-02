@@ -75,6 +75,8 @@ export const WithValue: Story = {
 export const WithUploadError: Story = {
   args: {},
   render: function WithUploadErrorFileUpload(args) {
+    const [uploadError, setUploadError] = useState<Error | null>(null);
+
     async function handleUploadWithError(
       uploadFiles: File[],
       options: {
@@ -91,9 +93,20 @@ export const WithUploadError: Story = {
     }
 
     return (
-      <FileUploadRoot {...args} onUpload={handleUploadWithError}>
-        <Button size="sm">Upload file</Button>
-      </FileUploadRoot>
+      <div>
+        <FileUploadRoot
+          {...args}
+          onUpload={handleUploadWithError}
+          onError={(_file, error) => {
+            setUploadError(error);
+          }}
+        >
+          <Button size="sm">Upload file</Button>
+        </FileUploadRoot>
+        {uploadError != null && (
+          <p className="mt-2 text-sm text-destructive">Error: {uploadError.message}</p>
+        )}
+      </div>
     );
   },
 };
