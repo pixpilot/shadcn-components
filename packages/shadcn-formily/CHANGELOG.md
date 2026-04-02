@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 1.8.0
+
+### Minor Changes
+
+- implement shared `mapUploadProps` for file upload components
+
 ## 1.7.5
 
 ### Patch Changes
