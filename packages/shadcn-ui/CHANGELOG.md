@@ -1,5 +1,15 @@
 # @pixpilot/shadcn-ui
 
+## 1.5.0
+
+### Minor Changes
+
+- update file upload display text and add story
+
+### Patch Changes
+
+- pass onChange to useFileUploadProgressCallbacks
+
 ## 1.4.0
 
 ### Minor Changes
