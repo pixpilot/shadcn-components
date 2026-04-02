@@ -5,7 +5,7 @@ import { getFileMeta } from '../utils';
 
 interface UseFileCallbacks {
   onChange?: (fileMeta: FileMetadata) => void;
-  onError?: (file: File, error: Error) => void;
+  onError?: (file: File, error: string) => void;
 }
 
 export function useFileUploadProgressCallbacks(
@@ -46,7 +46,7 @@ export function useFileUploadProgressCallbacks(
   useEffect(() => {
     if (uploadError != null && !isErrorTriggered.current) {
       isErrorTriggered.current = true;
-      onError?.(file, new Error(uploadError));
+      onError?.(file, uploadError);
     }
   }, [uploadError, onError, file]);
 }

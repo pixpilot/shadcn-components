@@ -15,7 +15,7 @@ type MainFileUploadProps = Omit<OrgFileUploadProps, 'value' | 'onError'>;
 
 export interface FileUploadBaseProps extends MainFileUploadProps {
   preventDuplicates?: boolean;
-  onError?: (file: File, error: Error) => void;
+  onError?: (file: File, error: string) => void;
 }
 
 export type FileUploadProps =

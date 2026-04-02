@@ -18,6 +18,7 @@ export function FileUpload(props: FileUploadProps) {
     maxFiles,
     preventDuplicates,
     onError,
+    onFileReject,
     ...rest
   } = props;
 
@@ -45,11 +46,21 @@ export function FileUpload(props: FileUploadProps) {
   const itemSize = 'size-22';
   const containerClasses = cn('p-1.5');
 
+  const handleError = React.useCallback((file: File, message: string) => {
+    if (onFileReject) {
+      onFileReject(file, message);
+    }
+    if (onError) {
+      onError(file, message);
+    }
+  }, []);
+
   return (
     <OrgFileUpload
       {...rest}
       value={orgValue}
       onAccept={handleFileAccept}
+      onFileReject={handleError}
       multiple={multiple}
       className={cn('w-full', className)}
     >

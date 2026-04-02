@@ -66,7 +66,7 @@ export interface FileUploadRootItemProps extends Partial<FileMetadata> {
   file: File;
   disabled?: boolean;
   onDelete: (file: FileWithMetadata) => void;
-  onError?: (file: File, error: Error) => void;
+  onError?: (file: File, error: string) => void;
 }
 
 export const FileUploadRootItem: React.FC<FileUploadRootItemProps> = React.memo(

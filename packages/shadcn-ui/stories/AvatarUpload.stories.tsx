@@ -82,7 +82,7 @@ export const WithImage: Story = {
 export const WithUploadError: Story = {
   args: {},
   render: function WithUploadErrorFileUpload(args) {
-    const [uploadError, setUploadError] = useState<Error | null>(null);
+    const [uploadError, setUploadError] = useState<string | null>(null);
 
     function handleUploadWithError(
       uploadFiles: File[],
@@ -112,7 +112,7 @@ export const WithUploadError: Story = {
           }}
         />
         {uploadError != null && (
-          <p className="text-sm text-destructive">Error: {uploadError.message}</p>
+          <p className="text-sm text-destructive">Error: {uploadError}</p>
         )}
       </div>
     );
