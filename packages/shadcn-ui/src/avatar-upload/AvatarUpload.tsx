@@ -60,15 +60,17 @@ const AvatarUpload: React.FC<AvatarUploadProps> = (props) => {
 
   const handleAccept = React.useCallback(
     (acceptedFiles: File[]) => {
+      const nextFiles = acceptedFiles.slice(0, 1);
+
       setFiles(
-        acceptedFiles.map((file) => {
+        nextFiles.map((file) => {
           return {
             file,
             id: `${file.name}-${file.lastModified.toString()}`,
           };
         }),
       );
-      onAccept?.(acceptedFiles);
+      onAccept?.(nextFiles);
     },
     [onAccept],
   );
@@ -78,6 +80,7 @@ const AvatarUpload: React.FC<AvatarUploadProps> = (props) => {
   return (
     <FileUpload
       {...rest}
+      multiple={false}
       onAccept={handleAccept}
       className={cn('w-fit', className)}
       accept="image/*"

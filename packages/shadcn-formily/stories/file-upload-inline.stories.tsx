@@ -1,6 +1,9 @@
 /* eslint-disable no-console */
 /* eslint-disable no-alert */
+import type { FileMetadata } from '@pixpilot/shadcn-ui';
 import type { Meta, StoryObj } from '@storybook/react';
+import type { FileUploadInlineProps } from '../src';
+import React from 'react';
 import {
   createForm,
   FileUploadInline,
@@ -26,6 +29,56 @@ export default meta;
 type Story = StoryObj<typeof Form>;
 
 const JSON_INDENT = 2;
+
+// eslint-disable-next-line no-magic-numbers
+const DEFAULT_MAX_SIZE = 2 * 1024 * 1024;
+
+type SingleFileUploadInlineProps = Omit<
+  FileUploadInlineProps,
+  'mapValue' | 'multiple' | 'onChange' | 'value'
+> & {
+  mapValue?: (value: FileMetadata | null) => FileMetadata | null;
+  multiple?: false;
+  onChange?: (value: FileMetadata | null) => void;
+  value?: FileMetadata | null;
+};
+type MultiFileUploadInlineProps = Extract<FileUploadInlineProps, { multiple: true }>;
+
+function withFallbackUrl(value: FileMetadata | null): FileMetadata | null {
+  if (value == null) {
+    return value;
+  }
+
+  const fallbackUrl = `${window.location.origin}/avatar.png`;
+
+  return {
+    ...value,
+    url: value.url != null && value.url !== '' ? value.url : fallbackUrl,
+  };
+}
+
+const CustomFileUploadInline: React.FC<SingleFileUploadInlineProps> = (props) => {
+  return <FileUploadInline {...props} mapValue={withFallbackUrl} />;
+};
+
+const CustomMultipleFileUploadInline: React.FC<MultiFileUploadInlineProps> = (props) => {
+  const { onFileSuccess, onFileError, ...restProps } = props;
+
+  return (
+    <FileUploadInline
+      {...restProps}
+      multiple={true}
+      onFileSuccess={(fileMeta) => {
+        console.log('Uploaded file:', fileMeta.name);
+        onFileSuccess?.(fileMeta);
+      }}
+      onFileError={(file, error) => {
+        console.error('Upload failed:', file.name, error);
+        onFileError?.(file, error);
+      }}
+    />
+  );
+};
 
 export const Declarative: Story = {
   render: () => {
@@ -347,7 +400,7 @@ export const WithFormFieldSetting: Story = {
         settings={{
           fileUpload: {
             onUpload: handleUpload,
-            maxSize: 2 * 1024 * 1024,
+            maxSize: DEFAULT_MAX_SIZE,
           },
         }}
       >
@@ -401,7 +454,7 @@ export const WithJsonSchemaFormRenderer: Story = {
         settings={{
           fileUpload: {
             onUpload: handleUpload,
-            maxSize: 2 * 1024 * 1024,
+            maxSize: DEFAULT_MAX_SIZE,
           },
         }}
         onSubmit={(values) => {
@@ -506,6 +559,166 @@ export const UploadFailure: Story = {
         settings={{
           fileUpload: {
             onUpload: handleUploadWithError,
+          },
+        }}
+        className="w-[400px]"
+        onSubmit={(values) => {
+          console.log('Form submitted:', values);
+          alert(JSON.stringify(values, null, JSON_INDENT));
+        }}
+      >
+        <button
+          type="submit"
+          className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+        >
+          Submit
+        </button>
+      </JsonSchemaFormExtended>
+    );
+  },
+};
+
+export const WithCustomMapValue: Story = {
+  render: () => {
+    const form = createForm({
+      initialValues: {
+        profilePicture: {
+          name: 'avatar.png',
+          size: 1024,
+          type: 'image/png',
+          lastModified: 1625247600000,
+        },
+      },
+    });
+    const schema = {
+      type: 'object',
+      properties: {
+        profilePicture: {
+          type: 'object',
+          title: 'Profile Picture',
+          required: true,
+          'x-decorator': 'FormItem',
+          'x-component': 'CustomFileUploadInline',
+          'x-component-props': {
+            buttonText: 'Select image',
+            accept: 'image/*',
+          },
+          properties: {
+            name: {
+              type: 'string',
+            },
+            size: {
+              type: 'number',
+            },
+            type: {
+              type: 'string',
+            },
+            url: {
+              type: 'string',
+            },
+            lastModified: { type: 'number' },
+          },
+        },
+      },
+    };
+
+    return (
+      <JsonSchemaFormExtended
+        form={form}
+        schema={schema}
+        settings={{
+          fileUpload: {
+            onUpload: handleUpload,
+          },
+        }}
+        components={{
+          fields: {
+            CustomFileUploadInline: {
+              component: CustomFileUploadInline,
+            },
+          },
+        }}
+        className="w-[400px]"
+        onSubmit={(values) => {
+          console.log('Form submitted:', values);
+          alert(JSON.stringify(values, null, JSON_INDENT));
+        }}
+      >
+        <button
+          type="submit"
+          className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+        >
+          Submit
+        </button>
+      </JsonSchemaFormExtended>
+    );
+  },
+};
+
+export const WithCustomMultipleComponent: Story = {
+  render: () => {
+    const form = createForm({
+      initialValues: {
+        documents: [
+          {
+            name: 'resume.pdf',
+            size: 204800,
+            type: 'application/pdf',
+            url: `${window.location.origin}/resume.pdf`,
+            lastModified: 1625247600000,
+          },
+          {
+            name: 'cover-letter.docx',
+            size: 102400,
+            type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            url: `${window.location.origin}/cover-letter.docx`,
+            lastModified: 1625247601000,
+          },
+        ],
+      },
+    });
+    const schema = {
+      type: 'object',
+      properties: {
+        documents: {
+          type: 'array',
+          title: 'Documents',
+          required: true,
+          'x-decorator': 'FormItem',
+          'x-component': 'CustomMultipleFileUploadInline',
+          'x-component-props': {
+            buttonText: 'Upload documents',
+            accept: '.pdf,.doc,.docx',
+            multiple: true,
+          },
+          items: {
+            type: 'object',
+            properties: {
+              name: { type: 'string' },
+              size: { type: 'number' },
+              type: { type: 'string' },
+              url: { type: 'string' },
+              lastModified: { type: 'number' },
+            },
+          },
+        },
+      },
+    };
+
+    return (
+      <JsonSchemaFormExtended
+        form={form}
+        schema={schema}
+        settings={{
+          fileUpload: {
+            onUpload: handleUpload,
+          },
+        }}
+        components={{
+          fields: {
+            CustomMultipleFileUploadInline: {
+              component: CustomMultipleFileUploadInline,
+            },
           },
         }}
         className="w-[400px]"

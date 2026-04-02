@@ -58,6 +58,40 @@ describe('mapUploadProps', () => {
     expect(result.value).toBeNull();
   });
 
+  it('applies mapValue to the current field value', () => {
+    const field = createMockField({
+      ...MOCK_FILE_META,
+      url: undefined,
+    } satisfies FileMetadata);
+    const result = callMapUploadProps(
+      {
+        mapValue: (value) => {
+          if (value == null) {
+            return value;
+          }
+
+          return {
+            ...value,
+            url: value.url ?? 'https://example.com/fallback.png',
+          };
+        },
+      },
+      field,
+    );
+
+    expect(result.value).toEqual({
+      ...MOCK_FILE_META,
+      url: 'https://example.com/fallback.png',
+    });
+  });
+
+  it('does not forward mapValue to the rendered component props', () => {
+    const field = createMockField(MOCK_FILE_META);
+    const result = callMapUploadProps({ mapValue: (value) => value }, field);
+
+    expect('mapValue' in result).toBe(false);
+  });
+
   it('sets onChange to undefined', () => {
     const field = createMockField();
     const result = callMapUploadProps({}, field);

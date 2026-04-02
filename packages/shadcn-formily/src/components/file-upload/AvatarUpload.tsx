@@ -1,18 +1,22 @@
 import type { Field } from '@formily/core';
-import type { AvatarUploadProps } from '@pixpilot/shadcn-ui';
+import type { AvatarUploadProps as ShadcnAvatarUploadProps } from '@pixpilot/shadcn-ui';
+import type { FormilyUploadProps } from './map-upload-props';
 import { connect, mapProps } from '@formily/react';
 import { AvatarUpload as ShadcnAvatarUpload } from '@pixpilot/shadcn-ui';
 import React from 'react';
 import { mapUploadProps } from './map-upload-props';
 import { useFileUploadFeedback } from './use-file-upload-feedback';
 
+export type AvatarUploadProps = FormilyUploadProps<ShadcnAvatarUploadProps>;
+
 const BaseAvatarUpload: React.FC<AvatarUploadProps> = (props) => {
+  const { mapValue: _mapValue, ...uploadProps } = props;
   const { onUpload, maxSize, handleFilesRejection, handleFileValidate } =
-    useFileUploadFeedback(props);
+    useFileUploadFeedback(uploadProps);
 
   return (
     <ShadcnAvatarUpload
-      {...props}
+      {...uploadProps}
       maxSize={maxSize}
       onFilesReject={handleFilesRejection}
       onFileValidate={handleFileValidate}
@@ -28,4 +32,4 @@ const BaseAvatarUpload: React.FC<AvatarUploadProps> = (props) => {
 export const AvatarUpload = connect(
   BaseAvatarUpload,
   mapProps((props, field) => mapUploadProps(props, field as Field)),
-);
+) as React.FC<AvatarUploadProps>;

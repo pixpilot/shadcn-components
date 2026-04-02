@@ -32,6 +32,11 @@ export { Combobox } from './components/Combobox';
 export * from './components/context/types';
 export { DatePicker } from './components/DatePicker';
 export { AvatarUpload, FileUpload, FileUploadInline } from './components/file-upload';
+export type {
+  AvatarUploadProps,
+  FileUploadInlineProps,
+  FileUploadProps,
+} from './components/file-upload';
 // Core components
 export { Form } from './components/Form';
 export { FormItem } from './components/form-item';
