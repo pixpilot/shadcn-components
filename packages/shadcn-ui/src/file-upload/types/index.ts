@@ -11,7 +11,7 @@ export interface FileMetadata {
 export type OnChangeSingleFile = (file: FileMetadata | null) => void;
 export type OnChangeMultipleFiles = (files: FileMetadata[]) => void;
 
-type MainFileUploadProps = Omit<OrgFileUploadProps, 'value'>;
+type MainFileUploadProps = Omit<OrgFileUploadProps, 'value' | 'onError'>;
 
 export interface FileUploadBaseProps extends MainFileUploadProps {
   preventDuplicates?: boolean;

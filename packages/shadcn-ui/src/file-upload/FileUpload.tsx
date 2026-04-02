@@ -17,6 +17,7 @@ export function FileUpload(props: FileUploadProps) {
     onAccept,
     maxFiles,
     preventDuplicates,
+    onError,
     ...rest
   } = props;
 
