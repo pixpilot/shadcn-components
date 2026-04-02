@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.7.0
+
+### Minor Changes
+
+- add onSuccess and onError callbacks to file upload components
+
 ## 1.6.0
 
 ### Minor Changes
