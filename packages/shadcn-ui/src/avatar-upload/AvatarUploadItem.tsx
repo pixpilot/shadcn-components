@@ -30,9 +30,9 @@ interface AvatarUploadItemProps {
 }
 
 const AvatarUploadItem: React.FC<AvatarUploadItemProps> = (props) => {
-  const { file, currentSize, change } = props;
+  const { file, currentSize, change, onChange } = props;
 
-  useFileUploadProgressCallbacks(file, props);
+  useFileUploadProgressCallbacks(file, { onChange });
 
   const fileError = useFileError(file);
 
