@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.10.3
+
+### Patch Changes
+
+- update message display logic based on image presence
+
 ## 1.10.2
 
 ### Patch Changes
