@@ -6,7 +6,19 @@ import {
   FileUploadDropzone,
   FileUploadList,
   FileUploadTrigger,
+  useFileUpload,
 } from '../../../src/components/ui/file-upload';
+
+/**
+ * Keep these tests passing when updating or overriding this component from the shadcn registry.
+ * They guard the upload-state behavior that can regress during registry syncs.
+ */
+
+function StatusProbe({ file }: { file: File }) {
+  const status = useFileUpload((store) => store.files.get(file)?.status ?? 'missing');
+
+  return <span data-testid="status">{status}</span>;
+}
 
 describe('fileUpload - onFilesReject prop', () => {
   it('should call onFilesReject with rejected files exceeding maxFiles', async () => {
@@ -280,5 +292,77 @@ describe('fileUpload - onFilesReject prop', () => {
       message: string;
     }>;
     expect(rejectedFiles).toHaveLength(2);
+  });
+
+  it('should keep success state when progress is queued before immediate success', async () => {
+    const uploadFile = new File(['content'], 'file.txt', { type: 'text/plain' });
+    const queuedFrames = new Map<number, FrameRequestCallback>();
+    let nextFrameId = 1;
+
+    vi.stubGlobal('requestAnimationFrame', (callback: FrameRequestCallback) => {
+      const frameId = nextFrameId++;
+      queuedFrames.set(frameId, callback);
+      return frameId;
+    });
+
+    vi.stubGlobal('cancelAnimationFrame', (frameId: number) => {
+      queuedFrames.delete(frameId);
+    });
+
+    const flushAnimationFrames = () => {
+      while (queuedFrames.size > 0) {
+        const [frameId, callback] = queuedFrames.entries().next().value as [
+          number,
+          FrameRequestCallback,
+        ];
+
+        queuedFrames.delete(frameId);
+        callback(performance.now());
+      }
+    };
+
+    try {
+      const { container, getByTestId } = render(
+        React.createElement(
+          FileUpload,
+          {
+            onUpload: (files, options) => {
+              for (const file of files) {
+                options.onProgress(file, 100);
+                options.onSuccess(file);
+              }
+            },
+          },
+          React.createElement(
+            FileUploadDropzone,
+            null,
+            React.createElement(FileUploadTrigger, null, 'Upload'),
+          ),
+          React.createElement(FileUploadList, null),
+          React.createElement(StatusProbe, { file: uploadFile }),
+        ),
+      );
+
+      const input = container.querySelector('input[type="file"]') as HTMLInputElement;
+
+      Object.defineProperty(input, 'files', {
+        value: [uploadFile],
+        writable: true,
+      });
+
+      act(() => {
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+
+      act(() => {
+        flushAnimationFrames();
+      });
+
+      await waitFor(() => {
+        expect(getByTestId('status').textContent).toBe('success');
+      });
+    } finally {
+      vi.unstubAllGlobals();
+    }
   });
 });

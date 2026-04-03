@@ -63,8 +63,6 @@ export function handleUpload(files: File[], options: FileUploadProgressCallBacks
       clearInterval(intervalId);
       options.onProgress(uploadFile, finalProgress);
 
-      await delay(500);
-
       options.onSuccess(uploadFile);
     })();
   }

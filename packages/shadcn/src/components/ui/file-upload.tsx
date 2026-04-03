@@ -337,6 +337,7 @@ function FileUploadRoot(props: FileUploadRootProps) {
   const dir = useDirection(dirProp);
   const listeners = useLazyRef(() => new Set<() => void>()).current;
   const files = useLazyRef<Map<File, FileState>>(() => new Map()).current;
+  const progressFrames = useLazyRef<Map<File, number>>(() => new Map()).current;
   const urlCache = useLazyRef(() => new WeakMap<File, string>()).current;
   const inputRef = React.useRef<HTMLInputElement>(null);
   const isControlled = value !== undefined;
@@ -351,18 +352,34 @@ function FileUploadRoot(props: FileUploadRootProps) {
     [accept],
   );
 
+  const cancelPendingProgress = React.useCallback(
+    (file: File) => {
+      const frameId = progressFrames.get(file);
+
+      if (frameId === undefined) {
+        return;
+      }
+
+      cancelAnimationFrame(frameId);
+      progressFrames.delete(file);
+    },
+    [progressFrames],
+  );
+
   const onProgress = useLazyRef(() => {
-    let frame = 0;
     return (file: File, progress: number) => {
-      if (frame) return;
-      frame = requestAnimationFrame(() => {
-        frame = 0;
+      cancelPendingProgress(file);
+
+      const frameId = requestAnimationFrame(() => {
+        progressFrames.delete(file);
         store.dispatch({
           type: 'SET_PROGRESS',
           file,
           progress: Math.min(Math.max(0, progress), 100),
         });
       });
+
+      progressFrames.set(file, frameId);
     };
   }).current;
 
@@ -376,6 +393,12 @@ function FileUploadRoot(props: FileUploadRootProps) {
 
   React.useEffect(() => {
     return () => {
+      for (const frameId of progressFrames.values()) {
+        cancelAnimationFrame(frameId);
+      }
+
+      progressFrames.clear();
+
       for (const file of files.keys()) {
         const cachedUrl = urlCache.get(file);
         if (cachedUrl) {
@@ -383,7 +406,7 @@ function FileUploadRoot(props: FileUploadRootProps) {
         }
       }
     };
-  }, [files, urlCache]);
+  }, [files, progressFrames, urlCache]);
 
   const onFilesUpload = React.useCallback(
     async (files: File[]) => {
@@ -396,9 +419,11 @@ function FileUploadRoot(props: FileUploadRootProps) {
           await onUpload(files, {
             onProgress,
             onSuccess: (file) => {
+              cancelPendingProgress(file);
               store.dispatch({ type: 'SET_SUCCESS', file });
             },
             onError: (file, error) => {
+              cancelPendingProgress(file);
               store.dispatch({
                 type: 'SET_ERROR',
                 file,
@@ -408,12 +433,14 @@ function FileUploadRoot(props: FileUploadRootProps) {
           });
         } else {
           for (const file of files) {
+            cancelPendingProgress(file);
             store.dispatch({ type: 'SET_SUCCESS', file });
           }
         }
       } catch (error) {
         const errorMessage = error instanceof Error ? error.message : 'Upload failed';
         for (const file of files) {
+          cancelPendingProgress(file);
           store.dispatch({
             type: 'SET_ERROR',
             file,
@@ -422,7 +449,7 @@ function FileUploadRoot(props: FileUploadRootProps) {
         }
       }
     },
-    [store, onUpload, onProgress],
+    [cancelPendingProgress, store, onUpload, onProgress],
   );
 
   const onFilesChange = React.useCallback(
