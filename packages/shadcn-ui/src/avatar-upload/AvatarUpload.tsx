@@ -136,7 +136,7 @@ const AvatarUpload: React.FC<AvatarUploadProps> = (props) => {
                 />
               )}
             </AvatarWrap>
-            <MessageComponent message={hasImageUrl ? change : upload} />
+            <MessageComponent message={value ? change : upload} />
           </MainWrapper>
         )}
       </FileUploadDropzone>
