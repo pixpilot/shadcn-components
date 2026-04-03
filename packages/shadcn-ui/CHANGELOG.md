@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.10.1
+
+### Patch Changes
+
+- update message display logic in `MessageComponent`
+
 ## 1.10.0
 
 ### Minor Changes
