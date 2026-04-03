@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.10.0
+
+### Minor Changes
+
+- refactor file handling and improve error management
+
 ## 1.9.0
 
 ### Minor Changes
