@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.9.0
+
+### Minor Changes
+
+- add `clearable` prop to AvatarUpload component
+
 ## 1.8.0
 
 ### Minor Changes
