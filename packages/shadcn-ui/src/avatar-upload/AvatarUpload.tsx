@@ -62,58 +62,62 @@ const AvatarUpload: React.FC<AvatarUploadProps> = (props) => {
 
   const currentSize = sizeClasses[size];
 
-  const [files, setFiles] = React.useState<{ file: File; id: string }[]>([]);
+  const [selectedFile, setSelectedFile] = React.useState<{
+    file: File;
+    id: string;
+  } | null>(null);
+  const [error, setError] = React.useState<string | null>(null);
 
   const imageUrl = value?.url;
 
   const handleAccept = React.useCallback(
     (acceptedFiles: File[]) => {
-      const nextFiles = acceptedFiles.slice(0, 1);
+      const nextFile = acceptedFiles[0];
 
-      setFiles(
-        nextFiles.map((file) => {
-          return {
-            file,
-            id: `${file.name}-${file.lastModified.toString()}`,
-          };
-        }),
+      setSelectedFile(
+        nextFile == null
+          ? null
+          : {
+              file: nextFile,
+              id: `${nextFile.name}-${nextFile.lastModified.toString()}`,
+            },
       );
-      onAccept?.(nextFiles);
+      onAccept?.(nextFile == null ? [] : [nextFile]);
     },
     [onAccept],
   );
 
   const handleClear = React.useCallback(() => {
-    setFiles([]);
+    setSelectedFile(null);
     onChange?.(null);
   }, [onChange]);
 
   const hasImageUrl = imageUrl != null;
-  const showClearButton = clearable && (files.length > 0 || hasImageUrl);
+  const showClearButton = clearable && (selectedFile != null || hasImageUrl);
 
   return (
     <FileUpload
       {...rest}
       multiple={false}
       onAccept={handleAccept}
-      className={cn('w-fit', className)}
+      className={cn('w-fit ', className)}
       accept="image/*"
     >
-      <FileUploadDropzone className={currentSize.dropZone}>
-        {files.length > 0 ? (
+      <FileUploadDropzone
+        className={cn(error != null && 'border-red-500', currentSize.dropZone)}
+      >
+        {selectedFile != null ? (
           <FileUploadList>
-            {files.map(({ file, id }, i) => (
-              <AvatarUploadItem
-                key={id}
-                file={file}
-                index={i}
-                currentSize={currentSize}
-                change={change}
-                onFileSuccess={onFileSuccess}
-                onFileError={onFileError}
-                onClear={showClearButton ? handleClear : undefined}
-              />
-            ))}
+            <AvatarUploadItem
+              key={selectedFile.id}
+              file={selectedFile.file}
+              currentSize={currentSize}
+              change={change}
+              onFileSuccess={onFileSuccess}
+              onError={setError}
+              onFileError={onFileError}
+              onClear={showClearButton ? handleClear : undefined}
+            />
           </FileUploadList>
         ) : (
           <MainWrapper currentSize={currentSize}>
@@ -132,7 +136,7 @@ const AvatarUpload: React.FC<AvatarUploadProps> = (props) => {
                 />
               )}
             </AvatarWrap>
-            <MessageComponent message={hasImageUrl != null ? change : upload} />
+            <MessageComponent message={hasImageUrl ? change : upload} />
           </MainWrapper>
         )}
       </FileUploadDropzone>

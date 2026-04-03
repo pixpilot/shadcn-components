@@ -13,6 +13,7 @@ import {
   useFileUpload,
 } from '@pixpilot/shadcn';
 import { AlertCircle } from 'lucide-react';
+import React from 'react';
 import { useFileError, useFileUploadProgressCallbacks } from '../file-upload';
 import {
   AvatarWrap,
@@ -23,14 +24,22 @@ import {
 
 interface AvatarUploadItemProps extends FileUploadCallbacks {
   file: File;
-  index: number;
   currentSize: ComponentSize;
   change: string;
   onClear?: () => void;
+  onError?: (error: string | null) => void;
 }
 
 const AvatarUploadItem: React.FC<AvatarUploadItemProps> = (props) => {
-  const { file, currentSize, change, onFileSuccess, onFileError, onClear } = props;
+  const {
+    file,
+    currentSize,
+    change = 'Change',
+    onFileSuccess,
+    onFileError,
+    onClear,
+    onError,
+  } = props;
 
   useFileUploadProgressCallbacks(file, { onFileSuccess, onFileError });
 
@@ -44,6 +53,16 @@ const AvatarUploadItem: React.FC<AvatarUploadItemProps> = (props) => {
     }
     return false;
   });
+
+  React.useEffect(() => {
+    if (fileError != null) {
+      onError?.(fileError);
+    }
+
+    return () => {
+      onError?.(null);
+    };
+  }, [fileError, onError]);
 
   return (
     <FileUploadItem value={file} className="p-0 border-0 m-0">
@@ -61,7 +80,7 @@ const AvatarUploadItem: React.FC<AvatarUploadItemProps> = (props) => {
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <button type="button" className="absolute -top-2 -right-2 p-1">
+                  <button type="button" className="absolute -top-3 -left-3 p-1">
                     <AlertCircle className="h-5 w-5 text-red-500" />
                   </button>
                 </TooltipTrigger>

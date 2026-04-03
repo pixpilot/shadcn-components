@@ -35,7 +35,7 @@ export const AvatarWrap: React.FC<{
           type="button"
           variant="secondary"
           size="icon"
-          className="-top-1 -right-1 absolute size-5 rounded-full"
+          className="-top-2.5 -right-2.5 absolute size-5.5 rounded-full"
           aria-label="Clear avatar"
           onClick={(e) => {
             e.stopPropagation();
