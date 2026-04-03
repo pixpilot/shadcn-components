@@ -135,6 +135,20 @@ describe('mapUploadProps', () => {
       expect(field.setValue).toHaveBeenCalledWith([MOCK_FILE_META]);
     });
 
+    it('normalises a single existing file into an array in multiple mode', () => {
+      const existingFile: FileMetadata = {
+        name: 'existing.png',
+        size: 1024,
+        type: 'image/png',
+        url: 'https://example.com/existing.png',
+        lastModified: 1700000000000,
+      };
+      const field = createMockField(existingFile);
+      const { onFileSuccess } = callMapUploadProps({ multiple: true }, field);
+      onFileSuccess(MOCK_FILE_META);
+      expect(field.setValue).toHaveBeenCalledWith([existingFile, MOCK_FILE_META]);
+    });
+
     it('honours an explicit single-mode override for single-only wrappers', () => {
       const field = createMockField(null);
       const { onFileSuccess } = callMapUploadProps({}, field, { forceSingle: true });

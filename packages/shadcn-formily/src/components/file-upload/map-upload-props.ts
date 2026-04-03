@@ -76,16 +76,31 @@ export function mapUploadProps<P extends object>(
   const { onFileSuccess, onFileError, mapValue, ...restProps } =
     props as MappedUploadProps<P>;
 
+  const { multiple } = props as { multiple?: boolean };
+
   /*
    * Default FileUpload and FileUploadInline to multiple unless the caller sets
    * `multiple === false`. Single-only wrappers such as AvatarUpload can force
    * single mode explicitly via `options.forceSingle`.
    */
   const isSingle =
-    options?.forceSingle === true || (props as { multiple?: boolean }).multiple === false;
+    multiple !== true && (options?.forceSingle === true || multiple === false);
 
   const baseValue = (field.value ?? null) as ExtractSingleFileValue<P>;
   const value = mapValue ? mapValue(baseValue) : baseValue;
+  const currentMultipleFiles: FileMetadata[] = (() => {
+    const currentValue = field.value as FileMetadata | FileMetadata[] | null | undefined;
+
+    if (Array.isArray(currentValue)) {
+      return currentValue;
+    }
+
+    if (currentValue == null) {
+      return [];
+    }
+
+    return [currentValue];
+  })();
 
   return {
     ...restProps,
@@ -103,7 +118,7 @@ export function mapUploadProps<P extends object>(
          * Only write to the field when the count decreased (i.e. a file was
          * removed), not when it increased (new accept before upload completes).
          */
-        const currentLen = ((field.value as FileMetadata[] | null) ?? []).length;
+        const currentLen = currentMultipleFiles.length;
         if (newValue.length <= currentLen) {
           field.setValue(newValue);
         }
@@ -119,11 +134,11 @@ export function mapUploadProps<P extends object>(
        * Use the resolved mode signal rather than inspecting `field.value`
        * alone, because the first successful upload may arrive while the field
        * value is still null/undefined. Keep the array append path limited to
-       * multiple mode and initialise the array when needed.
+       * multiple mode and normalise unexpected existing values so consumers do
+       * not crash if a single-file object is still stored.
        */
       if (!isSingle) {
-        const current = (field.value as FileMetadata[] | null) ?? [];
-        field.setValue([...current, fileMeta]);
+        field.setValue([...currentMultipleFiles, fileMeta]);
       } else {
         field.setValue(fileMeta);
       }

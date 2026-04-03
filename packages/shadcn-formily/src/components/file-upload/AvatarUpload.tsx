@@ -31,5 +31,7 @@ const BaseAvatarUpload: React.FC<AvatarUploadProps> = (props) => {
  */
 export const AvatarUpload = connect(
   BaseAvatarUpload,
-  mapProps((props, field) => mapUploadProps(props, field as Field)),
+  mapProps((props, field) =>
+    mapUploadProps(props, field as Field, { forceSingle: true }),
+  ),
 ) as React.FC<AvatarUploadProps>;

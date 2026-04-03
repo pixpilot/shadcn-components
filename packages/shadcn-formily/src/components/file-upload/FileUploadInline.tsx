@@ -33,5 +33,7 @@ const BaseFileUploadInline: React.FC<FileUploadInlineProps> = (props) => {
  */
 export const FileUploadInline = connect(
   BaseFileUploadInline,
-  mapProps((props, field) => mapUploadProps(props, field as Field)),
+  mapProps((props, field) =>
+    mapUploadProps(props, field as Field, { forceSingle: props.multiple !== true }),
+  ),
 ) as React.FC<FileUploadInlineProps>;
