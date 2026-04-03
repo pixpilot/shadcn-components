@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 1.10.0
+
+### Minor Changes
+
+- enhance `mapUploadProps` for better file handling
+
 ## 1.9.1
 
 ### Patch Changes
