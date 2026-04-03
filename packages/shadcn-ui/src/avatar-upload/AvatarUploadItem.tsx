@@ -1,6 +1,6 @@
 import type { FileUploadCallbacks } from '../file-upload';
 
-import type { ComponentSize } from './types';
+import type { ComponentSize, Size } from './types';
 
 import {
   cn,
@@ -25,6 +25,7 @@ import {
 interface AvatarUploadItemProps extends FileUploadCallbacks {
   file: File;
   currentSize: ComponentSize;
+  size: Size;
   change: string;
   onClear?: () => void;
   onError?: (error: string | null) => void;
@@ -39,6 +40,7 @@ const AvatarUploadItem: React.FC<AvatarUploadItemProps> = (props) => {
     onFileError,
     onClear,
     onError,
+    size = 'md',
   } = props;
 
   useFileUploadProgressCallbacks(file, { onFileSuccess, onFileError });
@@ -68,12 +70,7 @@ const AvatarUploadItem: React.FC<AvatarUploadItemProps> = (props) => {
     <FileUploadItem value={file} className="p-0 border-0 m-0">
       <MainWrapper currentSize={currentSize}>
         <div className={cn('relative')}>
-          <AvatarWrap
-            className={currentSize.avatar}
-            showChangeIcon={true}
-            iconClass={currentSize.icon}
-            onClear={onClear}
-          >
+          <AvatarWrap showChangeIcon={true} onClear={onClear} size={size}>
             <Image src={URL.createObjectURL(file)} />
           </AvatarWrap>
           {fileError != null && (

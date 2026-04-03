@@ -1,12 +1,8 @@
 export interface ComponentSize {
-  avatar: string;
-  icon: string;
   dropZone: string;
   main: string;
 }
 
-export interface ComponentSizes {
-  sm: ComponentSize;
-  md: ComponentSize;
-  lg: ComponentSize;
-}
+export type Size = 'md' | 'sm' | 'lg';
+
+export type ComponentSizes = Record<Size, ComponentSize>;

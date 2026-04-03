@@ -1,4 +1,4 @@
-import type { ComponentSize } from './types';
+import type { ComponentSize, ComponentSizes } from './types';
 import { Button } from '@pixpilot/shadcn';
 import { Pencil, X } from 'lucide-react';
 
@@ -15,18 +15,36 @@ export const MessageComponent: React.FC<{ message: string; className?: string }>
 export const AvatarWrap: React.FC<{
   children: React.ReactNode;
   className?: string;
-  iconClass: string;
   showChangeIcon: boolean;
+  size: keyof ComponentSizes;
   onClear?: () => void;
-}> = ({ children, className, iconClass, showChangeIcon, onClear }) => {
+}> = ({ children, className, showChangeIcon, size, onClear }) => {
+  const editIcon: Record<keyof ComponentSizes, string> = {
+    sm: 'size-5.5 bottom-0 right-0',
+    md: 'size-6.5 bottom-1 right-1',
+    lg: 'size-7 bottom-1.5 right-1.5',
+  };
+
+  const clearButtonSize: Record<keyof ComponentSizes, string> = {
+    sm: 'size-5.5',
+    md: 'size-6.5',
+    lg: 'size-7.5',
+  };
+
+  const rootSize: Record<keyof ComponentSizes, string> = {
+    sm: 'h-20 w-20',
+    md: 'h-28 w-28',
+    lg: 'h-40 w-40',
+  };
+
   return (
-    <div className={cn('relative', className)}>
+    <div className={cn('relative', rootSize[size], className)}>
       {children}
       {showChangeIcon && (
         <Pencil
           className={cn(
-            `absolute bottom-0 right-0 bg-secondary text-secondary-foreground rounded-full p-1.5 shadow-md`,
-            iconClass,
+            editIcon[size],
+            `absolute bg-secondary text-secondary-foreground rounded-full p-1.5 shadow-md`,
           )}
         />
       )}
@@ -35,7 +53,10 @@ export const AvatarWrap: React.FC<{
           type="button"
           variant="secondary"
           size="icon"
-          className="-top-2.5 -right-2.5 absolute size-5.5 rounded-full"
+          className={cn(
+            '-top-2.5 -right-2.5 absolute  rounded-full ',
+            clearButtonSize[size],
+          )}
           aria-label="Clear avatar"
           onClick={(e) => {
             e.stopPropagation();
@@ -43,7 +64,7 @@ export const AvatarWrap: React.FC<{
             onClear();
           }}
         >
-          <X className="size-3" />
+          <X className={cn('p-1.5', clearButtonSize[size])} />
         </Button>
       )}
     </div>

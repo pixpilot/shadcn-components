@@ -1,5 +1,5 @@
 import type { SingleFileUploadProps } from '../file-upload';
-import type { ComponentSizes } from './types';
+import type { ComponentSizes, Size } from './types';
 
 import { FileUpload, FileUploadDropzone, FileUploadList } from '@pixpilot/shadcn';
 import { UserCircle2 } from 'lucide-react';
@@ -20,7 +20,7 @@ export interface AvatarUploadProps extends SingleFileUploadProps {
     upload?: string;
     change?: string;
   };
-  size?: keyof ComponentSizes;
+  size?: Size;
   /**
    * When `true` (the default), a small × button is displayed on the avatar
    * whenever there is an image loaded. Clicking it clears the current value.
@@ -30,16 +30,12 @@ export interface AvatarUploadProps extends SingleFileUploadProps {
 }
 
 const sizeClasses: ComponentSizes = {
-  sm: { avatar: 'h-20 w-20', icon: 'h-5 w-5', dropZone: 'p-3', main: 'space-y-2' },
+  sm: { dropZone: 'p-3', main: 'space-y-2' },
   md: {
     main: 'space-y-2.5',
-    avatar: 'h-28 w-28',
-    icon: 'h-6 w-6 bottom-1 right-1',
     dropZone: 'p-4',
   },
   lg: {
-    avatar: 'h-40 w-40',
-    icon: 'h-7 w-7 bottom-1.5 right-1.5',
     dropZone: 'p-5',
     main: 'space-y-3',
   },
@@ -102,6 +98,7 @@ const AvatarUpload: React.FC<AvatarUploadProps> = (props) => {
       onAccept={handleAccept}
       className={cn('w-fit ', className)}
       accept="image/*"
+      data-slots="avatar-upload"
     >
       <FileUploadDropzone
         className={cn(error != null && 'border-red-500', currentSize.dropZone)}
@@ -117,15 +114,15 @@ const AvatarUpload: React.FC<AvatarUploadProps> = (props) => {
               onError={setError}
               onFileError={onFileError}
               onClear={showClearButton ? handleClear : undefined}
+              size={size}
             />
           </FileUploadList>
         ) : (
           <MainWrapper currentSize={currentSize}>
             <AvatarWrap
-              className={currentSize.avatar}
-              iconClass={currentSize.icon}
               showChangeIcon={hasImageUrl}
               onClear={showClearButton ? handleClear : undefined}
+              size={size}
             >
               {hasImageUrl ? (
                 <Image src={imageUrl} />
