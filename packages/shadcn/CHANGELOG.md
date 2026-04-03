@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 1.2.1
+
+### Patch Changes
+
+- update size handling and component structure
+
 ## 1.2.0
 
 ### Minor Changes
