@@ -1,5 +1,14 @@
 # @pixpilot/shadcn-ui
 
+## 1.10.2
+
+### Patch Changes
+
+- update size handling and component structure
+- remove unnecessary delay in upload success handling
+- Updated dependencies
+  - @pixpilot/shadcn@1.2.1
+
 ## 1.10.1
 
 ### Patch Changes
