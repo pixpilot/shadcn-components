@@ -19,11 +19,12 @@ export function FileUploadInline(props: FileUploadInlineProps) {
     buttonText: buttonTextProp,
     showIcon = defaultOptions.showIcon,
     onAccept,
+    multiple: multipleProp = false,
     preventDuplicates,
     ...rest
   } = props;
 
-  const multiple = props.multiple ?? defaultOptions.multiple;
+  const multiple = multipleProp ?? defaultOptions.multiple;
 
   const buttonText =
     buttonTextProp ?? (multiple ? 'Click to upload files' : 'Click to upload a file');
@@ -39,10 +40,13 @@ export function FileUploadInline(props: FileUploadInlineProps) {
       {...rest}
       // eslint-disable-next-line ts/no-unsafe-assignment
       value={value as any}
+      // eslint-disable-next-line ts/no-unsafe-assignment
+      onChange={onChange as any}
       onAccept={onAccept}
       disabled={disabled}
       // eslint-disable-next-line ts/no-unsafe-assignment
       multiple={multiple as any}
+      preventDuplicates={preventDuplicates}
       className={cn('space-y-2', className)}
       slots={{
         trigger: {

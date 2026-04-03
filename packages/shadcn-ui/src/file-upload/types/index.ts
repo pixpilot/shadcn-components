@@ -8,12 +8,7 @@ export interface FileMetadata {
   lastModified: number;
 }
 
-export interface UseFileCallbacks {
-  onSuccess?: (fileMeta: FileMetadata) => void;
-  onError?: (file: File, error: string) => void;
-}
-
-export interface MultiFileCallbacks {
+export interface FileUploadCallbacks {
   onFileSuccess?: (fileMeta: FileMetadata) => void;
   onFileError?: (file: File, error: string) => void;
 }
@@ -33,21 +28,21 @@ export type FileUploadProps =
       value?: FileMetadata[];
       onChange?: OnChangeMultipleFiles;
     } & FileUploadBaseProps &
-      MultiFileCallbacks)
+      FileUploadCallbacks)
   | ({
       multiple?: false; // defaults to single
       value?: FileMetadata | null;
       onChange?: OnChangeSingleFile;
     } & FileUploadBaseProps &
-      UseFileCallbacks);
+      FileUploadCallbacks);
 
-export interface MultiFileUploadProps extends FileUploadBaseProps, MultiFileCallbacks {
+export interface MultiFileUploadProps extends FileUploadBaseProps, FileUploadCallbacks {
   value?: FileMetadata[];
   onChange?: OnChangeMultipleFiles;
 }
 
 export interface SingleFileUploadProps
-  extends Omit<FileUploadBaseProps, 'multiple'>, UseFileCallbacks {
+  extends Omit<FileUploadBaseProps, 'multiple'>, FileUploadCallbacks {
   value?: FileMetadata | null;
   onChange?: OnChangeSingleFile;
 }

@@ -27,14 +27,18 @@ export type FormilyUploadProps<P> = P extends { multiple: true }
 export interface UploadFieldCallbacks<
   TValue extends SingleFileUploadValue = SingleFileUploadValue,
 > extends UploadValueMapper<TValue> {
-  onSuccess?: (fileMeta: FileMetadata) => void;
-  onError?: (file: File, error: string) => void;
+  onFileSuccess?: (fileMeta: FileMetadata) => void;
+  onFileError?: (file: File, error: string) => void;
 }
 
 type MappedUploadProps<P extends object> = P &
   UploadFieldCallbacks<ExtractSingleFileValue<P>> & {
     onChange?: unknown;
   };
+
+interface MapUploadPropsOptions {
+  forceSingle?: boolean;
+}
 
 /**
  * Shared `mapProps` mapper for all Formily-connected upload components.
@@ -43,25 +47,42 @@ type MappedUploadProps<P extends object> = P &
  *   component displays the currently stored file metadata.
  * - Applies `mapValue` to the field value before forwarding it so callers can
  *   derive a display-ready file object without mutating the stored form value.
- * - Sets `onChange` to `undefined` to prevent Formily's default wiring from
- *   calling `field.setValue()` the moment a file is selected (i.e. before the
- *   upload completes).
- * - Wraps `onSuccess` so that `field.setValue(fileMeta)` is called only after a
- *   successful upload, followed by the original `onSuccess` callback if one was
- *   supplied.
- * - Wraps `onError` so that `field.setFeedback({ type: 'error', … })` is set on
- *   upload failure, followed by the original `onError` callback if one was
- *   supplied.
+ * - Provides a guarded `onChange` that only writes to the field on deletions
+ *   (value becomes `null` for single-file, or the array shrinks for
+ *   multi-file).  New-file accepts fire `onChange` before the upload
+ *   completes with incomplete metadata (no `url`), so those calls are
+ *   intentionally ignored here — `onFileSuccess` handles the final write
+ *   once the upload finishes.
+ * - Wraps `onFileSuccess` so that `field.setValue(fileMeta)` is called only
+ *   after a successful upload, followed by the original `onFileSuccess`
+ *   callback if one was supplied. When the field value is an array (multiple
+ *   mode), the new file is appended to the existing array rather than
+ *   replacing it.
+ * - Wraps `onFileError` so that `field.setFeedback({ type: 'error', … })` is
+ *   set on upload failure, followed by the original `onFileError` callback if
+ *   one was supplied.
  *
  * The generic `P extends object` constraint keeps the return type identical to
  * the input type so that the mapper satisfies Formily's `IStateMapper<T>`.
  * Internally the props are cast to `UploadFieldCallbacks` to access the
- * upload-specific callbacks; the multiple-file variant of `FileUploadProps`
- * uses `onFileSuccess`/`onFileError` instead, which are simply left untouched
- * because this function only overrides `onSuccess` and `onError`.
+ * upload-specific callbacks; both single-file and multiple-file modes share
+ * the same `onFileSuccess`/`onFileError` callbacks that fire per file.
  */
-export function mapUploadProps<P extends object>(props: P, field: Field): P {
-  const { onSuccess, onError, mapValue, ...restProps } = props as MappedUploadProps<P>;
+export function mapUploadProps<P extends object>(
+  props: P,
+  field: Field,
+  options?: MapUploadPropsOptions,
+): P {
+  const { onFileSuccess, onFileError, mapValue, ...restProps } =
+    props as MappedUploadProps<P>;
+
+  /*
+   * Default FileUpload and FileUploadInline to multiple unless the caller sets
+   * `multiple === false`. Single-only wrappers such as AvatarUpload can force
+   * single mode explicitly via `options.forceSingle`.
+   */
+  const isSingle =
+    options?.forceSingle === true || (props as { multiple?: boolean }).multiple === false;
 
   const baseValue = (field.value ?? null) as ExtractSingleFileValue<P>;
   const value = mapValue ? mapValue(baseValue) : baseValue;
@@ -69,14 +90,48 @@ export function mapUploadProps<P extends object>(props: P, field: Field): P {
   return {
     ...restProps,
     value,
-    onChange: undefined,
-    onSuccess: (fileMeta: FileMetadata) => {
-      field.setValue(fileMeta);
-      onSuccess?.(fileMeta);
+    onChange: (newValue: FileMetadata | FileMetadata[] | null) => {
+      if (newValue === null) {
+        /*
+         * Single-file deletion: the X button called onChange(null).
+         * Clear the field value so the form reflects the removal.
+         */
+        field.setValue(null);
+      } else if (Array.isArray(newValue)) {
+        /*
+         * Multiple-file deletion: onChange is called with the filtered array.
+         * Only write to the field when the count decreased (i.e. a file was
+         * removed), not when it increased (new accept before upload completes).
+         */
+        const currentLen = ((field.value as FileMetadata[] | null) ?? []).length;
+        if (newValue.length <= currentLen) {
+          field.setValue(newValue);
+        }
+      }
+      /*
+       * Non-null single-file accept (pre-upload): the upload hasn't finished
+       * yet so the metadata has no url. Ignore it here — onFileSuccess will
+       * write the complete metadata once the upload succeeds.
+       */
     },
-    onError: (file: File, error: string) => {
+    onFileSuccess: (fileMeta: FileMetadata) => {
+      /*
+       * Use the resolved mode signal rather than inspecting `field.value`
+       * alone, because the first successful upload may arrive while the field
+       * value is still null/undefined. Keep the array append path limited to
+       * multiple mode and initialise the array when needed.
+       */
+      if (!isSingle) {
+        const current = (field.value as FileMetadata[] | null) ?? [];
+        field.setValue([...current, fileMeta]);
+      } else {
+        field.setValue(fileMeta);
+      }
+      onFileSuccess?.(fileMeta);
+    },
+    onFileError: (file: File, error: string) => {
       field.setFeedback({ type: 'error', messages: [error] });
-      onError?.(file, error);
+      onFileError?.(file, error);
     },
   } as unknown as P;
 }

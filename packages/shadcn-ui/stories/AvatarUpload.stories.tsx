@@ -28,6 +28,11 @@ const meta = {
       description: 'The current avatar file or URL',
       defaultValue: null,
     },
+    clearable: {
+      control: 'boolean',
+      description: 'Show the × button to clear the current avatar',
+      defaultValue: true,
+    },
   },
 } satisfies Meta<typeof AvatarUpload>;
 
@@ -35,22 +40,35 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 function Uploader(args: AvatarUploadProps) {
-  const [files, setFiles] = useState<FileMetadata | null>(null);
+  const [file, setFile] = useState<FileMetadata | null>(args.value ?? null);
 
-  const handleChange = useCallback((fileMeta: FileMetadata) => {
-    setFiles(fileMeta);
+  const handleSuccess = useCallback((fileMeta: FileMetadata) => {
+    setFile(fileMeta);
+  }, []);
+
+  const handleChange = useCallback((fileMeta: FileMetadata | null) => {
+    setFile(fileMeta);
   }, []);
 
   return (
     <div className="flex flex-col items-center space-y-4">
-      <AvatarUpload {...args} onUpload={handleUpload} onSuccess={handleChange} />
-      {files && (
+      <AvatarUpload
+        {...args}
+        value={file}
+        onUpload={handleUpload}
+        onFileSuccess={handleSuccess}
+        onChange={handleChange}
+      />
+      {file != null && (
         <div>
-          <p className="text-sm text-muted-foreground">Selected file: {files.name}</p>
+          <p className="text-sm text-muted-foreground">Selected file: {file.name}</p>
           <p className="text-xs text-muted-foreground">
-            {files.size} bytes, {files.type}
+            {file.size} bytes, {file.type}
           </p>
         </div>
+      )}
+      {file == null && (
+        <p className="text-xs text-muted-foreground italic">No avatar selected</p>
       )}
     </div>
   );
@@ -92,7 +110,7 @@ export const WithUploadSuccess: Story = {
 
     return (
       <div className="flex flex-col items-center space-y-4">
-        <AvatarUpload {...args} onUpload={handleUpload} onSuccess={handleSuccess} />
+        <AvatarUpload {...args} onUpload={handleUpload} onFileSuccess={handleSuccess} />
         <div>
           <p className="text-sm font-medium">
             onSuccess called: {successCount} {successCount === 1 ? 'time' : 'times'}
@@ -136,7 +154,7 @@ export const WithUploadError: Story = {
           {...args}
           value={null}
           onUpload={handleUploadWithError}
-          onError={(_file, error) => {
+          onFileError={(_file, error) => {
             setUploadError(error);
           }}
         />
@@ -146,4 +164,18 @@ export const WithUploadError: Story = {
       </div>
     );
   },
+};
+
+export const WithClearDisabled: Story = {
+  args: {
+    clearable: false,
+    value: {
+      name: 'avatar.png',
+      size: 1024,
+      type: 'image/png',
+      url: `${window.location.origin}/avatar.png`,
+      lastModified: 1625247600000,
+    },
+  },
+  render: Uploader,
 };

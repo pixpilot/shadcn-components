@@ -475,7 +475,7 @@ export const WithJsonSchemaFormRenderer: Story = {
 
 /**
  * Demonstrates that the form field value is only set **after** the upload
- * completes (`onSuccess` fires).  Select a file, wait for the progress bar
+ * completes (`onFileSuccess` fires).  Select a file, wait for the progress bar
  * to finish, then click Submit — the logged values will contain the file
  * metadata.  Submitting before completion leaves the field empty.
  */

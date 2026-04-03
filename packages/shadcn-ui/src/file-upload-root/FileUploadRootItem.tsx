@@ -1,6 +1,6 @@
 'use client';
 
-import type { FileMetadata, UseFileCallbacks } from '../file-upload/types';
+import type { FileMetadata, FileUploadCallbacks } from '../file-upload/types';
 import type { FileWithMetadata } from '../file-upload/utils';
 import {
   Button,
@@ -62,7 +62,8 @@ const FileItemInnerWrapper: React.FC<{
   return <div className="flex w-full gap-2">{children}</div>;
 };
 
-export interface FileUploadRootItemProps extends Partial<FileMetadata>, UseFileCallbacks {
+export interface FileUploadRootItemProps
+  extends Partial<FileMetadata>, FileUploadCallbacks {
   file: File;
   disabled?: boolean;
   onDelete: (file: FileWithMetadata) => void;
@@ -77,10 +78,10 @@ export const FileUploadRootItem: React.FC<FileUploadRootItemProps> = React.memo(
     lastModified = 0,
     disabled = false,
     onDelete,
-    onError,
-    onSuccess,
+    onFileError,
+    onFileSuccess,
   }) => {
-    useFileUploadProgressCallbacks(file, { onSuccess, onError });
+    useFileUploadProgressCallbacks(file, { onFileSuccess, onFileError });
     const fileError = useFileError(file);
 
     const isUploading = useFileUpload((store) => {

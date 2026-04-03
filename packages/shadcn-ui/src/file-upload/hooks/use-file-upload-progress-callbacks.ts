@@ -1,13 +1,13 @@
-import type { UseFileCallbacks } from '../types';
+import type { FileUploadCallbacks } from '../types';
 import { useFileUpload } from '@pixpilot/shadcn';
 import { useEffect, useMemo, useRef } from 'react';
 import { getFileMeta } from '../utils';
 
 export function useFileUploadProgressCallbacks(
   file: File,
-  callBacks: UseFileCallbacks,
+  callBacks: FileUploadCallbacks,
 ): void {
-  const { onSuccess, onError } = callBacks;
+  const { onFileSuccess, onFileError } = callBacks;
 
   const fileMeta = useMemo(() => getFileMeta(file), [file]);
 
@@ -34,14 +34,14 @@ export function useFileUploadProgressCallbacks(
   useEffect(() => {
     if (isUploadSuccess && !isChangeTrigged.current) {
       isChangeTrigged.current = true;
-      onSuccess?.(fileMeta);
+      onFileSuccess?.(fileMeta);
     }
-  }, [isUploadSuccess, onSuccess, fileMeta]);
+  }, [isUploadSuccess, onFileSuccess, fileMeta]);
 
   useEffect(() => {
     if (uploadError != null && !isErrorTriggered.current) {
       isErrorTriggered.current = true;
-      onError?.(file, uploadError);
+      onFileError?.(file, uploadError);
     }
-  }, [uploadError, onError, file]);
+  }, [uploadError, onFileError, file]);
 }

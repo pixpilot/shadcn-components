@@ -350,7 +350,7 @@ export const WithUploadError: Story = {
           onChange={(_file: FileMetadata | null) => {
             // handle single file change
           }}
-          onError={(_file, error) => {
+          onFileError={(_file, error) => {
             setUploadError(error);
           }}
         />

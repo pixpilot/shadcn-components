@@ -283,74 +283,6 @@ export const DisabledFileUpload: Story = {
   },
 };
 
-export const WithValidation: Story = {
-  render: () => {
-    const form = createForm();
-
-    const schema = {
-      type: 'object',
-      properties: {
-        taxDocument: {
-          type: 'string',
-          title: 'Tax Document',
-          required: true,
-          'x-decorator': 'FormItem',
-          'x-component': 'FileUpload',
-          'x-component-props': {
-            accept: '.pdf',
-          },
-          'x-validator': [
-            {
-              required: true,
-              message: 'Please upload your tax document',
-            },
-          ],
-        },
-        idProof: {
-          type: 'string',
-          title: 'ID Proof',
-          required: true,
-          'x-decorator': 'FormItem',
-          'x-component': 'FileUpload',
-          'x-component-props': {
-            accept: 'image/*,.pdf',
-          },
-          'x-validator': [
-            {
-              required: true,
-              message: 'ID proof is required',
-            },
-          ],
-        },
-      },
-    };
-
-    return (
-      <Form
-        form={form}
-        className="w-[400px]"
-        settings={{
-          fileUpload: {
-            onUpload: handleUpload,
-          },
-        }}
-        onSubmit={(values) => {
-          console.log('Form submitted:', values);
-          alert(JSON.stringify(values, null, JSON_INDENT));
-        }}
-      >
-        <SchemaFieldExtended schema={schema} />
-        <button
-          type="submit"
-          className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
-        >
-          Submit
-        </button>
-      </Form>
-    );
-  },
-};
-
 export const WithFormFieldSetting: Story = {
   render: () => {
     const form = createForm();
@@ -443,7 +375,7 @@ export const WithJsonSchemaFormRenderer: Story = {
 
 /**
  * Demonstrates that the form field value is only set **after** the upload
- * completes (`onSuccess` fires).  Select a file, wait for the progress bar
+ * completes (`onFileSuccess` fires).  Select a file, wait for the progress bar
  * to finish, then click Submit — the logged values will contain the file
  * metadata.  Submitting before completion leaves the field empty.
  */
@@ -698,6 +630,74 @@ export const WithCustomMultipleComponent: Story = {
           Submit
         </button>
       </JsonSchemaFormExtended>
+    );
+  },
+};
+
+export const WithValidation: Story = {
+  render: () => {
+    const form = createForm();
+
+    const schema = {
+      type: 'object',
+      properties: {
+        taxDocument: {
+          type: 'string',
+          title: 'Tax Document',
+          required: true,
+          'x-decorator': 'FormItem',
+          'x-component': 'FileUpload',
+          'x-component-props': {
+            accept: '.pdf',
+          },
+          'x-validator': [
+            {
+              required: true,
+              message: 'Please upload your tax document',
+            },
+          ],
+        },
+        idProof: {
+          type: 'string',
+          title: 'ID Proof',
+          required: true,
+          'x-decorator': 'FormItem',
+          'x-component': 'FileUpload',
+          'x-component-props': {
+            accept: 'image/*,.pdf',
+          },
+          'x-validator': [
+            {
+              required: true,
+              message: 'ID proof is required',
+            },
+          ],
+        },
+      },
+    };
+
+    return (
+      <Form
+        form={form}
+        className="w-[400px]"
+        settings={{
+          fileUpload: {
+            onUpload: handleUpload,
+          },
+        }}
+        onSubmit={(values) => {
+          console.log('Form submitted:', values);
+          alert(JSON.stringify(values, null, JSON_INDENT));
+        }}
+      >
+        <SchemaFieldExtended schema={schema} />
+        <button
+          type="submit"
+          className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+        >
+          Submit
+        </button>
+      </Form>
     );
   },
 };

@@ -142,7 +142,7 @@ export const WithUploadError: Story = {
           disabled={args.disabled}
           multiple={false}
           onUpload={handleUploadWithError}
-          onError={(_file, error) => {
+          onFileError={(_file, error) => {
             setUploadError(error);
           }}
         >

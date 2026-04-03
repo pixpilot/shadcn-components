@@ -427,3 +427,103 @@ export const WithCustomComponent: Story = {
     );
   },
 };
+
+/**
+ * Demonstrates the `clearable` prop in the Formily context.
+ * The avatar field is pre-populated with an image and the × button is shown
+ * by default. Clicking × sets the field value back to `null` so submitting
+ * afterwards yields an empty object.
+ */
+export const WithClear: Story = {
+  render: () => {
+    const form = createForm({
+      initialValues: {
+        avatar: {
+          name: 'avatar.png',
+          size: 1024,
+          type: 'image/png',
+          url: `${window.location.origin}/avatar.png`,
+          lastModified: 1625247600000,
+        },
+      },
+    });
+
+    return (
+      <Form
+        form={form}
+        className="w-[400px]"
+        onSubmit={(values) => {
+          console.log('Form submitted:', values);
+          alert(JSON.stringify(values, null, JSON_INDENT));
+        }}
+      >
+        <SchemaFieldExtended>
+          <SchemaFieldExtended.String
+            name="avatar"
+            title="Avatar (clearable)"
+            x-decorator="FormItem"
+            x-component="AvatarUpload"
+            x-component-props={{
+              accept: 'image/*',
+              onUpload: handleUpload,
+              clearable: true,
+            }}
+          />
+        </SchemaFieldExtended>
+        <button
+          type="submit"
+          className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+        >
+          Submit
+        </button>
+      </Form>
+    );
+  },
+};
+
+export const WithClearDisabled: Story = {
+  render: () => {
+    const form = createForm({
+      initialValues: {
+        avatar: {
+          name: 'avatar.png',
+          size: 1024,
+          type: 'image/png',
+          url: `${window.location.origin}/avatar.png`,
+          lastModified: 1625247600000,
+        },
+      },
+    });
+
+    return (
+      <Form
+        form={form}
+        className="w-[400px]"
+        onSubmit={(values) => {
+          console.log('Form submitted:', values);
+          alert(JSON.stringify(values, null, JSON_INDENT));
+        }}
+      >
+        <SchemaFieldExtended>
+          <SchemaFieldExtended.String
+            name="avatar"
+            title="Avatar (clear disabled)"
+            x-decorator="FormItem"
+            x-component="AvatarUpload"
+            x-component-props={{
+              accept: 'image/*',
+              onUpload: handleUpload,
+              clearable: false,
+            }}
+          />
+        </SchemaFieldExtended>
+        <button
+          type="submit"
+          className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+        >
+          Submit
+        </button>
+      </Form>
+    );
+  },
+};

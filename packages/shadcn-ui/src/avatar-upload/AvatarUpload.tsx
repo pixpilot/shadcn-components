@@ -21,6 +21,12 @@ export interface AvatarUploadProps extends SingleFileUploadProps {
     change?: string;
   };
   size?: keyof ComponentSizes;
+  /**
+   * When `true` (the default), a small × button is displayed on the avatar
+   * whenever there is an image loaded. Clicking it clears the current value.
+   * Set to `false` to hide the button.
+   */
+  clearable?: boolean;
 }
 
 const sizeClasses: ComponentSizes = {
@@ -45,9 +51,11 @@ const AvatarUpload: React.FC<AvatarUploadProps> = (props) => {
     messages,
     value,
     onAccept,
-    onSuccess,
-    onError,
+    onFileSuccess,
+    onFileError,
+    onChange,
     size = 'md',
+    clearable = true,
     ...rest
   } = props;
   const { upload = 'Upload', change = 'Change' } = messages || {};
@@ -75,7 +83,13 @@ const AvatarUpload: React.FC<AvatarUploadProps> = (props) => {
     [onAccept],
   );
 
+  const handleClear = React.useCallback(() => {
+    setFiles([]);
+    onChange?.(null);
+  }, [onChange]);
+
   const hasImageUrl = imageUrl != null;
+  const showClearButton = clearable && (files.length > 0 || hasImageUrl);
 
   return (
     <FileUpload
@@ -95,8 +109,9 @@ const AvatarUpload: React.FC<AvatarUploadProps> = (props) => {
                 index={i}
                 currentSize={currentSize}
                 change={change}
-                onSuccess={onSuccess}
-                onError={onError}
+                onFileSuccess={onFileSuccess}
+                onFileError={onFileError}
+                onClear={showClearButton ? handleClear : undefined}
               />
             ))}
           </FileUploadList>
@@ -106,6 +121,7 @@ const AvatarUpload: React.FC<AvatarUploadProps> = (props) => {
               className={currentSize.avatar}
               iconClass={currentSize.icon}
               showChangeIcon={hasImageUrl}
+              onClear={showClearButton ? handleClear : undefined}
             >
               {hasImageUrl ? (
                 <Image src={imageUrl} />

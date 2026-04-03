@@ -1,5 +1,6 @@
 import type { ComponentSize } from './types';
-import { Pencil } from 'lucide-react';
+import { Button } from '@pixpilot/shadcn';
+import { Pencil, X } from 'lucide-react';
 
 import React from 'react';
 import { cn } from '@/lib';
@@ -16,7 +17,8 @@ export const AvatarWrap: React.FC<{
   className?: string;
   iconClass: string;
   showChangeIcon: boolean;
-}> = ({ children, className, iconClass, showChangeIcon }) => {
+  onClear?: () => void;
+}> = ({ children, className, iconClass, showChangeIcon, onClear }) => {
   return (
     <div className={cn('relative', className)}>
       {children}
@@ -27,6 +29,22 @@ export const AvatarWrap: React.FC<{
             iconClass,
           )}
         />
+      )}
+      {onClear != null && (
+        <Button
+          type="button"
+          variant="secondary"
+          size="icon"
+          className="-top-1 -right-1 absolute size-5 rounded-full"
+          aria-label="Clear avatar"
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            onClear();
+          }}
+        >
+          <X className="size-3" />
+        </Button>
       )}
     </div>
   );
