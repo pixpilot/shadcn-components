@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.10.7
+
+### Patch Changes
+
+- refactor FormFileUploadOptions and update imports
+
 ## 1.10.6
 
 ### Patch Changes
