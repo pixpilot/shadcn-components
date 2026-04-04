@@ -106,6 +106,58 @@ describe('mapUploadProps', () => {
     expect(result.onChange).toBeTypeOf('function');
   });
 
+  describe('onChange', () => {
+    it('clears the value and upload warning feedback in single mode', () => {
+      const field = createMockField(MOCK_FILE_META);
+      const { onChange } = callMapUploadProps({ multiple: false }, field);
+
+      onChange(null);
+
+      expect(field.setValue).toHaveBeenCalledOnce();
+      expect(field.setValue).toHaveBeenCalledWith(null);
+      expect(field.setFeedback).toHaveBeenCalledOnce();
+      expect(field.setFeedback).toHaveBeenCalledWith({
+        type: 'warning',
+        messages: [],
+      });
+    });
+
+    it('clears the value and upload warning feedback for forced single mode', () => {
+      const field = createMockField(MOCK_FILE_META);
+      const { onChange } = callMapUploadProps({}, field, { forceSingle: true });
+
+      onChange(null);
+
+      expect(field.setValue).toHaveBeenCalledOnce();
+      expect(field.setValue).toHaveBeenCalledWith(null);
+      expect(field.setFeedback).toHaveBeenCalledOnce();
+      expect(field.setFeedback).toHaveBeenCalledWith({
+        type: 'warning',
+        messages: [],
+      });
+    });
+
+    it('does not clear feedback for multi-file deletions', () => {
+      const existingFiles = [
+        MOCK_FILE_META,
+        {
+          ...MOCK_FILE_META,
+          name: 'photo-2.png',
+          url: 'https://example.com/photo-2.png',
+          lastModified: 1700000000001,
+        } satisfies FileMetadata,
+      ];
+      const field = createMockField(existingFiles);
+      const { onChange } = callMapUploadProps({ multiple: true }, field);
+
+      onChange([existingFiles[0]!]);
+
+      expect(field.setValue).toHaveBeenCalledOnce();
+      expect(field.setValue).toHaveBeenCalledWith([existingFiles[0]]);
+      expect(field.setFeedback).not.toHaveBeenCalled();
+    });
+  });
+
   describe('onFileSuccess', () => {
     it('calls field.setValue with the file metadata in single mode', () => {
       const field = createMockField();

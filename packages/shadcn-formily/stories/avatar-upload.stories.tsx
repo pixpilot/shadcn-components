@@ -542,7 +542,8 @@ export const WithMaxFileSize: Story = {
           'x-component': 'AvatarUpload',
           'x-component-props': {
             accept: 'image/*',
-            maxSize: 1024, // 1 KB
+            maxSize: 1024 * 1024 * 1, // 1 MB
+            clearable: true,
           },
         },
       },

@@ -56,6 +56,8 @@ const AvatarUpload: React.FC<AvatarUploadProps> = (props) => {
   } = props;
   const { upload = 'Upload', change = 'Change' } = messages || {};
 
+  const hasValue = value != null && Object.keys(value).length > 0;
+
   const currentSize = sizeClasses[size];
 
   const [selectedFile, setSelectedFile] = React.useState<{
@@ -120,7 +122,7 @@ const AvatarUpload: React.FC<AvatarUploadProps> = (props) => {
         ) : (
           <MainWrapper currentSize={currentSize}>
             <AvatarWrap
-              showChangeIcon={Boolean(value)}
+              showChangeIcon={hasValue}
               onClear={showClearButton ? handleClear : undefined}
               size={size}
             >

@@ -110,8 +110,13 @@ export function mapUploadProps<P extends object>(
         /*
          * Single-file deletion: the X button called onChange(null).
          * Clear the field value so the form reflects the removal.
+         * Also clear file-rejection warnings because they refer to the file
+         * that was just removed.
          */
         field.setValue(null);
+        if (isSingle) {
+          field.setFeedback({ type: 'warning', messages: [] });
+        }
       } else if (Array.isArray(newValue)) {
         /*
          * Multiple-file deletion: onChange is called with the filtered array.
