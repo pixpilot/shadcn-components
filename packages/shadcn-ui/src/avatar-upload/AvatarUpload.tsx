@@ -120,7 +120,7 @@ const AvatarUpload: React.FC<AvatarUploadProps> = (props) => {
         ) : (
           <MainWrapper currentSize={currentSize}>
             <AvatarWrap
-              showChangeIcon={hasImageUrl}
+              showChangeIcon={Boolean(value)}
               onClear={showClearButton ? handleClear : undefined}
               size={size}
             >
