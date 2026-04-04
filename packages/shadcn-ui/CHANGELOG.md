@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.10.4
+
+### Patch Changes
+
+- update change icon visibility logic
+
 ## 1.10.3
 
 ### Patch Changes
