@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.10.5
+
+### Patch Changes
+
+- clear upload warning feedback on single file deletion
+
 ## 1.10.4
 
 ### Patch Changes
