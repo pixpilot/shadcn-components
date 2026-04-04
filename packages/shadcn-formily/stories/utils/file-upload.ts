@@ -1,3 +1,4 @@
+import type { FormFileUploadOptions } from '@pixpilot/shadcn-ui';
 import type { FileUploadProgressCallBacks } from '../../src/components/file-upload';
 
 export async function delay(val: number): Promise<void> {
@@ -12,14 +13,13 @@ export async function delay(val: number): Promise<void> {
  */
 export function handleUploadWithError(
   files: File[],
-  options: FileUploadProgressCallBacks,
+  options: FormFileUploadOptions,
 ): void {
   const progressIncrement = 8;
   const minIncrement = 2;
   const intervalMs = 200;
   const failAfterMs = 1500;
   const maxProgress = 60;
-
   for (const uploadFile of files) {
     // eslint-disable-next-line no-void
     void (async () => {

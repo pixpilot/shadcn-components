@@ -1,6 +1,6 @@
 import type {
   DialogContentProps,
-  FileUploadProgressCallBacks,
+  FormFileUploadOptions,
   IconProvider,
   PopoverContentProps,
   RichTextEditorProps,
@@ -10,7 +10,7 @@ import type { DescriptionPlacement, LabelPlacement } from '../../types/form-item
 import type { ActionItem } from '../array-base';
 
 export interface FomFileUpload {
-  onUpload?: (files: File[], options: FileUploadProgressCallBacks) => void;
+  onUpload?: (files: File[], options: FormFileUploadOptions) => void;
   maxSize?: number;
 }
 

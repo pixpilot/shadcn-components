@@ -2,6 +2,7 @@ import type {
   FileMetadata,
   FileUploadProgressCallBacks,
   FileUploadProps,
+  FormFileUploadOptions,
 } from './file-upload';
 import { cn } from '@pixpilot/shadcn';
 import { FileUpload } from './file-upload';
@@ -53,4 +54,5 @@ export {
   FileUpload,
   type FileUploadProgressCallBacks,
   type FileUploadProps,
+  type FormFileUploadOptions,
 };

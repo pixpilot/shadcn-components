@@ -1,5 +1,8 @@
 import type { Field } from '@formily/core';
-import type { FileUploadBaseProps } from '@pixpilot/shadcn-ui';
+import type {
+  FileUploadBaseProps,
+  FileUploadProgressCallBacks,
+} from '@pixpilot/shadcn-ui';
 import { useField } from '@formily/react';
 import prettyBytes from 'pretty-bytes';
 import React from 'react';
@@ -91,5 +94,19 @@ export function useFileUploadFeedback(props: FileUploadBaseProps): {
     [field, onFileValidate],
   );
 
-  return { onUpload, maxSize, handleFilesRejection, handleFileValidate };
+  const handleUpload = React.useCallback(
+    async (files: File[], options: FileUploadProgressCallBacks) => {
+      if (onUploadProp) {
+        return onUploadProp(files, options);
+      }
+      return onUpload?.(files, {
+        ...options,
+        component: field.componentType as string,
+        componentProps: { ...field.componentProps },
+      });
+    },
+    [field.componentProps, field.componentType, onUpload, onUploadProp],
+  );
+
+  return { onUpload: handleUpload, maxSize, handleFilesRejection, handleFileValidate };
 }
