@@ -1,5 +1,5 @@
-import type { FormFileUploadOptions } from '@pixpilot/shadcn-ui';
-import type { FileUploadProgressCallBacks } from '../../src/components/file-upload';
+import type { FileUploadProgressCallBacks } from '@pixpilot/shadcn-ui';
+import type { FormFileUploadOptions } from '../../src/components/file-upload';
 
 export async function delay(val: number): Promise<void> {
   await new Promise((resolve) => {

@@ -1,6 +1,5 @@
 import type {
   DialogContentProps,
-  FormFileUploadOptions,
   IconProvider,
   PopoverContentProps,
   RichTextEditorProps,
@@ -8,6 +7,7 @@ import type {
 import type { FormSpace } from '../../types/form';
 import type { DescriptionPlacement, LabelPlacement } from '../../types/form-item';
 import type { ActionItem } from '../array-base';
+import type { FormFileUploadOptions } from '../file-upload';
 
 export interface FomFileUpload {
   onUpload?: (files: File[], options: FormFileUploadOptions) => void;

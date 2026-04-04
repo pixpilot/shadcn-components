@@ -52,8 +52,3 @@ export interface FileUploadProgressCallBacks {
   onSuccess: (file: File) => void;
   onError: (file: File, error: Error) => void;
 }
-
-export interface FormFileUploadOptions extends FileUploadProgressCallBacks {
-  component: string;
-  componentProps: Record<string, any>;
-}
