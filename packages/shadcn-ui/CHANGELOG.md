@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.10.6
+
+### Patch Changes
+
+- update upload options type and logic
+
 ## 1.10.5
 
 ### Patch Changes
