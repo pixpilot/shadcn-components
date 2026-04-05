@@ -1,5 +1,13 @@
 # @pixpilot/formily-shadcn
 
+## 1.10.8
+
+### Patch Changes
+
+- refactor FormFileUploadOptions and update imports
+- Updated dependencies
+  - @pixpilot/shadcn-ui@1.10.7
+
 ## 1.10.7
 
 ### Patch Changes
