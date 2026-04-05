@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 1.10.9
+
+### Patch Changes
+
+- add path to FormFileUploadOptions and update logic
+
 ## 1.10.8
 
 ### Patch Changes
