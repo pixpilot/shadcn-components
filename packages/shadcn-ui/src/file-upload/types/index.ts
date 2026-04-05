@@ -51,5 +51,4 @@ export interface FileUploadProgressCallBacks {
   onProgress: (file: File, progress: number) => void;
   onSuccess: (file: File) => void;
   onError: (file: File, error: Error) => void;
-  onReplace: (originalFile: File, newFile: File) => void;
 }

@@ -367,13 +367,10 @@ describe('fileUpload - onFilesReject prop', () => {
   });
 });
 
-describe('fileUpload - onReplace callback', () => {
-  it('should track status on the replacement file, not the original', async () => {
+describe('fileUpload - transformFile prop', () => {
+  it('should add the transformed file to the store, not the original', async () => {
     const originalFile = new File(['original'], 'photo.jpg', { type: 'image/jpeg' });
-    const normalizedFile = new File(['normalized'], 'photo.jpg', { type: 'image/jpeg' });
-
-    let capturedOnReplace: ((original: File, replacement: File) => void) | undefined;
-    let capturedOnSuccess: ((file: File) => void) | undefined;
+    const transformedFile = new File(['stripped'], 'photo.jpg', { type: 'image/jpeg' });
 
     function OriginalStatusProbe() {
       const status = useFileUpload(
@@ -382,19 +379,61 @@ describe('fileUpload - onReplace callback', () => {
       return <span data-testid="original-status">{status}</span>;
     }
 
-    function NormalizedStatusProbe() {
+    function TransformedStatusProbe() {
       const status = useFileUpload(
-        (store) => store.files.get(normalizedFile)?.status ?? 'missing',
+        (store) => store.files.get(transformedFile)?.status ?? 'missing',
       );
-      return <span data-testid="normalized-status">{status}</span>;
+      return <span data-testid="transformed-status">{status}</span>;
     }
 
     const { container, getByTestId } = render(
       React.createElement(
         FileUpload,
         {
+          transformFile: () => transformedFile,
+        },
+        React.createElement(
+          FileUploadDropzone,
+          null,
+          React.createElement(FileUploadTrigger, null, 'Upload'),
+        ),
+        React.createElement(FileUploadList, null),
+        React.createElement(OriginalStatusProbe),
+        React.createElement(TransformedStatusProbe),
+      ),
+    );
+
+    const input = container.querySelector('input[type="file"]') as HTMLInputElement;
+    Object.defineProperty(input, 'files', { value: [originalFile], writable: true });
+    act(() => {
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+
+    await waitFor(() => {
+      expect(getByTestId('original-status').textContent).toBe('missing');
+      expect(getByTestId('transformed-status').textContent).toBe('idle');
+    });
+  });
+
+  it('should call onSuccess with the transformed file after upload', async () => {
+    const originalFile = new File(['original'], 'photo.jpg', { type: 'image/jpeg' });
+    const transformedFile = new File(['stripped'], 'photo.jpg', { type: 'image/jpeg' });
+
+    let capturedOnSuccess: ((file: File) => void) | undefined;
+
+    function TransformedStatusProbe() {
+      const status = useFileUpload(
+        (store) => store.files.get(transformedFile)?.status ?? 'missing',
+      );
+      return <span data-testid="transformed-status">{status}</span>;
+    }
+
+    const { container, getByTestId } = render(
+      React.createElement(
+        FileUpload,
+        {
+          transformFile: () => transformedFile,
           onUpload: (_files, options) => {
-            capturedOnReplace = options.onReplace;
             capturedOnSuccess = options.onSuccess;
           },
         },
@@ -404,8 +443,7 @@ describe('fileUpload - onReplace callback', () => {
           React.createElement(FileUploadTrigger, null, 'Upload'),
         ),
         React.createElement(FileUploadList, null),
-        React.createElement(OriginalStatusProbe),
-        React.createElement(NormalizedStatusProbe),
+        React.createElement(TransformedStatusProbe),
       ),
     );
 
@@ -416,42 +454,36 @@ describe('fileUpload - onReplace callback', () => {
     });
 
     await waitFor(() => {
-      expect(capturedOnReplace).toBeDefined();
+      expect(capturedOnSuccess).toBeDefined();
     });
 
     act(() => {
-      capturedOnReplace!(originalFile, normalizedFile);
-      capturedOnSuccess!(normalizedFile);
+      capturedOnSuccess!(transformedFile);
     });
 
     await waitFor(() => {
-      expect(getByTestId('original-status').textContent).toBe('missing');
-      expect(getByTestId('normalized-status').textContent).toBe('success');
+      expect(getByTestId('transformed-status').textContent).toBe('success');
     });
   });
 
-  it('should transfer error state to the replacement file', async () => {
+  it('should support async transforms', async () => {
     const originalFile = new File(['original'], 'photo.jpg', { type: 'image/jpeg' });
-    const normalizedFile = new File(['normalized'], 'photo.jpg', { type: 'image/jpeg' });
+    const transformedFile = new File(['async-stripped'], 'photo.jpg', {
+      type: 'image/jpeg',
+    });
 
-    let capturedOnReplace: ((original: File, replacement: File) => void) | undefined;
-    let capturedOnError: ((file: File, error: Error) => void) | undefined;
-
-    function NormalizedStatusProbe() {
+    function TransformedStatusProbe() {
       const status = useFileUpload(
-        (store) => store.files.get(normalizedFile)?.status ?? 'missing',
+        (store) => store.files.get(transformedFile)?.status ?? 'missing',
       );
-      return <span data-testid="normalized-status">{status}</span>;
+      return <span data-testid="transformed-status">{status}</span>;
     }
 
     const { container, getByTestId } = render(
       React.createElement(
         FileUpload,
         {
-          onUpload: (_files, options) => {
-            capturedOnReplace = options.onReplace;
-            capturedOnError = options.onError;
-          },
+          transformFile: async () => transformedFile,
         },
         React.createElement(
           FileUploadDropzone,
@@ -459,7 +491,7 @@ describe('fileUpload - onReplace callback', () => {
           React.createElement(FileUploadTrigger, null, 'Upload'),
         ),
         React.createElement(FileUploadList, null),
-        React.createElement(NormalizedStatusProbe),
+        React.createElement(TransformedStatusProbe),
       ),
     );
 
@@ -470,16 +502,7 @@ describe('fileUpload - onReplace callback', () => {
     });
 
     await waitFor(() => {
-      expect(capturedOnReplace).toBeDefined();
-    });
-
-    act(() => {
-      capturedOnReplace!(originalFile, normalizedFile);
-      capturedOnError!(normalizedFile, new Error('Upload failed'));
-    });
-
-    await waitFor(() => {
-      expect(getByTestId('normalized-status').textContent).toBe('error');
+      expect(getByTestId('transformed-status').textContent).toBe('idle');
     });
   });
 });

@@ -74,6 +74,55 @@ function Uploader(args: AvatarUploadProps) {
   );
 }
 
+async function normalizeAvatarFile(file: File): Promise<File> {
+  if (!file.type.startsWith('image/')) {
+    return file;
+  }
+
+  const fileBytes = await file.arrayBuffer();
+
+  return new File([fileBytes], file.name, {
+    type: file.type,
+    lastModified: file.lastModified,
+  });
+}
+
+function TransformingUploader(args: AvatarUploadProps) {
+  const [file, setFile] = useState<FileMetadata | null>(args.value ?? null);
+
+  const handleSuccess = useCallback((fileMeta: FileMetadata) => {
+    setFile(fileMeta);
+  }, []);
+
+  const handleChange = useCallback((fileMeta: FileMetadata | null) => {
+    setFile(fileMeta);
+  }, []);
+
+  return (
+    <div className="flex flex-col items-center space-y-4">
+      <AvatarUpload
+        {...args}
+        value={file}
+        transformFile={normalizeAvatarFile}
+        onUpload={handleUpload}
+        onFileSuccess={handleSuccess}
+        onChange={handleChange}
+      />
+      {file != null && (
+        <div>
+          <p className="text-sm text-muted-foreground">Selected file: {file.name}</p>
+          <p className="text-xs text-muted-foreground">
+            {file.size} bytes, {file.type}
+          </p>
+        </div>
+      )}
+      {file == null && (
+        <p className="text-xs text-muted-foreground italic">No avatar selected</p>
+      )}
+    </div>
+  );
+}
+
 export const Default: Story = {
   args: {},
   render: Uploader,
@@ -164,6 +213,11 @@ export const WithUploadError: Story = {
       </div>
     );
   },
+};
+
+export const WithBeforeFileAccept: Story = {
+  args: {},
+  render: TransformingUploader,
 };
 
 export const WithClearDisabled: Story = {

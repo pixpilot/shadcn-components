@@ -57,7 +57,6 @@ type StoreAction =
   | { type: 'SET_SUCCESS'; file: File }
   | { type: 'SET_ERROR'; file: File; error: string }
   | { type: 'REMOVE_FILE'; file: File }
-  | { type: 'REPLACE_FILE'; originalFile: File; newFile: File }
   | { type: 'SET_DRAG_OVER'; dragOver: boolean }
   | { type: 'SET_INVALID'; invalid: boolean }
   | { type: 'CLEAR' };
@@ -146,20 +145,6 @@ function createStore(
             error: action.error,
             status: 'error',
           });
-        }
-        return { ...state, files };
-      }
-
-      case 'REPLACE_FILE': {
-        const fileState = files.get(action.originalFile);
-        if (fileState) {
-          files.delete(action.originalFile);
-          files.set(action.newFile, { ...fileState, file: action.newFile });
-          const cachedUrl = urlCache.get(action.originalFile);
-          if (cachedUrl) {
-            urlCache.delete(action.originalFile);
-            urlCache.set(action.newFile, cachedUrl);
-          }
         }
         return { ...state, files };
       }
@@ -296,13 +281,20 @@ interface FileUploadRootProps extends Omit<
   onFileReject?: (file: File, message: string) => void;
   onFilesReject?: (files: Array<{ file: File; message: string }>) => void;
   onFileValidate?: (file: File) => string | null | undefined;
+  /**
+   * Optional async transform applied to each accepted file before it enters
+   * the store.  Return the same file to leave it unchanged, or return a new
+   * `File` (e.g. after EXIF stripping) to replace it.  All subsequent
+   * callbacks — `onProgress`, `onSuccess`, `onError` — will reference the
+   * returned file.
+   */
+  transformFile?: (file: File) => Promise<File> | File;
   onUpload?: (
     files: File[],
     options: {
       onProgress: (file: File, progress: number) => void;
       onSuccess: (file: File) => void;
       onError: (file: File, error: Error) => void;
-      onReplace: (originalFile: File, newFile: File) => void;
     },
   ) => Promise<void> | void;
   accept?: string;
@@ -328,6 +320,7 @@ function FileUploadRoot(props: FileUploadRootProps) {
     onFileReject,
     onFilesReject,
     onFileValidate,
+    transformFile,
     onUpload,
     accept,
     maxFiles,
@@ -445,10 +438,6 @@ function FileUploadRoot(props: FileUploadRootProps) {
                 file,
                 error: error.message ?? 'Upload failed',
               });
-            },
-            onReplace: (originalFile, newFile) => {
-              cancelPendingProgress(originalFile);
-              store.dispatch({ type: 'REPLACE_FILE', originalFile, newFile });
             },
           });
         } else {
@@ -571,28 +560,35 @@ function FileUploadRoot(props: FileUploadRootProps) {
       }
 
       if (acceptedFiles.length > 0) {
-        store.dispatch({ type: 'ADD_FILES', files: acceptedFiles });
+        // eslint-disable-next-line no-void
+        void (async () => {
+          const finalFiles = transformFile
+            ? await Promise.all(acceptedFiles.map(async (file) => transformFile(file)))
+            : acceptedFiles;
 
-        if (isControlled && onValueChange) {
-          const currentFiles = Array.from(store.getState().files.values()).map(
-            (f) => f.file,
-          );
-          onValueChange([...currentFiles]);
-        }
+          store.dispatch({ type: 'ADD_FILES', files: finalFiles });
 
-        if (onAccept) {
-          onAccept(acceptedFiles);
-        }
+          if (isControlled && onValueChange) {
+            const currentFiles = Array.from(store.getState().files.values()).map(
+              (f) => f.file,
+            );
+            onValueChange([...currentFiles]);
+          }
 
-        for (const file of acceptedFiles) {
-          onFileAccept?.(file);
-        }
+          if (onAccept) {
+            onAccept(finalFiles);
+          }
 
-        if (onUpload) {
-          requestAnimationFrame(() => {
-            onFilesUpload(acceptedFiles);
-          });
-        }
+          for (const file of finalFiles) {
+            onFileAccept?.(file);
+          }
+
+          if (onUpload) {
+            requestAnimationFrame(() => {
+              onFilesUpload(finalFiles);
+            });
+          }
+        })();
       }
     },
     [
@@ -603,6 +599,7 @@ function FileUploadRoot(props: FileUploadRootProps) {
       onFileAccept,
       onUpload,
       onFilesUpload,
+      transformFile,
       maxFiles,
       onFileValidate,
       onFileReject,
