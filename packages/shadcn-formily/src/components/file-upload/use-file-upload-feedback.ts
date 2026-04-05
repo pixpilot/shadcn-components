@@ -103,9 +103,10 @@ export function useFileUploadFeedback(props: FileUploadBaseProps): {
         ...options,
         component: field.componentType as string,
         componentProps: { ...field.componentProps },
+        path: field.address.toString(),
       });
     },
-    [field.componentProps, field.componentType, onUpload, onUploadProp],
+    [field.address, field.componentProps, field.componentType, onUpload, onUploadProp],
   );
 
   return { onUpload: handleUpload, maxSize, handleFilesRejection, handleFileValidate };
