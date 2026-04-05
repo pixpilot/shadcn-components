@@ -1,5 +1,16 @@
 # @pixpilot/formily-shadcn
 
+## 1.11.0
+
+### Minor Changes
+
+- add transformFile support
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn-ui@1.11.0
+
 ## 1.10.9
 
 ### Patch Changes
