@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.11.0
+
+### Minor Changes
+
+- add onReplace callback and related logic
+
 ## 1.10.7
 
 ### Patch Changes
