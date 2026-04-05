@@ -366,3 +366,120 @@ describe('fileUpload - onFilesReject prop', () => {
     }
   });
 });
+
+describe('fileUpload - onReplace callback', () => {
+  it('should track status on the replacement file, not the original', async () => {
+    const originalFile = new File(['original'], 'photo.jpg', { type: 'image/jpeg' });
+    const normalizedFile = new File(['normalized'], 'photo.jpg', { type: 'image/jpeg' });
+
+    let capturedOnReplace: ((original: File, replacement: File) => void) | undefined;
+    let capturedOnSuccess: ((file: File) => void) | undefined;
+
+    function OriginalStatusProbe() {
+      const status = useFileUpload(
+        (store) => store.files.get(originalFile)?.status ?? 'missing',
+      );
+      return <span data-testid="original-status">{status}</span>;
+    }
+
+    function NormalizedStatusProbe() {
+      const status = useFileUpload(
+        (store) => store.files.get(normalizedFile)?.status ?? 'missing',
+      );
+      return <span data-testid="normalized-status">{status}</span>;
+    }
+
+    const { container, getByTestId } = render(
+      React.createElement(
+        FileUpload,
+        {
+          onUpload: (_files, options) => {
+            capturedOnReplace = options.onReplace;
+            capturedOnSuccess = options.onSuccess;
+          },
+        },
+        React.createElement(
+          FileUploadDropzone,
+          null,
+          React.createElement(FileUploadTrigger, null, 'Upload'),
+        ),
+        React.createElement(FileUploadList, null),
+        React.createElement(OriginalStatusProbe),
+        React.createElement(NormalizedStatusProbe),
+      ),
+    );
+
+    const input = container.querySelector('input[type="file"]') as HTMLInputElement;
+    Object.defineProperty(input, 'files', { value: [originalFile], writable: true });
+    act(() => {
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+
+    await waitFor(() => {
+      expect(capturedOnReplace).toBeDefined();
+    });
+
+    act(() => {
+      capturedOnReplace!(originalFile, normalizedFile);
+      capturedOnSuccess!(normalizedFile);
+    });
+
+    await waitFor(() => {
+      expect(getByTestId('original-status').textContent).toBe('missing');
+      expect(getByTestId('normalized-status').textContent).toBe('success');
+    });
+  });
+
+  it('should transfer error state to the replacement file', async () => {
+    const originalFile = new File(['original'], 'photo.jpg', { type: 'image/jpeg' });
+    const normalizedFile = new File(['normalized'], 'photo.jpg', { type: 'image/jpeg' });
+
+    let capturedOnReplace: ((original: File, replacement: File) => void) | undefined;
+    let capturedOnError: ((file: File, error: Error) => void) | undefined;
+
+    function NormalizedStatusProbe() {
+      const status = useFileUpload(
+        (store) => store.files.get(normalizedFile)?.status ?? 'missing',
+      );
+      return <span data-testid="normalized-status">{status}</span>;
+    }
+
+    const { container, getByTestId } = render(
+      React.createElement(
+        FileUpload,
+        {
+          onUpload: (_files, options) => {
+            capturedOnReplace = options.onReplace;
+            capturedOnError = options.onError;
+          },
+        },
+        React.createElement(
+          FileUploadDropzone,
+          null,
+          React.createElement(FileUploadTrigger, null, 'Upload'),
+        ),
+        React.createElement(FileUploadList, null),
+        React.createElement(NormalizedStatusProbe),
+      ),
+    );
+
+    const input = container.querySelector('input[type="file"]') as HTMLInputElement;
+    Object.defineProperty(input, 'files', { value: [originalFile], writable: true });
+    act(() => {
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+
+    await waitFor(() => {
+      expect(capturedOnReplace).toBeDefined();
+    });
+
+    act(() => {
+      capturedOnReplace!(originalFile, normalizedFile);
+      capturedOnError!(normalizedFile, new Error('Upload failed'));
+    });
+
+    await waitFor(() => {
+      expect(getByTestId('normalized-status').textContent).toBe('error');
+    });
+  });
+});

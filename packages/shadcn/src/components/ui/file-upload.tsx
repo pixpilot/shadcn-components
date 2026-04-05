@@ -57,6 +57,7 @@ type StoreAction =
   | { type: 'SET_SUCCESS'; file: File }
   | { type: 'SET_ERROR'; file: File; error: string }
   | { type: 'REMOVE_FILE'; file: File }
+  | { type: 'REPLACE_FILE'; originalFile: File; newFile: File }
   | { type: 'SET_DRAG_OVER'; dragOver: boolean }
   | { type: 'SET_INVALID'; invalid: boolean }
   | { type: 'CLEAR' };
@@ -145,6 +146,20 @@ function createStore(
             error: action.error,
             status: 'error',
           });
+        }
+        return { ...state, files };
+      }
+
+      case 'REPLACE_FILE': {
+        const fileState = files.get(action.originalFile);
+        if (fileState) {
+          files.delete(action.originalFile);
+          files.set(action.newFile, { ...fileState, file: action.newFile });
+          const cachedUrl = urlCache.get(action.originalFile);
+          if (cachedUrl) {
+            urlCache.delete(action.originalFile);
+            urlCache.set(action.newFile, cachedUrl);
+          }
         }
         return { ...state, files };
       }
@@ -287,6 +302,7 @@ interface FileUploadRootProps extends Omit<
       onProgress: (file: File, progress: number) => void;
       onSuccess: (file: File) => void;
       onError: (file: File, error: Error) => void;
+      onReplace: (originalFile: File, newFile: File) => void;
     },
   ) => Promise<void> | void;
   accept?: string;
@@ -429,6 +445,10 @@ function FileUploadRoot(props: FileUploadRootProps) {
                 file,
                 error: error.message ?? 'Upload failed',
               });
+            },
+            onReplace: (originalFile, newFile) => {
+              cancelPendingProgress(originalFile);
+              store.dispatch({ type: 'REPLACE_FILE', originalFile, newFile });
             },
           });
         } else {
