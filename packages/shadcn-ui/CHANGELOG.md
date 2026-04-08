@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.12.1
+
+### Patch Changes
+
+- remove unnecessary DialogClose component
+
 ## 1.12.0
 
 ### Minor Changes
