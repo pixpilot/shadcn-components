@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.12.0
+
+### Minor Changes
+
+- enhance `description` prop type to support React nodes
+
 ## 1.11.1
 
 ### Patch Changes
