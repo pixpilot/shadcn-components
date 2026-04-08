@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ReactNode } from 'react';
+import type { AlertVariant } from '../src/variant-config';
 import { useState } from 'react';
 import { Button } from '../src/Button';
 import { DialogProvider, showConfirmDialog } from '../src/confirmation-dialog';
@@ -23,7 +24,17 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-function ConfirmationDialogStory({ description }: { description: ReactNode }) {
+function ConfirmationDialogStory({
+  description,
+  variant,
+  confirmText,
+  showIcon,
+}: {
+  description: ReactNode;
+  variant?: AlertVariant;
+  confirmText?: string;
+  showIcon?: boolean;
+}) {
   const [result, setResult] = useState('No dialog action yet.');
   const [isOpen, setIsOpen] = useState(false);
 
@@ -34,8 +45,10 @@ function ConfirmationDialogStory({ description }: { description: ReactNode }) {
       const confirmed = await showConfirmDialog({
         title: 'Delete project?',
         description,
-        confirmText: 'Delete',
+        confirmText: confirmText ?? 'Delete',
         cancelText: 'Cancel',
+        variant,
+        showIcon,
       });
 
       setResult(
@@ -84,6 +97,57 @@ export const WithReactNodeDescription: Story = {
           </span>
         </>
       }
+    />
+  ),
+};
+
+export const ErrorVariant: Story = {
+  render: () => (
+    <ConfirmationDialogStory
+      variant="error"
+      confirmText="Delete"
+      description="This will permanently delete the project and all related data. This action cannot be undone."
+    />
+  ),
+};
+
+export const WarningVariant: Story = {
+  render: () => (
+    <ConfirmationDialogStory
+      variant="warning"
+      confirmText="Proceed"
+      description="This action may have unintended side effects. Please review before continuing."
+    />
+  ),
+};
+
+export const InfoVariant: Story = {
+  render: () => (
+    <ConfirmationDialogStory
+      variant="info"
+      confirmText="Got it"
+      description="This will send a notification to all project members."
+    />
+  ),
+};
+
+export const SuccessVariant: Story = {
+  render: () => (
+    <ConfirmationDialogStory
+      variant="success"
+      confirmText="Publish"
+      description="Your changes are ready. Publishing will make them visible to all users."
+    />
+  ),
+};
+
+export const NoIcon: Story = {
+  render: () => (
+    <ConfirmationDialogStory
+      variant="info"
+      showIcon={false}
+      confirmText="Understood"
+      description="The confirmation dialog keeps the variant styling, but the icon is hidden."
     />
   ),
 };

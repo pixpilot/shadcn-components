@@ -1,6 +1,8 @@
+import type { AlertVariant } from '../variant-config';
 import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import {
   Button,
+  cn,
   Dialog,
   DialogClose,
   DialogContent,
@@ -9,6 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@pixpilot/shadcn';
+import { variantConfig } from '../variant-config';
 
 export interface ConfirmationDialogProps {
   title: string;
@@ -17,10 +20,12 @@ export interface ConfirmationDialogProps {
   cancelText?: string;
   onConfirm?: () => void;
   onCancel?: () => void;
+  variant?: AlertVariant;
+  showIcon?: boolean;
 }
 
 const ConfirmationDialog = NiceModal.create<Partial<ConfirmationDialogProps>>((props) => {
-  const { title = 'Confirmation Dialog' } = props;
+  const { title = 'Confirmation Dialog', variant, showIcon = true } = props;
 
   const modal = useModal();
 
@@ -44,13 +49,22 @@ const ConfirmationDialog = NiceModal.create<Partial<ConfirmationDialogProps>>((p
     }
   };
 
+  const config = variant != null ? variantConfig[variant] : null;
+  const shouldShowIcon = showIcon && variant != null && variant !== 'default';
+  const confirmButtonVariant = variant === 'error' ? 'destructive' : 'default';
+
   return (
     <Dialog open={modal.visible} onOpenChange={onOpenChange}>
       <DialogContent>
-        <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
+        <DialogHeader className="mb-3">
+          <DialogTitle className={cn('flex items-center gap-2', config?.textClass)}>
+            {shouldShowIcon && config != null && (
+              <config.IconComponent className="size-5 shrink-0" />
+            )}
+            {title}
+          </DialogTitle>
           {props.description != null && (
-            <DialogDescription>{props.description}</DialogDescription>
+            <DialogDescription className="mt-3">{props.description}</DialogDescription>
           )}
         </DialogHeader>
         <DialogFooter>
@@ -59,7 +73,9 @@ const ConfirmationDialog = NiceModal.create<Partial<ConfirmationDialogProps>>((p
               {props.cancelText ?? 'Cancel'}
             </Button>
           </DialogClose>
-          <Button onClick={handleConfirm}>{props.confirmText ?? 'Confirm'}</Button>
+          <Button variant={confirmButtonVariant} onClick={handleConfirm}>
+            {props.confirmText ?? 'Confirm'}
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

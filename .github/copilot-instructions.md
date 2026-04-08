@@ -9,7 +9,8 @@
 
 ## Testing
 
-This project uses Vitest for testing.
+- This project uses Vitest for testing.
+- After each change, run tests, lint, and typecheck, and make sure all three pass before wrapping up.
 
 # File Naming Conventions
 
