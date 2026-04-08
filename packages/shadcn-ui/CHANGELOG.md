@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.13.0
+
+### Minor Changes
+
+- update variant handling for ConfirmationDialog
+
 ## 1.12.1
 
 ### Patch Changes
