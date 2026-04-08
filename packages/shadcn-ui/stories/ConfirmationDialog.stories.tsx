@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ReactNode } from 'react';
-import type { AlertVariant } from '../src/variant-config';
+import type { ConfirmationDialogVariant } from '../src/confirmation-dialog';
 import { useState } from 'react';
 import { Button } from '../src/Button';
 import { DialogProvider, showConfirmDialog } from '../src/confirmation-dialog';
@@ -31,7 +31,7 @@ function ConfirmationDialogStory({
   showIcon,
 }: {
   description: ReactNode;
-  variant?: AlertVariant;
+  variant?: ConfirmationDialogVariant;
   confirmText?: string;
   showIcon?: boolean;
 }) {
@@ -104,7 +104,7 @@ export const WithReactNodeDescription: Story = {
 export const ErrorVariant: Story = {
   render: () => (
     <ConfirmationDialogStory
-      variant="error"
+      variant="destructive"
       confirmText="Delete"
       description="This will permanently delete the project and all related data. This action cannot be undone."
     />
@@ -121,33 +121,12 @@ export const WarningVariant: Story = {
   ),
 };
 
-export const InfoVariant: Story = {
+export const primaryVariant: Story = {
   render: () => (
     <ConfirmationDialogStory
-      variant="info"
+      variant="primary"
       confirmText="Got it"
       description="This will send a notification to all project members."
-    />
-  ),
-};
-
-export const SuccessVariant: Story = {
-  render: () => (
-    <ConfirmationDialogStory
-      variant="success"
-      confirmText="Publish"
-      description="Your changes are ready. Publishing will make them visible to all users."
-    />
-  ),
-};
-
-export const NoIcon: Story = {
-  render: () => (
-    <ConfirmationDialogStory
-      variant="info"
-      showIcon={false}
-      confirmText="Understood"
-      description="The confirmation dialog keeps the variant styling, but the icon is hidden."
     />
   ),
 };

@@ -12,6 +12,15 @@ import {
 } from '@pixpilot/shadcn';
 import { variantConfig } from '../variant-config';
 
+export type ConfirmationDialogVariant = 'destructive' | 'warning' | 'primary' | 'default';
+
+const variantMap: Record<ConfirmationDialogVariant, AlertVariant> = {
+  destructive: 'error',
+  warning: 'warning',
+  primary: 'info',
+  default: 'default',
+};
+
 export interface ConfirmationDialogProps {
   title: string;
   description?: string | React.ReactNode;
@@ -19,7 +28,7 @@ export interface ConfirmationDialogProps {
   cancelText?: string;
   onConfirm?: () => void;
   onCancel?: () => void;
-  variant?: AlertVariant;
+  variant?: ConfirmationDialogVariant;
   showIcon?: boolean;
 }
 
@@ -48,9 +57,30 @@ const ConfirmationDialog = NiceModal.create<Partial<ConfirmationDialogProps>>((p
     }
   };
 
-  const config = variant != null ? variantConfig[variant] : null;
+  const config = variant != null ? variantConfig[variantMap[variant]] : null;
   const shouldShowIcon = showIcon && variant != null && variant !== 'default';
-  const confirmButtonVariant = variant === 'error' ? 'destructive' : 'default';
+
+  const confirmButtonConfig: Record<
+    ConfirmationDialogVariant,
+    { variant: 'default' | 'destructive'; className?: string }
+  > = {
+    destructive: { variant: 'destructive' },
+    /*
+     * Warning and primary don't have a direct shadcn button variant, so we
+     * use `default` as the base and override the background color via
+     * className to visually match the dialog variant.
+     */
+    warning: {
+      variant: 'default',
+      className:
+        'bg-amber-600 hover:bg-amber-600/90 dark:bg-amber-500 dark:hover:bg-amber-500/90 text-white',
+    },
+    primary: { variant: 'default' },
+    default: { variant: 'default' },
+  };
+
+  const { variant: confirmBtnVariant, className: confirmBtnClassName } =
+    variant != null ? confirmButtonConfig[variant] : { variant: 'default' as const };
 
   return (
     <Dialog open={modal.visible} onOpenChange={onOpenChange}>
@@ -72,7 +102,8 @@ const ConfirmationDialog = NiceModal.create<Partial<ConfirmationDialogProps>>((p
           </Button>
           <Button
             data-slots="button-confirm"
-            variant={confirmButtonVariant}
+            variant={confirmBtnVariant}
+            className={confirmBtnClassName}
             onClick={handleConfirm}
           >
             {props.confirmText ?? 'Confirm'}
