@@ -12,7 +12,7 @@ import {
 
 export interface ConfirmationDialogProps {
   title: string;
-  description?: string;
+  description?: string | React.ReactNode;
   confirmText?: string;
   cancelText?: string;
   onConfirm?: () => void;
