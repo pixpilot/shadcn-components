@@ -8,6 +8,9 @@ import { DialogProvider, showConfirmDialog } from '../src/confirmation-dialog';
 const meta = {
   title: 'shadcn-ui/ConfirmationDialog',
   component: DialogProvider,
+  args: {
+    children: null,
+  },
   parameters: {
     layout: 'centered',
   },
@@ -128,5 +131,13 @@ export const primaryVariant: Story = {
       confirmText="Got it"
       description="This will send a notification to all project members."
     />
+  ),
+};
+
+export const NestedDialogProvider: Story = {
+  render: () => (
+    <DialogProvider>
+      <ConfirmationDialogStory description="This story nests a second DialogProvider inside the Storybook provider to verify confirm dialogs still work in provider trees." />
+    </DialogProvider>
   ),
 };
