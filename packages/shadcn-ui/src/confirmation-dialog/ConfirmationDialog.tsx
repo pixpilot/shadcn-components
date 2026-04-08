@@ -4,7 +4,6 @@ import {
   Button,
   cn,
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -68,12 +67,14 @@ const ConfirmationDialog = NiceModal.create<Partial<ConfirmationDialogProps>>((p
           )}
         </DialogHeader>
         <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="outline" onClick={handleCancel}>
-              {props.cancelText ?? 'Cancel'}
-            </Button>
-          </DialogClose>
-          <Button variant={confirmButtonVariant} onClick={handleConfirm}>
+          <Button data-slots="button-cancel" variant="outline" onClick={handleCancel}>
+            {props.cancelText ?? 'Cancel'}
+          </Button>
+          <Button
+            data-slots="button-confirm"
+            variant={confirmButtonVariant}
+            onClick={handleConfirm}
+          >
             {props.confirmText ?? 'Confirm'}
           </Button>
         </DialogFooter>
