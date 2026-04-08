@@ -21,7 +21,8 @@ const DialogProviderMountedContext = createContext(false);
  * the inner provider unmounts and remounts, creating a brand-new store. Any
  * in-flight `showConfirmDialog` calls still hold a reference to the old store's
  * dispatch, so their promises never resolve and the modal tree is left in a
- * broken state.
+ * broken state. This has been detected when navigating in a Next.js app,
+ * but it could happen in any React app that conditionally mounts/unmounts providers.
  *
  * The fix: track whether a DialogProvider is already mounted above us in the tree.
  * If one is, skip rendering NiceModal.Provider entirely and just pass children
