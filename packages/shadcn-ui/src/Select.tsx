@@ -56,6 +56,8 @@ type BaseSelectProps = {
    * Whether to show a clear button when a value is selected
    */
   clearable?: boolean;
+
+  id?: string;
 } & Omit<ComponentProps<typeof ShadcnSelect>, 'value' | 'onValueChange' | 'children'>;
 
 function Select(props: BaseSelectProps) {
@@ -95,11 +97,11 @@ function Select(props: BaseSelectProps) {
 
   return (
     <ShadcnSelect
-      value={value}
-      onValueChange={onChange}
-      open={open}
-      onOpenChange={handleOpenChange}
       {...restProps}
+      value={value}
+      open={open}
+      onValueChange={onChange}
+      onOpenChange={handleOpenChange}
     >
       <div className="relative w-full">
         <SelectTrigger className="w-full" onKeyDown={handleTriggerKeyDown}>
