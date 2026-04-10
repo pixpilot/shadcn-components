@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.17.0
+
+### Minor Changes
+
+- add README and scaffoldfy configuration for package generator
+
 ## 1.16.0
 
 ### Minor Changes
