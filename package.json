@@ -47,7 +47,8 @@
     "release:next": "changeset-publish --next",
     "release": "changeset version && pnpm changeset-publish",
     "check:all": "pnpm lint && pnpm format && pnpm typecheck && pnpm test",
-    "generate-packages-section": "node scripts/generate-packages-section.js"
+    "generate-packages-section": "node scripts/generate-packages-section.js",
+    "gen:package": "npx @pixpilot/scaffoldfy --config ./generators/package/scaffoldfy.json"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.8",
