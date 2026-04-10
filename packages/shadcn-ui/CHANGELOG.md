@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.16.0
+
+### Minor Changes
+
+- add optional `disabled` and `className` props to BaseSelectProps
+
 ## 1.15.0
 
 ### Minor Changes
