@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.15.0
+
+### Minor Changes
+
+- add optional `id` prop to BaseSelectProps
+
 ## 1.14.0
 
 ### Minor Changes
