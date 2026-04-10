@@ -211,7 +211,6 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
       TextAlign.configure({ types: ['heading', 'paragraph'] }),
     ] as Extension[];
     if (placeholder != null) {
-      // eslint-disable-next-line ts/no-unsafe-call, ts/no-unsafe-member-access
       baseExtensions.push(Placeholder.configure({ placeholder }) as Extension);
     }
     return baseExtensions.concat(extensions);
