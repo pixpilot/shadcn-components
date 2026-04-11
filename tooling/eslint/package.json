@@ -16,8 +16,8 @@
     "format:fix": "prettier --write ."
   },
   "dependencies": {
-    "@pixpilot/eslint-config": "^2.8.0",
-    "@pixpilot/eslint-config-react": "^0.4.6",
+    "@pixpilot/eslint-config": "^2.9.0",
+    "@pixpilot/eslint-config-react": "^0.5.0",
     "typescript-eslint": "catalog:dev"
   },
   "devDependencies": {

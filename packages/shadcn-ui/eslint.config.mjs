@@ -13,6 +13,18 @@ const config = Array.isArray(baseConfig)
           'react/no-forward-ref': 'off',
         },
       },
+      {
+        /*
+         * Markdown virtual code blocks (e.g. README.md/0_0.tsx) match *.tsx
+         * but have no TypeScript project info, so type-aware rules crash.
+         * Disable them for all markdown-embedded files.
+         */
+        files: ['**/*.md/**'],
+        rules: {
+          'ts-no-autofix/promise-function-async': 'off',
+          'ts/promise-function-async': 'off',
+        },
+      },
     ]
   : baseConfig;
 

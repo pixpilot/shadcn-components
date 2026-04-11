@@ -3,4 +3,22 @@ import baseConfig from '@internal/eslint-config/react';
 // Uncomment to use the internal ESLint config if available
 // /** @type {import('@internal/eslint-config').Config} */
 /** @type {import('typescript-eslint').Config} */
-export default baseConfig;
+const config = Array.isArray(baseConfig)
+  ? [
+      ...baseConfig,
+      {
+        /*
+         * Markdown virtual code blocks (e.g. README.md/0_0.tsx) match *.tsx
+         * but have no TypeScript project info, so type-aware rules crash.
+         * Disable them for all markdown-embedded files.
+         */
+        files: ['**/*.md/**'],
+        rules: {
+          'ts-no-autofix/promise-function-async': 'off',
+          'ts/promise-function-async': 'off',
+        },
+      },
+    ]
+  : baseConfig;
+
+export default config;

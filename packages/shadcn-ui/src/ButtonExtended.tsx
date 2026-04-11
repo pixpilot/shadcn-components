@@ -92,7 +92,7 @@ function getLoaderSize(
  * Render tooltip content. If it's a string containing newlines, split into
  * paragraphs; otherwise render the node as-is.
  */
-// eslint-disable-next-line ts/promise-function-async
+// eslint-disable-next-line ts-no-autofix/promise-function-async
 function renderTooltipContent(content: React.ReactNode | undefined) {
   if (typeof content === 'string') {
     return (
