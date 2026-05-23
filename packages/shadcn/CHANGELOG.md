@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 1.2.5
+
+### Patch Changes
+
+- 01ccd0c: fix release
+
 ## 1.2.4
 
 ### Patch Changes
