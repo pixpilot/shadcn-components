@@ -4,7 +4,6 @@ import type { IconProviderProps } from '../src/icon-selector/types';
 import faIcons from '@iconify-json/fa/icons.json';
 import mdiIcons from '@iconify-json/mdi/icons.json';
 import { addAPIProvider } from '@iconify/react';
-import { STORYBOOK_ORIGIN } from '@internal/storybook';
 import { useCallback, useState } from 'react';
 import { IconPicker } from '../src/icon-selector/IconPicker';
 
@@ -94,8 +93,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const iconifyServer =
-  typeof window !== 'undefined' ? window.location.origin : STORYBOOK_ORIGIN;
+const iconifyServer = window.location.origin;
 
 // Remove the default Iconify API provider to use our custom one
 // It use MSW to mock the API requests in storybook
