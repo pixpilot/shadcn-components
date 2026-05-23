@@ -1,5 +1,17 @@
 # @pixpilot/shadcn-ui
 
+## 1.18.0
+
+### Minor Changes
+
+- update Storybook configuration and dependencies
+
+### Patch Changes
+
+- package issue
+- Updated dependencies
+  - @pixpilot/shadcn@1.2.4
+
 ## 1.17.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 1.2.4
+
+### Patch Changes
+
+- package issue
+
 ## 1.2.3
 
 ### Patch Changes
