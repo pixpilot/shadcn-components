@@ -1,0 +1,175 @@
+{
+  "version": "0",
+  "stories": {
+    "shadcn-ui-colorpicker--button-with-reset-options": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"button\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "oIAq1CiMVUcC",
+          "title": "click reset"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"color-picker-trigger\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "WTSpAH1PUrMm",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"button\"]"
+                  },
+                  "id": "RizeQ3JWx4MW",
+                  "name": "click"
+                }
+              ],
+              "id": "-Edfdn9C9wj3",
+              "title": "click reset"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"color-picker-trigger\"]"
+                  },
+                  "id": "fXnkuXY1S2S2",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "HWGSkE_fbRCm",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserType": "chromium",
+          "id": "ATUiH38WrCXh",
+          "index": 0,
+          "title": "Reset clicked and color picker screenshot taken"
+        },
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"color-picker-trigger\"]"
+                  },
+                  "id": "S781aSQHA9dO",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "WojSkZ-92zDi",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserType": "chromium",
+          "id": "sxqh78YpGBOt",
+          "index": 1,
+          "title": "Color picker button with reset visible"
+        }
+      ]
+    },
+    "shadcn-ui-colorpicker--input-with-reset-options": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"color-picker-trigger\"]"
+                  },
+                  "id": "dRxeBxoTRiia",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "ism0b4LfxDS7",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserType": "chromium",
+          "id": "IuKnG82K0g92",
+          "index": 0,
+          "title": "Color picker reset options visible"
+        },
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"button\"]"
+                  },
+                  "id": "foTNVbeHvtb8",
+                  "name": "click"
+                }
+              ],
+              "id": "1_Thb6zf4VTP",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"color-picker-trigger\"]"
+                  },
+                  "id": "LaF6xiWY2QJf",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "lJqeUR3GH3eV",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserType": "chromium",
+          "id": "4t1p4VP1cY9i",
+          "index": 1,
+          "title": "Color picker reset button clicked"
+        }
+      ],
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"color-picker-trigger\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "PrA957HxwBaX",
+          "title": "takeElementScreenshot"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"button\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "9Hv6dyFJrm98",
+          "title": "click"
+        }
+      ]
+    }
+  }
+}
