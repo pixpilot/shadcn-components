@@ -44,12 +44,25 @@
                   "args": {
                     "selector": "[data-slot=\"button\"]"
                   },
-                  "id": "52ZCDSTPqrhe",
+                  "id": "h4mfx2yeIgc7",
                   "name": "click"
                 }
               ],
-              "id": "vXIFzVFMiehA",
+              "id": "2nIarzgUcmLz",
               "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 200
+                  },
+                  "id": "ibSggyoI68MM",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "pXR-qp7gU7ij",
+              "title": "delay 200"
             },
             {
               "actions": [
@@ -57,17 +70,17 @@
                   "args": {
                     "selector": "#avatar-upload-div-1"
                   },
-                  "id": "iuyLJnOo1vMX",
+                  "id": "N0Hj87otZxSx",
                   "name": "takeElementScreenshot"
                 }
               ],
-              "id": "2WDEmbImxjGU",
+              "id": "2oOzqAhywb2c",
               "title": "takeElementScreenshot"
             }
           ],
           "browserOptionsId": "LSw61olDITRy",
           "browserType": "chromium",
-          "id": "VZwPsssoTck5",
+          "id": "xf11cu5I8cl4",
           "index": 1,
           "title": "Should remove file"
         }
@@ -84,6 +97,18 @@
           ],
           "id": "e0xtY9FkTIRD",
           "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "timeout": 200
+              },
+              "name": "waitForTimeout"
+            }
+          ],
+          "id": "wcwPynL5ceVF",
+          "title": "delay 200"
         },
         {
           "actions": [
