@@ -105,14 +105,13 @@ export const LongContent: Story = {
             Long Content
           </h3>
 
-          {Array.from({ length: 20 }).map((_, index) => (
-            // eslint-disable-next-line react/no-array-index-key
+          {Array.from({ length: 20 }, (_, index) => index + 1).map((lineNumber) => (
             <p
               id="popover-content-p-2"
-              key={index}
+              key={lineNumber}
               className="text-sm text-muted-foreground mb-2"
             >
-              This is line {index + 1} of the long content inside the popover. It
+              This is line {lineNumber} of the long content inside the popover. It
               demonstrates how the popover handles overflow and scrolling behavior when
               the content exceeds the maximum height.
             </p>
