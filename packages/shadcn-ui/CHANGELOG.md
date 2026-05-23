@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.18.2
+
+### Patch Changes
+
+- enhance display with truncation and clear button
+
 ## 1.18.1
 
 ### Patch Changes
