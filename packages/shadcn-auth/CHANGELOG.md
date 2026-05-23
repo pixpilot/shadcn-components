@@ -1,5 +1,14 @@
 # @pixpilot/shadcn-auth
 
+## 1.0.32
+
+### Patch Changes
+
+- 3d902a3: new release
+- Updated dependencies [3d902a3]
+  - @pixpilot/shadcn@1.2.3
+  - @pixpilot/shadcn-ui@1.17.1
+
 ## 1.0.31
 
 ### Patch Changes

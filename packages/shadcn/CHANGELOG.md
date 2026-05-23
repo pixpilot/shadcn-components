@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 1.2.3
+
+### Patch Changes
+
+- 3d902a3: new release
+
 ## 1.2.2
 
 ### Patch Changes
