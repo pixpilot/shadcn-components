@@ -23,7 +23,7 @@ type Story = StoryObj<typeof meta>;
  */
 export const Default: Story = {
   render: () => (
-    <div className="relative inline-block">
+    <div id="absolute-fill-div-1" className="relative inline-block">
       <Button disabled>Disabled Button</Button>
       <AbsoluteFill title="This tooltip works on disabled button!" />
     </div>

@@ -13,7 +13,7 @@ const meta: Meta<typeof Form> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <div style={{ width: '400px', padding: '20px' }}>
+      <div id="schema-field-extended-div-1" style={{ width: '400px', padding: '20px' }}>
         <Story />
       </div>
     ),
@@ -114,6 +114,7 @@ export const ExtendedForm: Story = {
 
     return (
       <Form
+        id="schema-field-extended"
         form={form}
         settings={{
           fileUpload: {
@@ -236,8 +237,13 @@ export const FormWithCustomExtendedComponents: Story = {
       onChange?: (value: number) => void;
       [key: string]: unknown;
     }) => (
-      <div style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}>
-        <label htmlFor="custom-rating">Custom Rating: {value ?? 0}/10</label>
+      <div
+        id="schema-field-extended-div-2"
+        style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}
+      >
+        <label id="schema-field-extended-label-1" htmlFor="custom-rating">
+          Custom Rating: {value ?? 0}/10
+        </label>
         <input
           {...props}
           id="custom-rating"

@@ -33,6 +33,7 @@ export const BasicCheckbox: Story = {
 
     return (
       <Form
+        id="checkbox"
         form={form}
         className="w-[400px]"
         onSubmit={(values) => {
@@ -42,6 +43,7 @@ export const BasicCheckbox: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="checkbox-button-1"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -91,6 +93,7 @@ export const MultipleCheckboxes: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="checkbox-button-2"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -146,6 +149,7 @@ export const CheckboxInNestedObject: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="checkbox-button-3"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -191,6 +195,7 @@ export const RequiredCheckbox: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="checkbox-button-4"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >

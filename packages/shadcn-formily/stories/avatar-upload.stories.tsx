@@ -43,6 +43,7 @@ export const Declarative: Story = {
 
     return (
       <Form
+        id="avatar-upload"
         form={form}
         className="w-[400px]"
         onSubmit={(values) => {
@@ -64,6 +65,7 @@ export const Declarative: Story = {
           />
         </SchemaFieldExtended>
         <button
+          id="avatar-upload-button-1"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -106,6 +108,7 @@ export const WithOnUploadInSchema: Story = {
       >
         <SchemaFieldExtended schema={schema} />
         <button
+          id="avatar-upload-button-2"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -165,6 +168,7 @@ export const WithSize: Story = {
           />
         </SchemaFieldExtended>
         <button
+          id="avatar-upload-button-3"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -236,6 +240,7 @@ export const WithValue: Story = {
         }}
       >
         <button
+          id="avatar-upload-button-4"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -288,6 +293,7 @@ export const UploadSuccess: Story = {
         }}
       >
         <button
+          id="avatar-upload-button-5"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -339,6 +345,7 @@ export const UploadFailure: Story = {
         }}
       >
         <button
+          id="avatar-upload-button-6"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -419,6 +426,7 @@ export const WithCustomComponent: Story = {
         }}
       >
         <button
+          id="avatar-upload-button-7"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -472,6 +480,7 @@ export const WithClear: Story = {
           />
         </SchemaFieldExtended>
         <button
+          id="avatar-upload-button-8"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -519,6 +528,7 @@ export const WithClearDisabled: Story = {
           />
         </SchemaFieldExtended>
         <button
+          id="avatar-upload-button-9"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -566,6 +576,7 @@ export const WithMaxFileSize: Story = {
         }}
       >
         <button
+          id="avatar-upload-button-10"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -632,6 +643,7 @@ export const WithExifStrip: Story = {
         }}
       >
         <button
+          id="avatar-upload-button-11"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >

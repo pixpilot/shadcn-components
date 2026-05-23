@@ -45,6 +45,7 @@ export const BasicColorSelect: Story = {
 
     return (
       <Form
+        id="color-select"
         form={form}
         className="w-[400px]"
         onSubmit={(values) => {
@@ -54,6 +55,7 @@ export const BasicColorSelect: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="color-select-button-1"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -134,6 +136,7 @@ export const MultipleColorSelects: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="color-select-button-2"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -185,6 +188,7 @@ export const WithDefaultValue: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="color-select-button-3"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -230,18 +234,21 @@ export const WithValueChange: Story = {
     };
 
     return (
-      <div className="space-y-4">
+      <div id="color-select-div-1" className="space-y-4">
         <Form form={form} className="w-[400px]">
           <SchemaField schema={schema} />
         </Form>
         {selectedColor && (
-          <div className="flex items-center gap-2 text-sm">
-            <span>Selected color:</span>
+          <div id="color-select-div-2" className="flex items-center gap-2 text-sm">
+            <span id="color-select-span-1">Selected color:</span>
             <div
+              id="color-select-div-3"
               className="h-6 w-6 rounded border border-gray-300"
               style={{ backgroundColor: selectedColor }}
             />
-            <span className="font-mono">{selectedColor}</span>
+            <span id="color-select-span-2" className="font-mono">
+              {selectedColor}
+            </span>
           </div>
         )}
       </div>
@@ -286,6 +293,7 @@ export const WithCustomColors: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="color-select-button-4"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -340,6 +348,7 @@ export const WithValidation: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="color-select-button-5"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -388,6 +397,7 @@ export const WithDescription: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="color-select-button-6"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >

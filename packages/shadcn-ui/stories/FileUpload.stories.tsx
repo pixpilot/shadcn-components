@@ -4,6 +4,11 @@ import { useState } from 'react';
 import { FileUpload } from '../src/file-upload';
 import { delay, handleUpload } from './utils/file-upload';
 
+interface StoryArgs {
+  disabled?: boolean;
+  id?: string;
+}
+
 const meta = {
   title: 'shadcn-ui/FileUpload',
   component: FileUpload,
@@ -11,6 +16,7 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+
   argTypes: {
     disabled: {
       control: 'boolean',
@@ -19,20 +25,20 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div style={{ width: 350 }}>
+      <div id="file-upload-div-1" style={{ width: 350 }}>
         <Story />
       </div>
     ),
   ],
-} satisfies Meta<typeof FileUpload>;
+} satisfies Meta<StoryArgs>;
 
 export default meta;
-type Story = StoryObj<typeof FileUpload>;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {},
-  render: function DefaultFileUpload(args) {
-    return <FileUpload {...args} onUpload={handleUpload} />;
+  render: function DefaultFileUpload(args: StoryArgs) {
+    return <FileUpload {...args} multiple={false} value={null} onUpload={handleUpload} />;
   },
 };
 
@@ -41,7 +47,7 @@ export const Default: Story = {
  */
 export const WithValue: Story = {
   args: {},
-  render: function WithValueFileUpload(args) {
+  render: function WithValueFileUpload(args: StoryArgs) {
     const [files, setFiles] = useState<FileMetadata[]>([
       {
         name: 'avatar.png',
@@ -67,11 +73,11 @@ export const WithValue: Story = {
           onChange={handleChange}
           onUpload={handleUpload}
         />
-        <div style={{ marginTop: 12 }}>
-          <div style={{ fontWeight: 'bold', marginBottom: 4 }}>
+        <div id="file-upload-div-2" style={{ marginTop: 12 }}>
+          <div id="file-upload-div-3" style={{ fontWeight: 'bold', marginBottom: 4 }}>
             onChange called: {changeCount} {changeCount === 1 ? 'time' : 'times'}
           </div>
-          <pre>
+          <pre id="file-upload-pre-1">
             {JSON.stringify(
               files.map((x) => ({ name: x.name, size: x.size })),
               null,
@@ -89,7 +95,7 @@ export const WithValue: Story = {
  */
 export const WithUploadSuccess: Story = {
   args: {},
-  render: function WithUploadSuccessFileUpload(args) {
+  render: function WithUploadSuccessFileUpload(args: StoryArgs) {
     const [successCount, setSuccessCount] = useState(0);
     const [lastSuccess, setLastSuccess] = useState<FileMetadata | null>(null);
 
@@ -106,12 +112,12 @@ export const WithUploadSuccess: Story = {
           onUpload={handleUpload}
           onFileSuccess={handleSuccess}
         />
-        <div style={{ marginTop: 12 }}>
-          <div style={{ fontWeight: 'bold', marginBottom: 4 }}>
+        <div id="file-upload-div-4" style={{ marginTop: 12 }}>
+          <div id="file-upload-div-5" style={{ fontWeight: 'bold', marginBottom: 4 }}>
             onSuccess called: {successCount} {successCount === 1 ? 'time' : 'times'}
           </div>
           {lastSuccess != null && (
-            <pre>
+            <pre id="file-upload-pre-2">
               {JSON.stringify(
                 {
                   name: lastSuccess.name,
@@ -131,7 +137,7 @@ export const WithUploadSuccess: Story = {
 
 export const WithUploadError: Story = {
   args: {},
-  render: function WithUploadErrorFileUpload(args) {
+  render: function WithUploadErrorFileUpload(args: StoryArgs) {
     function handleUploadWithError(
       uploadFiles: File[],
       options: FileUploadProgressCallBacks,

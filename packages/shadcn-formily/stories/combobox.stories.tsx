@@ -45,6 +45,7 @@ export const BasicCombobox: Story = {
 
     return (
       <Form
+        id="combobox"
         form={form}
         className="w-[400px]"
         onSubmit={(values) => {
@@ -54,6 +55,7 @@ export const BasicCombobox: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="combobox-button-1"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -122,6 +124,7 @@ export const MultipleComboboxes: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="combobox-button-2"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -190,6 +193,7 @@ export const DeclarativeCombobox: Story = {
           />
         </SchemaField>
         <button
+          id="combobox-button-3"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >

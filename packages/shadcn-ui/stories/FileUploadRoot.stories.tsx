@@ -1,17 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ComponentProps } from 'react';
 import type { FileMetadata } from '../src/file-upload/types';
 import { useState } from 'react';
 import { Button } from '../src';
 import { FileUploadRoot } from '../src/file-upload-root/FileUploadRoot';
 import { delay, handleUpload } from './utils/file-upload';
 
-const meta = {
+type StoryArgs = Partial<
+  ComponentProps<typeof FileUploadRoot> & {
+    id?: string;
+  }
+>;
+
+const meta: Meta<StoryArgs> = {
   title: 'shadcn-ui/FileUploadRoot',
   component: FileUploadRoot,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
+
   argTypes: {
     disabled: {
       control: 'boolean',
@@ -20,12 +28,12 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div style={{ width: 420 }}>
+      <div id="file-upload-root-div-1" style={{ width: 420 }}>
         <Story />
       </div>
     ),
   ],
-} satisfies Meta<typeof FileUploadRoot>;
+} satisfies Meta<StoryArgs>;
 
 export default meta;
 type Story = StoryObj<typeof FileUploadRoot>;
@@ -93,12 +101,15 @@ export const WithUploadSuccess: Story = {
         >
           <Button size="sm">Upload file</Button>
         </FileUploadRoot>
-        <div style={{ marginTop: 12 }}>
-          <div style={{ fontWeight: 'bold', marginBottom: 4 }}>
+        <div id="file-upload-root-div-2" style={{ marginTop: 12 }}>
+          <div
+            id="file-upload-root-div-3"
+            style={{ fontWeight: 'bold', marginBottom: 4 }}
+          >
             onSuccess called: {successCount} {successCount === 1 ? 'time' : 'times'}
           </div>
           {lastSuccess != null && (
-            <pre>
+            <pre id="file-upload-root-pre-1">
               {JSON.stringify(
                 {
                   name: lastSuccess.name,
@@ -137,7 +148,7 @@ export const WithUploadError: Story = {
     }
 
     return (
-      <div>
+      <div id="file-upload-root-div-4">
         <FileUploadRoot
           disabled={args.disabled}
           multiple={false}
@@ -149,7 +160,9 @@ export const WithUploadError: Story = {
           <Button size="sm">Upload file</Button>
         </FileUploadRoot>
         {uploadError != null && (
-          <p className="mt-2 text-sm text-destructive">Error: {uploadError}</p>
+          <p id="file-upload-root-p-1" className="mt-2 text-sm text-destructive">
+            Error: {uploadError}
+          </p>
         )}
       </div>
     );

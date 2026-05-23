@@ -47,7 +47,7 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div className="w-50 mb-50">
+      <div id="color-picker-div-1" className="w-50 mb-50">
         <Story />
       </div>
     ),
@@ -74,7 +74,7 @@ export const WithControlled: React.FC = () => {
   const [color, setColor] = React.useState('#ff0000');
 
   return (
-    <div>
+    <div id="color-picker-div-2">
       {color}
       <ColorPicker
         value={color}
@@ -168,9 +168,12 @@ export const Controlled: React.FC = () => {
   const [color, setColor] = React.useState('#3b82f6');
 
   return (
-    <div className="space-y-4">
-      <div className="text-sm text-muted-foreground">
-        Selected color: <span className="font-mono">{color}</span>
+    <div id="color-picker-div-3" className="space-y-4">
+      <div id="color-picker-div-4" className="text-sm text-muted-foreground">
+        Selected color:{' '}
+        <span id="color-picker-span-1" className="font-mono">
+          {color}
+        </span>
       </div>
       <ColorPicker
         value={color}
@@ -178,7 +181,11 @@ export const Controlled: React.FC = () => {
         variant="input"
         placeholder="Select a color"
       />
-      <div className="w-16 h-16 rounded border" style={{ backgroundColor: color }} />
+      <div
+        id="color-picker-div-5"
+        className="w-16 h-16 rounded border"
+        style={{ backgroundColor: color }}
+      />
     </div>
   );
 };
@@ -195,8 +202,12 @@ export const CustomDisplayButton: React.FC = () => {
       onChange={setColor}
       variant="button"
       formatDisplayValue={(value: string) => (
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-4 rounded border" style={{ backgroundColor: value }} />
+        <div id="color-picker-div-6" className="flex items-center gap-2">
+          <div
+            id="color-picker-div-7"
+            className="w-4 h-4 rounded border"
+            style={{ backgroundColor: value }}
+          />
           {/* <span className="font-mono text-sm">{value.toUpperCase()}</span> */}
         </div>
       )}

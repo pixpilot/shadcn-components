@@ -15,6 +15,8 @@ const meta: Meta<typeof Form> = {
 export default meta;
 type Story = StoryObj<typeof Form>;
 
+const JSON_INDENT = 2;
+
 export const WithJSONSchema: Story = {
   render: () => {
     const form = createForm();
@@ -57,15 +59,17 @@ export const WithJSONSchema: Story = {
 
     return (
       <Form
+        id="form-basics"
         form={form}
         className="w-[400px]"
         onSubmit={(values) => {
           console.log('Form submitted:', values);
-          alert(JSON.stringify(values, null, 2));
+          alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
         <SchemaField schema={schema} />
         <button
+          id="form-basics-button-1"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -119,11 +123,12 @@ export const WithPropNameAsLabel: Story = {
         className="w-[400px]"
         onSubmit={(values) => {
           console.log('Form submitted:', values);
-          alert(JSON.stringify(values, null, 2));
+          alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
         <SchemaField schema={schema} />
         <button
+          id="form-basics-button-2"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -172,10 +177,11 @@ export const WithEmptyTitle = {
         className="w-[400px]"
         onSubmit={(values) => {
           console.log('Form submitted:', values);
-          alert(JSON.stringify(values, null, 2));
+          alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
         <button
+          id="form-basics-button-3"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >

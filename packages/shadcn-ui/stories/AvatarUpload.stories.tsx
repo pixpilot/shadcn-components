@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ComponentProps } from 'react';
 import type { AvatarUploadProps } from '../src/avatar-upload/AvatarUpload';
 import type { FileMetadata, FileUploadProgressCallBacks } from '../src/file-upload/types';
 import { useCallback, useState } from 'react';
@@ -9,13 +10,20 @@ import { delay, handleUpload } from './utils/file-upload';
  * Alert component for displaying important messages to users.
  * Supports multiple variants for different message types.
  */
-const meta = {
+type StoryArgs = Partial<
+  ComponentProps<typeof AvatarUpload> & {
+    id?: string;
+  }
+>;
+
+const meta: Meta<StoryArgs> = {
   title: 'shadcn-ui/AvatarUpload',
   component: AvatarUpload,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
+
   argTypes: {
     size: {
       control: { type: 'select' },
@@ -34,7 +42,7 @@ const meta = {
       defaultValue: true,
     },
   },
-} satisfies Meta<typeof AvatarUpload>;
+} satisfies Meta<StoryArgs>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -51,7 +59,7 @@ function Uploader(args: AvatarUploadProps) {
   }, []);
 
   return (
-    <div className="flex flex-col items-center space-y-4">
+    <div id="avatar-upload-div-1" className="flex flex-col items-center space-y-4">
       <AvatarUpload
         {...args}
         value={file}
@@ -60,15 +68,19 @@ function Uploader(args: AvatarUploadProps) {
         onChange={handleChange}
       />
       {file != null && (
-        <div>
-          <p className="text-sm text-muted-foreground">Selected file: {file.name}</p>
-          <p className="text-xs text-muted-foreground">
+        <div id="avatar-upload-div-2">
+          <p id="avatar-upload-p-1" className="text-sm text-muted-foreground">
+            Selected file: {file.name}
+          </p>
+          <p id="avatar-upload-p-2" className="text-xs text-muted-foreground">
             {file.size} bytes, {file.type}
           </p>
         </div>
       )}
       {file == null && (
-        <p className="text-xs text-muted-foreground italic">No avatar selected</p>
+        <p id="avatar-upload-p-3" className="text-xs text-muted-foreground italic">
+          No avatar selected
+        </p>
       )}
     </div>
   );
@@ -99,7 +111,7 @@ function TransformingUploader(args: AvatarUploadProps) {
   }, []);
 
   return (
-    <div className="flex flex-col items-center space-y-4">
+    <div id="avatar-upload-div-3" className="flex flex-col items-center space-y-4">
       <AvatarUpload
         {...args}
         value={file}
@@ -109,15 +121,19 @@ function TransformingUploader(args: AvatarUploadProps) {
         onChange={handleChange}
       />
       {file != null && (
-        <div>
-          <p className="text-sm text-muted-foreground">Selected file: {file.name}</p>
-          <p className="text-xs text-muted-foreground">
+        <div id="avatar-upload-div-4">
+          <p id="avatar-upload-p-4" className="text-sm text-muted-foreground">
+            Selected file: {file.name}
+          </p>
+          <p id="avatar-upload-p-5" className="text-xs text-muted-foreground">
             {file.size} bytes, {file.type}
           </p>
         </div>
       )}
       {file == null && (
-        <p className="text-xs text-muted-foreground italic">No avatar selected</p>
+        <p id="avatar-upload-p-6" className="text-xs text-muted-foreground italic">
+          No avatar selected
+        </p>
       )}
     </div>
   );
@@ -158,14 +174,14 @@ export const WithUploadSuccess: Story = {
     };
 
     return (
-      <div className="flex flex-col items-center space-y-4">
+      <div id="avatar-upload-div-5" className="flex flex-col items-center space-y-4">
         <AvatarUpload {...args} onUpload={handleUpload} onFileSuccess={handleSuccess} />
-        <div>
-          <p className="text-sm font-medium">
+        <div id="avatar-upload-div-6">
+          <p id="avatar-upload-p-7" className="text-sm font-medium">
             onSuccess called: {successCount} {successCount === 1 ? 'time' : 'times'}
           </p>
           {lastSuccess != null && (
-            <p className="text-xs text-muted-foreground">
+            <p id="avatar-upload-p-8" className="text-xs text-muted-foreground">
               {lastSuccess.name}, {lastSuccess.size} bytes, {lastSuccess.type}
             </p>
           )}
@@ -198,7 +214,7 @@ export const WithUploadError: Story = {
     }
 
     return (
-      <div className="flex flex-col items-center space-y-4">
+      <div id="avatar-upload-div-7" className="flex flex-col items-center space-y-4">
         <AvatarUpload
           {...args}
           value={null}
@@ -208,7 +224,9 @@ export const WithUploadError: Story = {
           }}
         />
         {uploadError != null && (
-          <p className="text-sm text-destructive">Error: {uploadError}</p>
+          <p id="avatar-upload-p-9" className="text-sm text-destructive">
+            Error: {uploadError}
+          </p>
         )}
       </div>
     );

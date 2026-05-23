@@ -1,0 +1,113 @@
+{
+  "version": "0",
+  "stories": {
+    "shadcn-ui-button--default": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#shadcn-ui-button--default"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "D33_xuk6S0r-",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#shadcn-ui-button--default"
+                  },
+                  "id": "uyHJeIYk9P-c",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "vjZzmJD4Aw47",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "otNtOM7N6xcX",
+          "browserType": "chromium",
+          "id": "SoFVGz1Ivj9-",
+          "index": 0,
+          "title": "Default Button"
+        }
+      ]
+    },
+    "shadcn-ui-button--disabled": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#shadcn-ui-button--default"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "XPPJ4ZTOtUVx",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "browserOptionsId": "fVRO6w-3Zj8C",
+          "browserType": "chromium",
+          "id": "Nh70xfZ8aZTA",
+          "index": 0,
+          "screenshotOptionsId": "8SFPaI8OeFxH",
+          "title": "Disabled button with \"Disabled reason\" title and \"Disabled\" text"
+        }
+      ]
+    },
+    "shadcn-ui-button--small": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#shadcn-ui-button--small"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "gS5QDZug0Bk4",
+          "title": "takeElementScreenshot"
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "otNtOM7N6xcX": {
+      "viewport": {
+        "height": 424,
+        "width": 780
+      },
+      "cursor": true
+    },
+    "fVRO6w-3Zj8C": {
+      "viewport": {
+        "height": 424,
+        "width": 836
+      },
+      "cursor": true
+    }
+  },
+  "screenshotOptions": {
+    "8SFPaI8OeFxH": {
+      "clip": {
+        "height": 60,
+        "width": 116,
+        "x": 360,
+        "y": 183
+      }
+    }
+  }
+}

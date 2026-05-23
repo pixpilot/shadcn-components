@@ -1,0 +1,866 @@
+{
+  "version": "0",
+  "stories": {
+    "shadcn-ui-alerttoast--default": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#alert-toast-button-1"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "lvrlPHSOqCAw",
+          "title": "click button"
+        },
+        {
+          "actions": [
+            {
+              "name": "takeScreenshot"
+            }
+          ],
+          "id": "1Og3yHZX8Xbh",
+          "title": "Take screenshot"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "timeout": 500
+              },
+              "name": "waitForTimeout"
+            }
+          ],
+          "id": "dYzyRbh_K6Xm",
+          "title": "delay 500"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"alert\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "zSLEkYeA-Z4x",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-button-1"
+                  },
+                  "id": "kp7myxehKDSV",
+                  "name": "click"
+                }
+              ],
+              "id": "mY3U6QQbbhW3",
+              "title": "click button"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 500
+                  },
+                  "id": "h3kf1ttnW62l",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "CdvuIeSHQyVd",
+              "title": "delay 500"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"alert\"]"
+                  },
+                  "id": "b0q27HqRoDWr",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "2yVRI1PpUOZi",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "zPuxu7-jRiLy",
+          "browserType": "chromium",
+          "globals": {
+            "backgrounds": {
+              "grid": false
+            }
+          },
+          "id": "uFlAH_zZFAzh",
+          "index": 0,
+          "title": "Alert toast visible after clicking button"
+        }
+      ]
+    },
+    "shadcn-ui-alerttoast--success": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-button-4"
+                  },
+                  "id": "kriqbqoCOzLB",
+                  "name": "click"
+                }
+              ],
+              "id": "rKTNQ9jltAI6",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 500
+                  },
+                  "id": "5JP7ILs6B3Vo",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "PogHx-RIxMsa",
+              "title": "waitForTimeout"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"alert\"]"
+                  },
+                  "id": "_fl3hI4UqGTa",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "FcHhesgzlNtW",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "va7Y3bT9bt_V",
+          "browserType": "chromium",
+          "globals": {
+            "backgrounds": {
+              "grid": false
+            }
+          },
+          "id": "ZORGo5aLvjsR",
+          "index": 0,
+          "title": "Success toast visible after clicking button"
+        },
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-button-4"
+                  },
+                  "id": "ObHxvGUtSGM9",
+                  "name": "click"
+                }
+              ],
+              "id": "L0K6352IgitH",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 200
+                  },
+                  "id": "Cyrl3k0Tau4Z",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "07rXxwrKTQ7m",
+              "title": "delay 200"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"alert-title\"]"
+                  },
+                  "id": "1v6bKQd34QHo",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "Ct0-ApLb9nPe",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "l8Y09d93uo-S",
+          "browserType": "chromium",
+          "globals": {
+            "backgrounds": {
+              "grid": false
+            }
+          },
+          "id": "JI8q09khohNj",
+          "index": 1,
+          "title": "Success toast visible after clicking Show Success Toast button"
+        },
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-button-5"
+                  },
+                  "id": "i3uA-5jWkfgJ",
+                  "name": "click"
+                }
+              ],
+              "id": "k0GuK-dPPvep",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 200
+                  },
+                  "id": "T5TT0ITT1km_",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "-HD7TiwQcr0T",
+              "title": "delay 200"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"alert\"]"
+                  },
+                  "id": "FXi46QP_-u25",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "KngZhHt5lzA_",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "l8Y09d93uo-S",
+          "browserType": "chromium",
+          "globals": {
+            "backgrounds": {
+              "grid": false
+            }
+          },
+          "id": "9FAlUdzsn96v",
+          "index": 2,
+          "title": "Success toast visible after click"
+        }
+      ],
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "timeout": 200
+              },
+              "name": "waitForTimeout"
+            }
+          ],
+          "id": "Z62iWeL-BMys",
+          "title": "delay 200"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"alert\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "LuEjX9HHR49f",
+          "title": "takeElementScreenshot"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#alert-toast-button-5"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "qJcy97ujZa7w",
+          "title": "click"
+        }
+      ]
+    },
+    "shadcn-ui-alerttoast--info": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#alert-toast-button-2"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "Z5HlGWkX_pjz",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"alert-title\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "u2xRP8xQD0HU",
+          "title": "takeElementScreenshot"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "timeout": 200
+              },
+              "name": "waitForTimeout"
+            }
+          ],
+          "id": "JKxp14BGmVs-",
+          "title": "delay 200"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-button-2"
+                  },
+                  "id": "F-sFD7dhPOVo",
+                  "name": "click"
+                }
+              ],
+              "id": "SK_oQCBj-uSW",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 200
+                  },
+                  "id": "UkhQl_ZtAEx_",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "oLXNCOMX7H71",
+              "title": "delay 200"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"alert-title\"]"
+                  },
+                  "id": "cHfDVnCUyupJ",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "B8hLnOQ38ari",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "l8Y09d93uo-S",
+          "browserType": "chromium",
+          "globals": {
+            "backgrounds": {
+              "grid": false
+            }
+          },
+          "id": "NTt8TpoW7F09",
+          "index": 0,
+          "title": "Info toast visible after clicking Show Info Toast button"
+        }
+      ]
+    },
+    "shadcn-ui-alerttoast--warning": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#alert-toast-button-6"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "Zdc88pyMVMw_",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "timeout": 200
+              },
+              "name": "waitForTimeout"
+            }
+          ],
+          "id": "QH5UVgB0HhfO",
+          "title": "delay 200"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"alert-title\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "CCE8SkZ6JI1k",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-button-6"
+                  },
+                  "id": "6bHBLRGAEyVm",
+                  "name": "click"
+                }
+              ],
+              "id": "oXflLexlgW5S",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 200
+                  },
+                  "id": "16ebjgICi4NN",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "qbrM14grlb6b",
+              "title": "delay 200"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"alert-title\"]"
+                  },
+                  "id": "rhREgXENo85K",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "H0qsfagGyxVP",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "l8Y09d93uo-S",
+          "browserType": "chromium",
+          "globals": {
+            "backgrounds": {
+              "grid": false
+            }
+          },
+          "id": "UAdLmxTxerxF",
+          "index": 0,
+          "title": "Warning toast visible after clicking show warning button"
+        }
+      ]
+    },
+    "shadcn-ui-alerttoast--error": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "timeout": 200
+              },
+              "name": "waitForTimeout"
+            }
+          ],
+          "id": "aS8MPtf83_wQ",
+          "title": "delay 200"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"alert-title\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "b_reZiZcOvrP",
+          "title": "takeElementScreenshot"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#alert-toast-button-8"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "tJvJfTRY40_t",
+          "title": "click"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-button-8"
+                  },
+                  "id": "zReSWJQq7pW5",
+                  "name": "click"
+                }
+              ],
+              "id": "bpQM8X-XwHVW",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 200
+                  },
+                  "id": "qbvDKVI3rj-K",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "2DD1iJv8EkQh",
+              "title": "delay 200"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"alert-title\"]"
+                  },
+                  "id": "TamBMyZ0gSHI",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "eNrUiK61euUo",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "l8Y09d93uo-S",
+          "browserType": "chromium",
+          "globals": {
+            "backgrounds": {
+              "grid": false
+            }
+          },
+          "id": "gDlNOTXSywCa",
+          "index": 0,
+          "title": "Error toast visible after clicking Show Error Toastbutton"
+        }
+      ]
+    },
+    "shadcn-ui-alerttoast--dismissible-false": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#alert-toast-button-12"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "NqCgRsi1OcSE",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "timeout": 200
+              },
+              "name": "waitForTimeout"
+            }
+          ],
+          "id": "wqZ1Hd4wcoiy",
+          "title": "delay 200"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "x": 575,
+                "y": 255
+              },
+              "name": "mouse.click"
+            }
+          ],
+          "id": "1I2uqa4xTChr",
+          "title": "mouse.click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"alert-title\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "t975r1Y6SEGs",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-button-12"
+                  },
+                  "id": "HlKA0KiK7pBt",
+                  "name": "click"
+                }
+              ],
+              "id": "ZzrN7MKm-pDr",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 200
+                  },
+                  "id": "p0-WEczVTVaX",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "rX5AHz6JLaAp",
+              "title": "delay 200"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"alert-title\"]"
+                  },
+                  "id": "dTxHyEFomGxo",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "9Fp3q-jiZ6ag",
+              "title": "takeElementScreenshot"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "x": 575,
+                    "y": 255
+                  },
+                  "id": "8GwU18JhY9To",
+                  "name": "mouse.click"
+                }
+              ],
+              "id": "O0nGBOAouNvO",
+              "title": "mouse.click"
+            }
+          ],
+          "browserOptionsId": "XL4bCv0GQklq",
+          "browserType": "chromium",
+          "globals": {
+            "backgrounds": {
+              "grid": false
+            }
+          },
+          "id": "W7bSjWtaJLnX",
+          "index": 0,
+          "screenshotOptionsId": "90h9d07JqDjt",
+          "title": "Alert toast should not dismissed"
+        }
+      ]
+    },
+    "shadcn-ui-alerttoast--custom-toast": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#alert-toast-button-14"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "ZzbFNAua8emJ",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "timeout": 200
+              },
+              "name": "waitForTimeout"
+            }
+          ],
+          "id": "7seINEEpSw8W",
+          "title": "delay 200"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#alert-toast-div-12"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "APBDcSFz5rJw",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-button-14"
+                  },
+                  "id": "bQPhkVFCVsRT",
+                  "name": "click"
+                }
+              ],
+              "id": "VpjDpqLBYHEA",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 200
+                  },
+                  "id": "2lfOJ_qcFzTD",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "ZVUCAqI27sYU",
+              "title": "delay 200"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-div-12"
+                  },
+                  "id": "KOX7JkyS_Nvl",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "RnvxKZSKPLIw",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "XL4bCv0GQklq",
+          "browserType": "chromium",
+          "globals": {
+            "backgrounds": {
+              "grid": false
+            }
+          },
+          "id": "9cZoxO943I07",
+          "index": 0,
+          "title": "Custom Toast shown after clicking Show Styled Custom Toast"
+        }
+      ]
+    },
+    "shadcn-ui-alerttoast--pass-id-and-remove": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#alert-toast-button-6"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "tHV8CKiPH4Bq",
+          "title": "click"
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "zPuxu7-jRiLy": {
+      "viewport": {
+        "height": 435,
+        "width": 811
+      }
+    },
+    "va7Y3bT9bt_V": {
+      "viewport": {
+        "height": 435,
+        "width": 810
+      }
+    },
+    "l8Y09d93uo-S": {
+      "viewport": {
+        "height": 275,
+        "width": 622
+      }
+    },
+    "XL4bCv0GQklq": {
+      "viewport": {
+        "height": 424,
+        "width": 780
+      },
+      "cursor": true
+    }
+  },
+  "screenshotOptions": {
+    "90h9d07JqDjt": {
+      "clip": {
+        "height": 63,
+        "width": 337,
+        "x": 199,
+        "y": 309
+      }
+    }
+  }
+}

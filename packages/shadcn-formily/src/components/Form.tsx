@@ -8,6 +8,7 @@ import { FormItemContainer } from './FormItemContainer';
 
 export interface IFormProps extends FormContextStates {
   form: IForm;
+  id?: string;
   className?: string;
   style?: React.CSSProperties;
   children?: React.ReactNode;
@@ -20,6 +21,7 @@ export interface IFormProps extends FormContextStates {
  */
 export function Form({
   form,
+  id,
   className,
   style,
   children,
@@ -53,6 +55,7 @@ export function Form({
       <FormProvider form={form}>
         <FormItemContainer
           as="form"
+          id={id}
           className={cn(className)}
           style={style}
           onSubmit={handleSubmit}

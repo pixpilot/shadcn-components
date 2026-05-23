@@ -48,6 +48,7 @@ export const BasicLabel: Story = {
 
     return (
       <Form
+        id="form-item-label"
         form={form}
         className="w-[400px]"
         onSubmit={(values) => {
@@ -57,6 +58,7 @@ export const BasicLabel: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="form-item-label-button-1"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -117,6 +119,7 @@ export const RequiredLabel: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="form-item-label-button-2"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -176,6 +179,7 @@ export const RequiredArrayLabel: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="form-item-label-button-3"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -216,6 +220,7 @@ export const LabelPlacementTop: Story = {
       <Form form={form} className="w-[400px]">
         <SchemaField schema={schema} />
         <button
+          id="form-item-label-button-4"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -273,6 +278,7 @@ export const LabelPlacementStart: Story = {
       <Form form={form} className="w-[500px]">
         <SchemaField schema={schema} />
         <button
+          id="form-item-label-button-5"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -323,6 +329,7 @@ export const LabelPlacementEnd: Story = {
       <Form form={form} className="w-[400px]">
         <SchemaField schema={schema} />
         <button
+          id="form-item-label-button-6"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -359,6 +366,7 @@ export const CustomLabelViaProps: Story = {
           }}
         />
         <button
+          id="form-item-label-button-7"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >

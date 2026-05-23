@@ -58,6 +58,7 @@ export const DescriptionPlacementTop: Story = {
 
     return (
       <Form
+        id="form-item-description"
         form={form}
         className="w-[400px]"
         onSubmit={(values) => {
@@ -67,6 +68,7 @@ export const DescriptionPlacementTop: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="form-item-description-button-1"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -127,6 +129,7 @@ export const DescriptionPlacementBottom: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="form-item-description-button-2"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -202,10 +205,11 @@ export const DescriptionPlacementPopover: Story = {
         }}
       >
         <SchemaField schema={schema} />
-        <p className="mt-4 text-sm text-muted-foreground">
+        <p id="form-item-description-p-1" className="mt-4 text-sm text-muted-foreground">
           Hover over the question mark icon to see field descriptions
         </p>
         <button
+          id="form-item-description-button-3"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -292,6 +296,7 @@ export const MixedDescriptionPlacements: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="form-item-description-button-4"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -353,15 +358,19 @@ export const GlobalDescriptionPlacement: Story = {
           alert(JSON.stringify(values, null, INDENT_SIZE));
         }}
       >
-        <p className="mb-4 text-sm font-medium">
-          Form-level description placement: <span className="text-primary">popover</span>
+        <p id="form-item-description-p-2" className="mb-4 text-sm font-medium">
+          Form-level description placement:{' '}
+          <span id="form-item-description-span-1" className="text-primary">
+            popover
+          </span>
         </p>
         <SchemaField schema={schema} />
-        <p className="mt-4 text-sm text-muted-foreground">
+        <p id="form-item-description-p-3" className="mt-4 text-sm text-muted-foreground">
           All descriptions appear in popovers by default (unless overridden at field
           level)
         </p>
         <button
+          id="form-item-description-button-5"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -441,6 +450,7 @@ export const DescriptionWithValidation: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="form-item-description-button-6"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >

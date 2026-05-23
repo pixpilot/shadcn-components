@@ -1,0 +1,60 @@
+{
+  "actionSets": [
+    {
+      "actions": [
+        {
+          "args": {
+            "timeout": 200
+          },
+          "id": "2dY9e7Cl6c",
+          "name": "waitForTimeout"
+        }
+      ],
+      "id": "6W9amMWtzzjWxP0",
+      "title": "delay 200",
+      "visibleTo": "*"
+    },
+    {
+      "actions": [
+        {
+          "args": {
+            "selector": "[data-slot=\"alert-title\"]"
+          },
+          "id": "VB-mNwMRsn",
+          "name": "takeElementScreenshot"
+        }
+      ],
+      "id": "ly5_OOsy0lJxsS6",
+      "title": "takeElementScreenshot",
+      "visibleTo": "shadcn-ui-alerttoast"
+    },
+    {
+      "actions": [
+        {
+          "args": {
+            "selector": "#alert-toast-button-6"
+          },
+          "id": "9h0GItWtDs",
+          "name": "click"
+        }
+      ],
+      "id": "fLzS_s1v5V7myy_",
+      "title": "click",
+      "visibleTo": "shadcn-ui-alerttoast"
+    },
+    {
+      "actions": [
+        {
+          "args": {
+            "selector": "#shadcn-ui-button--default"
+          },
+          "id": "5u5kKWLh7k",
+          "name": "takeElementScreenshot"
+        }
+      ],
+      "id": "FUKy7Ku_-QsGOIH",
+      "title": "takeElementScreenshot",
+      "visibleTo": "shadcn-ui-button"
+    }
+  ]
+}

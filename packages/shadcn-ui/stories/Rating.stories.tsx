@@ -87,9 +87,9 @@ export const Interactive: Story = {
   render: function InteractiveRating() {
     const [rating, setRating] = React.useState(0);
     return (
-      <div className="flex flex-col items-center gap-4">
+      <div id="rating-div-1" className="flex flex-col items-center gap-4">
         <Rating value={rating} onValueChange={setRating} />
-        <p className="text-sm text-muted-foreground">
+        <p id="rating-p-1" className="text-sm text-muted-foreground">
           Rating: {rating > 0 ? `${rating} / 5` : 'Not rated'}
         </p>
       </div>
@@ -111,9 +111,9 @@ export const WithLabels: Story = {
       { label: 'Excellent', value: 5 },
     ];
     return (
-      <div className="flex flex-col items-center gap-4">
+      <div id="rating-div-2" className="flex flex-col items-center gap-4">
         <Rating value={rating} onValueChange={setRating} options={options} />
-        <p className="text-sm text-muted-foreground">
+        <p id="rating-p-2" className="text-sm text-muted-foreground">
           {rating > 0 ? options[rating - 1]?.label : 'Hover over stars to see labels'}
         </p>
       </div>
@@ -128,9 +128,11 @@ export const CustomMax: Story = {
   render: function CustomMaxRating() {
     const [rating, setRating] = React.useState(0);
     return (
-      <div className="flex flex-col items-center gap-4">
+      <div id="rating-div-3" className="flex flex-col items-center gap-4">
         <Rating value={rating} onValueChange={setRating} max={10} />
-        <p className="text-sm text-muted-foreground">Rating: {rating} / 10</p>
+        <p id="rating-p-3" className="text-sm text-muted-foreground">
+          Rating: {rating} / 10
+        </p>
       </div>
     );
   },
@@ -144,9 +146,11 @@ export const CircleIcon: Story = {
     const INITIAL_RATING = 3;
     const [rating, setRating] = React.useState(INITIAL_RATING);
     return (
-      <div className="flex flex-col items-center gap-4">
+      <div id="rating-div-4" className="flex flex-col items-center gap-4">
         <Rating value={rating} onValueChange={setRating} iconType="circle" />
-        <p className="text-sm text-muted-foreground">Rating: {rating} / 5</p>
+        <p id="rating-p-4" className="text-sm text-muted-foreground">
+          Rating: {rating} / 5
+        </p>
       </div>
     );
   },
@@ -209,37 +213,53 @@ export const ColorComparison: Story = {
   render: function ColorComparisonRating() {
     const DEFAULT_RATING = 3;
     return (
-      <div className="flex flex-col gap-6">
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-sm font-medium">Default (Yellow)</p>
+      <div id="rating-div-5" className="flex flex-col gap-6">
+        <div id="rating-div-6" className="flex flex-col items-center gap-2">
+          <p id="rating-p-5" className="text-sm font-medium">
+            Default (Yellow)
+          </p>
           <Rating defaultValue={DEFAULT_RATING} color="default" />
         </div>
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-sm font-medium">Primary</p>
+        <div id="rating-div-7" className="flex flex-col items-center gap-2">
+          <p id="rating-p-6" className="text-sm font-medium">
+            Primary
+          </p>
           <Rating defaultValue={DEFAULT_RATING} color="primary" />
         </div>
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-sm font-medium">Secondary</p>
+        <div id="rating-div-8" className="flex flex-col items-center gap-2">
+          <p id="rating-p-7" className="text-sm font-medium">
+            Secondary
+          </p>
           <Rating defaultValue={DEFAULT_RATING} color="secondary" />
         </div>
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-sm font-medium">Destructive</p>
+        <div id="rating-div-9" className="flex flex-col items-center gap-2">
+          <p id="rating-p-8" className="text-sm font-medium">
+            Destructive
+          </p>
           <Rating defaultValue={DEFAULT_RATING} color="destructive" />
         </div>
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-sm font-medium">Foreground</p>
+        <div id="rating-div-10" className="flex flex-col items-center gap-2">
+          <p id="rating-p-9" className="text-sm font-medium">
+            Foreground
+          </p>
           <Rating defaultValue={DEFAULT_RATING} color="foreground" />
         </div>
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-sm font-medium">Accent</p>
+        <div id="rating-div-11" className="flex flex-col items-center gap-2">
+          <p id="rating-p-10" className="text-sm font-medium">
+            Accent
+          </p>
           <Rating defaultValue={DEFAULT_RATING} color="accent" />
         </div>
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-sm font-medium">Muted</p>
+        <div id="rating-div-12" className="flex flex-col items-center gap-2">
+          <p id="rating-p-11" className="text-sm font-medium">
+            Muted
+          </p>
           <Rating defaultValue={DEFAULT_RATING} color="muted" />
         </div>
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-sm font-medium">Ring</p>
+        <div id="rating-div-13" className="flex flex-col items-center gap-2">
+          <p id="rating-p-12" className="text-sm font-medium">
+            Ring
+          </p>
           <Rating defaultValue={DEFAULT_RATING} color="ring" />
         </div>
       </div>
@@ -262,12 +282,14 @@ export const Complete: Story = {
     ];
 
     return (
-      <div className="flex flex-col items-center gap-6 p-8">
-        <div className="flex flex-col items-center gap-2">
-          <h3 className="text-lg font-semibold">Rate your experience</h3>
+      <div id="rating-div-14" className="flex flex-col items-center gap-6 p-8">
+        <div id="rating-div-15" className="flex flex-col items-center gap-2">
+          <h3 id="rating-h3-1" className="text-lg font-semibold">
+            Rate your experience
+          </h3>
           <Rating value={rating} onValueChange={setRating} options={options} size="lg" />
           {rating > 0 && (
-            <p className="text-sm font-medium text-primary">
+            <p id="rating-p-13" className="text-sm font-medium text-primary">
               {options[rating - 1]?.label}
             </p>
           )}
@@ -288,13 +310,17 @@ export const IconTypeComparison: Story = {
     const [circleRating, setCircleRating] = React.useState(INITIAL_CIRCLE_RATING);
 
     return (
-      <div className="flex flex-col gap-8">
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-sm font-medium">Star Rating</p>
+      <div id="rating-div-16" className="flex flex-col gap-8">
+        <div id="rating-div-17" className="flex flex-col items-center gap-2">
+          <p id="rating-p-14" className="text-sm font-medium">
+            Star Rating
+          </p>
           <Rating value={starRating} onValueChange={setStarRating} iconType="star" />
         </div>
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-sm font-medium">Circle Rating</p>
+        <div id="rating-div-18" className="flex flex-col items-center gap-2">
+          <p id="rating-p-15" className="text-sm font-medium">
+            Circle Rating
+          </p>
           <Rating
             value={circleRating}
             onValueChange={setCircleRating}
@@ -313,21 +339,29 @@ export const SizeComparison: Story = {
   render: function SizeComparisonRating() {
     const DEFAULT_RATING = 3;
     return (
-      <div className="flex flex-col gap-6">
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-sm font-medium">Small</p>
+      <div id="rating-div-19" className="flex flex-col gap-6">
+        <div id="rating-div-20" className="flex flex-col items-center gap-2">
+          <p id="rating-p-16" className="text-sm font-medium">
+            Small
+          </p>
           <Rating defaultValue={DEFAULT_RATING} size="sm" />
         </div>
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-sm font-medium">Default</p>
+        <div id="rating-div-21" className="flex flex-col items-center gap-2">
+          <p id="rating-p-17" className="text-sm font-medium">
+            Default
+          </p>
           <Rating defaultValue={DEFAULT_RATING} size="default" />
         </div>
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-sm font-medium">Large</p>
+        <div id="rating-div-22" className="flex flex-col items-center gap-2">
+          <p id="rating-p-18" className="text-sm font-medium">
+            Large
+          </p>
           <Rating defaultValue={DEFAULT_RATING} size="lg" />
         </div>
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-sm font-medium">Extra Large</p>
+        <div id="rating-div-23" className="flex flex-col items-center gap-2">
+          <p id="rating-p-19" className="text-sm font-medium">
+            Extra Large
+          </p>
           <Rating defaultValue={DEFAULT_RATING} size="xl" />
         </div>
       </div>

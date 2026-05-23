@@ -1,8 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ComponentProps } from 'react';
 import type { ISchema } from '../src';
 import { createForm, JsonSchemaForm } from '../src';
 
-const meta: Meta<typeof JsonSchemaForm> = {
+type StoryArgs = Partial<
+  ComponentProps<typeof JsonSchemaForm> & {
+    id?: string;
+  }
+>;
+
+const meta: Meta<StoryArgs> = {
   title: 'Formily/Form Settings',
   component: JsonSchemaForm,
 
@@ -10,7 +17,7 @@ const meta: Meta<typeof JsonSchemaForm> = {
 
   decorators: [
     (Story) => (
-      <div className="w-full ">
+      <div id="form-settings-div-1" className="w-full ">
         <Story />
       </div>
     ),
@@ -18,7 +25,7 @@ const meta: Meta<typeof JsonSchemaForm> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof JsonSchemaForm>;
+type Story = StoryObj<StoryArgs>;
 
 export const JsonSchema: Story = {
   args: {
@@ -49,7 +56,14 @@ export const JsonSchema: Story = {
       },
     };
 
-    return <JsonSchemaForm {...args} schema={schema} form={form}></JsonSchemaForm>;
+    return (
+      <JsonSchemaForm
+        id="form-settings"
+        {...args}
+        schema={schema}
+        form={form}
+      ></JsonSchemaForm>
+    );
   },
 };
 

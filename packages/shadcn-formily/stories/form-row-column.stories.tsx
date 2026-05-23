@@ -28,6 +28,7 @@ export const DeclarativeMultiColumn: Story = {
 
     return (
       <Form
+        id="form-row-column"
         form={form}
         className="w-[800px]"
         onSubmit={(values) => {
@@ -35,8 +36,10 @@ export const DeclarativeMultiColumn: Story = {
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
-        <div className="space-y-4">
-          <h3 className="text-lg font-medium">User Profile</h3>
+        <div id="form-row-column-div-1" className="space-y-4">
+          <h3 id="form-row-column-h3-1" className="text-lg font-medium">
+            User Profile
+          </h3>
 
           <SchemaField>
             {/* First Row - Two equal columns */}
@@ -85,6 +88,7 @@ export const DeclarativeMultiColumn: Story = {
         </div>
 
         <button
+          id="form-row-column-button-1"
           type="submit"
           className="mt-6 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -438,6 +442,7 @@ export const JSONSchemaMultiColumn: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="form-row-column-button-2"
           type="submit"
           className="mt-6 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -464,8 +469,10 @@ export const CustomStyledLayout: Story = {
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
-        <div className="space-y-6">
-          <h3 className="text-lg font-medium">Product Form</h3>
+        <div id="form-row-column-div-2" className="space-y-6">
+          <h3 id="form-row-column-h3-2" className="text-lg font-medium">
+            Product Form
+          </h3>
 
           <SchemaField>
             {/* Row with custom Tailwind classes */}
@@ -603,6 +610,7 @@ export const CustomStyledLayout: Story = {
         </div>
 
         <button
+          id="form-row-column-button-3"
           type="submit"
           className="mt-6 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >

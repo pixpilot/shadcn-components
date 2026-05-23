@@ -51,6 +51,7 @@ export const Basic: Story = {
 
     return (
       <Form
+        id="array-tags"
         form={form}
         className="w-[600px]"
         onSubmit={(values) => {
@@ -230,8 +231,12 @@ export const WithPasteSupport: Story = {
         }}
       >
         <SchemaField schema={schema} />
-        <div className="mt-2 rounded-md bg-muted p-3 text-sm text-muted-foreground">
-          Try pasting: <code>frontend, backend, devops, testing</code>
+        <div
+          id="array-tags-div-1"
+          className="mt-2 rounded-md bg-muted p-3 text-sm text-muted-foreground"
+        >
+          Try pasting:{' '}
+          <code id="array-tags-code-1">frontend, backend, devops, testing</code>
         </div>
         <Button type="submit" className="mt-4 w-full">
           Submit
@@ -376,8 +381,12 @@ export const WithValidation: Story = {
         }}
       >
         <SchemaField schema={schema} />
-        <div className="mt-2 rounded-md bg-muted p-3 text-sm text-muted-foreground">
-          Try adding: <code>valid_user</code> ✓ or <code>invalid-user</code> ✗
+        <div
+          id="array-tags-div-2"
+          className="mt-2 rounded-md bg-muted p-3 text-sm text-muted-foreground"
+        >
+          Try adding: <code id="array-tags-code-2">valid_user</code> ✓ or{' '}
+          <code id="array-tags-code-3">invalid-user</code> ✗
         </div>
         <Button type="submit" className="mt-4 w-full">
           Submit
@@ -502,7 +511,10 @@ export const NumberArray: Story = {
         }}
       >
         <SchemaField schema={schema} />
-        <div className="mt-2 rounded-md bg-muted p-3 text-sm text-muted-foreground">
+        <div
+          id="array-tags-div-3"
+          className="mt-2 rounded-md bg-muted p-3 text-sm text-muted-foreground"
+        >
           Valid port range: 1-65535
         </div>
         <Button type="submit" className="mt-4 w-full">

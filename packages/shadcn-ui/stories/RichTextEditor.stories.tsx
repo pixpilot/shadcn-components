@@ -129,11 +129,15 @@ export const Interactive: Story = {
     const [content, setContent] = useState('<p>Edit this content...</p>');
 
     return (
-      <div className="space-y-4">
+      <div id="rich-text-editor-div-1" className="space-y-4">
         <RichTextEditor value={content} onChange={setContent} />
-        <div className="p-4 border rounded bg-muted">
-          <h3 className="font-semibold mb-2">HTML Output:</h3>
-          <pre className="text-sm whitespace-pre-wrap">{content}</pre>
+        <div id="rich-text-editor-div-2" className="p-4 border rounded bg-muted">
+          <h3 id="rich-text-editor-h3-1" className="font-semibold mb-2">
+            HTML Output:
+          </h3>
+          <pre id="rich-text-editor-pre-1" className="text-sm whitespace-pre-wrap">
+            {content}
+          </pre>
         </div>
       </div>
     );

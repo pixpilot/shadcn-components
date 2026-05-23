@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ComponentProps } from 'react';
 import React, { useState } from 'react';
 import { Select } from '../src/Select';
 
@@ -6,13 +7,20 @@ import { Select } from '../src/Select';
  * A customizable select component with options.
  * Built on top of shadcn/ui Select component.
  */
-const meta = {
+type StoryArgs = Partial<
+  ComponentProps<typeof Select> & {
+    id?: string;
+  }
+>;
+
+const meta: Meta<StoryArgs> = {
   title: 'shadcn-ui/Select',
   component: Select,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
+
   argTypes: {
     options: {
       control: 'object',
@@ -35,12 +43,12 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div style={{ width: 200 }}>
+      <div id="select-div-1" style={{ width: 200 }}>
         <Story />
       </div>
     ),
   ],
-} satisfies Meta<typeof Select>;
+} satisfies Meta<StoryArgs>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

@@ -58,7 +58,9 @@ function withFallbackUrl(value: FileMetadata | null): FileMetadata | null {
 }
 
 const CustomFileUploadInline: React.FC<SingleFileUploadInlineProps> = (props) => {
-  return <FileUploadInline {...props} mapValue={withFallbackUrl} />;
+  return (
+    <FileUploadInline id="file-upload-inline" {...props} mapValue={withFallbackUrl} />
+  );
 };
 
 const CustomMultipleFileUploadInline: React.FC<MultiFileUploadInlineProps> = (props) => {
@@ -120,6 +122,7 @@ export const Declarative: Story = {
           />
         </SchemaFieldExtended>
         <button
+          id="file-upload-inline-button-1"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -163,6 +166,7 @@ export const DeclarativeMultiple: Story = {
           />
         </SchemaFieldExtended>
         <button
+          id="file-upload-inline-button-2"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -207,6 +211,7 @@ export const WithOnUploadInSchema: Story = {
       >
         <SchemaFieldExtended schema={schema} />
         <button
+          id="file-upload-inline-button-3"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -249,6 +254,7 @@ export const WithoutIcon: Story = {
       >
         <SchemaFieldExtended schema={schema} />
         <button
+          id="file-upload-inline-button-4"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -291,6 +297,7 @@ export const DisabledFileUpload: Story = {
       >
         <SchemaFieldExtended schema={schema} />
         <button
+          id="file-upload-inline-button-5"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -361,6 +368,7 @@ export const WithValidation: Story = {
       >
         <SchemaFieldExtended schema={schema} />
         <button
+          id="file-upload-inline-button-6"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -406,6 +414,7 @@ export const WithFormFieldSetting: Story = {
       >
         <SchemaFieldExtended schema={schema} />
         <button
+          id="file-upload-inline-button-7"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -463,6 +472,7 @@ export const WithJsonSchemaFormRenderer: Story = {
         }}
       >
         <button
+          id="file-upload-inline-button-8"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -516,6 +526,7 @@ export const UploadSuccess: Story = {
         }}
       >
         <button
+          id="file-upload-inline-button-9"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -568,6 +579,7 @@ export const UploadFailure: Story = {
         }}
       >
         <button
+          id="file-upload-inline-button-10"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -645,6 +657,7 @@ export const WithCustomMapValue: Story = {
         }}
       >
         <button
+          id="file-upload-inline-button-11"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -728,6 +741,7 @@ export const WithCustomMultipleComponent: Story = {
         }}
       >
         <button
+          id="file-upload-inline-button-12"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >

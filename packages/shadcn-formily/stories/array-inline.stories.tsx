@@ -14,7 +14,7 @@ const meta: Meta<typeof Form> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <div className="w-[800px]">
+      <div id="array-inline-div-1" className="w-[800px]">
         <Story />
       </div>
     ),
@@ -84,15 +84,18 @@ export const InlineDeleteOnly: Story = {
 
     return (
       <Form
+        id="array-inline"
         form={form}
         className="space-y-6"
         onSubmit={(values) => {
           alert(JSON.stringify(values, null, 2));
         }}
       >
-        <div className="space-y-2">
-          <h2 className="text-2xl font-bold">ArrayInline (Inline inputs + delete)</h2>
-          <p className="text-muted-foreground">
+        <div id="array-inline-div-2" className="space-y-2">
+          <h2 id="array-inline-h2-1" className="text-2xl font-bold">
+            ArrayInline (Inline inputs + delete)
+          </h2>
+          <p id="array-inline-p-1" className="text-muted-foreground">
             Each row renders inputs inline with a sortable handle and a delete button.
           </p>
         </div>
@@ -130,6 +133,7 @@ export const InlineDeleteOnly: Story = {
         </SchemaField>
 
         <button
+          id="array-inline-button-1"
           type="submit"
           className="w-full rounded-md bg-primary px-4 py-2 text-primary-foreground"
         >

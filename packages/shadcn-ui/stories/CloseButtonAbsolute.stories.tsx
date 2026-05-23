@@ -29,8 +29,13 @@ type Story = StoryObj<typeof meta>;
  */
 export const Default: Story = {
   render: () => (
-    <div className="relative w-64 h-32 bg-gray-100 border rounded p-4">
-      <p>Content area with close button in top-right corner</p>
+    <div
+      id="close-button-absolute-div-1"
+      className="relative w-64 h-32 bg-gray-100 border rounded p-4"
+    >
+      <p id="close-button-absolute-p-1">
+        Content area with close button in top-right corner
+      </p>
       <CloseButtonAbsolute />
     </div>
   ),
@@ -41,8 +46,11 @@ export const Default: Story = {
  */
 export const Destructive: Story = {
   render: () => (
-    <div className="relative w-64 h-32 bg-red-50 border border-red-200 rounded p-4">
-      <p>Error dialog content</p>
+    <div
+      id="close-button-absolute-div-2"
+      className="relative w-64 h-32 bg-red-50 border border-red-200 rounded p-4"
+    >
+      <p id="close-button-absolute-p-2">Error dialog content</p>
       <CloseButtonAbsolute variant="destructive" />
     </div>
   ),

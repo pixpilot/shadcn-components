@@ -116,6 +116,7 @@ export const WithModalDisabled: Story = {
 
     return (
       <JsonSchemaFormExtended
+        id="array-popover"
         form={form}
         schema={schema}
         className="space-y-6"
@@ -124,14 +125,17 @@ export const WithModalDisabled: Story = {
           console.log('Form submitted:', values);
         }}
       >
-        <div className="space-y-4">
-          <h2 className="text-2xl font-bold">Array Popover with Overlay</h2>
-          <p className="text-muted-foreground">
+        <div id="array-popover-div-1" className="space-y-4">
+          <h2 id="array-popover-h2-1" className="text-2xl font-bold">
+            Array Popover with Overlay
+          </h2>
+          <p id="array-popover-p-1" className="text-muted-foreground">
             This form demonstrates the ArrayPopover component with overlay enabled.
           </p>
         </div>
 
         <button
+          id="array-popover-button-1"
           type="submit"
           className="mt-6 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground"
         >

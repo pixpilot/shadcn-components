@@ -1,7 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ComponentProps } from 'react';
 import type { TagsInputProps } from '../src/tags-input';
 import { useState } from 'react';
 import { TagsInput } from '../src/tags-input';
+
+type StoryArgs = Partial<
+  ComponentProps<typeof TagsInput> & {
+    id?: string;
+  }
+>;
 
 /**
  * An inline tags input component with dropdown suggestions and free-form entry.
@@ -14,6 +21,7 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+
   argTypes: {
     placeholder: {
       control: 'text',
@@ -59,12 +67,12 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div style={{ width: 500 }}>
+      <div id="tags-input-in-line-div-1" style={{ width: 500 }}>
         <Story />
       </div>
     ),
   ],
-} satisfies Meta<typeof TagsInput>;
+} satisfies Meta<StoryArgs>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

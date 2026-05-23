@@ -12,7 +12,7 @@ const meta: Meta<typeof Form> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <div style={{ width: '400px', padding: '20px' }}>
+      <div id="json-schema-form-basic-div-1" style={{ width: '400px', padding: '20px' }}>
         <Story />
       </div>
     ),
@@ -66,7 +66,13 @@ export const BasicForm: Story = {
       },
     };
 
-    return <JsonSchemaFormBasic form={form} schema={schema}></JsonSchemaFormBasic>;
+    return (
+      <JsonSchemaFormBasic
+        id="json-schema-form-basic"
+        form={form}
+        schema={schema}
+      ></JsonSchemaFormBasic>
+    );
   },
 };
 

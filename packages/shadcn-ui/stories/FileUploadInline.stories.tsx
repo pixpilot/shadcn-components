@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ComponentProps } from 'react';
 import type { FileMetadata, FileUploadProgressCallBacks } from '../src/file-upload/types';
 import { useState } from 'react';
 import { Button, FileUploadInline } from '../src';
@@ -8,13 +9,20 @@ import { delay, handleUpload } from './utils/file-upload';
  * A simple inline file upload component.
  * Shows a browse button and displays the selected filename with truncation.
  */
-const meta = {
+type StoryArgs = Partial<
+  ComponentProps<typeof FileUploadInline> & {
+    id?: string;
+  }
+>;
+
+const meta: Meta<StoryArgs> = {
   title: 'shadcn-ui/FileUploadInline',
   component: FileUploadInline,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
+
   argTypes: {
     buttonText: {
       control: 'text',
@@ -31,12 +39,12 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div style={{ width: 320 }}>
+      <div id="file-upload-inline-div-1" style={{ width: 320 }}>
         <Story />
       </div>
     ),
   ],
-} satisfies Meta<typeof FileUploadInline>;
+} satisfies Meta<StoryArgs>;
 
 export default meta;
 type Story = StoryObj<typeof FileUploadInline>;
@@ -94,12 +102,15 @@ export const WithUploadSuccess: Story = {
           onUpload={handleUpload}
           onFileSuccess={handleSuccess}
         />
-        <div style={{ marginTop: 12 }}>
-          <div style={{ fontWeight: 'bold', marginBottom: 4 }}>
+        <div id="file-upload-inline-div-2" style={{ marginTop: 12 }}>
+          <div
+            id="file-upload-inline-div-3"
+            style={{ fontWeight: 'bold', marginBottom: 4 }}
+          >
             onSuccess called: {successCount} {successCount === 1 ? 'time' : 'times'}
           </div>
           {lastSuccess != null && (
-            <pre>
+            <pre id="file-upload-inline-pre-1">
               {JSON.stringify(
                 {
                   name: lastSuccess.name,
@@ -242,11 +253,14 @@ export const WithMultipleAndValue: Story = {
           onChange={handleChange}
           onUpload={handleUpload}
         />
-        <div style={{ marginTop: 12 }}>
-          <div style={{ fontWeight: 'bold', marginBottom: 4 }}>
+        <div id="file-upload-inline-div-4" style={{ marginTop: 12 }}>
+          <div
+            id="file-upload-inline-div-5"
+            style={{ fontWeight: 'bold', marginBottom: 4 }}
+          >
             onChange called: {changeCount} {changeCount === 1 ? 'time' : 'times'}
           </div>
-          <pre>
+          <pre id="file-upload-inline-pre-2">
             {JSON.stringify(
               files.map((x) => ({ name: x.name, size: x.size })),
               null,
@@ -341,7 +355,7 @@ export const WithUploadError: Story = {
     }
 
     return (
-      <div>
+      <div id="file-upload-inline-div-6">
         <FileUploadInline
           {...args}
           value={null}
@@ -355,7 +369,9 @@ export const WithUploadError: Story = {
           }}
         />
         {uploadError != null && (
-          <p className="mt-2 text-sm text-destructive">Error: {uploadError}</p>
+          <p id="file-upload-inline-p-1" className="mt-2 text-sm text-destructive">
+            Error: {uploadError}
+          </p>
         )}
       </div>
     );

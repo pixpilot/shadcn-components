@@ -15,7 +15,7 @@ const meta: Meta<typeof Form> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <div className="w-[700px]">
+      <div id="array-collapse-div-1" className="w-[700px]">
         <Story />
       </div>
     ),
@@ -82,10 +82,12 @@ export const AccordionMode: Story = {
     });
 
     return (
-      <Form form={form} className="space-y-6">
-        <div className="space-y-4">
-          <h2 className="text-2xl font-bold">Contact List (Collapse)</h2>
-          <p className="text-muted-foreground">
+      <Form id="array-collapse" form={form} className="space-y-6">
+        <div id="array-collapse-div-2" className="space-y-4">
+          <h2 id="array-collapse-h2-1" className="text-2xl font-bold">
+            Contact List (Collapse)
+          </h2>
+          <p id="array-collapse-p-1" className="text-muted-foreground">
             Click on a contact to expand and edit inline. The collapse keeps your list
             organized and compact.
           </p>
@@ -126,7 +128,7 @@ export const AccordionMode: Story = {
           </SchemaField.Array>
         </SchemaField>
 
-        <div className="border-t pt-4">
+        <div id="array-collapse-div-3" className="border-t pt-4">
           <Button
             onClick={() => {
               form

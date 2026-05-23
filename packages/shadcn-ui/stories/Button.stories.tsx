@@ -1,12 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ComponentProps } from 'react';
 import React from 'react';
 import { Button } from '../src/Button';
 
-const meta = {
+type StoryArgs = Partial<
+  ComponentProps<typeof Button> & {
+    id?: string;
+  }
+>;
+
+const meta: Meta<StoryArgs> = {
   title: 'shadcn-ui/Button',
   component: Button,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
+
   argTypes: {
     variant: {
       control: 'select',
@@ -15,7 +23,7 @@ const meta = {
     size: { control: 'select', options: ['default', 'sm', 'lg', 'icon'] },
     disabled: { control: 'boolean' },
   },
-} satisfies Meta<typeof Button>;
+} satisfies Meta<StoryArgs>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

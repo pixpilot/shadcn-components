@@ -11,7 +11,13 @@ const meta: Meta<typeof Form> = {
   },
   tags: ['autodocs'],
 
-  decorators: [(Story) => <div className="w-100">{Story()}</div>],
+  decorators: [
+    (Story) => (
+      <div id="form-grid-div-1" className="w-100">
+        {Story()}
+      </div>
+    ),
+  ],
 };
 
 export default meta;
@@ -24,9 +30,11 @@ export const Declarative: Story = {
     });
 
     return (
-      <Form form={form}>
-        <div className="space-y-4">
-          <h2 className="text-2xl font-bold">Form Grid Example (Declarative)</h2>
+      <Form id="form-grid" form={form}>
+        <div id="form-grid-div-2" className="space-y-4">
+          <h2 id="form-grid-h2-1" className="text-2xl font-bold">
+            Form Grid Example (Declarative)
+          </h2>
         </div>
 
         <SchemaField>
@@ -82,7 +90,7 @@ export const Declarative: Story = {
           </SchemaField.Void>
         </SchemaField>
 
-        <div className=" pt-4">
+        <div id="form-grid-div-3" className=" pt-4">
           <Button
             onClick={() => {
               form
@@ -169,8 +177,10 @@ export const JsonSchema: Story = {
           console.log('Form submitted:', values);
         }}
       >
-        <div className="space-y-4">
-          <h2 className="text-2xl font-bold">Form Grid Example (JSON Schema)</h2>
+        <div id="form-grid-div-4" className="space-y-4">
+          <h2 id="form-grid-h2-2" className="text-2xl font-bold">
+            Form Grid Example (JSON Schema)
+          </h2>
         </div>
         <SchemaField schema={schema} />
         <Button

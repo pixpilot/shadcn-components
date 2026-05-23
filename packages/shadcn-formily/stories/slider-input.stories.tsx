@@ -54,6 +54,7 @@ export const BasicSliderInput: Story = {
 
       return (
         <Form
+          id="slider-input"
           form={form}
           className="w-[400px]"
           onSubmit={(values) => {
@@ -62,8 +63,11 @@ export const BasicSliderInput: Story = {
           }}
         >
           <SchemaField schema={schema} />
-          <pre className="mt-4 text-sm">{JSON.stringify(form.values, null, 2)}</pre>
+          <pre id="slider-input-pre-1" className="mt-4 text-sm">
+            {JSON.stringify(form.values, null, 2)}
+          </pre>
           <button
+            id="slider-input-button-1"
             type="submit"
             className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
           >
@@ -130,8 +134,11 @@ export const MultipleSliderInputs: Story = {
           }}
         >
           <SchemaField schema={schema} />
-          <pre className="mt-4 text-sm">{JSON.stringify(form.values, null, 2)}</pre>
+          <pre id="slider-input-pre-2" className="mt-4 text-sm">
+            {JSON.stringify(form.values, null, 2)}
+          </pre>
           <button
+            id="slider-input-button-2"
             type="submit"
             className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
           >
@@ -189,8 +196,11 @@ export const SliderInputWithRange: Story = {
           }}
         >
           <SchemaField schema={schema} />
-          <pre className="mt-4 text-sm">{JSON.stringify(form.values, null, 2)}</pre>
+          <pre id="slider-input-pre-3" className="mt-4 text-sm">
+            {JSON.stringify(form.values, null, 2)}
+          </pre>
           <button
+            id="slider-input-button-3"
             type="submit"
             className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
           >
@@ -229,8 +239,10 @@ export const DeclarativeSliderInput: Story = {
             alert(JSON.stringify(values, null, 2));
           }}
         >
-          <div className="space-y-6">
-            <h3 className="text-lg font-semibold">Audio & Display Settings</h3>
+          <div id="slider-input-div-1" className="space-y-6">
+            <h3 id="slider-input-h3-1" className="text-lg font-semibold">
+              Audio & Display Settings
+            </h3>
 
             <SchemaField>
               <SchemaField.Number
@@ -266,8 +278,11 @@ export const DeclarativeSliderInput: Story = {
               />
             </SchemaField>
           </div>
-          <pre className="mt-4 text-sm">{JSON.stringify(form.values, null, 2)}</pre>
+          <pre id="slider-input-pre-4" className="mt-4 text-sm">
+            {JSON.stringify(form.values, null, 2)}
+          </pre>
           <button
+            id="slider-input-button-4"
             type="submit"
             className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
           >
@@ -313,8 +328,11 @@ export const SliderInputWithTwoKnobs: Story = {
           }}
         >
           <SchemaField schema={schema} />
-          <pre className="mt-4 text-sm">{JSON.stringify(form.values, null, 2)}</pre>
+          <pre id="slider-input-pre-5" className="mt-4 text-sm">
+            {JSON.stringify(form.values, null, 2)}
+          </pre>
           <button
+            id="slider-input-button-5"
             type="submit"
             className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
           >
@@ -360,8 +378,11 @@ export const SliderInputWithThreeKnobs: Story = {
           }}
         >
           <SchemaField schema={schema} />
-          <pre className="mt-4 text-sm">{JSON.stringify(form.values, null, 2)}</pre>
+          <pre id="slider-input-pre-6" className="mt-4 text-sm">
+            {JSON.stringify(form.values, null, 2)}
+          </pre>
           <button
+            id="slider-input-button-6"
             type="submit"
             className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
           >
@@ -419,8 +440,11 @@ export const SliderInputWithDecimalStep: Story = {
           }}
         >
           <SchemaField schema={schema} />
-          <pre className="mt-4 text-sm">{JSON.stringify(form.values, null, 2)}</pre>
+          <pre id="slider-input-pre-7" className="mt-4 text-sm">
+            {JSON.stringify(form.values, null, 2)}
+          </pre>
           <button
+            id="slider-input-button-7"
             type="submit"
             className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
           >
@@ -483,8 +507,11 @@ export const WithSchemaMinMax: Story = {
           }}
         >
           <SchemaField schema={schema} />
-          <pre className="mt-4 text-sm">{JSON.stringify(form.values, null, 2)}</pre>
+          <pre id="slider-input-pre-8" className="mt-4 text-sm">
+            {JSON.stringify(form.values, null, 2)}
+          </pre>
           <button
+            id="slider-input-button-8"
             type="submit"
             className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
           >

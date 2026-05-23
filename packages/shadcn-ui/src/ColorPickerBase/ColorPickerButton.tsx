@@ -1,11 +1,12 @@
 import {
+  Button,
   cn,
   ColorPickerTrigger,
   InputGroup,
   InputGroupAddon,
   InputGroupText,
 } from '@pixpilot/shadcn';
-import { ChevronDownIcon, ChevronUpIcon } from 'lucide-react';
+import { ChevronDownIcon, ChevronUpIcon, XIcon } from 'lucide-react';
 import React from 'react';
 import { useColorPickerContext } from './color-picker-context';
 import { ColorPickerSwatch } from './ColorPickerSwatch';
@@ -16,13 +17,21 @@ export interface ColorPickerButtonProps extends Omit<
 > {
   formatDisplayValue?: (value: string) => React.ReactNode;
   placeholder?: string;
+  onClear?: () => void;
   slots?: {
-    swatch: React.ComponentProps<typeof ColorPickerSwatch>;
+    swatch?: React.ComponentProps<typeof ColorPickerSwatch>;
+    clearButton?: React.ComponentProps<typeof Button>;
   };
 }
 
 const ColorPickerButton: React.FC<ColorPickerButtonProps> = (props) => {
-  const { slots, formatDisplayValue, placeholder = 'Pick a color', ...rest } = props;
+  const {
+    slots,
+    formatDisplayValue,
+    placeholder = 'Pick a color',
+    onClear,
+    ...rest
+  } = props;
 
   const { isPickerOpen, value, onValueChange } = useColorPickerContext();
 
@@ -56,7 +65,29 @@ const ColorPickerButton: React.FC<ColorPickerButtonProps> = (props) => {
         <InputGroupText className="flex-1 text-left text-foreground pl-2">
           {renderDisplayValue()}
         </InputGroupText>
-        <InputGroupAddon align="inline-end" className="">
+        <InputGroupAddon align="inline-end" className="gap-1">
+          {onClear != null && (
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              aria-label="Clear color"
+              {...slots?.clearButton}
+              className={cn(
+                'size-6 shrink-0 rounded-full',
+                slots?.clearButton?.className,
+              )}
+              onClick={(e) => {
+                slots?.clearButton?.onClick?.(e);
+                if (e.defaultPrevented) return;
+                e.preventDefault();
+                e.stopPropagation();
+                onClear();
+              }}
+            >
+              <XIcon className="size-4 opacity-50" />
+            </Button>
+          )}
           {isPickerOpen ? (
             <ChevronUpIcon className="size-4 opacity-50" />
           ) : (

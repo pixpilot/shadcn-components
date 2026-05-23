@@ -57,6 +57,7 @@ export const SingleMode: Story = {
 
     return (
       <Form
+        id="toggle-group"
         form={form}
         className="w-[400px]"
         onSubmit={(values) => {
@@ -66,6 +67,7 @@ export const SingleMode: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="toggle-group-button-1"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -152,6 +154,7 @@ export const WithValidation: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="toggle-group-button-2"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -202,6 +205,7 @@ export const MultipleSelection: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="toggle-group-button-3"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -252,6 +256,7 @@ export const SingleWithOptions: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="toggle-group-button-4"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -301,6 +306,7 @@ export const MultipleWithOptions: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="toggle-group-button-5"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -354,6 +360,7 @@ export const MultipleWithDefault: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="toggle-group-button-6"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >

@@ -12,7 +12,7 @@ const meta: Meta<typeof Form> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <div style={{ width: '400px', padding: '20px' }}>
+      <div id="schema-field-basics-div-1" style={{ width: '400px', padding: '20px' }}>
         <Story />
       </div>
     ),
@@ -67,7 +67,7 @@ export const BasicForm: Story = {
     };
 
     return (
-      <Form form={form}>
+      <Form id="schema-field-basics" form={form}>
         <JsonSchemaFieldBasics schema={schema} />
       </Form>
     );
@@ -137,6 +137,7 @@ export const FormWithCustomComponents: Story = {
       [key: string]: unknown;
     }) => (
       <textarea
+        id="schema-field-basics-textarea-1"
         {...props}
         value={value ?? ''}
         onChange={(e) => onChange?.(e.target.value)}

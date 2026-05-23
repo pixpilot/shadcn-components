@@ -54,7 +54,7 @@ pnpm storybook
 pnpm --filter @internal/storybook storybook
 ```
 
-This will start Storybook at `http://localhost:6006`
+This will start Storybook on the port defined by `STORYBOOK_PORT`.
 
 ### Build Static Storybook
 
@@ -138,9 +138,10 @@ Storybook includes a built-in Iconify API endpoint for serving icon data. This a
 #### How It Works
 
 1. **Local Storybook Endpoint** (Default):
-   - By default, Storybook provides icon data via `http://localhost:6006/api/iconify`
-   - Icons are served from `@iconify-json/*` packages installed in the project
-   - Supports Material Design Icons (`mdi`) and other Iconify collections
+
+- By default, Storybook provides icon data via the local iconify endpoint defined by `STORYBOOK_ICONIFY_SERVER`
+- Icons are served from `@iconify-json/*` packages installed in the project
+- Supports Material Design Icons (`mdi`) and other Iconify collections
 
 2. **Custom Icon Server**:
    - You can use your own icon server or the public Iconify API
@@ -154,8 +155,7 @@ The icon server configuration is in `.storybook/preview.ts`:
 import { addAPIProvider } from '@iconify/react';
 
 // Default: uses local Storybook endpoint
-const iconifyServer =
-  process.env.STORYBOOK_ICONIFY_SERVER || 'http://localhost:6006/api/iconify';
+const iconifyServer = process.env.STORYBOOK_ICONIFY_SERVER || STORYBOOK_ICONIFY_SERVER;
 
 addAPIProvider('local', {
   resources: [iconifyServer],
@@ -171,7 +171,7 @@ addAPIProvider('local', {
 pnpm storybook
 ```
 
-The IconSelector component will fetch icons from the local middleware at `http://localhost:6006/api/iconify`.
+The IconSelector component will fetch icons from the local middleware at `STORYBOOK_ICONIFY_SERVER`.
 
 **Using Your Own Icon Server:**
 
@@ -207,9 +207,9 @@ The local icon server is implemented in `.storybook/middleware.mjs` and provides
 Example requests:
 
 ```
-http://localhost:6006/api/iconify?prefix=mdi                    # All Material Design Icons
-http://localhost:6006/api/iconify?prefix=mdi&icons=home,search  # Specific icons
-http://localhost:6006/api/iconify?prefix=fa                     # Font Awesome icons
+STORYBOOK_ICONIFY_SERVER?prefix=mdi                    # All Material Design Icons
+STORYBOOK_ICONIFY_SERVER?prefix=mdi&icons=home,search  # Specific icons
+STORYBOOK_ICONIFY_SERVER?prefix=fa                     # Font Awesome icons
 ```
 
 #### Available Icon Sets

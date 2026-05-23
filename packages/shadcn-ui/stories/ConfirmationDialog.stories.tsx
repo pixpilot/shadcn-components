@@ -63,10 +63,15 @@ function ConfirmationDialogStory({
   };
 
   return (
-    <div className="flex min-w-[320px] flex-col items-center gap-4 rounded-lg border bg-background p-6 text-center shadow-sm">
-      <div>
-        <h3 className="text-lg font-semibold">showConfirmDialog</h3>
-        <p className="text-muted-foreground text-sm">
+    <div
+      id="confirmation-dialog-div-1"
+      className="flex min-w-[320px] flex-col items-center gap-4 rounded-lg border bg-background p-6 text-center shadow-sm"
+    >
+      <div id="confirmation-dialog-div-2">
+        <h3 id="confirmation-dialog-h3-1" className="text-lg font-semibold">
+          showConfirmDialog
+        </h3>
+        <p id="confirmation-dialog-p-1" className="text-muted-foreground text-sm">
           Click the button below to open the confirmation dialog and inspect the result.
         </p>
       </div>
@@ -78,7 +83,9 @@ function ConfirmationDialogStory({
       >
         {isOpen ? 'Dialog open...' : 'Open confirmation dialog'}
       </Button>
-      <p className="text-sm">{result}</p>
+      <p id="confirmation-dialog-p-2" className="text-sm">
+        {result}
+      </p>
     </div>
   );
 }
@@ -92,10 +99,10 @@ export const WithReactNodeDescription: Story = {
     <ConfirmationDialogStory
       description={
         <>
-          <div>
+          <div id="confirmation-dialog-div-3">
             This action will permanently remove the project and all related data.{' '}
           </div>
-          <span className="font-medium text-foreground">
+          <span id="confirmation-dialog-span-1" className="font-medium text-foreground">
             Make sure you have exported anything you need first.
           </span>
         </>

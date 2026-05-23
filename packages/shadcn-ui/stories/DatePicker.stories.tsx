@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ComponentProps } from 'react';
 import { useState } from 'react';
 import { DatePicker } from '../src/DatePicker';
 
@@ -6,13 +7,20 @@ import { DatePicker } from '../src/DatePicker';
  * A date picker component with calendar popover.
  * Allows users to select a date from a calendar interface.
  */
-const meta = {
+type StoryArgs = Partial<
+  ComponentProps<typeof DatePicker> & {
+    id?: string;
+  }
+>;
+
+const meta: Meta<StoryArgs> = {
   title: 'shadcn-ui/DatePicker',
   component: DatePicker,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
+
   argTypes: {
     placeholder: {
       control: 'text',
@@ -21,12 +29,12 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div style={{ width: 280 }}>
+      <div id="date-picker-div-1" style={{ width: 280 }}>
         <Story />
       </div>
     ),
   ],
-} satisfies Meta<typeof DatePicker>;
+} satisfies Meta<StoryArgs>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

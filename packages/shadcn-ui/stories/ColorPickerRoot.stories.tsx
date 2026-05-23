@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ComponentProps } from 'react';
 import React from 'react';
 import { ColorPickerButton, ColorPickerInput, ColorPickerRoot } from '../src';
 import { ColorPickerCompactControls } from '../src/ColorPickerBase';
@@ -12,13 +13,20 @@ import { ColorPickerCompactControls } from '../src/ColorPickerBase';
  * Use it when you need a custom trigger or want to compose the picker
  * content yourself. For a batteries-included picker, use `ColorPickerBase`.
  */
-const meta = {
+type StoryArgs = Partial<
+  ComponentProps<typeof ColorPickerRoot> & {
+    id?: string;
+  }
+>;
+
+const meta: Meta<StoryArgs> = {
   title: 'shadcn-ui/ColorPickerRoot',
   component: ColorPickerRoot,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
+
   argTypes: {
     value: {
       control: 'color',
@@ -41,12 +49,15 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div className="flex items-center justify-center w-60 h-screen">
+      <div
+        id="color-picker-root-div-1"
+        className="flex items-center justify-center w-60 h-screen"
+      >
         <Story />
       </div>
     ),
   ],
-} satisfies Meta<typeof ColorPickerRoot>;
+} satisfies Meta<StoryArgs>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -71,8 +82,10 @@ export function WithInput() {
   const [color, setColor] = React.useState('hsl(217, 91%, 60%)');
 
   return (
-    <div className="space-y-3 w-full">
-      <div className="text-sm font-medium">Current value: {color}</div>
+    <div id="color-picker-root-div-2" className="space-y-3 w-full">
+      <div id="color-picker-root-div-3" className="text-sm font-medium">
+        Current value: {color}
+      </div>
       <ColorPickerRoot value={color} onChange={setColor} format="hsl">
         <ColorPickerInput />
         <ColorPickerCompactControls presetColors={[]} sections={['picker']} />
@@ -85,8 +98,10 @@ export function WithButton() {
   const [color, setColor] = React.useState('hsl(217, 91%, 60%)');
 
   return (
-    <div className="space-y-3 w-full">
-      <div className="text-sm font-medium">Current value: {color}</div>
+    <div id="color-picker-root-div-4" className="space-y-3 w-full">
+      <div id="color-picker-root-div-5" className="text-sm font-medium">
+        Current value: {color}
+      </div>
       <ColorPickerRoot value={color} onChange={setColor} format="hsl">
         <ColorPickerButton />
         <ColorPickerCompactControls presetColors={[]} sections={['picker']} />

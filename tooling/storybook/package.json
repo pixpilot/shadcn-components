@@ -6,8 +6,15 @@
   "packageManager": "pnpm@10.33.0",
   "author": "m.doaie <m.doaie@hotmail.com>",
   "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    }
+  },
+  "types": "./index.d.ts",
   "scripts": {
-    "storybook": "storybook dev -p 6007 --no-open",
+    "storybook": "tsx ./scripts/storybook.js",
     "build-storybook": "storybook build",
     "clean": "git clean -xdf .cache storybook-static",
     "clean:all": "git clean -xdf .cache storybook-static node_modules"
@@ -26,6 +33,8 @@
   "devDependencies": {
     "@internal/eslint-config": "workspace:*",
     "@internal/prettier-config": "workspace:*",
+    "@openrouter/ai-sdk-provider": "catalog:",
+    "@pixpilot/object": "catalog:prod",
     "@storybook/addon-essentials": "catalog:dev",
     "@storybook/addon-interactions": "catalog:dev",
     "@storybook/addon-links": "catalog:dev",
@@ -36,15 +45,18 @@
     "@storybook/test": "catalog:dev",
     "@tailwindcss/postcss": "catalog:dev",
     "@types/react": "catalog:dev",
+    "ai": "catalog:",
     "autoprefixer": "catalog:dev",
+    "internal-ip": "9.0.0",
     "msw": "^2.14.6",
     "playwright": "~1.59.1",
     "react": "catalog:prod",
     "react-dom": "catalog:prod",
     "storybook": "catalog:dev",
-    "storybook-addon-playwright": "5.4.0",
+    "storybook-addon-playwright": "7.8.4",
     "tailwindcss": "catalog:dev",
     "tailwindcss-animate": "catalog:dev",
+    "tsx": "catalog:dev",
     "typescript": "catalog:dev",
     "vite": "catalog:dev"
   },

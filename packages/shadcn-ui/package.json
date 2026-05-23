@@ -72,6 +72,7 @@
     "@internal/eslint-config": "workspace:*",
     "@internal/hooks": "workspace:*",
     "@internal/prettier-config": "workspace:*",
+    "@internal/storybook": "workspace:*",
     "@internal/tsconfig": "workspace:*",
     "@internal/tsdown-config": "workspace:*",
     "@internal/vitest-config": "workspace:*",

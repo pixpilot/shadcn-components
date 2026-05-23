@@ -52,6 +52,7 @@ export const BasicSliderSelect: Story = {
 
       return (
         <Form
+          id="slider-select"
           form={form}
           className="w-[420px]"
           onSubmit={(values) => {
@@ -60,8 +61,11 @@ export const BasicSliderSelect: Story = {
           }}
         >
           <SchemaField schema={schema} />
-          <pre className="mt-4 text-sm">{JSON.stringify(form.values, null, 2)}</pre>
+          <pre id="slider-select-pre-1" className="mt-4 text-sm">
+            {JSON.stringify(form.values, null, 2)}
+          </pre>
           <button
+            id="slider-select-button-1"
             type="submit"
             className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
           >

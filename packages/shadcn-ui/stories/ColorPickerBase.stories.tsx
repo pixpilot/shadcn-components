@@ -54,7 +54,11 @@ function DefaultChild(props: { value?: string }) {
   const { value } = props;
   return (
     <ColorPickerTrigger asChild>
-      <div className="h-10 w-50" style={{ background: value }}>
+      <div
+        id="color-picker-base-div-1"
+        className="h-10 w-50"
+        style={{ background: value }}
+      >
         {value}
       </div>
     </ColorPickerTrigger>
@@ -104,12 +108,18 @@ function ControlledColorPicker() {
   const [value, setValue] = React.useState('hsl(0, 0%, 0%)');
 
   return (
-    <div className="space-y-4 mb-20">
-      <div className="text-sm font-medium">Current Value: {value}</div>
+    <div id="color-picker-base-div-2" className="space-y-4 mb-20">
+      <div id="color-picker-base-div-3" className="text-sm font-medium">
+        Current Value: {value}
+      </div>
       <ColorPickerBase onChange={setValue} value={value} format="hsl">
         {(props) => (
           <ColorPickerTrigger asChild>
-            <div className="h-10 w-50" style={{ background: props.value }}>
+            <div
+              id="color-picker-base-div-4"
+              className="h-10 w-50"
+              style={{ background: props.value }}
+            >
               {props.value}
             </div>
           </ColorPickerTrigger>
@@ -123,12 +133,18 @@ function UncontrolledColorPicker() {
   const [value, setValue] = React.useState('hsl(0, 0%, 0%)');
 
   return (
-    <div className="space-y-4 mb-20">
-      <div className="text-sm font-medium">Current Value: {value}</div>
+    <div id="color-picker-base-div-5" className="space-y-4 mb-20">
+      <div id="color-picker-base-div-6" className="text-sm font-medium">
+        Current Value: {value}
+      </div>
       <ColorPickerBase onChange={setValue}>
         {(props) => (
           <ColorPickerTrigger asChild>
-            <div className="h-10 w-50" style={{ background: props.value }}>
+            <div
+              id="color-picker-base-div-7"
+              className="h-10 w-50"
+              style={{ background: props.value }}
+            >
               {props.value}
             </div>
           </ColorPickerTrigger>

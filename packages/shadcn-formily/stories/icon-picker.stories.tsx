@@ -54,6 +54,7 @@ export const BasicIconPicker: Story = {
 
     return (
       <Form
+        id="icon-picker"
         form={form}
         className="w-[500px]"
         settings={{
@@ -68,6 +69,7 @@ export const BasicIconPicker: Story = {
       >
         <SchemaFieldExtended schema={schema} />
         <button
+          id="icon-picker-button-1"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -113,6 +115,7 @@ export const BasicIconPickerButton: Story = {
       >
         <SchemaFieldExtended schema={schema} />
         <button
+          id="icon-picker-button-2"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -159,6 +162,7 @@ export const IconPickerWithPreselect: Story = {
       >
         <SchemaFieldExtended schema={schema} />
         <button
+          id="icon-picker-button-3"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -208,6 +212,7 @@ export const DeclarativeIconPicker: Story = {
           />
         </SchemaFieldExtended>
         <button
+          id="icon-picker-button-4"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -263,6 +268,7 @@ export const JsonSchemaIconPicker: Story = {
       >
         <SchemaFieldExtended schema={schema} />
         <button
+          id="icon-picker-button-5"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -354,6 +360,7 @@ export const AsyncProviders: Story = {
       >
         <SchemaFieldExtended schema={schema} />
         <button
+          id="icon-picker-button-6"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >

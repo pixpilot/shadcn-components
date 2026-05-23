@@ -50,6 +50,7 @@ export const Basic: Story = {
 
     return (
       <Form
+        id="array-toggle-group"
         form={form}
         className="w-[400px]"
         onSubmit={(values) => {
@@ -59,6 +60,7 @@ export const Basic: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="array-toggle-group-button-1"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -109,6 +111,7 @@ export const WithDefaultValue: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="array-toggle-group-button-2"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -156,6 +159,7 @@ export const WithValidation: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="array-toggle-group-button-3"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -209,6 +213,7 @@ export const WithCustomVariant: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="array-toggle-group-button-4"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -232,7 +237,7 @@ export const WithDifferentSizes: Story = {
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
-        <div className="space-y-6">
+        <div id="array-toggle-group-div-1" className="space-y-6">
           <SchemaField>
             <SchemaField.Array
               name="small"
@@ -282,6 +287,7 @@ export const WithDifferentSizes: Story = {
           </SchemaField>
         </div>
         <button
+          id="array-toggle-group-button-5"
           type="submit"
           className="mt-6 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -390,6 +396,7 @@ export const Disabled: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="array-toggle-group-button-6"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -442,6 +449,7 @@ export const ReadOnly: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="array-toggle-group-button-7"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -510,6 +518,7 @@ export const MultipleFields: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="array-toggle-group-button-8"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >

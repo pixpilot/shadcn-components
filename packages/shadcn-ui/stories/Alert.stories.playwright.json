@@ -1,0 +1,235 @@
+{
+  "version": "0",
+  "stories": {
+    "shadcn-ui-alert--default": {
+      "screenshots": [
+        {
+          "browserOptionsId": "p6yOcuOBbimF",
+          "browserType": "chromium",
+          "id": "6JfeCFY0gYrE",
+          "index": 0,
+          "screenshotOptionsId": "PHTkBYUftHr-",
+          "title": "Alert with default variant"
+        }
+      ]
+    },
+    "shadcn-ui-alert--error": {
+      "screenshots": [
+        {
+          "browserOptionsId": "p6yOcuOBbimF",
+          "browserType": "chromium",
+          "id": "sw8gs0wYL4RF",
+          "index": 0,
+          "screenshotOptionsId": "cC5GhGCvyL90",
+          "title": "Error alert with title and description"
+        }
+      ]
+    },
+    "shadcn-ui-alert--warning": {
+      "screenshots": [
+        {
+          "browserOptionsId": "cdSzmKGW3-X2",
+          "browserType": "chromium",
+          "id": "0eVfdU3tM19J",
+          "index": 0,
+          "screenshotOptionsId": "56eg_Yrv-URN",
+          "title": "Warning alert with title and description"
+        }
+      ]
+    },
+    "shadcn-ui-alert--info": {
+      "screenshots": [
+        {
+          "browserOptionsId": "cdSzmKGW3-X2",
+          "browserType": "chromium",
+          "id": "vpeE54UUiJCz",
+          "index": 0,
+          "screenshotOptionsId": "56eg_Yrv-URN",
+          "title": "Info alert with default title and description"
+        }
+      ]
+    },
+    "shadcn-ui-alert--success": {
+      "screenshots": [
+        {
+          "browserOptionsId": "cdSzmKGW3-X2",
+          "browserType": "chromium",
+          "id": "i7H277oXB-kn",
+          "index": 0,
+          "screenshotOptionsId": "56eg_Yrv-URN",
+          "title": "Success alert with title and description"
+        }
+      ]
+    },
+    "shadcn-ui-alert--title-only": {
+      "screenshots": [
+        {
+          "browserOptionsId": "cdSzmKGW3-X2",
+          "browserType": "chromium",
+          "id": "lqhoIYpJAtDK",
+          "index": 0,
+          "screenshotOptionsId": "gG6kIFTx_XZI",
+          "title": "Alert Title Only"
+        }
+      ]
+    },
+    "shadcn-ui-alert--description-only": {
+      "screenshots": [
+        {
+          "browserOptionsId": "cdSzmKGW3-X2",
+          "browserType": "chromium",
+          "id": "3XcNaEUTFHpk",
+          "index": 0,
+          "screenshotOptionsId": "eZq70lhAEdvn",
+          "title": "Description Only alert with no title"
+        }
+      ]
+    },
+    "shadcn-ui-alert--custom-style": {
+      "screenshots": [
+        {
+          "browserOptionsId": "qkpKTmdHXJKz",
+          "browserType": "chromium",
+          "id": "F7iZfDYMsdh8",
+          "index": 0,
+          "screenshotOptionsId": "zzLD0kBQ_5F-",
+          "title": "Custom Style alert with custom border and shadow"
+        }
+      ]
+    },
+    "shadcn-ui-alert--multiline-description": {
+      "screenshots": [
+        {
+          "browserOptionsId": "qkpKTmdHXJKz",
+          "browserType": "chromium",
+          "id": "x2M9z4dTtLO9",
+          "index": 0,
+          "screenshotOptionsId": "gzt7iJhxox3O",
+          "title": "Multiline Alert with description showing three lines"
+        }
+      ]
+    },
+    "shadcn-ui-alert--description-with-component": {
+      "screenshots": [
+        {
+          "browserOptionsId": "qkpKTmdHXJKz",
+          "browserType": "chromium",
+          "id": "BzxgNL9Wzt1n",
+          "index": 0,
+          "screenshotOptionsId": "UDm9U1NyDjeR",
+          "title": "Description With Component with link and bold text"
+        }
+      ]
+    },
+    "shadcn-ui-alert--children-only": {
+      "screenshots": [
+        {
+          "browserOptionsId": "qkpKTmdHXJKz",
+          "browserType": "chromium",
+          "id": "kfXPZGozc-m-",
+          "index": 0,
+          "screenshotOptionsId": "UDm9U1NyDjeR",
+          "title": "Alert with custom children content"
+        }
+      ]
+    },
+    "shadcn-ui-alert--with-icon": {
+      "screenshots": [
+        {
+          "browserOptionsId": "qkpKTmdHXJKz",
+          "browserType": "chromium",
+          "id": "vMNdlLLK4ih4",
+          "index": 0,
+          "screenshotOptionsId": "UDm9U1NyDjeR",
+          "title": "Alert with Icon (clipped)"
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "p6yOcuOBbimF": {
+      "viewport": {
+        "height": 450,
+        "width": 836
+      }
+    },
+    "cdSzmKGW3-X2": {
+      "viewport": {
+        "height": 450,
+        "width": 798
+      }
+    },
+    "qkpKTmdHXJKz": {
+      "viewport": {
+        "height": 450,
+        "width": 462
+      }
+    }
+  },
+  "screenshotOptions": {
+    "PHTkBYUftHr-": {
+      "clip": {
+        "height": 96,
+        "width": 360,
+        "x": 10,
+        "y": 6
+      }
+    },
+    "cC5GhGCvyL90": {
+      "clip": {
+        "height": 91,
+        "width": 326,
+        "x": 10,
+        "y": 8
+      }
+    },
+    "56eg_Yrv-URN": {
+      "clip": {
+        "height": 86,
+        "width": 337,
+        "x": 13,
+        "y": 5
+      }
+    },
+    "gG6kIFTx_XZI": {
+      "clip": {
+        "height": 64,
+        "width": 779,
+        "x": 10,
+        "y": 8
+      }
+    },
+    "eZq70lhAEdvn": {
+      "clip": {
+        "height": 63,
+        "width": 273,
+        "x": 9,
+        "y": 7
+      }
+    },
+    "zzLD0kBQ_5F-": {
+      "clip": {
+        "height": 96,
+        "width": 441,
+        "x": 13,
+        "y": 3
+      }
+    },
+    "gzt7iJhxox3O": {
+      "clip": {
+        "height": 129,
+        "width": 194,
+        "x": 8,
+        "y": 6
+      }
+    },
+    "UDm9U1NyDjeR": {
+      "clip": {
+        "height": 89,
+        "width": 309,
+        "x": 13,
+        "y": 2
+      }
+    }
+  }
+}

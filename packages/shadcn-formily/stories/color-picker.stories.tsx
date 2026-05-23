@@ -39,6 +39,7 @@ export const BasicColorPicker: Story = {
 
     return (
       <Form
+        id="color-picker"
         form={form}
         className="w-[400px]"
         onSubmit={(values) => {
@@ -48,6 +49,7 @@ export const BasicColorPicker: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="color-picker-button-1"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -89,6 +91,7 @@ export const WithButtonVariant: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="color-picker-button-2"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -129,9 +132,10 @@ export const ColorPickerWithPreview: Story = {
       };
 
       return (
-        <div className="w-[400px]">
+        <div id="color-picker-div-1" className="w-[400px]">
           {selectedColor && (
             <div
+              id="color-picker-div-2"
               className="mb-4 h-16 w-full rounded-md border"
               style={{ backgroundColor: selectedColor }}
               title={`Selected color: ${selectedColor}`}
@@ -146,6 +150,7 @@ export const ColorPickerWithPreview: Story = {
           >
             <SchemaField schema={schema} />
             <button
+              id="color-picker-button-3"
               type="submit"
               className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
             >
@@ -210,6 +215,7 @@ export const MultipleColorPickers: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="color-picker-button-4"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -259,6 +265,7 @@ export const DeclarativeColorPicker: Story = {
           />
         </SchemaField>
         <button
+          id="color-picker-button-5"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -311,6 +318,7 @@ export const SetValueWithForm: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="color-picker-button-6"
           type="button"
           className="mt-4 w-full rounded-md bg-secondary px-4 py-2 text-secondary-foreground hover:bg-secondary/90"
           onClick={() => form.setValues({ favoriteColor: '#EF4444' })}

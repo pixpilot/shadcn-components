@@ -160,7 +160,7 @@ export const MultipleCheckbox: Story = {
     const [value, setValue] = React.useState<string[]>(['bold']);
 
     return (
-      <div>
+      <div id="toggle-group-div-1">
         <ToggleGroup
           type="multiple"
           variant={args.variant}

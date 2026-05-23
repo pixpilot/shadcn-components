@@ -38,6 +38,7 @@ export const BasicToggle: Story = {
 
     return (
       <Form
+        id="toggle-button"
         form={form}
         className="w-[400px]"
         onSubmit={(values) => {
@@ -47,6 +48,7 @@ export const BasicToggle: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="toggle-button-button-1"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -111,6 +113,7 @@ export const MultipleToggles: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="toggle-button-button-2"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -141,8 +144,8 @@ export const WithDefaultValue: Story = {
           'x-decorator': 'FormItem',
           'x-component': 'ToggleButton',
           'x-component-props': {
-            checkedContent: <span>Enabled</span>,
-            uncheckedContent: <span>Disabled</span>,
+            checkedContent: <span id="toggle-button-span-1">Enabled</span>,
+            uncheckedContent: <span id="toggle-button-span-2">Disabled</span>,
           },
         },
       },
@@ -159,6 +162,7 @@ export const WithDefaultValue: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="toggle-button-button-3"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -185,8 +189,8 @@ export const SizeVariants: Story = {
           'x-decorator': 'FormItem',
           'x-component': 'ToggleButton',
           'x-component-props': {
-            checkedContent: <span>On</span>,
-            uncheckedContent: <span>Off</span>,
+            checkedContent: <span id="toggle-button-span-3">On</span>,
+            uncheckedContent: <span id="toggle-button-span-4">Off</span>,
             checkedProps: { size: 'sm' },
             uncheckedProps: { size: 'sm' },
           },
@@ -197,8 +201,8 @@ export const SizeVariants: Story = {
           'x-decorator': 'FormItem',
           'x-component': 'ToggleButton',
           'x-component-props': {
-            checkedContent: <span>On</span>,
-            uncheckedContent: <span>Off</span>,
+            checkedContent: <span id="toggle-button-span-5">On</span>,
+            uncheckedContent: <span id="toggle-button-span-6">Off</span>,
           },
         },
         largeToggle: {
@@ -207,8 +211,8 @@ export const SizeVariants: Story = {
           'x-decorator': 'FormItem',
           'x-component': 'ToggleButton',
           'x-component-props': {
-            checkedContent: <span>On</span>,
-            uncheckedContent: <span>Off</span>,
+            checkedContent: <span id="toggle-button-span-7">On</span>,
+            uncheckedContent: <span id="toggle-button-span-8">Off</span>,
             checkedProps: { size: 'lg' },
             uncheckedProps: { size: 'lg' },
           },
@@ -227,6 +231,7 @@ export const SizeVariants: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="toggle-button-button-4"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -258,8 +263,8 @@ export const Disabled: Story = {
           'x-decorator': 'FormItem',
           'x-component': 'ToggleButton',
           'x-component-props': {
-            checkedContent: <span>On</span>,
-            uncheckedContent: <span>Off</span>,
+            checkedContent: <span id="toggle-button-span-9">On</span>,
+            uncheckedContent: <span id="toggle-button-span-10">Off</span>,
             disabled: true,
           },
         },
@@ -277,6 +282,7 @@ export const Disabled: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="toggle-button-button-5"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >

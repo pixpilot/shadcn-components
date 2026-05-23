@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ComponentProps } from 'react';
 import { useState } from 'react';
 import { Combobox } from '../src/Combobox';
 
@@ -6,13 +7,20 @@ import { Combobox } from '../src/Combobox';
  * A searchable combobox component with dropdown options.
  * Allows users to search and select from a list of options.
  */
-const meta = {
+type StoryArgs = Partial<
+  ComponentProps<typeof Combobox> & {
+    id?: string;
+  }
+>;
+
+const meta: Meta<StoryArgs> = {
   title: 'shadcn-ui/Combobox',
   component: Combobox,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
+
   argTypes: {
     placeholder: {
       control: 'text',
@@ -29,12 +37,12 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div style={{ width: 300 }}>
+      <div id="combobox-div-1" style={{ width: 300 }}>
         <Story />
       </div>
     ),
   ],
-} satisfies Meta<typeof Combobox>;
+} satisfies Meta<StoryArgs>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

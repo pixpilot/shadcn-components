@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ComponentProps } from 'react';
 import { useState } from 'react';
 import { SliderInput } from '../src/slider/SliderInput';
 
@@ -6,13 +7,20 @@ import { SliderInput } from '../src/slider/SliderInput';
  * A slider component with optional input fields for precise value entry.
  * Combines a slider with number inputs for each value in the range.
  */
-const meta = {
+type StoryArgs = Partial<
+  ComponentProps<typeof SliderInput> & {
+    id?: string;
+  }
+>;
+
+const meta: Meta<StoryArgs> = {
   title: 'shadcn-ui/SliderInput',
   component: SliderInput,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
+
   argTypes: {
     min: {
       control: 'number',
@@ -42,12 +50,12 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div style={{ width: 400, padding: 20 }}>
+      <div id="slider-input-div-1" style={{ width: 400, padding: 20 }}>
         <Story />
       </div>
     ),
   ],
-} satisfies Meta<typeof SliderInput>;
+} satisfies Meta<StoryArgs>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -153,7 +161,7 @@ export const Vertical: Story = {
   },
   decorators: [
     (Story) => (
-      <div style={{ height: 300, padding: 20 }}>
+      <div id="slider-input-div-2" style={{ height: 300, padding: 20 }}>
         <Story />
       </div>
     ),
@@ -182,7 +190,7 @@ export const SliderControlled: Story = {
     const Component = () => {
       const [value, setValue] = useState(30);
       return (
-        <div className="space-y-4">
+        <div id="slider-input-div-3" className="space-y-4">
           <SliderInput
             value={[value]}
             onValueChange={([val]) => setValue(val!)}
@@ -191,8 +199,9 @@ export const SliderControlled: Story = {
             step={1}
             showInput
           />
-          <div>Current Value: {value}</div>
+          <div id="slider-input-div-4">Current Value: {value}</div>
           <button
+            id="slider-input-button-1"
             className="rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
             onClick={() => setValue(70)}
           >

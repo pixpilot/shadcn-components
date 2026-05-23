@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ComponentProps } from 'react';
 import { useState } from 'react';
 import { SliderSelect } from '../src/slider/SliderSelect';
 
@@ -6,13 +7,18 @@ import { SliderSelect } from '../src/slider/SliderSelect';
  * Discrete slider that maps positions to provided options,
  * plus an optional dropdown for direct selection.
  */
-const meta = {
+type StoryArgs = ComponentProps<typeof SliderSelect> & {
+  id?: string;
+};
+
+const meta: Meta<StoryArgs> = {
   title: 'shadcn-ui/SliderSelect',
   component: SliderSelect,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
+
   argTypes: {
     options: {
       control: 'object',
@@ -34,15 +40,15 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div style={{ width: 420, padding: 20 }}>
+      <div id="slider-select-div-1" style={{ width: 420, padding: 20 }}>
         <Story />
       </div>
     ),
   ],
-} satisfies Meta<typeof SliderSelect>;
+} satisfies Meta<StoryArgs>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<StoryArgs>;
 
 const SIZE_OPTIONS = ['sx', 'xs', 'sm', 'md', 'lg', 'xl'] as const;
 
@@ -51,17 +57,21 @@ export const Sizes: Story = {
     options: [...SIZE_OPTIONS],
     showSelect: true,
   },
-  render: function SizesStory(args) {
+  render: function SizesStory(args: StoryArgs) {
     const [value, setValue] = useState<(typeof SIZE_OPTIONS)[number]>('md');
 
     return (
-      <div className="space-y-3">
+      <div id="slider-select-div-2" className="space-y-3">
         <SliderSelect
-          {...args}
+          options={args.options}
+          showSelect={args.showSelect}
+          disabled={args.disabled}
+          orientation={args.orientation}
+          id={args.id}
           value={value}
           onValueChange={(v) => setValue(v as (typeof SIZE_OPTIONS)[number])}
         />
-        <div>Current value: {value}</div>
+        <div id="slider-select-div-3">Current value: {value}</div>
       </div>
     );
   },
@@ -72,16 +82,20 @@ export const WithoutDropdown: Story = {
     options: [...SIZE_OPTIONS],
     showSelect: false,
   },
-  render: function WithoutDropdownStory(args) {
+  render: function WithoutDropdownStory(args: StoryArgs) {
     const [value, setValue] = useState<(typeof SIZE_OPTIONS)[number]>('sm');
     return (
-      <div className="space-y-3">
+      <div id="slider-select-div-4" className="space-y-3">
         <SliderSelect
-          {...args}
+          options={args.options}
+          showSelect={args.showSelect}
+          disabled={args.disabled}
+          orientation={args.orientation}
+          id={args.id}
           value={value}
           onValueChange={(v) => setValue(v as (typeof SIZE_OPTIONS)[number])}
         />
-        <div>Current value: {value}</div>
+        <div id="slider-select-div-5">Current value: {value}</div>
       </div>
     );
   },
@@ -92,16 +106,20 @@ export const Numeric: Story = {
     options: [1, 2, 3, 4, 5],
     showSelect: true,
   },
-  render: function NumericStory(args) {
+  render: function NumericStory(args: StoryArgs) {
     const [value, setValue] = useState<number>(3);
     return (
-      <div className="space-y-3">
+      <div id="slider-select-div-6" className="space-y-3">
         <SliderSelect
-          {...args}
+          options={args.options}
+          showSelect={args.showSelect}
+          disabled={args.disabled}
+          orientation={args.orientation}
+          id={args.id}
           value={value}
           onValueChange={(v) => setValue(Number(v))}
         />
-        <div>Current value: {value}</div>
+        <div id="slider-select-div-7">Current value: {value}</div>
       </div>
     );
   },

@@ -1,7 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ComponentProps } from 'react';
 import { useEffect, useState } from 'react';
 import { Button } from '../src/Button';
 import { LoadingOverlay } from '../src/LoadingOverlay';
+
+type StoryArgs = Partial<
+  ComponentProps<typeof LoadingOverlay> & {
+    id?: string;
+  }
+>;
 
 /**
  * A loading overlay component with backdrop and positioning options.
@@ -20,6 +27,7 @@ const meta = {
     },
   },
   tags: ['autodocs'],
+
   argTypes: {
     backdrop: {
       control: 'boolean',
@@ -44,7 +52,7 @@ const meta = {
       description: 'Scope of the loader overlay',
     },
   },
-} satisfies Meta<typeof LoadingOverlay>;
+} satisfies Meta<StoryArgs>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -115,7 +123,7 @@ export const Interactive: Story = {
     }, [loading]);
 
     return (
-      <div className="relative">
+      <div id="loading-overlay-div-1" className="relative">
         <Button onClick={() => setLoading(!loading)}>
           {loading ? 'Stop Loading' : 'Start Loading'}
         </Button>
@@ -145,7 +153,7 @@ export const DelayedLoader: Story = {
     }, [loading]);
 
     return (
-      <div className="relative">
+      <div id="loading-overlay-div-2" className="relative">
         <Button onClick={() => setLoading(!loading)}>
           {loading ? 'Stop Loading' : 'Start Loading'}
         </Button>
@@ -178,7 +186,7 @@ export const Fullscreen: Story = {
     }, [loading]);
 
     return (
-      <div className="relative w-64 h-64 border">
+      <div id="loading-overlay-div-3" className="relative w-64 h-64 border">
         <Button onClick={() => setLoading(!loading)}>
           {loading ? 'Stop Loading' : 'Start Loading'}
         </Button>
@@ -210,8 +218,8 @@ export const LoadingOnMount: Story = {
     };
 
     return (
-      <div className="flex flex-col gap-4 items-start">
-        <div className="flex gap-2">
+      <div id="loading-overlay-div-4" className="flex flex-col gap-4 items-start">
+        <div id="loading-overlay-div-5" className="flex gap-2">
           <Button onClick={handleShow} disabled={show}>
             Show Component
           </Button>
@@ -233,10 +241,15 @@ export const LoadingOnMount: Story = {
           )}
         </div>
         {show && (
-          <div className="relative w-64 h-40 border rounded-md overflow-hidden">
-            <div className="p-4">
-              <p className="font-medium">Component content</p>
-              <p className="text-sm text-muted-foreground">
+          <div
+            id="loading-overlay-div-6"
+            className="relative w-64 h-40 border rounded-md overflow-hidden"
+          >
+            <div id="loading-overlay-div-7" className="p-4">
+              <p id="loading-overlay-p-1" className="font-medium">
+                Component content
+              </p>
+              <p id="loading-overlay-p-2" className="text-sm text-muted-foreground">
                 This content is blocked immediately on mount.
               </p>
             </div>
@@ -269,7 +282,7 @@ export const ContainerScope: Story = {
     }, [loading]);
 
     return (
-      <div className="relative w-64 h-64 border">
+      <div id="loading-overlay-div-8" className="relative w-64 h-64 border">
         <Button onClick={() => setLoading(!loading)}>
           {loading ? 'Stop Loading' : 'Start Loading'}
         </Button>

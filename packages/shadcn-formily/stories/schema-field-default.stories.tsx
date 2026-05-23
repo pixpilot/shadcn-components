@@ -12,7 +12,7 @@ const meta: Meta<typeof Form> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <div style={{ width: '400px', padding: '20px' }}>
+      <div id="schema-field-default-div-1" style={{ width: '400px', padding: '20px' }}>
         <Story />
       </div>
     ),
@@ -82,7 +82,7 @@ export const DefaultForm: Story = {
     };
 
     return (
-      <Form form={form}>
+      <Form id="schema-field-default" form={form}>
         <JsonSchemaField schema={schema} />
       </Form>
     );
@@ -165,8 +165,13 @@ export const FormWithCustomComponents: Story = {
       onChange?: (value: number) => void;
       [key: string]: unknown;
     }) => (
-      <div style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}>
-        <label htmlFor="custom-slider">Custom Volume Control: {value ?? 0}</label>
+      <div
+        id="schema-field-default-div-2"
+        style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}
+      >
+        <label id="schema-field-default-label-1" htmlFor="custom-slider">
+          Custom Volume Control: {value ?? 0}
+        </label>
         <input
           {...props}
           id="custom-slider"

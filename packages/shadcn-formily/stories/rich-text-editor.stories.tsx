@@ -41,7 +41,7 @@ const meta: Meta<typeof RichTextEditor> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <div className="w-full max-w-lg">
+      <div id="rich-text-editor-div-1" className="w-full max-w-lg">
         <Story />
       </div>
     ),
@@ -72,6 +72,7 @@ export const Declarative: Story = {
 
     return (
       <Form
+        id="rich-text-editor"
         form={form}
         className="w-[400px]"
         onSubmit={(values) => {
@@ -87,6 +88,7 @@ export const Declarative: Story = {
           />
         </SchemaFieldExtended>
         <button
+          id="rich-text-editor-button-1"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >

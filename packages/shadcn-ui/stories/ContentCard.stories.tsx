@@ -34,7 +34,9 @@ export const Default: Story = {
   args: {
     title: 'Card Title',
     children: (
-      <p>This is some content inside the card. It can contain any React elements.</p>
+      <p id="content-card-p-1">
+        This is some content inside the card. It can contain any React elements.
+      </p>
     ),
   },
 };
@@ -45,9 +47,9 @@ export const Default: Story = {
 export const WithoutTitle: Story = {
   args: {
     children: (
-      <div>
-        <p>Content without a title.</p>
-        <p>Multiple paragraphs or elements can be included.</p>
+      <div id="content-card-div-1">
+        <p id="content-card-p-2">Content without a title.</p>
+        <p id="content-card-p-3">Multiple paragraphs or elements can be included.</p>
       </div>
     ),
   },
@@ -60,6 +62,6 @@ export const WithMargin: Story = {
   args: {
     title: 'Card with Margin',
     marginBottom: true,
-    children: <p>This card has margin bottom applied.</p>,
+    children: <p id="content-card-p-4">This card has margin bottom applied.</p>,
   },
 };

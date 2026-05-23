@@ -139,12 +139,12 @@ export const DescriptionWithComponent: Story = {
     variant: 'warning',
     title: 'Component in Description',
     description: (
-      <div>
+      <div id="alert-div-1">
         This alert contains a{' '}
-        <a href="https://example.com" className="underline">
+        <a id="alert-a-1" href="https://example.com" className="underline">
           link
         </a>{' '}
-        and some <strong>bold text</strong>.
+        and some <strong id="alert-strong-1">bold text</strong>.
       </div>
     ),
   },
@@ -158,11 +158,13 @@ export const ChildrenOnly: Story = {
     variant: 'default',
     children: (
       <>
-        <div>
-          <strong>Custom content:</strong> This alert is rendered via children only.
+        <div id="alert-div-2">
+          <strong id="alert-strong-2">Custom content:</strong> This alert is rendered via
+          children only.
         </div>
-        <div>
-          <strong>Custom content:</strong> This alert is rendered via children only.
+        <div id="alert-div-3">
+          <strong id="alert-strong-3">Custom content:</strong> This alert is rendered via
+          children only.
         </div>
       </>
     ),

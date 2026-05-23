@@ -12,7 +12,7 @@ const meta: Meta<typeof ObjectContainer> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <div className="w-100">
+      <div id="object-container-div-1" className="w-100">
         <Story />
       </div>
     ),
@@ -44,6 +44,7 @@ export const JsonSchemaForm: Story = {
 
     return (
       <JsonSchemaFormRenderer
+        id="object-container"
         form={form}
         components={{
           fields: defaultComponentRegistry,
@@ -386,8 +387,10 @@ export const withoutObject: Story = {
     };
 
     return (
-      <div>
-        <h5 className="pb-5">Should not wrap with object container</h5>
+      <div id="object-container-div-2">
+        <h5 id="object-container-h5-1" className="pb-5">
+          Should not wrap with object container
+        </h5>
         <JsonSchemaFormRenderer
           form={form}
           components={{
@@ -593,11 +596,17 @@ export const WithTitleChildren: Story = {
                   slotProps={{
                     title: {
                       children: (
-                        <div className="flex gap-2">
-                          <button className="px-2 py-1 bg-blue-500 text-white rounded text-sm">
+                        <div id="object-container-div-3" className="flex gap-2">
+                          <button
+                            id="object-container-button-1"
+                            className="px-2 py-1 bg-blue-500 text-white rounded text-sm"
+                          >
                             Edit
                           </button>
-                          <button className="px-2 py-1 bg-red-500 text-white rounded text-sm">
+                          <button
+                            id="object-container-button-2"
+                            className="px-2 py-1 bg-red-500 text-white rounded text-sm"
+                          >
                             Delete
                           </button>
                         </div>

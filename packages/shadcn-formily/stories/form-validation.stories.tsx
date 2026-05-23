@@ -50,6 +50,7 @@ export const SimpleInputValidation: Story = {
 
     return (
       <Form
+        id="form-validation"
         form={form}
         className="w-[400px]"
         onSubmit={(values) => {
@@ -59,6 +60,7 @@ export const SimpleInputValidation: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="form-validation-button-1"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >

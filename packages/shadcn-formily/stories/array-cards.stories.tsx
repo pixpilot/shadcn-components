@@ -76,6 +76,7 @@ export const WithCustomComponent: Story = {
 
     return (
       <Form
+        id="array-cards"
         form={form}
         className="w-[600px]"
         onSubmit={(values) => {
@@ -85,8 +86,10 @@ export const WithCustomComponent: Story = {
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
-        <div className="space-y-4">
-          <h3 className="text-lg font-medium">Contacts</h3>
+        <div id="array-cards-div-1" className="space-y-4">
+          <h3 id="array-cards-h3-1" className="text-lg font-medium">
+            Contacts
+          </h3>
 
           <SchemaField>
             <SchemaField.Array
@@ -103,25 +106,25 @@ export const WithCustomComponent: Story = {
                 <SchemaField.Void
                   x-component="ArrayCards.MoveDown"
                   x-component-props={{
-                    icon: <span>Down</span>,
+                    icon: <span id="array-cards-span-1">Down</span>,
                   }}
                 />
                 <SchemaField.Void
                   x-component="ArrayCards.MoveUp"
                   x-component-props={{
-                    icon: <span>UP</span>,
+                    icon: <span id="array-cards-span-2">UP</span>,
                   }}
                 />
                 <SchemaField.Void
                   x-component="ArrayCards.Copy"
                   x-component-props={{
-                    icon: <span>CPY</span>,
+                    icon: <span id="array-cards-span-3">CPY</span>,
                   }}
                 />
                 <SchemaField.Void
                   x-component="ArrayCards.Remove"
                   x-component-props={{
-                    icon: <span>Del</span>,
+                    icon: <span id="array-cards-span-4">Del</span>,
                   }}
                 />
                 <SchemaField.Void x-component="ArrayCards.Index" />
@@ -141,6 +144,7 @@ export const WithCustomComponent: Story = {
         </div>
 
         <button
+          id="array-cards-button-1"
           type="submit"
           className="mt-6 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground"
         >
@@ -174,8 +178,10 @@ export const WithOverrideComponent: Story = {
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
-        <div className="space-y-4">
-          <h3 className="text-lg font-medium">Contacts</h3>
+        <div id="array-cards-div-2" className="space-y-4">
+          <h3 id="array-cards-h3-2" className="text-lg font-medium">
+            Contacts
+          </h3>
 
           <SchemaField>
             <SchemaField.Array
@@ -186,7 +192,9 @@ export const WithOverrideComponent: Story = {
                 title: ' Custom Contacts',
                 transformActions: (actions) =>
                   actions.map((a) =>
-                    a === 'remove' ? { type: 'remove', icon: <span>Del</span> } : a,
+                    a === 'remove'
+                      ? { type: 'remove', icon: <span id="array-cards-span-5">Del</span> }
+                      : a,
                   ),
               }}
             >
@@ -206,6 +214,7 @@ export const WithOverrideComponent: Story = {
         </div>
 
         <button
+          id="array-cards-button-2"
           type="submit"
           className="mt-6 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground"
         >
@@ -312,13 +321,16 @@ export const WithCustomComponentJsonSchema: Story = {
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
-        <div className="space-y-4">
-          <h3 className="text-lg font-medium">Contacts (Custom JSON Schema)</h3>
+        <div id="array-cards-div-3" className="space-y-4">
+          <h3 id="array-cards-h3-3" className="text-lg font-medium">
+            Contacts (Custom JSON Schema)
+          </h3>
 
           <SchemaField schema={schema} />
         </div>
 
         <button
+          id="array-cards-button-3"
           type="submit"
           className="mt-6 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground"
         >
@@ -452,13 +464,16 @@ export const NestedArraysJsonSchema: Story = {
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
-        <div className="space-y-4">
-          <h3 className="text-lg font-medium">Companies & Employees (Nested Arrays)</h3>
+        <div id="array-cards-div-4" className="space-y-4">
+          <h3 id="array-cards-h3-4" className="text-lg font-medium">
+            Companies & Employees (Nested Arrays)
+          </h3>
 
           <SchemaField schema={schema} />
         </div>
 
         <button
+          id="array-cards-button-4"
           type="submit"
           className="mt-6 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground"
         >
@@ -501,8 +516,10 @@ export const NestedArraysDeclarative: Story = {
           alert(JSON.stringify(values, null, JSON_INDENT));
         }}
       >
-        <div className="space-y-4">
-          <h3 className="text-lg font-medium">Companies & Employees (SchemaField)</h3>
+        <div id="array-cards-div-5" className="space-y-4">
+          <h3 id="array-cards-h3-5" className="text-lg font-medium">
+            Companies & Employees (SchemaField)
+          </h3>
 
           <SchemaField>
             <SchemaField.Array
@@ -556,6 +573,7 @@ export const NestedArraysDeclarative: Story = {
         </div>
 
         <button
+          id="array-cards-button-5"
           type="submit"
           className="mt-6 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground"
         >

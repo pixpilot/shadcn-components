@@ -25,7 +25,7 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div className=" w-100">
+      <div id="tabs-div-1" className=" w-100">
         <Story />
       </div>
     ),
@@ -49,21 +49,27 @@ export const Default: Story = {
           <TabsTrigger value="tab3">Tab 3</TabsTrigger>
         </TabsList>
         <TabsContent value="tab1">
-          <div className="p-4">
-            <h3 className="text-lg font-semibold">Tab 1 Content</h3>
-            <p>This is the content for the first tab.</p>
+          <div id="tabs-div-2" className="p-4">
+            <h3 id="tabs-h3-1" className="text-lg font-semibold">
+              Tab 1 Content
+            </h3>
+            <p id="tabs-p-1">This is the content for the first tab.</p>
           </div>
         </TabsContent>
         <TabsContent value="tab2">
-          <div className="p-4">
-            <h3 className="text-lg font-semibold">Tab 2 Content</h3>
-            <p>This is the content for the second tab.</p>
+          <div id="tabs-div-3" className="p-4">
+            <h3 id="tabs-h3-2" className="text-lg font-semibold">
+              Tab 2 Content
+            </h3>
+            <p id="tabs-p-2">This is the content for the second tab.</p>
           </div>
         </TabsContent>
         <TabsContent value="tab3">
-          <div className="p-4">
-            <h3 className="text-lg font-semibold">Tab 3 Content</h3>
-            <p>This is the content for the third tab.</p>
+          <div id="tabs-div-4" className="p-4">
+            <h3 id="tabs-h3-3" className="text-lg font-semibold">
+              Tab 3 Content
+            </h3>
+            <p id="tabs-p-3">This is the content for the third tab.</p>
           </div>
         </TabsContent>
       </>
@@ -79,29 +85,35 @@ export const Vertical: Story = {
     defaultValue: 'tab1',
     orientation: 'vertical',
     children: (
-      <div className="flex gap-4">
+      <div id="tabs-div-5" className="flex gap-4">
         <TabsList className="flex-col h-fit">
           <TabsTrigger value="tab1">Account</TabsTrigger>
           <TabsTrigger value="tab2">Password</TabsTrigger>
           <TabsTrigger value="tab3">Settings</TabsTrigger>
         </TabsList>
-        <div className="flex-1">
+        <div id="tabs-div-6" className="flex-1">
           <TabsContent value="tab1">
-            <div className="p-4">
-              <h3 className="text-lg font-semibold">Account Settings</h3>
-              <p>Manage your account information here.</p>
+            <div id="tabs-div-7" className="p-4">
+              <h3 id="tabs-h3-4" className="text-lg font-semibold">
+                Account Settings
+              </h3>
+              <p id="tabs-p-4">Manage your account information here.</p>
             </div>
           </TabsContent>
           <TabsContent value="tab2">
-            <div className="p-4">
-              <h3 className="text-lg font-semibold">Password Settings</h3>
-              <p>Change your password and security settings.</p>
+            <div id="tabs-div-8" className="p-4">
+              <h3 id="tabs-h3-5" className="text-lg font-semibold">
+                Password Settings
+              </h3>
+              <p id="tabs-p-5">Change your password and security settings.</p>
             </div>
           </TabsContent>
           <TabsContent value="tab3">
-            <div className="p-4">
-              <h3 className="text-lg font-semibold">General Settings</h3>
-              <p>Configure general application preferences.</p>
+            <div id="tabs-div-9" className="p-4">
+              <h3 id="tabs-h3-6" className="text-lg font-semibold">
+                General Settings
+              </h3>
+              <p id="tabs-p-6">Configure general application preferences.</p>
             </div>
           </TabsContent>
         </div>
@@ -121,12 +133,14 @@ export const WithIcons: Story = {
         <TabsList>
           <TabsTrigger value="home">
             <svg
+              id="tabs-svg-1"
               className="w-4 h-4 mr-2"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
               <path
+                id="tabs-path-1"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
@@ -137,12 +151,14 @@ export const WithIcons: Story = {
           </TabsTrigger>
           <TabsTrigger value="profile">
             <svg
+              id="tabs-svg-2"
               className="w-4 h-4 mr-2"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
               <path
+                id="tabs-path-2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
@@ -153,18 +169,21 @@ export const WithIcons: Story = {
           </TabsTrigger>
           <TabsTrigger value="settings">
             <svg
+              id="tabs-svg-3"
               className="w-4 h-4 mr-2"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
               <path
+                id="tabs-path-3"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
                 d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
               />
               <path
+                id="tabs-path-4"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
@@ -175,21 +194,27 @@ export const WithIcons: Story = {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="home">
-          <div className="p-4">
-            <h3 className="text-lg font-semibold">Home</h3>
-            <p>Welcome to the home tab!</p>
+          <div id="tabs-div-10" className="p-4">
+            <h3 id="tabs-h3-7" className="text-lg font-semibold">
+              Home
+            </h3>
+            <p id="tabs-p-7">Welcome to the home tab!</p>
           </div>
         </TabsContent>
         <TabsContent value="profile">
-          <div className="p-4">
-            <h3 className="text-lg font-semibold">Profile</h3>
-            <p>View and edit your profile information.</p>
+          <div id="tabs-div-11" className="p-4">
+            <h3 id="tabs-h3-8" className="text-lg font-semibold">
+              Profile
+            </h3>
+            <p id="tabs-p-8">View and edit your profile information.</p>
           </div>
         </TabsContent>
         <TabsContent value="settings">
-          <div className="p-4">
-            <h3 className="text-lg font-semibold">Settings</h3>
-            <p>Configure your application settings.</p>
+          <div id="tabs-div-12" className="p-4">
+            <h3 id="tabs-h3-9" className="text-lg font-semibold">
+              Settings
+            </h3>
+            <p id="tabs-p-9">Configure your application settings.</p>
           </div>
         </TabsContent>
       </>
@@ -211,21 +236,27 @@ export const Outline: Story = {
           <TabsTrigger value="tab3">Settings</TabsTrigger>
         </TabsList>
         <TabsContent value="tab1">
-          <div className="p-4">
-            <h3 className="text-lg font-semibold">Overview</h3>
-            <p>Get a high-level view of your data and metrics.</p>
+          <div id="tabs-div-13" className="p-4">
+            <h3 id="tabs-h3-10" className="text-lg font-semibold">
+              Overview
+            </h3>
+            <p id="tabs-p-10">Get a high-level view of your data and metrics.</p>
           </div>
         </TabsContent>
         <TabsContent value="tab2">
-          <div className="p-4">
-            <h3 className="text-lg font-semibold">Analytics</h3>
-            <p>Detailed analytics and insights.</p>
+          <div id="tabs-div-14" className="p-4">
+            <h3 id="tabs-h3-11" className="text-lg font-semibold">
+              Analytics
+            </h3>
+            <p id="tabs-p-11">Detailed analytics and insights.</p>
           </div>
         </TabsContent>
         <TabsContent value="tab3">
-          <div className="p-4">
-            <h3 className="text-lg font-semibold">Settings</h3>
-            <p>Configure your preferences and options.</p>
+          <div id="tabs-div-15" className="p-4">
+            <h3 id="tabs-h3-12" className="text-lg font-semibold">
+              Settings
+            </h3>
+            <p id="tabs-p-12">Configure your preferences and options.</p>
           </div>
         </TabsContent>
       </>
@@ -247,21 +278,27 @@ export const Ghost: Story = {
           <TabsTrigger value="tab3">Team</TabsTrigger>
         </TabsList>
         <TabsContent value="tab1">
-          <div className="p-4">
-            <h3 className="text-lg font-semibold">Dashboard</h3>
-            <p>Your personalized dashboard overview.</p>
+          <div id="tabs-div-16" className="p-4">
+            <h3 id="tabs-h3-13" className="text-lg font-semibold">
+              Dashboard
+            </h3>
+            <p id="tabs-p-13">Your personalized dashboard overview.</p>
           </div>
         </TabsContent>
         <TabsContent value="tab2">
-          <div className="p-4">
-            <h3 className="text-lg font-semibold">Projects</h3>
-            <p>Manage and track your projects.</p>
+          <div id="tabs-div-17" className="p-4">
+            <h3 id="tabs-h3-14" className="text-lg font-semibold">
+              Projects
+            </h3>
+            <p id="tabs-p-14">Manage and track your projects.</p>
           </div>
         </TabsContent>
         <TabsContent value="tab3">
-          <div className="p-4">
-            <h3 className="text-lg font-semibold">Team</h3>
-            <p>Collaborate with your team members.</p>
+          <div id="tabs-div-18" className="p-4">
+            <h3 id="tabs-h3-15" className="text-lg font-semibold">
+              Team
+            </h3>
+            <p id="tabs-p-15">Collaborate with your team members.</p>
           </div>
         </TabsContent>
       </>
@@ -283,21 +320,27 @@ export const Pill: Story = {
           <TabsTrigger value="tab3">Contact</TabsTrigger>
         </TabsList>
         <TabsContent value="tab1">
-          <div className="p-4">
-            <h3 className="text-lg font-semibold">Home</h3>
-            <p>Welcome to our website.</p>
+          <div id="tabs-div-19" className="p-4">
+            <h3 id="tabs-h3-16" className="text-lg font-semibold">
+              Home
+            </h3>
+            <p id="tabs-p-16">Welcome to our website.</p>
           </div>
         </TabsContent>
         <TabsContent value="tab2">
-          <div className="p-4">
-            <h3 className="text-lg font-semibold">About</h3>
-            <p>Learn more about our company and mission.</p>
+          <div id="tabs-div-20" className="p-4">
+            <h3 id="tabs-h3-17" className="text-lg font-semibold">
+              About
+            </h3>
+            <p id="tabs-p-17">Learn more about our company and mission.</p>
           </div>
         </TabsContent>
         <TabsContent value="tab3">
-          <div className="p-4">
-            <h3 className="text-lg font-semibold">Contact</h3>
-            <p>Get in touch with us.</p>
+          <div id="tabs-div-21" className="p-4">
+            <h3 id="tabs-h3-18" className="text-lg font-semibold">
+              Contact
+            </h3>
+            <p id="tabs-p-18">Get in touch with us.</p>
           </div>
         </TabsContent>
       </>
@@ -325,21 +368,27 @@ export const Underline: Story = {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="tab1">
-          <div className="p-4">
-            <h3 className="text-lg font-semibold">Account Settings</h3>
-            <p>Manage your account information and preferences.</p>
+          <div id="tabs-div-22" className="p-4">
+            <h3 id="tabs-h3-19" className="text-lg font-semibold">
+              Account Settings
+            </h3>
+            <p id="tabs-p-19">Manage your account information and preferences.</p>
           </div>
         </TabsContent>
         <TabsContent value="tab2">
-          <div className="p-4">
-            <h3 className="text-lg font-semibold">Security Settings</h3>
-            <p>Configure your security and privacy options.</p>
+          <div id="tabs-div-23" className="p-4">
+            <h3 id="tabs-h3-20" className="text-lg font-semibold">
+              Security Settings
+            </h3>
+            <p id="tabs-p-20">Configure your security and privacy options.</p>
           </div>
         </TabsContent>
         <TabsContent value="tab3">
-          <div className="p-4">
-            <h3 className="text-lg font-semibold">Notification Settings</h3>
-            <p>Control how and when you receive notifications.</p>
+          <div id="tabs-div-24" className="p-4">
+            <h3 id="tabs-h3-21" className="text-lg font-semibold">
+              Notification Settings
+            </h3>
+            <p id="tabs-p-21">Control how and when you receive notifications.</p>
           </div>
         </TabsContent>
       </>

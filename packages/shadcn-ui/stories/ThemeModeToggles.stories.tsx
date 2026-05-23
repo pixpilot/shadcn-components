@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ComponentProps } from 'react';
 
 import { useTheme } from 'next-themes';
 import React from 'react';
@@ -16,7 +17,11 @@ import {
  * Wrap your app (or story) with `ThemeProvider` and pass theme values via useTheme hook.
  */
 
-const meta: Meta = {
+type StoryArgs = ComponentProps<typeof ThemeModeSwitchInside> & {
+  id?: string;
+};
+
+const meta: Meta<StoryArgs> = {
   title: 'shadcn-ui/ThemeModeToggles',
   parameters: {
     layout: 'centered',

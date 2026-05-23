@@ -1,0 +1,64 @@
+{
+  "version": "0",
+  "stories": {
+    "shadcn-ui-absolutefill--default": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 200
+                  },
+                  "id": "TsDcDKZ-Arc4",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "vuKICoTKGWy5",
+              "title": "delay 200"
+            }
+          ],
+          "browserOptionsId": "hm2p2mU0WNyc",
+          "browserType": "chromium",
+          "id": "JAsZoAgQ-d32",
+          "index": 0,
+          "screenshotOptionsId": "-WsIHoaCBiag",
+          "title": "AbsoluteFill over disabled button with tooltip visible"
+        }
+      ],
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "timeout": 200
+              },
+              "name": "waitForTimeout"
+            }
+          ],
+          "id": "IJYDRt8cxT5D",
+          "title": "delay 200"
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "hm2p2mU0WNyc": {
+      "viewport": {
+        "height": 450,
+        "width": 836
+      }
+    }
+  },
+  "screenshotOptions": {
+    "-WsIHoaCBiag": {
+      "clip": {
+        "height": 71,
+        "width": 159,
+        "x": 338,
+        "y": 191
+      }
+    }
+  }
+}

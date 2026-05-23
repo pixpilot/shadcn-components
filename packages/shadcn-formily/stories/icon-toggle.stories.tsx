@@ -42,6 +42,7 @@ export const BasicVisibilityToggle: Story = {
 
     return (
       <Form
+        id="icon-toggle"
         form={form}
         className="w-[400px]"
         onSubmit={(values) => {
@@ -51,6 +52,7 @@ export const BasicVisibilityToggle: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="icon-toggle-button-1"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -125,6 +127,7 @@ export const MultipleIconToggles: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="icon-toggle-button-2"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -173,6 +176,7 @@ export const WithDefaultValue: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="icon-toggle-button-3"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -224,6 +228,7 @@ export const WithSVGStrings: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="icon-toggle-button-4"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -296,6 +301,7 @@ export const MixedIconTypes: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="icon-toggle-button-5"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -363,6 +369,7 @@ export const SizeVariants: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="icon-toggle-button-6"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -430,6 +437,7 @@ export const StyleVariants: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="icon-toggle-button-7"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -480,6 +488,7 @@ export const WithValidation: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="icon-toggle-button-8"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -525,6 +534,7 @@ export const WithDescription: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="icon-toggle-button-9"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -575,6 +585,7 @@ export const Disabled: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="icon-toggle-button-10"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -717,6 +728,7 @@ export const SettingsForm: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="icon-toggle-button-11"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >

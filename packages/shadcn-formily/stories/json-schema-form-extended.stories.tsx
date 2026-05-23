@@ -14,7 +14,10 @@ const meta: Meta<typeof Form> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <div style={{ width: '600px', padding: '20px' }}>
+      <div
+        id="json-schema-form-extended-div-1"
+        style={{ width: '600px', padding: '20px' }}
+      >
         <Story />
       </div>
     ),
@@ -86,6 +89,7 @@ export const ExtendedForm: Story = {
 
     return (
       <JsonSchemaFormExtended
+        id="json-schema-form-extended"
         form={form}
         settings={{
           fileUpload: {

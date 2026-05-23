@@ -33,6 +33,7 @@ export const BasicSwitch: Story = {
 
     return (
       <Form
+        id="switch"
         form={form}
         className="w-[400px]"
         onSubmit={(values) => {
@@ -42,6 +43,7 @@ export const BasicSwitch: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="switch-button-1"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -91,6 +93,7 @@ export const MultipleSwitches: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="switch-button-2"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -146,6 +149,7 @@ export const SwitchWithSettings: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="switch-button-3"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -174,8 +178,10 @@ export const DeclarativeSwitch: Story = {
           alert(JSON.stringify(values, null, 2));
         }}
       >
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Preferences</h3>
+        <div id="switch-div-1" className="space-y-4">
+          <h3 id="switch-h3-1" className="text-lg font-semibold">
+            Preferences
+          </h3>
 
           <SchemaField>
             <SchemaField.Boolean
@@ -211,6 +217,7 @@ export const DeclarativeSwitch: Story = {
           </SchemaField>
         </div>
         <button
+          id="switch-button-4"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >

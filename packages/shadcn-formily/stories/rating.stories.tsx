@@ -34,6 +34,7 @@ export const BasicRating: Story = {
 
     return (
       <Form
+        id="rating"
         form={form}
         className="w-[400px]"
         onSubmit={(values) => {
@@ -43,6 +44,7 @@ export const BasicRating: Story = {
       >
         <SchemaFieldExtended schema={schema} />
         <button
+          id="rating-button-1"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -84,6 +86,7 @@ export const RatingWithDefaultValue: Story = {
       >
         <SchemaFieldExtended schema={schema} />
         <button
+          id="rating-button-2"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -124,6 +127,7 @@ export const RatingWithCustomMax: Story = {
       >
         <SchemaFieldExtended schema={schema} />
         <button
+          id="rating-button-3"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -176,6 +180,7 @@ export const RatingWithLabels: Story = {
       >
         <SchemaFieldExtended schema={schema} />
         <button
+          id="rating-button-4"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -216,6 +221,7 @@ export const RatingWithCircleIcon: Story = {
       >
         <SchemaFieldExtended schema={schema} />
         <button
+          id="rating-button-5"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -280,6 +286,7 @@ export const RatingWithDifferentSizes: Story = {
       >
         <SchemaFieldExtended schema={schema} />
         <button
+          id="rating-button-6"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -361,6 +368,7 @@ export const MultipleRatings: Story = {
       >
         <SchemaFieldExtended schema={schema} />
         <button
+          id="rating-button-7"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -409,6 +417,7 @@ export const RatingWithValidation: Story = {
       >
         <SchemaFieldExtended schema={schema} />
         <button
+          id="rating-button-8"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -464,6 +473,7 @@ export const RatingInNestedObject: Story = {
       >
         <SchemaFieldExtended schema={schema} />
         <button
+          id="rating-button-9"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -614,6 +624,7 @@ export const CompleteReviewForm: Story = {
       >
         <SchemaFieldExtended schema={schema} />
         <button
+          id="rating-button-10"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >

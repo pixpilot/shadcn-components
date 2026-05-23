@@ -1,0 +1,112 @@
+{
+  "version": "0",
+  "stories": {
+    "shadcn-ui-avatarupload--default": {
+      "screenshots": [
+        {
+          "browserOptionsId": "LSw61olDITRy",
+          "browserType": "chromium",
+          "id": "ymadX4CQBybb",
+          "index": 0,
+          "title": "Default AvatarUpload"
+        }
+      ]
+    },
+    "shadcn-ui-avatarupload--with-image": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#avatar-upload-div-1"
+                  },
+                  "id": "LK5Gk97ED2Tw",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "RmRqg2BqSLua",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "LSw61olDITRy",
+          "browserType": "chromium",
+          "id": "YaTJ_JkKlLpN",
+          "index": 0,
+          "title": "Avatar upload with image displayed"
+        },
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"button\"]"
+                  },
+                  "id": "52ZCDSTPqrhe",
+                  "name": "click"
+                }
+              ],
+              "id": "vXIFzVFMiehA",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#avatar-upload-div-1"
+                  },
+                  "id": "iuyLJnOo1vMX",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "2WDEmbImxjGU",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "LSw61olDITRy",
+          "browserType": "chromium",
+          "id": "VZwPsssoTck5",
+          "index": 1,
+          "title": "Should remove file"
+        }
+      ],
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"button\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "e0xtY9FkTIRD",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#avatar-upload-div-1"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "YgO6iAxooOQH",
+          "title": "takeElementScreenshot"
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "LSw61olDITRy": {
+      "viewport": {
+        "height": 424,
+        "width": 780
+      },
+      "cursor": true
+    }
+  }
+}

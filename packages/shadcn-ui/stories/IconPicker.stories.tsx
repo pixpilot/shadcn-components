@@ -1,10 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ComponentProps } from 'react';
 import type { IconProviderProps } from '../src/icon-selector/types';
 import faIcons from '@iconify-json/fa/icons.json';
 import mdiIcons from '@iconify-json/mdi/icons.json';
 import { addAPIProvider } from '@iconify/react';
+import { STORYBOOK_ORIGIN } from '@internal/storybook';
 import { useCallback, useState } from 'react';
 import { IconPicker } from '../src/icon-selector/IconPicker';
+
+type StoryArgs = ComponentProps<typeof IconPicker> & {
+  id?: string;
+};
 
 // Constants for magic numbers
 const MAX_CHANGELOG_ENTRIES = 5;
@@ -38,6 +44,7 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+
   argTypes: {
     value: {
       control: 'text',
@@ -82,13 +89,13 @@ const meta = {
       description: 'Toggle the clear button when an icon is selected',
     },
   },
-} satisfies Meta<typeof IconPicker>;
+} satisfies Meta<StoryArgs>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 const iconifyServer =
-  typeof window !== 'undefined' ? window.location.origin : 'http://localhost:6006';
+  typeof window !== 'undefined' ? window.location.origin : STORYBOOK_ORIGIN;
 
 // Remove the default Iconify API provider to use our custom one
 // It use MSW to mock the API requests in storybook
@@ -298,7 +305,10 @@ export const ClearButton: Story = {
     const [iconButtonValue, setIconButtonValue] = useState<string>('mdi:star');
 
     return (
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+      <div
+        id="icon-picker-div-1"
+        style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
+      >
         <IconPicker
           {...args}
           value={defaultValue}
@@ -489,14 +499,21 @@ export const Interactive: Story = {
     };
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <div
+        id="icon-picker-div-2"
+        style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+      >
         <IconPicker {...args} value={value} onChange={handleChange} />
-        <div style={{ fontSize: '0.875rem', color: '#666' }}>
-          <p style={{ marginBottom: '0.5rem', fontWeight: 'bold' }}>Change Log:</p>
-          <ul style={{ margin: 0, paddingLeft: '1.5rem' }}>
+        <div id="icon-picker-div-3" style={{ fontSize: '0.875rem', color: '#666' }}>
+          <p id="icon-picker-p-1" style={{ marginBottom: '0.5rem', fontWeight: 'bold' }}>
+            Change Log:
+          </p>
+          <ul id="icon-picker-ul-1" style={{ margin: 0, paddingLeft: '1.5rem' }}>
             {changeLog.slice(-MAX_CHANGELOG_ENTRIES).map((log, idx) => (
               // eslint-disable-next-line react/no-array-index-key
-              <li key={idx}>{log}</li>
+              <li id="icon-picker-li-1" key={idx}>
+                {log}
+              </li>
             ))}
           </ul>
         </div>
@@ -595,7 +612,10 @@ export const MultipleAsyncProviders: Story = {
     const providersArray = [loadMdiAsync, loadFaAsync];
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <div
+        id="icon-picker-div-4"
+        style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+      >
         <IconPicker
           {...args}
           providers={providersArray}
@@ -611,6 +631,7 @@ export const MultipleAsyncProviders: Story = {
           }}
         />
         <div
+          id="icon-picker-div-5"
           style={{
             fontSize: '0.875rem',
             maxHeight: '200px',
@@ -619,13 +640,16 @@ export const MultipleAsyncProviders: Story = {
             borderRadius: '4px',
           }}
         >
-          <p style={{ marginBottom: '0.5rem', fontWeight: 'bold' }}>
+          <p id="icon-picker-p-2" style={{ marginBottom: '0.5rem', fontWeight: 'bold' }}>
             Loading Log (Close and re-open to see caching):
           </p>
-          <ul style={{ margin: 0, paddingLeft: '1.5rem', listStyle: 'none' }}>
+          <ul
+            id="icon-picker-ul-2"
+            style={{ margin: 0, paddingLeft: '1.5rem', listStyle: 'none' }}
+          >
             {log.map((entry, idx) => (
               // eslint-disable-next-line react/no-array-index-key
-              <li key={idx} style={{ fontSize: '0.75rem' }}>
+              <li id="icon-picker-li-2" key={idx} style={{ fontSize: '0.75rem' }}>
                 {entry}
               </li>
             ))}
@@ -683,7 +707,10 @@ export const WithErrorHandling: Story = {
     }, []);
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <div
+        id="icon-picker-div-6"
+        style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+      >
         <IconPicker
           {...args}
           providers={[loadValidProvider, loadFailingProvider, loadInvalidProvider]}
@@ -700,6 +727,7 @@ export const WithErrorHandling: Story = {
           }}
         />
         <div
+          id="icon-picker-div-7"
           style={{
             fontSize: '0.875rem',
             padding: '0.5rem',
@@ -709,15 +737,21 @@ export const WithErrorHandling: Story = {
             borderColor: errors.some((e) => e.includes('✓')) ? '#4caf50' : '#ff9800',
           }}
         >
-          <p style={{ marginBottom: '0.5rem', fontWeight: 'bold' }}>Error Log:</p>
-          <ul style={{ margin: 0, paddingLeft: '1.5rem', listStyle: 'none' }}>
+          <p id="icon-picker-p-3" style={{ marginBottom: '0.5rem', fontWeight: 'bold' }}>
+            Error Log:
+          </p>
+          <ul
+            id="icon-picker-ul-3"
+            style={{ margin: 0, paddingLeft: '1.5rem', listStyle: 'none' }}
+          >
             {errors.length === 0 && (
-              <li style={{ fontSize: '0.75rem', color: '#666' }}>
+              <li id="icon-picker-li-3" style={{ fontSize: '0.75rem', color: '#666' }}>
                 Open the picker to see error handling...
               </li>
             )}
             {errors.map((error) => (
               <li
+                id="icon-picker-li-4"
                 key={error}
                 style={{
                   fontSize: '0.75rem',
@@ -761,7 +795,10 @@ export const LargeIconSet: Story = {
     }, []);
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <div
+        id="icon-picker-div-8"
+        style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+      >
         <IconPicker
           {...args}
           providers={[loadLargeIconSet]}
@@ -781,19 +818,27 @@ export const LargeIconSet: Story = {
           }}
         />
         <div
+          id="icon-picker-div-9"
           style={{
             fontSize: '0.875rem',
             padding: '0.5rem',
             borderRadius: '4px',
           }}
         >
-          <p style={{ marginBottom: '0.5rem', fontWeight: 'bold' }}>Performance Info:</p>
-          <ul style={{ margin: 0, paddingLeft: '1.5rem', fontSize: '0.75rem' }}>
-            <li>Icons are virtualized for optimal performance</li>
-            <li>
+          <p id="icon-picker-p-4" style={{ marginBottom: '0.5rem', fontWeight: 'bold' }}>
+            Performance Info:
+          </p>
+          <ul
+            id="icon-picker-ul-4"
+            style={{ margin: 0, paddingLeft: '1.5rem', fontSize: '0.75rem' }}
+          >
+            <li id="icon-picker-li-5">Icons are virtualized for optimal performance</li>
+            <li id="icon-picker-li-6">
               Search uses pre-computed lowercase names (no toLowerCase() per keystroke)
             </li>
-            <li>Providers are cached (won't reload when closing/reopening the picker)</li>
+            <li id="icon-picker-li-7">
+              Providers are cached (won't reload when closing/reopening the picker)
+            </li>
           </ul>
         </div>
       </div>

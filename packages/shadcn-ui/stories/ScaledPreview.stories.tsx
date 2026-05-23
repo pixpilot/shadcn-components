@@ -51,6 +51,7 @@ export const Default: Story = {
     scaleFactor: 1,
     children: (
       <div
+        id="scaled-preview-div-1"
         style={{
           width: '816px',
           height: '1056px',
@@ -60,9 +61,11 @@ export const Default: Story = {
           color: '#333',
         }}
       >
-        <h1>Sample Page</h1>
-        <p>This is a sample page content that will be scaled to fit the preview size.</p>
-        <p>
+        <h1 id="scaled-preview-h1-1">Sample Page</h1>
+        <p id="scaled-preview-p-1">
+          This is a sample page content that will be scaled to fit the preview size.
+        </p>
+        <p id="scaled-preview-p-2">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
           incididunt ut labore et dolore magna aliqua.
         </p>
@@ -79,6 +82,7 @@ export const Small: Story = {
     scaleFactor: 0.5,
     children: (
       <div
+        id="scaled-preview-div-2"
         style={{
           width: '816px',
           height: '1056px',
@@ -87,8 +91,8 @@ export const Small: Story = {
           padding: '10px',
         }}
       >
-        <h2>Small Preview</h2>
-        <p>Content scaled down for a smaller preview.</p>
+        <h2 id="scaled-preview-h2-1">Small Preview</h2>
+        <p id="scaled-preview-p-3">Content scaled down for a smaller preview.</p>
       </div>
     ),
   },
@@ -103,6 +107,7 @@ export const Large: Story = {
     padding: 40,
     children: (
       <div
+        id="scaled-preview-div-3"
         style={{
           width: '816px',
           height: '1056px',
@@ -111,12 +116,12 @@ export const Large: Story = {
           padding: '10px',
         }}
       >
-        <h1>Large Preview</h1>
-        <p>This preview is larger, showing more detail.</p>
-        <ul>
-          <li>Item 1</li>
-          <li>Item 2</li>
-          <li>Item 3</li>
+        <h1 id="scaled-preview-h1-2">Large Preview</h1>
+        <p id="scaled-preview-p-4">This preview is larger, showing more detail.</p>
+        <ul id="scaled-preview-ul-1">
+          <li id="scaled-preview-li-1">Item 1</li>
+          <li id="scaled-preview-li-2">Item 2</li>
+          <li id="scaled-preview-li-3">Item 3</li>
         </ul>
       </div>
     ),
@@ -132,6 +137,7 @@ export const ManualScale: Story = {
     forceScale: 0.5,
     children: (
       <div
+        id="scaled-preview-div-4"
         style={{
           width: '816px',
           height: '1056px',
@@ -140,12 +146,14 @@ export const ManualScale: Story = {
           padding: '10px',
         }}
       >
-        <h1>Manual Scale</h1>
-        <p>
+        <h1 id="scaled-preview-h1-3">Manual Scale</h1>
+        <p id="scaled-preview-p-5">
           This preview uses a manual scale factor of 0.5, making the content appear at 50%
           of its original size.
         </p>
-        <p>The automatic scaling is overridden by the scale prop.</p>
+        <p id="scaled-preview-p-6">
+          The automatic scaling is overridden by the scale prop.
+        </p>
       </div>
     ),
   },
@@ -160,6 +168,7 @@ export const CustomSize: Story = {
     previewBoxSize: { width: 500, height: 700 },
     children: (
       <div
+        id="scaled-preview-div-5"
         style={{
           width: '816px',
           height: '1056px',
@@ -168,12 +177,14 @@ export const CustomSize: Story = {
           padding: '10px',
         }}
       >
-        <h1>Custom Size</h1>
-        <p>
+        <h1 id="scaled-preview-h1-4">Custom Size</h1>
+        <p id="scaled-preview-p-7">
           This preview uses a custom size of 500x700 pixels, overriding the scaleFactor
           calculation.
         </p>
-        <p>The previewBoxSize prop takes precedence over scaleFactor.</p>
+        <p id="scaled-preview-p-8">
+          The previewBoxSize prop takes precedence over scaleFactor.
+        </p>
       </div>
     ),
   },

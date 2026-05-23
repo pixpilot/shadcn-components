@@ -148,10 +148,12 @@ export const LongDialog: Story = {
     };
 
     return (
-      <Form form={form} className="space-y-6">
-        <div className="space-y-4">
-          <h2 className="text-2xl font-bold">Long Dialog Array</h2>
-          <p className="text-muted-foreground">
+      <Form id="array-dialog" form={form} className="space-y-6">
+        <div id="array-dialog-div-1" className="space-y-4">
+          <h2 id="array-dialog-h2-1" className="text-2xl font-bold">
+            Long Dialog Array
+          </h2>
+          <p id="array-dialog-p-1" className="text-muted-foreground">
             This array dialog contains many fields to demonstrate scrolling behavior in
             long forms.
           </p>
@@ -159,7 +161,7 @@ export const LongDialog: Story = {
 
         <SchemaField schema={schema} />
 
-        <div className="border-t pt-4">
+        <div id="array-dialog-div-2" className="border-t pt-4">
           <Button
             type="button"
             onClick={() => alert(JSON.stringify(form.values, null, 2))}
@@ -238,16 +240,20 @@ function DialogInsideContainerSettingsContent() {
   };
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="space-y-2">
-        <h2 className="text-2xl font-bold">Array Dialog In Container</h2>
-        <p className="text-muted-foreground max-w-xl">
-          This story uses <code>settings.dialog.container</code> on the form so the dialog
-          portal mounts inside the bordered box instead of the document body.
+    <div id="array-dialog-div-3" className="flex flex-col gap-4">
+      <div id="array-dialog-div-4" className="space-y-2">
+        <h2 id="array-dialog-h2-2" className="text-2xl font-bold">
+          Array Dialog In Container
+        </h2>
+        <p id="array-dialog-p-2" className="text-muted-foreground max-w-xl">
+          This story uses <code id="array-dialog-code-1">settings.dialog.container</code>{' '}
+          on the form so the dialog portal mounts inside the bordered box instead of the
+          document body.
         </p>
       </div>
 
       <div
+        id="array-dialog-div-5"
         ref={containerRef}
         className="relative h-[360px] overflow-hidden rounded-lg border bg-muted/20 p-4"
       >
@@ -338,12 +344,17 @@ export const PreventBackdropDismiss: Story = {
           },
         }}
       >
-        <div className="space-y-2">
-          <h2 className="text-2xl font-bold">Array Dialog Without Backdrop Dismiss</h2>
-          <p className="text-muted-foreground">
+        <div id="array-dialog-div-6" className="space-y-2">
+          <h2 id="array-dialog-h2-3" className="text-2xl font-bold">
+            Array Dialog Without Backdrop Dismiss
+          </h2>
+          <p id="array-dialog-p-3" className="text-muted-foreground">
             Open the item editor and click outside the dialog. The backdrop click should
             not close it because the setting is enabled through
-            <code>settings.dialog.preventBackdropClickClose</code>.
+            <code id="array-dialog-code-2">
+              settings.dialog.preventBackdropClickClose
+            </code>
+            .
           </p>
         </div>
 

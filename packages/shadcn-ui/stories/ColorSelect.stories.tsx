@@ -1,6 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ComponentProps } from 'react';
 import React, { useState } from 'react';
 import { ColorSelect } from '../src/ColorSelect';
+
+type StoryArgs = Partial<
+  ComponentProps<typeof ColorSelect> & {
+    id?: string;
+  }
+>;
 
 /**
  * A color select component that displays a color box next to each option.
@@ -13,6 +20,7 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+
   argTypes: {
     options: {
       control: 'object',
@@ -31,12 +39,12 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div style={{ width: 250 }}>
+      <div id="color-select-div-1" style={{ width: 250 }}>
         <Story />
       </div>
     ),
   ],
-} satisfies Meta<typeof ColorSelect>;
+} satisfies Meta<StoryArgs>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -65,7 +73,7 @@ export const WithSelectedValue: Story = {
     const [color, setColor] = React.useState('#3b82f6');
 
     return (
-      <div className="flex flex-col gap-4">
+      <div id="color-select-div-2" className="flex flex-col gap-4">
         <ColorSelect
           options={[
             { label: 'Red', value: '#ef4444' },
@@ -78,10 +86,10 @@ export const WithSelectedValue: Story = {
           onChange={setColor}
           placeholder="Select a color..."
         />
-        <div className="mt-4 text-sm text-gray-600">
-          <p>
+        <div id="color-select-div-3" className="mt-4 text-sm text-gray-600">
+          <p id="color-select-p-1">
             Selected color:{' '}
-            <strong>
+            <strong id="color-select-strong-1">
               {color
                 ? `${
                     [
@@ -96,9 +104,10 @@ export const WithSelectedValue: Story = {
             </strong>
           </p>
           {color && (
-            <div className="mt-2 flex items-center gap-2">
-              <span>Preview:</span>
+            <div id="color-select-div-4" className="mt-2 flex items-center gap-2">
+              <span id="color-select-span-1">Preview:</span>
               <div
+                id="color-select-div-5"
                 className="h-8 w-8 rounded border border-gray-300"
                 style={{ backgroundColor: color }}
               />
@@ -117,10 +126,13 @@ export const WithPlaceholder: Story = {
   render: function Render(args) {
     const [value, setValue] = React.useState<string>('');
     return (
-      <div className="space-y-4">
+      <div id="color-select-div-6" className="space-y-4">
         <ColorSelect {...args} value={value} onChange={setValue} />
-        <div className="text-sm text-muted-foreground">
-          Selected value: <span className="font-mono">{value || 'none'}</span>
+        <div id="color-select-div-7" className="text-sm text-muted-foreground">
+          Selected value:{' '}
+          <span id="color-select-span-2" className="font-mono">
+            {value || 'none'}
+          </span>
         </div>
       </div>
     );
@@ -145,10 +157,13 @@ export const CustomColors: Story = {
     const [value, setValue] = React.useState('');
 
     return (
-      <div className="space-y-4">
+      <div id="color-select-div-8" className="space-y-4">
         <ColorSelect {...args} value={value} onChange={setValue} />
-        <div className="text-sm text-gray-600">
-          Selected value: <span className="font-mono">{value || 'none'}</span>
+        <div id="color-select-div-9" className="text-sm text-gray-600">
+          Selected value:{' '}
+          <span id="color-select-span-3" className="font-mono">
+            {value || 'none'}
+          </span>
         </div>
       </div>
     );
@@ -174,7 +189,7 @@ export const Controlled: Story = {
     const [value, setValue] = useState('');
 
     return (
-      <div className="space-y-4">
+      <div id="color-select-div-10" className="space-y-4">
         <ColorSelect
           options={[
             { label: 'Slate', value: '#64748b' },
@@ -187,16 +202,19 @@ export const Controlled: Story = {
           onChange={setValue}
           placeholder="Select a neutral color"
         />
-        <div className="text-sm text-gray-600">
-          <div>Selected value: {value || 'None'}</div>
+        <div id="color-select-div-11" className="text-sm text-gray-600">
+          <div id="color-select-div-12">Selected value: {value || 'None'}</div>
           {value && (
-            <div className="mt-2 flex items-center gap-2">
-              <span>Selected color:</span>
+            <div id="color-select-div-13" className="mt-2 flex items-center gap-2">
+              <span id="color-select-span-4">Selected color:</span>
               <div
+                id="color-select-div-14"
                 className="h-6 w-6 rounded border border-gray-300"
                 style={{ backgroundColor: value }}
               />
-              <span className="font-mono text-sm">{value}</span>
+              <span id="color-select-span-5" className="font-mono text-sm">
+                {value}
+              </span>
             </div>
           )}
         </div>
@@ -213,7 +231,7 @@ export const KeyboardCycleMode: Story = {
     const [value, setValue] = React.useState('#ff0000');
 
     return (
-      <div className="flex flex-col gap-4">
+      <div id="color-select-div-15" className="flex flex-col gap-4">
         <ColorSelect
           value={value}
           onChange={setValue}
@@ -228,7 +246,7 @@ export const KeyboardCycleMode: Story = {
           placeholder="Select a color"
           keyboardMode="cycle"
         />
-        <div className="text-sm text-muted-foreground">
+        <div id="color-select-div-16" className="text-sm text-muted-foreground">
           Try using arrow keys to cycle through colors
         </div>
       </div>

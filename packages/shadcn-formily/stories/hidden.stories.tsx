@@ -43,6 +43,6 @@ export const JsonSchema: Story = {
       },
     };
 
-    return <JsonSchemaForm form={form} schema={schema}></JsonSchemaForm>;
+    return <JsonSchemaForm id="hidden" form={form} schema={schema}></JsonSchemaForm>;
   },
 };

@@ -10,7 +10,7 @@ const meta: Meta = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <div className="w-full max-w-lg">
+      <div id="form-density-div-1" className="w-full max-w-lg">
         <Story />
       </div>
     ),
@@ -52,12 +52,19 @@ export const CompactDensity: Story = {
   render: () => {
     const form = createForm();
     return (
-      <div>
-        <h3 className="mb-4 text-lg font-semibold">Compact Density</h3>
-        <p className="mb-4 text-sm text-gray-600">
+      <div id="form-density-div-2">
+        <h3 id="form-density-h3-1" className="mb-4 text-lg font-semibold">
+          Compact Density
+        </h3>
+        <p id="form-density-p-1" className="mb-4 text-sm text-gray-600">
           Smallest gaps and text size - ideal for dense information displays
         </p>
-        <JsonSchemaForm form={form} schema={baseSchema} layout={{ density: 'compact' }} />
+        <JsonSchemaForm
+          id="form-density"
+          form={form}
+          schema={baseSchema}
+          layout={{ density: 'compact' }}
+        />
       </div>
     );
   },
@@ -67,9 +74,11 @@ export const NormalDensity: Story = {
   render: () => {
     const form = createForm();
     return (
-      <div>
-        <h3 className="mb-4 text-lg font-semibold">Normal Density</h3>
-        <p className="mb-4 text-sm text-gray-600">
+      <div id="form-density-div-3">
+        <h3 id="form-density-h3-2" className="mb-4 text-lg font-semibold">
+          Normal Density
+        </h3>
+        <p id="form-density-p-2" className="mb-4 text-sm text-gray-600">
           Balanced spacing - default and recommended for most use cases
         </p>
         <JsonSchemaForm form={form} schema={baseSchema} layout={{ density: 'normal' }} />
@@ -82,9 +91,11 @@ export const ComfortableDensity: Story = {
   render: () => {
     const form = createForm();
     return (
-      <div>
-        <h3 className="mb-4 text-lg font-semibold">Comfortable Density</h3>
-        <p className="mb-4 text-sm text-gray-600">
+      <div id="form-density-div-4">
+        <h3 id="form-density-h3-3" className="mb-4 text-lg font-semibold">
+          Comfortable Density
+        </h3>
+        <p id="form-density-p-3" className="mb-4 text-sm text-gray-600">
           Larger gaps and text size - ideal for accessibility and readability
         </p>
         <JsonSchemaForm
@@ -101,9 +112,11 @@ export const ResponsiveDensity: Story = {
   render: () => {
     const form = createForm();
     return (
-      <div>
-        <h3 className="mb-4 text-lg font-semibold">Responsive Density</h3>
-        <p className="mb-4 text-sm text-gray-600">
+      <div id="form-density-div-5">
+        <h3 id="form-density-h3-4" className="mb-4 text-lg font-semibold">
+          Responsive Density
+        </h3>
+        <p id="form-density-p-4" className="mb-4 text-sm text-gray-600">
           Automatically adjusts based on screen size - compact on mobile, comfortable on
           desktop
         </p>
@@ -124,9 +137,11 @@ export const AllDensitiesComparison: Story = {
     const formComfortable = createForm();
     const formResponsive = createForm();
     return (
-      <div className="space-y-8">
-        <div>
-          <h4 className="mb-2 font-semibold">Compact</h4>
+      <div id="form-density-div-6" className="space-y-8">
+        <div id="form-density-div-7">
+          <h4 id="form-density-h4-1" className="mb-2 font-semibold">
+            Compact
+          </h4>
           <JsonSchemaForm
             form={formCompact}
             schema={baseSchema}
@@ -134,8 +149,10 @@ export const AllDensitiesComparison: Story = {
           />
         </div>
 
-        <div className="border-t pt-8">
-          <h4 className="mb-2 font-semibold">Normal</h4>
+        <div id="form-density-div-8" className="border-t pt-8">
+          <h4 id="form-density-h4-2" className="mb-2 font-semibold">
+            Normal
+          </h4>
           <JsonSchemaForm
             form={formNormal}
             schema={baseSchema}
@@ -143,8 +160,10 @@ export const AllDensitiesComparison: Story = {
           />
         </div>
 
-        <div className="border-t pt-8">
-          <h4 className="mb-2 font-semibold">Comfortable</h4>
+        <div id="form-density-div-9" className="border-t pt-8">
+          <h4 id="form-density-h4-3" className="mb-2 font-semibold">
+            Comfortable
+          </h4>
           <JsonSchemaForm
             form={formComfortable}
             schema={baseSchema}
@@ -152,8 +171,10 @@ export const AllDensitiesComparison: Story = {
           />
         </div>
 
-        <div className="border-t pt-8">
-          <h4 className="mb-2 font-semibold">Responsive</h4>
+        <div id="form-density-div-10" className="border-t pt-8">
+          <h4 id="form-density-h4-4" className="mb-2 font-semibold">
+            Responsive
+          </h4>
           <JsonSchemaForm
             form={formResponsive}
             schema={baseSchema}
@@ -203,8 +224,8 @@ export const NestedObjectsDensity: Story = {
     };
 
     return (
-      <div className="w-lg">
-        <h3 className="mb-4 text-lg font-semibold">
+      <div id="form-density-div-11" className="w-lg">
+        <h3 id="form-density-h3-5" className="mb-4 text-lg font-semibold">
           Nested Objects - Comfortable Density
         </h3>
         <JsonSchemaForm

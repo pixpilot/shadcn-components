@@ -45,14 +45,14 @@ export const Default: Story = {
             Make changes to your profile here. Click save when you're done.
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
+        <div id="dialog-div-1" className="grid gap-4 py-4">
+          <div id="dialog-div-2" className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">
               Name
             </Label>
             <input id="name" defaultValue="Pedro Duarte" className="col-span-3" />
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
+          <div id="dialog-div-3" className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">
               Username
             </Label>
@@ -105,7 +105,7 @@ export const Simple: Story = {
         <DialogHeader>
           <DialogTitle>Simple Dialog</DialogTitle>
         </DialogHeader>
-        <p>This is a simple dialog with just a title and some content.</p>
+        <p id="dialog-p-1">This is a simple dialog with just a title and some content.</p>
       </DialogContent>
     </Dialog>
   ),
@@ -130,7 +130,11 @@ export const LongDialog: Story = {
         </DialogHeader>
         <DialogBody>
           {Array.from({ length: 50 }, (_, i) => (
-            <div key={i} className="grid grid-cols-4 items-center gap-4">
+            <div
+              id="dialog-div-4"
+              key={i}
+              className="grid grid-cols-4 items-center gap-4"
+            >
               <Label htmlFor={`field-${i}`} className="text-right">
                 Field {i + 1}
               </Label>
@@ -171,10 +175,13 @@ function ContainerDialogStoryContent({
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-4">
-      <p className="text-muted-foreground text-sm">{description}</p>
+    <div id="dialog-div-5" className="flex flex-col items-center gap-4">
+      <p id="dialog-p-2" className="text-muted-foreground text-sm">
+        {description}
+      </p>
       {/* Container the dialog will be scoped to */}
       <div
+        id="dialog-div-6"
         ref={containerRef}
         className="relative overflow-hidden rounded-lg border w-[480px] h-[320px] flex items-center justify-center bg-muted/30"
       >
@@ -192,7 +199,7 @@ function ContainerDialogStoryContent({
               <DialogDescription>{bodyText}</DialogDescription>
             </DialogHeader>
             <DialogBody>
-              <p className="text-sm">
+              <p id="dialog-p-3" className="text-sm">
                 The overlay and dialog are clipped to the box above.
               </p>
             </DialogBody>

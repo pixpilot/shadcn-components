@@ -36,7 +36,7 @@ export const Default: Story = {
 export const Sizes: Story = {
   render: function SizesRender() {
     return (
-      <div className="flex flex-col items-start gap-8">
+      <div id="button-group-div-1" className="flex flex-col items-start gap-8">
         <ButtonGroup>
           <Button variant="outline" size="sm">
             Small

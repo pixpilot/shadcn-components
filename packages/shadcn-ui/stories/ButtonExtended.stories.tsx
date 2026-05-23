@@ -1,17 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ComponentProps } from 'react';
 import { ButtonExtended } from '../src/ButtonExtended';
 
 /**
  * A customizable button component with loading states, tooltips, and multiple variants.
  * Built on top of shadcn/ui Button component.
  */
-const meta = {
+type StoryArgs = Partial<
+  ComponentProps<typeof ButtonExtended> & {
+    id?: string;
+  }
+>;
+
+const meta: Meta<StoryArgs> = {
   title: 'shadcn-ui/ButtonExtended',
   component: ButtonExtended,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
+
   argTypes: {
     variant: {
       control: 'select',
@@ -32,7 +40,7 @@ const meta = {
       description: 'Disables the button',
     },
   },
-} satisfies Meta<typeof ButtonExtended>;
+} satisfies Meta<StoryArgs>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -187,8 +195,10 @@ export const TooltipWithNode: Story = {
       {...args}
       tooltip={
         <>
-          <strong>Rich title</strong>
-          <p className="mt-1">Additional descriptive text as a node.</p>
+          <strong id="button-extended-strong-1">Rich title</strong>
+          <p id="button-extended-p-1" className="mt-1">
+            Additional descriptive text as a node.
+          </p>
         </>
       }
     >

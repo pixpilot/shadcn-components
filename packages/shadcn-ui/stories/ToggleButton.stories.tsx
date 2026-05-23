@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ComponentProps } from 'react';
 import React from 'react';
 import { ToggleButton } from '../src/ToggleButton';
 
@@ -7,13 +8,20 @@ import { ToggleButton } from '../src/ToggleButton';
  * A toggle button component that can switch between checked and unchecked states.
  * Supports both controlled and uncontrolled usage with customizable content for each state.
  */
-const meta = {
+type StoryArgs = Partial<
+  ComponentProps<typeof ToggleButton> & {
+    id?: string;
+  }
+>;
+
+const meta: Meta<StoryArgs> = {
   title: 'shadcn-ui/ToggleButton',
   component: ToggleButton,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
+
   argTypes: {
     checked: {
       control: 'boolean',
@@ -36,7 +44,7 @@ const meta = {
       description: 'Content shown when unchecked',
     },
   },
-} satisfies Meta<typeof ToggleButton>;
+} satisfies Meta<StoryArgs>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

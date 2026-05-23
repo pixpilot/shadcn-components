@@ -14,7 +14,7 @@ const meta = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <div style={{ width: 320 }}>
+      <div id="input-div-1" style={{ width: 320 }}>
         <Story />
       </div>
     ),
@@ -59,7 +59,7 @@ export const WithSuffix: Story = {
 export const WithPrefixAndSuffix: Story = {
   args: {
     prefix: '@',
-    suffix: <kbd>⌘K</kbd>,
+    suffix: <kbd id="input-kbd-1">⌘K</kbd>,
     placeholder: 'username',
   },
 };

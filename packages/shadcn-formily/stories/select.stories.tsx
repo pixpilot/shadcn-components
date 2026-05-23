@@ -45,6 +45,7 @@ export const BasicSelect: Story = {
 
     return (
       <Form
+        id="select"
         form={form}
         className="w-[400px]"
         onSubmit={(values) => {
@@ -54,6 +55,7 @@ export const BasicSelect: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="select-button-1"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -114,6 +116,7 @@ export const SelectWithOwnOptions: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="select-button-2"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -156,6 +159,7 @@ export const SelectWithDefaultValue: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="select-button-3"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -214,6 +218,7 @@ export const SelectInNestedObject: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="select-button-4"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -261,6 +266,7 @@ export const RequiredSelect: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="select-button-5"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -309,6 +315,7 @@ export const SelectWithFormattedLabels: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="select-button-6"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -342,8 +349,10 @@ export const DeclarativeSelect: Story = {
             alert(JSON.stringify(values, null, JSON_INDENT));
           }}
         >
-          <div className="space-y-6">
-            <h3 className="text-lg font-semibold">User Preferences</h3>
+          <div id="select-div-1" className="space-y-6">
+            <h3 id="select-h3-1" className="text-lg font-semibold">
+              User Preferences
+            </h3>
 
             <SchemaField>
               <SchemaField.String
@@ -402,10 +411,11 @@ export const DeclarativeSelect: Story = {
               />
             </SchemaField>
           </div>
-          <pre className="mt-4 text-sm">
+          <pre id="select-pre-1" className="mt-4 text-sm">
             {JSON.stringify(form.values, null, JSON_INDENT)}
           </pre>
           <button
+            id="select-button-7"
             type="submit"
             className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
           >

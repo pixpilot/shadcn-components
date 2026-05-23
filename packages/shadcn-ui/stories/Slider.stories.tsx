@@ -38,7 +38,7 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div style={{ width: 300, padding: 20 }}>
+      <div id="slider-div-1" style={{ width: 300, padding: 20 }}>
         <Story />
       </div>
     ),
@@ -103,7 +103,7 @@ export const Vertical: Story = {
   },
   decorators: [
     (Story) => (
-      <div style={{ height: 200, padding: 20 }}>
+      <div id="slider-div-2" style={{ height: 200, padding: 20 }}>
         <Story />
       </div>
     ),

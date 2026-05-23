@@ -2,12 +2,17 @@ packages:
   - packages/**
   - tooling/**
 
+catalog:
+  ai: 6.0.182
+  '@openrouter/ai-sdk-provider': ^2.9.0
+
 catalogs:
   prod:
     'pretty-bytes': ^7.1.0
     '@pixpilot/hash': ^0.2.0
     '@pixpilot/string': ^2.5.0
     '@pixpilot/env': ^0.2.3
+    '@pixpilot/object': ^2.4.2
     class-variance-authority: ^0.7.1
     clsx: ^2.1.1
     lucide-react: 0.553.0
@@ -54,3 +59,4 @@ catalogs:
     jsdom: ^27.4.0
     ip: ^1.1.5
     postcss: ^8.5.14
+    tsx: ^4.21.0

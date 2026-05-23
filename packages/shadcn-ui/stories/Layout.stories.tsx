@@ -51,7 +51,9 @@ export const FullLayout: StoryObj = {
       <LayoutMain className="bg-secondary">
         {[...Array.from({ length: 50 })].map((_, i) => (
           // eslint-disable-next-line react/no-array-index-key
-          <p key={i}>Content line {i + 1}</p>
+          <p id="layout-p-1" key={i}>
+            Content line {i + 1}
+          </p>
         ))}
       </LayoutMain>
       <LayoutFooter className="bg-primary text-primary-foreground">Footer</LayoutFooter>
@@ -65,7 +67,9 @@ export const MainOnly: StoryObj = {
       <LayoutMain className="bg-secondary">
         {[...Array.from({ length: 50 })].map((_, i) => (
           // eslint-disable-next-line react/no-array-index-key
-          <p key={i}>Content line {i + 1}</p>
+          <p id="layout-p-2" key={i}>
+            Content line {i + 1}
+          </p>
         ))}
       </LayoutMain>
     </Layout>
@@ -79,7 +83,9 @@ export const HeaderOnly: StoryObj = {
       <LayoutMain className="bg-secondary">
         {[...Array.from({ length: 50 })].map((_, i) => (
           // eslint-disable-next-line react/no-array-index-key
-          <p key={i}>Content line {i + 1}</p>
+          <p id="layout-p-3" key={i}>
+            Content line {i + 1}
+          </p>
         ))}
       </LayoutMain>
     </Layout>
@@ -92,7 +98,9 @@ export const FooterOnly: StoryObj = {
       <LayoutMain className="bg-secondary">
         {[...Array.from({ length: 50 })].map((_, i) => (
           // eslint-disable-next-line react/no-array-index-key
-          <p key={i}>Content line {i + 1}</p>
+          <p id="layout-p-4" key={i}>
+            Content line {i + 1}
+          </p>
         ))}
       </LayoutMain>
       <LayoutFooter className="bg-primary text-primary-foreground">Footer</LayoutFooter>
@@ -102,13 +110,15 @@ export const FooterOnly: StoryObj = {
 
 export const WithInsideContainer: StoryObj = {
   render: () => (
-    <div className="h-96 border-2 border-dashed">
+    <div id="layout-div-1" className="h-96 border-2 border-dashed">
       <Layout>
         <LayoutHeader className="bg-primary text-primary-foreground">Header</LayoutHeader>
         <LayoutMain className="bg-secondary">
           {[...Array.from({ length: 20 })].map((_, i) => (
             // eslint-disable-next-line react/no-array-index-key
-            <p key={i}>Content line {i + 1}</p>
+            <p id="layout-p-5" key={i}>
+              Content line {i + 1}
+            </p>
           ))}
         </LayoutMain>
         <LayoutFooter className="bg-primary text-primary-foreground">Footer</LayoutFooter>
@@ -124,7 +134,9 @@ export const FullScreen: StoryObj = {
       <LayoutMain className="bg-secondary">
         {[...Array.from({ length: 50 })].map((_, i) => (
           // eslint-disable-next-line react/no-array-index-key
-          <p key={i}>Content line {i + 1}</p>
+          <p id="layout-p-6" key={i}>
+            Content line {i + 1}
+          </p>
         ))}
       </LayoutMain>
       <LayoutFooter className="bg-primary text-primary-foreground">Footer</LayoutFooter>
@@ -139,7 +151,10 @@ export const NestedLayout: StoryObj = {
         Top Header
       </LayoutHeader>
       <LayoutMain className="bg-secondary">
-        <div className="border-2 border-dashed border-accent m-4 flex flex-col overflow-hidden h-96">
+        <div
+          id="layout-div-2"
+          className="border-2 border-dashed border-accent m-4 flex flex-col overflow-hidden h-96"
+        >
           <Layout className="h-full">
             <LayoutHeader className="bg-accent text-accent-foreground">
               Nested Header
@@ -147,7 +162,9 @@ export const NestedLayout: StoryObj = {
             <LayoutMain className="bg-muted">
               {[...Array.from({ length: 15 })].map((_, i) => (
                 // eslint-disable-next-line react/no-array-index-key
-                <p key={i}>Nested content line {i + 1}</p>
+                <p id="layout-p-7" key={i}>
+                  Nested content line {i + 1}
+                </p>
               ))}
             </LayoutMain>
             <LayoutFooter className="bg-accent text-accent-foreground">

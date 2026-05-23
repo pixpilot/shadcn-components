@@ -69,6 +69,7 @@ export const HorizontalSeparator: Story = {
 
     return (
       <Form
+        id="separator"
         form={form}
         className="w-[400px]"
         onSubmit={(values) => {
@@ -78,6 +79,7 @@ export const HorizontalSeparator: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="separator-button-1"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -163,6 +165,7 @@ export const WithSectionHeaders: Story = {
       >
         <SchemaField schema={schema} />
         <button
+          id="separator-button-2"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
@@ -191,8 +194,10 @@ export const DeclarativeSeparator: Story = {
           alert(JSON.stringify(values, null, 2));
         }}
       >
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold">User Profile</h3>
+        <div id="separator-div-1" className="space-y-4">
+          <h3 id="separator-h3-1" className="text-lg font-semibold">
+            User Profile
+          </h3>
 
           <SchemaField>
             <SchemaField.Void
@@ -259,6 +264,7 @@ export const DeclarativeSeparator: Story = {
           </SchemaField>
         </div>
         <button
+          id="separator-button-3"
           type="submit"
           className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >

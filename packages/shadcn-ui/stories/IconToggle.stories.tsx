@@ -156,14 +156,14 @@ export const Controlled: Story = {
     const [isVisible, setIsVisible] = useState(false);
 
     return (
-      <div className="flex flex-col items-center gap-4">
+      <div id="icon-toggle-div-1" className="flex flex-col items-center gap-4">
         <IconToggle
           checked={isVisible}
           onChange={setIsVisible}
           checkedIcon={<Eye />}
           uncheckedIcon={<EyeOff />}
         />
-        <p className="text-sm text-muted-foreground">
+        <p id="icon-toggle-p-1" className="text-sm text-muted-foreground">
           Password is {isVisible ? 'visible' : 'hidden'}
         </p>
       </div>
@@ -177,7 +177,7 @@ export const Controlled: Story = {
 export const MultipleToggles: Story = {
   render: () => {
     return (
-      <div className="flex gap-2">
+      <div id="icon-toggle-div-2" className="flex gap-2">
         <IconToggle
           checkedIcon={<Eye />}
           uncheckedIcon={<EyeOff />}
@@ -222,21 +222,28 @@ export const WithOnChange: Story = {
     };
 
     return (
-      <div className="flex flex-col items-center gap-4">
+      <div id="icon-toggle-div-3" className="flex flex-col items-center gap-4">
         <IconToggle
           checkedIcon={<Eye />}
           uncheckedIcon={<EyeOff />}
           onChange={handleChange}
           defaultChecked={false}
         />
-        <div className="w-64">
-          <p className="mb-2 text-sm font-medium">Change Log:</p>
-          <div className="space-y-1 rounded-md border border-border bg-muted/30 p-2">
+        <div id="icon-toggle-div-4" className="w-64">
+          <p id="icon-toggle-p-2" className="mb-2 text-sm font-medium">
+            Change Log:
+          </p>
+          <div
+            id="icon-toggle-div-5"
+            className="space-y-1 rounded-md border border-border bg-muted/30 p-2"
+          >
             {logs.length === 0 ? (
-              <p className="text-xs text-muted-foreground">No changes yet</p>
+              <p id="icon-toggle-p-3" className="text-xs text-muted-foreground">
+                No changes yet
+              </p>
             ) : (
               logs.map((log) => (
-                <p key={log} className="text-xs font-mono">
+                <p id="icon-toggle-p-4" key={log} className="text-xs font-mono">
                   {log}
                 </p>
               ))
@@ -294,7 +301,7 @@ export const HeartToggleSVG: Story = {
 export const MixedIconTypes: Story = {
   render: () => {
     return (
-      <div className="flex gap-2">
+      <div id="icon-toggle-div-6" className="flex gap-2">
         <IconToggle
           checkedIcon={<Eye />}
           uncheckedIcon={<EyeOff />}
@@ -321,33 +328,39 @@ export const MixedIconTypes: Story = {
 export const AllSizes: Story = {
   render: () => {
     return (
-      <div className="flex items-center gap-4">
-        <div className="flex flex-col items-center gap-2">
+      <div id="icon-toggle-div-7" className="flex items-center gap-4">
+        <div id="icon-toggle-div-8" className="flex flex-col items-center gap-2">
           <IconToggle
             size="sm"
             checkedIcon={<Eye />}
             uncheckedIcon={<EyeOff />}
             defaultChecked={false}
           />
-          <span className="text-xs text-muted-foreground">Small</span>
+          <span id="icon-toggle-span-1" className="text-xs text-muted-foreground">
+            Small
+          </span>
         </div>
-        <div className="flex flex-col items-center gap-2">
+        <div id="icon-toggle-div-9" className="flex flex-col items-center gap-2">
           <IconToggle
             size="default"
             checkedIcon={<Eye />}
             uncheckedIcon={<EyeOff />}
             defaultChecked={false}
           />
-          <span className="text-xs text-muted-foreground">Default</span>
+          <span id="icon-toggle-span-2" className="text-xs text-muted-foreground">
+            Default
+          </span>
         </div>
-        <div className="flex flex-col items-center gap-2">
+        <div id="icon-toggle-div-10" className="flex flex-col items-center gap-2">
           <IconToggle
             size="lg"
             checkedIcon={<Eye />}
             uncheckedIcon={<EyeOff />}
             defaultChecked={false}
           />
-          <span className="text-xs text-muted-foreground">Large</span>
+          <span id="icon-toggle-span-3" className="text-xs text-muted-foreground">
+            Large
+          </span>
         </div>
       </div>
     );
@@ -360,33 +373,39 @@ export const AllSizes: Story = {
 export const AllVariants: Story = {
   render: () => {
     return (
-      <div className="flex items-center gap-4">
-        <div className="flex flex-col items-center gap-2">
+      <div id="icon-toggle-div-11" className="flex items-center gap-4">
+        <div id="icon-toggle-div-12" className="flex flex-col items-center gap-2">
           <IconToggle
             variant="default"
             checkedIcon={<Eye />}
             uncheckedIcon={<EyeOff />}
             defaultChecked={false}
           />
-          <span className="text-xs text-muted-foreground">Default</span>
+          <span id="icon-toggle-span-4" className="text-xs text-muted-foreground">
+            Default
+          </span>
         </div>
-        <div className="flex flex-col items-center gap-2">
+        <div id="icon-toggle-div-13" className="flex flex-col items-center gap-2">
           <IconToggle
             variant="outline"
             checkedIcon={<Eye />}
             uncheckedIcon={<EyeOff />}
             defaultChecked={false}
           />
-          <span className="text-xs text-muted-foreground">Outline</span>
+          <span id="icon-toggle-span-5" className="text-xs text-muted-foreground">
+            Outline
+          </span>
         </div>
-        <div className="flex flex-col items-center gap-2">
+        <div id="icon-toggle-div-14" className="flex flex-col items-center gap-2">
           <IconToggle
             variant="ghost"
             checkedIcon={<Eye />}
             uncheckedIcon={<EyeOff />}
             defaultChecked={false}
           />
-          <span className="text-xs text-muted-foreground">Ghost</span>
+          <span id="icon-toggle-span-6" className="text-xs text-muted-foreground">
+            Ghost
+          </span>
         </div>
       </div>
     );
