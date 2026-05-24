@@ -38,6 +38,7 @@ const ColorPickerInput: React.FC<ColorPickerInputProps> = (props) => {
     resetIcon,
     handleClear,
     showClearButton,
+    currentcolor,
   } = useColorPickerResetOptions({
     resetOptions,
     onClear,
@@ -50,12 +51,10 @@ const ColorPickerInput: React.FC<ColorPickerInputProps> = (props) => {
     }
   }
 
-  const currentcolor = !isResetValue && value != null && value !== '' ? value : undefined;
   const inputValue = isResetValue ? '' : (value ?? '');
   const inputPlaceholder = isResetValue ? resetLabel : placeholder;
-  const swatchChildren = isResetValue
-    ? (resetIcon ?? slots?.swatch?.children)
-    : undefined;
+  const swatchChildren =
+    slots?.swatch?.children ?? (isResetValue ? resetIcon : undefined);
 
   return (
     <ColorPickerTrigger asChild>

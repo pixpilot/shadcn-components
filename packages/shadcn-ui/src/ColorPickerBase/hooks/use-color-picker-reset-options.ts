@@ -18,6 +18,7 @@ export function useColorPickerResetOptions(params: UseColorPickerResetOptionsPar
   resetIcon: React.ReactNode;
   handleClear?: () => void;
   showClearButton: boolean;
+  currentcolor?: string;
 } {
   const { resetOptions, onClear } = params;
   const { value, onValueChange } = useColorPickerContext();
@@ -27,7 +28,7 @@ export function useColorPickerResetOptions(params: UseColorPickerResetOptionsPar
   const resetLabel = resetOptions?.label ?? capitalize(resetOptions?.value ?? '');
   const resetIcon = resetOptions?.icon;
   const resetTooltip = resetOptions?.tooltip ?? capitalize(resetLabel);
-
+  const currentcolor = !isResetValue && value != null && value !== '' ? value : undefined;
   const handleReset = React.useCallback(() => {
     if (resetOptions != null) {
       onValueChange(resetOptions.value);
@@ -47,5 +48,6 @@ export function useColorPickerResetOptions(params: UseColorPickerResetOptionsPar
     resetIcon,
     handleClear,
     showClearButton,
+    currentcolor,
   };
 }
