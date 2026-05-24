@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 1.2.6
+
+### Patch Changes
+
+- keep workspace packages in source during HMR
+
 ## 1.2.5
 
 ### Patch Changes
