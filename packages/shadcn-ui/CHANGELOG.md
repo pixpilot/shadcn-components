@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.19.0
+
+### Minor Changes
+
+- add reset options and clear button functionality
+
 ## 1.18.2
 
 ### Patch Changes
