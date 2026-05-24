@@ -70,7 +70,7 @@ const ColorPickerButton: React.FC<ColorPickerButtonProps> = (props) => {
   const currentcolor = !isResetValue && value != null && value !== '' ? value : undefined;
   const swatchChildren = isResetValue
     ? (resetIcon ?? slots?.swatch?.children)
-    : undefined;
+    : slots?.swatch?.children;
 
   return (
     <ColorPickerTrigger asChild>
