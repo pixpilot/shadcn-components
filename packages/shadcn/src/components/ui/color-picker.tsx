@@ -1104,10 +1104,15 @@ function ColorPickerSwatch(props: ColorPickerSwatchProps) {
   const color = React.useMemo(() => {
     if (colorProp === undefined) return storeColor;
 
-    return parseColorString(colorProp) ?? storeColor;
+    return parseColorString(colorProp);
   }, [colorProp, storeColor]);
 
   const backgroundStyle = React.useMemo(() => {
+    if (!color)
+      return {
+        backgroundColor: colorProp,
+      };
+
     const colorString = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
 
     if (color.a < 1) {
@@ -1119,9 +1124,13 @@ function ColorPickerSwatch(props: ColorPickerSwatchProps) {
     return {
       backgroundColor: colorString,
     };
-  }, [color]);
+  }, [color, colorProp]);
 
-  const ariaLabel = `Current color: ${colorToString(color, format)}`;
+  const ariaLabel = color
+    ? `Current color: ${colorToString(color, format)}`
+    : colorProp
+      ? `Current color: ${colorProp}`
+      : 'No color selected';
 
   const SwatchPrimitive = asChild ? Slot : 'div';
 

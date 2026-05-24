@@ -10,14 +10,14 @@ export interface ColorPickerSwatchProps extends React.ComponentProps<
 }
 
 const ColorPickerSwatch: React.FC<ColorPickerSwatchProps> = (props) => {
-  const { resetOptions } = props;
+  const styles: React.CSSProperties = {};
 
   return (
     <OrgColorPickerSwatch
       {...props}
       style={{
-        backgroundColor:
-          props.color === resetOptions?.value ? resetOptions?.swatchColor : props.color,
+        ...styles,
+        ...props.style,
       }}
       className={cn(
         'rounded-sm w-6.5 h-6.5 p-0 -ml-1 cursor-pointer relative flex items-center justify-center',

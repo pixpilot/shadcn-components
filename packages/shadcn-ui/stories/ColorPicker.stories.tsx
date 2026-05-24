@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import type { Meta, StoryObj } from '@storybook/react';
 import { RotateCcwIcon } from 'lucide-react';
 
@@ -76,19 +77,25 @@ export const WithButton: Story = {
   },
 };
 
-export const WithControlled: React.FC = () => {
-  const [color, setColor] = React.useState('#ff0000');
+export const WithControlled: Story = {
+  args: {
+    value: '#ff0000',
+    layout: 'full',
+  },
+  render: (args) => {
+    const [color, setColor] = React.useState(args.value as string);
 
-  return (
-    <div id="color-picker-div-2">
-      {color}
-      <ColorPicker
-        value={color}
-        onChange={(newColor) => setColor(newColor)}
-        layout="full"
-      />
-    </div>
-  );
+    return (
+      <div id="color-picker-div-2">
+        {color}
+        <ColorPicker
+          {...args}
+          value={color}
+          onChange={(newColor) => setColor(newColor)}
+        />
+      </div>
+    );
+  },
 };
 
 /**
@@ -170,71 +177,85 @@ export const WithPresetColors: Story = {
 /**
  * Controlled component with state management
  */
-export const Controlled: React.FC = () => {
-  const [color, setColor] = React.useState('#3b82f6');
+export const Controlled: Story = {
+  args: {
+    value: '#3b82f6',
+    variant: 'input',
+    placeholder: 'Select a color',
+  },
+  render: (args) => {
+    const [color, setColor] = React.useState(args.value as string);
 
-  return (
-    <div id="color-picker-div-3" className="space-y-4">
-      <div id="color-picker-div-4" className="text-sm text-muted-foreground">
-        Selected color:{' '}
-        <span id="color-picker-span-1" className="font-mono">
-          {color}
-        </span>
+    return (
+      <div id="color-picker-div-3" className="space-y-4">
+        <div id="color-picker-div-4" className="text-sm text-muted-foreground">
+          Selected color:{' '}
+          <span id="color-picker-span-1" className="font-mono">
+            {color}
+          </span>
+        </div>
+        <ColorPicker {...args} value={color} onChange={setColor} />
+        <div
+          id="color-picker-div-5"
+          className="w-16 h-16 rounded border"
+          style={{ backgroundColor: color }}
+        />
       </div>
+    );
+  },
+};
+
+/**
+ * With custom formatted display and button variant
+ */
+export const CustomDisplayButton: Story = {
+  args: {
+    value: '#ff6b6b',
+    variant: 'button',
+  },
+  render: (args) => {
+    const [color, setColor] = React.useState(args.value as string);
+
+    return (
       <ColorPicker
+        {...args}
         value={color}
         onChange={setColor}
-        variant="input"
-        placeholder="Select a color"
+        formatDisplayValue={(value: string) => (
+          <div id="color-picker-div-6" className="flex items-center gap-2">
+            <div
+              id="color-picker-div-7"
+              className="w-4 h-4 rounded border"
+              style={{ backgroundColor: value }}
+            />
+            {/* <span className="font-mono text-sm">{value.toUpperCase()}</span> */}
+          </div>
+        )}
       />
-      <div
-        id="color-picker-div-5"
-        className="w-16 h-16 rounded border"
-        style={{ backgroundColor: color }}
-      />
-    </div>
-  );
+    );
+  },
 };
 
 /**
  * With custom formatted display and button variant
  */
-export const CustomDisplayButton: React.FC = () => {
-  const [color, setColor] = React.useState('#ff6b6b');
+export const CustomDisplayFormat: Story = {
+  args: {
+    value: '#ff6b6b',
+    variant: 'button',
+  },
+  render: (args) => {
+    const [color, setColor] = React.useState(args.value as string);
 
-  return (
-    <ColorPicker
-      value={color}
-      onChange={setColor}
-      variant="button"
-      formatDisplayValue={(value: string) => (
-        <div id="color-picker-div-6" className="flex items-center gap-2">
-          <div
-            id="color-picker-div-7"
-            className="w-4 h-4 rounded border"
-            style={{ backgroundColor: value }}
-          />
-          {/* <span className="font-mono text-sm">{value.toUpperCase()}</span> */}
-        </div>
-      )}
-    />
-  );
-};
-
-/**
- * With custom formatted display and button variant
- */
-export const CustomDisplayFormat: React.FC = () => {
-  const [color, setColor] = React.useState('#ff6b6b');
-
-  return (
-    <ColorPicker
-      value={color}
-      onChange={setColor}
-      variant="button"
-      formatDisplayValue={(value: string) => `Color: ${value.toUpperCase()}`}
-    />
-  );
+    return (
+      <ColorPicker
+        {...args}
+        value={color}
+        onChange={setColor}
+        formatDisplayValue={(value: string) => `Color: ${value.toUpperCase()}`}
+      />
+    );
+  },
 };
 
 export const WithContentWidth: Story = {
@@ -243,96 +264,106 @@ export const WithContentWidth: Story = {
   },
 };
 
-export const ButtonWithResetOptions: React.FC = () => {
-  const [color, setColor] = React.useState('#3b82f6');
+export const ButtonWithResetOptions: Story = {
+  args: {
+    value: '#3b82f6',
+    variant: 'button',
+    resetOptions: {
+      value: '',
+      label: 'Automatic',
+      tooltip: 'Use automatic theme color',
+      icon: <RotateCcwIcon size={14} aria-hidden="true" />,
+      swatchColor: undefined,
+    },
+  },
+  render: (args) => {
+    const [color, setColor] = React.useState(args.value as string);
 
-  return (
-    <div className="space-y-4 w-60">
-      <div className="text-sm text-muted-foreground">
-        Selected color: <span className="font-mono">{color || 'Automatic'}</span>
+    return (
+      <div className="space-y-4 w-60">
+        <div className="text-sm text-muted-foreground">
+          Selected color: <span className="font-mono">{color || 'Automatic'}</span>
+        </div>
+        <ColorPicker {...args} value={color} onChange={setColor} />
       </div>
-      <ColorPicker
-        value={color}
-        onChange={setColor}
-        variant="button"
-        resetOptions={{
-          value: '',
-          label: 'Automatic',
-          tooltip: 'Use automatic theme color',
-          icon: <RotateCcwIcon size={14} aria-hidden="true" />,
-        }}
-      />
-    </div>
-  );
+    );
+  },
 };
 
-export const InputWithResetOptions: React.FC = () => {
-  const [color, setColor] = React.useState('#f97316');
+export const InputWithResetOptions: Story = {
+  args: {
+    value: '#f97316',
+    variant: 'input',
+    resetOptions: {
+      value: '',
+      label: 'Automatic',
+      tooltip: 'Use automatic theme color',
+      icon: <RotateCcwIcon size={14} aria-hidden="true" />,
+      swatchColor: undefined,
+    },
+  },
+  render: (args) => {
+    const [color, setColor] = React.useState(args.value as string);
 
-  return (
-    <div className="space-y-4 w-60">
-      <div className="text-sm text-muted-foreground">
-        Selected color: <span className="font-mono">{color || 'Automatic'}</span>
+    return (
+      <div className="space-y-4 w-60">
+        <div className="text-sm text-muted-foreground">
+          Selected color: <span className="font-mono">{color || 'Automatic'}</span>
+        </div>
+        <ColorPicker {...args} value={color} onChange={setColor} />
       </div>
-      <ColorPicker
-        value={color}
-        onChange={setColor}
-        variant="input"
-        resetOptions={{
-          value: '',
-          label: 'Automatic',
-          tooltip: 'Use automatic theme color',
-          icon: <RotateCcwIcon size={14} aria-hidden="true" />,
-        }}
-      />
-    </div>
-  );
+    );
+  },
 };
 
-export const ButtonWithResetSwatchColor: React.FC = () => {
-  const [color, setColor] = React.useState('#3b82f6');
+export const ButtonWithResetSwatchColor: Story = {
+  args: {
+    value: '#3b82f6',
+    variant: 'button',
+    resetOptions: {
+      value: 'inherit',
+      label: 'Automatic',
+      tooltip: 'Use automatic theme color',
+      icon: <RotateCcwIcon size={14} aria-hidden="true" />,
+      swatchColor: '#a855f7',
+    },
+  },
+  render: (args) => {
+    const [color, setColor] = React.useState(args.value as string);
 
-  return (
-    <div className="space-y-4 w-60">
-      <div className="text-sm text-muted-foreground">
-        Selected color: <span className="font-mono">{color || 'Automatic'}</span>
+    return (
+      <div className="space-y-4 w-60">
+        <div className="text-sm text-muted-foreground">
+          Selected color: <span className="font-mono">{color || 'Automatic'}</span>
+        </div>
+        <ColorPicker {...args} value={color} onChange={setColor} />
       </div>
-      <ColorPicker
-        value={color}
-        onChange={setColor}
-        variant="button"
-        resetOptions={{
-          value: 'inherit',
-          label: 'Automatic',
-          tooltip: 'Use automatic theme color',
-          icon: <RotateCcwIcon size={14} aria-hidden="true" />,
-          swatchColor: '#a855f7',
-        }}
-      />
-    </div>
-  );
+    );
+  },
 };
 
-export const ButtonWithResetToInherit: React.FC = () => {
-  const [color, setColor] = React.useState('#3b82f6');
+export const ButtonWithResetToInherit: Story = {
+  args: {
+    value: '#3b82f6',
+    variant: 'button',
+    resetOptions: {
+      value: 'inherit',
+      label: 'Automatic',
+      tooltip: 'Use automatic theme color',
+      icon: <RotateCcwIcon size={14} aria-hidden="true" />,
+      swatchColor: 'inherit',
+    },
+  },
+  render: (args) => {
+    const [color, setColor] = React.useState(args.value as string);
 
-  return (
-    <div className="space-y-4 w-60">
-      <div className="text-sm text-muted-foreground">
-        Selected color: <span className="font-mono">{color || 'Automatic'}</span>
+    return (
+      <div className="space-y-4 w-60">
+        <div className="text-sm text-muted-foreground">
+          Selected color: <span className="font-mono">{color || 'Automatic'}</span>
+        </div>
+        <ColorPicker {...args} value={color} onChange={setColor} />
       </div>
-      <ColorPicker
-        value={color}
-        onChange={setColor}
-        variant="button"
-        resetOptions={{
-          value: 'inherit',
-          label: 'Automatic',
-          tooltip: 'Use automatic theme color',
-          icon: <RotateCcwIcon size={14} aria-hidden="true" />,
-          swatchColor: 'inherit',
-        }}
-      />
-    </div>
-  );
+    );
+  },
 };
