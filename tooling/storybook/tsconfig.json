@@ -8,7 +8,8 @@
     ".storybook/**/*",
     "../../packages/*/stories/**/*.stories.tsx",
     "index.js",
-    "scripts/**/*"
+    "scripts/**/*",
+    "vite.config.ts"
   ],
   "exclude": ["node_modules", "storybook-static"]
 }

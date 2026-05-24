@@ -4,11 +4,65 @@
     "shadcn-ui-avatarupload--default": {
       "screenshots": [
         {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 200
+                  },
+                  "id": "S73NarZBrPO9",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "04L4Niuwytxu",
+              "title": "waitForTimeout"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#avatar-upload-div-1"
+                  },
+                  "id": "Ae0ezNueeo-x",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "sLuCMqr_6QwL",
+              "title": "takeElementScreenshot"
+            }
+          ],
           "browserOptionsId": "LSw61olDITRy",
           "browserType": "chromium",
-          "id": "ymadX4CQBybb",
+          "id": "o87Ge9_UeZKz",
           "index": 0,
           "title": "Default AvatarUpload"
+        }
+      ],
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#avatar-upload-div-1"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "NdAYLSveYGP8",
+          "title": "takeElementScreenshot"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "timeout": 200
+              },
+              "name": "waitForTimeout"
+            }
+          ],
+          "id": "EyLQdVheMMLY",
+          "title": "waitForTimeout"
         }
       ]
     },

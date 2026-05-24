@@ -7,6 +7,18 @@
           "actions": [
             {
               "args": {
+                "timeout": 200
+              },
+              "name": "waitForTimeout"
+            }
+          ],
+          "id": "DuBXVhF32X1S",
+          "title": "delay 200"
+        },
+        {
+          "actions": [
+            {
+              "args": {
                 "selector": "#shadcn-ui-button--default"
               },
               "name": "takeElementScreenshot"
@@ -23,19 +35,32 @@
               "actions": [
                 {
                   "args": {
+                    "timeout": 200
+                  },
+                  "id": "oOSJm_n42qK5",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "nkIwyCqokNeM",
+              "title": "delay 200"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
                     "selector": "#shadcn-ui-button--default"
                   },
-                  "id": "uyHJeIYk9P-c",
+                  "id": "ed8MWlXOvuag",
                   "name": "takeElementScreenshot"
                 }
               ],
-              "id": "vjZzmJD4Aw47",
+              "id": "4wRjAtMx1Y8F",
               "title": "takeElementScreenshot"
             }
           ],
           "browserOptionsId": "otNtOM7N6xcX",
           "browserType": "chromium",
-          "id": "SoFVGz1Ivj9-",
+          "id": "e9n7u_-xhHiL",
           "index": 0,
           "title": "Default Button"
         }
@@ -43,6 +68,18 @@
     },
     "shadcn-ui-button--disabled": {
       "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "timeout": 200
+              },
+              "name": "waitForTimeout"
+            }
+          ],
+          "id": "oI-JcIdq82qx",
+          "title": "delay 200"
+        },
         {
           "actions": [
             {
@@ -58,9 +95,24 @@
       ],
       "screenshots": [
         {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 200
+                  },
+                  "id": "OLQY9R6FoU6j",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "JRNRbFOEkA2B",
+              "title": "delay 200"
+            }
+          ],
           "browserOptionsId": "fVRO6w-3Zj8C",
           "browserType": "chromium",
-          "id": "Nh70xfZ8aZTA",
+          "id": "g5kt-qcfbSy4",
           "index": 0,
           "screenshotOptionsId": "8SFPaI8OeFxH",
           "title": "Disabled button with \"Disabled reason\" title and \"Disabled\" text"

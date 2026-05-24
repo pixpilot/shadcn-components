@@ -288,3 +288,27 @@ export const InputWithResetOptions: React.FC = () => {
     </div>
   );
 };
+
+export const ButtonWithResetSwatchColor: React.FC = () => {
+  const [color, setColor] = React.useState('#3b82f6');
+
+  return (
+    <div className="space-y-4 w-60">
+      <div className="text-sm text-muted-foreground">
+        Selected color: <span className="font-mono">{color || 'Automatic'}</span>
+      </div>
+      <ColorPicker
+        value={color}
+        onChange={setColor}
+        variant="button"
+        resetOptions={{
+          value: '',
+          label: 'Automatic',
+          tooltip: 'Use automatic theme color',
+          icon: <RotateCcwIcon size={14} aria-hidden="true" />,
+          swatchColor: '#a855f7',
+        }}
+      />
+    </div>
+  );
+};

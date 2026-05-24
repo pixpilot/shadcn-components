@@ -6,9 +6,19 @@ import {
   ColorPickerAlphaSlider,
   ColorPickerContent,
   ColorPickerSwatch,
+  colorUtils,
 } from '../../../src/components/ui/color-picker';
 
 describe('colorPicker - value parsing', () => {
+  it('should parse transparent into a fully transparent color value', () => {
+    expect(colorUtils.parseColorString('  TRANSPARENT  ')).toEqual({
+      r: 0,
+      g: 0,
+      b: 0,
+      a: 0,
+    });
+  });
+
   it('should emit 8-digit hex when alpha changes in hex format (controlled regression)', () => {
     /*
      * Why this exists:
@@ -53,6 +63,38 @@ describe('colorPicker - value parsing', () => {
       <ColorPicker value="#ff0000" onValueChange={onValueChange} inline>
         <ColorPickerContent>
           <ColorPickerSwatch />
+        </ColorPickerContent>
+      </ColorPicker>,
+    );
+
+    await waitFor(() => {
+      expect(getByRole('img').getAttribute('aria-label')).toBe('Current color: #ff0000');
+    });
+  });
+
+  it('should prioritize ColorPickerSwatch color prop over picker value (regression: swatch color override)', async () => {
+    const onValueChange = vi.fn();
+    const { getByRole } = render(
+      <ColorPicker value="#ff0000" onValueChange={onValueChange} inline>
+        <ColorPickerContent>
+          <ColorPickerSwatch color="#00ff00" />
+        </ColorPickerContent>
+      </ColorPicker>,
+    );
+
+    await waitFor(() => {
+      const swatch = getByRole('img');
+      expect(swatch.getAttribute('aria-label')).toBe('Current color: #00ff00');
+      expect(swatch.getAttribute('style') ?? '').toContain('rgb(0, 255, 0)');
+    });
+  });
+
+  it('should fallback to picker value when ColorPickerSwatch color prop is invalid (regression: swatch color override)', async () => {
+    const onValueChange = vi.fn();
+    const { getByRole } = render(
+      <ColorPicker value="#ff0000" onValueChange={onValueChange} inline>
+        <ColorPickerContent>
+          <ColorPickerSwatch color="not-a-color" />
         </ColorPickerContent>
       </ColorPicker>,
     );

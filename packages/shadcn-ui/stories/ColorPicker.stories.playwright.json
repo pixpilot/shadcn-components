@@ -94,27 +94,6 @@
               "actions": [
                 {
                   "args": {
-                    "selector": "[data-slot=\"color-picker-trigger\"]"
-                  },
-                  "id": "dRxeBxoTRiia",
-                  "name": "takeElementScreenshot"
-                }
-              ],
-              "id": "ism0b4LfxDS7",
-              "title": "takeElementScreenshot"
-            }
-          ],
-          "browserType": "chromium",
-          "id": "IuKnG82K0g92",
-          "index": 0,
-          "title": "Color picker reset options visible"
-        },
-        {
-          "actionSets": [
-            {
-              "actions": [
-                {
-                  "args": {
                     "selector": "[data-slot=\"button\"]"
                   },
                   "id": "foTNVbeHvtb8",
@@ -142,9 +121,55 @@
           "id": "4t1p4VP1cY9i",
           "index": 1,
           "title": "Color picker reset button clicked"
+        },
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 200
+                  },
+                  "id": "rI_-NaHgu2Z-",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "s66jtjUF54wC",
+              "title": "delay 200"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"color-picker-trigger\"]"
+                  },
+                  "id": "E2dYVfMSCTWY",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "KsDKUrlrecgn",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserType": "chromium",
+          "id": "hLWCjYZsvzrc",
+          "index": 0,
+          "title": "Color picker reset options visible"
         }
       ],
       "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "timeout": 200
+              },
+              "name": "waitForTimeout"
+            }
+          ],
+          "id": "p2JveG7beELX",
+          "title": "delay 200"
+        },
         {
           "actions": [
             {
@@ -168,6 +193,70 @@
           ],
           "id": "9Hv6dyFJrm98",
           "title": "click"
+        }
+      ]
+    },
+    "shadcn-ui-colorpicker--button-with-reset-swatch-color": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"button\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "eAk41YAthfmM",
+          "title": "reset"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"color-picker-trigger\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "NEyv2B4gWq4D",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"button\"]"
+                  },
+                  "id": "dlgyfdhRin92",
+                  "name": "click"
+                }
+              ],
+              "id": "wUSYvTSP0i55",
+              "title": "reset"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"color-picker-trigger\"]"
+                  },
+                  "id": "vAKqLQnfYuwF",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "ck2anxpCK7lm",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserType": "chromium",
+          "id": "ipMEYuVwBsk-",
+          "index": 0,
+          "title": "Button With Reset Swatch Color"
         }
       ]
     }

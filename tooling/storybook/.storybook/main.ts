@@ -8,9 +8,9 @@ const config: StorybookConfig = {
     '../../../packages/*/stories/**/*.mdx',
   ],
   addons: [
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
+    // '@storybook/addon-links',
+    '@storybook/addon-essentials/controls',
+    // '@storybook/addon-interactions',
     '@storybook/addon-themes',
     'storybook-addon-playwright/register',
   ],

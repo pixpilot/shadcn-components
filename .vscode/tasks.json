@@ -1,24 +1,70 @@
 {
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "type": "shell",
-      "label": "tsc:watch",
-      "command": "pnpm",
-      "args": ["run", "tsc:watch"],
-      "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": true,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "isBackground": true,
-      "runOptions": {
-        "runOn": "folderOpen"
-      }
-    }
-  ]
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "tsc:watch",
+			"command": "pnpm",
+			"args": [
+				"run",
+				"tsc:watch"
+			],
+			"group": "build",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": false
+			},
+			"isBackground": true,
+			"runOptions": {
+				"runOn": "folderOpen"
+			}
+		},
+		{
+			"label": "validate:lint-hot-reload-fix",
+			"type": "shell",
+			"command": "pnpm",
+			"args": [
+				"exec",
+				"eslint",
+				"tooling/storybook/vite.config.ts",
+				"packages/shadcn/src/components/ui/color-picker.tsx"
+			]
+		},
+		{
+			"label": "validate:typecheck-hot-reload-fix",
+			"type": "shell",
+			"command": "pnpm",
+			"args": [
+				"typecheck"
+			]
+		},
+		{
+			"label": "validate:test-hot-reload-fix",
+			"type": "shell",
+			"command": "pnpm",
+			"args": [
+				"test"
+			]
+		},
+		{
+			"label": "validate:lint-hot-reload-fix-official",
+			"type": "shell",
+			"command": "pnpm",
+			"args": [
+				"lint"
+			]
+		},
+		{
+			"label": "validate:lint-hot-reload-fix-official-rerun",
+			"type": "shell",
+			"command": "pnpm",
+			"args": [
+				"lint"
+			]
+		}
+	]
 }
