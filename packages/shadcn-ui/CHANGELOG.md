@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.20.0
+
+### Minor Changes
+
+- support reset-to-inherit swatch
+
 ## 1.19.4
 
 ### Patch Changes
