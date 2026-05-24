@@ -1,5 +1,13 @@
 # @pixpilot/shadcn-ui
 
+## 1.19.4
+
+### Patch Changes
+
+- update color handling to use `swatchColor`
+- Updated dependencies
+  - @pixpilot/shadcn@1.2.6
+
 ## 1.19.3
 
 ### Patch Changes
