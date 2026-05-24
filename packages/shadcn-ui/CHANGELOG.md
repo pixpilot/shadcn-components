@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.19.2
+
+### Patch Changes
+
+- correct swatchChildren assignment logic
+
 ## 1.19.1
 
 ### Patch Changes
