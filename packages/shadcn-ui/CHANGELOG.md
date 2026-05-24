@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.19.1
+
+### Patch Changes
+
+- fix reset title
+
 ## 1.19.0
 
 ### Minor Changes
