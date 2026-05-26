@@ -57,11 +57,7 @@ const ColorPickerInput: React.FC<ColorPickerInputProps> = (props) => {
     <ColorPickerTrigger asChild>
       <InputGroup className="w-full">
         <InputGroupAddon align="inline-start">
-          <ColorPickerSwatch
-            color={swatchColor}
-            resetOptions={resetOptions}
-            {...slots?.swatch}
-          >
+          <ColorPickerSwatch color={swatchColor} {...slots?.swatch}>
             {swatchChildren}
           </ColorPickerSwatch>
         </InputGroupAddon>

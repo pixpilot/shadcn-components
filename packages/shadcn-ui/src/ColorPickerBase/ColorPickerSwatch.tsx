@@ -1,13 +1,9 @@
-import type { ColorPickerResetOptions } from './types';
-
 import { cn, ColorPickerSwatch as OrgColorPickerSwatch } from '@pixpilot/shadcn';
 import React from 'react';
 
 export interface ColorPickerSwatchProps extends React.ComponentProps<
   typeof OrgColorPickerSwatch
-> {
-  resetOptions: ColorPickerResetOptions | undefined;
-}
+> {}
 
 const ColorPickerSwatch: React.FC<ColorPickerSwatchProps> = (props) => {
   const styles: React.CSSProperties = {};

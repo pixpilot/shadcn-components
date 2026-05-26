@@ -79,11 +79,7 @@ const ColorPickerButton: React.FC<ColorPickerButtonProps> = (props) => {
         )}
       >
         <InputGroupAddon align="inline-start">
-          <ColorPickerSwatch
-            color={swatchColor}
-            resetOptions={resetOptions}
-            {...slots?.swatch}
-          >
+          <ColorPickerSwatch color={swatchColor} {...slots?.swatch}>
             {swatchChildren}
           </ColorPickerSwatch>
         </InputGroupAddon>
