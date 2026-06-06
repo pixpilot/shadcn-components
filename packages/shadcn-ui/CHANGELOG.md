@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.21.2
+
+### Patch Changes
+
+- simplify ColorPickerSwatch usage in Button and Input components
+
 ## 1.21.1
 
 ### Patch Changes
