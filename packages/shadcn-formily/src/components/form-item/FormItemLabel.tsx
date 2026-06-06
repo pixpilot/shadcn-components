@@ -5,7 +5,7 @@ import { cn } from '@pixpilot/shadcn';
 import { FormItemDescriptionPopover } from './FormItemDescriptionPopover';
 
 export interface FormItemLabelProps {
-  id: string;
+  id?: string;
   label: SyncReactNode;
   asterisk?: boolean;
   error?: boolean;

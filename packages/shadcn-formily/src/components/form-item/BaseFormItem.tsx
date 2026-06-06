@@ -9,8 +9,9 @@ import type {
 } from './form-item-types';
 import { useField } from '@formily/react';
 import { cn } from '@pixpilot/shadcn';
-import React from 'react';
+import { getId } from '@pixpilot/shadcn-ui';
 
+import React from 'react';
 import { useFormContext, useLabel } from '../../hooks';
 import { FormItemLabel } from './FormItemLabel';
 import { getSpacingConfig } from './spacing-config';
@@ -84,8 +85,8 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
     (field?.componentProps?.id as string) ??
     `form-${field?.address?.toString()?.replace(/\./gu, '-')}`;
 
-  const descriptionId = React.useId();
-  const feedbackId = React.useId();
+  const descriptionId = getId(id, 'description');
+  const feedbackId = getId(id, 'feedback');
 
   const descriptionRenderedInline =
     description != null && resolvedDescriptionPlacement !== 'popover';
@@ -105,7 +106,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
   const labelElement = effectiveLabel != null && (
     <FormItemLabel
       data-slot="form-item-label"
-      id={id}
+      id={getId(id, 'label')}
       label={effectiveLabel}
       asterisk={asterisk}
       error={feedbackStatus === 'error'}

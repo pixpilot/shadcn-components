@@ -4,6 +4,7 @@ import { useControlled } from '@internal/hooks';
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
 import { Select } from '../Select';
+import { getId } from '../utils';
 import { Slider as ShadcnSlider } from './Slider';
 
 export type SliderSelectValue = string | number;
@@ -95,11 +96,15 @@ const SliderSelect: React.FC<SliderSelectProps> = (props) => {
   };
 
   return (
-    <div id={id} className={cn('flex items-center gap-2', className)} style={style}>
+    <div
+      id={getId(id, 'slider-select-container')}
+      className={cn('flex items-center gap-2', className)}
+      style={style}
+    >
       <ShadcnSlider
         {...rest}
         className={slider?.className}
-        id={id != null ? `${id}-slider` : undefined}
+        id={id}
         min={0}
         max={Math.max(0, normalizedOptions.length - 1)}
         step={1}
@@ -118,6 +123,7 @@ const SliderSelect: React.FC<SliderSelectProps> = (props) => {
         <div className={cn('w-28', selectContainerClassName)}>
           <Select
             {...selectProps}
+            id={getId(id, 'select')}
             contentProps={{
               position: 'item-aligned',
               ...selectProps.contentProps,

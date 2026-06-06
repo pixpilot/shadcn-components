@@ -1,6 +1,6 @@
 import type { InputProps } from '@pixpilot/shadcn-ui';
 import { useControlled } from '@internal/hooks';
-import { cn, Input } from '@pixpilot/shadcn-ui';
+import { cn, getId, Input } from '@pixpilot/shadcn-ui';
 import React from 'react';
 import { Slider as ShadcnSlider } from './Slider';
 
@@ -68,11 +68,15 @@ const SliderInput: React.FC<SliderInputProps> = (props) => {
   };
 
   return (
-    <div id={id} className="flex items-center gap-2" style={style}>
+    <div
+      id={getId(id, 'slider-container')}
+      className="flex items-center gap-2"
+      style={style}
+    >
       <ShadcnSlider
         {...rest}
         className={slider?.className}
-        id={id ?? `${id}-slider`}
+        id={id}
         min={min}
         max={max}
         step={step}
@@ -84,7 +88,7 @@ const SliderInput: React.FC<SliderInputProps> = (props) => {
         Array.isArray(currentValue) &&
         currentValue.map((v, i) => (
           <Input
-            id={id ?? `${id}-input-${i}`}
+            id={getId(id, `input-${i}`)}
             disabled={disabled}
             {...input}
             key={inputKeysRef.current[i]}
