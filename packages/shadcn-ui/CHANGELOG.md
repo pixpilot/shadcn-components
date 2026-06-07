@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.22.0
+
+### Minor Changes
+
+- implement `getId` utility for consistent ID generation
+
 ## 1.21.2
 
 ### Patch Changes
