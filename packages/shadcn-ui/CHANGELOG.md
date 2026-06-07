@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.23.0
+
+### Minor Changes
+
+- enhance ID handling for Select component
+
 ## 1.22.0
 
 ### Minor Changes
