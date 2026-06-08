@@ -1,5 +1,16 @@
 # @pixpilot/shadcn-ui
 
+## 1.24.0
+
+### Minor Changes
+
+- add id prop support across various components for improved accessibility
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn@1.3.0
+
 ## 1.23.0
 
 ### Minor Changes
