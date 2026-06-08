@@ -171,11 +171,62 @@ export const ChildrenOnly: Story = {
   },
 };
 
+export const ChildrenWithIconOnly: Story = {
+  args: {
+    variant: 'info',
+    icon: true,
+    children: (
+      <div id="alert-div-4">
+        <strong id="alert-strong-4">Icon child content:</strong> Children render inside
+        the text column beside the icon.
+      </div>
+    ),
+  },
+};
+
+export const WithTitleAndChildren: Story = {
+  args: {
+    variant: 'success',
+    title: 'Alert with Title and Children',
+    children: (
+      <div id="alert-div-5">
+        This child content appears inside the structured text column below the title.
+      </div>
+    ),
+  },
+};
+
+export const WithDescriptionAndChildren: Story = {
+  args: {
+    variant: 'warning',
+    description: 'This alert has a description and child content without an icon.',
+    children: (
+      <div id="alert-div-6">
+        This child content appears below the description in the same column.
+      </div>
+    ),
+  },
+};
+
 export const WithIcon: Story = {
   args: {
     variant: 'info',
     title: 'Alert with Icon',
     description: 'This alert includes an icon by default.',
     icon: true,
+  },
+};
+
+export const WithTitleAndIconAndChildren: Story = {
+  args: {
+    variant: 'default',
+    title: 'Alert with Title, Icon, and Children',
+    description: 'This alert includes a title, an icon, and custom children content.',
+    icon: true,
+    children: (
+      <div id="alert-div-7" className="text-red-500">
+        This content is rendered via children and appears below the title and description.
+      </div>
+    ),
   },
 };

@@ -44,6 +44,7 @@ const Alert: React.FC<AlertProps> = (props) => {
 
   const hasTitle = title != null && title.trim() !== '';
   const hasContent = hasTitle || description != null;
+  const hasStructuredLayout = Boolean(msgIcon || hasContent);
 
   const config = variantConfig[variant] ?? variantConfig.default;
 
@@ -52,36 +53,46 @@ const Alert: React.FC<AlertProps> = (props) => {
       {...rest}
       variant="destructive"
       className={cn(
-        'bg-card border-accent! flex justify-between rounded-sm border-0 border-l-4',
-        msgIcon ? 'flex-row' : 'flex-col',
+        'flex flex-col items-stretch bg-card border-accent! rounded-sm border-0 border-l-4',
         config.borderClass,
         config.textClass,
         className,
       )}
     >
-      {/* {msgIcon} */}
-      {msgIcon && <div className={cn('mr-3 flex items-start pt-0.5')}>{msgIcon}</div>}
-      {hasContent && (
-        <div className="flex flex-1 flex-col gap-1">
-          {hasTitle && (
-            <AlertTitle className={cn(config.textClass, { 'block!': !hasTitle })}>
-              {title}
-            </AlertTitle>
+      {hasStructuredLayout && (
+        <div
+          className={cn(
+            'col-span-full flex w-full min-w-0 items-start',
+            msgIcon ? 'flex-row' : 'flex-col',
           )}
-          {description != null && (
-            <AlertDescription
-              className={cn(
-                config.descClass,
-                !hasTitle && config.textClass,
-                'whitespace-pre-wrap',
+        >
+          {msgIcon && (
+            <div className={cn('mr-3 flex shrink-0 items-start pt-0.5')}>{msgIcon}</div>
+          )}
+          {(hasContent || children != null) && (
+            <div className="flex w-full min-w-0 flex-1 flex-col gap-1">
+              {hasTitle && (
+                <AlertTitle className={cn(config.textClass, { 'block!': !hasTitle })}>
+                  {title}
+                </AlertTitle>
               )}
-            >
-              {description}
-            </AlertDescription>
+              {description != null && (
+                <AlertDescription
+                  className={cn(
+                    config.descClass,
+                    !hasTitle && config.textClass,
+                    'whitespace-pre-wrap',
+                  )}
+                >
+                  {description}
+                </AlertDescription>
+              )}
+              {children}
+            </div>
           )}
         </div>
       )}
-      {children}
+      {!hasStructuredLayout && children}
     </ShadAlert>
   );
 };

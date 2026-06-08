@@ -144,6 +144,54 @@
           "title": "Alert with Icon (clipped)"
         }
       ]
+    },
+    "shadcn-ui-alert--children-with-icon-only": {
+      "screenshots": [
+        {
+          "browserOptionsId": "lw1d40m43AGH",
+          "browserType": "chromium",
+          "id": "oR6NIlhCJuwM",
+          "index": 0,
+          "screenshotOptionsId": "tjzs3tuPddpF",
+          "title": "Children with icon only, text beside icon"
+        }
+      ]
+    },
+    "shadcn-ui-alert--with-title-and-children": {
+      "screenshots": [
+        {
+          "browserOptionsId": "lw1d40m43AGH",
+          "browserType": "chromium",
+          "id": "0ph81pcsCoVZ",
+          "index": 0,
+          "screenshotOptionsId": "tjzs3tuPddpF",
+          "title": "Alert with Title and Children"
+        }
+      ]
+    },
+    "shadcn-ui-alert--with-description-and-children": {
+      "screenshots": [
+        {
+          "browserOptionsId": "lw1d40m43AGH",
+          "browserType": "chromium",
+          "id": "kcS_T7fikHW5",
+          "index": 0,
+          "screenshotOptionsId": "tjzs3tuPddpF",
+          "title": "Alert with description and children"
+        }
+      ]
+    },
+    "shadcn-ui-alert--with-title-and-icon-and-children": {
+      "screenshots": [
+        {
+          "browserOptionsId": "lw1d40m43AGH",
+          "browserType": "chromium",
+          "id": "F-p75Yydu2Yo",
+          "index": 0,
+          "screenshotOptionsId": "_j4_6iCItS_A",
+          "title": "Alert with Title, Icon, and Children"
+        }
+      ]
     }
   },
   "browserOptions": {
@@ -163,6 +211,12 @@
       "viewport": {
         "height": 450,
         "width": 462
+      }
+    },
+    "lw1d40m43AGH": {
+      "viewport": {
+        "height": 368,
+        "width": 836
       }
     }
   },
@@ -229,6 +283,22 @@
         "width": 309,
         "x": 13,
         "y": 2
+      }
+    },
+    "tjzs3tuPddpF": {
+      "clip": {
+        "height": 58,
+        "width": 250,
+        "x": 12,
+        "y": 11
+      }
+    },
+    "_j4_6iCItS_A": {
+      "clip": {
+        "height": 100,
+        "width": 163,
+        "x": 12,
+        "y": 10
       }
     }
   }

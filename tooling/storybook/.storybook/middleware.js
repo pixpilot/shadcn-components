@@ -11,7 +11,7 @@ import { STORYBOOK_PORT } from './storybook-config.js';
 
 const manager = new BrowserManager({
   browserCount: {
-    chromium: 8,
+    chromium: 15,
     firefox: 4,
     webkit: 4,
   },
@@ -46,6 +46,7 @@ const provider = createOpenRouter({
   const strorybookEndpoint = `http://${ip}:${STORYBOOK_PORT}`;
 
   setConfig({
+    concurrencyLimit: { file: 5, story: 10 },
     // When running Playwright in a separate container or remote environment,
     // set `storybookEndpoint` to a host/IP that is reachable from the remote browser runtime.
     // `localhost` only works when Storybook and Playwright run on the same machine/network namespace.
