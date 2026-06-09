@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.26.0
+
+### Minor Changes
+
+- refactor loading prop to show and add delayed visibility hook
+
 ## 1.25.0
 
 ### Minor Changes
