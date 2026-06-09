@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.27.0
+
+### Minor Changes
+
+- enhance component with title, description, and close button
+
 ## 1.26.0
 
 ### Minor Changes

@@ -1,5 +1,12 @@
 # @pixpilot/formily-shadcn
 
+## 1.11.27
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn-ui@1.27.0
+
 ## 1.11.26
 
 ### Patch Changes
