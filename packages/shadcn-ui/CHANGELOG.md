@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.25.0
+
+### Minor Changes
+
+- enhance Alert component with structured layout and new story examples
+
 ## 1.24.0
 
 ### Minor Changes
