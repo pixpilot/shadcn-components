@@ -3,6 +3,7 @@ import type { ComponentProps } from 'react';
 import { useState } from 'react';
 import { Button } from '../src/Button';
 import { toast, Toaster } from '../src/toast';
+import { AlertToast } from '../src/toast/AlertToast';
 
 /**
  * AlertToast component for displaying toast notifications with different variants.
@@ -98,6 +99,18 @@ export const Default: Story = {
       Show Default Toast
     </Button>
   ),
+};
+
+export const AlertToastComponent: React.FC = () => {
+  return (
+    <AlertToast
+      title="Alert Toast"
+      description="This is an example of the AlertToast component"
+      variant="success"
+      icon
+      onClose={() => {}}
+    />
+  );
 };
 
 /**

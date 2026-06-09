@@ -52,11 +52,13 @@ const provider = createOpenRouter({
     // `localhost` only works when Storybook and Playwright run on the same machine/network namespace.
     storybookEndpoint: strorybookEndpoint,
     selectorAttributeNames: ['id', 'data-testid', 'data-slot'],
+
     getPage: async (browserType, options) => {
       const { browser, index } = await manager.getBrowser(browserType);
       // eslint-disable-next-line no-console
       console.log(`Browser ${browserType}-${index}`);
       const page = await browser.newPage(options);
+      page.setDefaultTimeout(5000);
       return page;
     },
 

@@ -192,7 +192,7 @@
               "actions": [
                 {
                   "args": {
-                    "selector": "[data-slot=\"alert-title\"]"
+                    "selector": "[data-slot=\"toast-title\"]"
                   },
                   "id": "1v6bKQd34QHo",
                   "name": "takeElementScreenshot"
@@ -324,7 +324,7 @@
           "actions": [
             {
               "args": {
-                "selector": "[data-slot=\"alert-title\"]"
+                "selector": "[data-slot=\"toast-title\"]"
               },
               "name": "takeElementScreenshot"
             }
@@ -378,7 +378,7 @@
               "actions": [
                 {
                   "args": {
-                    "selector": "[data-slot=\"alert-title\"]"
+                    "selector": "[data-slot=\"toast-title\"]"
                   },
                   "id": "cHfDVnCUyupJ",
                   "name": "takeElementScreenshot"
@@ -431,7 +431,7 @@
           "actions": [
             {
               "args": {
-                "selector": "[data-slot=\"alert-title\"]"
+                "selector": "[data-slot=\"toast-title\"]"
               },
               "name": "takeElementScreenshot"
             }
@@ -473,7 +473,7 @@
               "actions": [
                 {
                   "args": {
-                    "selector": "[data-slot=\"alert-title\"]"
+                    "selector": "[data-slot=\"toast-title\"]"
                   },
                   "id": "rhREgXENo85K",
                   "name": "takeElementScreenshot"
@@ -514,7 +514,7 @@
           "actions": [
             {
               "args": {
-                "selector": "[data-slot=\"alert-title\"]"
+                "selector": "[data-slot=\"toast-title\"]"
               },
               "name": "takeElementScreenshot"
             }
@@ -568,7 +568,7 @@
               "actions": [
                 {
                   "args": {
-                    "selector": "[data-slot=\"alert-title\"]"
+                    "selector": "[data-slot=\"toast-title\"]"
                   },
                   "id": "TamBMyZ0gSHI",
                   "name": "takeElementScreenshot"
@@ -597,18 +597,6 @@
           "actions": [
             {
               "args": {
-                "selector": "#alert-toast-button-12"
-              },
-              "name": "click"
-            }
-          ],
-          "id": "NqCgRsi1OcSE",
-          "title": "click"
-        },
-        {
-          "actions": [
-            {
-              "args": {
                 "timeout": 200
               },
               "name": "waitForTimeout"
@@ -616,6 +604,18 @@
           ],
           "id": "wqZ1Hd4wcoiy",
           "title": "delay 200"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#alert-toast-button-12"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "NqCgRsi1OcSE",
+          "title": "click"
         },
         {
           "actions": [
@@ -652,11 +652,11 @@
                   "args": {
                     "selector": "#alert-toast-button-12"
                   },
-                  "id": "HlKA0KiK7pBt",
+                  "id": "NdIapiq5Qf_K",
                   "name": "click"
                 }
               ],
-              "id": "ZzrN7MKm-pDr",
+              "id": "M5O5JdXOzSWN",
               "title": "click"
             },
             {
@@ -665,25 +665,12 @@
                   "args": {
                     "timeout": 200
                   },
-                  "id": "p0-WEczVTVaX",
+                  "id": "0FAUptwVCTum",
                   "name": "waitForTimeout"
                 }
               ],
-              "id": "rX5AHz6JLaAp",
+              "id": "DQ1U6UT9cj8-",
               "title": "delay 200"
-            },
-            {
-              "actions": [
-                {
-                  "args": {
-                    "selector": "[data-slot=\"alert-title\"]"
-                  },
-                  "id": "dTxHyEFomGxo",
-                  "name": "takeElementScreenshot"
-                }
-              ],
-              "id": "9Fp3q-jiZ6ag",
-              "title": "takeElementScreenshot"
             },
             {
               "actions": [
@@ -692,24 +679,31 @@
                     "x": 575,
                     "y": 255
                   },
-                  "id": "8GwU18JhY9To",
+                  "id": "xWNL1-4MRLJK",
                   "name": "mouse.click"
                 }
               ],
-              "id": "O0nGBOAouNvO",
+              "id": "mFfgx7rFxeQQ",
               "title": "mouse.click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"alert-title\"]"
+                  },
+                  "id": "iEZe5Y9rJv1W",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "od0AFoAKBI3F",
+              "title": "takeElementScreenshot"
             }
           ],
-          "browserOptionsId": "XL4bCv0GQklq",
+          "browserOptionsId": "IRuQp8ZzPZEs",
           "browserType": "chromium",
-          "globals": {
-            "backgrounds": {
-              "grid": false
-            }
-          },
-          "id": "W7bSjWtaJLnX",
+          "id": "OcXJCbXEDgLf",
           "index": 0,
-          "screenshotOptionsId": "90h9d07JqDjt",
           "title": "Alert toast should not dismissed"
         }
       ]
@@ -849,6 +843,13 @@
       "viewport": {
         "height": 424,
         "width": 780
+      },
+      "cursor": true
+    },
+    "IRuQp8ZzPZEs": {
+      "viewport": {
+        "height": 309,
+        "width": 836
       },
       "cursor": true
     }
