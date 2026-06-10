@@ -1,9 +1,38 @@
 import type { Decorator, Preview } from '@storybook/react';
 import { addAPIProvider } from '@iconify/react';
 import { withThemeByClassName } from '@storybook/addon-themes';
+import { useEffect } from 'react';
 import { worker } from './mocks/browser';
 import { STORYBOOK_ORIGIN } from './storybook-config';
 import './globals.css';
+
+function PlaywrightStylesSync() {
+  useEffect(() => {
+    if (navigator.webdriver !== true) {
+      return () => {
+        // no-op
+      };
+    }
+
+    const { documentElement } = document;
+    documentElement.classList.add('playwright');
+
+    return () => {
+      documentElement.classList.remove('playwright');
+    };
+  }, []);
+
+  return null;
+}
+
+const withPlaywrightStyles: Decorator = (Story) => {
+  return (
+    <>
+      <PlaywrightStylesSync />
+      <Story />
+    </>
+  );
+};
 
 const withStoryId: Decorator = (Story, context) => {
   return (
@@ -33,6 +62,7 @@ const preview: Preview = {
     },
   },
   decorators: [
+    withPlaywrightStyles,
     withComponentId,
     withStoryId,
     withThemeByClassName({

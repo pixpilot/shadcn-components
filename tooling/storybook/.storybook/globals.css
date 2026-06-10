@@ -7,6 +7,14 @@
   --breakpoint-xs: 30rem;
 }
 
+.playwright *,
+.playwright *::before,
+.playwright *::after {
+  transition-property: none !important;
+  animation: none !important;
+  caret-color: transparent !important;
+}
+
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);

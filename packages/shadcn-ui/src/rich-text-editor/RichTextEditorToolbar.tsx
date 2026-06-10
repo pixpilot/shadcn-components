@@ -5,6 +5,7 @@ import type { RichTextEditorSlots, ToolbarItems } from './RichTextEditor';
 import type { ToolbarButtonTooltipMode } from './ToolbarButton';
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
+import { LinkPopoverToolbarButton } from './LinkPopoverToolbarButton';
 import { predefinedToolbarItems } from './predefined-toolbar-items';
 import { ToolbarButton } from './ToolbarButton';
 
@@ -19,6 +20,7 @@ export interface RichTextEditorToolbarProps {
    */
   renderTick: number;
   tooltipMode?: ToolbarButtonTooltipMode;
+  allowLinkTarget?: boolean;
 }
 
 const RichTextEditorToolbarComponent: React.FC<RichTextEditorToolbarProps> = ({
@@ -28,6 +30,7 @@ const RichTextEditorToolbarComponent: React.FC<RichTextEditorToolbarProps> = ({
   showToolbar,
   renderTick,
   tooltipMode,
+  allowLinkTarget,
 }) => {
   if (!showToolbar) return null;
 
@@ -67,6 +70,19 @@ const RichTextEditorToolbarComponent: React.FC<RichTextEditorToolbarProps> = ({
         }
 
         if (typeof option === 'string') {
+          if (option === 'link' || option === 'linkPopover') {
+            return (
+              <LinkPopoverToolbarButton
+                key={option}
+                editor={editor}
+                isActive={isEditorFocused && editor.isActive('link')}
+                className={slots?.toolbar?.button?.className}
+                tooltipMode={tooltipMode}
+                allowLinkTarget={allowLinkTarget}
+              />
+            );
+          }
+
           const predefinedOption = predefinedToolbarItems[option];
           if (!predefinedOption) return null;
 

@@ -55,6 +55,66 @@
       "id": "FUKy7Ku_-QsGOIH",
       "title": "takeElementScreenshot",
       "visibleTo": "shadcn-ui-button"
+    },
+    {
+      "actions": [
+        {
+          "args": {
+            "selector": "[data-slot=\"link-form\"]"
+          },
+          "id": "KL-X9Y4ZSS",
+          "name": "takeElementScreenshot"
+        }
+      ],
+      "id": "l9QgkCW7D7-41bV",
+      "title": "takeElementScreenshot",
+      "visibleTo": "*"
+    },
+    {
+      "actions": [
+        {
+          "args": {
+            "x": 52,
+            "y": 94,
+            "options": {
+              "delay": 8
+            }
+          },
+          "id": "AFQU41qYLx",
+          "name": "mouse.click"
+        }
+      ],
+      "id": "IZCzVN16xZgmEV_",
+      "title": "click on editor link content",
+      "visibleTo": "*"
+    },
+    {
+      "actions": [
+        {
+          "args": {
+            "selector": "[data-slot=\"link-button\"]"
+          },
+          "id": "heHDQt_6hX",
+          "name": "click"
+        }
+      ],
+      "id": "qzbiyMUqRbvYgRO",
+      "title": "click link button",
+      "visibleTo": "*"
+    },
+    {
+      "actions": [
+        {
+          "args": {
+            "timeout": 500
+          },
+          "id": "ICVPE5Eva71n1h7p4waNc",
+          "name": "waitForTimeout"
+        }
+      ],
+      "id": "0SjXwxXFKaw6mO3",
+      "title": "delay 500",
+      "visibleTo": "*"
     }
   ]
 }

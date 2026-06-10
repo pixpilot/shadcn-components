@@ -44,9 +44,9 @@ export const predefinedToolbarItems: Record<string, PredefinedToolbarOption> = {
     onClick: (editor) => editor.chain().focus().toggleUnderline().run(),
     isActive: (editor) => editor.isActive('underline'),
   },
-  link: {
+  toggleLink: {
     icon: <LinkIcon className="h-4 w-4" />,
-    tooltip: 'Link',
+    tooltip: 'Toggle Link',
     onClick: (editor) => editor.chain().focus().toggleLink().run(),
     isActive: (editor) => editor.isActive('link'),
   },

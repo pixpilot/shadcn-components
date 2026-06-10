@@ -36,6 +36,16 @@ const meta = {
       control: 'object',
       description: 'Array of toolbar items to display',
     },
+    allowLinkTarget: {
+      control: 'boolean',
+      description: 'Whether the link popover allows choosing a target',
+      defaultValue: false,
+    },
+    openOnClick: {
+      control: 'boolean',
+      description: 'Whether links open when clicked inside the editor',
+      defaultValue: false,
+    },
   },
 } satisfies Meta<typeof RichTextEditor>;
 
@@ -108,6 +118,30 @@ export const CustomToolbar: Story = {
           console.warn('Save button clicked!');
         },
       },
+    ],
+  },
+};
+
+/**
+ * Editor with custom toolbar options
+ */
+export const WithLink: Story = {
+  args: {
+    value:
+      '<p><a href="https://github.com/">Select </a>this text, click the link button, and apply a URL.</p>',
+    allowLinkTarget: true,
+    openOnClick: false,
+    toolbarItems: [
+      'bold',
+      'italic',
+      'underline',
+      'strike',
+      'link',
+      '|',
+      'heading2',
+      'heading3',
+      '|',
+      'bulletList',
     ],
   },
 };

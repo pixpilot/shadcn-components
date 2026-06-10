@@ -39,6 +39,20 @@ const meta: Meta<typeof RichTextEditor> = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  argTypes: {
+    allowLinkTarget: {
+      control: 'boolean',
+      description: 'Passed to x-component-props.allowLinkTarget',
+    },
+    openOnClick: {
+      control: 'boolean',
+      description: 'Passed to x-component-props.openOnClick',
+    },
+    toolbarItems: {
+      control: 'object',
+      description: 'Passed to x-component-props.toolbarItems',
+    },
+  },
   decorators: [
     (Story) => (
       <div id="rich-text-editor-div-1" className="w-full max-w-lg">
@@ -50,6 +64,12 @@ const meta: Meta<typeof RichTextEditor> = {
 
 export default meta;
 type Story = StoryObj<typeof RichTextEditor>;
+interface LinkOptionsStoryArgs {
+  allowLinkTarget: boolean;
+  openOnClick: boolean;
+  toolbarItems: string[];
+}
+type LinkOptionsStory = StoryObj<LinkOptionsStoryArgs>;
 
 const BELL_ICON_SVG =
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 10-12 0c0 7-3 7-3 7h18s-3 0-3-7"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>';
@@ -110,6 +130,67 @@ export const JsonSchemaForm: Story = {
           title: 'Rich Text Editor',
           'x-decorator': 'FormItem',
           'x-component': 'RichTextEditor',
+        },
+      },
+    };
+
+    return (
+      <JsonSchemaFormRenderer
+        form={form}
+        schema={schema}
+        components={{
+          fields: {
+            ...defaultComponentRegistry,
+            RichTextEditor: {
+              component: RichTextEditor,
+            },
+          },
+        }}
+        onSubmit={(values) => {
+          alert(JSON.stringify(values, null, 2));
+        }}
+      ></JsonSchemaFormRenderer>
+    );
+  },
+};
+
+export const JsonSchemaWithLinkOptions: LinkOptionsStory = {
+  args: {
+    allowLinkTarget: true,
+    openOnClick: false,
+    toolbarItems: [
+      'bold',
+      'italic',
+      'underline',
+      'strike',
+      'link',
+      '|',
+      'heading2',
+      'heading3',
+      '|',
+      'bulletList',
+    ],
+  },
+  render: (args) => {
+    const form = createForm({
+      values: {
+        richText:
+          '<p>Select this text, click the link button, and apply a URL from schema props.</p>',
+      },
+    });
+    const schema: ISchema = {
+      type: 'object',
+      properties: {
+        richText: {
+          type: 'string',
+          title: 'Rich Text Editor with Link Options',
+          'x-decorator': 'FormItem',
+          'x-component': 'RichTextEditor',
+          'x-component-props': {
+            allowLinkTarget: args.allowLinkTarget,
+            openOnClick: args.openOnClick,
+            toolbarItems: args.toolbarItems,
+          },
         },
       },
     };

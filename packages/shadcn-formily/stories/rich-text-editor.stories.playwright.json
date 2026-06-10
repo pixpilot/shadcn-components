@@ -1,0 +1,82 @@
+{
+  "version": "0",
+  "stories": {
+    "formily-richtexteditor--json-schema-with-link-options": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"link-button\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "v5GUTcgCLEWl",
+          "title": "click link button"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"link-form\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "poXu4OAfwZRw",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"link-button\"]"
+                  },
+                  "id": "Enokg0u6aV0p",
+                  "name": "click"
+                }
+              ],
+              "id": "7wxAzpMgVp6r",
+              "title": "click link button"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"link-form\"]"
+                  },
+                  "id": "lcjvJoibJgTj",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "S0OkURXXknzP",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "args": {
+            "allowLinkTarget": false
+          },
+          "browserOptionsId": "UzILjCcoL2tb",
+          "browserType": "chromium",
+          "id": "WqEW_gN0_BOV",
+          "index": 0,
+          "title": "should not have link target radio buttons"
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "UzILjCcoL2tb": {
+      "viewport": {
+        "height": 368,
+        "width": 657
+      },
+      "cursor": true
+    }
+  }
+}

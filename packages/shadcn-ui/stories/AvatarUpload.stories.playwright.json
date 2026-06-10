@@ -74,28 +74,6 @@
               "actions": [
                 {
                   "args": {
-                    "selector": "#avatar-upload-div-1"
-                  },
-                  "id": "LK5Gk97ED2Tw",
-                  "name": "takeElementScreenshot"
-                }
-              ],
-              "id": "RmRqg2BqSLua",
-              "title": "takeElementScreenshot"
-            }
-          ],
-          "browserOptionsId": "LSw61olDITRy",
-          "browserType": "chromium",
-          "id": "YaTJ_JkKlLpN",
-          "index": 0,
-          "title": "Avatar upload with image displayed"
-        },
-        {
-          "actionSets": [
-            {
-              "actions": [
-                {
-                  "args": {
                     "selector": "[data-slot=\"button\"]"
                   },
                   "id": "h4mfx2yeIgc7",
@@ -137,9 +115,56 @@
           "id": "xf11cu5I8cl4",
           "index": 1,
           "title": "Should remove file"
+        },
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 500
+                  },
+                  "id": "vvZCCbeBLYTf",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "coqVs8wf8ijg",
+              "title": "delay 500"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#avatar-upload-div-1"
+                  },
+                  "id": "TAy6BqO_yysT",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "KKqhWzD0BUMy",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "LSw61olDITRy",
+          "browserType": "chromium",
+          "id": "rJLRDLq1UBuM",
+          "index": 0,
+          "title": "Avatar upload with image displayed"
         }
       ],
       "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#avatar-upload-div-1"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "YgO6iAxooOQH",
+          "title": "takeElementScreenshot"
+        },
         {
           "actions": [
             {
@@ -156,25 +181,13 @@
           "actions": [
             {
               "args": {
-                "timeout": 200
+                "timeout": 500
               },
               "name": "waitForTimeout"
             }
           ],
           "id": "wcwPynL5ceVF",
-          "title": "delay 200"
-        },
-        {
-          "actions": [
-            {
-              "args": {
-                "selector": "#avatar-upload-div-1"
-              },
-              "name": "takeElementScreenshot"
-            }
-          ],
-          "id": "YgO6iAxooOQH",
-          "title": "takeElementScreenshot"
+          "title": "delay 500"
         }
       ]
     }

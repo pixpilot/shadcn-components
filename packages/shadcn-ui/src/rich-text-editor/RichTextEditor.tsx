@@ -101,6 +101,20 @@ export interface RichTextEditorProps {
    * Placeholder text to show when the editor is empty
    */
   placeholder?: string;
+
+  /**
+   * Whether the link popover should expose target controls.
+   * When false, links are always written without `target` and `rel`.
+   * @default false
+   */
+  allowLinkTarget?: boolean;
+
+  /**
+   * Whether link clicks should open links inside the editor.
+   * When false, link clicks are prevented so linked text can be selected.
+   * @default false
+   */
+  openOnClick?: boolean;
 }
 
 const defaultExtensions: Extension[] = [];
@@ -131,6 +145,7 @@ const defaultToolbarItems: ToolbarItems[] = [
 function useEditorProps(
   slots?: RichTextEditorSlots,
   customEditorProps?: EditorProps,
+  openOnClick = false,
 ): EditorProps {
   const defaultEditorProps: EditorProps = React.useMemo(
     () => ({
@@ -161,6 +176,25 @@ function useEditorProps(
     () => ({
       ...defaultEditorProps,
       ...customEditorProps,
+      handleClickOn: (view, pos, node, nodePos, event, direct) => {
+        const { target } = event;
+        const linkElement =
+          target instanceof Element ? target.closest<HTMLAnchorElement>('a[href]') : null;
+
+        if (!openOnClick && linkElement != null) {
+          event.preventDefault();
+          return true;
+        }
+
+        return customEditorProps?.handleClickOn?.(
+          view,
+          pos,
+          node,
+          nodePos,
+          event,
+          direct,
+        );
+      },
 
       attributes: {
         ...defaultEditorProps.attributes,
@@ -171,7 +205,7 @@ function useEditorProps(
         ),
       },
     }),
-    [defaultEditorProps, customEditorProps],
+    [defaultEditorProps, customEditorProps, openOnClick],
   );
 
   return mergedEditorProps;
@@ -189,13 +223,15 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   immediatelyRender = false,
   tooltipMode = 'native',
   placeholder,
+  allowLinkTarget = false,
+  openOnClick = false,
 }) => {
   // TipTap editor state (selection/active marks) changes without React re-rendering.
   // Force a re-render on selection/transaction updates so toolbar buttons
   // correctly reflect the current cursor/selection formatting.
   const [renderTick, forceRender] = React.useReducer((x: number) => x + 1, 0);
 
-  const mergedEditorProps = useEditorProps(slots, customEditorProps);
+  const mergedEditorProps = useEditorProps(slots, customEditorProps, openOnClick);
 
   const onChangeRef = React.useRef(onChange);
   onChangeRef.current = onChange;
@@ -207,14 +243,20 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   const memoizedExtensions = React.useMemo(() => {
     const baseExtensions = [
       StarterKit,
-      Link,
+      Link.configure({
+        openOnClick,
+        HTMLAttributes: {
+          target: null,
+          rel: null,
+        },
+      }),
       TextAlign.configure({ types: ['heading', 'paragraph'] }),
     ] as Extension[];
     if (placeholder != null) {
       baseExtensions.push(Placeholder.configure({ placeholder }) as Extension);
     }
     return baseExtensions.concat(extensions);
-  }, [extensions, placeholder]);
+  }, [extensions, placeholder, openOnClick]);
 
   const editorInstance = useEditor({
     extensions: memoizedExtensions,
@@ -279,6 +321,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
         showToolbar={showToolbar}
         renderTick={renderTick}
         tooltipMode={tooltipMode}
+        allowLinkTarget={allowLinkTarget}
       />
       <EditorContent editor={editorInstance} />
     </div>

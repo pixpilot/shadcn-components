@@ -1,0 +1,381 @@
+{
+  "version": "0",
+  "stories": {
+    "shadcn-ui-richtexteditor--with-link": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "name": "takeScreenshot"
+            }
+          ],
+          "id": "0pqOBCKkE-DM",
+          "title": "Take screenshot"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "x": 52,
+                "y": 94,
+                "options": {
+                  "delay": 8
+                }
+              },
+              "name": "mouse.click"
+            }
+          ],
+          "id": "lDeUjGLZIf2Z",
+          "title": "click on editor link content"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"link-button\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "degP97kOSufr",
+          "title": "click link button"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"link-form\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "8aTpYmEhFNue",
+          "title": "takeElementScreenshot"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"link-input\"]",
+                "value": "https://stackoverflow.com/"
+              },
+              "name": "fill"
+            }
+          ],
+          "id": "fvwVS8AbknBh",
+          "title": "fill"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"link-button\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "PXA7DjvdHRMm",
+          "title": "click link button"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"link-input\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "3rWO_cdAIIG8",
+          "title": "takeElementScreenshot"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"link-remove-button\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "LrdLZ35lxlX3",
+          "title": "click apply"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "x": 54,
+                "y": 143
+              },
+              "name": "mouse.click"
+            }
+          ],
+          "id": "Mxy1kAWoQ0yO",
+          "title": "mouse.click"
+        },
+        {
+          "actions": [
+            {
+              "name": "takeScreenshot"
+            }
+          ],
+          "id": "tRDKMHDEhZ-7",
+          "title": "Take screenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "x": 52,
+                    "y": 94,
+                    "options": {
+                      "delay": 8
+                    }
+                  },
+                  "id": "uIlbIP2pWuiv",
+                  "name": "mouse.click"
+                }
+              ],
+              "id": "ByE6ITcvcqIv",
+              "title": "click on editor link content"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"link-button\"]"
+                  },
+                  "id": "uvdreqA-io6F",
+                  "name": "click"
+                }
+              ],
+              "id": "aBw1pcD-xc19",
+              "title": "click link button"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"link-form\"]"
+                  },
+                  "id": "qCv3XWWgKXkB",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "OQTX8z-oeTL3",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "JWcogdIGPpAf",
+          "browserType": "chromium",
+          "id": "TqHPcAFtZ9ES",
+          "index": 0,
+          "title": "should have link value and defaults"
+        },
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "x": 52,
+                    "y": 94,
+                    "options": {
+                      "delay": 8
+                    }
+                  },
+                  "id": "UbT0l-ZdI0uv",
+                  "name": "mouse.click"
+                }
+              ],
+              "id": "QxllmNpVbNFq",
+              "title": "click on editor link content"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"link-button\"]"
+                  },
+                  "id": "5E2CJzFY77fL",
+                  "name": "click"
+                }
+              ],
+              "id": "T58djfqTjmnE",
+              "title": "click link button"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"link-input\"]",
+                    "value": "https://stackoverflow.com/"
+                  },
+                  "id": "5vdmq_FIWEDQ",
+                  "name": "fill"
+                }
+              ],
+              "id": "0TTWdsqEX8F5",
+              "title": "fill"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"link-apply-button\"]"
+                  },
+                  "id": "37lB__NFcYNK",
+                  "name": "click"
+                }
+              ],
+              "id": "rk1J2UUrYiza",
+              "title": "click apply"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"link-button\"]"
+                  },
+                  "id": "dA8TYZhvw2wV",
+                  "name": "click"
+                }
+              ],
+              "id": "M7H_m4zGAodf",
+              "title": "click link button"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"link-input\"]"
+                  },
+                  "id": "TOv0ExBpFF1k",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "o7TKH0g5ctXB",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "JWcogdIGPpAf",
+          "browserType": "chromium",
+          "id": "Le2FE6cv5ig-",
+          "index": 1,
+          "title": "should preserve new link"
+        },
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "id": "IUAyX9a8t6-h",
+                  "name": "takeScreenshot"
+                }
+              ],
+              "id": "q5QI7JNUYjNC",
+              "title": "Take screenshot"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "x": 52,
+                    "y": 94,
+                    "options": {
+                      "delay": 8
+                    }
+                  },
+                  "id": "DEEjc0-_BZQC",
+                  "name": "mouse.click"
+                }
+              ],
+              "id": "u3AsvfnJfQPU",
+              "title": "click on editor link content"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"link-button\"]"
+                  },
+                  "id": "LruGlwE-gGpJ",
+                  "name": "click"
+                }
+              ],
+              "id": "Ii09EXAc4bku",
+              "title": "click link button"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"link-remove-button\"]"
+                  },
+                  "id": "Tvq0vFBm83pY",
+                  "name": "click"
+                }
+              ],
+              "id": "pjQz44cZLBCH",
+              "title": "click apply"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "x": 54,
+                    "y": 143
+                  },
+                  "id": "mZKMDCndMM8s",
+                  "name": "mouse.click"
+                }
+              ],
+              "id": "Apd7AWsvrl5f",
+              "title": "mouse.click"
+            },
+            {
+              "actions": [
+                {
+                  "id": "Pnk2nE0ngLFJ",
+                  "name": "takeScreenshot"
+                }
+              ],
+              "id": "VQ9dm9J235hO",
+              "title": "Take screenshot"
+            }
+          ],
+          "browserOptionsId": "JWcogdIGPpAf",
+          "browserType": "chromium",
+          "id": "CYCb7YPdOWHl",
+          "index": 2,
+          "screenshotOptionsId": "RfWN86Un-GtE",
+          "title": "should remove link"
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "JWcogdIGPpAf": {
+      "viewport": {
+        "height": 368,
+        "width": 836
+      },
+      "cursor": true
+    }
+  },
+  "screenshotOptions": {
+    "RfWN86Un-GtE": {
+      "clip": {
+        "height": 55,
+        "width": 87,
+        "x": 15,
+        "y": 63
+      }
+    }
+  }
+}
