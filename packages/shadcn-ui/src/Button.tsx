@@ -7,6 +7,7 @@ import type {
 
 import type { VariantProps } from 'class-variance-authority';
 import { cn, Button as OrgButton } from '@pixpilot/shadcn';
+import { Slottable } from '@radix-ui/react-slot';
 
 import React, { useCallback } from 'react';
 import { AbsoluteFill } from './AbsoluteFill';
@@ -45,6 +46,7 @@ function Button(props: ButtonProps & { ref?: React.Ref<HTMLButtonElement> }) {
     className,
     variant,
     size,
+    asChild,
     ref,
     ...rest
   } = props;
@@ -62,6 +64,7 @@ function Button(props: ButtonProps & { ref?: React.Ref<HTMLButtonElement> }) {
     <OrgButton
       {...rest}
       ref={ref}
+      asChild={asChild}
       disabled={disabled}
       onClick={handleClick}
       className={cn('relative', className)}
@@ -78,7 +81,7 @@ function Button(props: ButtonProps & { ref?: React.Ref<HTMLButtonElement> }) {
         />
       )}
 
-      {children}
+      {asChild ? <Slottable>{children}</Slottable> : children}
     </OrgButton>
   );
 

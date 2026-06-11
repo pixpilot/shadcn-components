@@ -8,6 +8,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@pixpilot/shadcn';
+import { Slottable } from '@radix-ui/react-slot';
 
 import { Loader2 } from 'lucide-react';
 import React, { useCallback } from 'react';
@@ -124,6 +125,7 @@ function ButtonExtended(
     className,
     variant,
     size,
+    asChild,
     ref,
     ...rest
   } = props;
@@ -170,6 +172,7 @@ function ButtonExtended(
     <OrgButton
       {...rest}
       ref={ref}
+      asChild={asChild}
       disabled={isDisabled}
       onClick={handleClick}
       className={cn('relative', className)}
@@ -194,7 +197,7 @@ function ButtonExtended(
 
       {loading && loaderPlacement === 'start' && Loader}
 
-      {children}
+      {asChild ? <Slottable>{children}</Slottable> : children}
       {loading && (loaderPlacement === 'end' || loaderPlacement === 'center') && Loader}
     </OrgButton>
   );

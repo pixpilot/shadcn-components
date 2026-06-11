@@ -134,6 +134,46 @@
           "title": "takeElementScreenshot"
         }
       ]
+    },
+    "shadcn-ui-button--as-child-link": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#shadcn-ui-button--as-child-link"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "S54wrajv-ovr",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#shadcn-ui-button--as-child-link"
+                  },
+                  "id": "NZeObnKz-4iK",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "Zl-KNmk_LvSF",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "PDsUcF7Kauow",
+          "browserType": "chromium",
+          "id": "NZId127i-L-K",
+          "index": 0,
+          "title": "As Child Link with link element rendered"
+        }
+      ]
     }
   },
   "browserOptions": {
@@ -148,6 +188,13 @@
       "viewport": {
         "height": 424,
         "width": 836
+      },
+      "cursor": true
+    },
+    "PDsUcF7Kauow": {
+      "viewport": {
+        "height": 368,
+        "width": 657
       },
       "cursor": true
     }

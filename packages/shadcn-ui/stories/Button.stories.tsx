@@ -62,3 +62,30 @@ export const DisabledOverlayClickable: Story = {
     </Button>
   ),
 };
+
+export const AsChildLink: Story = {
+  render: (args) => (
+    <div className="flex flex-col items-start gap-4">
+      <Button {...args} asChild>
+        <a href="https://example.com" target="_blank" rel="noreferrer">
+          Open example link
+        </a>
+      </Button>
+
+      <Button
+        {...args}
+        asChild
+        disabled
+        title="Disabled asChild link"
+        onDisabledClick={() => {
+          // eslint-disable-next-line no-alert
+          alert('Disabled asChild overlay clicked');
+        }}
+      >
+        <a href="https://example.com" target="_blank" rel="noreferrer">
+          Disabled example link
+        </a>
+      </Button>
+    </div>
+  ),
+};

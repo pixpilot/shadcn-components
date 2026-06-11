@@ -1,0 +1,79 @@
+{
+  "version": "0",
+  "stories": {
+    "shadcn-ui-buttonextended--as-child": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#shadcn-ui-buttonextended--as-child"
+              },
+              "name": "hover"
+            }
+          ],
+          "id": "QMimKnUQptEe",
+          "title": "hover"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-testid=\"as-child-wrapper\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "Xl2_MMZqWG-c",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#shadcn-ui-buttonextended--as-child"
+                  },
+                  "id": "5D6JyGXTQvEP",
+                  "name": "hover"
+                }
+              ],
+              "id": "NKQIbwpBzvyU",
+              "title": "hover"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-testid=\"as-child-wrapper\"]"
+                  },
+                  "id": "9-qSwX386SQz",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "DGHkz2GUJD-K",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "QB9AU10K72H_",
+          "browserType": "chromium",
+          "id": "Xb-tUearpsSH",
+          "index": 0,
+          "title": "Tooltip visible on hover of As Child button"
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "QB9AU10K72H_": {
+      "viewport": {
+        "height": 368,
+        "width": 657
+      },
+      "cursor": true
+    }
+  }
+}

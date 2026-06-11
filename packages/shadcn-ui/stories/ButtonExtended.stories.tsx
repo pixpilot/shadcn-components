@@ -187,6 +187,22 @@ export const MultilineStringTooltip: Story = {
 };
 
 /**
+ * Button rendered as a child element
+ */
+export const AsChild: Story = {
+  render: (args) => (
+    <div data-testid="as-child-wrapper" className="p-10">
+      <ButtonExtended {...args} asChild>
+        <a href="https://github.com/pixpilot/shadcn-components">Open repository</a>
+      </ButtonExtended>
+    </div>
+  ),
+  args: {
+    tooltip: 'Opens the project repository',
+  },
+};
+
+/**
  * Tooltip provided as a React node
  */
 export const TooltipWithNode: Story = {
