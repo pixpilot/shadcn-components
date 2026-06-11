@@ -1,5 +1,16 @@
 # @pixpilot/formily-shadcn
 
+## 1.12.0
+
+### Minor Changes
+
+- add link popover with target options
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn-ui@1.28.0
+
 ## 1.11.27
 
 ### Patch Changes

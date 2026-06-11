@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.28.0
+
+### Minor Changes
+
+- add link popover with target options
+
 ## 1.27.0
 
 ### Minor Changes
