@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.29.2
+
+### Patch Changes
+
+- correct typo in 'use client' directive
+
 ## 1.29.1
 
 ### Patch Changes
