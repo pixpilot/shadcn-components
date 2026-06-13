@@ -1,5 +1,14 @@
 # @pixpilot/shadcn-ui
 
+## 1.29.1
+
+### Patch Changes
+
+- update package versions for release
+- 65120f4: fix release
+- Updated dependencies [65120f4]
+  - @pixpilot/shadcn@1.3.1
+
 ## 1.29.0
 
 ### Minor Changes
