@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.30.0
+
+### Minor Changes
+
+- add Card component and related stories
+
 ## 1.29.2
 
 ### Patch Changes
