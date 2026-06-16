@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.32.0
+
+### Minor Changes
+
+- enhance Dialog component with new DialogClose functionality and improved styling
+
 ## 1.31.0
 
 ### Minor Changes
