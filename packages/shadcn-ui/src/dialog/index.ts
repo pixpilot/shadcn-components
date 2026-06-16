@@ -1,11 +1,11 @@
+import { Dialog, DialogDescription, DialogTitle, DialogTrigger } from '@pixpilot/shadcn';
 import {
-  Dialog,
+  DialogBody,
   DialogClose,
-  DialogDescription,
-  DialogTitle,
-  DialogTrigger,
-} from '@pixpilot/shadcn';
-import { DialogBody, DialogContent, DialogFooter, DialogHeader } from './Dialog';
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+} from './Dialog';
 
 export type { DialogContentProps } from './Dialog';
 
