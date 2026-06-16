@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.30.1
+
+### Patch Changes
+
+- simplify Card component and remove marginBottom prop
+
 ## 1.30.0
 
 ### Minor Changes
