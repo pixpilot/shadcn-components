@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.31.0
+
+### Minor Changes
+
+- enhance DialogContent styling and add WideCardsRow story
+
 ## 1.30.1
 
 ### Patch Changes
