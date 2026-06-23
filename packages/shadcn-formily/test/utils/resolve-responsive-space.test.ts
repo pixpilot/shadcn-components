@@ -12,27 +12,27 @@ import {
 describe('resolveSpacingClass', () => {
   it('should return fixed spacing class for compact density', () => {
     const result = resolveSpacingClass('compact', spaceYConfig);
-    expect(result).toBe('space-y-3');
+    expect(result).toBe('gap-y-3');
   });
 
   it('should return fixed spacing class for normal density', () => {
     const result = resolveSpacingClass('normal', spaceYConfig);
-    expect(result).toBe('space-y-4');
+    expect(result).toBe('gap-y-4');
   });
 
   it('should return fixed spacing class for comfortable density', () => {
     const result = resolveSpacingClass('comfortable', spaceYConfig);
-    expect(result).toBe('space-y-6');
+    expect(result).toBe('gap-y-6');
   });
 
   it('should return responsive classes for responsive density', () => {
     const result = resolveSpacingClass('responsive', spaceYConfig);
-    expect(result).toBe('space-y-3 md:space-y-4 lg:space-y-6');
+    expect(result).toBe('gap-y-3 md:gap-y-4 lg:gap-y-6');
   });
 
   it('should return responsive classes when density is undefined', () => {
     const result = resolveSpacingClass(undefined, spaceYConfig);
-    expect(result).toBe('space-y-3 md:space-y-4 lg:space-y-6');
+    expect(result).toBe('gap-y-3 md:gap-y-4 lg:gap-y-6');
   });
 
   it('should work with gap config', () => {
@@ -58,34 +58,34 @@ describe('resolveSpacingClass', () => {
 });
 
 describe('resolveResponsiveSpaceClass', () => {
-  it('should return space-y-3 for compact density', () => {
+  it('should return gap-y-3 for compact density', () => {
     const result = resolveResponsiveSpaceClass({ density: 'compact' });
-    expect(result).toBe('space-y-3');
+    expect(result).toBe('gap-y-3');
   });
 
-  it('should return space-y-4 for normal density', () => {
+  it('should return gap-y-4 for normal density', () => {
     const result = resolveResponsiveSpaceClass({ density: 'normal' });
-    expect(result).toBe('space-y-4');
+    expect(result).toBe('gap-y-4');
   });
 
-  it('should return space-y-6 for comfortable density', () => {
+  it('should return gap-y-6 for comfortable density', () => {
     const result = resolveResponsiveSpaceClass({ density: 'comfortable' });
-    expect(result).toBe('space-y-6');
+    expect(result).toBe('gap-y-6');
   });
 
   it('should return responsive classes for responsive density', () => {
     const result = resolveResponsiveSpaceClass({ density: 'responsive' });
-    expect(result).toBe('space-y-3 md:space-y-4 lg:space-y-6');
+    expect(result).toBe('gap-y-3 md:gap-y-4 lg:gap-y-6');
   });
 
   it('should return responsive classes for undefined density', () => {
     const result = resolveResponsiveSpaceClass({});
-    expect(result).toBe('space-y-3 md:space-y-4 lg:space-y-6');
+    expect(result).toBe('gap-y-3 md:gap-y-4 lg:gap-y-6');
   });
 
   it('should return responsive classes when formSpace is undefined', () => {
     const result = resolveResponsiveSpaceClass(undefined);
-    expect(result).toBe('space-y-3 md:space-y-4 lg:space-y-6');
+    expect(result).toBe('gap-y-3 md:gap-y-4 lg:gap-y-6');
   });
 });
 
@@ -155,10 +155,10 @@ describe('spacing config objects', () => {
   it('should have spaceYConfig with correct structure', () => {
     expect(spaceYConfig).toHaveProperty('fixed');
     expect(spaceYConfig).toHaveProperty('responsive');
-    expect(spaceYConfig.fixed).toHaveProperty('sm', 'space-y-3');
-    expect(spaceYConfig.fixed).toHaveProperty('md', 'space-y-4');
-    expect(spaceYConfig.fixed).toHaveProperty('lg', 'space-y-6');
-    expect(spaceYConfig.responsive).toBe('space-y-3 md:space-y-4 lg:space-y-6');
+    expect(spaceYConfig.fixed).toHaveProperty('sm', 'gap-y-3');
+    expect(spaceYConfig.fixed).toHaveProperty('md', 'gap-y-4');
+    expect(spaceYConfig.fixed).toHaveProperty('lg', 'gap-y-6');
+    expect(spaceYConfig.responsive).toBe('gap-y-3 md:gap-y-4 lg:gap-y-6');
   });
 
   it('should have gapYConfig with correct structure', () => {

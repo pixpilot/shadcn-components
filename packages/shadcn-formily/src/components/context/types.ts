@@ -5,10 +5,9 @@ import type {
   RichTextEditorProps,
 } from '@pixpilot/shadcn-ui';
 import type { FormSpace } from '../../types/form';
-import type { DescriptionPlacement, LabelPlacement } from '../../types/form-item';
 import type { ActionItem } from '../array-base';
 import type { FormFileUploadOptions } from '../file-upload';
-import type { FormItemLabelProps } from '../form-item';
+import type { FormItemDescriptionProps, FormItemLabelProps } from '../form-item';
 
 export interface FomFileUpload {
   onUpload?: (files: File[], options: FormFileUploadOptions) => void;
@@ -58,14 +57,10 @@ export interface FormSettings {
 export interface FormLayoutOptions {
   /** Form density - affects spacing between elements */
   density?: FormSpace['density'];
-  /** Default description placement for FormItem decorators */
-  descriptionPlacement?: DescriptionPlacement;
-  /** Default label placement for FormItem decorators */
-  labelPlacement?: LabelPlacement;
-  /** Custom class names for FormItem elements */
+  /** Custom props for FormItem elements */
   itemProps?: {
     label?: FormItemLabelProps;
-    description?: React.HTMLAttributes<HTMLParagraphElement>;
+    description?: FormItemDescriptionProps;
     inputWrapper?: React.HTMLAttributes<HTMLDivElement>;
     error?: React.HTMLAttributes<HTMLParagraphElement>;
     container?: React.HTMLAttributes<HTMLDivElement>;

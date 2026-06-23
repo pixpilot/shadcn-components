@@ -70,7 +70,7 @@ export const DescriptionPlacementTop: Story = {
         <button
           id="form-item-description-button-1"
           type="submit"
-          className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+          className=" w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
           Submit
         </button>
@@ -131,7 +131,7 @@ export const DescriptionPlacementBottom: Story = {
         <button
           id="form-item-description-button-2"
           type="submit"
-          className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+          className="w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
           Submit
         </button>
@@ -211,7 +211,7 @@ export const DescriptionPlacementPopover: Story = {
         <button
           id="form-item-description-button-3"
           type="submit"
-          className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+          className=" w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
           Submit
         </button>
@@ -298,7 +298,7 @@ export const MixedDescriptionPlacements: Story = {
         <button
           id="form-item-description-button-4"
           type="submit"
-          className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+          className=" w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
           Submit
         </button>
@@ -352,7 +352,7 @@ export const GlobalDescriptionPlacement: Story = {
       <Form
         form={form}
         className="w-[400px]"
-        layout={{ descriptionPlacement: 'popover' }}
+        layout={{ itemProps: { description: { placement: 'popover' } } }}
         onSubmit={(values) => {
           console.log('Form submitted:', values);
           alert(JSON.stringify(values, null, INDENT_SIZE));
@@ -372,7 +372,7 @@ export const GlobalDescriptionPlacement: Story = {
         <button
           id="form-item-description-button-5"
           type="submit"
-          className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+          className=" w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
           Submit
         </button>
@@ -452,7 +452,7 @@ export const DescriptionWithValidation: Story = {
         <button
           id="form-item-description-button-6"
           type="submit"
-          className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+          className="w-full rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
           Submit
         </button>

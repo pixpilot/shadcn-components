@@ -56,7 +56,7 @@ export function Form({
         <FormItemContainer
           as="form"
           id={id}
-          className={cn(className)}
+          className={cn('flex flex-col', className)}
           style={style}
           onSubmit={handleSubmit}
         >

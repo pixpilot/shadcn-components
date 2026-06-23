@@ -3,7 +3,7 @@ import { createSchemaField, FormProvider } from '@formily/react';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { FormItem, Input } from '../../../src';
+import { Form, FormItem, Input } from '../../../src';
 
 describe('connectedFormItem required mark behavior', () => {
   const SchemaField = createSchemaField({
@@ -210,5 +210,66 @@ describe('connectedFormItem required mark behavior', () => {
 
     const requiredMark = screen.queryByText('*');
     expect(requiredMark).toBeNull();
+  });
+
+  it('should use itemProps.label.placement from the form layout', () => {
+    const form = createForm();
+
+    const schema = {
+      type: 'object',
+      properties: {
+        name: {
+          type: 'string',
+          title: 'Name',
+          'x-decorator': 'FormItem',
+          'x-component': 'Input',
+        },
+      },
+    };
+
+    render(
+      <Form form={form} layout={{ itemProps: { label: { placement: 'end' } } }}>
+        <SchemaField schema={schema} />
+      </Form>,
+    );
+
+    const label = screen.getByText('Name').closest('label');
+    const content = label?.parentElement;
+
+    expect(content?.getAttribute('data-slot')).to.equal('form-item-content');
+    expect(content?.firstElementChild?.getAttribute('data-slot')).to.equal(
+      'form-item-input',
+    );
+    expect(content?.lastElementChild).to.equal(label);
+  });
+
+  it('should use itemProps.description.placement from the form layout', () => {
+    const form = createForm();
+
+    const schema = {
+      type: 'object',
+      properties: {
+        name: {
+          type: 'string',
+          title: 'Name',
+          description: 'Help text',
+          'x-decorator': 'FormItem',
+          'x-component': 'Input',
+        },
+      },
+    };
+
+    render(
+      <Form form={form} layout={{ itemProps: { description: { placement: 'top' } } }}>
+        <SchemaField schema={schema} />
+      </Form>,
+    );
+
+    const description = screen.getByText('Help text');
+
+    expect(description.nextElementSibling?.getAttribute('data-slot')).to.equal(
+      'form-item-input',
+    );
+    expect(description.getAttribute('placement')).toBeNull();
   });
 });

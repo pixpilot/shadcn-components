@@ -12,18 +12,19 @@ The `FormLayoutOptions` interface provides a centralized way to configure visual
 interface FormLayoutOptions {
   /** Form density - affects spacing between elements */
   density?: 'compact' | 'normal' | 'comfortable' | 'responsive';
-  /** Default description placement for FormItem decorators */
-  descriptionPlacement?: 'top' | 'bottom' | 'popover';
-  /** Default label placement for FormItem decorators */
-  labelPlacement?: 'top' | 'bottom' | 'start' | 'end';
-  /** Custom class names for FormItem elements */
+  /** Custom props for FormItem elements */
   itemProps?: {
-    classes?: {
-      label?: string;
-      description?: string;
-      inputWrapper?: string;
-      errorMessage?: string;
+    label?: {
+      placement?: 'top' | 'bottom' | 'start' | 'end';
+      className?: string;
     };
+    description?: {
+      placement?: 'top' | 'bottom' | 'popover';
+      className?: string;
+    };
+    inputWrapper?: { className?: string };
+    error?: { className?: string };
+    container?: { className?: string };
   };
   /** Custom class names for ObjectContainer elements */
   objectContainer?: {
@@ -53,7 +54,7 @@ export function MyForm() {
       form={form}
       layout={{
         density: 'comfortable',
-        descriptionPlacement: 'bottom',
+        itemProps: { description: { placement: 'bottom' } },
       }}
     >
       {/* Form fields */}
@@ -88,7 +89,7 @@ export function MyJsonSchemaForm() {
       schema={schema}
       layout={{
         density: 'responsive',
-        descriptionPlacement: 'popover',
+        itemProps: { description: { placement: 'popover' } },
       }}
     />
   );
@@ -125,7 +126,7 @@ Determines where field descriptions appear relative to the input:
 ```tsx
 import { Form } from '@pixpilot/formily-shadcn';
 
-<Form form={form} layout={{ descriptionPlacement: 'popover' }}>
+<Form form={form} layout={{ itemProps: { description: { placement: 'popover' } } }}>
   {/* Form content */}
 </Form>;
 ```
@@ -156,7 +157,7 @@ Controls where labels appear relative to the input field:
 ```tsx
 import { Form } from '@pixpilot/formily-shadcn';
 
-<Form form={form} layout={{ labelPlacement: 'start' }}>
+<Form form={form} layout={{ itemProps: { label: { placement: 'start' } } }}>
   {/* Form content */}
 </Form>;
 ```
@@ -176,12 +177,10 @@ import { Form } from '@pixpilot/formily-shadcn';
   form={form}
   layout={{
     itemProps: {
-      classes: {
-        label: 'font-bold text-primary',
-        description: 'text-xs italic',
-        inputWrapper: 'bg-gray-50',
-        errorMessage: 'text-red-600 font-semibold',
-      },
+      label: { className: 'font-bold text-primary' },
+      description: { className: 'text-xs italic' },
+      inputWrapper: { className: 'bg-gray-50' },
+      error: { className: 'text-red-600 font-semibold' },
     },
   }}
 >
@@ -260,12 +259,14 @@ export function CompleteExample() {
       schema={schema}
       layout={{
         density: 'comfortable',
-        descriptionPlacement: 'bottom',
-        labelPlacement: 'top',
         itemProps: {
-          classes: {
-            label: 'text-sm font-medium',
-            description: 'text-xs text-muted-foreground',
+          label: {
+            placement: 'top',
+            className: 'text-sm font-medium',
+          },
+          description: {
+            placement: 'bottom',
+            className: 'text-xs text-muted-foreground',
           },
         },
         objectContainer: {
@@ -298,7 +299,7 @@ export function CompleteExample() {
 
 ## Migration from Individual Props
 
-If you're updating existing code that used individual props like `density`, `descriptionPlacement`, etc., wrap them in the `layout` prop:
+If you're updating existing code that used individual layout props, move them into the `layout` prop and group element-specific options under `itemProps`:
 
 **Old approach:**
 
@@ -309,7 +310,7 @@ import { Form } from '@pixpilot/formily-shadcn';
   form={form}
   density="comfortable"
   descriptionPlacement="bottom"
-  itemProps={{ classes: { label: 'font-bold' } }}
+  itemProps={{ label: { className: 'font-bold' } }}
 />;
 ```
 
@@ -322,8 +323,10 @@ import { Form } from '@pixpilot/formily-shadcn';
   form={form}
   layout={{
     density: 'comfortable',
-    descriptionPlacement: 'bottom',
-    itemProps: { classes: { label: 'font-bold' } },
+    itemProps: {
+      label: { className: 'font-bold' },
+      description: { placement: 'bottom' },
+    },
   }}
 />;
 ```

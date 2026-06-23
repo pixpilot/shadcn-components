@@ -143,6 +143,34 @@
       "id": "1RKQ_k0uHugVX-R",
       "title": "takeElementScreenshot",
       "visibleTo": "*"
+    },
+    {
+      "actions": [
+        {
+          "args": {
+            "selector": "#form-item-description"
+          },
+          "id": "aYaLdEQqZL",
+          "name": "takeElementScreenshot"
+        }
+      ],
+      "id": "rR0A5L5bPbsM2yZ",
+      "title": "takeElementScreenshot",
+      "visibleTo": "*"
+    },
+    {
+      "actions": [
+        {
+          "args": {
+            "selector": "[data-slot=\"form-item\"]"
+          },
+          "id": "aYaLdEQqZL",
+          "name": "takeElementScreenshot"
+        }
+      ],
+      "id": "-AzHhcOOMsFsDqx",
+      "title": "takeElementScreenshot",
+      "visibleTo": "*"
     }
   ]
 }

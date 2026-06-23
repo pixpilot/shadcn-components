@@ -23,16 +23,16 @@ const densitySpaceMap: Record<
 };
 
 /**
- * Space-Y spacing configuration
+ * gap-y spacing configuration
  * Controls vertical spacing between form items
  */
 export const spaceYConfig: SpacingConfig = {
   fixed: {
-    sm: 'space-y-3',
-    md: 'space-y-4',
-    lg: 'space-y-6',
+    sm: 'gap-y-3',
+    md: 'gap-y-4',
+    lg: 'gap-y-6',
   },
-  responsive: 'space-y-3 md:space-y-4 lg:space-y-6',
+  responsive: 'gap-y-3 md:gap-y-4 lg:gap-y-6',
 } as const;
 
 /**
@@ -70,7 +70,7 @@ export function resolveSpacingClass(
 }
 
 /**
- * Resolves responsive space and returns the Tailwind space-y class(es)
+ * Resolves responsive space and returns the Tailwind gap-y class(es)
  * For responsive density, returns responsive breakpoint classes
  * For fixed density, returns single space class
  *

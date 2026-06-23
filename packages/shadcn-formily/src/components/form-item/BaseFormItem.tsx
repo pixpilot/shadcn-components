@@ -58,8 +58,9 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
 
   const { layout } = useFormContext();
   const itemComponentsProps = layout?.itemProps || {};
-  const contextDescriptionPlacement = layout?.descriptionPlacement;
-  const contextLabelPlacement = layout?.labelPlacement;
+  const { placement: contextDescriptionPlacement, ...itemDescriptionProps } =
+    itemComponentsProps.description ?? {};
+  const contextLabelPlacement = itemComponentsProps.label?.placement;
 
   const fieldLabelPlacement: LabelPlacement | undefined =
     fieldLabelProps?.placement ??
@@ -154,13 +155,13 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
   const descriptionElement = descriptionRenderedInline ? (
     <p
       data-slot="form-item-description"
-      {...itemComponentsProps.description}
+      {...itemDescriptionProps}
       {...slots?.description}
       id={descriptionId}
       className={cn(
         'text-muted-foreground text-[0.8rem]',
         spacingConfig.description,
-        itemComponentsProps.description?.className,
+        itemDescriptionProps.className,
         slots?.description?.className,
       )}
     >

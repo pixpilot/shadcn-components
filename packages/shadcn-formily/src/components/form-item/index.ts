@@ -1,5 +1,6 @@
 export type {
   DescriptionPlacement,
+  FormItemDescriptionProps,
   FormItemLabelProps,
   FormItemProps,
   FormItemSlots,

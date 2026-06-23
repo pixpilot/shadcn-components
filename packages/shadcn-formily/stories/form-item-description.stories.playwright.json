@@ -1,0 +1,134 @@
+{
+  "version": "0",
+  "stories": {
+    "formily-formitem-description--description-placement-top": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#form-item-description"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "Y6_kaqSsqnMM",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#form-item-description"
+                  },
+                  "id": "92hMpn8LlNbv",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "tBa0c3L3kwrm",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "gnzaY-yypDfP",
+          "browserType": "chromium",
+          "id": "XaAXpYM0FSe6",
+          "index": 0,
+          "title": "Description placed above form field"
+        }
+      ]
+    },
+    "formily-formitem-description--description-placement-bottom": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"form-item\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "9vmL_N0ayuC_",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"form-item\"]"
+                  },
+                  "id": "O0_np8n8bcyF",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "rRokUrevOayh",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "gnzaY-yypDfP",
+          "browserType": "chromium",
+          "id": "OuwOfQkOoWFQ",
+          "index": 0,
+          "title": "Description visible below form item"
+        }
+      ]
+    },
+    "formily-formitem-description--description-placement-popover": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"form-item\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "ah_XoGkRHEyd",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"form-item\"]"
+                  },
+                  "id": "CXw6PhORzlve",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "s1qH0-gr1pZh",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "gnzaY-yypDfP",
+          "browserType": "chromium",
+          "id": "oqaGggMLkFp1",
+          "index": 0,
+          "title": "Description popover visible on form item hover"
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "gnzaY-yypDfP": {
+      "viewport": {
+        "height": 519,
+        "width": 899
+      },
+      "cursor": true
+    }
+  }
+}

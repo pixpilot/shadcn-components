@@ -10,6 +10,10 @@ export type FormItemLabelProps = Omit<
   placement?: LabelPlacement;
 };
 
+export type FormItemDescriptionProps = React.HTMLAttributes<HTMLParagraphElement> & {
+  placement?: DescriptionPlacement;
+};
+
 export interface FormItemSlots {
   label?: FormItemLabelProps;
   description?: React.HTMLAttributes<HTMLParagraphElement>;
