@@ -32,6 +32,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
   label,
   description,
   descriptionPlacement,
+  requiredMark,
   asterisk,
   feedbackStatus,
   feedbackText,
@@ -108,7 +109,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
       data-slot="form-item-label"
       id={getId(id, 'label')}
       label={effectiveLabel}
-      asterisk={asterisk}
+      requiredMark={requiredMark !== undefined ? requiredMark : asterisk}
       error={feedbackStatus === 'error'}
       shrink={effectiveLabelPlacement === 'end' || effectiveLabelPlacement === 'start'}
       labelProps={{

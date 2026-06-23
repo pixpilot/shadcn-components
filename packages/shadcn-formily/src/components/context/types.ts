@@ -8,6 +8,7 @@ import type { FormSpace } from '../../types/form';
 import type { DescriptionPlacement, LabelPlacement } from '../../types/form-item';
 import type { ActionItem } from '../array-base';
 import type { FormFileUploadOptions } from '../file-upload';
+import type { FormItemLabelProps } from '../form-item';
 
 export interface FomFileUpload {
   onUpload?: (files: File[], options: FormFileUploadOptions) => void;
@@ -63,7 +64,7 @@ export interface FormLayoutOptions {
   labelPlacement?: LabelPlacement;
   /** Custom class names for FormItem elements */
   itemProps?: {
-    label?: React.LabelHTMLAttributes<HTMLLabelElement>;
+    label?: FormItemLabelProps;
     description?: React.HTMLAttributes<HTMLParagraphElement>;
     inputWrapper?: React.HTMLAttributes<HTMLDivElement>;
     error?: React.HTMLAttributes<HTMLParagraphElement>;

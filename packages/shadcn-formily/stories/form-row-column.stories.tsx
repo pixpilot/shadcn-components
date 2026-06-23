@@ -77,7 +77,7 @@ export const DeclarativeMultiColumn: Story = {
                     target: 'lastName',
                     fulfill: {
                       state: {
-                        decorator: ['FormItem', { asterisk: true }],
+                        decorator: ['FormItem', { requiredMark: true }],
                       },
                     },
                   }}
@@ -147,7 +147,7 @@ export const JSONSchemaMultiColumn: Story = {
                     target: 'firstName',
                     fulfill: {
                       state: {
-                        decorator: ['FormItem', { asterisk: true }],
+                        decorator: ['FormItem', { requiredMark: true }],
                       },
                     },
                   },
@@ -166,7 +166,7 @@ export const JSONSchemaMultiColumn: Story = {
                     target: 'lastName',
                     fulfill: {
                       state: {
-                        decorator: ['FormItem', { asterisk: true }],
+                        decorator: ['FormItem', { requiredMark: true }],
                       },
                     },
                   },
@@ -262,7 +262,7 @@ export const JSONSchemaMultiColumn: Story = {
                     target: 'email',
                     fulfill: {
                       state: {
-                        decorator: ['FormItem', { asterisk: true }],
+                        decorator: ['FormItem', { requiredMark: true }],
                       },
                     },
                   },
@@ -491,7 +491,7 @@ export const CustomStyledLayout: Story = {
                   target: 'productName',
                   fulfill: {
                     state: {
-                      decorator: ['FormItem', { asterisk: true }],
+                      decorator: ['FormItem', { requiredMark: true }],
                     },
                   },
                 }}

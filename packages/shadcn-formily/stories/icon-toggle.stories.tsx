@@ -619,7 +619,7 @@ export const SettingsForm: Story = {
           'x-content': 'Appearance',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            asterisk: false,
+            requiredMark: false,
           },
         },
         darkMode: {
@@ -646,7 +646,7 @@ export const SettingsForm: Story = {
           'x-content': 'Notifications',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            asterisk: false,
+            requiredMark: false,
           },
         },
         emailNotifications: {
@@ -673,7 +673,7 @@ export const SettingsForm: Story = {
           'x-content': 'Privacy',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            asterisk: false,
+            requiredMark: false,
           },
         },
         showSensitiveData: {
@@ -700,7 +700,7 @@ export const SettingsForm: Story = {
           'x-content': 'Playback',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            asterisk: false,
+            requiredMark: false,
           },
         },
         autoPlay: {

@@ -31,6 +31,10 @@ export interface FormItemProps extends React.ComponentProps<'div'> {
    * - `popover`: show a help icon before the label and render the description in a hover popover
    */
   descriptionPlacement?: DescriptionPlacement;
+  requiredMark?: boolean | React.ReactNode;
+  /**
+   * @deprecated Use `requiredMark` instead.
+   */
   asterisk?: boolean;
   feedbackStatus?: 'error' | 'warning' | 'success';
   feedbackText?: SyncReactNode;

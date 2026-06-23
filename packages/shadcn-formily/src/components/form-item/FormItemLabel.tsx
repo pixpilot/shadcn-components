@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import type { SyncReactNode } from '../../types';
 import type { FormItemLabelProps as LabelProps } from './form-item-types';
 import { cn } from '@pixpilot/shadcn';
@@ -7,6 +8,10 @@ import { FormItemDescriptionPopover } from './FormItemDescriptionPopover';
 export interface FormItemLabelProps {
   id?: string;
   label: SyncReactNode;
+  requiredMark?: boolean | ReactNode;
+  /**
+   * @deprecated Use `requiredMark` instead.
+   */
   asterisk?: boolean;
   error?: boolean;
   shrink?: boolean;
@@ -18,6 +23,7 @@ export interface FormItemLabelProps {
 export function FormItemLabel({
   id,
   label,
+  requiredMark,
   asterisk,
   error,
   shrink,
@@ -26,6 +32,7 @@ export function FormItemLabel({
   descriptionInPopover,
 }: FormItemLabelProps) {
   const { className, placement: _placement, ...restLabelProps } = labelProps ?? {};
+  const resolvedRequiredMark = requiredMark !== undefined ? requiredMark : asterisk;
 
   return (
     <label
@@ -49,13 +56,13 @@ export function FormItemLabel({
           <FormItemDescriptionPopover description={description} />
         )}
       </span>
-      {asterisk && (
+      {resolvedRequiredMark !== false && resolvedRequiredMark != null && (
         <span
-          data-slot="form-item-label-asterisk"
+          data-slot="form-item-label-required-mark"
           className="text-destructive ml-1"
           aria-label="required"
         >
-          *
+          {resolvedRequiredMark === true ? '*' : resolvedRequiredMark}
         </span>
       )}
     </label>

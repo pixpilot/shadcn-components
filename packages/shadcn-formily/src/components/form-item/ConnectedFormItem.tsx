@@ -17,7 +17,8 @@ export const FormItem = connect(
       return {
         label: (field.title ?? props.label) as SyncReactNode,
         description: (props.description ?? field.description) as SyncReactNode,
-        asterisk: props.asterisk,
+        requiredMark:
+          props.requiredMark !== undefined ? props.requiredMark : props.asterisk,
       };
     }
 
@@ -38,31 +39,28 @@ export const FormItem = connect(
       return undefined;
     };
 
-    const takeAsterisk = (): boolean => {
-      if ('asterisk' in props) {
-        return Boolean(props.asterisk);
-      }
+    let resolvedRequiredMark = props.requiredMark;
 
-      if (
+    if (resolvedRequiredMark === undefined) {
+      if (props.asterisk !== undefined) {
+        resolvedRequiredMark = Boolean(props.asterisk);
+      } else if (
         schema.parent &&
         Array.isArray(schema.parent.required) &&
         schema.parent.required.includes(schema.name as string)
       ) {
-        return true;
+        resolvedRequiredMark = true;
+      } else {
+        resolvedRequiredMark = field.required && field.pattern !== 'readPretty';
       }
-
-      if (field.required && field.pattern !== 'readPretty') {
-        return true;
-      }
-      return false;
-    };
+    }
 
     return {
       label: (props.label ?? field.title) as SyncReactNode,
       description: (props.description ?? field.description) as SyncReactNode,
       feedbackStatus: takeFeedbackStatus(),
       feedbackText: takeFeedbackText(),
-      asterisk: takeAsterisk(),
+      requiredMark: resolvedRequiredMark,
     };
   }),
 );

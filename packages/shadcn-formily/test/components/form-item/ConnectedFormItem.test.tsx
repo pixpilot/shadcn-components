@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 
 import { FormItem, Input } from '../../../src';
 
-describe('connectedFormItem asterisk behavior', () => {
+describe('connectedFormItem required mark behavior', () => {
   const SchemaField = createSchemaField({
     components: {
       FormItem,
@@ -13,7 +13,7 @@ describe('connectedFormItem asterisk behavior', () => {
     },
   });
 
-  it('should show asterisk for required field', () => {
+  it('should show the required mark for a required field', () => {
     const form = createForm();
 
     const schema = {
@@ -35,12 +35,14 @@ describe('connectedFormItem asterisk behavior', () => {
       </FormProvider>,
     );
 
-    const asterisk = screen.getByText('*');
-    expect(asterisk).toBeTruthy();
-    expect(asterisk.getAttribute('data-slot')).to.equal('form-item-label-asterisk');
+    const requiredMark = screen.getByText('*');
+    expect(requiredMark).toBeTruthy();
+    expect(requiredMark.getAttribute('data-slot')).to.equal(
+      'form-item-label-required-mark',
+    );
   });
 
-  it('should hide asterisk when x-decorator-props asterisk is false', () => {
+  it('should hide the required mark when requiredMark is false', () => {
     const form = createForm();
 
     const schema = {
@@ -52,7 +54,7 @@ describe('connectedFormItem asterisk behavior', () => {
           required: true,
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            asterisk: false,
+            requiredMark: false,
           },
           'x-component': 'Input',
         },
@@ -65,11 +67,72 @@ describe('connectedFormItem asterisk behavior', () => {
       </FormProvider>,
     );
 
-    const asterisk = screen.queryByText('*');
-    expect(asterisk).toBeNull();
+    const requiredMark = screen.queryByText('*');
+    expect(requiredMark).toBeNull();
   });
 
-  it('should show asterisk when x-decorator-props asterisk is true', () => {
+  it('should show the required mark when requiredMark is true', () => {
+    const form = createForm();
+
+    const schema = {
+      type: 'object',
+      properties: {
+        name: {
+          type: 'string',
+          title: 'Name',
+          'x-decorator': 'FormItem',
+          'x-decorator-props': {
+            requiredMark: true,
+          },
+          'x-component': 'Input',
+        },
+      },
+    };
+
+    render(
+      <FormProvider form={form}>
+        <SchemaField schema={schema} />
+      </FormProvider>,
+    );
+
+    const requiredMark = screen.getByText('*');
+    expect(requiredMark).toBeTruthy();
+    expect(requiredMark.getAttribute('data-slot')).to.equal(
+      'form-item-label-required-mark',
+    );
+  });
+
+  it('should render a custom requiredMark node', () => {
+    const form = createForm();
+
+    const schema = {
+      type: 'object',
+      properties: {
+        name: {
+          type: 'string',
+          title: 'Name',
+          'x-decorator': 'FormItem',
+          'x-decorator-props': {
+            requiredMark: 'Required',
+          },
+          'x-component': 'Input',
+        },
+      },
+    };
+
+    render(
+      <FormProvider form={form}>
+        <SchemaField schema={schema} />
+      </FormProvider>,
+    );
+
+    const requiredMark = screen.getByText('Required');
+    expect(requiredMark.getAttribute('data-slot')).to.equal(
+      'form-item-label-required-mark',
+    );
+  });
+
+  it('should support the deprecated asterisk prop', () => {
     const form = createForm();
 
     const schema = {
@@ -93,12 +156,38 @@ describe('connectedFormItem asterisk behavior', () => {
       </FormProvider>,
     );
 
-    const asterisk = screen.getByText('*');
-    expect(asterisk).toBeTruthy();
-    expect(asterisk.getAttribute('data-slot')).to.equal('form-item-label-asterisk');
+    expect(screen.getByText('*')).toBeTruthy();
   });
 
-  it('should not show asterisk for optional field', () => {
+  it('should prefer requiredMark over the deprecated asterisk prop', () => {
+    const form = createForm();
+
+    const schema = {
+      type: 'object',
+      properties: {
+        name: {
+          type: 'string',
+          title: 'Name',
+          'x-decorator': 'FormItem',
+          'x-decorator-props': {
+            requiredMark: false,
+            asterisk: true,
+          },
+          'x-component': 'Input',
+        },
+      },
+    };
+
+    render(
+      <FormProvider form={form}>
+        <SchemaField schema={schema} />
+      </FormProvider>,
+    );
+
+    expect(screen.queryByText('*')).toBeNull();
+  });
+
+  it('should not show the required mark for an optional field', () => {
     const form = createForm();
 
     const schema = {
@@ -119,7 +208,7 @@ describe('connectedFormItem asterisk behavior', () => {
       </FormProvider>,
     );
 
-    const asterisk = screen.queryByText('*');
-    expect(asterisk).toBeNull();
+    const requiredMark = screen.queryByText('*');
+    expect(requiredMark).toBeNull();
   });
 });
