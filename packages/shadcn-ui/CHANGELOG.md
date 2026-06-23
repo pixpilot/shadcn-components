@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.32.1
+
+### Patch Changes
+
+- adjust padding and margins for Dialog components
+
 ## 1.32.0
 
 ### Minor Changes
