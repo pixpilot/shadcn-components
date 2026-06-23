@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 1.13.0
+
+### Minor Changes
+
+- introduce `requiredMark` prop and deprecate `asterisk`
+
 ## 1.12.8
 
 ### Patch Changes
