@@ -14,4 +14,3 @@ export async function showConfirmDialog(props: ConfirmDialog): Promise<boolean> 
   // Show the dialog using the unique ID
   return NiceModal.show(id, props);
 }
-// You can call handleDelete from anywhere, including inside other dialogs

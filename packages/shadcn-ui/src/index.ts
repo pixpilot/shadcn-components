@@ -24,6 +24,7 @@ export * from './confirmation-dialog';
 export * from './ContentCard';
 export * from './DatePicker';
 export * from './dialog';
+export * from './dialog-provider';
 export * from './file-upload-inline';
 export * from './file-upload-root';
 export * from './file-upload/types';
@@ -46,7 +47,6 @@ export * from './theme-provider';
 export * from './theme-toggle';
 export * from './toast';
 export * from './ToggleButton';
-export * from './ToggleGroup';
 export {
   cn,
   type FileMetadata,
@@ -54,4 +54,5 @@ export {
   type FileUploadProgressCallBacks,
   type FileUploadProps,
 };
+export * from './ToggleGroup';
 export * from './utils';

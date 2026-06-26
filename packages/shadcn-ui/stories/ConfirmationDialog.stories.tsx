@@ -3,7 +3,8 @@ import type { ReactNode } from 'react';
 import type { ConfirmationDialogVariant } from '../src/confirmation-dialog';
 import { useState } from 'react';
 import { Button } from '../src/Button';
-import { DialogProvider, showConfirmDialog } from '../src/confirmation-dialog';
+import { showConfirmDialog } from '../src/confirmation-dialog';
+import { DialogProvider } from '../src/dialog-provider/DialogProvider';
 
 const meta = {
   title: 'shadcn-ui/ConfirmationDialog',
