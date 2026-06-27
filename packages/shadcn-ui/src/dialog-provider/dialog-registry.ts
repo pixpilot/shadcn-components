@@ -1,6 +1,9 @@
-import NiceModal, { unregister } from '@ebay/nice-modal-react';
+import NiceModal, { unregister, useModal as useNiceModal } from '@ebay/nice-modal-react';
 import { registerDialog } from './register-dialog';
 import { showDialog } from './show-dialog';
+
+export const createDialog = NiceModal.create;
+export const useDialog = useNiceModal;
 
 /**
  * Hides a registered dialog by id.
@@ -67,6 +70,22 @@ export interface DialogRegistry {
   register: typeof registerDialog;
 
   /**
+   * Creates a custom NiceModal dialog component.
+   *
+   * Use this for dialogs that need to control `useDialog()` directly. For simple
+   * shadcn dialogs, prefer `dialog.register(...)`.
+   *
+   * Usage:
+   * ```ts
+   * const CustomDialog = dialog.create((props) => {
+   *   const modal = dialog.useDialog();
+   *   return <Dialog open={modal.visible} onOpenChange={(open) => !open && modal.hide()} />;
+   * });
+   * ```
+   */
+  create: typeof createDialog;
+
+  /**
    * Shows a registered dialog by id with generic props.
    *
    * @returns A promise resolved by the dialog component.
@@ -113,6 +132,8 @@ export interface DialogRegistry {
    * ```
    */
   unregister: typeof unregisterDialog;
+
+  useDialog: typeof useDialog;
 }
 
 /**
@@ -133,9 +154,11 @@ export interface DialogRegistry {
  * ```
  */
 export const dialog: DialogRegistry = {
+  create: createDialog,
   hide: hideDialog,
   register: registerDialog,
   remove: removeDialog,
   show: showDialog,
   unregister: unregisterDialog,
+  useDialog,
 };

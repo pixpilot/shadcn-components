@@ -1,16 +1,23 @@
 import type { NiceModalHocProps } from '@ebay/nice-modal-react';
-import type React from 'react';
-import NiceModal from '@ebay/nice-modal-react';
+import NiceModal, { useModal } from '@ebay/nice-modal-react';
+import React from 'react';
 
 type NiceModalInjectedKeys = keyof NiceModalHocProps;
+type DialogInjectedKeys = 'open' | 'onOpenChange';
+type RegisteredDialogInjectedKeys = NiceModalInjectedKeys | DialogInjectedKeys;
+
+export interface RegisteredDialogInjectedProps {
+  open?: boolean;
+  onOpenChange?: (isOpen: boolean) => void;
+}
 
 type Pretty<TValue> = {
   [TKey in keyof TValue]: TValue[TKey];
 } & {};
 
-type OptionalNiceModalProps<TProps extends object> = Pretty<
-  Omit<TProps, Extract<keyof TProps, NiceModalInjectedKeys>> &
-    Partial<Pick<TProps, Extract<keyof TProps, NiceModalInjectedKeys>>>
+type OptionalRegisteredDialogProps<TProps extends object> = Pretty<
+  Omit<TProps, Extract<keyof TProps, RegisteredDialogInjectedKeys>> &
+    Partial<Pick<TProps, Extract<keyof TProps, RegisteredDialogInjectedKeys>>>
 >;
 
 type DefaultedDialogProps<
@@ -25,12 +32,14 @@ type EmptyDialogDefaultProps = Record<never, never>;
 
 export type RegisteredDialogShowProps<
   TProps extends object,
-  TDefaultProps extends Partial<OptionalNiceModalProps<TProps>> = EmptyDialogDefaultProps,
-> = DefaultedDialogProps<OptionalNiceModalProps<TProps>, TDefaultProps>;
+  TDefaultProps extends Partial<OptionalRegisteredDialogProps<TProps>> =
+    EmptyDialogDefaultProps,
+> = DefaultedDialogProps<OptionalRegisteredDialogProps<TProps>, TDefaultProps>;
 
 export interface RegisteredDialog<
   TProps extends object,
-  TDefaultProps extends Partial<OptionalNiceModalProps<TProps>> = EmptyDialogDefaultProps,
+  TDefaultProps extends Partial<OptionalRegisteredDialogProps<TProps>> =
+    EmptyDialogDefaultProps,
 > {
   /**
    * The stable NiceModal id used to register, show, hide, and remove this dialog.
@@ -92,13 +101,16 @@ export interface RegisteredDialog<
 }
 
 /**
- * Registers a NiceModal dialog component and returns a typed controller for it.
+ * Registers a dialog component and returns a typed controller for it.
  *
  * Use this when a dialog has a known component and you want type-safe props for
- * default values and `show(...)` calls.
+ * default values and `show(...)` calls. The component is wrapped with
+ * NiceModal automatically, and receives controlled `open` and `onOpenChange`
+ * props.
  *
  * @param id - Stable dialog id used by NiceModal and by generic `showDialog`.
- * @param component - Dialog component, usually created with `NiceModal.create`.
+ * @param component - Dialog component. Use `dialog.create(...)` instead when a
+ * component needs custom NiceModal lifecycle behavior.
  * @param defaultProps - Optional component props registered as defaults.
  * @returns A controller with `id`, `show`, `hide`, and `remove` helpers.
  *
@@ -115,13 +127,50 @@ export interface RegisteredDialog<
  */
 export function registerDialog<
   TProps extends object,
-  TDefaultProps extends Partial<OptionalNiceModalProps<TProps>> = EmptyDialogDefaultProps,
+  TDefaultProps extends Partial<OptionalRegisteredDialogProps<TProps>> =
+    EmptyDialogDefaultProps,
 >(
   id: string,
   component: React.FC<TProps>,
   defaultProps?: TDefaultProps,
 ): RegisteredDialog<TProps, TDefaultProps> {
-  NiceModal.register(id, component, defaultProps as Partial<TProps> | undefined);
+  const WrappedDialog = NiceModal.create<OptionalRegisteredDialogProps<TProps>>(
+    (props) => {
+      const modal = useModal();
+      const {
+        open: _open,
+        onOpenChange,
+        ...componentProps
+      } = props as OptionalRegisteredDialogProps<TProps> & RegisteredDialogInjectedProps;
+      const Component = component as React.FC<TProps & RegisteredDialogInjectedProps>;
+
+      const handleClose = (result: unknown) => {
+        modal.resolve(result);
+        // eslint-disable-next-line ts/no-floating-promises
+        modal.hide();
+      };
+
+      return React.createElement(Component, {
+        ...(componentProps as TProps),
+        open: modal.visible,
+        onOpenChange: (isOpen: boolean) => {
+          onOpenChange?.(isOpen);
+
+          if (!isOpen) {
+            handleClose('Closed');
+          }
+        },
+      });
+    },
+  );
+
+  WrappedDialog.displayName = `RegisteredDialog(${component.displayName ?? component.name ?? id})`;
+
+  NiceModal.register(
+    id,
+    WrappedDialog,
+    defaultProps as Partial<React.ComponentProps<typeof WrappedDialog>> | undefined,
+  );
 
   return {
     id,

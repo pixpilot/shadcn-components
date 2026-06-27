@@ -1,29 +1,55 @@
+/* eslint-disable ts/no-floating-promises */
+/* eslint-disable react-hooks/rules-of-hooks */
 import type { Meta, StoryObj } from '@storybook/react';
-import NiceModal, { useModal } from '@ebay/nice-modal-react';
-import { useMemo, useState } from 'react';
+import type { ComponentProps } from 'react';
+import { useMemo } from 'react';
 import { Button } from '../src/Button';
 import {
   Dialog,
+  DialogBody,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from '../src/dialog';
-import { dialog, DialogProvider } from '../src/dialog-provider';
+import { dialog, DialogProvider, useDialog } from '../src/dialog-provider';
 
-interface RegisteredExampleDialogProps {
+interface RegisteredStoryDialogProps extends ComponentProps<typeof Dialog> {
   description?: string;
-  title: string;
+  title?: string;
 }
 
-const RegisteredExampleDialog = NiceModal.create<RegisteredExampleDialogProps>(
-  (props) => {
-    const modal = useModal();
+function RegisteredStoryDialog({
+  description = 'This is a registered dialog component. It can be shown using dialog.show(...) or the typed controller returned by dialog.register(...).',
+  title = 'Registered Dialog',
+  ...dialogProps
+}: RegisteredStoryDialogProps) {
+  return (
+    <Dialog {...dialogProps}>
+      <DialogContent className="!max-w-[325px]">
+        <DialogHeader>
+          <DialogTitle data-slot="dialog-title">{title}</DialogTitle>
+        </DialogHeader>
+        <DialogBody>{description}</DialogBody>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+interface CustomStoryDialogProps {
+  description?: string;
+  title?: string;
+}
+
+const CustomStoryDialog = dialog.create<CustomStoryDialogProps>(
+  ({
+    description = 'This dialog was created with dialog.create(...), so it owns the NiceModal lifecycle directly.',
+    title = 'Custom Dialog',
+  }) => {
+    const modal = useDialog();
 
     const handleClose = (result: string) => {
       modal.resolve(result);
-      modal.hide().catch(() => undefined);
+      modal.hide();
     };
 
     return (
@@ -35,19 +61,16 @@ const RegisteredExampleDialog = NiceModal.create<RegisteredExampleDialogProps>(
           }
         }}
       >
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="!max-w-[325px]">
           <DialogHeader>
-            <DialogTitle data-slot="dialog-title">{props.title}</DialogTitle>
-            {props.description != null && (
-              <DialogDescription>{props.description}</DialogDescription>
-            )}
+            <DialogTitle data-slot="dialog-title">{title}</DialogTitle>
           </DialogHeader>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => handleClose('Dismissed')}>
-              Dismiss
+          <DialogBody>{description}</DialogBody>
+          <div className="flex justify-end">
+            <Button id="close-dialog" onClick={() => handleClose('Done')}>
+              Done
             </Button>
-            <Button onClick={() => handleClose('Accepted')}>Accept</Button>
-          </DialogFooter>
+          </div>
         </DialogContent>
       </Dialog>
     );
@@ -76,75 +99,62 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-function RegisterDialogStoryContent() {
-  const [result, setResult] = useState('No dialog action yet.');
-  const [isOpen, setIsOpen] = useState(false);
-  const registeredDialog = useMemo(
-    () =>
-      dialog.register('storybook-registered-dialog', RegisteredExampleDialog, {
-        title: 'Registered dialog',
-      }),
-    [],
-  );
-
-  const handleTypedShow = async () => {
-    setIsOpen(true);
-
-    try {
-      const dialogResult = await registeredDialog.show<string>({
-        description: 'Opened from the typed controller returned by registerDialog.',
-      });
-
-      setResult(dialogResult);
-    } finally {
-      setIsOpen(false);
-    }
-  };
-
-  const handleGenericShow = async () => {
-    setIsOpen(true);
-
-    try {
-      const dialogResult = await dialog.show<string>('storybook-registered-dialog', {
-        description: 'Opened by id through showDialog.',
-        title: 'Generic dialog call',
-      });
-
-      setResult(dialogResult);
-    } finally {
-      setIsOpen(false);
-    }
-  };
-
-  return (
-    <div className="flex min-w-[320px] flex-col items-center gap-4 rounded-lg border bg-background p-6 text-center shadow-sm">
-      <div>
-        <h3 className="text-lg font-semibold">registerDialog</h3>
-        <p className="text-sm text-muted-foreground">{result}</p>
-      </div>
-      <div className="flex flex-wrap justify-center gap-2">
-        <Button
-          onClick={() => {
-            handleTypedShow().catch(() => undefined);
-          }}
-          disabled={isOpen}
-        >
-          Typed show
-        </Button>
-        <Button
-          variant="outline"
-          onClick={() => {
-            handleGenericShow().catch(() => undefined);
-          }}
-          disabled={isOpen}
-        >
-          Generic show
-        </Button>
-      </div>
-    </div>
-  );
-}
-
 export const Default: Story = {
-  render: () => <RegisterDialogStoryContent />,
+  render: () => {
+    const registeredDialog = useMemo(
+      () =>
+        dialog.register('storybook-registered-dialog', RegisteredStoryDialog, {
+          title: 'Registered dialog',
+        }),
+      [],
+    );
+
+    return (
+      <div className="flex min-w-[320px] flex-col items-center gap-4 rounded-lg border bg-background p-6 text-center shadow-sm">
+        <div>
+          <h3 className="text-lg font-semibold">Register Dialog</h3>
+        </div>
+        <div className="flex flex-wrap justify-center gap-2">
+          <Button
+            data-slot="show-registered-dialog"
+            onClick={() => {
+              registeredDialog.show({
+                description:
+                  'registerDialog now injects open and onOpenChange automatically.',
+              });
+            }}
+          >
+            Typed show
+          </Button>
+        </div>
+      </div>
+    );
+  },
+};
+
+export const CustomCreate: Story = {
+  render: () => {
+    const customDialog = dialog.useDialog(CustomStoryDialog);
+
+    return (
+      <div className="flex min-w-[320px] flex-col items-center gap-4 rounded-lg border bg-background p-6 text-center shadow-sm">
+        <div>
+          <h3 className="text-lg font-semibold">dialog.create</h3>
+        </div>
+        <div className="flex flex-wrap justify-center gap-2">
+          <Button
+            data-slot="show-dialog"
+            onClick={() => {
+              customDialog.show({
+                description:
+                  'Use dialog.create when the component should call useDialog itself.',
+              });
+            }}
+          >
+            Custom show
+          </Button>
+        </div>
+      </div>
+    );
+  },
 };

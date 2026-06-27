@@ -7,13 +7,25 @@
           "actions": [
             {
               "args": {
-                "selector": "[data-slot=\"button\"]"
+                "selector": "[data-slot=\"dialog-close\"]"
               },
               "name": "click"
             }
           ],
-          "id": "pCEjAdRBNhBO",
+          "id": "LbHZpr35xzLU",
           "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"dialog-title\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "XF5rTetN3Ro1",
+          "title": "takeElementScreenshot"
         },
         {
           "actions": [
@@ -26,6 +38,18 @@
           ],
           "id": "cTfPXKWiyNqJ",
           "title": "takeElementScreenshot"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"show-registered-dialog\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "pCEjAdRBNhBO",
+          "title": "click"
         }
       ],
       "screenshots": [
@@ -35,13 +59,13 @@
               "actions": [
                 {
                   "args": {
-                    "selector": "[data-slot=\"button\"]"
+                    "selector": "[data-slot=\"show-registered-dialog\"]"
                   },
-                  "id": "_I-4J1O7puky",
+                  "id": "oFN42DXuUcIE",
                   "name": "click"
                 }
               ],
-              "id": "atia2DaTAM1b",
+              "id": "LhxaTZGPTxTb",
               "title": "click"
             },
             {
@@ -50,19 +74,160 @@
                   "args": {
                     "selector": "[data-slot=\"dialog-title\"]"
                   },
-                  "id": "3GEZvCGWYBPF",
+                  "id": "JgPXRl5UYp82",
                   "name": "takeElementScreenshot"
                 }
               ],
-              "id": "x0Uq4hyH5Xc0",
+              "id": "Y4AIKb1n5Wrq",
+              "title": "takeElementScreenshot"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"dialog-close\"]"
+                  },
+                  "id": "9GfplI_frfS5",
+                  "name": "click"
+                }
+              ],
+              "id": "MN-DtIn8BcmY",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"show-registered-dialog\"]"
+                  },
+                  "id": "15lyVxye2esQ",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "Z2ZVuGOujhRC",
               "title": "takeElementScreenshot"
             }
           ],
           "browserOptionsId": "W2THX4QjkeCg",
           "browserType": "chromium",
-          "id": "kNWVL04yIi9y",
+          "id": "j1vciaBprolL",
           "index": 0,
-          "title": "RegisterDialog dialog title captured after button click"
+          "title": "Dialog shown after clicking show button and close on click the close button"
+        }
+      ]
+    },
+    "shadcn-ui-registerdialog--custom-create": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"show-dialog\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "y5U-mTZGlNd5",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#close-dialog"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "B1PSqz5BTAwH",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"dialog-title\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "zn6UG2Ah5J23",
+          "title": "takeElementScreenshot"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"show-dialog\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "x_cltVtG6oVU",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"show-dialog\"]"
+                  },
+                  "id": "Ii1nWhHNFqPd",
+                  "name": "click"
+                }
+              ],
+              "id": "H0xNKXBygISg",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"dialog-title\"]"
+                  },
+                  "id": "cIAvf4_qTU3S",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "TQI4Yj6dO0oK",
+              "title": "takeElementScreenshot"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#close-dialog"
+                  },
+                  "id": "DcoRALsSdhFP",
+                  "name": "click"
+                }
+              ],
+              "id": "6mAODS1QZ2k4",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"show-dialog\"]"
+                  },
+                  "id": "kSIwd48dIO9m",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "rDApcKfIsnL3",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "W2THX4QjkeCg",
+          "browserType": "chromium",
+          "id": "_5Ib7f_kx0jM",
+          "index": 0,
+          "title": "Dialog shown after clicking Custom show, then closed on click `Done` button"
         }
       ]
     }
