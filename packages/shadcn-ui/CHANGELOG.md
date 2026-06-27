@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.33.0
+
+### Minor Changes
+
+- implement dialog registration and management
+
 ## 1.32.1
 
 ### Patch Changes
