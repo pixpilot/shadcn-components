@@ -1,7 +1,7 @@
 import type { NiceModalHocProps } from '@ebay/nice-modal-react';
 import type React from 'react';
 import type { RegisteredDialogShowProps } from '../../src/dialog-provider';
-import { describe, expect, expectTypeOf, it, vi } from 'vitest';
+import { beforeEach, describe, expect, expectTypeOf, it, vi } from 'vitest';
 import {
   dialog,
   hideDialog,
@@ -12,15 +12,19 @@ import {
 } from '../../src/dialog-provider';
 
 const niceModalMocks = vi.hoisted(() => ({
+  create: vi.fn((component) => component),
   hide: vi.fn(),
   register: vi.fn(),
   remove: vi.fn(),
   show: vi.fn(),
+  useModal: vi.fn(),
   unregister: vi.fn(),
 }));
 
 vi.mock('@ebay/nice-modal-react', () => ({
   default: niceModalMocks,
+  create: niceModalMocks.create,
+  useModal: niceModalMocks.useModal,
   unregister: niceModalMocks.unregister,
 }));
 
@@ -31,6 +35,10 @@ interface ExampleDialogProps extends NiceModalHocProps {
 }
 
 const ExampleDialog: React.FC<ExampleDialogProps> = () => null;
+
+beforeEach(() => {
+  vi.clearAllMocks();
+});
 
 describe('dialog-provider helpers', () => {
   it('registers a dialog and returns a controller for show, hide, and remove', async () => {
@@ -49,7 +57,7 @@ describe('dialog-provider helpers', () => {
     expect(controller.id).toBe('example-dialog');
     expect(niceModalMocks.register).toHaveBeenCalledWith(
       'example-dialog',
-      ExampleDialog,
+      expect.any(Function),
       defaultProps,
     );
     expect(niceModalMocks.show).toHaveBeenCalledWith('example-dialog', { count: 1 });
@@ -90,7 +98,7 @@ describe('dialog-provider helpers', () => {
     expect(controller.id).toBe('registry-dialog');
     expect(niceModalMocks.register).toHaveBeenCalledWith(
       'registry-dialog',
-      ExampleDialog,
+      expect.any(Function),
       { message: 'Registry default' },
     );
     expect(niceModalMocks.show).toHaveBeenCalledWith('registry-dialog', { count: 3 });

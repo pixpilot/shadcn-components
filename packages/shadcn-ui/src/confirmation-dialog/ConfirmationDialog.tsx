@@ -1,5 +1,4 @@
 import type { AlertVariant } from '../variant-config';
-import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import {
   Button,
   cn,
@@ -10,6 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@pixpilot/shadcn';
+import { dialog } from '../dialog-provider';
 import { getId } from '../utils';
 import { variantConfig } from '../variant-config';
 
@@ -34,10 +34,10 @@ export interface ConfirmationDialogProps {
   showIcon?: boolean;
 }
 
-const ConfirmationDialog = NiceModal.create<Partial<ConfirmationDialogProps>>((props) => {
+const ConfirmationDialog = dialog.create<Partial<ConfirmationDialogProps>>((props) => {
   const { id, title = 'Confirmation Dialog', variant, showIcon = true } = props;
 
-  const modal = useModal();
+  const modal = dialog.useDialog();
 
   const handleConfirm = () => {
     props.onConfirm?.();

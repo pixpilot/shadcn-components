@@ -1,0 +1,367 @@
+{
+  "version": "0",
+  "stories": {
+    "shadcn-ui-confirmationdialog--default": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"button\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "Au_VUhK81eFo",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"dialog-title\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "IyER2Bpcbvz1",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"button\"]"
+                  },
+                  "id": "-lJMaxY8YbuK",
+                  "name": "click"
+                }
+              ],
+              "id": "452XwVXciH6F",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"dialog-title\"]"
+                  },
+                  "id": "f9aIYPe0XMGK",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "nJSyJPR7SFy4",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "-Og_suLP63YJ",
+          "browserType": "chromium",
+          "id": "9qFcPSWcOL9W",
+          "index": 0,
+          "title": "Confirmation dialog visible after button click"
+        }
+      ]
+    },
+    "shadcn-ui-confirmationdialog--with-react-node-description": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"button\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "KG7AXlZa-9ui",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"dialog-title\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "gntHhfY7Sjfc",
+          "title": "takeElementScreenshot"
+        }
+      ]
+    },
+    "shadcn-ui-confirmationdialog--error-variant": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"button\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "LqA6xyVND996",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"dialog-title\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "Vq_czSQzDbUq",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"button\"]"
+                  },
+                  "id": "siJmp-tF1bI3",
+                  "name": "click"
+                }
+              ],
+              "id": "dVLnsF-TncWS",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"dialog-title\"]"
+                  },
+                  "id": "iNv3ECu5C5Ey",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "Oz9WqH07sAF_",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "-Og_suLP63YJ",
+          "browserType": "chromium",
+          "id": "BbAQDz8Xxxk0",
+          "index": 0,
+          "title": "Error Variant - Dialog title screenshot after clicking button"
+        }
+      ]
+    },
+    "shadcn-ui-confirmationdialog--warning-variant": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"button\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "dkPZBcoSyxvJ",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"dialog-title\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "z8DgSdRqF9jA",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"button\"]"
+                  },
+                  "id": "ao_9RcIqhrQ-",
+                  "name": "click"
+                }
+              ],
+              "id": "97Bt1edOP1TQ",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"dialog-title\"]"
+                  },
+                  "id": "bxBPP62JY5HO",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "ixmk8JUrLw9D",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "-Og_suLP63YJ",
+          "browserType": "chromium",
+          "id": "OxzmifpDCWbT",
+          "index": 0,
+          "title": "Warning Variant - Dialog title visible after button click"
+        }
+      ]
+    },
+    "shadcn-ui-confirmationdialog--primary-variant": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"button\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "ijTR64_NYThD",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"dialog-title\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "A79C9i1DI-2C",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"button\"]"
+                  },
+                  "id": "HPsMd5vOtm1E",
+                  "name": "click"
+                }
+              ],
+              "id": "6N-QlvANRAOY",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"dialog-title\"]"
+                  },
+                  "id": "-jFmiDkCR_k9",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "H6WOTDp-CD40",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "-Og_suLP63YJ",
+          "browserType": "chromium",
+          "id": "gPKD0vEx9qB5",
+          "index": 0,
+          "title": "Confirmation dialog title after button click"
+        }
+      ]
+    },
+    "shadcn-ui-confirmationdialog--nested-dialog-provider": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"button\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "0F1ZS5-oxb8u",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"dialog-title\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "HU99fPinepaN",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"button\"]"
+                  },
+                  "id": "qEDET_rrWi_0",
+                  "name": "click"
+                }
+              ],
+              "id": "xpBkvdih9gdO",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"dialog-title\"]"
+                  },
+                  "id": "Pvw6yQC-4Z6q",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "3yJAqXsrgciv",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "-Og_suLP63YJ",
+          "browserType": "chromium",
+          "id": "imNbyP3wQU3_",
+          "index": 0,
+          "title": "Nested Dialog Provider - Dialog title visible after button click"
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "-Og_suLP63YJ": {
+      "viewport": {
+        "height": 519,
+        "width": 899
+      },
+      "cursor": true
+    }
+  }
+}

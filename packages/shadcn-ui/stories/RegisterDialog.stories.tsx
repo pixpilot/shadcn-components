@@ -40,7 +40,7 @@ interface CustomStoryDialogProps {
   title?: string;
 }
 
-const CustomStoryDialog = dialog.create<CustomStoryDialogProps>(
+const customStoryDialog = dialog.create<CustomStoryDialogProps>(
   ({
     description = 'This dialog was created with dialog.create(...), so it owns the NiceModal lifecycle directly.',
     title = 'Custom Dialog',
@@ -134,8 +134,6 @@ export const Default: Story = {
 
 export const CustomCreate: Story = {
   render: () => {
-    const customDialog = dialog.useDialog(CustomStoryDialog);
-
     return (
       <div className="flex min-w-[320px] flex-col items-center gap-4 rounded-lg border bg-background p-6 text-center shadow-sm">
         <div>
@@ -145,13 +143,23 @@ export const CustomCreate: Story = {
           <Button
             data-slot="show-dialog"
             onClick={() => {
-              customDialog.show({
+              customStoryDialog.show({
                 description:
                   'Use dialog.create when the component should call useDialog itself.',
               });
             }}
           >
             Custom show
+          </Button>
+          <Button
+            data-slot="show-dialog-with-promise"
+            onClick={() => {
+              customStoryDialog.show({
+                title: 'Custom dialog 2',
+              });
+            }}
+          >
+            Show dialog 2
           </Button>
         </div>
       </div>

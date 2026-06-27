@@ -1,9 +1,34 @@
+import type { NiceModalHocProps } from '@ebay/nice-modal-react';
+import type { ComponentType, FC } from 'react';
 import NiceModal, { unregister, useModal as useNiceModal } from '@ebay/nice-modal-react';
 import { registerDialog } from './register-dialog';
 import { showDialog } from './show-dialog';
 
-export const createDialog = NiceModal.create;
 export const useDialog = useNiceModal;
+
+export interface CreatedDialog<TProps extends object> extends FC<
+  TProps & NiceModalHocProps
+> {
+  show: <TResult = unknown>(props?: TProps) => Promise<TResult>;
+  hide: <TResult = unknown>() => Promise<TResult>;
+  remove: () => void;
+}
+
+export function createDialog<TProps extends object>(
+  component: ComponentType<TProps>,
+): CreatedDialog<TProps> {
+  const CreatedDialog = NiceModal.create<TProps>(component);
+
+  return Object.assign(CreatedDialog, {
+    show: async <TResult = unknown>(props?: TProps): Promise<TResult> =>
+      NiceModal.show<TResult, TProps & NiceModalHocProps, TProps>(CreatedDialog, props),
+    hide: async <TResult = unknown>(): Promise<TResult> =>
+      NiceModal.hide<TResult>(CreatedDialog),
+    remove: (): void => {
+      NiceModal.remove(CreatedDialog);
+    },
+  });
+}
 
 /**
  * Hides a registered dialog by id.
@@ -70,7 +95,7 @@ export interface DialogRegistry {
   register: typeof registerDialog;
 
   /**
-   * Creates a custom NiceModal dialog component.
+   * Creates a custom NiceModal dialog component with controller helpers.
    *
    * Use this for dialogs that need to control `useDialog()` directly. For simple
    * shadcn dialogs, prefer `dialog.register(...)`.
@@ -81,6 +106,8 @@ export interface DialogRegistry {
    *   const modal = dialog.useDialog();
    *   return <Dialog open={modal.visible} onOpenChange={(open) => !open && modal.hide()} />;
    * });
+   *
+   * await CustomDialog.show({ projectId: 'project-1' });
    * ```
    */
   create: typeof createDialog;

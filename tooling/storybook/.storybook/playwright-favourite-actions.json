@@ -171,6 +171,34 @@
       "id": "-AzHhcOOMsFsDqx",
       "title": "takeElementScreenshot",
       "visibleTo": "*"
+    },
+    {
+      "actions": [
+        {
+          "args": {
+            "selector": "[data-slot=\"button\"]"
+          },
+          "id": "wmm7moKVDp",
+          "name": "click"
+        }
+      ],
+      "id": "Ly-wqHqiHlvGric",
+      "title": "click",
+      "visibleTo": "*"
+    },
+    {
+      "actions": [
+        {
+          "args": {
+            "selector": "[data-slot=\"dialog-title\"]"
+          },
+          "id": "KL-X9Y4ZSS",
+          "name": "takeElementScreenshot"
+        }
+      ],
+      "id": "rmSUQckleEr8yLR",
+      "title": "takeElementScreenshot",
+      "visibleTo": "*"
     }
   ]
 }
