@@ -32,9 +32,11 @@ export function DatePicker(props: DatePickerProps) {
     ...calendarProps
   } = props;
 
+  const [open, setOpen] = React.useState(false);
+
   return (
     <div className="relative flex items-center">
-      <Popover>
+      <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             id={id}
@@ -53,7 +55,10 @@ export function DatePicker(props: DatePickerProps) {
           <Calendar
             mode="single"
             selected={value}
-            onSelect={onChange}
+            onSelect={(date) => {
+              onChange?.(date);
+              setOpen(false);
+            }}
             initialFocus
             {...calendarProps}
           />
@@ -62,6 +67,7 @@ export function DatePicker(props: DatePickerProps) {
       {showClearButton && value && (
         <button
           type="button"
+          data-slot="clear-button"
           onClick={() => onChange?.(undefined)}
           className="absolute right-2 text-muted-foreground hover:text-foreground"
           aria-label="Clear date"

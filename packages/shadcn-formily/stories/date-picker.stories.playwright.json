@@ -1,0 +1,87 @@
+{
+  "version": "0",
+  "stories": {
+    "formily-datepicker--basic-date-picker": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#form-birthDate"
+                  },
+                  "id": "25qsz2PQ7HUs",
+                  "name": "click"
+                }
+              ],
+              "id": "VCnUm_gDCSh9",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "id": "N6LiXbiUUs6y",
+                  "name": "takeScreenshot"
+                }
+              ],
+              "id": "9EYL_PBEOfMv",
+              "title": "Take screenshot"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "x": 184,
+                    "y": 251
+                  },
+                  "id": "CftVTs25EIv8",
+                  "name": "mouse.click"
+                }
+              ],
+              "id": "Ncol24lsm-7x",
+              "title": "click date"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"clear-button\"]"
+                  },
+                  "id": "eAhbHFdi7EDX",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "fBjtHc1DQhPT",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "UNZY0yn2uB9I",
+          "browserType": "chromium",
+          "id": "pAgs3AGbmDfe",
+          "index": 0,
+          "screenshotOptionsId": "1VrSlLJbc2b1",
+          "title": "Date picker field clicked and should have clear button"
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "UNZY0yn2uB9I": {
+      "viewport": {
+        "height": 294,
+        "width": 433
+      }
+    }
+  },
+  "screenshotOptions": {
+    "1VrSlLJbc2b1": {
+      "clip": {
+        "height": 35,
+        "width": 234,
+        "x": 101,
+        "y": 195
+      }
+    }
+  }
+}
