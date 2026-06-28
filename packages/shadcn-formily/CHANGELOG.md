@@ -1,5 +1,17 @@
 # @pixpilot/formily-shadcn
 
+## 1.14.0
+
+### Minor Changes
+
+- implement clear button functionality and update state management
+- add clear button functionality and improve props handling
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn-ui@1.35.0
+
 ## 1.13.2
 
 ### Patch Changes

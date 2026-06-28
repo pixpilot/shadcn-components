@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.35.0
+
+### Minor Changes
+
+- add clear button functionality and improve props handling
+
 ## 1.34.0
 
 ### Minor Changes
