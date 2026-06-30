@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.36.0
+
+### Minor Changes
+
+- add sizes variant with screenshot functionality
+
 ## 1.35.0
 
 ### Minor Changes
