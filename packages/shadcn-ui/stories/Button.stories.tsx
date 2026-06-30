@@ -3,6 +3,14 @@ import type { ComponentProps } from 'react';
 import React from 'react';
 import { Button } from '../src/Button';
 
+const buttonSizes = [
+  { size: 'xs', label: 'Extra small', children: 'Extra small' },
+  { size: 'sm', label: 'Small', children: 'Small' },
+  { size: 'default', label: 'Default', children: 'Default' },
+  { size: 'lg', label: 'Large', children: 'Large' },
+  { size: 'icon', label: 'Icon', children: '+' },
+] as const;
+
 type StoryArgs = Partial<
   ComponentProps<typeof Button> & {
     id?: string;
@@ -20,7 +28,7 @@ const meta: Meta<StoryArgs> = {
       control: 'select',
       options: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'],
     },
-    size: { control: 'select', options: ['default', 'sm', 'lg', 'icon'] },
+    size: { control: 'select', options: ['default', 'xs', 'sm', 'lg', 'icon'] },
     disabled: { control: 'boolean' },
   },
 } satisfies Meta<StoryArgs>;
@@ -42,6 +50,22 @@ export const Outline: Story = {
 
 export const Small: Story = {
   args: { size: 'sm', children: 'Small' },
+};
+
+export const Sizes: Story = {
+  args: { variant: 'default' },
+  render: (args) => (
+    <div className="flex flex-wrap items-center gap-4">
+      {buttonSizes.map(({ size, label, children }) => (
+        <div key={size} className="flex flex-col items-center gap-2">
+          <Button {...args} size={size} aria-label={size === 'icon' ? label : undefined}>
+            {children}
+          </Button>
+          <span className="text-muted-foreground text-xs">{label}</span>
+        </div>
+      ))}
+    </div>
+  ),
 };
 
 export const WithTitleTooltip: Story = {
