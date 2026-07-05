@@ -1,1 +1,6 @@
-export * from '@pixpilot/shadcn/tooltip';
+export {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@pixpilot/shadcn';
