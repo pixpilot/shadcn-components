@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 1.4.0
+
+### Minor Changes
+
+- add Tooltip component and related stories
+
 ## 1.3.1
 
 ### Patch Changes

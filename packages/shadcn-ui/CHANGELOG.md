@@ -1,5 +1,16 @@
 # @pixpilot/shadcn-ui
 
+## 1.37.0
+
+### Minor Changes
+
+- add Tooltip component and related stories
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn@1.4.0
+
 ## 1.36.0
 
 ### Minor Changes
