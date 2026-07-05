@@ -55,4 +55,5 @@ export {
   type FileUploadProps,
 };
 export * from './ToggleGroup';
+export * from './Tooltip';
 export * from './utils';

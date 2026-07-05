@@ -12,7 +12,11 @@
     "directory": "packages/ui"
   },
   "sideEffects": false,
-  "exports": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./form": "./src/form/index.ts",
+    "./*": "./src/components/ui/*.tsx"
+  },
   "files": [
     "dist"
   ],
@@ -27,6 +31,10 @@
       "./form": {
         "import": "./dist/form/index.js",
         "require": "./dist/form/index.cjs"
+      },
+      "./*": {
+        "types": "./dist/components/ui/*.d.ts",
+        "import": "./dist/components/ui/*.js"
       }
     },
     "main": "./dist/index.cjs",

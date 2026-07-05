@@ -31,9 +31,24 @@ const workspaceAliasPackages = Object.keys(workspaceAliases).filter((alias) =>
   alias.startsWith('@pixpilot/'),
 );
 
+const shadcnSrcPath = path.resolve(packagesDir, 'shadcn', 'src');
+
 export default defineConfig({
   resolve: {
-    alias: workspaceAliases,
+    alias: [
+      {
+        find: '@pixpilot/shadcn/form',
+        replacement: path.resolve(shadcnSrcPath, 'form', 'index.ts'),
+      },
+      {
+        find: /^@pixpilot\/shadcn\/(.+)$/,
+        replacement: path.resolve(shadcnSrcPath, 'components', 'ui', '$1.tsx'),
+      },
+      ...Object.entries(workspaceAliases).map(([find, replacement]) => ({
+        find,
+        replacement,
+      })),
+    ],
   },
   optimizeDeps: {
     // Keep workspace packages out of prebundling so HMR reflects local source edits.

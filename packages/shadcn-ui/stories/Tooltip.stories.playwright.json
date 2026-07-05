@@ -1,0 +1,103 @@
+{
+  "version": "0",
+  "stories": {
+    "shadcn-ui-tooltip--with-credit-breakdown": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"tooltip-trigger\"]"
+              },
+              "name": "hover"
+            }
+          ],
+          "id": "SFa7fCGkz0AO",
+          "title": "hover"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "timeout": 200
+              },
+              "name": "waitForTimeout"
+            }
+          ],
+          "id": "FonRdIwSlqYo",
+          "title": "delay 200"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"tooltip-content\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "gesMR9TSucZg",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"tooltip-trigger\"]"
+                  },
+                  "id": "dIBciji-YdvH",
+                  "name": "hover"
+                }
+              ],
+              "id": "FtrpfwaTGv0N",
+              "title": "hover"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 200
+                  },
+                  "id": "_lEZ3K_BfqRO",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "oRm56HruyVUP",
+              "title": "delay 200"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"tooltip-content\"]"
+                  },
+                  "id": "1Hffi10Mzdk7",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "sQq5y0iyXsHW",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "K_kJE68OwO8j",
+          "browserType": "chromium",
+          "id": "ZCXDB88nNwNM",
+          "index": 0,
+          "title": "should have all content visible correctly"
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "K_kJE68OwO8j": {
+      "viewport": {
+        "height": 651,
+        "width": 836
+      }
+    }
+  }
+}
