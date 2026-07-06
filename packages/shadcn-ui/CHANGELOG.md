@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 1.38.0
+
+### Minor Changes
+
+- adds mcp
+
 ## 1.37.0
 
 ### Minor Changes
