@@ -5,12 +5,12 @@ import type { ArrayItemProps } from '../array-base';
 import { RecursionField, useField, useFieldSchema } from '@formily/react';
 import { cn } from '@pixpilot/shadcn-ui';
 import React from 'react';
-import { getXComponentProps } from '../../utils';
 import { ArrayBase } from '../array-base';
 import { isOperationComponent } from '../array-base/utils/is-array-component';
 import { ArrayDragHandle } from '../array-common/ArrayDragHandle';
 import { ArrayItemOperations } from '../array-common/ArrayItemOperations';
 import { useArrayItemActions } from '../array-common/use-array-item-actions';
+import { useArrayItemWrapperProps } from '../array-common/use-array-item-wrapper-props';
 import { SortableItem } from '../array-sortable';
 
 export interface ArrayInlineItemProps extends ArrayItemProps {
@@ -23,8 +23,8 @@ const ArrayInlineItem = React.memo(({ index, record, itemKey }: ArrayInlineItemP
 
   const items = schema?.items as Schema;
 
-  const itemWrapperProps = getXComponentProps(items);
-  const { className: itemWrapperClassName, ...itemWrapperRestProps } = itemWrapperProps;
+  const { className: itemWrapperClassName, ...itemWrapperRestProps } =
+    useArrayItemWrapperProps();
 
   const { array, actionContext, resolvedActions } = useArrayItemActions({
     index,

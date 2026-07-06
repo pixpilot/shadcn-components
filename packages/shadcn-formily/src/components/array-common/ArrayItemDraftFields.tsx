@@ -12,8 +12,6 @@ import {
 } from '@formily/react';
 import React from 'react';
 
-import { getXComponentProps } from '../../utils';
-
 export interface ArrayItemDraftFieldsProps {
   schema: Schema;
   form: IForm;
@@ -28,19 +26,6 @@ export interface ArrayItemDraftFieldsProps {
    * onFieldInputValueChange and onFieldValueChange fire normally.
    */
   isolated?: boolean;
-}
-
-function mergeClassName(a?: string, b?: string) {
-  const aa = a?.trim();
-  const bb = b?.trim();
-
-  const hasA = aa != null && aa.length > 0;
-  const hasB = bb != null && bb.length > 0;
-
-  if (!hasA && !hasB) return undefined;
-  if (hasA && !hasB) return aa;
-  if (!hasA && hasB) return bb;
-  return `${aa} ${bb}`;
 }
 
 interface IsolatedDraftFieldsProps {
@@ -87,14 +72,13 @@ export function ArrayItemDraftFields({
   className,
   isolated = true,
 }: ArrayItemDraftFieldsProps) {
-  const itemWrapperProps = getXComponentProps(schema);
-  const { className: itemWrapperClassName, ...itemWrapperRestProps } = itemWrapperProps;
-
+  // The edit surface (dialog/popover body) is the item's *editor*, not the item
+  // itself. Per-item styling from `items['x-component-props']` is applied to the
+  // rendered list row via ItemWrapper; the editor keeps only the layout className
+  // passed explicitly by the dialog/popover. Style the editor via `dialogProps` /
+  // `popoverProps` instead.
   return (
-    <Component
-      {...itemWrapperRestProps}
-      className={mergeClassName(className, itemWrapperClassName)}
-    >
+    <Component className={className}>
       {isolated ? (
         <IsolatedDraftFields schema={schema} form={form} basePath={basePath} />
       ) : (

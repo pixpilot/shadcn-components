@@ -3,10 +3,9 @@ import type { ArrayItemProps } from '../array-base';
 import { RecursionField, useFieldSchema } from '@formily/react';
 import { cn } from '@pixpilot/shadcn-ui';
 import React from 'react';
-import { getXComponentProps } from '../../utils';
 import { ArrayBase } from '../array-base';
 import { isOperationComponent } from '../array-base/utils/is-array-component';
-import { ArrayItemHeaderRow } from '../array-common';
+import { ArrayItemHeaderRow, useArrayItemWrapperProps } from '../array-common';
 import { SortableItem } from '../array-sortable';
 
 export interface ArrayCardItemProps extends ArrayItemProps {
@@ -23,10 +22,10 @@ const ArrayItem = React.memo(
 
     const items = schema?.items as Schema;
 
-    // Get x-component-props from items schema to apply to the wrapper div
-    // Since we're not using onlyRenderProperties, we manually extract these props
-    const itemWrapperProps = getXComponentProps(items);
-    const { className: itemWrapperClassName, ...itemWrapperRestProps } = itemWrapperProps;
+    // Per-item props sourced from `items['x-component-props']`, shared with all
+    // other array components. Applied to the wrapper div.
+    const { className: itemWrapperClassName, ...itemWrapperRestProps } =
+      useArrayItemWrapperProps();
 
     return (
       <ArrayBase.Item index={index} record={record ?? {}}>

@@ -6,10 +6,14 @@ import { RecursionField, useField, useFieldSchema } from '@formily/react';
 import { cn } from '@pixpilot/shadcn';
 import { ChevronDownIcon } from 'lucide-react';
 import React from 'react';
-import { getXComponentProps } from '../../utils';
 import { validateArrayItemFields } from '../../utils/validate-array-item-fields';
 import { ArrayBase } from '../array-base';
-import { ArrayItemHeaderRow, ItemWrapper, useArrayItemSchema } from '../array-common';
+import {
+  ArrayItemHeaderRow,
+  ItemWrapper,
+  useArrayItemSchema,
+  useArrayItemWrapperProps,
+} from '../array-common';
 import { getHiddenItemSchema } from '../array-common/get-hidden-item-schema';
 import { SortableItem } from '../array-sortable';
 
@@ -46,8 +50,9 @@ const ArrayCollapseItemBase = React.memo((props: ArrayCollapseItemProps) => {
     return getHiddenItemSchema(items as unknown);
   }, [items]);
 
-  // Get x-component-props from items schema to apply to the wrapper
-  const itemWrapperProps = getXComponentProps(items);
+  // Per-item props sourced from `items['x-component-props']`, shared with all
+  // other array components. Applied to the item wrapper.
+  const itemWrapperProps = useArrayItemWrapperProps();
 
   React.useEffect(() => {
     if (isNewItem(index)) {

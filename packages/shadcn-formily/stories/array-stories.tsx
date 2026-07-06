@@ -38,6 +38,8 @@ export function createStories(config: StoryConfig) {
     EmptyArray: createEmptyArrayStory(config),
     WithActions: createWithActions(config),
     WithComponentClassName: createWithComponentClassNameStory(config),
+    WithItemClassName: createWithItemClassNameStory(config),
+    WithItemClassNameDeclarative: createWithItemClassNameDeclarativeStory(config),
     WithDescription: createWithDescriptionStory(config),
     Declarative: createDeclarativeStory(config),
     WithJSONSchema: createWithJsonSchemaStory(config),
@@ -292,7 +294,6 @@ export function createWithActions(config: StoryConfig): Story {
  */
 export function createWithComponentClassNameStory(config: StoryConfig): Story {
   const { componentName, displayTitle } = config;
-  const itemComponent = `${componentName}.Item`;
 
   return {
     render: () => {
@@ -317,7 +318,7 @@ export function createWithComponentClassNameStory(config: StoryConfig): Story {
             },
             items: {
               type: 'object',
-              'x-component': itemComponent,
+              // Per-item styling: applied to each rendered list row, not the editor.
               'x-component-props': {
                 className: 'bg-slate-500 text-white',
               },
@@ -373,6 +374,176 @@ export function createWithComponentClassNameStory(config: StoryConfig): Story {
           </div>
 
           <SchemaField schema={schema} />
+        </Form>
+      );
+    },
+  };
+}
+
+/**
+ * Creates a WithItemClassName story for the given array component.
+ *
+ * Demonstrates per-item styling: `items['x-component-props']` (e.g. className) is
+ * forwarded onto every rendered item wrapper. This is distinct from the array
+ * node's own `x-component-props.className`, which targets the array component
+ * itself (list container / dialog / popover).
+ */
+export function createWithItemClassNameStory(config: StoryConfig): Story {
+  const { componentName, displayTitle } = config;
+
+  return {
+    render: () => {
+      const form = createForm({
+        values: {
+          items: [{ name: 'First item' }, { name: 'Second item' }],
+        },
+      });
+
+      const schema: ISchema = {
+        type: 'object',
+        properties: {
+          items: {
+            type: 'array',
+            'x-component': componentName,
+            'x-component-props': {
+              // Targets the array component itself (list container / dialog / popover)
+              ...config.componentProps,
+            },
+            items: {
+              type: 'object',
+              // Per-item styling: applied to EVERY rendered item wrapper.
+              'x-component-props': {
+                className: 'border-red-500 border-2 shadow-sm',
+              },
+              'x-reactions': {
+                fulfill: {
+                  state: {
+                    title: "{{$self.value?.name || 'Item'}}",
+                  },
+                },
+              },
+              properties: {
+                name: {
+                  type: 'string',
+                  title: 'Name',
+                  required: true,
+                  'x-decorator': 'FormItem',
+                  'x-component': 'Input',
+                  'x-component-props': { placeholder: 'Enter name' },
+                },
+              },
+            },
+            properties: {
+              addition: {
+                type: 'void',
+                title: 'Add Item',
+                'x-component': `${componentName}.Addition`,
+              },
+            },
+          },
+        },
+      };
+
+      return (
+        <Form form={form} className="space-y-6 w-[600px]">
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">{displayTitle} (Per-Item ClassName)</h2>
+            <p className="text-muted-foreground">
+              Each item wrapper is styled via{' '}
+              <code>items[&apos;x-component-props&apos;].className</code> (a primary
+              border here). The array node&apos;s own{' '}
+              <code>x-component-props.className</code> styles the container instead.
+            </p>
+          </div>
+
+          <SchemaField schema={schema} />
+
+          <div className="pt-4">
+            <Button
+              type="button"
+              onClick={() => alert(JSON.stringify(form.values, null, 2))}
+            >
+              View Values
+            </Button>
+          </div>
+        </Form>
+      );
+    },
+  };
+}
+
+/**
+ * Creates a declarative (JSX SchemaField) version of the per-item className story.
+ *
+ * The array item is the `<SchemaField.Object>`, so per-item styling is set through
+ * its `x-component-props` — the declarative equivalent of `items['x-component-props']`.
+ */
+export function createWithItemClassNameDeclarativeStory(config: StoryConfig): Story {
+  const { componentName, displayTitle } = config;
+
+  return {
+    render: () => {
+      const form = createForm({
+        values: {
+          items: [{ name: 'First item' }, { name: 'Second item' }],
+        },
+      });
+
+      return (
+        <Form form={form} className="space-y-6 w-[600px]">
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">
+              {displayTitle} (Per-Item ClassName · Declarative)
+            </h2>
+            <p className="text-muted-foreground">
+              Declarative form: the item is the <code>SchemaField.Object</code>, so
+              per-item styling is set via its <code>x-component-props</code> — the
+              equivalent of <code>items[&apos;x-component-props&apos;]</code>.
+            </p>
+          </div>
+
+          <SchemaField>
+            <SchemaField.Array
+              name="items"
+              x-component={componentName}
+              x-component-props={config.componentProps}
+            >
+              <SchemaField.Object
+                x-component-props={{
+                  className: 'border-red-500 border-2 shadow-sm',
+                }}
+                x-reactions={{
+                  fulfill: {
+                    state: {
+                      title: "{{$self.value?.name || 'Item'}}",
+                    },
+                  },
+                }}
+              >
+                <SchemaField.String
+                  name="name"
+                  title="Name"
+                  required
+                  x-decorator="FormItem"
+                  x-component="Input"
+                  x-component-props={{ placeholder: 'Enter name' }}
+                />
+              </SchemaField.Object>
+              <SchemaField.Void
+                x-component={`${componentName}.Addition`}
+                title="Add Item"
+              />
+            </SchemaField.Array>
+          </SchemaField>
+
+          <div className="pt-4">
+            <Button
+              type="button"
+              onClick={() => alert(JSON.stringify(form.values, null, 2))}
+            >
+              View Values
+            </Button>
+          </div>
         </Form>
       );
     },

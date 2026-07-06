@@ -15,5 +15,6 @@ export * from './use-array-item-actions';
 export * from './use-array-item-draft-form';
 export * from './use-array-item-edit-labels';
 export * from './use-array-item-schema';
+export * from './use-array-item-wrapper-props';
 export * from './use-edit-handlers';
 export * from './use-shake-animation';
