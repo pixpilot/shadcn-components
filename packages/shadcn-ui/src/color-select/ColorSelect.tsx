@@ -9,8 +9,8 @@ import {
 } from '@pixpilot/shadcn';
 import React from 'react';
 
-import { useSelectKeyboard } from './hooks/use-select-keyboard';
-import { getId } from './utils';
+import { useSelectKeyboard } from '../hooks/use-select-keyboard';
+import { getId } from '../utils';
 
 export interface ColorSelectOption {
   label: string;

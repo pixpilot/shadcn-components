@@ -1,7 +1,7 @@
 import { cn } from '@pixpilot/shadcn';
 
 import React from 'react';
-import { Button } from '../Button';
+import { Button } from '../button';
 import { isSvgMarkupString, svgMarkupToMaskUrl } from '../utils';
 
 export type ToolbarButtonTooltipMode = 'native' | 'custom';

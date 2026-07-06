@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ComponentProps } from 'react';
 import { useState } from 'react';
-import { DatePicker } from '../src/DatePicker';
+import { DatePicker } from '../src/date-picker';
 
 /**
  * A date picker component with calendar popover.

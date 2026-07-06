@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Alert } from '../src/Alert';
+import { Alert } from '../src/alert';
 
 /**
  * Alert component for displaying important messages to users.

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import * as React from 'react';
 
-import { ToggleGroup, ToggleGroupItem } from '../src/ToggleGroup';
+import { ToggleGroup, ToggleGroupItem } from '../src/toggle-group';
 
 type ToggleGroupStoryVariant = 'default' | 'outline';
 

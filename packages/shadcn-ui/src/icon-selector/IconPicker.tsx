@@ -7,7 +7,7 @@ import { Icon } from '@iconify/react';
 import { cn } from '@pixpilot/shadcn';
 import { Plus, X } from 'lucide-react';
 import { useCallback, useState } from 'react';
-import { Button } from '../Button';
+import { Button } from '../button';
 import { useMediaQuery } from '../hooks';
 import { getId } from '../utils';
 import { ICON_SELECTOR_ERROR_MESSAGE } from './constants';

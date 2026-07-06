@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { CloseButtonAbsolute } from '../src/CloseButtonAbsolute';
+import { CloseButtonAbsolute } from '../src/close-button-absolute';
 
 /**
  * An absolutely positioned rounded close button.

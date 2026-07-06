@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ComponentProps } from 'react';
-import { ButtonExtended } from '../src/ButtonExtended';
+import { ButtonExtended } from '../src/button-extended';
 
 /**
  * A customizable button component with loading states, tooltips, and multiple variants.

@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from './Card';
+import { Card, CardContent, CardHeader, CardTitle } from '../card';
 
 interface SectionCardProps extends React.ComponentProps<typeof Card> {
   title?: string;

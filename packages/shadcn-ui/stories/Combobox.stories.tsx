@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ComponentProps } from 'react';
 import { useState } from 'react';
-import { Combobox } from '../src/Combobox';
+import { Combobox } from '../src/combobox';
 
 /**
  * A searchable combobox component with dropdown options.

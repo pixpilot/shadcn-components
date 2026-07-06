@@ -1,8 +1,8 @@
-import type { AlertVariant } from './variant-config';
+import type { AlertVariant } from '../variant-config';
 import { AlertDescription, AlertTitle, Alert as ShadAlert } from '@pixpilot/shadcn';
 import React from 'react';
 import { cn } from '@/lib';
-import { variantConfig } from './variant-config';
+import { variantConfig } from '../variant-config';
 
 export type { AlertVariant };
 

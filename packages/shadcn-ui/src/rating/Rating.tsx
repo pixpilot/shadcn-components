@@ -3,7 +3,7 @@ import { cn } from '@pixpilot/shadcn';
 import { cva } from 'class-variance-authority';
 import { Circle, Star } from 'lucide-react';
 import * as React from 'react';
-import { getId } from './utils';
+import { getId } from '../utils';
 
 export type RatingColor =
   | 'default'

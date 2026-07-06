@@ -3,7 +3,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ComponentProps } from 'react';
 import { useMemo } from 'react';
-import { Button } from '../src/Button';
+import { Button } from '../src/button';
 import {
   Dialog,
   DialogBody,

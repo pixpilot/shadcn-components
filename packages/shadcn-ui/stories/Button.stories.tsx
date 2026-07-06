@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ComponentProps } from 'react';
 import React from 'react';
-import { Button } from '../src/Button';
+import { Button } from '../src/button';
 
 const buttonSizes = [
   { size: 'xs', label: 'Extra small', children: 'Extra small' },

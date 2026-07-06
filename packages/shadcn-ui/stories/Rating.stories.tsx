@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import { Rating } from '../src/Rating';
+import { Rating } from '../src/rating';
 
 /**
  * A customizable rating component for displaying and collecting user ratings.

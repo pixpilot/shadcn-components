@@ -3,8 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { PlusIcon } from 'lucide-react';
 import * as React from 'react';
 
-import { Button } from '../src/Button';
-import { ButtonGroup } from '../src/ButtonGroup';
+import { Button } from '../src/button';
+import { ButtonGroup } from '../src/button-group';
 
 const meta = {
   title: 'shadcn-ui/ButtonGroup',

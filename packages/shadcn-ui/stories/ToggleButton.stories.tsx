@@ -2,7 +2,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ComponentProps } from 'react';
 import React from 'react';
-import { ToggleButton } from '../src/ToggleButton';
+import { ToggleButton } from '../src/toggle-button';
 
 /**
  * A toggle button component that can switch between checked and unchecked states.

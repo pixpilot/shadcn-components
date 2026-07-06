@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Label } from '@pixpilot/shadcn';
 import * as React from 'react';
-import { Button } from '../src/Button';
+import { Button } from '../src/button';
 import {
   Card,
   CardContent,
@@ -9,7 +9,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '../src/Card';
+} from '../src/card';
 import {
   Dialog,
   DialogBody,

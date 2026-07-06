@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { CloseButtonRounded } from '../src/CloseButtonRounded';
+import { CloseButtonRounded } from '../src/close-button-rounded';
 
 /**
  * A rounded close button with X icon.

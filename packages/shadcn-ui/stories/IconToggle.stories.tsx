@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Eye, EyeOff, Moon, Pause, Play, Sun, Volume2, VolumeX } from 'lucide-react';
 import { useState } from 'react';
 
-import { IconToggle } from '../src/IconToggle';
+import { IconToggle } from '../src/icon-toggle';
 
 /**
  * A toggle button component with customizable icons for checked/unchecked states.

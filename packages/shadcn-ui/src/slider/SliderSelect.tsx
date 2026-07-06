@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 import { useControlled } from '@internal/hooks';
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
-import { Select } from '../Select';
+import { Select } from '../select';
 import { getId } from '../utils';
 import { Slider as ShadcnSlider } from './Slider';
 

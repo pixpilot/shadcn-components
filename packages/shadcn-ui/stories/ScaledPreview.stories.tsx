@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ScaledPreview } from '../src/ScaledPreview';
+import { ScaledPreview } from '../src/scaled-preview';
 
 /**
  * A component that scales its children to fit within a specified preview size,

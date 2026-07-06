@@ -11,7 +11,7 @@ import { cn, Button as OrgButton } from '@pixpilot/shadcn';
 import { Slottable } from '@radix-ui/react-slot';
 
 import React, { useCallback } from 'react';
-import { AbsoluteFill } from './AbsoluteFill';
+import { AbsoluteFill } from '../absolute-fill';
 
 export interface ButtonProps
   extends React.ComponentProps<typeof OrgButton>, VariantProps<typeof buttonVariants> {

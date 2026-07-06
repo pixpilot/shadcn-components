@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from '../src/Button';
+import { Button } from '../src/button';
 import {
   Card,
   CardAction,
@@ -8,7 +8,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '../src/Card';
+} from '../src/card';
 
 /**
  * Card primitives for grouping related content and actions.

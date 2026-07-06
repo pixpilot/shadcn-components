@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ComponentProps } from 'react';
 import React, { useState } from 'react';
-import { Select } from '../src/Select';
+import { Select } from '../src/select';
 
 /**
  * A customizable select component with options.

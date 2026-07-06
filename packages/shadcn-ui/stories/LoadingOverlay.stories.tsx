@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ComponentProps } from 'react';
 import { useEffect, useState } from 'react';
-import { Button } from '../src/Button';
-import { LoadingOverlay } from '../src/LoadingOverlay';
+import { Button } from '../src/button';
+import { LoadingOverlay } from '../src/loading-overlay';
 
 const AUTO_HIDE_DELAY = 4000;
 const OUT_DELAY_AUTO_HIDE_DELAY = 2500;

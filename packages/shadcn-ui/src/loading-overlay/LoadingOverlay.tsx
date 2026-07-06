@@ -3,7 +3,7 @@
 import { cn } from '@pixpilot/shadcn';
 import { Loader2 } from 'lucide-react';
 import React from 'react';
-import { useDelayedVisibility } from './hooks';
+import { useDelayedVisibility } from '../hooks';
 
 const DEFAULT_DELAY = 0;
 const FADE_DURATION = 300;

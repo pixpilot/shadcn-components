@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ContentCard } from '../src/ContentCard';
+import { ContentCard } from '../src/content-card';
 
 /**
  * A content card component with optional title.

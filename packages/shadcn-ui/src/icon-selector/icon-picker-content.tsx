@@ -7,7 +7,7 @@ import { X } from 'lucide-react';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Input } from '../input';
-import { LoadingOverlay } from '../LoadingOverlay';
+import { LoadingOverlay } from '../loading-overlay';
 import { getId } from '../utils';
 import { useAsyncProviders } from './use-async-providers';
 import VirtualizedIconGrid from './virtualized-icon-grid';

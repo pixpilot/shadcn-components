@@ -13,7 +13,7 @@ import { Slottable } from '@radix-ui/react-slot';
 
 import { Loader2 } from 'lucide-react';
 import React, { useCallback } from 'react';
-import { AbsoluteFill } from './AbsoluteFill';
+import { AbsoluteFill } from '../absolute-fill';
 
 export interface ButtonExtendedLoaderProps {
   /**

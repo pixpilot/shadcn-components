@@ -1,7 +1,7 @@
 'use client';
 
 import type { ComponentProps } from 'react';
-import type { CommandOptionListItem } from './CommandOptionList';
+import type { CommandOptionListItem } from '../command-option-list';
 
 import {
   Button,
@@ -13,8 +13,8 @@ import {
 } from '@pixpilot/shadcn';
 import { ChevronsUpDown } from 'lucide-react';
 import React, { useState } from 'react';
-import { CommandOptionList } from './CommandOptionList';
-import { getId } from './utils';
+import { CommandOptionList } from '../command-option-list';
+import { getId } from '../utils';
 
 type ComboboxProps = {
   id?: string;

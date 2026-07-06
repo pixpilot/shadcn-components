@@ -3,7 +3,7 @@ import type { ToolbarButtonTooltipMode } from './ToolbarButton';
 import { cn, Label, RadioGroup, RadioGroupItem } from '@pixpilot/shadcn';
 import { Link as LinkIcon } from 'lucide-react';
 import React from 'react';
-import { Button } from '../Button';
+import { Button } from '../button';
 import { Input } from '../input';
 import { Popover, PopoverContent, PopoverTrigger } from '../popover';
 

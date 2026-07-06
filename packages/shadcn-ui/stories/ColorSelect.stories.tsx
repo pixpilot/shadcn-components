@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ComponentProps } from 'react';
 import React, { useState } from 'react';
-import { ColorSelect } from '../src/ColorSelect';
+import { ColorSelect } from '../src/color-select';
 
 type StoryArgs = Partial<
   ComponentProps<typeof ColorSelect> & {

@@ -1,8 +1,8 @@
-import type { ToggleButtonProps } from './ToggleButton';
+import type { ToggleButtonProps } from '../toggle-button';
 import { cn } from '@pixpilot/shadcn';
 import React from 'react';
-import { ToggleButton } from './ToggleButton';
-import { isSvgMarkupString, svgMarkupToMaskUrl } from './utils';
+import { ToggleButton } from '../toggle-button';
+import { isSvgMarkupString, svgMarkupToMaskUrl } from '../utils';
 
 export interface IconToggleProps extends Omit<
   ToggleButtonProps,

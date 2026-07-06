@@ -11,8 +11,8 @@ import {
 import { XIcon } from 'lucide-react';
 import React from 'react';
 
-import { useSelectKeyboard } from './hooks/use-select-keyboard';
-import { getId } from './utils';
+import { useSelectKeyboard } from '../hooks/use-select-keyboard';
+import { getId } from '../utils';
 
 export interface SelectOption {
   value: string | number;

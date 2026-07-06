@@ -8,7 +8,7 @@ import {
   CommandList,
 } from '@pixpilot/shadcn';
 import { Check } from 'lucide-react';
-import { getId } from './utils';
+import { getId } from '../utils';
 
 export interface CommandOptionListItem {
   value: string;

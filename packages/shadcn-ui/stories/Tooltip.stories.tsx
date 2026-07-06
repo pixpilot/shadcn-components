@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from '../src/Button';
-import { Tooltip, TooltipContent, TooltipTrigger } from '../src/Tooltip';
+import { Button } from '../src/button';
+import { Tooltip, TooltipContent, TooltipTrigger } from '../src/tooltip';
 
 interface CreditBreakdownRow {
   label: string;

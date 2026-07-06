@@ -1,6 +1,6 @@
 'use client';
 
-import type { CommandOptionListItem } from '../CommandOptionList';
+import type { CommandOptionListItem } from '../command-option-list';
 import {
   cn,
   Command,
@@ -11,7 +11,7 @@ import {
 } from '@pixpilot/shadcn';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { CommandOptionList } from '../CommandOptionList';
+import { CommandOptionList } from '../command-option-list';
 import { TagsInputInline } from './TagsInputInline';
 
 export interface TagsInputProps {

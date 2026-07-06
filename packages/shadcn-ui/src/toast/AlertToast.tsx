@@ -2,7 +2,7 @@ import type { AlertToastProps } from './types';
 import { cn } from '@pixpilot/shadcn';
 import { XIcon } from 'lucide-react';
 import React from 'react';
-import { Alert } from '../Alert';
+import { Alert } from '../alert';
 import { variantConfig } from '../variant-config';
 
 const AlertToast: React.FC<AlertToastProps> = (props) => {

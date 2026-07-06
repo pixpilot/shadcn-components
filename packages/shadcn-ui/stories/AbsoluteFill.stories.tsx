@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { AbsoluteFill } from '../src/AbsoluteFill';
-import { Button } from '../src/Button';
+import { AbsoluteFill } from '../src/absolute-fill';
+import { Button } from '../src/button';
 
 /**
  * A stretched element positioned absolutely to enable tooltips on disabled buttons.

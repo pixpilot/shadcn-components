@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ComponentProps } from 'react';
 import { useState } from 'react';
-import { Button } from '../src/Button';
+import { Button } from '../src/button';
 import { toast, Toaster } from '../src/toast';
 import { AlertToast } from '../src/toast/AlertToast';
 
