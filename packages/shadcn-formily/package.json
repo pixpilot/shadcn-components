@@ -12,6 +12,9 @@
     "directory": "packages/shadcn-formily"
   },
   "exports": "./src/index.ts",
+  "bin": {
+    "formily-shadcn-mcp": "./dist/mcp-server.js"
+  },
   "files": [
     "dist"
   ],
@@ -32,8 +35,9 @@
     "prepublishOnly": "pnpm run clean && pnpm run build",
     "clean": "git clean -xdf .cache .turbo dist",
     "clean:all": "git clean -xdf .cache .turbo dist node_modules",
-    "build": "tsdown",
+    "build": "pnpm run mcp:registry && tsdown",
     "build:watch": "tsdown --watch",
+    "mcp:registry": "tsx ../mcp/src/generate-mcp-registry-cli.ts",
     "test": "vitest --run --passWithNoTests",
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",
@@ -58,16 +62,19 @@
     "@iconify-json/fa": "catalog:prod",
     "@iconify-json/mdi": "catalog:prod",
     "@iconify/react": "catalog:prod",
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "@pixpilot/env": "catalog:prod",
     "@pixpilot/shadcn": "workspace:*",
     "@pixpilot/shadcn-ui": "workspace:*",
     "@pixpilot/string": "catalog:prod",
     "json-schema-traverse": "^1.0.0",
     "lucide-react": "^0.562.0",
-    "pretty-bytes": "catalog:prod"
+    "pretty-bytes": "catalog:prod",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@internal/eslint-config": "workspace:*",
+    "@internal/mcp": "workspace:*",
     "@internal/prettier-config": "workspace:*",
     "@internal/tsconfig": "workspace:*",
     "@internal/tsdown-config": "workspace:*",
@@ -81,6 +88,7 @@
     "react": "catalog:prod",
     "react-dom": "catalog:prod",
     "tsdown": "catalog:dev",
+    "tsx": "catalog:dev",
     "typescript": "catalog:dev"
   },
   "prettier": "@internal/prettier-config"

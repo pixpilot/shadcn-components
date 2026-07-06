@@ -12,6 +12,9 @@
     "directory": "packages/shadcn-ui"
   },
   "exports": "./src/index.ts",
+  "bin": {
+    "shadcn-ui-mcp": "./dist/mcp-server.js"
+  },
   "files": [
     "dist"
   ],
@@ -32,8 +35,9 @@
     "prepublishOnly": "pnpm run clean && pnpm run build",
     "clean": "git clean -xdf .cache .turbo dist",
     "clean:all": "git clean -xdf .cache .turbo dist node_modules",
-    "build": "tsdown",
+    "build": "pnpm run mcp:registry && tsdown",
     "build:watch": "tsdown --watch",
+    "mcp:registry": "tsx ../mcp/src/generate-mcp-registry-cli.ts",
     "test": "vitest --run --passWithNoTests",
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",
@@ -51,6 +55,7 @@
     "@iconify-json/fa": "catalog:prod",
     "@iconify-json/mdi": "catalog:prod",
     "@iconify/react": "catalog:prod",
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "@pixpilot/hash": "catalog:prod",
     "@pixpilot/shadcn": "workspace:*",
     "@pixpilot/string": "catalog:prod",
@@ -68,11 +73,13 @@
     "next-themes": "catalog:prod",
     "pretty-bytes": "^7.1.0",
     "react-responsive": "^10.0.1",
-    "sonner": "2.0.7"
+    "sonner": "2.0.7",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@internal/eslint-config": "workspace:*",
     "@internal/hooks": "workspace:*",
+    "@internal/mcp": "workspace:*",
     "@internal/prettier-config": "workspace:*",
     "@internal/tsconfig": "workspace:*",
     "@internal/tsdown-config": "workspace:*",
@@ -88,6 +95,7 @@
     "react-dom": "catalog:prod",
     "tailwindcss": "catalog:dev",
     "tsdown": "catalog:dev",
+    "tsx": "catalog:dev",
     "typescript": "catalog:dev"
   },
   "prettier": "@internal/prettier-config"
