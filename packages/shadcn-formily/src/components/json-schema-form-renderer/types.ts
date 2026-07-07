@@ -1,5 +1,5 @@
 import type { ISchema } from '@formily/react';
-import type { Form as FormilyForm } from '../Form';
+import type { Form as FormilyForm } from '../form';
 
 export interface JsonSchemaFormComponent {
   component: React.ComponentType<any>;

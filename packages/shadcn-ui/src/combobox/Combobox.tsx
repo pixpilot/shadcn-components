@@ -82,3 +82,4 @@ const Combobox: React.FC<ComboboxProps> = (props) => {
 Combobox.displayName = 'Combobox';
 
 export { Combobox };
+export type { ComboboxProps };

@@ -21,7 +21,12 @@ startComponentMcpServer({
 Each component's own metadata is authored next to its source in a `mcp.ts` file:
 
 ```ts
-type ComponentOwnProps = OwnProps<MyComponent, 'div'>;
+import type { ComponentMeta, OwnProps } from '@internal/mcp';
+import type { MyComponentProps } from './MyComponent';
+import { defineProps } from '@internal/mcp';
+
+// Do not hardcode the props type here, because it will be duplicated in the component's own source. Instead, import the props type from the component's source file.
+type ComponentOwnProps = OwnProps<MyComponentProps, 'div'>;
 
 export const meta: ComponentMeta<ComponentOwnProps> = {
   name: 'MyComponent',
@@ -29,7 +34,7 @@ export const meta: ComponentMeta<ComponentOwnProps> = {
   description:
     'An example component that demonstrates how to define metadata for a component in a TypeScript project.',
   htmlElement: 'div',
-  props: defineProps<ButtonOwnProps>({
+  props: defineProps<MyComponentProps>({
     prop1: {
       type: 'string',
       description: 'A string prop for the component.',
@@ -47,6 +52,35 @@ export const meta: ComponentMeta<ComponentOwnProps> = {
 ```
 
 These `meta` exports are collected into a registry at build time and served by three MCP tools.
+
+## Generating the registry
+
+The registry at `src/generated/mcp-registry.ts` is **auto-generated — do not edit it by hand.** Run the generator whenever you add, remove, or rename a component:
+
+```json
+{
+  "scripts": {
+    "mcp:generate": "tsx ../mcp/src/generate-mcp-registry-cli.ts"
+  }
+}
+```
+
+The generator scans every folder in `src/components` and expects each to export a `meta` from an `mcp.ts` file. **If a component folder is missing `mcp.ts`, generation fails** with the list of offending folders — this is the reminder to add metadata for a newly added component.
+
+Folders that intentionally have no `mcp.ts` (shared helpers, contexts, internal utilities) must be listed in an optional `mcp.config.ts` at the package root:
+
+```ts
+import { defineMcpRegistryConfig } from '@internal/mcp/generate-mcp-registry';
+
+export default defineMcpRegistryConfig({
+  // Folder names inside src/components that do not need MCP metadata.
+  exclude: ['array-common', 'context'],
+  // Optional: change the folder scanned (relative to src). Defaults to 'components'.
+  // componentsDir: 'components',
+});
+```
+
+The same check is exposed as `findMissingMcpFiles(options)` so packages can add a test that fails in CI when a component folder is missing its `mcp.ts` (see `test/mcp-registry.test.ts` in the consuming package).
 
 ## What the AI receives
 

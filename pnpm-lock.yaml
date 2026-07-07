@@ -291,6 +291,9 @@ importers:
       eslint:
         specifier: catalog:dev
         version: 9.39.4(jiti@2.6.1)
+      tsx:
+        specifier: catalog:dev
+        version: 4.21.0
       typescript:
         specifier: catalog:dev
         version: 5.9.3
@@ -12417,7 +12420,7 @@ snapshots:
   cssstyle@5.3.4:
     dependencies:
       '@asamuzakjp/css-color': 4.1.0
-      '@csstools/css-syntax-patches-for-csstree': 1.0.14(postcss@8.5.14)
+      '@csstools/css-syntax-patches-for-csstree': 1.0.14(postcss@8.5.9)
       css-tree: 3.1.0
     transitivePeerDependencies:
       - postcss

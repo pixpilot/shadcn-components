@@ -158,3 +158,4 @@ function Select(props: BaseSelectProps) {
 }
 
 export { Select };
+export type { BaseSelectProps as SelectProps };

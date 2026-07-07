@@ -21,7 +21,8 @@
     "test:coverage": "vitest --coverage",
     "typecheck": "tsc --noEmit",
     "lint": "eslint",
-    "format": "prettier --check . --ignore-path ../../.gitignore --ignore-path ../../.prettierignore"
+    "format": "prettier --check . --ignore-path ../../.gitignore --ignore-path ../../.prettierignore",
+    "mcp:generate": "tsx ./src/generate-mcp-registry-cli.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
@@ -37,6 +38,7 @@
     "@vitest/coverage-v8": "catalog:dev",
     "@vitest/ui": "catalog:dev",
     "eslint": "catalog:dev",
+    "tsx": "catalog:dev",
     "typescript": "catalog:dev",
     "vitest": "catalog:dev"
   },

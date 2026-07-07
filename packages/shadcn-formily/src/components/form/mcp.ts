@@ -1,8 +1,9 @@
-import type { ComponentMeta, DocumentedProps } from '@internal/mcp';
-import type { IFormProps } from '../Form';
+import type { ComponentMeta, OwnProps } from '@internal/mcp';
+
+import type { IFormProps } from './Form';
 import { defineProps } from '@internal/mcp';
 
-type FormOwnProps = DocumentedProps<IFormProps, 'form', 'onSubmit'>;
+type FormOwnProps = OwnProps<IFormProps, 'form'>;
 
 export const meta: ComponentMeta<FormOwnProps> = {
   name: 'Form',
@@ -19,8 +20,6 @@ export const meta: ComponentMeta<FormOwnProps> = {
     layout:
       'Optional layout configuration passed through the Formily shadcn form context.',
     onAutoSubmit:
-      'Called with submitted values after the underlying Formily form submit succeeds.',
-    onSubmit:
       'Called with submitted values after the underlying Formily form submit succeeds.',
     settings: 'Optional form settings passed through the Formily shadcn form context.',
   }),

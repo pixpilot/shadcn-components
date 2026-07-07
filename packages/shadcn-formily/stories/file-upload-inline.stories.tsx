@@ -13,7 +13,7 @@ import {
   JsonSchemaFormRenderer,
   SchemaFieldExtended,
 } from '../src';
-import { ObjectContainer } from '../src/components/ObjectContainer';
+import { ObjectContainer } from '../src/components/object-container';
 import { handleUpload, handleUploadWithError } from './utils/file-upload';
 
 const meta: Meta<typeof Form> = {

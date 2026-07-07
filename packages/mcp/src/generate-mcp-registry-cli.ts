@@ -1,11 +1,10 @@
 import process from 'node:process';
-import { generateMcpRegistry } from './generate-mcp-registry';
+import { generateMcpRegistry, resolveMcpRegistryOptions } from './generate-mcp-registry';
 
 /** CLI entrypoint used by package build scripts to regenerate MCP metadata. */
 async function main(): Promise<void> {
-  await generateMcpRegistry({
-    packageRoot: process.cwd(),
-  });
+  const options = await resolveMcpRegistryOptions(process.cwd());
+  await generateMcpRegistry(options);
 }
 
 main().catch((error: unknown) => {

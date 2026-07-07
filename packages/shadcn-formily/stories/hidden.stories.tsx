@@ -2,7 +2,7 @@ import type { Form } from '@formily/core';
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ISchema } from '../src';
 import { createForm, JsonSchemaForm } from '../src';
-import { Hidden } from '../src/components/Hidden';
+import { Hidden } from '../src/components/hidden';
 
 const meta: Meta<typeof Form> = {
   title: 'Formily/Hidden',

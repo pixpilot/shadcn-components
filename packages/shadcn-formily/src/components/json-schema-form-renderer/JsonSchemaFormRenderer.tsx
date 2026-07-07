@@ -3,7 +3,7 @@ import type { FormSettings } from '../context';
 import type { JsonSchemaFormRendererProps } from './types';
 import React, { useMemo } from 'react';
 import { useFormSchema } from '../../hooks/use-form-schema';
-import { Form } from '../Form';
+import { Form } from '../form';
 
 const JsonSchemaFormRenderer: React.FC<JsonSchemaFormRendererProps> = (props) => {
   const {

@@ -8,11 +8,11 @@ import { useFormSchema } from '../../hooks/use-form-schema';
 import { useMergedSchemaComponents } from '../../hooks/use-merged-schema-components';
 import { extractComponents } from '../../utils/extract-components';
 import { ColorPicker } from '../color-picker/ColorPicker';
-import { ColorSelect } from '../ColorSelect';
-import { Combobox } from '../Combobox';
-import { Rating } from '../Rating';
+import { ColorSelect } from '../color-select';
+import { Combobox } from '../combobox';
+import { Rating } from '../rating';
 import { Slider, SliderInput, SliderSelect } from '../slider';
-import { TagsInputInLine } from '../TagsInputInline';
+import { TagsInputInLine } from '../tags-input-inline';
 import { basicComponentRegistry } from './schema-field-basics';
 
 export const defaultComponentRegistry = {
@@ -34,7 +34,7 @@ export const SchemaField = createSchemaField({
   components: defaultComponents,
 });
 
-type SchemaFieldDefaultProps = Omit<
+export type SchemaFieldDefaultProps = Omit<
   React.ComponentProps<typeof SchemaField>,
   'components'
 > & {
