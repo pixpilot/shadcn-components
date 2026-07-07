@@ -3,11 +3,7 @@ import type { CommonArrayProp } from '../array-common/array-mcp-props';
 import { defineProps } from '@internal/mcp';
 import { commonArrayPropDocs, perItemStylingNote } from '../array-common/array-mcp-props';
 
-type ArrayCollapseProp =
-  | CommonArrayProp
-  | 'mode'
-  | 'defaultActiveKey'
-  | 'collapseProps';
+type ArrayCollapseProp = CommonArrayProp | 'mode' | 'defaultActiveKey' | 'collapseProps';
 
 export const meta: ComponentMeta<ArrayCollapseProp> = {
   name: 'ArrayCollapse',
@@ -24,7 +20,8 @@ export const meta: ComponentMeta<ArrayCollapseProp> = {
       defaultValue: `'multiple'`,
     },
     defaultActiveKey: 'Indices of the panels that are expanded by default.',
-    collapseProps: 'HTML attributes applied to every item panel wrapper (className, style, etc.).',
+    collapseProps:
+      'HTML attributes applied to every item panel wrapper (className, style, etc.).',
   }),
   examples: [
     {

@@ -13,7 +13,8 @@ export const meta: ComponentMeta<ArrayCardsProp> = {
   htmlElement: 'div',
   props: defineProps<ArrayCardsProp>({
     ...commonArrayPropDocs,
-    cardProps: 'HTML attributes applied to every item card wrapper (className, style, etc.).',
+    cardProps:
+      'HTML attributes applied to every item card wrapper (className, style, etc.).',
   }),
   examples: [
     {

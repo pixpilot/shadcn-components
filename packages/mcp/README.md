@@ -58,14 +58,7 @@ Takes no input. Returns just the names of every registered component, so the AI 
 
 ```json
 {
-  "components": [
-    "Accordion",
-    "Alert",
-    "Button",
-    "Card",
-    "Dialog",
-    "Input"
-  ]
+  "components": ["Accordion", "Alert", "Button", "Card", "Dialog", "Input"]
 }
 ```
 

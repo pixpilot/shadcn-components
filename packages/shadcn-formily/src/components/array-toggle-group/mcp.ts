@@ -14,7 +14,8 @@ export const meta: ComponentMeta<ArrayToggleGroupProp> = {
       'Explicit `{ label, value, disabled? }` options. When omitted, options are resolved from the field/schema (`items.enum`).',
     disabled: 'Disables the whole group. Falls back to the field disabled state.',
     readOnly: 'Makes the group read-only. Falls back to the field read-only state.',
-    slots: 'Slot overrides, e.g. `slots.button.className` applied to every toggle button.',
+    slots:
+      'Slot overrides, e.g. `slots.button.className` applied to every toggle button.',
     variant: {
       description: 'Visual variant forwarded to the underlying ToggleGroup.',
       type: `'default' | 'outline'`,
