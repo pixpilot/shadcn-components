@@ -3,6 +3,7 @@ import process from 'node:process';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod/v4';
+import { searchComponents } from './search';
 
 const JSON_INDENT = 2;
 
@@ -59,11 +60,23 @@ export function createComponentMcpServer<TRegistry extends ComponentRegistry>({
     },
     async () =>
       jsonToolResult({
-        components: components.map(({ name, category, description }) => ({
-          name,
-          category,
-          description,
-        })),
+        components: components.map(({ name }) => name),
+      }),
+  );
+
+  server.registerTool(
+    'search_components',
+    {
+      title: 'Search components',
+      description: `Search registered ${packageName} components by name, category, keywords, and description. Returns matches ranked by relevance score.`,
+      inputSchema: {
+        query: z.string(),
+        limit: z.number().int().min(1).optional(),
+      },
+    },
+    async ({ query, limit }: { query: string; limit?: number }) =>
+      jsonToolResult({
+        results: searchComponents(components, query, limit),
       }),
   );
 
