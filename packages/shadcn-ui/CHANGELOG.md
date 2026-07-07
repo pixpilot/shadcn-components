@@ -1,5 +1,15 @@
 # @pixpilot/shadcn-ui
 
+## 1.39.0
+
+### Minor Changes
+
+- add per-item array styling stories
+
+### Patch Changes
+
+- format JSON components list and improve prop descriptions
+
 ## 1.38.0
 
 ### Minor Changes

@@ -1,5 +1,18 @@
 # @pixpilot/formily-shadcn
 
+## 1.15.0
+
+### Minor Changes
+
+- add new Formily-connected components and update MCP registry
+- implement component search functionality
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+  - @pixpilot/shadcn-ui@1.39.0
+
 ## 1.14.3
 
 ### Patch Changes
