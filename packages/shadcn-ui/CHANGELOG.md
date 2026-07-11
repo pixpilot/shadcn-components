@@ -1,5 +1,15 @@
 # @pixpilot/shadcn-ui
 
+## 2.0.0
+
+### Major Changes
+
+- 97065da: new release
+
+### Minor Changes
+
+- add MCP metadata for shadcn UI components
+
 ## 1.39.0
 
 ### Minor Changes
