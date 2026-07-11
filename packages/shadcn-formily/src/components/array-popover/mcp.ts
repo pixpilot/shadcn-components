@@ -3,7 +3,8 @@ import type { CommonArrayProp } from '../array-common/array-mcp-props';
 import { defineProps } from '@internal/mcp';
 import { commonArrayPropDocs, perItemStylingNote } from '../array-common/array-mcp-props';
 
-type ArrayPopoverProp = CommonArrayProp | 'autoSave' | 'popoverProps';
+// `autoSave` is part of `CommonArrayProp`; this component overrides its doc below.
+type ArrayPopoverProp = CommonArrayProp | 'popoverProps';
 
 export const meta: ComponentMeta<ArrayPopoverProp> = {
   name: 'ArrayPopover',

@@ -1,27 +1,22 @@
 import type { ComponentPropDescription } from '@internal/mcp';
+import type { IArrayBaseProps } from '../array-base/types';
 
 /**
  * Prop names shared by the object-array components (ArrayCards, ArrayCollapse,
  * ArrayDialog, ArrayInline, ArrayPopover). Kept in one place so every component's
  * `mcp.ts` documents them identically.
+ *
+ * Derived from `IArrayBaseProps` so that adding a shared array prop to that
+ * interface is a compile error until it is documented in `commonArrayPropDocs`.
  */
-export type CommonArrayProp =
-  | 'sortable'
-  | 'disabled'
-  | 'actions'
-  | 'transformActions'
-  | 'description'
-  | 'onAdd'
-  | 'onRemove'
-  | 'onMoveUp'
-  | 'onMoveDown'
-  | 'onEdit'
-  | 'onCopy';
+export type CommonArrayProp = Extract<keyof IArrayBaseProps, string>;
 
 /** Shared documentation for the common array-field props. */
 export const commonArrayPropDocs: Record<CommonArrayProp, ComponentPropDescription> = {
   sortable: 'Enables drag-and-drop reordering of items via a drag handle.',
   disabled: 'Disables the array field and all of its item operations.',
+  autoSave:
+    'When true, array item editors (popover/dialog) commit changes live; when false (default) they only commit on Save.',
   actions: {
     description:
       'Item action buttons. Accepts built-in operation strings and/or custom/toggle action objects. Set to false to disable all actions, including global defaults.',

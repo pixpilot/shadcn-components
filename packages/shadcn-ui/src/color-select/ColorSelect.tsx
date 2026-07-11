@@ -1,6 +1,7 @@
 import type { ComponentProps } from 'react';
 
 import {
+  cn,
   SelectContent,
   SelectItem,
   SelectTrigger,
@@ -25,6 +26,7 @@ type BaseColorSelectProps = {
   onChange?: (value: string) => void;
   placeholder?: string;
   keyboardMode?: 'cycle' | 'dropdown';
+  className?: string;
 } & Omit<ComponentProps<typeof ShadcnSelect>, 'value' | 'onValueChange' | 'children'>;
 
 function ColorSelect(props: BaseColorSelectProps) {
@@ -38,6 +40,7 @@ function ColorSelect(props: BaseColorSelectProps) {
     open: openProp,
     onOpenChange: onOpenChangeProp,
     id,
+    className,
     ...restProps
   } = props;
 
@@ -71,7 +74,11 @@ function ColorSelect(props: BaseColorSelectProps) {
       onOpenChange={handleOpenChange}
       {...restProps}
     >
-      <SelectTrigger id={id} className="w-full" onKeyDown={handleTriggerKeyDown}>
+      <SelectTrigger
+        id={id}
+        className={cn('w-full', className)}
+        onKeyDown={handleTriggerKeyDown}
+      >
         <SelectValue placeholder={placeholder}>
           {selectedOption && (
             <div className="flex items-center gap-2">

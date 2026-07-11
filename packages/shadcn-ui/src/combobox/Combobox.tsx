@@ -5,6 +5,7 @@ import type { CommandOptionListItem } from '../command-option-list';
 
 import {
   Button,
+  cn,
   Command,
   CommandInput,
   Popover,
@@ -16,7 +17,7 @@ import React, { useState } from 'react';
 import { CommandOptionList } from '../command-option-list';
 import { getId } from '../utils';
 
-type ComboboxProps = {
+interface ComboboxProps extends Omit<React.ComponentProps<typeof Button>, 'onChange'> {
   id?: string;
   value?: string;
   onChange?: (value: string) => void;
@@ -24,7 +25,11 @@ type ComboboxProps = {
   placeholder?: string;
   searchPlaceholder?: string;
   emptyText?: string;
-} & Omit<ComponentProps<typeof Command>, 'value' | 'onValueChange'>;
+  /** Styles the visible trigger button. */
+  className?: string;
+  /** Props forwarded to the underlying cmdk `Command` root. */
+  commandProps?: ComponentProps<typeof Command>;
+}
 
 const DEFAULT_OPTIONS: CommandOptionListItem[] = [];
 
@@ -37,7 +42,10 @@ const Combobox: React.FC<ComboboxProps> = (props) => {
     searchPlaceholder = 'Search...',
     emptyText = 'No option found.',
     id,
-    ...commandProps
+    className,
+    commandProps,
+    variant = 'outline',
+    ...buttonProps
   } = props;
 
   const [open, setOpen] = useState(false);
@@ -46,11 +54,12 @@ const Combobox: React.FC<ComboboxProps> = (props) => {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
+          {...buttonProps}
           id={id}
-          variant="outline"
+          variant={variant}
           role="combobox"
           aria-expanded={open}
-          className="w-full justify-between"
+          className={cn('w-full justify-between', className)}
         >
           {value ? options.find((option) => option.value === value)?.label : placeholder}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />

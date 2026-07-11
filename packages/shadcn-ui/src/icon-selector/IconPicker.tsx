@@ -47,6 +47,7 @@ export interface IconPickerProps {
     valueText?: { className?: string };
     clearIcon?: { className?: string };
   };
+  className?: string;
 }
 
 const ICON_SIZE = '!h-4 !w-4';
@@ -64,6 +65,7 @@ export const IconPicker: FC<IconPickerProps> = ({
   emptyText = <Plus className={ICON_SIZE} />,
   showClearButton = true,
   slots,
+  className,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -152,7 +154,7 @@ export const IconPicker: FC<IconPickerProps> = ({
           type="button"
           variant="outline"
           aria-label={iconButtonLabel}
-          className={cn('p-2 min-w-10', slots?.preview?.className)}
+          className={cn('p-2 min-w-10', slots?.preview?.className, className)}
         >
           {iconButtonContent}
           {shouldShowClearButton && (

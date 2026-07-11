@@ -18,6 +18,32 @@ Formily integration for shadcn/ui components. Build powerful, schema-driven form
 pnpm add @pixpilot/formily-shadcn @formily/core @formily/react
 ```
 
+## MCP Server
+
+This package ships a local stdio MCP server so coding assistants can discover its
+components and props. Add it to your MCP client configuration:
+
+```json
+{
+  "mcpServers": {
+    "formily-shadcn": {
+      "command": "npx",
+      "args": ["-y", "@pixpilot/formily-shadcn"]
+    }
+  }
+}
+```
+
+This works with Claude Code, Claude Desktop, GitHub Copilot, Cursor, Codex, and
+any MCP-compatible client. The client launches and stops the server
+automatically — you do not need to start it manually.
+
+The server exposes generated component metadata through these tools:
+
+- `list_components`
+- `search_components`
+- `get_component_details`
+
 ## Quick Start
 
 ### Basic Form

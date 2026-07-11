@@ -1,19 +1,13 @@
-import type { ComponentMeta } from '@internal/mcp';
+import type { ComponentMeta, DocumentedProps } from '@internal/mcp';
+import type { ArrayTagsProps } from './ArrayTags';
 import { defineProps } from '@internal/mcp';
 
-type ArrayTagsProp =
-  | 'placeholder'
-  | 'emptyText'
-  | 'disabled'
-  | 'readOnly'
-  | 'maxTags'
-  | 'minTags'
-  | 'allowDuplicates'
-  | 'editable'
-  | 'delimiter'
-  | 'addOnPaste'
-  | 'addOnTab'
-  | 'onValidate';
+// Derive the documented prop set from the component's own props type so that
+// adding a prop to `ArrayTagsProps` is a compile error until it is documented
+// here. `ArrayTagsProps` extends the native `div` props, so subtract that native
+// surface. `onChange` is a native `div` event name this component redefines, so
+// re-add it via the extra-props parameter.
+type ArrayTagsProp = DocumentedProps<ArrayTagsProps, 'div', 'onChange'>;
 
 export const meta: ComponentMeta<ArrayTagsProp> = {
   name: 'ArrayTags',
@@ -22,6 +16,27 @@ export const meta: ComponentMeta<ArrayTagsProp> = {
     'A Formily array field for simple string/number arrays, rendered as an editable tag input with keyboard and paste support.',
   htmlElement: 'div',
   props: defineProps<ArrayTagsProp>({
+    value: 'Controlled array value for the tag input. Usually supplied by Formily.',
+    onChange:
+      'Called with the new array of values when tags change. Usually supplied by Formily.',
+    options: 'Optional suggestion list shown while typing, as `{ label, value }[]`.',
+    freeSolo: {
+      description: 'Allow arbitrary tag values not present in `options`.',
+      type: 'boolean',
+      defaultValue: 'true',
+    },
+    label: 'Label content or accessible label for the tag input.',
+    showLabel: {
+      description: 'Hides the label element while keeping the `label` value available.',
+      type: 'boolean',
+      defaultValue: 'true',
+    },
+    slots:
+      'Per-part prop overrides for the inline input, e.g. `{ list, label, item, input, addButton, clear }`.',
+    addButtonVisibility: {
+      description: 'When the inline add button is shown.',
+      type: `'always' | 'touch' | 'never'`,
+    },
     placeholder: {
       description: 'Placeholder shown in the tag input.',
       defaultValue: `'Add items...'`,

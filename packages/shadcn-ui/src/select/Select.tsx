@@ -58,16 +58,22 @@ type BaseSelectProps = {
    * Whether to show a clear button when a value is selected
    */
   clearable?: boolean;
+  /**
+   * Controlled open state of the dropdown
+   */
+  open?: ComponentProps<typeof ShadcnSelect>['open'];
+  /**
+   * Callback function called when the open state changes
+   */
+  onOpenChange?: ComponentProps<typeof ShadcnSelect>['onOpenChange'];
 
   id?: string;
   disabled?: boolean;
   name?: string;
   required?: boolean;
+  /** Styles the visible trigger. */
   className?: string;
-} & Omit<
-  ComponentProps<typeof ShadcnSelect>,
-  'value' | 'onValueChange' | 'children' | 'disabled' | 'name' | 'required'
->;
+} & Omit<ComponentProps<typeof SelectTrigger>, 'onChange' | 'value'>;
 
 function Select(props: BaseSelectProps) {
   const {
@@ -82,9 +88,11 @@ function Select(props: BaseSelectProps) {
     position,
     clearable = false,
     disabled,
+    name,
+    required,
     className,
     id,
-    ...restProps
+    ...triggerProps
   } = props;
 
   const [uncontrolledOpen, setUncontrolledOpen] = React.useState(false);
@@ -109,14 +117,16 @@ function Select(props: BaseSelectProps) {
 
   return (
     <ShadcnSelect
-      {...restProps}
       value={value}
       open={open}
       onValueChange={onChange}
       onOpenChange={handleOpenChange}
+      name={name}
+      required={required}
     >
       <div className="relative w-full">
         <SelectTrigger
+          {...triggerProps}
           id={id}
           className={cn('w-full', className)}
           onKeyDown={handleTriggerKeyDown}

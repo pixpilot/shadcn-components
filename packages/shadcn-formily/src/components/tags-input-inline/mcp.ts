@@ -11,6 +11,13 @@ export const meta: ComponentMeta<TagsInputInLineOwnProps> = {
   htmlElement: 'div',
   props: defineProps<TagsInputInLineOwnProps>({
     label: 'Label content or accessible label for the component.',
+    showLabel: {
+      description: 'Hides the label element while keeping the `label` value available.',
+      type: 'boolean',
+      defaultValue: 'true',
+    },
+    slots:
+      'Per-part prop overrides for the inline input, e.g. `{ list, label, item, input, addButton, clear }`.',
     value: 'Controlled value for the underlying field UI. Usually supplied by Formily.',
     editable: 'Forwarded to the underlying UI component.',
     disabled:

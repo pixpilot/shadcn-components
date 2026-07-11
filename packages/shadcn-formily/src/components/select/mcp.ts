@@ -14,10 +14,15 @@ export const meta: ComponentMeta<SelectOwnProps> = {
     required: 'Marks the control as required for accessibility and UI state.',
     options: 'Options supplied directly or resolved from schema enum/dataSource.',
     placeholder: 'Placeholder text shown before a value is selected or entered.',
-    autoComplete: 'Forwarded to the underlying UI component.',
     open: 'Forwarded to the underlying UI component.',
-    defaultOpen: 'Forwarded to the underlying UI component.',
     onOpenChange: 'Forwarded to the underlying UI component.',
+    size: {
+      description: 'Controls the trigger height.',
+      type: `'sm' | 'default'`,
+      defaultValue: `'default'`,
+    },
+    asChild:
+      'Render the trigger behavior and styles through the child element instead of a native button.',
     contentProps: 'Forwarded to the underlying UI component.',
     keyboardMode: 'Forwarded to the underlying UI component.',
     position: 'Forwarded to the underlying UI component.',

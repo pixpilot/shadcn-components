@@ -3,7 +3,8 @@ import type { CommonArrayProp } from '../array-common/array-mcp-props';
 import { defineProps } from '@internal/mcp';
 import { commonArrayPropDocs, perItemStylingNote } from '../array-common/array-mcp-props';
 
-type ArrayDialogProp = CommonArrayProp | 'autoSave' | 'dialogProps';
+// `autoSave` is part of `CommonArrayProp`; this component overrides its doc below.
+type ArrayDialogProp = CommonArrayProp | 'dialogProps';
 
 export const meta: ComponentMeta<ArrayDialogProp> = {
   name: 'ArrayDialog',
