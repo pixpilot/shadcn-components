@@ -1,5 +1,14 @@
 # @pixpilot/formily-shadcn
 
+## 1.15.2
+
+### Patch Changes
+
+- a04e977: provenance release
+- Updated dependencies [a04e977]
+  - @pixpilot/shadcn@1.4.1
+  - @pixpilot/shadcn-ui@2.0.1
+
 ## 1.15.1
 
 ### Patch Changes

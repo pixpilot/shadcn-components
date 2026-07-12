@@ -1,5 +1,14 @@
 # @pixpilot/shadcn-auth
 
+## 1.0.68
+
+### Patch Changes
+
+- a04e977: provenance release
+- Updated dependencies [a04e977]
+  - @pixpilot/shadcn@1.4.1
+  - @pixpilot/shadcn-ui@2.0.1
+
 ## 1.0.67
 
 ### Patch Changes

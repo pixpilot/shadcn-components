@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 1.4.1
+
+### Patch Changes
+
+- a04e977: provenance release
+
 ## 1.4.0
 
 ### Minor Changes
