@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 1.16.0
+
+### Minor Changes
+
+- fix object container gap-y
+
 ## 1.15.2
 
 ### Patch Changes
