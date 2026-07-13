@@ -623,3 +623,49 @@ export const WithTitleChildren: Story = {
     );
   },
 };
+
+export const WithNestedObjects: Story = {
+  render: () => {
+    const form = createForm();
+    const schema: ISchema = {
+      type: 'object',
+      properties: {
+        userInfo: {
+          type: 'object',
+          title: 'User Information',
+          properties: {
+            firstName: {
+              type: 'string',
+              title: 'First Name',
+            },
+            lastName: {
+              type: 'string',
+              title: 'Last Name',
+            },
+          },
+        },
+        address: {
+          type: 'object',
+          title: 'Address',
+          properties: {
+            street: {
+              type: 'string',
+              title: 'Street',
+            },
+          },
+        },
+      },
+    };
+
+    return (
+      <JsonSchemaFormRenderer
+        form={form}
+        id="object-container-nested"
+        components={{
+          fields: defaultComponentRegistry,
+        }}
+        schema={schema}
+      ></JsonSchemaFormRenderer>
+    );
+  },
+};

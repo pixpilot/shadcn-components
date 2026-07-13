@@ -1,0 +1,83 @@
+{
+  "version": "0",
+  "stories": {
+    "formily-object-container--nested-object": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"card-content\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "IPSEhKGCsb6M",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"card-content\"]"
+                  },
+                  "id": "QIwO9nne9Akn",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "l7pvnFjIw06C",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserType": "chromium",
+          "id": "F-__LJxQt7Y9",
+          "index": 0,
+          "title": "should have correct vertical gap"
+        }
+      ]
+    },
+    "formily-object-container--with-nested-objects": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#object-container-nested"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "lrwj7ZAOQ4nQ",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#object-container-nested"
+                  },
+                  "id": "WEIUkUuQc3rF",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "1yHMgeWnhYrK",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserType": "chromium",
+          "id": "_HtBu2c6T9s3",
+          "index": 0,
+          "title": "should have correct vertical gap"
+        }
+      ]
+    }
+  }
+}

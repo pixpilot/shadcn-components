@@ -204,7 +204,7 @@ export const ObjectContainer: React.FC<ObjectContainerProps> = ({
         {...mergedContentProps}
         as={CardContent}
         className={cn(
-          'form-object-content',
+          'grid form-object-content',
           mergedContentProps.className,
           isFlat && 'px-0',
         )}
