@@ -1,0 +1,548 @@
+{
+  "version": "0",
+  "stories": {
+    "formily-dialog-item--json-schema-form": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#form-age"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "OuTi8qjZkKKq",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#storybook-root"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "RDJ0l0xkCot4",
+          "title": "takeElementScreenshot"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"dialog-content\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "O1H-1TX6XxNB",
+          "title": "take screenshot from dialog-content"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#storybook-root"
+                  },
+                  "id": "cAGai506ZEjy",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "YneVE1Tj2yk3",
+              "title": "takeElementScreenshot"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#form-age"
+                  },
+                  "id": "2P3fv1DiIE8p",
+                  "name": "click"
+                }
+              ],
+              "id": "wUBJCLuaL4iO",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"dialog-content\"]"
+                  },
+                  "id": "kBAlfJ9ABtas",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "tyVvT5cfHLM7",
+              "title": "take screenshot from dialog-content"
+            }
+          ],
+          "browserType": "chromium",
+          "id": "yz4-okX1DHaf",
+          "index": 0,
+          "title": "Should show dialog on field click"
+        }
+      ]
+    },
+    "formily-dialog-item--validation": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#form-email"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "vIAbvctnScKb",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"footer-button\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "nmOX8wEZs2LL",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"dialog-content\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "rkhdRtXALk72",
+          "title": "take screenshot from dialog content"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#form-email"
+                  },
+                  "id": "fahZTf4dWyNi",
+                  "name": "click"
+                }
+              ],
+              "id": "BVO_LNKfwk5P",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"footer-button\"]"
+                  },
+                  "id": "jZa-0Ku2y7Gh",
+                  "name": "click"
+                }
+              ],
+              "id": "qIVm0fefUNnF",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"dialog-content\"]"
+                  },
+                  "id": "MoPSLwvKdkN6",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "dAFYBGXGOuj6",
+              "title": "take screenshot from dialog content"
+            }
+          ],
+          "browserType": "chromium",
+          "id": "H-TNm9-l0Igs",
+          "index": 0,
+          "title": "should validate"
+        }
+      ]
+    },
+    "formily-dialog-item--trigger-label-from-reaction": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#form-bio"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "Z-BTs_FS6AYt",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"textarea\"]",
+                "value": "dfg"
+              },
+              "name": "fill"
+            }
+          ],
+          "id": "3lwzsV9ebNJz",
+          "title": "fill"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"footer-button\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "BlKOKDAMYksy",
+          "title": "click done"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#form-bio"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "rdxzYLgP1fnI",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#form-bio"
+                  },
+                  "id": "BDEsnhf9Hg1_",
+                  "name": "click"
+                }
+              ],
+              "id": "WUvzQKKkit34",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"textarea\"]",
+                    "value": "dfg"
+                  },
+                  "id": "j2_633Ik3TTC",
+                  "name": "fill"
+                }
+              ],
+              "id": "ldSnJpbaI1pp",
+              "title": "fill"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"footer-button\"]"
+                  },
+                  "id": "tYVzPsr4kl_h",
+                  "name": "click"
+                }
+              ],
+              "id": "WEv9K6S9oNz5",
+              "title": "click done"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#form-bio"
+                  },
+                  "id": "HUhzT7vX8Qma",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "ccfeLVHPLeM0",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserType": "chromium",
+          "id": "x_LkeodUojZq",
+          "index": 0,
+          "title": "Trigger label updates to character count after typing in bio field"
+        }
+      ]
+    },
+    "formily-dialog-item--long-form-in-dialog": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#form-profile"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "pGPzIOAUuqEx",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#form-profile"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "zFfngFPev-bQ",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"dialog-content\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "1DXxUr9cWgCo",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#form-profile"
+                  },
+                  "id": "wGrPdO9M4Vxy",
+                  "name": "click"
+                }
+              ],
+              "id": "LCWAapRktTKn",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"dialog-content\"]"
+                  },
+                  "id": "mZFg1RPAL8xZ",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "lli2Km1_jVoS",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "t9ydAyJE8FSd",
+          "browserType": "chromium",
+          "id": "cry9to3zFkoD",
+          "index": 0,
+          "title": "Long Form In Dialog - Form dialog content captured after clicking form trigger"
+        }
+      ]
+    },
+    "formily-dialog-item--submit-marks-trigger-invalid": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-testid=\"submit-button\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "rwJZFnwMKANZ",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-testid=\"dialog-item-decorator\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "F0BIvpRua8-i",
+          "title": "takeElementScreenshot"
+        }
+      ]
+    },
+    "formily-dialog-item--default-values": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#form-profile"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "qy8ctUe3MweE",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"body\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "UGcdA5ylQn-9",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#form-profile"
+                  },
+                  "id": "xONv3ARZGI5b",
+                  "name": "click"
+                }
+              ],
+              "id": "6GSoHYJvOpk3",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"body\"]"
+                  },
+                  "id": "02H0Q9tfz334",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "-oUxM-7TEID3",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "9uVrwBG9IrGb",
+          "browserType": "chromium",
+          "id": "sVEY4I1Uku2h",
+          "index": 0,
+          "title": "should have default value"
+        }
+      ]
+    },
+    "formily-dialog-item--default-values-on-single-fields": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#form-bio"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "Ry_bBV8ztLXw",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"textarea\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "Y01hNLJ15jLW",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#form-bio"
+                  },
+                  "id": "C64upmQeouc1",
+                  "name": "click"
+                }
+              ],
+              "id": "37vRxnkJf_kb",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"textarea\"]"
+                  },
+                  "id": "YBkAw7H6qT33",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "qa7U9eF8147z",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "9uVrwBG9IrGb",
+          "browserType": "chromium",
+          "id": "fI1Gezt9SfMl",
+          "index": 0,
+          "title": "should have default value"
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "t9ydAyJE8FSd": {
+      "viewport": {
+        "height": 381,
+        "width": 856
+      }
+    },
+    "9uVrwBG9IrGb": {
+      "viewport": {
+        "height": 490,
+        "width": 856
+      }
+    }
+  }
+}

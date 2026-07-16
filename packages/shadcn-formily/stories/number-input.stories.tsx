@@ -39,6 +39,7 @@ export const BasicNumberInput: Story = {
         type: 'object',
         properties: {
           age: {
+            description: 'Enter your age in years.',
             type: 'number',
             title: 'Age',
             default: 25,

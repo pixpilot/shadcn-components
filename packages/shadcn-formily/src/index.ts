@@ -31,6 +31,8 @@ export { Combobox } from './components/combobox';
 // Context and configuration types
 export * from './components/context/types';
 export { DatePicker } from './components/date-picker';
+export type { DialogItemProps } from './components/dialog-item';
+export { BaseDialogItem, DialogItem } from './components/dialog-item';
 export * from './components/file-upload';
 // Core components
 export { Form } from './components/form';
@@ -45,6 +47,8 @@ export * from './components/json-schema-form-renderer';
 
 export { NumberInput } from './components/number';
 export * from './components/object-container';
+export { BasePopoverItem, PopoverItem } from './components/popover-item';
+export type { PopoverItemProps } from './components/popover-item';
 export { ConnectedRadio, Radio } from './components/radio';
 export { Rating } from './components/rating';
 export { RichTextEditor } from './components/rich-text-editor';

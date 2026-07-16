@@ -199,6 +199,20 @@
       "id": "rmSUQckleEr8yLR",
       "title": "takeElementScreenshot",
       "visibleTo": "*"
+    },
+    {
+      "actions": [
+        {
+          "args": {
+            "selector": "[data-slot=\"footer-button\"]"
+          },
+          "id": "t-U8Py_HGb",
+          "name": "click"
+        }
+      ],
+      "id": "a0DGGpE23eBxg7q",
+      "title": "click done",
+      "visibleTo": "*"
     }
   ]
 }

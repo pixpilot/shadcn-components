@@ -1,0 +1,392 @@
+{
+  "version": "0",
+  "stories": {
+    "formily-popover-item--default-values": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#form-profile"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "AJXCz7eDvvLK",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"card\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "MSMhNUM-YHoy",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#form-profile"
+                  },
+                  "id": "DR9k5Z2Zy1f9",
+                  "name": "click"
+                }
+              ],
+              "id": "MJobXPcbc8_r",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"card\"]"
+                  },
+                  "id": "SIiRVg9a0Un_",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "REgEASQzhjc9",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "U3erlrYU7v4j",
+          "browserType": "chromium",
+          "id": "2U3jGTc52N_z",
+          "index": 0,
+          "title": "should have default value"
+        }
+      ]
+    },
+    "formily-popover-item--default-values-on-single-fields": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#form-bio"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "CliaaRClAaeV",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"textarea\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "NYEJCEK0zBF0",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#form-bio"
+                  },
+                  "id": "-idTnwLor0Ra",
+                  "name": "click"
+                }
+              ],
+              "id": "GVSuwGU6fFma",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"textarea\"]"
+                  },
+                  "id": "9MSwJjUsZSV_",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "xMWtIeIWMYhN",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "U3erlrYU7v4j",
+          "browserType": "chromium",
+          "id": "Ajf1Ui-5Xs14",
+          "index": 0,
+          "title": "should have default value"
+        }
+      ]
+    },
+    "formily-popover-item--validation": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#form-email"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "6-2gqYQvgkBN",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "x": 686,
+                "y": 97
+              },
+              "name": "mouse.click"
+            }
+          ],
+          "id": "NBCSfZPBbj8t",
+          "title": "mouse.click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"popover-content\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "Ds3Bm1Y_tb3C",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#form-email"
+                  },
+                  "id": "f_d5hNP-kvdy",
+                  "name": "click"
+                }
+              ],
+              "id": "Xrbz6Q_8k7pG",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "x": 686,
+                    "y": 97
+                  },
+                  "id": "cjjXBewGclfW",
+                  "name": "mouse.click"
+                }
+              ],
+              "id": "STldqeYRjiEN",
+              "title": "mouse.click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"popover-content\"]"
+                  },
+                  "id": "grTCq7gqITf_",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "0zqlV7b7iSKh",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "U3erlrYU7v4j",
+          "browserType": "chromium",
+          "id": "4MwS0TZ-ljI5",
+          "index": 0,
+          "title": "Validation popover shown after clicking email field"
+        }
+      ]
+    },
+    "formily-popover-item--submit-marks-trigger-invalid": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-testid=\"submit-button\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "Oqj2SHZQMVDO",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#form-email"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "9G6Hy_uzEfH6",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-testid=\"submit-button\"]"
+                  },
+                  "id": "_9m_yDdW3dGT",
+                  "name": "click"
+                }
+              ],
+              "id": "OrjfzmsR31l0",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#form-email"
+                  },
+                  "id": "iuh-67vaKFJG",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "sYDFdlLu13Bk",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "U3erlrYU7v4j",
+          "browserType": "chromium",
+          "id": "iOIeRpeNpH75",
+          "index": 0,
+          "title": "should validate on submit"
+        }
+      ]
+    },
+    "formily-popover-item--trigger-label-from-reaction": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#form-bio"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "F0fBZSx8f6-f",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"textarea\"]",
+                "value": "abc"
+              },
+              "name": "fill"
+            }
+          ],
+          "id": "Rflu4Emj5oBp",
+          "title": "fill"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#form-bio"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "Lt8UkklF3qAq",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#form-bio"
+                  },
+                  "id": "ZLfOSIKQ4WXy",
+                  "name": "click"
+                }
+              ],
+              "id": "4tWjvdMK4aKC",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"textarea\"]",
+                    "value": "abc"
+                  },
+                  "id": "uPjCVv08Yps6",
+                  "name": "fill"
+                }
+              ],
+              "id": "rN3p2JbtCMcf",
+              "title": "fill"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#form-bio"
+                  },
+                  "id": "IDq6JeWjjVod",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "QlgR_C5p4vZD",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "U3erlrYU7v4j",
+          "browserType": "chromium",
+          "id": "LzQgfN9F81tU",
+          "index": 0,
+          "title": "Trigger label shows character count after typing \"abc\""
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "U3erlrYU7v4j": {
+      "viewport": {
+        "height": 673,
+        "width": 856
+      }
+    }
+  }
+}

@@ -14,5 +14,7 @@ export default defineMcpRegistryConfig({
     'array-common',
     // React context providers/consumers — not a standalone component.
     'context',
+    // Shared overlay helpers/hooks (trigger, open state, validation) — not a standalone component.
+    'overlay-common',
   ],
 });

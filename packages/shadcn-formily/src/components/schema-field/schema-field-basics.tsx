@@ -17,6 +17,7 @@ import { ArrayToggleGroup } from '../array-toggle-group';
 import { Checkbox } from '../checkbox';
 import { Column } from '../column';
 import { DatePicker } from '../date-picker';
+import { DialogItem } from '../dialog-item';
 import { FormGrid } from '../form-grid';
 import { FormItem } from '../form-item';
 import { Hidden } from '../hidden';
@@ -24,6 +25,7 @@ import { IconToggle } from '../icon-toggle';
 import { Input } from '../input';
 import { NumberInput } from '../number';
 import { ObjectContainer } from '../object-container';
+import { PopoverItem } from '../popover-item';
 import { ConnectedRadio as Radio } from '../radio';
 import { Row } from '../row';
 import { Select } from '../select';
@@ -45,6 +47,9 @@ export const basicComponentRegistry = {
   Checkbox: { component: Checkbox, decorator: 'FormItem' },
   Column: { component: Column },
   DatePicker: { component: DatePicker, decorator: 'FormItem' },
+  // Decorators used in place of FormItem to edit a field in an overlay.
+  DialogItem: { component: DialogItem },
+  PopoverItem: { component: PopoverItem },
   FormGrid: { component: FormGrid },
   FormItem: { component: FormItem },
   Hidden: { component: Hidden },
