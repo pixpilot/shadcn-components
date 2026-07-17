@@ -1,0 +1,79 @@
+{
+  "version": "0",
+  "stories": {
+    "formily-checkbox--basic-checkbox": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"form-item-label-text\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "9BS9UhPi8JzF",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"form-item-content\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "_wCD71oxWvxP",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"form-item-label-text\"]"
+                  },
+                  "id": "ZV9Ladzl4JoX",
+                  "name": "click"
+                }
+              ],
+              "id": "nJsu1xwWLqVY",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"form-item-content\"]"
+                  },
+                  "id": "i37q5l0EMBrV",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "uYRSr5NMNxjK",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "S-zJ0Grqdb0g",
+          "browserType": "chromium",
+          "id": "iIVmxcP_Jxnh",
+          "index": 0,
+          "title": "check the checkbox when click on the label"
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "S-zJ0Grqdb0g": {
+      "viewport": {
+        "height": 673,
+        "width": 856
+      },
+      "cursor": true
+    }
+  }
+}

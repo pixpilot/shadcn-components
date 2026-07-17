@@ -109,6 +109,7 @@ export const BaseFormItem: React.FC<React.PropsWithChildren<FormItemProps>> = ({
     <FormItemLabel
       data-slot="form-item-label"
       id={getId(id, 'label')}
+      htmlFor={id}
       label={effectiveLabel}
       requiredMark={requiredMark !== undefined ? requiredMark : asterisk}
       error={feedbackStatus === 'error'}

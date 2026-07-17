@@ -7,6 +7,11 @@ import { FormItemDescriptionPopover } from './FormItemDescriptionPopover';
 
 export interface FormItemLabelProps {
   id?: string;
+  /**
+   * The id of the form control this label is associated with. Rendered as the
+   * `<label>` element's `htmlFor` so clicking the label activates the control.
+   */
+  htmlFor?: string;
   label: SyncReactNode;
   requiredMark?: boolean | ReactNode;
   /**
@@ -22,6 +27,7 @@ export interface FormItemLabelProps {
 
 export function FormItemLabel({
   id,
+  htmlFor,
   label,
   requiredMark,
   asterisk,
@@ -36,7 +42,8 @@ export function FormItemLabel({
 
   return (
     <label
-      htmlFor={id}
+      id={id}
+      htmlFor={htmlFor}
       data-slot="form-item-label"
       data-error={Boolean(error)}
       {...restLabelProps}
