@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 1.17.0
+
+### Minor Changes
+
+- add popover item stories and tests
+
 ## 1.16.0
 
 ### Minor Changes
