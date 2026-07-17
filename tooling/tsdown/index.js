@@ -28,7 +28,11 @@ export function defineConfig(options) {
     ],
     // Ensure proper treeshaking and no Node.js polyfills
     treeshake: true,
-    platform: 'browser',
+    // `neutral` keeps `process.env.NODE_ENV` intact in the output so each
+    // consumer's bundler (Next.js, Vite, etc.) can dead-code-eliminate dev-only
+    // guards in production. `browser` would inline it to "development" at our
+    // build time, making dev-only code run unconditionally in shipped bundles.
+    platform: 'neutral',
     // sourcemap: true,
     ...options,
   });

@@ -11,6 +11,7 @@
     "url": "https://github.com/pixpilot/shadcn-components.git",
     "directory": "packages/shadcn-formily"
   },
+  "sideEffects": false,
   "exports": "./src/index.ts",
   "bin": {
     "formily-shadcn-mcp": "./dist/mcp-server.js"

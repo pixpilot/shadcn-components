@@ -11,6 +11,7 @@
     "url": "https://github.com/pixpilot/shadcn-components.git",
     "directory": "packages/shadcn-ui"
   },
+  "sideEffects": false,
   "exports": "./src/index.ts",
   "bin": {
     "shadcn-ui-mcp": "./dist/mcp-server.js"

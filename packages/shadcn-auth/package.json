@@ -11,6 +11,7 @@
     "url": "https://github.com/pixpilot/shadcn-components.git",
     "directory": "packages/shadcn-auth"
   },
+  "sideEffects": false,
   "exports": "./src/index.ts",
   "files": [
     "dist"

@@ -3,10 +3,9 @@ import type { JsonSchemaFormComponents } from '../components/json-schema-form-re
 import type { FormComponentRecord } from '../types/form';
 
 import { createSchemaField } from '@formily/react';
-import { isDevelopment } from '@pixpilot/env/is-dev';
 import React from 'react';
 
-import { validateSchemaComponents } from '../utils';
+import { validateSchemaComponents, validateSchemaShape } from '../utils';
 import { extractComponents } from '../utils/extract-components';
 
 // eslint-disable-next-line ts/explicit-module-boundary-types
@@ -29,8 +28,9 @@ export function useSchemaField(
 
     // Extract component instances
     const components = extractComponents(componentConfigs);
-
-    if (isDevelopment()) {
+    // eslint-disable-next-line no-restricted-properties, node/prefer-global/process
+    if (process.env.NODE_ENV === 'development') {
+      validateSchemaShape(formSchema);
       validateSchemaComponents(formSchema, components);
     }
 

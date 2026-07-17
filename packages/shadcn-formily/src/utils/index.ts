@@ -13,3 +13,4 @@ export * from './transform-schema';
 export * from './use-array-item-editor';
 export * from './validate-array-item-fields';
 export * from './validate-schema-components';
+export * from './validate-schema-shape';
