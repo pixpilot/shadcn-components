@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 2.1.0
+
+### Minor Changes
+
+- add schema shape validation
+
 ## 2.0.1
 
 ### Patch Changes

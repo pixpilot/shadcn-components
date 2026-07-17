@@ -1,5 +1,16 @@
 # @pixpilot/shadcn-auth
 
+## 1.1.0
+
+### Minor Changes
+
+- add schema shape validation
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn-ui@2.1.0
+
 ## 1.0.68
 
 ### Patch Changes
