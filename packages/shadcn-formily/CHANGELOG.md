@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 1.18.0
+
+### Minor Changes
+
+- add `htmlFor` prop to FormItemLabel for accessibility
+
 ## 1.17.1
 
 ### Patch Changes
