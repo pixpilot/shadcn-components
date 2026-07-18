@@ -1,5 +1,11 @@
 # @pixpilot/formily-shadcn
 
+## 2.0.0
+
+### Major Changes
+
+- f2539f1: Major release after removing DialogProvider in favor of OverlayProvider.
+
 ## 1.18.1
 
 ### Patch Changes
