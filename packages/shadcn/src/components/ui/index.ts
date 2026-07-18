@@ -10,6 +10,7 @@ export * from './checkbox';
 export * from './color-picker';
 export * from './command';
 export * from './dialog';
+export * from './drawer';
 export * from './dropdown-menu';
 export * from './file-upload';
 // INTENTIONALLY NOT EXPORTED: `form`

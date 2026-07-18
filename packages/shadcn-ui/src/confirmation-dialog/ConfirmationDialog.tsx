@@ -9,7 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@pixpilot/shadcn';
-import { dialog } from '../dialog-provider';
+import { dialog } from '../dialog-registry';
 import { getId } from '../utils';
 import { variantConfig } from '../variant-config';
 
@@ -37,7 +37,7 @@ export interface ConfirmationDialogProps {
 const ConfirmationDialog = dialog.create<Partial<ConfirmationDialogProps>>((props) => {
   const { id, title = 'Confirmation Dialog', variant, showIcon = true } = props;
 
-  const modal = dialog.useDialog();
+  const modal = dialog.use();
 
   const handleConfirm = () => {
     props.onConfirm?.();

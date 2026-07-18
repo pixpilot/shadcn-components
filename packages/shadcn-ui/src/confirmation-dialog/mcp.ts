@@ -11,7 +11,7 @@ export const meta: ComponentMeta<ConfirmationDialogDocumentedProps> = {
   name: 'ConfirmationDialog',
   category: 'Overlays',
   description:
-    'A prebuilt confirm/cancel dialog with variant styling and icon, shown imperatively via the dialog helper inside a DialogProvider.',
+    'A prebuilt confirm/cancel dialog with variant styling and icon, shown imperatively via the `dialog` helper (see `registerDialog`) under an OverlayProvider.',
   props: defineProps<ConfirmationDialogDocumentedProps>({
     id: 'Optional identifier for the dialog instance used by the imperative dialog helper.',
     title: {
@@ -46,7 +46,7 @@ export const meta: ComponentMeta<ConfirmationDialogDocumentedProps> = {
     },
   }),
   notes: [
-    'Render a DialogProvider near the app root, then show this dialog imperatively via the exported `dialog` helper.',
+    'Render an OverlayProvider near the app root, then show this dialog imperatively via the exported `dialog` helper.',
   ],
   examples: [
     {
@@ -54,6 +54,6 @@ export const meta: ComponentMeta<ConfirmationDialogDocumentedProps> = {
       code: 'const ok = await dialog.show(ConfirmationDialog, { title: "Delete item?", variant: "destructive", confirmText: "Delete" });\nif (ok) deleteItem();',
     },
   ],
-  related: ['Dialog', 'DialogProvider'],
+  related: ['Dialog', 'registerDialog'],
   keywords: ['confirm', 'dialog', 'modal', 'confirmation', 'prompt'],
 };

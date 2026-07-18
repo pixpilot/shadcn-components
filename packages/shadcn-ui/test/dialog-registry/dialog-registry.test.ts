@@ -1,15 +1,7 @@
 import type { NiceModalHocProps } from '@ebay/nice-modal-react';
 import type React from 'react';
-import type { RegisteredDialogShowProps } from '../../src/dialog-provider';
-import { beforeEach, describe, expect, expectTypeOf, it, vi } from 'vitest';
-import {
-  dialog,
-  hideDialog,
-  registerDialog,
-  removeDialog,
-  showDialog,
-  unregisterDialog,
-} from '../../src/dialog-provider';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { dialog, registerDialog, showDialog } from '../../src/dialog-registry';
 
 const niceModalMocks = vi.hoisted(() => ({
   create: vi.fn((component) => component),
@@ -40,7 +32,7 @@ beforeEach(() => {
   vi.clearAllMocks();
 });
 
-describe('dialog-provider helpers', () => {
+describe('dialog-registry helpers', () => {
   it('registers a dialog and returns a controller for show, hide, and remove', async () => {
     const defaultProps = {
       message: 'Saved as default',
@@ -105,54 +97,5 @@ describe('dialog-provider helpers', () => {
     expect(niceModalMocks.hide).toHaveBeenCalledWith('registry-dialog');
     expect(niceModalMocks.remove).toHaveBeenCalledWith('registry-dialog');
     expect(niceModalMocks.unregister).toHaveBeenCalledWith('registry-dialog');
-  });
-
-  it('exposes named id-based hide, remove, and unregister helpers', async () => {
-    niceModalMocks.hide.mockResolvedValueOnce('hidden');
-
-    await expect(hideDialog<string>('named-dialog')).resolves.toBe('hidden');
-    removeDialog('named-dialog');
-    unregisterDialog('named-dialog');
-
-    expect(niceModalMocks.hide).toHaveBeenCalledWith('named-dialog');
-    expect(niceModalMocks.remove).toHaveBeenCalledWith('named-dialog');
-    expect(niceModalMocks.unregister).toHaveBeenCalledWith('named-dialog');
-  });
-
-  it('keeps registered dialog props typed and makes default props optional', () => {
-    type ShowProps = RegisteredDialogShowProps<ExampleDialogProps, { message: string }>;
-
-    expectTypeOf<ShowProps>().toMatchTypeOf<{
-      count: number;
-      id?: string;
-      defaultVisible?: boolean;
-      keepMounted?: boolean;
-      message?: string;
-      tone?: 'default' | 'warning';
-    }>();
-
-    const controller = registerDialog('typed-dialog', ExampleDialog, {
-      message: 'Default message',
-    });
-    const registryController = dialog.register('typed-registry-dialog', ExampleDialog, {
-      message: 'Default message',
-    });
-
-    expectTypeOf(controller.show).parameter(0).toMatchTypeOf<
-      | {
-          count: number;
-          message?: string;
-          tone?: 'default' | 'warning';
-        }
-      | undefined
-    >();
-    expectTypeOf(registryController.show).parameter(0).toMatchTypeOf<
-      | {
-          count: number;
-          message?: string;
-          tone?: 'default' | 'warning';
-        }
-      | undefined
-    >();
   });
 });

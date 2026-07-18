@@ -25,5 +25,8 @@ export default defineMcpRegistryConfig({
     'utils',
     // Internal command list used by combobox/select — not part of the public API.
     'command-option-list',
+    // Shared overlay-registry base used by dialog-provider and drawer-provider —
+    // internal plumbing, not a standalone component.
+    'overlay-provider',
   ],
 });

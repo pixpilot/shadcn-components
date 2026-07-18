@@ -26,7 +26,7 @@ import { meta as ConfirmationDialogMeta14 } from '../confirmation-dialog/mcp';
 import { meta as ContentCardMeta15 } from '../content-card/mcp';
 import { meta as DatePickerMeta16 } from '../date-picker/mcp';
 import { meta as DialogMeta17 } from '../dialog/mcp';
-import { meta as DialogProviderMeta18 } from '../dialog-provider/mcp';
+import { meta as DrawerMeta18 } from '../drawer/mcp';
 import { meta as FileUploadMeta19 } from '../file-upload/mcp';
 import { meta as FileUploadInlineMeta20 } from '../file-upload-inline/mcp';
 import { meta as FileUploadRootMeta21 } from '../file-upload-root/mcp';
@@ -35,21 +35,24 @@ import { meta as IconToggleMeta23 } from '../icon-toggle/mcp';
 import { meta as InputMeta24 } from '../input/mcp';
 import { meta as LayoutMeta25 } from '../layout/mcp';
 import { meta as LoadingOverlayMeta26 } from '../loading-overlay/mcp';
-import { meta as PaginationMeta27 } from '../pagination/mcp';
-import { meta as PopoverMeta28 } from '../popover/mcp';
-import { meta as RatingMeta29 } from '../rating/mcp';
-import { meta as RichTextEditorMeta30 } from '../rich-text-editor/mcp';
-import { meta as ScaledPreviewMeta31 } from '../scaled-preview/mcp';
-import { meta as SelectMeta32 } from '../select/mcp';
-import { meta as SliderMeta33 } from '../slider/mcp';
-import { meta as TabsMeta34 } from '../tabs/mcp';
-import { meta as TagsInputMeta35 } from '../tags-input/mcp';
-import { meta as ThemeModeToggleButtonMeta36 } from '../theme-toggle/mcp';
-import { meta as ThemeProviderMeta37 } from '../theme-provider/mcp';
-import { meta as ToastMeta38 } from '../toast/mcp';
-import { meta as ToggleButtonMeta39 } from '../toggle-button/mcp';
-import { meta as ToggleGroupMeta40 } from '../toggle-group/mcp';
-import { meta as TooltipMeta41 } from '../tooltip/mcp';
+import { meta as OverlayProviderMeta27 } from '../overlay-provider/mcp';
+import { meta as PaginationMeta28 } from '../pagination/mcp';
+import { meta as PopoverMeta29 } from '../popover/mcp';
+import { meta as RatingMeta30 } from '../rating/mcp';
+import { meta as registerDialogMeta31 } from '../dialog-registry/mcp';
+import { meta as registerDrawerMeta32 } from '../drawer-registry/mcp';
+import { meta as RichTextEditorMeta33 } from '../rich-text-editor/mcp';
+import { meta as ScaledPreviewMeta34 } from '../scaled-preview/mcp';
+import { meta as SelectMeta35 } from '../select/mcp';
+import { meta as SliderMeta36 } from '../slider/mcp';
+import { meta as TabsMeta37 } from '../tabs/mcp';
+import { meta as TagsInputMeta38 } from '../tags-input/mcp';
+import { meta as ThemeModeToggleButtonMeta39 } from '../theme-toggle/mcp';
+import { meta as ThemeProviderMeta40 } from '../theme-provider/mcp';
+import { meta as ToastMeta41 } from '../toast/mcp';
+import { meta as ToggleButtonMeta42 } from '../toggle-button/mcp';
+import { meta as ToggleGroupMeta43 } from '../toggle-group/mcp';
+import { meta as TooltipMeta44 } from '../tooltip/mcp';
 
 function withHtmlElementNote<
   TComponent extends { htmlElement?: string; notes?: readonly string[] },
@@ -87,7 +90,7 @@ export const mcpRegistry = {
   "ContentCard": withHtmlElementNote(ContentCardMeta15),
   "DatePicker": withHtmlElementNote(DatePickerMeta16),
   "Dialog": withHtmlElementNote(DialogMeta17),
-  "DialogProvider": withHtmlElementNote(DialogProviderMeta18),
+  "Drawer": withHtmlElementNote(DrawerMeta18),
   "FileUpload": withHtmlElementNote(FileUploadMeta19),
   "FileUploadInline": withHtmlElementNote(FileUploadInlineMeta20),
   "FileUploadRoot": withHtmlElementNote(FileUploadRootMeta21),
@@ -96,21 +99,24 @@ export const mcpRegistry = {
   "Input": withHtmlElementNote(InputMeta24),
   "Layout": withHtmlElementNote(LayoutMeta25),
   "LoadingOverlay": withHtmlElementNote(LoadingOverlayMeta26),
-  "Pagination": withHtmlElementNote(PaginationMeta27),
-  "Popover": withHtmlElementNote(PopoverMeta28),
-  "Rating": withHtmlElementNote(RatingMeta29),
-  "RichTextEditor": withHtmlElementNote(RichTextEditorMeta30),
-  "ScaledPreview": withHtmlElementNote(ScaledPreviewMeta31),
-  "Select": withHtmlElementNote(SelectMeta32),
-  "Slider": withHtmlElementNote(SliderMeta33),
-  "Tabs": withHtmlElementNote(TabsMeta34),
-  "TagsInput": withHtmlElementNote(TagsInputMeta35),
-  "ThemeModeToggleButton": withHtmlElementNote(ThemeModeToggleButtonMeta36),
-  "ThemeProvider": withHtmlElementNote(ThemeProviderMeta37),
-  "Toast": withHtmlElementNote(ToastMeta38),
-  "ToggleButton": withHtmlElementNote(ToggleButtonMeta39),
-  "ToggleGroup": withHtmlElementNote(ToggleGroupMeta40),
-  "Tooltip": withHtmlElementNote(TooltipMeta41),
+  "OverlayProvider": withHtmlElementNote(OverlayProviderMeta27),
+  "Pagination": withHtmlElementNote(PaginationMeta28),
+  "Popover": withHtmlElementNote(PopoverMeta29),
+  "Rating": withHtmlElementNote(RatingMeta30),
+  "registerDialog": withHtmlElementNote(registerDialogMeta31),
+  "registerDrawer": withHtmlElementNote(registerDrawerMeta32),
+  "RichTextEditor": withHtmlElementNote(RichTextEditorMeta33),
+  "ScaledPreview": withHtmlElementNote(ScaledPreviewMeta34),
+  "Select": withHtmlElementNote(SelectMeta35),
+  "Slider": withHtmlElementNote(SliderMeta36),
+  "Tabs": withHtmlElementNote(TabsMeta37),
+  "TagsInput": withHtmlElementNote(TagsInputMeta38),
+  "ThemeModeToggleButton": withHtmlElementNote(ThemeModeToggleButtonMeta39),
+  "ThemeProvider": withHtmlElementNote(ThemeProviderMeta40),
+  "Toast": withHtmlElementNote(ToastMeta41),
+  "ToggleButton": withHtmlElementNote(ToggleButtonMeta42),
+  "ToggleGroup": withHtmlElementNote(ToggleGroupMeta43),
+  "Tooltip": withHtmlElementNote(TooltipMeta44),
 } as const;
 
 /** Type of the generated component metadata registry. */

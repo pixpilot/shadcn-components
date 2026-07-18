@@ -10,6 +10,7 @@ import { extractComponents } from '../../utils/extract-components';
 import { ArrayCards } from '../array-cards';
 import { ArrayCollapse } from '../array-collapse';
 import { ArrayDialog } from '../array-dialog';
+import { ArrayDrawer } from '../array-drawer';
 import { ArrayInline } from '../array-inline';
 import { ArrayPopover } from '../array-popover';
 import { ArrayTags } from '../array-tags';
@@ -18,6 +19,7 @@ import { Checkbox } from '../checkbox';
 import { Column } from '../column';
 import { DatePicker } from '../date-picker';
 import { DialogItem } from '../dialog-item';
+import { DrawerItem } from '../drawer-item';
 import { FormGrid } from '../form-grid';
 import { FormItem } from '../form-item';
 import { Hidden } from '../hidden';
@@ -39,6 +41,7 @@ export const basicComponentRegistry = {
   ArrayCards: { component: ArrayCards, decorator: 'FormItem' },
   ArrayCollapse: { component: ArrayCollapse, decorator: 'FormItem' },
   ArrayDialog: { component: ArrayDialog, decorator: 'FormItem' },
+  ArrayDrawer: { component: ArrayDrawer, decorator: 'FormItem' },
   ArrayInline: { component: ArrayInline, decorator: 'FormItem' },
   ArrayPopover: { component: ArrayPopover, decorator: 'FormItem' },
   ArrayTags: { component: ArrayTags, decorator: 'FormItem' },
@@ -49,6 +52,7 @@ export const basicComponentRegistry = {
   DatePicker: { component: DatePicker, decorator: 'FormItem' },
   // Decorators used in place of FormItem to edit a field in an overlay.
   DialogItem: { component: DialogItem },
+  DrawerItem: { component: DrawerItem },
   PopoverItem: { component: PopoverItem },
   FormGrid: { component: FormGrid },
   FormItem: { component: FormItem },

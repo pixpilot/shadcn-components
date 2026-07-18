@@ -2,13 +2,13 @@ import type { Meta, StoryObj } from '@storybook/react';
 import type { ReactNode } from 'react';
 import type { ConfirmationDialogVariant } from '../src/confirmation-dialog';
 import { useState } from 'react';
+import { OverlayProvider } from '../src';
 import { Button } from '../src/button';
 import { showConfirmDialog } from '../src/confirmation-dialog';
-import { DialogProvider } from '../src/dialog-provider/DialogProvider';
 
 const meta = {
   title: 'shadcn-ui/ConfirmationDialog',
-  component: DialogProvider,
+  component: OverlayProvider,
   args: {
     children: null,
   },
@@ -18,12 +18,12 @@ const meta = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <DialogProvider>
+      <OverlayProvider>
         <Story />
-      </DialogProvider>
+      </OverlayProvider>
     ),
   ],
-} satisfies Meta<typeof DialogProvider>;
+} satisfies Meta<typeof OverlayProvider>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -144,8 +144,8 @@ export const primaryVariant: Story = {
 
 export const NestedDialogProvider: Story = {
   render: () => (
-    <DialogProvider>
+    <OverlayProvider>
       <ConfirmationDialogStory description="This story nests a second DialogProvider inside the Storybook provider to verify confirm dialogs still work in provider trees." />
-    </DialogProvider>
+    </OverlayProvider>
   ),
 };

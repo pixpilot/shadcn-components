@@ -63,6 +63,6 @@ export const meta: ComponentMeta<DialogDocumentedProps> = {
       code: '<Dialog>\n  <DialogTrigger asChild><Button>Open</Button></DialogTrigger>\n  <DialogContent>\n    <DialogHeader><DialogTitle>Edit</DialogTitle></DialogHeader>\n    <DialogBody>{form}</DialogBody>\n    <DialogFooter><DialogClose asChild><Button>Save</Button></DialogClose></DialogFooter>\n  </DialogContent>\n</Dialog>',
     },
   ],
-  related: ['ConfirmationDialog', 'DialogProvider'],
+  related: ['ConfirmationDialog', 'registerDialog'],
   keywords: ['dialog', 'modal', 'overlay', 'popup'],
 };

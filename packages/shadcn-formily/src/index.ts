@@ -13,6 +13,8 @@ export * from './components/array-collapse';
 
 export * from './components/array-dialog';
 
+export * from './components/array-drawer';
+
 export * from './components/array-inline';
 
 export * from './components/array-popover';
@@ -33,6 +35,8 @@ export * from './components/context/types';
 export { DatePicker } from './components/date-picker';
 export type { DialogItemProps } from './components/dialog-item';
 export { BaseDialogItem, DialogItem } from './components/dialog-item';
+export type { DrawerItemProps } from './components/drawer-item';
+export { BaseDrawerItem, DrawerItem } from './components/drawer-item';
 export * from './components/file-upload';
 // Core components
 export { Form } from './components/form';

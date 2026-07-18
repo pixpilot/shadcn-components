@@ -122,14 +122,14 @@
               "actions": [
                 {
                   "args": {
-                    "timeout": 500
+                    "timeout": 4000
                   },
-                  "id": "vvZCCbeBLYTf",
+                  "id": "qn12jqUvbObe",
                   "name": "waitForTimeout"
                 }
               ],
-              "id": "coqVs8wf8ijg",
-              "title": "delay 500"
+              "id": "m-xBMlS5JJkg",
+              "title": "delay 4000"
             },
             {
               "actions": [
@@ -137,17 +137,17 @@
                   "args": {
                     "selector": "#avatar-upload-div-1"
                   },
-                  "id": "TAy6BqO_yysT",
+                  "id": "YOUr-NB0R26y",
                   "name": "takeElementScreenshot"
                 }
               ],
-              "id": "KKqhWzD0BUMy",
+              "id": "gCPMXQbs31yf",
               "title": "takeElementScreenshot"
             }
           ],
           "browserOptionsId": "LSw61olDITRy",
           "browserType": "chromium",
-          "id": "rJLRDLq1UBuM",
+          "id": "lzr3YNMWc1HZ",
           "index": 0,
           "title": "Avatar upload with image displayed"
         }
@@ -181,13 +181,13 @@
           "actions": [
             {
               "args": {
-                "timeout": 500
+                "timeout": 4000
               },
               "name": "waitForTimeout"
             }
           ],
           "id": "wcwPynL5ceVF",
-          "title": "delay 500"
+          "title": "delay 4000"
         }
       ]
     }

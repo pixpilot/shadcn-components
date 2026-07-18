@@ -1,0 +1,125 @@
+{
+  "version": "0",
+  "stories": {
+    "shadcn-ui-drawer--default": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"drawer-trigger\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "n8WgbcKaaD6z",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "name": "takeScreenshot"
+            }
+          ],
+          "id": "DTF-u7IT6z6a",
+          "title": "Take screenshot"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "x": 114,
+                "y": 51
+              },
+              "name": "mouse.click"
+            }
+          ],
+          "id": "VvhePPp7dmvW",
+          "title": "mouse.click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"drawer-trigger\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "gpq6llxE_gvn",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"drawer-trigger\"]"
+                  },
+                  "id": "7uFXUa3I5Sm7",
+                  "name": "click"
+                }
+              ],
+              "id": "SMnOiXcQSRXe",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "id": "4ub1ZvG--1lF",
+                  "name": "takeScreenshot"
+                }
+              ],
+              "id": "Be6hdHE8NIUe",
+              "title": "Take screenshot"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "x": 114,
+                    "y": 51
+                  },
+                  "id": "za472gvC3hhe",
+                  "name": "mouse.click"
+                }
+              ],
+              "id": "GPldAr2kYnfg",
+              "title": "mouse.click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"drawer-trigger\"]"
+                  },
+                  "id": "oEZAwBYvDM7z",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "JXMTjMAd2jL_",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "Ma2gKRrquZ0A",
+          "browserType": "chromium",
+          "id": "SudlCVgic5z8",
+          "index": 0,
+          "title": "should show and hide drawer"
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "Ma2gKRrquZ0A": {
+      "viewport": {
+        "height": 348,
+        "width": 672
+      },
+      "cursor": true
+    }
+  }
+}
