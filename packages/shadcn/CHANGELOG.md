@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 2.0.0
+
+### Major Changes
+
+- add overlay registry and drawer support
+
 ## 1.4.1
 
 ### Patch Changes
