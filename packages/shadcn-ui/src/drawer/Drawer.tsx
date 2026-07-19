@@ -52,7 +52,7 @@ export function DrawerHeader({
   return (
     <div
       data-slot="header"
-      className={cn('flex shrink-0 flex-col gap-2.5 text-left', className)}
+      className={cn('flex shrink-0 flex-col gap-2.5', className)}
       {...props}
     />
   );

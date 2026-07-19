@@ -127,6 +127,31 @@
           ],
           "id": "rkhdRtXALk72",
           "title": "take screenshot from dialog content"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "x": 23,
+                "y": 71
+              },
+              "name": "mouse.click"
+            }
+          ],
+          "id": "L7ir9r0iF7ze",
+          "title": "click outside"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"body\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "ZAcTO-7lJwbo",
+          "title": "takeElementScreenshot"
         }
       ],
       "screenshots": [
@@ -176,6 +201,55 @@
           "id": "H-TNm9-l0Igs",
           "index": 0,
           "title": "should validate"
+        },
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#form-email"
+                  },
+                  "id": "xpihp429HPwR",
+                  "name": "click"
+                }
+              ],
+              "id": "GE8cvtTl0u07",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "x": 23,
+                    "y": 71
+                  },
+                  "id": "cDV8Dx30ZR7g",
+                  "name": "mouse.click"
+                }
+              ],
+              "id": "WNh7O_Rt0DUc",
+              "title": "click outside"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"body\"]"
+                  },
+                  "id": "xWnzwROE_op4",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "PABmvp4KwR5l",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "A0zfqPeIVfw4",
+          "browserType": "chromium",
+          "id": "BcE6GIZVlu_u",
+          "index": 1,
+          "title": "should validate before close when click outside"
         }
       ]
     },
@@ -543,6 +617,13 @@
         "height": 490,
         "width": 856
       }
+    },
+    "A0zfqPeIVfw4": {
+      "viewport": {
+        "height": 276,
+        "width": 565
+      },
+      "cursor": true
     }
   }
 }
