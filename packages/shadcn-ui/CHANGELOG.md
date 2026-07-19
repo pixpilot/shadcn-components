@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 3.1.0
+
+### Minor Changes
+
+- fix drawer spacing
+
 ## 3.0.0
 
 ### Major Changes
