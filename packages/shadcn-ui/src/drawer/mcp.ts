@@ -19,6 +19,12 @@ export const meta: ComponentMeta<DrawerDocumentedProps> = {
       type: 'boolean',
       defaultValue: 'false',
     },
+    showCloseButton: {
+      description:
+        'Render the built-in close button in the drawer content so consumers do not need to place one manually for common layouts.',
+      type: 'boolean',
+      defaultValue: 'true',
+    },
     asChild: {
       description:
         'Merge behavior and styles onto the child element instead of the default content wrapper.',
