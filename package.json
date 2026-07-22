@@ -68,6 +68,7 @@
     "lint-staged": "^16.4.0",
     "prettier": "catalog:dev",
     "rimraf": "^6.1.3",
+    "storybook-addon-playwright": "catalog:dev",
     "tsx": "^4.21.0",
     "turbo": "^2.9.6",
     "typescript": "catalog:dev",

@@ -54,7 +54,7 @@
     "react": "catalog:prod",
     "react-dom": "catalog:prod",
     "storybook": "catalog:dev",
-    "storybook-addon-playwright": "7.8.8",
+    "storybook-addon-playwright": "catalog:dev",
     "tailwindcss": "catalog:dev",
     "tailwindcss-animate": "catalog:dev",
     "tsx": "catalog:dev",

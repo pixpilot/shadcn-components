@@ -1,0 +1,145 @@
+{
+  "version": "0",
+  "stories": {
+    "shadcn-ui-input--default": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#input-div-1"
+                  },
+                  "id": "a1DefInputScr",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "s1DefInputSet",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "inputVp320",
+          "browserType": "chromium",
+          "id": "scDefInput001",
+          "index": 0,
+          "title": "Default input with placeholder"
+        }
+      ]
+    },
+    "shadcn-ui-input--with-prefix": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#input-div-1"
+                  },
+                  "id": "a1PrefixScr",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "s1PrefixSet",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "inputVp320",
+          "browserType": "chromium",
+          "id": "scPrefix0001",
+          "index": 0,
+          "title": "Input with dollar prefix"
+        }
+      ]
+    },
+    "shadcn-ui-input--with-suffix": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#input-div-1"
+                  },
+                  "id": "a1SuffixScr",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "s1SuffixSet",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "inputVp320",
+          "browserType": "chromium",
+          "id": "scSuffix0001",
+          "index": 0,
+          "title": "Input with USD suffix"
+        }
+      ]
+    },
+    "shadcn-ui-input--with-prefix-and-suffix": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#input-div-1"
+                  },
+                  "id": "a1PreSufScr",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "s1PreSufSet",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "inputVp320",
+          "browserType": "chromium",
+          "id": "scPreSuf0001",
+          "index": 0,
+          "title": "Input with prefix and suffix"
+        }
+      ]
+    },
+    "shadcn-ui-input--disabled": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#input-div-1"
+                  },
+                  "id": "a1DisabledScr",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "s1DisabledSet",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "inputVp320",
+          "browserType": "chromium",
+          "id": "scDisabled001",
+          "index": 0,
+          "title": "Disabled input with prefix and suffix"
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "inputVp320": {
+      "viewport": {
+        "height": 200,
+        "width": 480
+      },
+      "cursor": true
+    }
+  },
+  "screenshotOptions": {}
+}
