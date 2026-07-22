@@ -1,5 +1,16 @@
 # @pixpilot/formily-shadcn
 
+## 2.1.0
+
+### Minor Changes
+
+- add new drawer drag behavior prop
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn-ui@3.5.0
+
 ## 2.0.4
 
 ### Patch Changes
