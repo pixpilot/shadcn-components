@@ -8,7 +8,6 @@ export * from './get-edit-description';
 export * from './get-hidden-item-schema';
 export * from './ItemWrapper';
 export * from './ListItem';
-export * from './ShakeStyles';
 export * from './use-array-data-source';
 export * from './use-array-editor';
 export * from './use-array-item-actions';

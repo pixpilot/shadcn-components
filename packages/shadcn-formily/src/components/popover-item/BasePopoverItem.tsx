@@ -5,8 +5,9 @@ import type {
   OverlayTriggerProps,
 } from '../overlay-common';
 import { cn, Popover, PopoverContent, PopoverTrigger } from '@pixpilot/shadcn';
+import { ShakeStyles } from '@pixpilot/shadcn-ui';
+
 import React from 'react';
-import { ShakeStyles } from '../array-common';
 import { BaseFormItem } from '../form-item';
 import { OverlayFields, OverlayTrigger, useOverlay } from '../overlay-common';
 

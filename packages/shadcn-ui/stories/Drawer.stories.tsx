@@ -255,6 +255,72 @@ export const RightPanel: Story = {
 };
 
 /**
+ * A right-side drawer containing a text editor. By default vaul treats a
+ * press-and-drag on `left`/`right` drawers as a drag-to-dismiss gesture, so
+ * selecting text with the mouse pulls the whole panel across. Setting `noDrag`
+ * on the `Drawer` root (or on any part such as `DrawerBody`) renders
+ * `data-vaul-no-drag`, which lets the pointer select text without moving the
+ * drawer.
+ */
+export const NoDragRoot: Story = {
+  render: () => (
+    <Drawer direction="right" noDrag>
+      <DrawerTrigger asChild>
+        <Button variant="outline">Open Editor</Button>
+      </DrawerTrigger>
+      <DrawerContent className="sm:max-w-md">
+        <DrawerHeader>
+          <DrawerTitle>Compose note</DrawerTitle>
+          <DrawerDescription>
+            Drag-select the text below — the drawer stays put.
+          </DrawerDescription>
+        </DrawerHeader>
+        <DrawerBody>
+          <textarea
+            className="border-input focus-visible:ring-ring h-48 w-full resize-none rounded-md border bg-transparent p-3 text-sm focus-visible:ring-2 focus-visible:outline-none"
+            defaultValue="Select this text by dragging your mouse across it. Without noDrag the drawer would follow the pointer and slide away instead of letting you highlight."
+          />
+        </DrawerBody>
+        <DrawerFooter>
+          <DrawerClose asChild>
+            <Button>Save</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  ),
+};
+
+export const NoDragComponents: Story = {
+  render: () => (
+    <Drawer direction="right">
+      <DrawerTrigger asChild>
+        <Button variant="outline">Open Editor</Button>
+      </DrawerTrigger>
+      <DrawerContent className="sm:max-w-md">
+        <DrawerHeader noDrag>
+          <DrawerTitle>Compose note</DrawerTitle>
+          <DrawerDescription>
+            Drag-select the text below — the drawer stays put.
+          </DrawerDescription>
+        </DrawerHeader>
+        <DrawerBody noDrag>
+          <textarea
+            className="border-input focus-visible:ring-ring h-48 w-full resize-none rounded-md border bg-transparent p-3 text-sm focus-visible:ring-2 focus-visible:outline-none"
+            defaultValue="Select this text by dragging your mouse across it. Without noDrag the drawer would follow the pointer and slide away instead of letting you highlight."
+          />
+        </DrawerBody>
+        <DrawerFooter noDrag>
+          <DrawerClose asChild>
+            <Button>Save</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  ),
+};
+
+/**
  * A drawer with long content to demonstrate the scrollable body while the
  * header and footer stay put.
  */

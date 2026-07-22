@@ -25,6 +25,12 @@ export const meta: ComponentMeta<DrawerDocumentedProps> = {
       type: 'boolean',
       defaultValue: 'true',
     },
+    noDrag: {
+      description:
+        "Disable vaul's drag-to-dismiss for this element and everything inside it (renders `data-vaul-no-drag`). Use for text editors, sliders, or any content where a press-and-move gesture should select/interact instead of dragging the drawer. Available on every drawer part; set on the Drawer root to disable dragging for the whole drawer.",
+      type: 'boolean',
+      defaultValue: 'false',
+    },
     asChild: {
       description:
         'Merge behavior and styles onto the child element instead of the default content wrapper.',

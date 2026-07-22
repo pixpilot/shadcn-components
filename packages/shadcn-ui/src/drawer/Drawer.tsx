@@ -1,4 +1,5 @@
 import {
+  Drawer as BaseDrawer,
   DrawerClose as BaseDrawerClose,
   DrawerContent as BaseDrawerContent,
   cn,
@@ -6,18 +7,65 @@ import {
 import { XIcon } from 'lucide-react';
 import * as React from 'react';
 
+/**
+ * Shared by every drawer part so `noDrag` set on the root propagates down
+ * without threading props by hand. The root provides its `noDrag` value here;
+ * each part ORs it with its own local `noDrag` prop.
+ */
+const DrawerNoDragContext = React.createContext(false);
+
+/**
+ * Vaul decides whether a pointer-down starts a drag in its internal
+ * `shouldDrag`. For `left`/`right` drawers that check returns `true` before it
+ * ever looks at highlighted text, so selecting text inside the panel drags the
+ * whole drawer. The one escape hatch vaul honours is the `data-vaul-no-drag`
+ * attribute (matched via `.closest()`, so it also covers descendants). This
+ * helper renders that attribute when either the root context or the part's own
+ * `noDrag` prop is set, and nothing otherwise.
+ */
+function useNoDragProps(local?: boolean): { 'data-vaul-no-drag'?: '' } {
+  const inherited = React.use(DrawerNoDragContext);
+  return inherited || local ? { 'data-vaul-no-drag': '' } : {};
+}
+
+/** A drawer part that can opt out of vaul's drag-to-dismiss. */
+interface NoDragProps {
+  /**
+   * Disable vaul's drag-to-dismiss for this element and everything inside it.
+   * Useful for text editors, sliders, or any content where a press-and-move
+   * gesture should select/interact instead of dragging the drawer. Setting it
+   * on the `Drawer` root disables dragging for the entire drawer.
+   */
+  noDrag?: boolean;
+}
+
+export type DrawerProps = React.ComponentProps<typeof BaseDrawer> & NoDragProps;
+
+/**
+ * Drawer root. Wraps the vaul/Radix root and, when `noDrag` is set, disables
+ * drag-to-dismiss for the whole drawer via context.
+ */
+export function Drawer({ noDrag = false, ...props }: DrawerProps) {
+  return (
+    <DrawerNoDragContext value={noDrag}>
+      <BaseDrawer {...props} />
+    </DrawerNoDragContext>
+  );
+}
+
 export type DrawerContentProps = React.ComponentPropsWithoutRef<
   typeof BaseDrawerContent
-> & {
-  /**
-   * Detach the drawer from the viewport edges: adds a gap on every side and
-   * rounds all corners, so it reads as a floating card rather than a panel
-   * flush to the edge. Works for any `direction`. Default `true`.
-   */
-  floating?: boolean;
+> &
+  NoDragProps & {
+    /**
+     * Detach the drawer from the viewport edges: adds a gap on every side and
+     * rounds all corners, so it reads as a floating card rather than a panel
+     * flush to the edge. Works for any `direction`. Default `true`.
+     */
+    floating?: boolean;
 
-  showCloseButton?: boolean;
-};
+    showCloseButton?: boolean;
+  };
 
 /**
  * Direction-aware "floating" overrides. Each rule targets vaul's
@@ -37,10 +85,11 @@ const floatingClass = cn(
 export const DrawerContent = React.forwardRef<
   React.ElementRef<typeof BaseDrawerContent>,
   DrawerContentProps
->(({ className, floating = true, showCloseButton = true, ...props }, ref) => (
+>(({ className, floating = true, showCloseButton = true, noDrag, ...props }, ref) => (
   <BaseDrawerContent
     ref={ref}
     className={cn('min-h-0 gap-4 px-6 pb-6', floating && floatingClass, className)}
+    {...useNoDragProps(noDrag)}
     {...props}
   >
     {props.children}
@@ -61,12 +110,14 @@ DrawerContent.displayName = 'DrawerContent';
 // DrawerHeader.tsx
 export function DrawerHeader({
   className,
+  noDrag,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+}: React.HTMLAttributes<HTMLDivElement> & NoDragProps) {
   return (
     <div
       data-slot="header"
       className={cn('flex shrink-0 flex-col gap-2.5', className)}
+      {...useNoDragProps(noDrag)}
       {...props}
     />
   );
@@ -75,12 +126,14 @@ export function DrawerHeader({
 // DrawerBody.tsx
 export function DrawerBody({
   className,
+  noDrag,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+}: React.HTMLAttributes<HTMLDivElement> & NoDragProps) {
   return (
     <div
       data-slot="body"
       className={cn('min-h-0 flex-1 overflow-auto -mx-6 px-6', className)}
+      {...useNoDragProps(noDrag)}
       {...props}
     />
   );
@@ -89,12 +142,14 @@ export function DrawerBody({
 // DrawerFooter.tsx
 export function DrawerFooter({
   className,
+  noDrag,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+}: React.HTMLAttributes<HTMLDivElement> & NoDragProps) {
   return (
     <div
       data-slot="footer"
       className={cn('flex shrink-0 justify-end space-x-2', className)}
+      {...useNoDragProps(noDrag)}
       {...props}
     />
   );
@@ -102,7 +157,10 @@ export function DrawerFooter({
 
 export function DrawerClose({
   className,
+  noDrag,
   ...props
-}: React.ComponentPropsWithoutRef<typeof BaseDrawerClose>) {
-  return <BaseDrawerClose className={cn(className)} {...props} />;
+}: React.ComponentPropsWithoutRef<typeof BaseDrawerClose> & NoDragProps) {
+  return (
+    <BaseDrawerClose className={cn(className)} {...useNoDragProps(noDrag)} {...props} />
+  );
 }

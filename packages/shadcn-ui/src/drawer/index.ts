@@ -1,5 +1,6 @@
-import { Drawer, DrawerDescription, DrawerTitle, DrawerTrigger } from '@pixpilot/shadcn';
+import { DrawerDescription, DrawerTitle, DrawerTrigger } from '@pixpilot/shadcn';
 import {
+  Drawer,
   DrawerBody,
   DrawerClose,
   DrawerContent,
@@ -7,7 +8,7 @@ import {
   DrawerHeader,
 } from './Drawer';
 
-export type { DrawerContentProps } from './Drawer';
+export type { DrawerContentProps, DrawerProps } from './Drawer';
 
 export {
   Drawer,

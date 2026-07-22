@@ -43,6 +43,7 @@ export * from './rating';
 export * from './rich-text-editor';
 export * from './scaled-preview';
 export * from './select';
+export * from './shake-styles';
 export * from './slider';
 export * from './tabs';
 export * from './tags-input';

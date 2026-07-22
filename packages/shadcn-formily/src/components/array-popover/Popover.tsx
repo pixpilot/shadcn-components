@@ -5,9 +5,9 @@ import { observer } from '@formily/react';
 import { Button, cn, PopoverContent } from '@pixpilot/shadcn';
 import { XIcon } from 'lucide-react';
 import React from 'react';
+import { ShakeStyles } from '../../../../shadcn-ui/src/shake-styles/ShakeStyles';
 import { useFormContext } from '../../hooks';
 import { ArrayItemDraftFields } from '../array-common/ArrayItemDraftFields';
-import { ShakeStyles } from '../array-common/ShakeStyles';
 import { useArrayItemEditState } from '../array-common/use-array-item-edit-state';
 
 export interface ArrayItemsEditPopoverProps extends Omit<

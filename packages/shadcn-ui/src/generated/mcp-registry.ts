@@ -44,15 +44,16 @@ import { meta as registerDrawerMeta32 } from '../drawer-registry/mcp';
 import { meta as RichTextEditorMeta33 } from '../rich-text-editor/mcp';
 import { meta as ScaledPreviewMeta34 } from '../scaled-preview/mcp';
 import { meta as SelectMeta35 } from '../select/mcp';
-import { meta as SliderMeta36 } from '../slider/mcp';
-import { meta as TabsMeta37 } from '../tabs/mcp';
-import { meta as TagsInputMeta38 } from '../tags-input/mcp';
-import { meta as ThemeModeToggleButtonMeta39 } from '../theme-toggle/mcp';
-import { meta as ThemeProviderMeta40 } from '../theme-provider/mcp';
-import { meta as ToastMeta41 } from '../toast/mcp';
-import { meta as ToggleButtonMeta42 } from '../toggle-button/mcp';
-import { meta as ToggleGroupMeta43 } from '../toggle-group/mcp';
-import { meta as TooltipMeta44 } from '../tooltip/mcp';
+import { meta as ShakeStylesMeta36 } from '../shake-styles/mcp';
+import { meta as SliderMeta37 } from '../slider/mcp';
+import { meta as TabsMeta38 } from '../tabs/mcp';
+import { meta as TagsInputMeta39 } from '../tags-input/mcp';
+import { meta as ThemeModeToggleButtonMeta40 } from '../theme-toggle/mcp';
+import { meta as ThemeProviderMeta41 } from '../theme-provider/mcp';
+import { meta as ToastMeta42 } from '../toast/mcp';
+import { meta as ToggleButtonMeta43 } from '../toggle-button/mcp';
+import { meta as ToggleGroupMeta44 } from '../toggle-group/mcp';
+import { meta as TooltipMeta45 } from '../tooltip/mcp';
 
 function withHtmlElementNote<
   TComponent extends { htmlElement?: string; notes?: readonly string[] },
@@ -108,15 +109,16 @@ export const mcpRegistry = {
   "RichTextEditor": withHtmlElementNote(RichTextEditorMeta33),
   "ScaledPreview": withHtmlElementNote(ScaledPreviewMeta34),
   "Select": withHtmlElementNote(SelectMeta35),
-  "Slider": withHtmlElementNote(SliderMeta36),
-  "Tabs": withHtmlElementNote(TabsMeta37),
-  "TagsInput": withHtmlElementNote(TagsInputMeta38),
-  "ThemeModeToggleButton": withHtmlElementNote(ThemeModeToggleButtonMeta39),
-  "ThemeProvider": withHtmlElementNote(ThemeProviderMeta40),
-  "Toast": withHtmlElementNote(ToastMeta41),
-  "ToggleButton": withHtmlElementNote(ToggleButtonMeta42),
-  "ToggleGroup": withHtmlElementNote(ToggleGroupMeta43),
-  "Tooltip": withHtmlElementNote(TooltipMeta44),
+  "ShakeStyles": withHtmlElementNote(ShakeStylesMeta36),
+  "Slider": withHtmlElementNote(SliderMeta37),
+  "Tabs": withHtmlElementNote(TabsMeta38),
+  "TagsInput": withHtmlElementNote(TagsInputMeta39),
+  "ThemeModeToggleButton": withHtmlElementNote(ThemeModeToggleButtonMeta40),
+  "ThemeProvider": withHtmlElementNote(ThemeProviderMeta41),
+  "Toast": withHtmlElementNote(ToastMeta42),
+  "ToggleButton": withHtmlElementNote(ToggleButtonMeta43),
+  "ToggleGroup": withHtmlElementNote(ToggleGroupMeta44),
+  "Tooltip": withHtmlElementNote(TooltipMeta45),
 } as const;
 
 /** Type of the generated component metadata registry. */

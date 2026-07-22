@@ -17,9 +17,9 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
+  ShakeStyles,
 } from '@pixpilot/shadcn-ui';
 import React from 'react';
-import { ShakeStyles } from '../array-common';
 import { BaseFormItem } from '../form-item';
 import { OverlayFields, OverlayTrigger, useOverlay } from '../overlay-common';
 
