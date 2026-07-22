@@ -59,6 +59,7 @@ export const meta: ComponentMeta<RichTextEditorDocumentedProps> = {
       type: 'boolean',
       defaultValue: 'false',
     },
+    className: 'CSS class for the root element.',
   }),
   dependencies: [
     { name: '@tiptap/react', type: 'peer' },

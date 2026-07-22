@@ -115,6 +115,8 @@ export interface RichTextEditorProps {
    * @default false
    */
   openOnClick?: boolean;
+
+  className?: string;
 }
 
 const defaultExtensions: Extension[] = [];
@@ -225,6 +227,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   placeholder,
   allowLinkTarget = false,
   openOnClick = false,
+  className,
 }) => {
   // TipTap editor state (selection/active marks) changes without React re-rendering.
   // Force a re-render on selection/transaction updates so toolbar buttons
@@ -322,6 +325,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
       className={cn(
         'flex flex-col overflow-hidden border rounded-md bg-background',
         slots?.root?.className,
+        className,
       )}
     >
       <RichTextEditorToolbar
