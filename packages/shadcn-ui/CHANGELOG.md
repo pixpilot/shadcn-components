@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 3.5.0
+
+### Minor Changes
+
+- add optional className prop for customization
+
 ## 3.4.0
 
 ### Minor Changes
