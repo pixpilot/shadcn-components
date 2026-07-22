@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 3.4.0
+
+### Minor Changes
+
+- enhance editor layout for constrained height
+
 ## 3.3.0
 
 ### Minor Changes
