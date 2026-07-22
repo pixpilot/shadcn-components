@@ -1,5 +1,16 @@
 # @pixpilot/formily-shadcn
 
+## 2.2.0
+
+### Minor Changes
+
+- add support for custom TipTap extensions
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn-ui@3.6.0
+
 ## 2.1.1
 
 ### Patch Changes

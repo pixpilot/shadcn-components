@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 3.6.0
+
+### Minor Changes
+
+- add support for custom TipTap extensions
+
 ## 3.5.1
 
 ### Patch Changes
