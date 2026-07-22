@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 3.2.0
+
+### Minor Changes
+
+- add close button to drawer content
+
 ## 3.1.0
 
 ### Minor Changes
