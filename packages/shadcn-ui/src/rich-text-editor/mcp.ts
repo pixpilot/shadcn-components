@@ -34,7 +34,8 @@ export const meta: ComponentMeta<RichTextEditorDocumentedProps> = {
     },
     toolbarItems:
       'Explicit toolbar items: predefined command strings, "|" separators, or custom button objects.',
-    extensions: 'Additional TipTap extensions to add to the editor.',
+    extensions:
+      'Additional TipTap extensions appended to the built-in ones (StarterKit, Link, TextAlign, Placeholder). Accepts any TipTap Extension, Node, or Mark — official packages or your own custom ones. See the "Add a custom extension" example.',
     editorProps: 'Custom TipTap editorProps merged into the defaults.',
     slots:
       'Class overrides for the root, toolbar (and its buttons/separators), and content area.',
@@ -73,6 +74,46 @@ export const meta: ComponentMeta<RichTextEditorDocumentedProps> = {
     {
       title: 'Custom toolbar',
       code: '<RichTextEditor value={html} onChange={setHtml} toolbarItems={["bold", "italic", "|", "bulletList"]} />',
+    },
+    {
+      title: 'Add an official extension',
+      code: `// npm i @tiptap/extension-highlight
+import Highlight from '@tiptap/extension-highlight';
+
+// Extensions are appended to the built-in ones (StarterKit, Link, TextAlign, Placeholder).
+<RichTextEditor value={html} onChange={setHtml} extensions={[Highlight]} />`,
+    },
+    {
+      title: 'Add a custom extension (Mark/Node/Extension) with a toolbar button',
+      code: `import { Mark, mergeAttributes } from '@tiptap/core';
+
+// Any Mark.create / Node.create / Extension.create result can be passed to \`extensions\`.
+const Highlight = Mark.create({
+  name: 'highlight',
+  parseHTML() {
+    return [{ tag: 'mark' }];
+  },
+  renderHTML({ HTMLAttributes }) {
+    return ['mark', mergeAttributes(HTMLAttributes), 0];
+  },
+});
+
+<RichTextEditor
+  value={html}
+  onChange={setHtml}
+  extensions={[Highlight]}
+  toolbarItems={[
+    'bold',
+    'italic',
+    '|',
+    {
+      icon: '🖍️',
+      tooltip: 'Highlight',
+      onClick: (editor) => editor.chain().focus().toggleMark('highlight').run(),
+      isActive: (editor) => editor.isActive('highlight'),
+    },
+  ]}
+/>`,
     },
   ],
   keywords: ['rich text', 'editor', 'wysiwyg', 'tiptap', 'html', 'form'],

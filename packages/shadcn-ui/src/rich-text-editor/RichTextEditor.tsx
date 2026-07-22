@@ -1,4 +1,4 @@
-import type { Editor, EditorEvents, Extension } from '@tiptap/core';
+import type { Editor, EditorEvents, Extensions } from '@tiptap/core';
 import type { UseEditorOptions } from '@tiptap/react';
 import type { ToolbarButtonTooltipMode } from './ToolbarButton';
 import { cn } from '@pixpilot/shadcn';
@@ -51,9 +51,12 @@ export interface RichTextEditorProps {
    */
   onChange?: (content: string) => void;
   /**
-   * Additional extensions to add to the editor
+   * Additional TipTap extensions to add to the editor. These are appended to
+   * the built-in extensions (StarterKit, Link, TextAlign, Placeholder), so you
+   * can plug in any TipTap `Extension`, `Node`, or `Mark` — official packages
+   * (e.g. `@tiptap/extension-highlight`) or your own custom ones.
    */
-  extensions?: Extension[];
+  extensions?: Extensions;
   /**
    * Whether the editor is editable
    * @default true
@@ -119,7 +122,7 @@ export interface RichTextEditorProps {
   className?: string;
 }
 
-const defaultExtensions: Extension[] = [];
+const defaultExtensions: Extensions = [];
 
 const defaultToolbarItems: ToolbarItems[] = [
   'bold',
@@ -244,7 +247,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   }, []);
 
   const memoizedExtensions = React.useMemo(() => {
-    const baseExtensions = [
+    const baseExtensions: Extensions = [
       StarterKit,
       Link.configure({
         openOnClick,
@@ -254,9 +257,9 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
         },
       }),
       TextAlign.configure({ types: ['heading', 'paragraph'] }),
-    ] as Extension[];
+    ];
     if (placeholder != null) {
-      baseExtensions.push(Placeholder.configure({ placeholder }) as Extension);
+      baseExtensions.push(Placeholder.configure({ placeholder }));
     }
     return baseExtensions.concat(extensions);
   }, [extensions, placeholder, openOnClick]);
@@ -338,7 +341,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
         allowLinkTarget={allowLinkTarget}
       />
       <div className="flex-1 min-h-0 overflow-y-auto">
-        <EditorContent editor={editorInstance} />
+        <EditorContent editor={editorInstance} data-slot="editor-content" />
       </div>
     </div>
   );

@@ -1241,4 +1241,72 @@ describe('transformSchema', () => {
       ).toBeUndefined();
     });
   });
+
+  describe('x-component-props preservation', () => {
+    // A plain JSON clone silently drops functions and class instances. These
+    // are common in x-component-props (e.g. RichTextEditor toolbar `onClick`
+    // handlers and TipTap `extensions`), so they must survive the transform.
+    it('should preserve function values inside x-component-props', () => {
+      const onClick = vi.fn();
+      const schema: ISchema = {
+        type: 'object',
+        properties: {
+          richText: {
+            type: 'string',
+            'x-component': 'RichTextEditor',
+            'x-component-props': {
+              toolbarItems: ['bold', { icon: '🖍️', tooltip: 'Highlight', onClick }],
+            },
+          },
+        },
+      };
+
+      const transformedSchema = transformSchema(schema);
+      const props = (transformedSchema.properties as any).richText['x-component-props'];
+      expect(props.toolbarItems[1].onClick).toBe(onClick);
+      expect(typeof props.toolbarItems[1].onClick).toBe('function');
+    });
+
+    it('should preserve class instances inside x-component-props by reference', () => {
+      class FakeExtension {
+        name = 'highlight';
+        renderHTML() {
+          return ['mark', 0];
+        }
+      }
+      const extension = new FakeExtension();
+      const schema: ISchema = {
+        type: 'object',
+        properties: {
+          richText: {
+            type: 'string',
+            'x-component': 'RichTextEditor',
+            'x-component-props': {
+              extensions: [extension],
+            },
+          },
+        },
+      };
+
+      const transformedSchema = transformSchema(schema);
+      const props = (transformedSchema.properties as any).richText['x-component-props'];
+      // Same reference, so prototype methods (renderHTML) are intact.
+      expect(props.extensions[0]).toBe(extension);
+      expect(typeof props.extensions[0].renderHTML).toBe('function');
+    });
+
+    it('should not mutate the input schema', () => {
+      const schema: ISchema = {
+        type: 'object',
+        properties: {
+          name: { type: 'string', title: 'Name' },
+        },
+      };
+
+      const transformedSchema = transformSchema(schema);
+      // Input untouched, output enriched.
+      expect((schema.properties as any).name['x-component']).toBeUndefined();
+      expect((transformedSchema.properties as any).name['x-component']).toBe('Input');
+    });
+  });
 });

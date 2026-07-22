@@ -15,7 +15,8 @@ export const meta: ComponentMeta<RichTextEditorOwnProps> = {
     editable: 'Forwarded to the underlying UI component.',
     editorProps: 'Forwarded to the underlying UI component.',
     immediatelyRender: 'Forwarded to the underlying UI component.',
-    extensions: 'Forwarded to the underlying UI component.',
+    extensions:
+      'Additional TipTap extensions forwarded to the underlying UI component, appended to the built-in ones (StarterKit, Link, TextAlign, Placeholder). Accepts any TipTap Extension, Node, or Mark. In schema forms pass them via `x-component-props.extensions`. See the "Add a custom extension" example.',
     slots: 'Slot props for customizing internal rendered parts.',
     showToolbar: 'Forwarded to the underlying UI component.',
     toolbarItems: 'Forwarded to the underlying UI component.',
@@ -42,6 +43,48 @@ export const meta: ComponentMeta<RichTextEditorOwnProps> = {
     },
   },
 }`,
+    },
+    {
+      title: 'Add a custom extension via x-component-props',
+      code: `import { Mark, mergeAttributes } from '@tiptap/core';
+
+// Any Mark.create / Node.create / Extension.create result (or an official
+// package like @tiptap/extension-highlight) can be passed to \`extensions\`.
+const Highlight = Mark.create({
+  name: 'highlight',
+  parseHTML() {
+    return [{ tag: 'mark' }];
+  },
+  renderHTML({ HTMLAttributes }) {
+    return ['mark', mergeAttributes(HTMLAttributes), 0];
+  },
+});
+
+const schema = {
+  type: 'object',
+  properties: {
+    richText: {
+      type: 'string',
+      title: 'Rich Text Editor',
+      'x-decorator': 'FormItem',
+      'x-component': 'RichTextEditor',
+      'x-component-props': {
+        extensions: [Highlight],
+        toolbarItems: [
+          'bold',
+          'italic',
+          '|',
+          {
+            icon: '🖍️',
+            tooltip: 'Highlight',
+            onClick: (editor) => editor.chain().focus().toggleMark('highlight').run(),
+            isActive: (editor) => editor.isActive('highlight'),
+          },
+        ],
+      },
+    },
+  },
+};`,
     },
   ],
   keywords: ['formily', 'rich text', 'editor', 'html'],

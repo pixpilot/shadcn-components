@@ -35,6 +35,41 @@ const inputSchemaMap: InputSchemaMap = {
   },
 };
 
+/**
+ * Deep-clone the plain-object/array structure of a schema while keeping any
+ * non-plain values (functions, class instances such as TipTap extensions,
+ * Dates, etc.) by reference.
+ *
+ * A plain `JSON.parse(JSON.stringify(...))` clone silently drops function
+ * values, which breaks `x-component-props` that carry callbacks (e.g. custom
+ * toolbar `onClick` handlers) or class instances (e.g. TipTap `extensions`,
+ * whose `parseHTML`/`renderHTML` methods would be stripped). This clone only
+ * copies plain objects and arrays — the parts `transformSchema` actually
+ * mutates — and leaves everything else untouched.
+ */
+function cloneSchemaPreservingRefs<T>(value: T): T {
+  if (Array.isArray(value)) {
+    return (value as unknown[]).map((item) => cloneSchemaPreservingRefs(item)) as T;
+  }
+
+  if (value !== null && typeof value === 'object') {
+    const proto = Object.getPrototypeOf(value) as object | null;
+    // Only deep-clone plain objects. Class instances, Dates, etc. keep their
+    // reference so their methods/prototype survive.
+    if (proto === Object.prototype || proto === null) {
+      const source = value as Record<string, unknown>;
+      const out: Record<string, unknown> = {};
+      for (const key of Object.keys(source)) {
+        out[key] = cloneSchemaPreservingRefs(source[key]);
+      }
+      return out as T;
+    }
+  }
+
+  // Primitives, functions and non-plain objects are returned as-is.
+  return value;
+}
+
 export function transformSchema(
   schema: ISchema,
   fieldsDecorators?: Record<string, string | undefined>,
@@ -42,13 +77,11 @@ export function transformSchema(
   // IMPORTANT: don't mutate the input schema in-place.
   // In Next.js dev (React StrictMode) components may render more than once,
   // and mutating shared schema objects can cause server/client markup to diverge.
-  let normalizedSchema: ISchema;
-  try {
-    normalizedSchema = JSON.parse(JSON.stringify(schema)) as ISchema;
-  } catch {
-    // Fallback to JSON clone if structuredClone fails (e.g., due to functions)
-    normalizedSchema = JSON.parse(JSON.stringify(schema)) as ISchema;
-  }
+  //
+  // We clone the plain schema structure but preserve functions and class
+  // instances (e.g. `x-component-props.extensions` TipTap marks/nodes and
+  // toolbar `onClick` handlers) by reference — a JSON clone would strip them.
+  const normalizedSchema = cloneSchemaPreservingRefs(schema);
   traverse(
     normalizedSchema,
     { allKeys: true },

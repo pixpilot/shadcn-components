@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import type { Editor } from '@tiptap/core';
+import { Mark, mergeAttributes } from '@tiptap/core';
 import { useState } from 'react';
 import { RichTextEditor } from '../src/rich-text-editor/RichTextEditor';
 
@@ -179,6 +181,52 @@ export const ConstrainedHeight: Story = {
       >
         <RichTextEditor value={longContent} slots={{ root: { className: 'h-full' } }} />
       </div>
+    );
+  },
+};
+
+/**
+ * You can extend the editor with any TipTap `Extension`, `Node`, or `Mark`
+ * through the `extensions` prop. They are appended to the built-in extensions
+ * (StarterKit, Link, TextAlign, Placeholder).
+ *
+ * This example defines a custom `highlight` mark inline (no extra dependency)
+ * that wraps the selection in a `<mark>` element, and wires it to a custom
+ * toolbar button. In real projects you can pass official packages the same way,
+ * e.g. `extensions={[Highlight, Image]}` from `@tiptap/extension-highlight` and
+ * `@tiptap/extension-image`.
+ */
+export const WithCustomExtension: Story = {
+  render: function CustomExtensionEditor() {
+    // A minimal custom mark. Anything created with TipTap's `Mark.create`,
+    // `Node.create`, or `Extension.create` can be passed to `extensions`.
+    const Highlight = Mark.create({
+      name: 'highlight',
+      parseHTML() {
+        return [{ tag: 'mark' }];
+      },
+      renderHTML({ HTMLAttributes }) {
+        return ['mark', mergeAttributes(HTMLAttributes), 0];
+      },
+    });
+
+    return (
+      <RichTextEditor
+        value="<p>Select some text and press the highlighter button.</p>"
+        extensions={[Highlight]}
+        toolbarItems={[
+          'bold',
+          'italic',
+          '|',
+          {
+            icon: '🖍️',
+            tooltip: 'Highlight',
+            onClick: (editor: Editor) =>
+              editor.chain().focus().toggleMark('highlight').run(),
+            isActive: (editor: Editor) => editor.isActive('highlight'),
+          },
+        ]}
+      />
     );
   },
 };

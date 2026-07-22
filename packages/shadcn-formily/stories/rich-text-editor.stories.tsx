@@ -5,7 +5,9 @@
 /* eslint-disable no-magic-numbers */
 /* eslint-disable no-console */
 import type { Meta, StoryObj } from '@storybook/react';
+import type { Editor } from '@tiptap/core';
 import type { ISchema } from '../src';
+import { Mark, mergeAttributes } from '@tiptap/core';
 import {
   createForm,
   defaultComponentRegistry,
@@ -594,6 +596,179 @@ export const WithInitialValue: Story = {
             RichTextEditor: {
               component: RichTextEditor,
             },
+          },
+        }}
+        onSubmit={(values) => {
+          alert(JSON.stringify(values, null, 2));
+        }}
+      ></JsonSchemaFormRenderer>
+    );
+  },
+};
+
+/**
+ * Story demonstrating how to add a custom TipTap extension.
+ *
+ * Any TipTap `Extension`, `Node`, or `Mark` can be added through the
+ * `extensions` prop (here via `x-component-props.extensions`). They are appended
+ * to the built-in extensions (StarterKit, Link, TextAlign, Placeholder).
+ *
+ * This example defines a custom `highlight` mark inline (no extra dependency)
+ * that wraps the selection in a `<mark>` element, and wires it to a custom
+ * toolbar button. In real projects you can pass official packages the same way,
+ * e.g. `extensions: [Highlight]` from `@tiptap/extension-highlight`.
+ */
+export const WithCustomExtension: Story = {
+  parameters: {
+    controls: { disable: true },
+    actions: { disable: true },
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
+  args: {},
+  render: () => {
+    const form = createForm();
+
+    // A minimal custom mark. Anything created with TipTap's `Mark.create`,
+    // `Node.create`, or `Extension.create` can be passed to `extensions`.
+    const Highlight = Mark.create({
+      name: 'highlight',
+      parseHTML() {
+        return [{ tag: 'mark' }];
+      },
+      renderHTML({ HTMLAttributes }) {
+        return ['mark', mergeAttributes(HTMLAttributes), 0];
+      },
+    });
+
+    const schema: ISchema = {
+      type: 'object',
+      properties: {
+        richText: {
+          type: 'string',
+          title: 'Rich Text Editor with Custom Extension',
+          'x-decorator': 'FormItem',
+          'x-component': 'RichTextEditor',
+          'x-component-props': {
+            extensions: [Highlight],
+            toolbarItems: [
+              'bold',
+              'italic',
+              '|',
+              {
+                icon: <span data-testid="highlight-icon">🖍️</span>,
+                tooltip: 'Highlight',
+                onClick: (editor: Editor) =>
+                  editor.chain().focus().toggleMark('highlight').run(),
+                isActive: (editor: Editor) => editor.isActive('highlight'),
+              },
+            ],
+          },
+        },
+      },
+    };
+
+    return (
+      <JsonSchemaFormRenderer
+        form={form}
+        schema={schema}
+        components={{
+          fields: {
+            ...defaultComponentRegistry,
+            RichTextEditor: {
+              component: RichTextEditor,
+            },
+          },
+        }}
+        onSubmit={(values) => {
+          alert(JSON.stringify(values, null, 2));
+        }}
+      ></JsonSchemaFormRenderer>
+    );
+  },
+};
+
+/**
+ * Story demonstrating a custom extension configured at the form settings level.
+ *
+ * Because `settings.richTextEditor` accepts the full `RichTextEditorProps`, you
+ * can register extensions (and their toolbar buttons) once and they apply to
+ * every RichTextEditor in the form. Field-level `x-component-props` still
+ * override these defaults.
+ */
+export const WithCustomExtensionInFormSettings: Story = {
+  parameters: {
+    controls: { disable: true },
+    actions: { disable: true },
+    docs: {
+      source: {
+        type: 'code',
+      },
+    },
+  },
+  args: {},
+  render: () => {
+    const form = createForm();
+
+    // Defined once, applied to every RichTextEditor in the form via settings.
+    const Highlight = Mark.create({
+      name: 'highlight',
+      parseHTML() {
+        return [{ tag: 'mark' }];
+      },
+      renderHTML({ HTMLAttributes }) {
+        return ['mark', mergeAttributes(HTMLAttributes), 0];
+      },
+    });
+
+    const schema: ISchema = {
+      type: 'object',
+      properties: {
+        richText1: {
+          type: 'string',
+          title: 'First Editor',
+          'x-decorator': 'FormItem',
+          'x-component': 'RichTextEditor',
+        },
+        richText2: {
+          type: 'string',
+          title: 'Second Editor (Same Extension)',
+          'x-decorator': 'FormItem',
+          'x-component': 'RichTextEditor',
+        },
+      },
+    };
+
+    return (
+      <JsonSchemaFormRenderer
+        form={form}
+        schema={schema}
+        components={{
+          fields: {
+            ...defaultComponentRegistry,
+            RichTextEditor: {
+              component: RichTextEditor,
+            },
+          },
+        }}
+        settings={{
+          richTextEditor: {
+            extensions: [Highlight],
+            toolbarItems: [
+              'bold',
+              'italic',
+              '|',
+              {
+                icon: '🖍️',
+                tooltip: 'Highlight',
+                onClick: (editor: Editor) =>
+                  editor.chain().focus().toggleMark('highlight').run(),
+                isActive: (editor: Editor) => editor.isActive('highlight'),
+              },
+            ],
           },
         }}
         onSubmit={(values) => {

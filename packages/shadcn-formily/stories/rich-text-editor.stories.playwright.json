@@ -68,6 +68,71 @@
           "title": "should not have link target radio buttons"
         }
       ]
+    },
+    "formily-richtexteditor--with-custom-extension": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-testid=\"highlight-icon\"]"
+                  },
+                  "id": "0sjPqEKCW8GQ",
+                  "name": "click"
+                }
+              ],
+              "id": "Gp8LPNZHJGyR",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"editor-content\"]"
+                  },
+                  "id": "Z2HzLa8Ej7G1",
+                  "name": "click"
+                }
+              ],
+              "id": "xJaqpU3EJd6t",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "text": "ABC"
+                  },
+                  "id": "GfIFdiIz6wg6",
+                  "name": "keyboard.insertText"
+                }
+              ],
+              "id": "i2cnOU8VyfT9",
+              "title": "keyboard.insertText"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"form-item\"]"
+                  },
+                  "id": "UiIOmYdlubxI",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "vB3W25A-zaYL",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "rHlMLwuDWfxT",
+          "browserType": "chromium",
+          "id": "UVdr2Qtayqsb",
+          "index": 0,
+          "title": "should use custom extention"
+        }
+      ]
     }
   },
   "browserOptions": {
@@ -75,6 +140,13 @@
       "viewport": {
         "height": 368,
         "width": 657
+      },
+      "cursor": true
+    },
+    "rHlMLwuDWfxT": {
+      "viewport": {
+        "height": 502,
+        "width": 716
       },
       "cursor": true
     }
