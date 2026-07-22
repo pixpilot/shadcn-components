@@ -50,11 +50,11 @@
                   "args": {
                     "selector": "#form-email"
                   },
-                  "id": "ERn9HsfmTq-5",
+                  "id": "Mt5CkWHU4G8J",
                   "name": "click"
                 }
               ],
-              "id": "azXS_H-XxAVR",
+              "id": "84xbXOImarIm",
               "title": "click fild"
             },
             {
@@ -64,11 +64,11 @@
                     "x": 41,
                     "y": 155
                   },
-                  "id": "SzlfAfnDRRup",
+                  "id": "cIYznNqVaHyX",
                   "name": "mouse.click"
                 }
               ],
-              "id": "PYaPXzLWZIO_",
+              "id": "MpUygvwKNtOF",
               "title": "mouse.click"
             },
             {
@@ -77,17 +77,17 @@
                   "args": {
                     "selector": "[data-slot=\"body\"]"
                   },
-                  "id": "pi8wXpbPo4dp",
+                  "id": "u5y1cE2ZDCsW",
                   "name": "takeElementScreenshot"
                 }
               ],
-              "id": "sjtZ4rWayM8x",
+              "id": "KsZDI6HN_hYD",
               "title": "takeElementScreenshot"
             }
           ],
-          "browserOptionsId": "fEbbHv-g3PIg",
+          "browserOptionsId": "-uJQMFDLYcjo",
           "browserType": "chromium",
-          "id": "wXj3O7WBZIck",
+          "id": "PxHSDuikPRUT",
           "index": 0,
           "title": "should validate when click outside drawer"
         }
@@ -99,6 +99,13 @@
       "viewport": {
         "height": 276,
         "width": 565
+      },
+      "cursor": true
+    },
+    "-uJQMFDLYcjo": {
+      "viewport": {
+        "height": 295,
+        "width": 716
       },
       "cursor": true
     }
