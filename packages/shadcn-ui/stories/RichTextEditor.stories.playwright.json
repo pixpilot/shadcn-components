@@ -357,6 +357,18 @@
           "title": "should remove link"
         }
       ]
+    },
+    "shadcn-ui-richtexteditor--constrained-height": {
+      "screenshots": [
+        {
+          "browserOptionsId": "0GQdYjULzBG6",
+          "browserType": "chromium",
+          "id": "RVzM5Yr9jRI0",
+          "index": 0,
+          "screenshotOptionsId": "pY3ptN5T6Wj-",
+          "title": "Should have content scrollbar on large content"
+        }
+      ]
     }
   },
   "browserOptions": {
@@ -366,6 +378,12 @@
         "width": 836
       },
       "cursor": true
+    },
+    "0GQdYjULzBG6": {
+      "viewport": {
+        "height": 502,
+        "width": 716
+      }
     }
   },
   "screenshotOptions": {
@@ -375,6 +393,14 @@
         "width": 87,
         "x": 15,
         "y": 63
+      }
+    },
+    "pY3ptN5T6Wj-": {
+      "clip": {
+        "height": 431,
+        "width": 52,
+        "x": 650,
+        "y": 2
       }
     }
   }

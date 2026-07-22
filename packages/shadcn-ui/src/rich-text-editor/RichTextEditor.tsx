@@ -291,18 +291,23 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
 
   if (editorInstance == null) {
     return (
-      <div className={cn('border rounded-md bg-background', slots?.root?.className)}>
+      <div
+        className={cn(
+          'flex flex-col overflow-hidden border rounded-md bg-background',
+          slots?.root?.className,
+        )}
+      >
         {showToolbar && (
           <div
             className={cn(
-              'flex flex-wrap items-center gap-1 border-b p-2 h-10',
+              'flex flex-wrap items-center gap-1 border-b p-2 h-10 shrink-0',
               slots?.toolbar?.className,
             )}
           />
         )}
         <div
           className={cn(
-            'min-h-[200px] p-4 text-sm leading-relaxed',
+            'flex-1 overflow-y-auto min-h-[200px] p-4 text-sm leading-relaxed',
             slots?.content?.className,
           )}
         >
@@ -313,7 +318,12 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   }
 
   return (
-    <div className={cn('border rounded-md bg-background', slots?.root?.className)}>
+    <div
+      className={cn(
+        'flex flex-col overflow-hidden border rounded-md bg-background',
+        slots?.root?.className,
+      )}
+    >
       <RichTextEditorToolbar
         editor={editorInstance}
         toolbarItems={toolbarItems}
@@ -323,7 +333,9 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
         tooltipMode={tooltipMode}
         allowLinkTarget={allowLinkTarget}
       />
-      <EditorContent editor={editorInstance} />
+      <div className="flex-1 min-h-0 overflow-y-auto">
+        <EditorContent editor={editorInstance} />
+      </div>
     </div>
   );
 };

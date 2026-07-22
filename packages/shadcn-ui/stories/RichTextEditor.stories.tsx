@@ -156,6 +156,34 @@ export const WithPlaceholder: Story = {
 };
 
 /**
+ * When placed inside a fixed-height container, the editor keeps the toolbar
+ * pinned to the top and scrolls the content area internally instead of letting
+ * the whole editor overflow its parent.
+ *
+ * This works automatically: give the editor a bounded height (here via
+ * `slots.root.className="h-full"` inside a fixed-height wrapper) and the
+ * flex layout takes care of the rest.
+ */
+export const ConstrainedHeight: Story = {
+  render: function ConstrainedHeightEditor() {
+    const longContent = Array.from(
+      { length: 12 },
+      (_, i) =>
+        `<h2>Section ${i + 1}</h2><p>This is a long paragraph used to demonstrate internal scrolling. The toolbar should stay pinned to the top while this content scrolls. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>`,
+    ).join('');
+
+    return (
+      <div
+        id="rich-text-editor-constrained-wrapper"
+        className="h-[400px] w-full max-w-2xl"
+      >
+        <RichTextEditor value={longContent} slots={{ root: { className: 'h-full' } }} />
+      </div>
+    );
+  },
+};
+
+/**
  * Interactive example with state management
  */
 export const Interactive: Story = {
