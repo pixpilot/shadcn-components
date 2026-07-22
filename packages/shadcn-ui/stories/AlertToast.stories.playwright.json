@@ -2,53 +2,6 @@
   "version": "0",
   "stories": {
     "shadcn-ui-alerttoast--default": {
-      "actionSets": [
-        {
-          "actions": [
-            {
-              "args": {
-                "selector": "#alert-toast-button-1"
-              },
-              "name": "click"
-            }
-          ],
-          "id": "lvrlPHSOqCAw",
-          "title": "click button"
-        },
-        {
-          "actions": [
-            {
-              "name": "takeScreenshot"
-            }
-          ],
-          "id": "1Og3yHZX8Xbh",
-          "title": "Take screenshot"
-        },
-        {
-          "actions": [
-            {
-              "args": {
-                "timeout": 500
-              },
-              "name": "waitForTimeout"
-            }
-          ],
-          "id": "dYzyRbh_K6Xm",
-          "title": "delay 500"
-        },
-        {
-          "actions": [
-            {
-              "args": {
-                "selector": "[data-slot=\"alert\"]"
-              },
-              "name": "takeElementScreenshot"
-            }
-          ],
-          "id": "zSLEkYeA-Z4x",
-          "title": "takeElementScreenshot"
-        }
-      ],
       "screenshots": [
         {
           "actionSets": [
