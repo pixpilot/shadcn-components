@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 3.5.1
+
+### Patch Changes
+
+- 03d2649: fix release
+
 ## 3.5.0
 
 ### Minor Changes
