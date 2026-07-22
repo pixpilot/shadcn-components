@@ -1,5 +1,17 @@
 # @pixpilot/shadcn-ui
 
+## 3.3.0
+
+### Minor Changes
+
+- update drawer dimensions and add new screenshot test
+
+### Patch Changes
+
+- adjust max-width for right and left drawer directions
+- Updated dependencies
+  - @pixpilot/shadcn@2.1.0
+
 ## 3.2.0
 
 ### Minor Changes

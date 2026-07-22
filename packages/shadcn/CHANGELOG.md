@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 2.1.0
+
+### Minor Changes
+
+- update drawer dimensions and add new screenshot test
+
 ## 2.0.0
 
 ### Major Changes
