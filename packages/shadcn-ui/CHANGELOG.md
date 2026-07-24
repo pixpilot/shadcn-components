@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 3.6.1
+
+### Patch Changes
+
+- update data-slot attributes for DrawerHeader, DrawerBody, and DrawerFooter
+
 ## 3.6.0
 
 ### Minor Changes
