@@ -36,8 +36,6 @@
     "typecheck": "turbo run typecheck",
     "storybook": "pnpm --filter @internal/storybook storybook",
     "build-storybook": "pnpm --filter @internal/storybook build-storybook",
-    "clean:workspaces": "turbo run clean:all && git clean -xdf .cache .turbo",
-    "clean:workspaces:install": "pnpm clean:workspaces && pnpm install",
     "deps:update": "npx taze -r -w && pnpm install",
     "deps:update:major": "npx taze major -r -w && pnpm install",
     "turbo:gen:init": "pnpm turbo gen init",
@@ -48,6 +46,8 @@
     "release": "changeset version && pnpm changeset-publish",
     "check:all": "pnpm lint && pnpm format && pnpm typecheck && pnpm test",
     "generate-packages-section": "node scripts/generate-packages-section.js",
+    "clean:workspaces": "turbo run clean:all && git clean -xdf .cache .turbo",
+    "clean:workspaces:install": "pnpm clean:workspaces && pnpm install",
     "gen:package": "npx @pixpilot/scaffoldfy --config ./generators/package/scaffoldfy.json"
   },
   "devDependencies": {
