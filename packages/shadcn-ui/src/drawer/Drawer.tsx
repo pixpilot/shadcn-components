@@ -115,7 +115,7 @@ export function DrawerHeader({
 }: React.HTMLAttributes<HTMLDivElement> & NoDragProps) {
   return (
     <div
-      data-slot="header"
+      data-slot="drawer-header"
       className={cn('flex shrink-0 flex-col gap-2.5', className)}
       {...useNoDragProps(noDrag)}
       {...props}
@@ -131,7 +131,7 @@ export function DrawerBody({
 }: React.HTMLAttributes<HTMLDivElement> & NoDragProps) {
   return (
     <div
-      data-slot="body"
+      data-slot="drawer-body"
       className={cn('min-h-0 flex-1 overflow-auto -mx-6 px-6', className)}
       {...useNoDragProps(noDrag)}
       {...props}
@@ -147,7 +147,7 @@ export function DrawerFooter({
 }: React.HTMLAttributes<HTMLDivElement> & NoDragProps) {
   return (
     <div
-      data-slot="footer"
+      data-slot="drawer-footer"
       className={cn('flex shrink-0 justify-end space-x-2', className)}
       {...useNoDragProps(noDrag)}
       {...props}
