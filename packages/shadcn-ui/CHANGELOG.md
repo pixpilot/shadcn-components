@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 3.7.0
+
+### Minor Changes
+
+- refactor dialog and drawer components to use OverlayPanel
+
 ## 3.6.1
 
 ### Patch Changes
