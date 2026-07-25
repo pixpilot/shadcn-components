@@ -67,6 +67,7 @@
     "@tiptap/extension-link": "^3.22.3",
     "@tiptap/extension-placeholder": "^3.22.3",
     "@tiptap/extension-text-align": "^3.22.3",
+    "@tiptap/extensions": "^3.22.3",
     "@tiptap/react": "^3.22.3",
     "@tiptap/starter-kit": "^3.22.3",
     "class-variance-authority": "catalog:prod",

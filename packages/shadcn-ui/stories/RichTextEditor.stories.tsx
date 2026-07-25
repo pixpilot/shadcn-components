@@ -38,6 +38,11 @@ const meta = {
       control: 'object',
       description: 'Array of toolbar items to display',
     },
+    maxLength: {
+      control: 'number',
+      description:
+        'Maximum number of characters allowed. Shows a counter below the content area',
+    },
     allowLinkTarget: {
       control: 'boolean',
       description: 'Whether the link popover allows choosing a target',
@@ -154,6 +159,22 @@ export const WithLink: Story = {
 export const WithPlaceholder: Story = {
   args: {
     placeholder: 'Start writing your amazing content here...',
+  },
+};
+
+/**
+ * Passing `maxLength` caps the number of characters the editor accepts and
+ * renders a `current / max` counter below the content area. The count is based
+ * on the plain text content, so HTML markup does not consume the budget.
+ *
+ * Once the limit is reached, further input is rejected and the counter turns
+ * into the destructive color.
+ */
+export const WithMaxLength: Story = {
+  args: {
+    value: '<p>This editor accepts at most 120 characters.</p>',
+    maxLength: 120,
+    toolbarItems: ['bold', 'italic', '|', 'bulletList'],
   },
 };
 

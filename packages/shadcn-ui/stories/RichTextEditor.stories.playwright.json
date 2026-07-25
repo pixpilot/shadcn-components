@@ -358,6 +358,93 @@
         }
       ]
     },
+    "shadcn-ui-richtexteditor--with-max-length": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"rich-text-editor\"]"
+                  },
+                  "id": "fyNW13Vw-H1j",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "c_pO12Mb-bf8",
+              "temp": true,
+              "title": "capture editor with counter"
+            }
+          ],
+          "browserOptionsId": "CI9D8jBZaGpG",
+          "browserType": "chromium",
+          "id": "wOxTKq6UiOxF",
+          "index": 0,
+          "title": "should show the character counter"
+        },
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "x": 62,
+                    "y": 156
+                  },
+                  "id": "izUnIAtkAZ_q",
+                  "name": "mouse.click"
+                }
+              ],
+              "id": "I4V-rf49_7hx",
+              "temp": true,
+              "title": "focus the editor"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "key": "Control+End"
+                  },
+                  "id": "Z9mK9FnbGdJR",
+                  "name": "keyboard.press"
+                },
+                {
+                  "args": {
+                    "selector": ".tiptap ",
+                    "text": "Typing past the limit is rejected, so the trailing characters of this sentence never make it into the document."
+                  },
+                  "id": "7pjY5LFMXDgT",
+                  "name": "type"
+                }
+              ],
+              "id": "iJW62oQtWIq7",
+              "temp": true,
+              "title": "type past the limit"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"rich-text-editor\"]"
+                  },
+                  "id": "r-J4BKybOCCj",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "p8LRedX510gV",
+              "temp": true,
+              "title": "capture editor at the limit"
+            }
+          ],
+          "browserOptionsId": "tktF2YTdvEgo",
+          "browserType": "chromium",
+          "id": "JGGnwWELM6XV",
+          "index": 1,
+          "title": "should stop accepting input at the character limit"
+        }
+      ]
+    },
     "shadcn-ui-richtexteditor--constrained-height": {
       "screenshots": [
         {
@@ -383,6 +470,24 @@
       "viewport": {
         "height": 502,
         "width": 716
+      }
+    },
+    "Nq7sVbEyHu2R": {
+      "viewport": {
+        "height": 400,
+        "width": 720
+      }
+    },
+    "CI9D8jBZaGpG": {
+      "viewport": {
+        "height": 294,
+        "width": 525
+      }
+    },
+    "tktF2YTdvEgo": {
+      "viewport": {
+        "height": 294,
+        "width": 417
       }
     }
   },

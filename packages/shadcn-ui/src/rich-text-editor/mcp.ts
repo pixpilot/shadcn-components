@@ -38,8 +38,13 @@ export const meta: ComponentMeta<RichTextEditorDocumentedProps> = {
       'Additional TipTap extensions appended to the built-in ones (StarterKit, Link, TextAlign, Placeholder). Accepts any TipTap Extension, Node, or Mark — official packages or your own custom ones. See the "Add a custom extension" example.',
     editorProps: 'Custom TipTap editorProps merged into the defaults.',
     slots:
-      'Class overrides for the root, toolbar (and its buttons/separators), and content area.',
+      'Class overrides for the root, toolbar (and its buttons/separators), content area, and character counter.',
     placeholder: 'Placeholder text shown when the editor is empty.',
+    maxLength: {
+      description:
+        'Maximum number of characters allowed. Input beyond the limit is rejected and a "current / max" counter is rendered below the content area. Counts plain text, not HTML markup.',
+      type: 'number',
+    },
     tooltipMode: {
       description: 'How toolbar button tooltips are rendered.',
       type: 'ToolbarButtonTooltipMode',
@@ -74,6 +79,10 @@ export const meta: ComponentMeta<RichTextEditorDocumentedProps> = {
     {
       title: 'Custom toolbar',
       code: '<RichTextEditor value={html} onChange={setHtml} toolbarItems={["bold", "italic", "|", "bulletList"]} />',
+    },
+    {
+      title: 'Limit the content length',
+      code: '<RichTextEditor value={html} onChange={setHtml} maxLength={280} />',
     },
     {
       title: 'Add an official extension',

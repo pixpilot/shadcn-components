@@ -22,6 +22,11 @@ export const meta: ComponentMeta<RichTextEditorOwnProps> = {
     toolbarItems: 'Forwarded to the underlying UI component.',
     tooltipMode: 'Forwarded to the underlying UI component.',
     placeholder: 'Placeholder text shown before a value is selected or entered.',
+    maxLength: {
+      description:
+        'Maximum number of characters allowed. Input beyond the limit is rejected and a "current / max" counter is rendered below the content area. Counts plain text, not HTML markup. In schema forms pass it via `x-component-props.maxLength`.',
+      type: 'number',
+    },
     allowLinkTarget: 'Forwarded to the underlying UI component.',
     openOnClick: 'Forwarded to the underlying UI component.',
   }),

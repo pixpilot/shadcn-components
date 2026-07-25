@@ -5,6 +5,7 @@ import { cn } from '@pixpilot/shadcn';
 import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
 import TextAlign from '@tiptap/extension-text-align';
+import { CharacterCount } from '@tiptap/extensions/character-count';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import React from 'react';
@@ -36,6 +37,9 @@ export interface RichTextEditorSlots {
     };
   };
   content?: {
+    className?: string;
+  };
+  characterCount?: {
     className?: string;
   };
 }
@@ -70,6 +74,7 @@ export interface RichTextEditorProps {
    * - `slots.toolbar.button.className`: each toolbar button
    * - `slots.toolbar.separator.className`: separators (`|`)
    * - `slots.content.className`: editor content area (merged into TipTap `editorProps.attributes.class`)
+   * - `slots.characterCount.className`: character counter shown when `maxLength` is set
    */
   slots?: RichTextEditorSlots;
   /**
@@ -104,6 +109,15 @@ export interface RichTextEditorProps {
    * Placeholder text to show when the editor is empty
    */
   placeholder?: string;
+
+  /**
+   * Maximum number of characters allowed in the editor. When set, input beyond
+   * the limit is rejected and a `current / max` counter is rendered below the
+   * content area.
+   *
+   * The count is based on the plain text content, not the HTML markup.
+   */
+  maxLength?: number;
 
   /**
    * Whether the link popover should expose target controls.
@@ -228,6 +242,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   immediatelyRender = false,
   tooltipMode = 'native',
   placeholder,
+  maxLength,
   allowLinkTarget = false,
   openOnClick = false,
   className,
@@ -261,8 +276,11 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
     if (placeholder != null) {
       baseExtensions.push(Placeholder.configure({ placeholder }));
     }
+    if (maxLength != null) {
+      baseExtensions.push(CharacterCount.configure({ limit: maxLength }));
+    }
     return baseExtensions.concat(extensions);
-  }, [extensions, placeholder, openOnClick]);
+  }, [extensions, placeholder, maxLength, openOnClick]);
 
   const editorInstance = useEditor({
     extensions: memoizedExtensions,
@@ -298,6 +316,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   if (editorInstance == null) {
     return (
       <div
+        data-slot="rich-text-editor"
         className={cn(
           'flex flex-col overflow-hidden border rounded-md bg-background',
           slots?.root?.className,
@@ -323,8 +342,14 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
     );
   }
 
+  // `renderTick` already forces a re-render on every transaction, so reading the
+  // count during render keeps the counter in sync with the content.
+  const characterCount =
+    maxLength == null ? 0 : editorInstance.storage.characterCount.characters();
+
   return (
     <div
+      data-slot="rich-text-editor"
       className={cn(
         'flex flex-col overflow-hidden border rounded-md bg-background',
         slots?.root?.className,
@@ -343,6 +368,18 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
       <div className="flex-1 min-h-0 overflow-y-auto">
         <EditorContent editor={editorInstance} data-slot="editor-content" />
       </div>
+      {maxLength != null && (
+        <div
+          data-slot="character-count"
+          className={cn(
+            'shrink-0 border-t px-3 py-1.5 text-xs tabular-nums text-muted-foreground text-right',
+            characterCount >= maxLength && 'text-destructive',
+            slots?.characterCount?.className,
+          )}
+        >
+          {characterCount} / {maxLength}
+        </div>
+      )}
     </div>
   );
 };
