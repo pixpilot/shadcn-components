@@ -28,5 +28,6 @@ export default defineMcpRegistryConfig({
     // Shared overlay-registry base used by dialog-provider and drawer-provider —
     // internal plumbing, not a standalone component.
     'overlay-provider',
+    'overlay-panel',
   ],
 });
