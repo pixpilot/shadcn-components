@@ -32,7 +32,7 @@
           "actions": [
             {
               "args": {
-                "selector": "[data-slot=\"body\"]"
+                "selector": "[data-slot=\"drawer-body\"]"
               },
               "name": "takeElementScreenshot"
             }
@@ -50,11 +50,11 @@
                   "args": {
                     "selector": "#form-email"
                   },
-                  "id": "Mt5CkWHU4G8J",
+                  "id": "gzqkFRVu9KQ4",
                   "name": "click"
                 }
               ],
-              "id": "84xbXOImarIm",
+              "id": "wLMfVWNegU1w",
               "title": "click fild"
             },
             {
@@ -64,30 +64,30 @@
                     "x": 41,
                     "y": 155
                   },
-                  "id": "cIYznNqVaHyX",
+                  "id": "5vU1Yn7_N-7R",
                   "name": "mouse.click"
                 }
               ],
-              "id": "MpUygvwKNtOF",
+              "id": "N76o8Xx8wvEw",
               "title": "mouse.click"
             },
             {
               "actions": [
                 {
                   "args": {
-                    "selector": "[data-slot=\"body\"]"
+                    "selector": "[data-slot=\"drawer-body\"]"
                   },
-                  "id": "u5y1cE2ZDCsW",
+                  "id": "MhftqIbtHRwC",
                   "name": "takeElementScreenshot"
                 }
               ],
-              "id": "KsZDI6HN_hYD",
+              "id": "bDMUWzk0jt1v",
               "title": "takeElementScreenshot"
             }
           ],
           "browserOptionsId": "-uJQMFDLYcjo",
           "browserType": "chromium",
-          "id": "PxHSDuikPRUT",
+          "id": "GhPh7BGTXxF5",
           "index": 0,
           "title": "should validate when click outside drawer"
         }

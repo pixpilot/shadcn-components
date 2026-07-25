@@ -6,6 +6,11 @@ import {
 } from '@pixpilot/shadcn';
 import { XIcon } from 'lucide-react';
 import * as React from 'react';
+import {
+  OverlayPanelBody,
+  OverlayPanelFooter,
+  OverlayPanelHeader,
+} from '../overlay-panel/OverlayPanel';
 
 /**
  * Shared by every drawer part so `noDrag` set on the root propagates down
@@ -109,14 +114,12 @@ DrawerContent.displayName = 'DrawerContent';
 
 // DrawerHeader.tsx
 export function DrawerHeader({
-  className,
   noDrag,
   ...props
 }: React.HTMLAttributes<HTMLDivElement> & NoDragProps) {
   return (
-    <div
+    <OverlayPanelHeader
       data-slot="drawer-header"
-      className={cn('flex shrink-0 flex-col gap-2.5', className)}
       {...useNoDragProps(noDrag)}
       {...props}
     />
@@ -125,30 +128,22 @@ export function DrawerHeader({
 
 // DrawerBody.tsx
 export function DrawerBody({
-  className,
   noDrag,
   ...props
 }: React.HTMLAttributes<HTMLDivElement> & NoDragProps) {
   return (
-    <div
-      data-slot="drawer-body"
-      className={cn('min-h-0 flex-1 overflow-auto -mx-6 px-6', className)}
-      {...useNoDragProps(noDrag)}
-      {...props}
-    />
+    <OverlayPanelBody data-slot="drawer-body" {...useNoDragProps(noDrag)} {...props} />
   );
 }
 
 // DrawerFooter.tsx
 export function DrawerFooter({
-  className,
   noDrag,
   ...props
 }: React.HTMLAttributes<HTMLDivElement> & NoDragProps) {
   return (
-    <div
+    <OverlayPanelFooter
       data-slot="drawer-footer"
-      className={cn('flex shrink-0 justify-end space-x-2', className)}
       {...useNoDragProps(noDrag)}
       {...props}
     />

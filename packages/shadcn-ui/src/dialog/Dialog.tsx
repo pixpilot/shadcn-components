@@ -4,6 +4,11 @@ import {
   cn,
 } from '@pixpilot/shadcn';
 import * as React from 'react';
+import {
+  OverlayPanelBody,
+  OverlayPanelFooter,
+  OverlayPanelHeader,
+} from '../overlay-panel/OverlayPanel';
 
 export interface DialogContentProps extends React.ComponentPropsWithoutRef<
   typeof BaseDialogContent
@@ -29,45 +34,18 @@ export const DialogContent = React.forwardRef<
 DialogContent.displayName = 'DialogContent';
 
 // DialogHeader.tsx
-export function DialogHeader({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
-  return (
-    <div
-      data-slot="header"
-      className={cn('flex shrink-0 flex-col gap-2.5', className)}
-      {...props}
-    />
-  );
+export function DialogHeader(props: React.HTMLAttributes<HTMLDivElement>) {
+  return <OverlayPanelHeader data-slot="dialog-header" {...props} />;
 }
 
 // DialogBody.tsx
-export function DialogBody({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
-  return (
-    <div
-      data-slot="body"
-      className={cn('min-h-0 flex-1 overflow-auto -mx-6 px-6', className)}
-      {...props}
-    />
-  );
+export function DialogBody(props: React.HTMLAttributes<HTMLDivElement>) {
+  return <OverlayPanelBody data-slot="dialog-body" {...props} />;
 }
 
 // DialogFooter.tsx
-export function DialogFooter({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
-  return (
-    <div
-      data-slot="footer"
-      className={cn('flex shrink-0 justify-end space-x-2', className)}
-      {...props}
-    />
-  );
+export function DialogFooter(props: React.HTMLAttributes<HTMLDivElement>) {
+  return <OverlayPanelFooter data-slot="dialog-footer" {...props} />;
 }
 
 export function DialogClose({

@@ -180,7 +180,7 @@ export const BaseDialogItem: React.FC<React.PropsWithChildren<DialogItemProps>> 
         {open && (
           <DialogBody
             {...slots?.body}
-            className={cn('grid py-1', gapClass, slots?.body?.className)}
+            className={cn('grid', gapClass, slots?.body?.className)}
           >
             {children}
             {feedbackText != null && feedbackText !== '' && (

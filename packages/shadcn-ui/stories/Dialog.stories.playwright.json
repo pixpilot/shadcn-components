@@ -874,7 +874,7 @@
           "actions": [
             {
               "args": {
-                "selector": "[data-slot=\"header\"]"
+                "selector": "[data-slot=\"dialog-header\"]"
               },
               "name": "takeElementScreenshot"
             }
@@ -886,7 +886,7 @@
           "actions": [
             {
               "args": {
-                "selector": "[data-slot=\"header\"]"
+                "selector": "[data-slot=\"dialog-header\"]"
               },
               "name": "takeElementScreenshot"
             }
@@ -915,7 +915,7 @@
               "actions": [
                 {
                   "args": {
-                    "selector": "[data-slot=\"header\"]"
+                    "selector": "[data-slot=\"dialog-header\"]"
                   },
                   "id": "eLdgrCDGuNKx",
                   "name": "takeElementScreenshot"
@@ -942,7 +942,7 @@
               "actions": [
                 {
                   "args": {
-                    "selector": "[data-slot=\"header\"]"
+                    "selector": "[data-slot=\"dialog-header\"]"
                   },
                   "id": "TZarcSRW7OfC",
                   "name": "takeElementScreenshot"

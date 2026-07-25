@@ -145,7 +145,7 @@
           "actions": [
             {
               "args": {
-                "selector": "[data-slot=\"body\"]"
+                "selector": "[data-slot=\"dialog-body\"]"
               },
               "name": "takeElementScreenshot"
             }
@@ -210,11 +210,11 @@
                   "args": {
                     "selector": "#form-email"
                   },
-                  "id": "xpihp429HPwR",
+                  "id": "qc5nUniVanmr",
                   "name": "click"
                 }
               ],
-              "id": "GE8cvtTl0u07",
+              "id": "NEs_4EuddZ82",
               "title": "click"
             },
             {
@@ -224,30 +224,30 @@
                     "x": 23,
                     "y": 71
                   },
-                  "id": "cDV8Dx30ZR7g",
+                  "id": "E7z8nv7jV2kc",
                   "name": "mouse.click"
                 }
               ],
-              "id": "WNh7O_Rt0DUc",
+              "id": "iDp7ghs8CQny",
               "title": "click outside"
             },
             {
               "actions": [
                 {
                   "args": {
-                    "selector": "[data-slot=\"body\"]"
+                    "selector": "[data-slot=\"dialog-body\"]"
                   },
-                  "id": "xWnzwROE_op4",
+                  "id": "-Dz0njfxW9Gs",
                   "name": "takeElementScreenshot"
                 }
               ],
-              "id": "PABmvp4KwR5l",
+              "id": "RR3dALO8WkVU",
               "title": "takeElementScreenshot"
             }
           ],
           "browserOptionsId": "A0zfqPeIVfw4",
           "browserType": "chromium",
-          "id": "BcE6GIZVlu_u",
+          "id": "2s-yH2bhAEhz",
           "index": 1,
           "title": "should validate before close when click outside"
         }
@@ -492,7 +492,7 @@
           "actions": [
             {
               "args": {
-                "selector": "[data-slot=\"body\"]"
+                "selector": "[data-slot=\"dialog-body\"]"
               },
               "name": "takeElementScreenshot"
             }
@@ -510,30 +510,30 @@
                   "args": {
                     "selector": "#form-profile"
                   },
-                  "id": "xONv3ARZGI5b",
+                  "id": "U0EV-S-KKZ2X",
                   "name": "click"
                 }
               ],
-              "id": "6GSoHYJvOpk3",
+              "id": "XRjIeq_Y5FBg",
               "title": "click"
             },
             {
               "actions": [
                 {
                   "args": {
-                    "selector": "[data-slot=\"body\"]"
+                    "selector": "[data-slot=\"dialog-body\"]"
                   },
-                  "id": "02H0Q9tfz334",
+                  "id": "UXUW-TJO3qah",
                   "name": "takeElementScreenshot"
                 }
               ],
-              "id": "-oUxM-7TEID3",
+              "id": "onmoFfFCD2fd",
               "title": "takeElementScreenshot"
             }
           ],
           "browserOptionsId": "9uVrwBG9IrGb",
           "browserType": "chromium",
-          "id": "sVEY4I1Uku2h",
+          "id": "rMn0oxoRDteV",
           "index": 0,
           "title": "should have default value"
         }
