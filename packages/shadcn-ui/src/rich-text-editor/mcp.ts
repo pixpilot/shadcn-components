@@ -45,6 +45,12 @@ export const meta: ComponentMeta<RichTextEditorDocumentedProps> = {
         'Maximum number of characters allowed. Input beyond the limit is rejected and a "current / max" counter is rendered below the content area. Counts plain text, not HTML markup.',
       type: 'number',
     },
+    autoFocus: {
+      description:
+        'Focus the editor on mount and choose where the cursor lands. `true` behaves like "start"; a number is a document position.',
+      type: `boolean | 'start' | 'end' | 'all' | number | null`,
+      defaultValue: 'false',
+    },
     tooltipMode: {
       description: 'How toolbar button tooltips are rendered.',
       type: 'ToolbarButtonTooltipMode',

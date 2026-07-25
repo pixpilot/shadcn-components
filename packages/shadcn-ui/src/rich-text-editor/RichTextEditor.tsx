@@ -1,4 +1,4 @@
-import type { Editor, EditorEvents, Extensions } from '@tiptap/core';
+import type { Editor, EditorEvents, Extensions, FocusPosition } from '@tiptap/core';
 import type { UseEditorOptions } from '@tiptap/react';
 import type { ToolbarButtonTooltipMode } from './ToolbarButton';
 import { cn } from '@pixpilot/shadcn';
@@ -118,6 +118,14 @@ export interface RichTextEditorProps {
    * The count is based on the plain text content, not the HTML markup.
    */
   maxLength?: number;
+
+  /**
+   * Whether the editor should receive focus on mount, and where the cursor is
+   * placed. `true` is equivalent to `'start'`; a number places the cursor at
+   * that document position.
+   * @default false
+   */
+  autoFocus?: FocusPosition;
 
   /**
    * Whether the link popover should expose target controls.
@@ -243,6 +251,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   tooltipMode = 'native',
   placeholder,
   maxLength,
+  autoFocus = false,
   allowLinkTarget = false,
   openOnClick = false,
   className,
@@ -277,6 +286,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
       baseExtensions.push(Placeholder.configure({ placeholder }));
     }
     if (maxLength != null) {
+      // eslint-disable-next-line ts/no-unsafe-argument, ts/no-unsafe-call
       baseExtensions.push(CharacterCount.configure({ limit: maxLength }));
     }
     return baseExtensions.concat(extensions);
@@ -286,6 +296,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
     extensions: memoizedExtensions,
     content: value,
     editable,
+    autofocus: autoFocus,
     onUpdate: handleChange,
     immediatelyRender,
     editorProps: mergedEditorProps,

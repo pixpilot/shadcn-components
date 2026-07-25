@@ -43,6 +43,12 @@ const meta = {
       description:
         'Maximum number of characters allowed. Shows a counter below the content area',
     },
+    autoFocus: {
+      control: 'select',
+      options: [false, true, 'start', 'end', 'all'],
+      description: 'Focus the editor on mount, and where the cursor is placed',
+      defaultValue: false,
+    },
     allowLinkTarget: {
       control: 'boolean',
       description: 'Whether the link popover allows choosing a target',
@@ -159,6 +165,18 @@ export const WithLink: Story = {
 export const WithPlaceholder: Story = {
   args: {
     placeholder: 'Start writing your amazing content here...',
+  },
+};
+
+/**
+ * `autoFocus` puts the cursor in the editor as soon as it mounts. Use `'end'`
+ * to continue after existing content, `'start'` (or `true`) to land before it,
+ * `'all'` to select everything, or a number for an explicit document position.
+ */
+export const WithAutoFocus: Story = {
+  args: {
+    value: '<p>The cursor starts at the end of this sentence.</p>',
+    autoFocus: 'end',
   },
 };
 
