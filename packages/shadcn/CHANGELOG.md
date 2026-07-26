@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 2.2.0
+
+### Minor Changes
+
+- add `deferPointerDownOutside` prop for improved interaction handling
+
 ## 2.1.0
 
 ### Minor Changes
