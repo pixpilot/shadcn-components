@@ -25,12 +25,12 @@ const tabsTriggerVariants = cva(
     variants: {
       variant: {
         default:
-          'data-[state=active]:bg-background dark:data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground h-[calc(100%-1px)] flex-1 data-[state=active]:shadow-sm',
+          'data-[state=active]:bg-background dark:data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring  text-foreground dark:text-muted-foreground h-[calc(100%-1px)] flex-1 data-[state=active]:shadow-sm',
         outline:
           'data-[state=active]:bg-background data-[state=active]:border-input focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring text-muted-foreground data-[state=active]:text-foreground h-[calc(100%-1px)] flex-1 data-[state=active]:shadow-sm border-input',
         ghost:
           'data-[state=active]:bg-accent data-[state=active]:text-accent-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring text-muted-foreground hover:text-foreground h-[calc(100%-1px)] flex-1',
-        pill: 'data-[state=active]:bg-background data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground h-[calc(100%-2px)] flex-1 rounded-full data-[state=active]:shadow-sm',
+        pill: 'data-[state=active]:bg-background data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring d text-foreground dark:text-muted-foreground h-[calc(100%-2px)] flex-1 rounded-full data-[state=active]:shadow-sm',
       },
     },
     defaultVariants: {

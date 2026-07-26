@@ -14,6 +14,7 @@ const TabsTrigger: React.FC<TabsTriggerProps> = (props) => {
 
   const underlineClasses = cn(
     'data-[state=active]:border-primary m-0 mb-[-1px] rounded-none border-0 border-b-2 bg-transparent py-2 px-3 shadow-none',
+    'data-[state=active]:border-input data-[state=active]:bg-input/30 data-[state=active]:shadow-none',
   );
 
   // Handle underline variant separately as it's custom to shadcn-ui

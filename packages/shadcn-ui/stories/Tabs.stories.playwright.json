@@ -1,0 +1,230 @@
+{
+  "version": "0",
+  "stories": {
+    "shadcn-ui-tabs--default": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"tabs-list\"]"
+                  },
+                  "id": "QhTrLH4axLuX",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "-RqNY43hvJ4R",
+              "temp": true,
+              "title": "capture"
+            }
+          ],
+          "browserOptionsId": "vp1",
+          "browserType": "chromium",
+          "globals": {
+            "theme": "dark"
+          },
+          "id": "aDYWKq7vOQNW",
+          "index": 0,
+          "title": "Default horizontal tabs"
+        }
+      ]
+    },
+    "shadcn-ui-tabs--vertical": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"tabs-list\"]"
+                  },
+                  "id": "aHPpCidHOyZD",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "bvwkZwJ6Rm7l",
+              "temp": true,
+              "title": "capture"
+            }
+          ],
+          "browserOptionsId": "vp2",
+          "browserType": "chromium",
+          "globals": {
+            "theme": "dark"
+          },
+          "id": "UqPZXbcOQsKu",
+          "index": 0,
+          "title": "Vertical tabs layout"
+        }
+      ]
+    },
+    "shadcn-ui-tabs--with-icons": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"tabs-list\"]"
+                  },
+                  "id": "bMfQL_fXKnFN",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "eGJKY5uTJxij",
+              "temp": true,
+              "title": "capture"
+            }
+          ],
+          "browserOptionsId": "vp1",
+          "browserType": "chromium",
+          "globals": {
+            "theme": "dark"
+          },
+          "id": "jPvQ3QiyFHlH",
+          "index": 0,
+          "title": "Tabs with icons"
+        }
+      ]
+    },
+    "shadcn-ui-tabs--outline": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"tabs-list\"]"
+                  },
+                  "id": "sV_f1dPwl1cP",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "utwWATQTJiwQ",
+              "temp": true,
+              "title": "capture"
+            }
+          ],
+          "browserOptionsId": "vp1",
+          "browserType": "chromium",
+          "globals": {
+            "theme": "dark"
+          },
+          "id": "o7CXfsbrU3kX",
+          "index": 0,
+          "title": "Outline variant tabs"
+        }
+      ]
+    },
+    "shadcn-ui-tabs--ghost": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"tabs-list\"]"
+                  },
+                  "id": "ReNOhZtlIOIc",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "49GFtWbqYMIU",
+              "temp": true,
+              "title": "capture"
+            }
+          ],
+          "browserOptionsId": "vp1",
+          "browserType": "chromium",
+          "globals": {
+            "theme": "dark"
+          },
+          "id": "7wEqfulRRX32",
+          "index": 0,
+          "title": "Ghost variant tabs"
+        }
+      ]
+    },
+    "shadcn-ui-tabs--pill": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"tabs-list\"]"
+                  },
+                  "id": "zsGBM6yOJKEQ",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "Y-mfYpGgI901",
+              "temp": true,
+              "title": "capture"
+            }
+          ],
+          "browserOptionsId": "vp1",
+          "browserType": "chromium",
+          "globals": {
+            "theme": "dark"
+          },
+          "id": "aj3AYVXrraWo",
+          "index": 0,
+          "title": "Pill variant tabs"
+        }
+      ]
+    },
+    "shadcn-ui-tabs--underline": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"tabs-list\"]"
+                  },
+                  "id": "-Mobj1qvaO4K",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "LR5476XTCk-3",
+              "temp": true,
+              "title": "capture"
+            }
+          ],
+          "browserOptionsId": "vp1",
+          "browserType": "chromium",
+          "globals": {
+            "theme": "dark"
+          },
+          "id": "UneANNoqfZox",
+          "index": 0,
+          "title": "Underline variant tabs"
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "vp1": {
+      "viewport": {
+        "width": 640,
+        "height": 300
+      }
+    },
+    "vp2": {
+      "viewport": {
+        "width": 800,
+        "height": 400
+      }
+    }
+  },
+  "screenshotOptions": {}
+}

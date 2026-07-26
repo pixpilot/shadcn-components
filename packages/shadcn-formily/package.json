@@ -71,7 +71,7 @@
     "json-schema-traverse": "^1.0.0",
     "lucide-react": "^0.562.0",
     "pretty-bytes": "catalog:prod",
-    "zod": "^4.3.6"
+    "zod": "catalog:prod"
   },
   "devDependencies": {
     "@internal/eslint-config": "workspace:*",
