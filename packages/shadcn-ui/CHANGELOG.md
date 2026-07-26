@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 3.9.0
+
+### Minor Changes
+
+- add `maxLength` and `autoFocus` props
+
 ## 3.8.0
 
 ### Minor Changes
