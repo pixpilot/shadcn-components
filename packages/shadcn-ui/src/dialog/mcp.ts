@@ -39,6 +39,12 @@ export const meta: ComponentMeta<DialogDocumentedProps> = {
       'Called when focus moves outside the content; call preventDefault to keep it open.',
     onInteractOutside:
       'Called on any interaction (pointer or focus) outside the content; call preventDefault to keep it open.',
+    deferPointerDownOutside: {
+      description:
+        'When true, defer pointerdown outside handling to allow other handlers to run first.',
+      type: 'boolean',
+      defaultValue: 'false',
+    },
     showCloseButton: {
       description: 'Whether to render the built-in close (×) button in the top corner.',
       type: 'boolean',

@@ -20,6 +20,7 @@ export const meta: ComponentMeta<RadioOwnProps> = {
     loop: 'Forwarded to the underlying UI component.',
     orientation: 'Forwarded to the underlying UI component.',
     name: 'Forwarded to the underlying UI component.',
+    form: 'The Formily form instance (usually supplied by Formily).',
   }),
   examples: [
     {

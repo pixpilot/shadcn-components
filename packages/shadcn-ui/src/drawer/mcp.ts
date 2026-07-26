@@ -51,6 +51,12 @@ export const meta: ComponentMeta<DrawerDocumentedProps> = {
       'Called when focus moves outside the content; call preventDefault to keep it open.',
     onInteractOutside:
       'Called on any interaction (pointer or focus) outside the content; call preventDefault to keep it open.',
+    deferPointerDownOutside: {
+      description:
+        'When true, defer pointerdown outside handling to allow other handlers to run first.',
+      type: 'boolean',
+      defaultValue: 'false',
+    },
   }),
   notes: [
     'Compose with the Drawer root, DrawerTrigger, DrawerTitle, and DrawerDescription from the shadcn drawer primitives.',
