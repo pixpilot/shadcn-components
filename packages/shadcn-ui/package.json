@@ -90,6 +90,7 @@
     "@testing-library/react": "catalog:dev",
     "@types/node": "catalog:dev",
     "@types/react": "catalog:dev",
+    "@types/react-dom": "catalog:dev",
     "eslint": "catalog:dev",
     "jsdom": "catalog:dev",
     "postcss": "catalog:dev",

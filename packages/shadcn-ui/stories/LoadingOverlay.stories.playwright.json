@@ -186,6 +186,102 @@
           "title": "should show loader in center"
         }
       ]
+    },
+    "shadcn-ui-loadingoverlay--with-long-page-content": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"button\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "nS1IxtirMs_V",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "timeout": 200
+              },
+              "name": "waitForTimeout"
+            }
+          ],
+          "id": "RTAVgMDjYVHY",
+          "title": "delay 200"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "html",
+                "scrollProperty": {
+                  "top": 213
+                }
+              },
+              "name": "scrollSelector"
+            }
+          ],
+          "id": "v4pOHMGOSEsT",
+          "title": "scrollSelector"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"button\"]"
+                  },
+                  "id": "IrEMDYOYeFup",
+                  "name": "click"
+                }
+              ],
+              "id": "AT0gWogpuZyB",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 200
+                  },
+                  "id": "K4x8uYg82IWy",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "2Z3MI5kLa_2F",
+              "title": "delay 200"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "html",
+                    "scrollProperty": {
+                      "top": 213
+                    }
+                  },
+                  "id": "eTqIAmOJIbhp",
+                  "name": "scrollSelector"
+                }
+              ],
+              "id": "kONUHEV27n43",
+              "title": "scrollSelector"
+            }
+          ],
+          "browserOptionsId": "dQv8RA9oLUJc",
+          "browserType": "chromium",
+          "id": "w_bWnAiNH0Nm",
+          "index": 0,
+          "title": "should keep loader position when scroll html-body"
+        }
+      ]
     }
   },
   "browserOptions": {
@@ -200,6 +296,13 @@
       "viewport": {
         "height": 349,
         "width": 350
+      },
+      "cursor": true
+    },
+    "dQv8RA9oLUJc": {
+      "viewport": {
+        "height": 238,
+        "width": 380
       },
       "cursor": true
     }

@@ -2,13 +2,11 @@
 'use client';
 import { cn } from '@pixpilot/shadcn';
 import { Loader2 } from 'lucide-react';
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import { useDelayedVisibility } from '../hooks';
 
 const DEFAULT_DELAY = 0;
 const FADE_DURATION = 300;
-
-type ContainerBounds = Pick<DOMRect, 'top' | 'left' | 'width' | 'height'>;
 
 export interface LoadingOverlayProps {
   /**
@@ -84,7 +82,6 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = (props) => {
 
   const contentProps = slots?.content || {};
   const overlayRef = useRef<HTMLDivElement>(null);
-  const [containerBounds, setContainerBounds] = useState<ContainerBounds>();
   const { mounted, visible } = useDelayedVisibility({
     show,
     inDelay,
@@ -111,25 +108,28 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = (props) => {
   }[size];
 
   useLayoutEffect(() => {
+    const overlay = overlayRef.current;
     const container =
-      mounted && scope === 'container' ? overlayRef.current?.parentElement : undefined;
-    if (!container) return () => {};
+      mounted && scope === 'container' ? overlay?.parentElement : undefined;
+    if (!overlay || !container) return () => {};
 
-    const updateBounds = () => {
-      const { top, left, width, height } = container.getBoundingClientRect();
-      setContainerBounds({ top, left, width, height });
+    let rafId: number;
+
+    const updateTransform = () => {
+      overlay.style.transform = `translate(${container.scrollLeft}px, ${container.scrollTop}px)`;
     };
 
-    updateBounds();
-    const resizeObserver = new ResizeObserver(updateBounds);
-    resizeObserver.observe(container);
-    container.addEventListener('scroll', updateBounds, { passive: true });
-    window.addEventListener('resize', updateBounds);
+    const onScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(updateTransform);
+    };
+
+    updateTransform(); // set initial position
+    container.addEventListener('scroll', onScroll, { passive: true });
 
     return () => {
-      resizeObserver.disconnect();
-      container.removeEventListener('scroll', updateBounds);
-      window.removeEventListener('resize', updateBounds);
+      cancelAnimationFrame(rafId);
+      container.removeEventListener('scroll', onScroll);
     };
   }, [mounted, scope]);
 
@@ -143,7 +143,7 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = (props) => {
       data-slot="loading-overlay"
       className={cn(
         'inset-0 z-[9999] flex justify-center transition-opacity',
-        'fixed',
+        scope === 'container' ? 'absolute' : 'fixed',
         positionClass,
         backdrop ? 'bg-black/50' : 'pointer-events-none',
         visible ? 'opacity-100' : 'opacity-0',
@@ -151,14 +151,6 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = (props) => {
       )}
       style={{
         transitionDuration: `${FADE_DURATION}ms`,
-        ...(scope === 'container' && containerBounds
-          ? {
-              top: containerBounds.top,
-              left: containerBounds.left,
-              width: containerBounds.width,
-              height: containerBounds.height,
-            }
-          : {}),
       }}
       role="status"
       aria-live="polite"
