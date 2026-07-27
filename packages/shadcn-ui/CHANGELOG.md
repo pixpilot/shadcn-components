@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 3.12.1
+
+### Patch Changes
+
+- add resize observer for dynamic bounds updating
+
 ## 3.12.0
 
 ### Minor Changes
