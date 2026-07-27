@@ -282,6 +282,71 @@
           "title": "should keep loader position when scroll html-body"
         }
       ]
+    },
+    "shadcn-ui-loadingoverlay--drawer-loading": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"drawer-trigger\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "uLwbGyS1FCpO",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "timeout": 200
+              },
+              "name": "waitForTimeout"
+            }
+          ],
+          "id": "S15JmQmQekAZ",
+          "title": "delay 200"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"drawer-trigger\"]"
+                  },
+                  "id": "Ydpwrqa6eRpX",
+                  "name": "click"
+                }
+              ],
+              "id": "drOUB8xlye-Y",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 200
+                  },
+                  "id": "ln-nVOC97hNl",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "tN6yGu6tJmoW",
+              "title": "delay 200"
+            }
+          ],
+          "browserOptionsId": "eL8Mk3fqoiwG",
+          "browserType": "chromium",
+          "id": "HLmAN2HglDZo",
+          "index": 0,
+          "title": "should show loading in drawer"
+        }
+      ]
     }
   },
   "browserOptions": {
@@ -305,6 +370,12 @@
         "width": 380
       },
       "cursor": true
+    },
+    "eL8Mk3fqoiwG": {
+      "viewport": {
+        "height": 238,
+        "width": 380
+      }
     }
   }
 }

@@ -476,7 +476,11 @@ export const DrawerLoading: Story = {
           </Button>
         </DrawerTrigger>
         <DrawerContent floating className="sm:mx-auto sm:max-w-md">
-          <LoadingOverlay message="Preparing drawer..." show={loading} />
+          <LoadingOverlay
+            message="Preparing drawer..."
+            className="bg-red-500/50"
+            show={loading}
+          />
           <DrawerHeader>
             <DrawerTitle>Ready to continue</DrawerTitle>
             <DrawerDescription>
