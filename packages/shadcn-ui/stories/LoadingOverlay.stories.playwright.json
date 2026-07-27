@@ -1,0 +1,207 @@
+{
+  "version": "0",
+  "stories": {
+    "shadcn-ui-loadingoverlay--container-scope-with-scrollbar": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#loading-overlay-div-10",
+                "scrollProperty": {
+                  "top": 240
+                }
+              },
+              "name": "scrollSelector"
+            }
+          ],
+          "id": "JtjNpM47zE-b",
+          "title": "scrollSelector"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"button\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "PSLv1NliuUcg",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#loading-overlay-div-10"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "kz-FKxvOHvO0",
+          "title": "takeElementScreenshot"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "timeout": 100
+              },
+              "name": "waitForTimeout"
+            }
+          ],
+          "id": "IekxgNZAKszN",
+          "title": "waitForTimeout"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#loading-overlay-div-10",
+                    "scrollProperty": {
+                      "top": 240
+                    }
+                  },
+                  "id": "TmsTQEpJUESU",
+                  "name": "scrollSelector"
+                }
+              ],
+              "id": "FVqKA_vapNhy",
+              "title": "scrollSelector"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"button\"]"
+                  },
+                  "id": "PNd8pfE2mWQD",
+                  "name": "click"
+                }
+              ],
+              "id": "cFu1B28s8v1T",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 100
+                  },
+                  "id": "BIy-gyi-RyTq",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "d4k_dbg6VsfA",
+              "title": "waitForTimeout"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#loading-overlay-div-10"
+                  },
+                  "id": "cv4vqxk8lEMa",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "oE7LCNLMX9J6",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "gnb4tyDCxmyr",
+          "browserType": "chromium",
+          "id": "vx9pHfYMWkvK",
+          "index": 0,
+          "title": "should cover scrolled container"
+        }
+      ]
+    },
+    "shadcn-ui-loadingoverlay--fullscreen": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"button\"]"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "W67TIK7Q8Pjk",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "timeout": 200
+              },
+              "name": "waitForTimeout"
+            }
+          ],
+          "id": "sPQ1s-P9Rqcm",
+          "title": "waitForTimeout"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"button\"]"
+                  },
+                  "id": "xRNspbnpfVdp",
+                  "name": "click"
+                }
+              ],
+              "id": "OLVrCCxaVRUg",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 200
+                  },
+                  "id": "p4NBuCueCSuA",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "sn7fIgSZ8Vl0",
+              "title": "waitForTimeout"
+            }
+          ],
+          "browserOptionsId": "Vl-fod878auI",
+          "browserType": "chromium",
+          "id": "HL0IeU1a5eXg",
+          "index": 0,
+          "title": "should show loader in center"
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "gnb4tyDCxmyr": {
+      "viewport": {
+        "height": 510,
+        "width": 836
+      },
+      "cursor": true
+    },
+    "Vl-fod878auI": {
+      "viewport": {
+        "height": 349,
+        "width": 350
+      },
+      "cursor": true
+    }
+  }
+}

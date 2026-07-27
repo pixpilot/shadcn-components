@@ -2,11 +2,13 @@
 'use client';
 import { cn } from '@pixpilot/shadcn';
 import { Loader2 } from 'lucide-react';
-import React from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import { useDelayedVisibility } from '../hooks';
 
 const DEFAULT_DELAY = 0;
 const FADE_DURATION = 300;
+
+type ContainerBounds = Pick<DOMRect, 'top' | 'left' | 'width' | 'height'>;
 
 export interface LoadingOverlayProps {
   /**
@@ -81,6 +83,8 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = (props) => {
   } = props;
 
   const contentProps = slots?.content || {};
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const [containerBounds, setContainerBounds] = useState<ContainerBounds>();
   const { mounted, visible } = useDelayedVisibility({
     show,
     inDelay,
@@ -106,16 +110,37 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = (props) => {
     lg: 'text-base',
   }[size];
 
+  useLayoutEffect(() => {
+    const container =
+      mounted && scope === 'container' ? overlayRef.current?.parentElement : undefined;
+    if (!container) return () => {};
+
+    const updateBounds = () => {
+      const { top, left, width, height } = container.getBoundingClientRect();
+      setContainerBounds({ top, left, width, height });
+    };
+
+    updateBounds();
+    container.addEventListener('scroll', updateBounds, { passive: true });
+    window.addEventListener('resize', updateBounds);
+
+    return () => {
+      container.removeEventListener('scroll', updateBounds);
+      window.removeEventListener('resize', updateBounds);
+    };
+  }, [mounted, scope]);
+
   if (!mounted) {
     return null;
   }
 
   return (
     <div
+      ref={overlayRef}
       data-slot="loading-overlay"
       className={cn(
         'inset-0 z-[9999] flex justify-center transition-opacity',
-        scope === 'fullscreen' ? 'fixed' : 'absolute',
+        'fixed',
         positionClass,
         backdrop ? 'bg-black/50' : 'pointer-events-none',
         visible ? 'opacity-100' : 'opacity-0',
@@ -123,6 +148,14 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = (props) => {
       )}
       style={{
         transitionDuration: `${FADE_DURATION}ms`,
+        ...(scope === 'container' && containerBounds
+          ? {
+              top: containerBounds.top,
+              left: containerBounds.left,
+              width: containerBounds.width,
+              height: containerBounds.height,
+            }
+          : {}),
       }}
       role="status"
       aria-live="polite"

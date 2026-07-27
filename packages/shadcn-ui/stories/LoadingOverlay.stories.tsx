@@ -338,3 +338,48 @@ export const ContainerScope: Story = {
     );
   },
 };
+
+/**
+ * Container-scoped loader over a container with scrollable overflow content.
+ * Verifies the overlay covers the visible container area correctly even
+ * when the container has its own scrollbar.
+ */
+export const ContainerScopeWithScrollbar: Story = {
+  args: {
+    show: true,
+    scope: 'container',
+  },
+  render: function ContainerScopeWithScrollbar(args) {
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+      if (!loading) return;
+      const timeoutId = setTimeout(() => {
+        setLoading(false);
+      }, AUTO_HIDE_DELAY);
+      // eslint-disable-next-line consistent-return
+      return () => clearTimeout(timeoutId);
+    }, [loading]);
+
+    return (
+      <div id="loading-overlay-div-9" className="flex flex-col gap-4 items-start">
+        <Button onClick={() => setLoading(!loading)}>
+          {loading ? 'Stop Loading' : 'Start Loading'}
+        </Button>
+        <div
+          id="loading-overlay-div-10"
+          className="relative w-64 h-64 border rounded-md overflow-y-auto"
+        >
+          <div id="loading-overlay-div-11" className="p-4 flex flex-col gap-4">
+            {Array.from({ length: 20 }, (_, index) => (
+              <p key={index} className="text-sm text-muted-foreground">
+                Scrollable content row {index + 1}
+              </p>
+            ))}
+          </div>
+          <LoadingOverlay {...args} message="Loading..." show={loading} />
+        </div>
+      </div>
+    );
+  },
+};
