@@ -20,13 +20,32 @@ export type ToastMessage =
   | string
   | ({ title: string; description: string } & AlertToastProps);
 
+/**
+ * Handle passed to a `toast.custom` render function so the rendered content can
+ * control its own toast (e.g. close itself from a button).
+ */
+export interface ToastApi {
+  /** The id sonner assigned to this toast. */
+  id: string | number;
+  /** Dismiss this toast. */
+  dismiss: () => void;
+}
+
+/**
+ * Content accepted by `toast.custom`: either a ready-made element or a render
+ * function that receives a {@link ToastApi} handle.
+ */
+export type ToastCustomContent =
+  | React.ReactElement
+  | ((toastApi: ToastApi) => React.ReactElement);
+
 export interface ToastFunction {
   (props: ToastProps): string;
   error: (message: ToastMessage, options?: ToastOwnProps) => string;
   success: (message: ToastMessage, options?: ToastOwnProps) => string;
   warning: (message: ToastMessage, options?: ToastOwnProps) => string;
   info: (message: ToastMessage, options?: ToastOwnProps) => string;
-  custom: (component: React.ReactElement, options?: ToastOwnProps) => string | number;
+  custom: (content: ToastCustomContent, options?: ToastOwnProps) => string | number;
   dismiss: (id: string) => void;
   dismissAll: () => void;
 }
@@ -129,17 +148,23 @@ toast.warning = (message: ToastMessage, options?: ToastOwnProps) =>
 toast.info = (message: ToastMessage, options?: ToastOwnProps) =>
   createToast('info', message, options);
 
-toast.custom = (component: React.ReactElement, options?: ToastOwnProps) => {
+toast.custom = (content: ToastCustomContent, options?: ToastOwnProps) => {
   const { duration, ...rest } = options || {};
 
   // 1. No tracking Map!
   // 2. No ID generation! (Sonner does this natively if `id` is missing)
   // 3. No counter suffixes!
 
-  return sonnerToast.custom(() => component, {
-    duration: duration ?? DEFAULT_ALERT_DURATION,
-    ...rest, // This passes 'id', 'position', etc., straight to Sonner
-  });
+  return sonnerToast.custom(
+    (t) =>
+      typeof content === 'function'
+        ? content({ id: t, dismiss: () => sonnerToast.dismiss(t) })
+        : content,
+    {
+      duration: duration ?? DEFAULT_ALERT_DURATION,
+      ...rest, // This passes 'id', 'position', etc., straight to Sonner
+    },
+  );
 };
 toast.dismiss = (id: string) => {
   sonnerToast.dismiss(id);

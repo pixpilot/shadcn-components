@@ -43,6 +43,7 @@ export const meta: ComponentMeta<ToastDocumentedProps> = {
   notes: [
     'Render <ToastProvider /> once near the app root.',
     'Convenience helpers: toast.success, toast.error, toast.warning, toast.info, toast.custom, toast.dismiss(id), toast.dismissAll().',
+    'toast.custom accepts either a React element or a render function `(toastApi) => element`, where `toastApi` is `{ id, dismiss() }` for the toast being rendered.',
   ],
   examples: [
     {
@@ -52,6 +53,10 @@ export const meta: ComponentMeta<ToastDocumentedProps> = {
     {
       title: 'Custom toast call',
       code: 'toast({ title: "Heads up", description: "Something happened", variant: "warning", duration: 5000 });',
+    },
+    {
+      title: 'Custom toast that dismisses itself',
+      code: 'toast.custom((toastApi) => (\n  <div>\n    <span>Saved to drafts</span>\n    <button type="button" onClick={toastApi.dismiss}>Dismiss</button>\n  </div>\n));',
     },
   ],
   keywords: ['toast', 'notification', 'sonner', 'alert', 'snackbar'],

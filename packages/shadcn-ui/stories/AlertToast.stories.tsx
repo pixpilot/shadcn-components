@@ -52,6 +52,14 @@ import { AlertToast } from '../src/toast/AlertToast';
  *   </div>,
  *   { duration: 5000, id: 'my-custom-toast' }
  * );
+ *
+ * // Or pass a render function to get a `toastApi` handle for the toast itself
+ * toast.custom((toastApi) => (
+ *   <div>
+ *     <span>Are you sure?</span>
+ *     <button type="button" onClick={toastApi.dismiss}>Dismiss</button>
+ *   </div>
+ * ));
  * ```
  */
 type StoryArgs = Partial<
@@ -384,6 +392,104 @@ export const CustomToast: Story = {
         }}
       >
         Show Replacing Custom Toasts
+      </Button>
+    </div>
+  ),
+};
+
+/**
+ * Custom toast with a render function.
+ * Instead of a ready-made element, `toast.custom()` also accepts
+ * `(toastApi) => JSX`. The `toastApi` handle exposes the toast `id` and a
+ * `dismiss()` function, so the custom content can close its own toast — handy
+ * for confirmation prompts or an in-toast close button.
+ */
+export const CustomRenderFunction: Story = {
+  render: () => (
+    <div id="alert-toast-div-28" className="flex flex-col gap-2">
+      <Button
+        id="alert-toast-button-22"
+        onClick={() =>
+          toast.custom(
+            (toastApi) => (
+              <div
+                id="alert-toast-div-29"
+                data-slot="custom-render-toast"
+                className="flex w-80 items-start gap-3 rounded-lg border bg-background p-4 shadow-md"
+              >
+                <span id="alert-toast-span-4" className="text-2xl">
+                  🛎️
+                </span>
+                <div id="alert-toast-div-30" className="min-w-0 flex-1">
+                  <div id="alert-toast-div-31" className="font-semibold">
+                    Self-dismissing toast
+                  </div>
+                  <div id="alert-toast-div-32" className="text-sm opacity-90">
+                    The render function receives a toastApi with dismiss().
+                  </div>
+                </div>
+                <Button
+                  id="alert-toast-button-23"
+                  size="sm"
+                  variant="outline"
+                  onClick={toastApi.dismiss}
+                >
+                  Dismiss
+                </Button>
+              </div>
+            ),
+            { id: 'render-fn-toast' },
+          )
+        }
+      >
+        Show Toast With Dismiss Button
+      </Button>
+
+      <Button
+        id="alert-toast-button-24"
+        variant="outline"
+        onClick={() =>
+          toast.custom(
+            (toastApi) => (
+              <div
+                id="alert-toast-div-33"
+                data-slot="custom-render-confirm-toast"
+                className="flex w-80 flex-col gap-3 rounded-lg border bg-background p-4 shadow-md"
+              >
+                <div id="alert-toast-div-34" className="font-semibold">
+                  Delete this item?
+                </div>
+                <div id="alert-toast-div-35" className="text-sm text-muted-foreground">
+                  Toast id: {toastApi.id}
+                </div>
+                <div id="alert-toast-div-36" className="flex justify-end gap-2">
+                  <Button
+                    id="alert-toast-button-25"
+                    size="sm"
+                    variant="outline"
+                    onClick={toastApi.dismiss}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    id="alert-toast-button-26"
+                    size="sm"
+                    variant="destructive"
+                    onClick={() => {
+                      toastApi.dismiss();
+                      toast.success('Item deleted');
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </div>
+              </div>
+            ),
+            { id: 'confirm-toast', duration: 15000 },
+          )
+        }
+      >
+        Show Confirm Toast
       </Button>
     </div>
   ),

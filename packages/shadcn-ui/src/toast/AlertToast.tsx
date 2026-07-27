@@ -42,7 +42,7 @@ const AlertToast: React.FC<AlertToastProps> = (props) => {
         icon={icon}
         {...rest}
         variant={variant}
-        className={cn('shadow-md pr-3', className)}
+        className={cn('shadow-md pr-3 pointer-events-auto', className)}
         description={
           <div className="flex w-full min-w-0 items-start gap-3">
             <div className="flex min-w-0 flex-1 flex-col gap-1">

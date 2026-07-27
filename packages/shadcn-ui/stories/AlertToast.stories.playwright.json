@@ -753,6 +753,392 @@
           "id": "9cZoxO943I07",
           "index": 0,
           "title": "Custom Toast shown after clicking Show Styled Custom Toast"
+        },
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-button-13"
+                  },
+                  "id": "hR2kPq8wLmT4",
+                  "name": "click"
+                }
+              ],
+              "id": "Vn7xQd3sBzE1",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 500
+                  },
+                  "id": "Jt5mCw9pRyU0",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "Zk4bFh1nXgO6",
+              "title": "delay 500"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-div-7"
+                  },
+                  "id": "Ql8vTs2eNjA7",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "Wp0yGr6uMdI3",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "Kq2vN8pR4tXw",
+          "browserType": "chromium",
+          "globals": {
+            "backgrounds": {
+              "grid": false
+            }
+          },
+          "id": "Ys3dLk7aVcF9",
+          "index": 1,
+          "title": "Custom Toast shown after clicking Show Custom Toast"
+        }
+      ]
+    },
+    "shadcn-ui-alerttoast--custom-render-function": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-button-22"
+                  },
+                  "id": "Ab1cDe2fGh3i",
+                  "name": "click"
+                }
+              ],
+              "id": "Jk4lMn5oPq6r",
+              "title": "click Show Toast With Dismiss Button"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 500
+                  },
+                  "id": "St7uVw8xYz9a",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "Bc0dEf1gHi2j",
+              "title": "delay 500"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"custom-render-toast\"]"
+                  },
+                  "id": "Kl3mNo4pQr5s",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "Tu6vWx7yZa8b",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "Kq2vN8pR4tXw",
+          "browserType": "chromium",
+          "globals": {
+            "backgrounds": {
+              "grid": false
+            }
+          },
+          "id": "Cd9eFg0hIj1k",
+          "index": 0,
+          "title": "Render function toast with its own dismiss button"
+        },
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-button-24"
+                  },
+                  "id": "Lm2nOp3qRs4t",
+                  "name": "click"
+                }
+              ],
+              "id": "Uv5wXy6zAb7c",
+              "title": "click Show Confirm Toast"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 500
+                  },
+                  "id": "De8fGh9iJk0l",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "Mn1oPq2rSt3u",
+              "title": "delay 500"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"custom-render-confirm-toast\"]"
+                  },
+                  "id": "Vw4xYz5aBc6d",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "Ef7gHi8jKl9m",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "Kq2vN8pR4tXw",
+          "browserType": "chromium",
+          "globals": {
+            "backgrounds": {
+              "grid": false
+            }
+          },
+          "id": "No0pQr1sTu2v",
+          "index": 1,
+          "title": "Confirm toast rendered with the toast api id"
+        },
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-button-22"
+                  },
+                  "id": "eZ28B-gTqdSB",
+                  "name": "click"
+                }
+              ],
+              "id": "jhKojKToayoZ",
+              "temp": true,
+              "title": "click Show Toast With Dismiss Button"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 500
+                  },
+                  "id": "5aKmDe2ZxdDC",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "_-MWQc5nVxkK",
+              "temp": true,
+              "title": "delay 500"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-button-23"
+                  },
+                  "id": "Hzg2S3Zw6jQ1",
+                  "name": "click"
+                }
+              ],
+              "id": "e16ftaxiIlON",
+              "temp": true,
+              "title": "click the in-toast Dismiss button"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 800
+                  },
+                  "id": "KvhUkm6r3-QB",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "UlOkDKOMe04_",
+              "temp": true,
+              "title": "delay 800"
+            }
+          ],
+          "browserOptionsId": "VAizMZ9bON4s",
+          "browserType": "chromium",
+          "id": "b-mO_e1nFSvL",
+          "index": 2,
+          "title": "Toast dismissed through the toast api dismiss function"
+        }
+      ]
+    },
+    "shadcn-ui-alerttoast--custom-duration": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-button-11"
+                  },
+                  "id": "Rs6tUv7wXy8z",
+                  "name": "click"
+                }
+              ],
+              "id": "Ab9cDe0fGh1i",
+              "title": "click Show 15s Toast"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 500
+                  },
+                  "id": "Jk2lMn3oPq4r",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "St5uVw6xYz7a",
+              "title": "delay 500"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"alert\"]"
+                  },
+                  "id": "Bc8dEf9gHi0j",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "Kl1mNo2pQr3s",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "l8Y09d93uo-S",
+          "browserType": "chromium",
+          "globals": {
+            "backgrounds": {
+              "grid": false
+            }
+          },
+          "id": "Tu4vWx5yZa6b",
+          "index": 0,
+          "title": "Long duration toast visible after clicking Show 15s Toast"
+        }
+      ]
+    },
+    "shadcn-ui-alerttoast--position": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-button-16"
+                  },
+                  "id": "Cd7eFg8hIj9k",
+                  "name": "click"
+                }
+              ],
+              "id": "Lm0nOp1qRs2t",
+              "title": "click Show Toast"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 500
+                  },
+                  "id": "Uv3wXy4zAb5c",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "De6fGh7iJk8l",
+              "title": "delay 500"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"alert\"]"
+                  },
+                  "id": "Mn9oPq0rSt1u",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "Vw2xYz3aBc4d",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "Ax9pLm3QwZ7t",
+          "browserType": "chromium",
+          "globals": {
+            "backgrounds": {
+              "grid": false
+            }
+          },
+          "id": "Ef5gHi6jKl7m",
+          "index": 0,
+          "title": "Toast shown at the selected top-right position"
+        }
+      ]
+    },
+    "shadcn-ui-alerttoast--alert-toast-component": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 300
+                  },
+                  "id": "No8pQr9sTu0v",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "Wx1yZa2bCd3e",
+              "title": "delay 300"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"alert\"]"
+                  },
+                  "id": "Fg4hIj5kLm6n",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "Op7qRs8tUv9w",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "Ct7rWq2ZmXn9",
+          "browserType": "chromium",
+          "globals": {
+            "backgrounds": {
+              "grid": false
+            }
+          },
+          "id": "Xy0zAb1cDe2f",
+          "index": 0,
+          "title": "AlertToast component rendered directly"
         }
       ]
     },
@@ -769,6 +1155,140 @@
           ],
           "id": "tHV8CKiPH4Bq",
           "title": "click"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-button-17"
+                  },
+                  "id": "Gh3iJk4lMn5o",
+                  "name": "click"
+                }
+              ],
+              "id": "Pq6rSt7uVw8x",
+              "title": "click Show Toast With ID"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 500
+                  },
+                  "id": "Yz9aBc0dEf1g",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "Hi2jKl3mNo4p",
+              "title": "delay 500"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"alert\"]"
+                  },
+                  "id": "Qr5sTu6vWx7y",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "Za8bCd9eFg0h",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "Bd4nHs6VyKp2",
+          "browserType": "chromium",
+          "globals": {
+            "backgrounds": {
+              "grid": false
+            }
+          },
+          "id": "Ij1kLm2nOp3q",
+          "index": 0,
+          "title": "Toast with a fixed id visible after clicking Show Toast With ID"
+        },
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-button-17"
+                  },
+                  "id": "Rs4tUv5wXy6z",
+                  "name": "click"
+                }
+              ],
+              "id": "Ab7cDe8fGh9i",
+              "title": "click Show Toast With ID"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 500
+                  },
+                  "id": "Jk0lMn1oPq2r",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "St3uVw4xYz5a",
+              "title": "delay 500"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-button-18"
+                  },
+                  "id": "Bc6dEf7gHi8j",
+                  "name": "click"
+                }
+              ],
+              "id": "Kl9mNo0pQr1s",
+              "title": "click Remove Toast By ID"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 800
+                  },
+                  "id": "Tu2vWx3yZa4b",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "Cd5eFg6hIj7k",
+              "title": "delay 800"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-div-24"
+                  },
+                  "id": "Lm8nOp9qRs0t",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "Uv1wXy2zAb3c",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "Bd4nHs6VyKp2",
+          "browserType": "chromium",
+          "globals": {
+            "backgrounds": {
+              "grid": false
+            }
+          },
+          "id": "De4fGh5iJk6l",
+          "index": 1,
+          "title": "Toast removed after clicking Remove Toast By ID"
         }
       ]
     }
@@ -805,6 +1325,36 @@
         "width": 836
       },
       "cursor": true
+    },
+    "Kq2vN8pR4tXw": {
+      "viewport": {
+        "height": 400,
+        "width": 700
+      }
+    },
+    "Ax9pLm3QwZ7t": {
+      "viewport": {
+        "height": 400,
+        "width": 800
+      }
+    },
+    "Bd4nHs6VyKp2": {
+      "viewport": {
+        "height": 520,
+        "width": 700
+      }
+    },
+    "Ct7rWq2ZmXn9": {
+      "viewport": {
+        "height": 200,
+        "width": 500
+      }
+    },
+    "VAizMZ9bON4s": {
+      "viewport": {
+        "height": 162,
+        "width": 433
+      }
     }
   },
   "screenshotOptions": {

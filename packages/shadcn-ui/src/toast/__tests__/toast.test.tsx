@@ -67,4 +67,37 @@ describe('toast', () => {
     const returned = renderFn();
     expect(returned).toBe(comp);
   });
+
+  it('toast.custom calls a render function with the toast api', () => {
+    (sonner.toast.custom as any).mockReturnValue('render-fn-id');
+
+    const render = vi.fn((toastApi: { id: string | number }) =>
+      React.createElement('div', { 'data-testid': 'y' }, String(toastApi.id)),
+    );
+
+    toast.custom(render, { id: 'render-fn-id' });
+
+    const [renderFn, opts] = (sonner.toast.custom as any).mock.calls[0];
+    expect(opts.id).toBe('render-fn-id');
+
+    const element = renderFn('render-fn-id');
+    expect(render).toHaveBeenCalledTimes(1);
+    expect(element.props.children).toBe('render-fn-id');
+  });
+
+  it('toast api dismiss closes the toast it was rendered for', () => {
+    (sonner.toast.dismiss as any).mockClear();
+
+    let api: { id: string | number; dismiss: () => void } | undefined;
+    toast.custom((toastApi) => {
+      api = toastApi;
+      return React.createElement('div');
+    });
+
+    const [renderFn] = (sonner.toast.custom as any).mock.calls[0];
+    renderFn('generated-id');
+
+    api!.dismiss();
+    expect(sonner.toast.dismiss as any).toHaveBeenCalledWith('generated-id');
+  });
 });
