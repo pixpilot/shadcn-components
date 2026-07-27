@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 3.11.0
+
+### Minor Changes
+
+- add loading overlay screenshot for fullscreen loader
+
 ## 3.10.0
 
 ### Minor Changes
