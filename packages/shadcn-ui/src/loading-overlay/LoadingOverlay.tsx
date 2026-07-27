@@ -121,10 +121,13 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = (props) => {
     };
 
     updateBounds();
+    const resizeObserver = new ResizeObserver(updateBounds);
+    resizeObserver.observe(container);
     container.addEventListener('scroll', updateBounds, { passive: true });
     window.addEventListener('resize', updateBounds);
 
     return () => {
+      resizeObserver.disconnect();
       container.removeEventListener('scroll', updateBounds);
       window.removeEventListener('resize', updateBounds);
     };
