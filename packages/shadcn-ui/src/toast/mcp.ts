@@ -44,6 +44,7 @@ export const meta: ComponentMeta<ToastDocumentedProps> = {
     'Render <ToastProvider /> once near the app root.',
     'Convenience helpers: toast.success, toast.error, toast.warning, toast.info, toast.custom, toast.dismiss(id), toast.dismissAll().',
     'toast.custom accepts either a React element or a render function `(toastApi) => element`, where `toastApi` is `{ id, dismiss() }` for the toast being rendered.',
+    'For a custom toast with the built-in alert styling, use the `AlertToast` component from `packages/shadcn-ui/src/toast/AlertToast.tsx` (also exported from `@pixpilot/shadcn-ui`).',
   ],
   examples: [
     {
@@ -55,8 +56,8 @@ export const meta: ComponentMeta<ToastDocumentedProps> = {
       code: 'toast({ title: "Heads up", description: "Something happened", variant: "warning", duration: 5000 });',
     },
     {
-      title: 'Custom toast that dismisses itself',
-      code: 'toast.custom((toastApi) => (\n  <div>\n    <span>Saved to drafts</span>\n    <button type="button" onClick={toastApi.dismiss}>Dismiss</button>\n  </div>\n));',
+      title: 'Custom AlertToast',
+      code: 'toast.custom((toastApi) => (\n  <AlertToast\n    title="Saved to drafts"\n    description="Your draft is ready to continue editing."\n    variant="success"\n    onClose={toastApi.dismiss}\n  />\n));',
     },
   ],
   keywords: ['toast', 'notification', 'sonner', 'alert', 'snackbar'],
