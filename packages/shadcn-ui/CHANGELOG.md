@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 3.13.0
+
+### Minor Changes
+
+- export `AlertToast` component
+
 ## 3.12.1
 
 ### Patch Changes
