@@ -4,6 +4,7 @@ import {
   cn,
 } from '@pixpilot/shadcn';
 import * as React from 'react';
+import { isToastInteractionTarget } from '../overlay-panel/overlay-interaction';
 import {
   OverlayPanelBody,
   OverlayPanelFooter,
@@ -19,17 +20,30 @@ export interface DialogContentProps extends React.ComponentPropsWithoutRef<
 export const DialogContent = React.forwardRef<
   React.ElementRef<typeof BaseDialogContent>,
   DialogContentProps
->(({ className, fullscreen = false, ...props }, ref) => (
-  <BaseDialogContent
-    ref={ref}
-    className={cn(
-      'max-h-[calc(100%-2rem)] sm:max-h-[calc(100%-2rem)] w-fit max-w-[calc(100%-2rem)] sm:max-w-[calc(100%-2rem)] flex min-h-0 flex-col gap-4 px-6 py-5',
-      fullscreen && 'h-[calc(100%-2rem)] w-[calc(100%-2rem)] max-w-none sm:max-w-none',
-      className,
-    )}
-    {...props}
-  />
-));
+>(({ className, fullscreen = false, onPointerDownOutside, ...props }, ref) => {
+  const handleOnPointerDownOutside = React.useCallback(
+    (event: Parameters<NonNullable<DialogContentProps['onPointerDownOutside']>>[0]) => {
+      onPointerDownOutside?.(event);
+      if (isToastInteractionTarget(event.target)) {
+        event.preventDefault();
+      }
+    },
+    [onPointerDownOutside],
+  );
+
+  return (
+    <BaseDialogContent
+      ref={ref}
+      className={cn(
+        'max-h-[calc(100%-2rem)] sm:max-h-[calc(100%-2rem)] w-fit max-w-[calc(100%-2rem)] sm:max-w-[calc(100%-2rem)] flex min-h-0 flex-col gap-4 px-6 py-5',
+        fullscreen && 'h-[calc(100%-2rem)] w-[calc(100%-2rem)] max-w-none sm:max-w-none',
+        className,
+      )}
+      onPointerDownOutside={handleOnPointerDownOutside}
+      {...props}
+    />
+  );
+});
 
 DialogContent.displayName = 'DialogContent';
 

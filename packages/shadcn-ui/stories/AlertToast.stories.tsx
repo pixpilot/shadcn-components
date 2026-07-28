@@ -1,6 +1,19 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ComponentProps } from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import {
+  Dialog,
+  DialogBody,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+} from '../src';
 import { Button } from '../src/button';
 import { toast, Toaster } from '../src/toast';
 import { AlertToast } from '../src/toast/AlertToast';
@@ -295,6 +308,78 @@ export const DismissibleFalse: Story = {
       Show Non-dismissible Toast
     </Button>
   ),
+};
+
+export const OpenToasetFromDrawer: Story = {
+  render: () => {
+    const [openDrawr, setOpenDrawr] = React.useState<boolean>(false);
+
+    return (
+      <div id="alert-toast-div-37" className="flex flex-col gap-2">
+        <Button id="alert-toast-button-11" onClick={() => setOpenDrawr(true)}>
+          Open Drawer
+        </Button>
+        <Drawer open={openDrawr} onOpenChange={setOpenDrawr}>
+          <DrawerContent floating className="sm:mx-auto sm:max-w-md">
+            <DrawerHeader>
+              <DrawerTitle data-slot="drawer-title">Open Toast from Drawer</DrawerTitle>
+            </DrawerHeader>
+            <DrawerBody>
+              <Button
+                id="alert-toast-button-12"
+                onClick={() =>
+                  toast({
+                    title: 'Non-dismissible Toast',
+                    description: 'This toast cannot be dismissed manually.',
+                    dismissible: false,
+                    position: 'top-center',
+                  })
+                }
+              >
+                Show Non-dismissible Toast
+              </Button>
+            </DrawerBody>
+          </DrawerContent>
+        </Drawer>
+      </div>
+    );
+  },
+};
+
+export const OpenToastFromDialog: Story = {
+  render: () => {
+    const [openDialog, setOpenDialog] = React.useState<boolean>(false);
+
+    return (
+      <div id="alert-toast-div-38" className="flex flex-col gap-2">
+        <Button id="alert-toast-button-13" onClick={() => setOpenDialog(true)}>
+          Open Dialog
+        </Button>
+        <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle data-slot="dialog-title">Open Toast from Dialog</DialogTitle>
+            </DialogHeader>
+            <DialogBody>
+              <Button
+                id="alert-toast-button-14"
+                onClick={() =>
+                  toast({
+                    title: 'Non-dismissible Toast',
+                    description: 'This toast cannot be dismissed manually.',
+                    dismissible: false,
+                    position: 'top-center',
+                  })
+                }
+              >
+                Show Non-dismissible Toast
+              </Button>
+            </DialogBody>
+          </DialogContent>
+        </Dialog>
+      </div>
+    );
+  },
 };
 
 /**

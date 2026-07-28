@@ -6,6 +6,7 @@ import {
 } from '@pixpilot/shadcn';
 import { XIcon } from 'lucide-react';
 import * as React from 'react';
+import { isToastInteractionTarget } from '../overlay-panel/overlay-interaction';
 import {
   OverlayPanelBody,
   OverlayPanelFooter,
@@ -90,25 +91,50 @@ const floatingClass = cn(
 export const DrawerContent = React.forwardRef<
   React.ElementRef<typeof BaseDrawerContent>,
   DrawerContentProps
->(({ className, floating = true, showCloseButton = true, noDrag, ...props }, ref) => (
-  <BaseDrawerContent
-    ref={ref}
-    className={cn('min-h-0 gap-4 px-6 pb-6', floating && floatingClass, className)}
-    {...useNoDragProps(noDrag)}
-    {...props}
-  >
-    {props.children}
-    {showCloseButton && (
-      <BaseDrawerClose
-        data-slot="drawer-close"
-        className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+>(
+  (
+    {
+      className,
+      floating = true,
+      showCloseButton = true,
+      noDrag,
+      onPointerDownOutside,
+      ...props
+    },
+    ref,
+  ) => {
+    const handleOnPointerDownOutside = React.useCallback(
+      (event: Parameters<NonNullable<DrawerContentProps['onPointerDownOutside']>>[0]) => {
+        onPointerDownOutside?.(event);
+        if (isToastInteractionTarget(event.target)) {
+          event.preventDefault();
+        }
+      },
+      [onPointerDownOutside],
+    );
+
+    return (
+      <BaseDrawerContent
+        ref={ref}
+        className={cn('min-h-0 gap-4 px-6 pb-6', floating && floatingClass, className)}
+        {...useNoDragProps(noDrag)}
+        onPointerDownOutside={handleOnPointerDownOutside}
+        {...props}
       >
-        <XIcon />
-        <span className="sr-only">Close</span>
-      </BaseDrawerClose>
-    )}
-  </BaseDrawerContent>
-));
+        {props.children}
+        {showCloseButton && (
+          <BaseDrawerClose
+            data-slot="drawer-close"
+            className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+          >
+            <XIcon />
+            <span className="sr-only">Close</span>
+          </BaseDrawerClose>
+        )}
+      </BaseDrawerContent>
+    );
+  },
+);
 
 DrawerContent.displayName = 'DrawerContent';
 

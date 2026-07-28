@@ -661,6 +661,251 @@
         }
       ]
     },
+    "shadcn-ui-alerttoast--open-toaset-from-drawer": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-button-11"
+                  },
+                  "id": "Wqak6CYbhc2P",
+                  "name": "click"
+                }
+              ],
+              "id": "ZFrDUCIsFSEp",
+              "temp": true,
+              "title": "open drawer"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-button-12"
+                  },
+                  "id": "dN2w4PO2Ak33",
+                  "name": "click"
+                }
+              ],
+              "id": "c7PTp1LQV2oL",
+              "temp": true,
+              "title": "show toast from drawer"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 200
+                  },
+                  "id": "dFn270b7fyE9",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "lqKVf8chZBQp",
+              "temp": true,
+              "title": "wait for toast"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-sonner-toast]"
+                  },
+                  "id": "jJqmnYMwVDhO",
+                  "name": "click"
+                }
+              ],
+              "id": "fqQ0B2eH4zUy",
+              "temp": true,
+              "title": "click toast without closing drawer"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"alert\"]"
+                  },
+                  "id": "LuvNpjRmnYsI",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "o0tJ1_K3I0iu",
+              "title": "takeElementScreenshot"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"drawer-content\"]"
+                  },
+                  "id": "6C61Gk7fKPeh",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "pJH51YKCQt_4",
+              "temp": true,
+              "title": "drawer remains open after toast click"
+            }
+          ],
+          "browserOptionsId": "3DdeEUnj2-rV",
+          "browserType": "chromium",
+          "id": "yPQDgt7i5gXk",
+          "index": 0,
+          "title": "Drawer remains open when toast is clicked"
+        }
+      ],
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"alert\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "lAG-16ma6kst",
+          "title": "takeElementScreenshot"
+        }
+      ]
+    },
+    "shadcn-ui-alerttoast--open-toast-from-dialog": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-button-13"
+                  },
+                  "id": "xzeH_cjlqPaQ",
+                  "name": "click"
+                }
+              ],
+              "id": "NviLy0AV5cMh",
+              "temp": true,
+              "title": "open dialog"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#alert-toast-button-14"
+                  },
+                  "id": "L6GStPW6t6F4",
+                  "name": "click"
+                }
+              ],
+              "id": "R4DgWuQ1-UaV",
+              "temp": true,
+              "title": "show toast from dialog"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 200
+                  },
+                  "id": "Q3oHMCGN5r51",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "VZ_WRZWdf4hX",
+              "temp": true,
+              "title": "wait for toast"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-sonner-toast]"
+                  },
+                  "id": "MoLPlCn62S17",
+                  "name": "click"
+                }
+              ],
+              "id": "_NbSl9rxqsdq",
+              "temp": true,
+              "title": "click toast without closing dialog"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"alert\"]"
+                  },
+                  "id": "mL4ofAIAVSzZ",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "ZAqzKSkIqOlb",
+              "title": "takeElementScreenshot"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 200
+                  },
+                  "id": "zP60V6VRW6rp",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "nEp2mUKFSIXx",
+              "title": "delay 200"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"dialog-content\"]"
+                  },
+                  "id": "nMuUcP18UYj-",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "jw7h8o6reNYx",
+              "temp": true,
+              "title": "dialog remains open after toast click"
+            }
+          ],
+          "browserOptionsId": "l2U26Z-Yew3O",
+          "browserType": "chromium",
+          "id": "hGj07F6v79R0",
+          "index": 0,
+          "title": "Dialog remains open when toast is clicked"
+        }
+      ],
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"alert\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "fmlMfwnRpaZz",
+          "title": "takeElementScreenshot"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "timeout": 200
+              },
+              "name": "waitForTimeout"
+            }
+          ],
+          "id": "cb-W1HkBHOF_",
+          "title": "delay 200"
+        }
+      ]
+    },
     "shadcn-ui-alerttoast--custom-toast": {
       "actionSets": [
         {
@@ -1355,6 +1600,20 @@
         "height": 162,
         "width": 433
       }
+    },
+    "3DdeEUnj2-rV": {
+      "viewport": {
+        "height": 265,
+        "width": 836
+      },
+      "cursor": true
+    },
+    "l2U26Z-Yew3O": {
+      "viewport": {
+        "height": 355,
+        "width": 836
+      },
+      "cursor": true
     }
   },
   "screenshotOptions": {
