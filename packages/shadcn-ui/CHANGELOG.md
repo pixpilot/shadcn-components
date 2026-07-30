@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 3.15.0
+
+### Minor Changes
+
+- add `WithSearchIcon` story to showcase search input
+
 ## 3.14.0
 
 ### Minor Changes
