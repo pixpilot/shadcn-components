@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { Search } from 'lucide-react';
 import { Input } from '../src/input';
 
 /**
@@ -70,5 +71,13 @@ export const Disabled: Story = {
     suffix: '.com',
     placeholder: 'example',
     disabled: true,
+  },
+};
+
+export const WithSearchIcon: Story = {
+  args: {
+    suffix: <Search size={16} />,
+    placeholder: 'Search',
+    type: 'search',
   },
 };
