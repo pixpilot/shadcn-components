@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 3.14.0
+
+### Minor Changes
+
+- add `AlertToast` component reference in documentation
+
 ## 3.13.0
 
 ### Minor Changes
