@@ -1,0 +1,687 @@
+{
+  "version": "0",
+  "stories": {
+    "shadcn-ui-iconpicker--default": {
+      "screenshots": [
+        {
+          "id": "scDefault01",
+          "index": 0,
+          "title": "Default icon picker dialog",
+          "browserType": "chromium",
+          "browserOptionsId": "desktop",
+          "actionSets": [
+            {
+              "id": "setDefault",
+              "title": "Open picker",
+              "actions": [
+                {
+                  "id": "clickDefault",
+                  "name": "click",
+                  "args": {
+                    "selector": "button:has-text('Select Icon')"
+                  }
+                },
+                {
+                  "id": "waitDefault",
+                  "name": "waitForSelector",
+                  "args": {
+                    "selector": "[data-slot=\"dialog-content\"]",
+                    "options": {
+                      "state": "visible"
+                    }
+                  }
+                },
+                {
+                  "id": "shotDefault",
+                  "name": "takeElementScreenshot",
+                  "args": {
+                    "selector": "[data-slot=\"dialog-content\"]"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#storybook-root"
+                  },
+                  "id": "Cy-et-sTt-s3",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "jW8-vnB8nU3Q",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "URmdvvyVG7Vi",
+          "browserType": "chromium",
+          "id": "i9hcU0FQsEHZ",
+          "index": 1,
+          "title": "default variant"
+        }
+      ],
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#storybook-root"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "tMbQ6u5N_dVS",
+          "title": "takeElementScreenshot"
+        }
+      ]
+    },
+    "shadcn-ui-iconpicker--hide-value-text-and-dash": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#storybook-root"
+                  },
+                  "id": "_DlyQNEpgHpk",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "Naq6e0OPTPaF",
+              "temp": true,
+              "title": "Open picker"
+            }
+          ],
+          "browserOptionsId": "desktop",
+          "browserType": "chromium",
+          "id": "H7_8orxILpJd",
+          "index": 0,
+          "title": "Icon picker with dash placeholder"
+        }
+      ]
+    },
+    "shadcn-ui-iconpicker--icon-button-variant": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#storybook-root"
+                  },
+                  "id": "0uBDMGUOfliF",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "_mRHpOiXZRGP",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "desktop",
+          "browserType": "chromium",
+          "id": "t2bdnTpZfgph",
+          "index": 0,
+          "title": "Empty icon button picker dialog"
+        }
+      ],
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#storybook-root"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "pWeqbGuwBjtk",
+          "title": "takeElementScreenshot"
+        }
+      ]
+    },
+    "shadcn-ui-iconpicker--icon-button-with-icon": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#storybook-root"
+                  },
+                  "id": "ECrrOuk_dNlS",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "m0TVU2PKu2xE",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "desktop",
+          "browserType": "chromium",
+          "id": "m0qKiBfC-fT5",
+          "index": 0,
+          "title": "Selected icon button picker dialog"
+        }
+      ]
+    },
+    "shadcn-ui-iconpicker--clear-button": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#storybook-root"
+                  },
+                  "id": "xA8Zo9bpntD1",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "cKJtJyuVTXaq",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "desktop",
+          "browserType": "chromium",
+          "id": "J1QY798u8e26",
+          "index": 0,
+          "title": "Picker with clear buttons"
+        }
+      ],
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#storybook-root"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "WK4didEmKDuA",
+          "title": "takeElementScreenshot"
+        }
+      ]
+    },
+    "shadcn-ui-iconpicker--dialog-mode": {
+      "screenshots": [
+        {
+          "id": "scDialog01",
+          "index": 0,
+          "title": "Dialog mode picker",
+          "browserType": "chromium",
+          "browserOptionsId": "desktop",
+          "actionSets": [
+            {
+              "id": "setDialog",
+              "title": "Open picker",
+              "actions": [
+                {
+                  "id": "clickDialog",
+                  "name": "click",
+                  "args": {
+                    "selector": "button:has-text('Select Icon')"
+                  }
+                },
+                {
+                  "id": "waitDialog",
+                  "name": "waitForSelector",
+                  "args": {
+                    "selector": "[data-slot=\"dialog-content\"]",
+                    "options": {
+                      "state": "visible"
+                    }
+                  }
+                },
+                {
+                  "id": "shotDialog",
+                  "name": "takeElementScreenshot",
+                  "args": {
+                    "selector": "[data-slot=\"dialog-content\"]"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "shadcn-ui-iconpicker--popover-mode": {
+      "screenshots": [
+        {
+          "id": "scPopover01",
+          "index": 0,
+          "title": "Popover mode picker",
+          "browserType": "chromium",
+          "browserOptionsId": "desktop",
+          "actionSets": [
+            {
+              "id": "setPopover",
+              "title": "Open picker",
+              "actions": [
+                {
+                  "id": "clickPopover",
+                  "name": "click",
+                  "args": {
+                    "selector": "button:has-text('Select Icon')"
+                  }
+                },
+                {
+                  "id": "waitPopover",
+                  "name": "waitForSelector",
+                  "args": {
+                    "selector": "[data-slot=\"popover-content\"]",
+                    "options": {
+                      "state": "visible"
+                    }
+                  }
+                },
+                {
+                  "id": "shotPopover",
+                  "name": "takeElementScreenshot",
+                  "args": {
+                    "selector": "[data-slot=\"popover-content\"]"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "shadcn-ui-iconpicker--single-provider": {
+      "screenshots": [
+        {
+          "id": "scSingle01",
+          "index": 0,
+          "title": "Single provider picker dialog",
+          "browserType": "chromium",
+          "browserOptionsId": "desktop",
+          "actionSets": [
+            {
+              "id": "setSingle",
+              "title": "Open picker",
+              "actions": [
+                {
+                  "id": "clickSingle",
+                  "name": "click",
+                  "args": {
+                    "selector": "button:has-text('Select Icon')"
+                  }
+                },
+                {
+                  "id": "waitSingle",
+                  "name": "waitForSelector",
+                  "args": {
+                    "selector": "[data-slot=\"dialog-content\"]",
+                    "options": {
+                      "state": "visible"
+                    }
+                  }
+                },
+                {
+                  "id": "shotSingle",
+                  "name": "takeElementScreenshot",
+                  "args": {
+                    "selector": "[data-slot=\"dialog-content\"]"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "shadcn-ui-iconpicker--multiple-providers": {
+      "screenshots": [
+        {
+          "id": "scMultiple01",
+          "index": 0,
+          "title": "Multiple provider picker dialog",
+          "browserType": "chromium",
+          "browserOptionsId": "desktop",
+          "actionSets": [
+            {
+              "id": "setMultiple",
+              "title": "Open picker",
+              "actions": [
+                {
+                  "id": "clickMultiple",
+                  "name": "click",
+                  "args": {
+                    "selector": "button:has-text('Select Icon')"
+                  }
+                },
+                {
+                  "id": "waitMultiple",
+                  "name": "waitForSelector",
+                  "args": {
+                    "selector": "[data-slot=\"dialog-content\"]",
+                    "options": {
+                      "state": "visible"
+                    }
+                  }
+                },
+                {
+                  "id": "shotMultiple",
+                  "name": "takeElementScreenshot",
+                  "args": {
+                    "selector": "[data-slot=\"dialog-content\"]"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "shadcn-ui-iconpicker--with-popover-config": {
+      "screenshots": [
+        {
+          "id": "scPopoverConfig01",
+          "index": 0,
+          "title": "Configured popover picker",
+          "browserType": "chromium",
+          "browserOptionsId": "desktop",
+          "actionSets": [
+            {
+              "id": "setPopoverConfig",
+              "title": "Open picker",
+              "actions": [
+                {
+                  "id": "clickPopoverConfig",
+                  "name": "click",
+                  "args": {
+                    "selector": "button:has-text('Select Icon')"
+                  }
+                },
+                {
+                  "id": "waitPopoverConfig",
+                  "name": "waitForSelector",
+                  "args": {
+                    "selector": "[data-slot=\"popover-content\"]",
+                    "options": {
+                      "state": "visible"
+                    }
+                  }
+                },
+                {
+                  "id": "shotPopoverConfig",
+                  "name": "takeElementScreenshot",
+                  "args": {
+                    "selector": "[data-slot=\"popover-content\"]"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "shadcn-ui-iconpicker--interactive": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#shadcn-ui-iconpicker--interactive-clear-button"
+                  },
+                  "id": "sMgcaxbgedo7",
+                  "name": "click"
+                }
+              ],
+              "id": "DIUnw0Yk9Slo",
+              "title": "click"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#storybook-root"
+                  },
+                  "id": "HEWXo4Ha7usG",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "gQYccdIma4Ht",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "Ey5JK4tczYN1",
+          "browserType": "chromium",
+          "id": "Dq_E0F80SzZa",
+          "index": 0,
+          "title": "Interactive picker dialog"
+        }
+      ],
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#shadcn-ui-iconpicker--interactive-clear-button"
+              },
+              "name": "click"
+            }
+          ],
+          "id": "q98hsyxwpp8y",
+          "title": "click"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#storybook-root"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "WK9LmvwodRbQ",
+          "title": "takeElementScreenshot"
+        }
+      ]
+    },
+    "shadcn-ui-iconpicker--with-lazy-loading": {
+      "screenshots": [
+        {
+          "id": "scLazy01",
+          "index": 0,
+          "title": "Lazy-loading picker dialog",
+          "browserType": "chromium",
+          "browserOptionsId": "desktop",
+          "actionSets": [
+            {
+              "id": "setLazy",
+              "title": "Open picker",
+              "actions": [
+                {
+                  "id": "clickLazy",
+                  "name": "click",
+                  "args": {
+                    "selector": "button:has-text('Select Icon')"
+                  }
+                },
+                {
+                  "id": "waitLazy",
+                  "name": "waitForSelector",
+                  "args": {
+                    "selector": "[data-slot=\"dialog-content\"]",
+                    "options": {
+                      "state": "visible"
+                    }
+                  }
+                },
+                {
+                  "id": "shotLazy",
+                  "name": "takeElementScreenshot",
+                  "args": {
+                    "selector": "[data-slot=\"dialog-content\"]"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "shadcn-ui-iconpicker--multiple-async-providers": {
+      "screenshots": [
+        {
+          "id": "scAsync01",
+          "index": 0,
+          "title": "Async provider picker dialog",
+          "browserType": "chromium",
+          "browserOptionsId": "desktop",
+          "actionSets": [
+            {
+              "id": "setAsync",
+              "title": "Open picker",
+              "actions": [
+                {
+                  "id": "clickAsync",
+                  "name": "click",
+                  "args": {
+                    "selector": "#icon-picker-div-4 button:has-text('Select Icon')"
+                  }
+                },
+                {
+                  "id": "waitAsync",
+                  "name": "waitForSelector",
+                  "args": {
+                    "selector": "[data-slot=\"dialog-content\"]",
+                    "options": {
+                      "state": "visible"
+                    }
+                  }
+                },
+                {
+                  "id": "shotAsync",
+                  "name": "takeElementScreenshot",
+                  "args": {
+                    "selector": "[data-slot=\"dialog-content\"]"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "shadcn-ui-iconpicker--with-selected-icon": {
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#storybook-root"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "xptw5PGZS1bV",
+          "title": "takeElementScreenshot"
+        }
+      ],
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#storybook-root"
+                  },
+                  "id": "X8B81y5vXd8T",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "zyUv5nKg4e9X",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "URmdvvyVG7Vi",
+          "browserType": "chromium",
+          "id": "N1oyBoXynwUI",
+          "index": 0,
+          "title": "With Selected Icon - mdi:heart selected"
+        },
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "button[aria-label=\"Change selected icon (mdi:heart)\"]"
+                  },
+                  "id": "vhsQ9A0R0Gia",
+                  "name": "click"
+                },
+                {
+                  "args": {
+                    "selector": "[data-slot=\"dialog-content\"]",
+                    "options": {
+                      "state": "visible"
+                    }
+                  },
+                  "id": "A_VgYlI67YN0",
+                  "name": "waitForSelector"
+                },
+                {
+                  "args": {
+                    "selector": "[data-slot=\"tabs-list\"]"
+                  },
+                  "id": "lekjH6sCEzEt",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "lFrb_d0WNkFE",
+              "temp": true,
+              "title": "Open picker from icon preview"
+            }
+          ],
+          "browserOptionsId": "desktop",
+          "browserType": "chromium",
+          "id": "OJBRniLlwyHk",
+          "index": 1,
+          "title": "Selected icon preview opens the change dialog"
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "desktop": {
+      "viewport": {
+        "width": 960,
+        "height": 720
+      },
+      "reducedMotion": "reduce"
+    },
+    "URmdvvyVG7Vi": {
+      "viewport": {
+        "height": 355,
+        "width": 836
+      }
+    },
+    "Ey5JK4tczYN1": {
+      "viewport": {
+        "width": 960,
+        "height": 720
+      },
+      "reducedMotion": "reduce",
+      "cursor": true
+    }
+  },
+  "screenshotOptions": {}
+}

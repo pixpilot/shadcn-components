@@ -438,3 +438,37 @@ export const CreateViaProvider: Story = {
     </div>
   ),
 };
+
+function PortalContainerStoryContent() {
+  const portalContainerRef = React.useRef<HTMLDivElement>(null);
+
+  return (
+    <OverlayProvider portalContainerRef={portalContainerRef}>
+      <div className="flex flex-col items-center gap-4">
+        <Drawer>
+          <DrawerTrigger asChild>
+            <Button variant="outline">Open Route Drawer</Button>
+          </DrawerTrigger>
+          <DrawerContent>
+            <DrawerHeader>
+              <DrawerTitle>Route-scoped drawer</DrawerTitle>
+              <DrawerDescription>
+                This portal is mounted in the route overlay root.
+              </DrawerDescription>
+            </DrawerHeader>
+          </DrawerContent>
+        </Drawer>
+        <div
+          ref={portalContainerRef}
+          data-testid="drawer-portal-container"
+          className="relative h-80 w-full max-w-lg overflow-hidden rounded-lg border bg-muted/30"
+        />
+      </div>
+    </OverlayProvider>
+  );
+}
+
+/** Drawer portal scoped by OverlayProvider instead of a per-drawer prop. */
+export const PortalContainer: Story = {
+  render: () => <PortalContainerStoryContent />,
+};

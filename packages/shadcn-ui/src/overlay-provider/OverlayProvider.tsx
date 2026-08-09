@@ -1,9 +1,12 @@
 /* eslint-disable react/no-context-provider */
+import type { PortalContainerRef } from '@pixpilot/shadcn';
 import NiceModal from '@ebay/nice-modal-react';
+import { PortalContainerProvider } from '@pixpilot/shadcn';
 import React, { createContext, use } from 'react';
 
 export interface OverlayProviderProps {
   children: React.ReactNode;
+  portalContainerRef?: PortalContainerRef;
 }
 
 /**
@@ -37,13 +40,19 @@ export function createOverlayProvider(
 
     // If a provider is already above us in the tree, just pass children through.
     if (isAlreadyMounted) {
-      return <>{props.children}</>;
+      return (
+        <PortalContainerProvider portalContainerRef={props.portalContainerRef}>
+          {props.children}
+        </PortalContainerProvider>
+      );
     }
 
     return (
-      <OverlayProviderMountedContext.Provider value={true}>
-        <NiceModal.Provider>{props.children}</NiceModal.Provider>
-      </OverlayProviderMountedContext.Provider>
+      <PortalContainerProvider portalContainerRef={props.portalContainerRef}>
+        <OverlayProviderMountedContext.Provider value={true}>
+          <NiceModal.Provider>{props.children}</NiceModal.Provider>
+        </OverlayProviderMountedContext.Provider>
+      </PortalContainerProvider>
     );
   };
 

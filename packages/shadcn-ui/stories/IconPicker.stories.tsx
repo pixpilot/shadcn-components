@@ -172,6 +172,7 @@ export const Default: Story = {
     return (
       <IconPicker
         {...args}
+        data-testid="icon-picker"
         value={value}
         onChange={(newValue) => {
           setValue(newValue);
@@ -199,6 +200,7 @@ export const WithSelectedIcon: Story = {
       <IconPicker
         {...args}
         value={value}
+        data-testid="icon-picker"
         onChange={(newValue) => {
           setValue(newValue);
           args.onChange?.(newValue);
@@ -227,6 +229,7 @@ export const HideValueTextAndDash: Story = {
       <IconPicker
         {...args}
         value={value}
+        data-testid="icon-picker"
         onChange={(newValue) => {
           setValue(newValue);
           args.onChange?.(newValue);
@@ -253,6 +256,7 @@ export const IconButtonVariant: Story = {
       <IconPicker
         {...args}
         value={value}
+        data-testid="icon-picker"
         onChange={(newValue) => {
           setValue(newValue);
           args.onChange?.(newValue);
@@ -279,6 +283,7 @@ export const IconButtonWithIcon: Story = {
       <IconPicker
         {...args}
         value={value}
+        data-testid="icon-picker"
         onChange={(newValue) => {
           setValue(newValue);
           args.onChange?.(newValue);
@@ -310,6 +315,7 @@ export const ClearButton: Story = {
         <IconPicker
           {...args}
           value={defaultValue}
+          data-testid="icon-picker"
           onChange={(newValue) => {
             setDefaultValue(newValue);
             args.onChange?.(newValue);
@@ -346,6 +352,7 @@ export const DialogMode: Story = {
       <IconPicker
         {...args}
         value={value}
+        data-testid="icon-picker"
         onChange={(newValue) => {
           setValue(newValue);
           args.onChange?.(newValue);
@@ -372,6 +379,7 @@ export const PopoverMode: Story = {
       <IconPicker
         {...args}
         value={value}
+        data-testid="icon-picker"
         onChange={(newValue) => {
           setValue(newValue);
           args.onChange?.(newValue);
@@ -411,6 +419,7 @@ export const SingleProvider: Story = {
       <IconPicker
         {...args}
         value={value}
+        data-testid="icon-picker"
         onChange={(newValue) => {
           setValue(newValue);
           args.onChange?.(newValue);
@@ -437,6 +446,7 @@ export const MultipleProviders: Story = {
       <IconPicker
         {...args}
         value={value}
+        data-testid="icon-picker"
         onChange={(newValue) => {
           setValue(newValue);
           args.onChange?.(newValue);
@@ -467,6 +477,7 @@ export const WithPopoverConfig: Story = {
       <IconPicker
         {...args}
         value={value}
+        data-testid="icon-picker"
         onChange={(newValue) => {
           setValue(newValue);
           args.onChange?.(newValue);
@@ -546,6 +557,7 @@ export const WithLazyLoading: Story = {
     return (
       <IconPicker
         {...args}
+        data-testid="icon-picker"
         providers={[loadFontAwesomeAsync]}
         value={value}
         onChange={(newValue) => {
@@ -616,6 +628,7 @@ export const MultipleAsyncProviders: Story = {
       >
         <IconPicker
           {...args}
+          data-testid="icon-picker"
           providers={providersArray}
           value={value}
           onChange={(newValue) => {
@@ -711,6 +724,7 @@ export const WithErrorHandling: Story = {
       >
         <IconPicker
           {...args}
+          data-testid="icon-picker"
           providers={[loadValidProvider, loadFailingProvider, loadInvalidProvider]}
           value={value}
           onChange={(newValue) => {
@@ -799,6 +813,7 @@ export const LargeIconSet: Story = {
       >
         <IconPicker
           {...args}
+          data-testid="icon-picker"
           providers={[loadLargeIconSet]}
           value={value}
           onChange={(newValue) => {

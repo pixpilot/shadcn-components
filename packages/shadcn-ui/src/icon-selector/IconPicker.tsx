@@ -86,6 +86,11 @@ export const IconPicker: FC<IconPickerProps> = ({
     onOpenChange?.(false);
   }, [onChange, onOpenChange]);
 
+  const handleOpenPicker = useCallback(() => {
+    setIsOpen(true);
+    onOpenChange?.(true);
+  }, [onOpenChange]);
+
   const hasValue = typeof value === 'string' && value.length > 0;
 
   const renderIconDisplay = (emptyClassName: string, ariaHidden?: boolean) => {
@@ -185,9 +190,12 @@ export const IconPicker: FC<IconPickerProps> = ({
 
   return (
     <div className={cn('flex items-center gap-2', slots?.root?.className)}>
-      <div
+      <button
+        type="button"
+        aria-label={iconButtonLabel}
+        onClick={handleOpenPicker}
         className={cn(
-          'flex items-center gap-2 rounded-md border border-input bg-background px-3 py-2',
+          'flex cursor-pointer items-center gap-2 rounded-md border border-input bg-background px-3 py-2 hover:bg-muted/50',
           slots?.preview?.className,
         )}
       >
@@ -199,7 +207,7 @@ export const IconPicker: FC<IconPickerProps> = ({
             {value}
           </span>
         )}
-      </div>
+      </button>
 
       <IconPickerContainer
         effectiveMode={effectiveMode}

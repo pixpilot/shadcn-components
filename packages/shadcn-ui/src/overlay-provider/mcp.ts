@@ -14,9 +14,11 @@ export const meta: ComponentMeta<OverlayProviderDocumentedProps> = {
     'Context provider that enables imperatively shown dialogs/drawers (e.g. ConfirmationDialog). Guards against nested providers so it is safe to mount once near the app root.',
   props: defineProps<OverlayProviderDocumentedProps>({
     children: 'The application subtree that can show dialogs through the dialog helper.',
+    portalContainerRef:
+      'Optional ref to the element that descendant Dialog and Drawer portals should use.',
   }),
   notes: [
-    'Nesting a second OverlayProvider is a safe no-op; the inner one passes children through.',
+    'Nested providers do not mount another NiceModal store, but may set a different portalContainerRef for their descendants.',
   ],
   examples: [
     {

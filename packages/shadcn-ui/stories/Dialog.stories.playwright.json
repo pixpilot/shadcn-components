@@ -1189,6 +1189,45 @@
           "title": "Dialog shown after clicking Custom show, then closed on click `Done` button"
         }
       ]
+    },
+    "shadcn-ui-dialog--portal-container": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"dialog-trigger\"]"
+                  },
+                  "id": "portalDialogOpenAction",
+                  "name": "click"
+                }
+              ],
+              "id": "portalDialogOpenActionSet",
+              "title": "open route dialog"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-testid=\"dialog-portal-container\"]"
+                  },
+                  "id": "portalDialogScreenshotAction",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "portalDialogScreenshotActionSet",
+              "title": "capture route-scoped dialog"
+            }
+          ],
+          "browserOptionsId": "381RjXAZ3beS",
+          "browserType": "chromium",
+          "id": "portalDialogScreenshot",
+          "index": 0,
+          "title": "dialog inside OverlayProvider portal container"
+        }
+      ]
     }
   },
   "browserOptions": {

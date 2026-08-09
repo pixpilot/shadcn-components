@@ -20,7 +20,8 @@
  * WHAT WAS CUSTOMISED
  * ─────────────────────────────────────────────────────────────────────────────
  * `DialogContent` was extended with an optional `container?: HTMLElement | null`
- * prop.  When supplied:
+ * prop, and `DialogPortal` now resolves the shared PortalContainerProvider
+ * default. When a container is resolved:
  *
  *   1. The Radix `DialogPortal` mounts into that element instead of
  *      `document.body`, scoping the dialog's DOM subtree.
@@ -49,6 +50,8 @@
  *     body with `pointer-events: none`.
  *   - Destructure `onInteractOutside` and prevent default when
  *     `preventBackdropClickClose` is true.
+ *   - Resolve `DialogPortal` through `usePortalContainer(container)` so an
+ *     explicit container wins over PortalContainerProvider.
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
@@ -61,6 +64,7 @@ import {
   DialogDescription,
   DialogTitle,
 } from '../../../src/components/ui/dialog';
+import { PortalContainerProvider } from '../../../src/components/ui/portal-container';
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -229,6 +233,62 @@ describe('dialogContent — container prop (custom, restore after shadcn update)
 
     document.body.removeChild(containerEl);
     document.body.style.pointerEvents = '';
+  });
+
+  it('uses the PortalContainerProvider container when no explicit container is supplied', () => {
+    const providerContainer = document.createElement('div');
+    document.body.appendChild(providerContainer);
+    const portalContainerRef: React.RefObject<HTMLElement | null> = {
+      current: providerContainer,
+    };
+
+    const view = render(
+      <PortalContainerProvider portalContainerRef={portalContainerRef}>
+        <Dialog open>
+          <DialogContent aria-describedby={undefined}>
+            <DialogTitle>Provider Dialog</DialogTitle>
+          </DialogContent>
+        </Dialog>
+      </PortalContainerProvider>,
+    );
+
+    expect(
+      providerContainer.querySelector('[data-slot="dialog-content"]'),
+    ).not.toBeNull();
+    expect(
+      providerContainer.querySelector('[data-slot="dialog-content"]')?.className,
+    ).toContain('absolute');
+
+    view.unmount();
+    providerContainer.remove();
+  });
+
+  it('lets an explicit container override PortalContainerProvider', () => {
+    const providerContainer = document.createElement('div');
+    const explicitContainer = document.createElement('div');
+    document.body.append(providerContainer, explicitContainer);
+    const portalContainerRef: React.RefObject<HTMLElement | null> = {
+      current: providerContainer,
+    };
+
+    const view = render(
+      <PortalContainerProvider portalContainerRef={portalContainerRef}>
+        <Dialog open>
+          <DialogContent container={explicitContainer} aria-describedby={undefined}>
+            <DialogTitle>Explicit Dialog</DialogTitle>
+          </DialogContent>
+        </Dialog>
+      </PortalContainerProvider>,
+    );
+
+    expect(
+      explicitContainer.querySelector('[data-slot="dialog-content"]'),
+    ).not.toBeNull();
+    expect(providerContainer.querySelector('[data-slot="dialog-content"]')).toBeNull();
+
+    view.unmount();
+    providerContainer.remove();
+    explicitContainer.remove();
   });
 });
 

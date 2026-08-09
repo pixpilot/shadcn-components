@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Drawer as DrawerPrimitive } from 'vaul';
 
 import { cn } from '@/lib/index';
+import { usePortalContainer } from './portal-container';
 
 /**
  * A drawer that slides in from an edge of the viewport.
@@ -26,8 +27,19 @@ function DrawerTrigger({
   return <DrawerPrimitive.Trigger data-slot="drawer-trigger" {...props} />;
 }
 
-function DrawerPortal({ ...props }: React.ComponentProps<typeof DrawerPrimitive.Portal>) {
-  return <DrawerPrimitive.Portal data-slot="drawer-portal" {...props} />;
+function DrawerPortal({
+  container,
+  ...props
+}: React.ComponentProps<typeof DrawerPrimitive.Portal>) {
+  const resolvedContainer = usePortalContainer(container);
+
+  return (
+    <DrawerPrimitive.Portal
+      data-slot="drawer-portal"
+      container={resolvedContainer}
+      {...props}
+    />
+  );
 }
 
 function DrawerClose({ ...props }: React.ComponentProps<typeof DrawerPrimitive.Close>) {

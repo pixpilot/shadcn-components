@@ -872,3 +872,37 @@ export const CreateViaProvider: Story = {
     </div>
   ),
 };
+
+function PortalContainerStoryContent() {
+  const portalContainerRef = React.useRef<HTMLDivElement>(null);
+
+  return (
+    <OverlayProvider portalContainerRef={portalContainerRef}>
+      <div className="flex flex-col items-center gap-4">
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="outline">Open Route Dialog</Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Route-scoped dialog</DialogTitle>
+              <DialogDescription>
+                This portal is mounted in the route overlay root.
+              </DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
+        <div
+          ref={portalContainerRef}
+          data-testid="dialog-portal-container"
+          className="relative h-80 w-full max-w-lg overflow-hidden rounded-lg border bg-muted/30"
+        />
+      </div>
+    </OverlayProvider>
+  );
+}
+
+/** Dialog portal scoped by OverlayProvider instead of a per-dialog prop. */
+export const PortalContainer: Story = {
+  render: () => <PortalContainerStoryContent />,
+};

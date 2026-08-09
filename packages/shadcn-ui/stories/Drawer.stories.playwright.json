@@ -454,6 +454,45 @@
           "title": "should not allow drag on footer"
         }
       ]
+    },
+    "shadcn-ui-drawer--portal-container": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"drawer-trigger\"]"
+                  },
+                  "id": "portalDrawerOpenAction",
+                  "name": "click"
+                }
+              ],
+              "id": "portalDrawerOpenActionSet",
+              "title": "open route drawer"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"drawer-content\"]"
+                  },
+                  "id": "portalDrawerScreenshotAction",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "portalDrawerScreenshotActionSet",
+              "title": "capture route-scoped drawer"
+            }
+          ],
+          "browserOptionsId": "e7gPR14t7RcM",
+          "browserType": "chromium",
+          "id": "portalDrawerScreenshot",
+          "index": 0,
+          "title": "drawer inside OverlayProvider portal container"
+        }
+      ]
     }
   },
   "browserOptions": {

@@ -27,6 +27,7 @@ export * from './label';
 export * from './OrContinueWithSeparator';
 export * from './pagination';
 export * from './popover';
+export * from './portal-container';
 export * from './radio-group';
 export * from './select';
 export * from './separator';
