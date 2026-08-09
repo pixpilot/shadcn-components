@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 2.3.0
+
+### Minor Changes
+
+- support provider portal containers
+
 ## 2.2.0
 
 ### Minor Changes

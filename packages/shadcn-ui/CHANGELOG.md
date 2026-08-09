@@ -1,5 +1,16 @@
 # @pixpilot/shadcn-ui
 
+## 3.16.0
+
+### Minor Changes
+
+- support provider portal containers
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn@2.3.0
+
 ## 3.15.0
 
 ### Minor Changes
