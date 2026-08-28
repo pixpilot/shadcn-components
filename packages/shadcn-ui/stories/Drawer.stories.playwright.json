@@ -274,6 +274,119 @@
           "index": 0,
           "screenshotOptionsId": "zfx_6yfoaAhN",
           "title": "should not move on drag when root set to no drag"
+        },
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"drawer-trigger\"]"
+                  },
+                  "id": "noDragSelectOpenAction",
+                  "name": "click"
+                }
+              ],
+              "id": "noDragSelectOpenActionSet",
+              "title": "open drawer"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "from": {
+                      "x": 359,
+                      "y": 118
+                    },
+                    "to": {
+                      "x": 660,
+                      "y": 118
+                    }
+                  },
+                  "id": "noDragSelectDragAction",
+                  "name": "mouseFromTo"
+                }
+              ],
+              "id": "noDragSelectDragActionSet",
+              "title": "drag-select the first line of the textarea"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"drawer-content\"]"
+                  },
+                  "id": "noDragSelectScreenshotAction",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "noDragSelectScreenshotActionSet",
+              "title": "capture highlighted text"
+            }
+          ],
+          "browserOptionsId": "e7gPR14t7RcM",
+          "browserType": "chromium",
+          "id": "noDragSelectScreenshot",
+          "index": 1,
+          "title": "should allow text selection when root set to no drag"
+        },
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"drawer-trigger\"]"
+                  },
+                  "id": "K5aemDYiKodl",
+                  "name": "click"
+                }
+              ],
+              "id": "_F79knlNxtse",
+              "temp": true,
+              "title": "open drawer"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "from": {
+                      "x": 364,
+                      "y": 71
+                    },
+                    "to": {
+                      "x": 521,
+                      "y": 70
+                    }
+                  },
+                  "id": "KzEwPNe-eJfv",
+                  "name": "mouseFromTo"
+                }
+              ],
+              "id": "9UPT-vwwVwmG",
+              "temp": true,
+              "title": "drag-select describtion"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"drawer-header\"]"
+                  },
+                  "id": "KUxs9P0NdExg",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "g3RQ1LnAcx2c",
+              "temp": true,
+              "title": "capture highlighted text"
+            }
+          ],
+          "browserOptionsId": "e7gPR14t7RcM",
+          "browserType": "chromium",
+          "id": "Om2gScVJ7Oh5",
+          "index": 2,
+          "title": "should drag and select drawer desciption"
         }
       ]
     },

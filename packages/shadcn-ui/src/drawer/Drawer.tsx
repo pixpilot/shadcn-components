@@ -21,23 +21,40 @@ import {
 const DrawerNoDragContext = React.createContext(false);
 
 /**
+ * Vaul injects a global `@media (hover:hover) and (pointer:fine) {
+ * [data-vaul-drawer] { user-select: none } }` rule so a drag never leaves a
+ * trail of highlighted text. That rule is unlayered, so it outranks Tailwind's
+ * `@layer utilities` output no matter the class — an inline style is the only
+ * reliable override. Since a `noDrag` element cannot be dragged, selection is
+ * re-enabled there; `text` (rather than `auto`) is used because `auto` would
+ * resolve back to `none` when the drawer content above it is still unselectable.
+ */
+const selectableStyle: React.CSSProperties = { userSelect: 'text' };
+
+/**
  * Vaul decides whether a pointer-down starts a drag in its internal
  * `shouldDrag`. For `left`/`right` drawers that check returns `true` before it
  * ever looks at highlighted text, so selecting text inside the panel drags the
  * whole drawer. The one escape hatch vaul honours is the `data-vaul-no-drag`
  * attribute (matched via `.closest()`, so it also covers descendants). This
- * helper renders that attribute when either the root context or the part's own
- * `noDrag` prop is set, and nothing otherwise.
+ * helper renders that attribute — plus the `user-select` reset described above
+ * — when either the root context or the part's own `noDrag` prop is set, and
+ * passes `style` straight through otherwise.
  */
-function useNoDragProps(local?: boolean): { 'data-vaul-no-drag'?: '' } {
+function useNoDragProps(
+  local: boolean | undefined,
+  style: React.CSSProperties | undefined,
+): { 'data-vaul-no-drag'?: ''; style?: React.CSSProperties } {
   const inherited = React.use(DrawerNoDragContext);
-  return inherited || local ? { 'data-vaul-no-drag': '' } : {};
+  if (!inherited && !local) return { style };
+  return { 'data-vaul-no-drag': '', style: { ...selectableStyle, ...style } };
 }
 
 /** A drawer part that can opt out of vaul's drag-to-dismiss. */
 interface NoDragProps {
   /**
-   * Disable vaul's drag-to-dismiss for this element and everything inside it.
+   * Disable vaul's drag-to-dismiss for this element and everything inside it,
+   * and restore text selection (vaul disables it while a drawer is open).
    * Useful for text editors, sliders, or any content where a press-and-move
    * gesture should select/interact instead of dragging the drawer. Setting it
    * on the `Drawer` root disables dragging for the entire drawer.
@@ -98,6 +115,7 @@ export const DrawerContent = React.forwardRef<
       floating = true,
       showCloseButton = true,
       noDrag,
+      style,
       onPointerDownOutside,
       ...props
     },
@@ -117,7 +135,7 @@ export const DrawerContent = React.forwardRef<
       <BaseDrawerContent
         ref={ref}
         className={cn('min-h-0 gap-4 px-6 pb-6', floating && floatingClass, className)}
-        {...useNoDragProps(noDrag)}
+        {...useNoDragProps(noDrag, style)}
         onPointerDownOutside={handleOnPointerDownOutside}
         {...props}
       >
@@ -141,12 +159,13 @@ DrawerContent.displayName = 'DrawerContent';
 // DrawerHeader.tsx
 export function DrawerHeader({
   noDrag,
+  style,
   ...props
 }: React.HTMLAttributes<HTMLDivElement> & NoDragProps) {
   return (
     <OverlayPanelHeader
       data-slot="drawer-header"
-      {...useNoDragProps(noDrag)}
+      {...useNoDragProps(noDrag, style)}
       {...props}
     />
   );
@@ -155,22 +174,28 @@ export function DrawerHeader({
 // DrawerBody.tsx
 export function DrawerBody({
   noDrag,
+  style,
   ...props
 }: React.HTMLAttributes<HTMLDivElement> & NoDragProps) {
   return (
-    <OverlayPanelBody data-slot="drawer-body" {...useNoDragProps(noDrag)} {...props} />
+    <OverlayPanelBody
+      data-slot="drawer-body"
+      {...useNoDragProps(noDrag, style)}
+      {...props}
+    />
   );
 }
 
 // DrawerFooter.tsx
 export function DrawerFooter({
   noDrag,
+  style,
   ...props
 }: React.HTMLAttributes<HTMLDivElement> & NoDragProps) {
   return (
     <OverlayPanelFooter
       data-slot="drawer-footer"
-      {...useNoDragProps(noDrag)}
+      {...useNoDragProps(noDrag, style)}
       {...props}
     />
   );
@@ -179,9 +204,14 @@ export function DrawerFooter({
 export function DrawerClose({
   className,
   noDrag,
+  style,
   ...props
 }: React.ComponentPropsWithoutRef<typeof BaseDrawerClose> & NoDragProps) {
   return (
-    <BaseDrawerClose className={cn(className)} {...useNoDragProps(noDrag)} {...props} />
+    <BaseDrawerClose
+      className={cn(className)}
+      {...useNoDragProps(noDrag, style)}
+      {...props}
+    />
   );
 }
