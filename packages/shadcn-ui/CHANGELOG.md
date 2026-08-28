@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 3.16.1
+
+### Patch Changes
+
+- preserve text selection in non-draggable drawers
+
 ## 3.16.0
 
 ### Minor Changes
