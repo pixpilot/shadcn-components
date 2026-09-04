@@ -1,0 +1,137 @@
+{
+  "version": "0",
+  "stories": {
+    "shadcn-ui-sliderinput--input-bounds-override": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "#shadcn-ui-sliderinput--input-bounds-override-input-0",
+                    "value": "300"
+                  },
+                  "id": "g2T7L-UjcPaH",
+                  "name": "fill"
+                }
+              ],
+              "id": "He-6VUCTg6oI",
+              "title": "fill"
+            },
+            {
+              "actions": [
+                {
+                  "id": "YUUIWyhL7Nut",
+                  "name": "takeScreenshot"
+                }
+              ],
+              "id": "-l4Dg4u26Elg",
+              "title": "takeScreenshot"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"slider-thumb\"]"
+                  },
+                  "id": "N8UAYgJEMFjn",
+                  "name": "mouseDownOnSelector"
+                }
+              ],
+              "id": "B9dYzE1CuUu2",
+              "title": "mouseFromTo"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "x": 499,
+                    "y": 155
+                  },
+                  "id": "nhVHelsKQQk6",
+                  "name": "mouse.move"
+                }
+              ],
+              "id": "tHA1NLx-HVcV",
+              "title": "mouse.move"
+            }
+          ],
+          "browserOptionsId": "slider-input-viewport",
+          "browserType": "chromium",
+          "id": "TZU286Q0xDa3",
+          "index": 0,
+          "screenshotOptionsId": "slider-input-clip",
+          "title": "Unlimited input expands slider maximum"
+        }
+      ],
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "#shadcn-ui-sliderinput--input-bounds-override-input-0",
+                "value": "300"
+              },
+              "name": "fill"
+            }
+          ],
+          "id": "ukZlv_Ite7QZ",
+          "title": "fill"
+        },
+        {
+          "actions": [
+            {
+              "name": "takeScreenshot"
+            }
+          ],
+          "id": "bNtXite1t6op",
+          "title": "takeScreenshot"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"slider-thumb\"]"
+              },
+              "name": "mouseDownOnSelector"
+            }
+          ],
+          "id": "wvux2rReWU98",
+          "title": "mouseFromTo"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "x": 499,
+                "y": 155
+              },
+              "name": "mouse.move"
+            }
+          ],
+          "id": "t28ARaSdMiSl",
+          "title": "mouse.move"
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "slider-input-viewport": {
+      "viewport": {
+        "height": 320,
+        "width": 836
+      }
+    }
+  },
+  "screenshotOptions": {
+    "slider-input-clip": {
+      "clip": {
+        "height": 94,
+        "width": 363,
+        "x": 233,
+        "y": 107
+      }
+    }
+  }
+}

@@ -47,6 +47,14 @@ const meta: Meta<StoryArgs> = {
       control: 'boolean',
       description: 'Whether to show the input fields',
     },
+    autoExpandMax: {
+      control: 'boolean',
+      description: 'Whether input values above max expand the slider range',
+    },
+    autoExpandMin: {
+      control: 'boolean',
+      description: 'Whether input values below min expand the slider range',
+    },
   },
   decorators: [
     (Story) => (
@@ -73,6 +81,7 @@ const DECIMAL_MIN_VALUE = 0;
 const DECIMAL_MAX_VALUE = 10;
 const DECIMAL_DEFAULT_SINGLE_VALUE = 5.5;
 const DECIMAL_DEFAULT_VALUE = [DECIMAL_DEFAULT_SINGLE_VALUE];
+const UNLIMITED_INPUT_VALUE = [250];
 
 /**
  * Default slider input with single value and input field
@@ -180,6 +189,42 @@ export const DecimalStep: Story = {
   },
   render: function DecimalStepSliderInput(args) {
     const [value, setValue] = useState(DECIMAL_DEFAULT_VALUE);
+
+    return <SliderInput {...args} value={value} onValueChange={setValue} />;
+  },
+};
+
+/**
+ * Slider input whose maximum grows to include an unlimited number-field value.
+ */
+export const InputBoundsOverride: Story = {
+  args: {
+    min: MIN_VALUE,
+    max: MAX_VALUE,
+    step: STEP_VALUE,
+    input: { min: undefined, max: undefined },
+  },
+  render: function InputBoundsOverrideSliderInput(args) {
+    const [value, setValue] = useState(UNLIMITED_INPUT_VALUE);
+
+    return <SliderInput {...args} value={value} onValueChange={setValue} />;
+  },
+};
+
+/**
+ * An unlimited number field with a slider that stays at its configured maximum.
+ */
+export const FixedSliderMax: Story = {
+  args: {
+    min: MIN_VALUE,
+    max: MAX_VALUE,
+    step: STEP_VALUE,
+    autoExpandMax: false,
+    autoExpandMin: false,
+    input: { min: undefined, max: undefined },
+  },
+  render: function FixedSliderMaxInput(args) {
+    const [value, setValue] = useState(UNLIMITED_INPUT_VALUE);
 
     return <SliderInput {...args} value={value} onValueChange={setValue} />;
   },

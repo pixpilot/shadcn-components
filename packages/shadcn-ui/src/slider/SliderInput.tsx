@@ -3,23 +3,24 @@ import { useControlled } from '@internal/hooks';
 import { cn, getId, Input } from '@pixpilot/shadcn-ui';
 import React from 'react';
 import { Slider as ShadcnSlider } from './Slider';
+import { clampNumber, getInputBound, toFiniteNumber } from './utils/slider-input-bounds';
 
 export interface SliderInputProps extends React.ComponentProps<typeof ShadcnSlider> {
   showInput?: boolean;
+  /** Default true; preserves any higher maximum entered into an input. */
+  autoExpandMax?: boolean;
+  /** Default true; preserves any lower minimum entered into an input. */
+  autoExpandMin?: boolean;
+  /** Input props; set `min` or `max` to undefined to omit the inherited bound. */
   input?: InputProps;
   slider?: { className?: string };
-}
-
-function clampNumber(input: number, min: number | undefined, max: number | undefined) {
-  let value = input;
-  if (typeof min === 'number') value = Math.max(min, value);
-  if (typeof max === 'number') value = Math.min(max, value);
-  return value;
 }
 
 const SliderInput: React.FC<SliderInputProps> = (props) => {
   const {
     showInput = true,
+    autoExpandMax = true,
+    autoExpandMin = true,
     min,
     max,
     step,
@@ -50,7 +51,26 @@ const SliderInput: React.FC<SliderInputProps> = (props) => {
     state: 'value',
   });
 
-  // Ensure stable, non-index keys for each input.
+  const inputMin = getInputBound(input, 'min', min);
+  const inputMax = getInputBound(input, 'max', max);
+  const inputMinNumber = toFiniteNumber(inputMin);
+  const inputMaxNumber = toFiniteNumber(inputMax);
+  const configuredSliderMin = min ?? 0;
+  const configuredSliderMax = max ?? 100;
+  const [inputDrivenBounds, setInputDrivenBounds] = React.useState(() => ({
+    min: Math.min(configuredSliderMin, ...currentValue),
+    max: Math.max(configuredSliderMax, ...currentValue),
+  }));
+  const sliderMin = autoExpandMin
+    ? Math.min(configuredSliderMin, inputDrivenBounds.min, ...currentValue)
+    : configuredSliderMin;
+  const sliderMax = autoExpandMax
+    ? Math.max(configuredSliderMax, inputDrivenBounds.max, ...currentValue)
+    : configuredSliderMax;
+  const sliderValue = currentValue.map((value) =>
+    clampNumber(value, sliderMin, sliderMax),
+  );
+
   if (inputKeysRef.current.length !== currentValue.length) {
     if (inputKeysRef.current.length < currentValue.length) {
       const toAdd = currentValue.length - inputKeysRef.current.length;
@@ -77,11 +97,11 @@ const SliderInput: React.FC<SliderInputProps> = (props) => {
         {...rest}
         className={slider?.className}
         id={id}
-        min={min}
-        max={max}
+        min={sliderMin}
+        max={sliderMax}
         step={step}
         disabled={disabled}
-        value={currentValue}
+        value={sliderValue}
         onValueChange={handleValueChange}
       />
       {showInput &&
@@ -94,15 +114,19 @@ const SliderInput: React.FC<SliderInputProps> = (props) => {
             key={inputKeysRef.current[i]}
             type="number"
             value={v}
-            min={min}
-            max={max}
+            min={inputMin}
+            max={inputMax}
             step={step}
             onChange={(e) => {
               const nextNumber = e.currentTarget.valueAsNumber;
               if (Number.isNaN(nextNumber)) return;
 
               const next = [...currentValue];
-              next[i] = clampNumber(nextNumber, min, max);
+              next[i] = clampNumber(nextNumber, inputMinNumber, inputMaxNumber);
+              setInputDrivenBounds((currentBounds) => ({
+                min: Math.min(currentBounds.min, ...next),
+                max: Math.max(currentBounds.max, ...next),
+              }));
               handleValueChange(next);
             }}
             className={cn('w-25', input?.className)}
