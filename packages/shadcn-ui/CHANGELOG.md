@@ -1,5 +1,11 @@
 # @pixpilot/shadcn-ui
 
+## 3.17.0
+
+### Minor Changes
+
+- allow input bounds to expand slider range
+
 ## 3.16.1
 
 ### Patch Changes
