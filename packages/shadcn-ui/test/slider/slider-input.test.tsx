@@ -55,34 +55,34 @@ describe('slider-input', () => {
 
     const input = screen.getByRole('spinbutton') as unknown as HTMLInputElement;
 
-    expect(input).not.toHaveAttribute('min');
-    expect(input).not.toHaveAttribute('max');
+    expect(input.getAttribute('min')).toBeNull();
+    expect(input.getAttribute('max')).toBeNull();
 
     fireEvent.change(input, { target: { value: '-20' } });
 
     expect(onValueChange).toHaveBeenCalledWith([-20]);
     expect(input.value).toBe('-20');
-    expect(screen.getByRole('slider')).toHaveAttribute('aria-valuemin', '-20');
-    expect(screen.getByRole('slider')).toHaveAttribute('aria-valuenow', '-20');
+    expect(screen.getByRole('slider').getAttribute('aria-valuemin')).toBe('-20');
+    expect(screen.getByRole('slider').getAttribute('aria-valuenow')).toBe('-20');
 
     fireEvent.change(input, { target: { value: '20000' } });
 
     expect(onValueChange).toHaveBeenCalledWith([20000]);
     expect(input.value).toBe('20000');
-    expect(screen.getByRole('slider')).toHaveAttribute('aria-valuemin', '-20');
-    expect(screen.getByRole('slider')).toHaveAttribute('aria-valuemax', '20000');
-    expect(screen.getByRole('slider')).toHaveAttribute('aria-valuenow', '20000');
+    expect(screen.getByRole('slider').getAttribute('aria-valuemin')).toBe('-20');
+    expect(screen.getByRole('slider').getAttribute('aria-valuemax')).toBe('20000');
+    expect(screen.getByRole('slider').getAttribute('aria-valuenow')).toBe('20000');
 
     fireEvent.keyDown(screen.getByRole('slider'), { key: 'ArrowLeft' });
 
-    expect(screen.getByRole('slider')).toHaveAttribute('aria-valuemax', '20000');
-    expect(screen.getByRole('slider')).toHaveAttribute('aria-valuenow', '19999');
+    expect(screen.getByRole('slider').getAttribute('aria-valuemax')).toBe('20000');
+    expect(screen.getByRole('slider').getAttribute('aria-valuenow')).toBe('19999');
 
     fireEvent.change(input, { target: { value: '50' } });
 
-    expect(screen.getByRole('slider')).toHaveAttribute('aria-valuemin', '-20');
-    expect(screen.getByRole('slider')).toHaveAttribute('aria-valuemax', '20000');
-    expect(screen.getByRole('slider')).toHaveAttribute('aria-valuenow', '50');
+    expect(screen.getByRole('slider').getAttribute('aria-valuemin')).toBe('-20');
+    expect(screen.getByRole('slider').getAttribute('aria-valuemax')).toBe('20000');
+    expect(screen.getByRole('slider').getAttribute('aria-valuenow')).toBe('50');
   });
 
   it('keeps the supplied slider maximum when auto expansion is disabled', () => {
@@ -98,7 +98,7 @@ describe('slider-input', () => {
 
     fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '20000' } });
 
-    expect(screen.getByRole('slider')).toHaveAttribute('aria-valuemax', '100');
-    expect(screen.getByRole('slider')).toHaveAttribute('aria-valuenow', '100');
+    expect(screen.getByRole('slider').getAttribute('aria-valuemax')).toBe('100');
+    expect(screen.getByRole('slider').getAttribute('aria-valuenow')).toBe('100');
   });
 });
