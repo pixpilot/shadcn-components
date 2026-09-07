@@ -62,7 +62,7 @@
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
-    "@diceui/tags-input": "^0.7.2",
+    "@diceui/tags-input": "0.7.2",
     "@hookform/resolvers": "^5.5.7",
     "@pixpilot/hash": "catalog:prod",
     "@radix-ui/react-alert-dialog": "^1.1.23",
