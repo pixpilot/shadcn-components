@@ -1,5 +1,15 @@
 # @pixpilot/shadcn-ui
 
+## 3.17.1
+
+### Patch Changes
+
+- 47c9806: fix lockfile
+- Updated dependencies
+- Updated dependencies [527081a]
+- Updated dependencies [47c9806]
+  - @pixpilot/shadcn@2.3.1
+
 ## 3.17.0
 
 ### Minor Changes
