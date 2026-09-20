@@ -20,7 +20,7 @@ A reusable Material Design circular progress spinner component with customizable
 By default, the spinner uses `currentColor` which automatically inherits the text color from its parent. This makes it work seamlessly with dark/light mode:
 
 ```tsx
-import { CircleLoader } from '@internal/ui';
+import { CircleLoader } from '@pixpilot/ui';
 
 function MyComponent() {
   return (
@@ -38,7 +38,7 @@ export default MyComponent;
 Wrap the spinner in an element with Tailwind text color classes:
 
 ```tsx
-import { CircleLoader } from '@internal/ui';
+import { CircleLoader } from '@pixpilot/ui';
 
 function ColorExamples() {
   return (
@@ -62,7 +62,7 @@ export default ColorExamples;
 ### Custom Color
 
 ```tsx
-import { CircleLoader } from '@internal/ui';
+import { CircleLoader } from '@pixpilot/ui';
 
 function CustomColorExample() {
   return <CircleLoader size={80} color="#10b981" />;
@@ -74,7 +74,7 @@ export default CustomColorExample;
 ### Custom Speed
 
 ```tsx
-import { CircleLoader } from '@internal/ui';
+import { CircleLoader } from '@pixpilot/ui';
 
 function SpeedExamples() {
   return (
@@ -91,7 +91,7 @@ export default SpeedExamples;
 ### Multi-Color Animation
 
 ```tsx
-import { CircleLoader } from '@internal/ui';
+import { CircleLoader } from '@pixpilot/ui';
 
 function MultiColorExample() {
   return <CircleLoader colors={['#ef4444', '#f59e0b', '#10b981', '#3b82f6']} />;
@@ -103,7 +103,7 @@ export default MultiColorExample;
 ### All Props
 
 ```tsx
-import { CircleLoader } from '@internal/ui';
+import { CircleLoader } from '@pixpilot/ui';
 
 function AllPropsExample() {
   return (
@@ -139,7 +139,7 @@ export default AllPropsExample;
 The spinner automatically inherits text color, making it perfect for dark mode:
 
 ```tsx
-import { CircleLoader } from '@internal/ui';
+import { CircleLoader } from '@pixpilot/ui';
 
 function DarkLightExamples() {
   return (
@@ -168,7 +168,7 @@ export default DarkLightExamples;
 ### Loading State
 
 ```tsx
-import { CircleLoader } from '@internal/ui';
+import { CircleLoader } from '@pixpilot/ui';
 import { useState } from 'react';
 
 function AuthCallback() {
@@ -183,7 +183,7 @@ export default AuthCallback;
 ### With Different Colors
 
 ```tsx
-import { CircleLoader } from '@internal/ui';
+import { CircleLoader } from '@pixpilot/ui';
 
 function ColorVariations() {
   return (
