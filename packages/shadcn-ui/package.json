@@ -11,6 +11,9 @@
     "url": "https://github.com/pixpilot/shadcn-components.git",
     "directory": "packages/shadcn-ui"
   },
+  "bugs": {
+    "url": "https://github.com/pixpilot/shadcn-components/issues"
+  },
   "sideEffects": false,
   "exports": "./src/index.ts",
   "bin": {
