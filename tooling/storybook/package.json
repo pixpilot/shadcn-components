@@ -27,6 +27,7 @@
     "@pixpilot/formily-shadcn": "workspace:*",
     "@pixpilot/shadcn": "workspace:*",
     "@pixpilot/shadcn-auth": "workspace:*",
+    "@pixpilot/shadcn-kanban": "workspace:*",
     "@pixpilot/shadcn-ui": "workspace:*",
     "@pixpilot/string": "catalog:prod",
     "next-themes": "catalog:prod"

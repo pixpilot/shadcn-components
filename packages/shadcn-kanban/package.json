@@ -1,0 +1,97 @@
+{
+  "name": "@pixpilot/shadcn-kanban",
+  "type": "module",
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.33.0",
+  "description": "Accessible drag-and-drop Kanban board built with shadcn/ui and dnd-kit.",
+  "author": "m.doaie <m.doaie@hotmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/pixpilot/shadcn-components",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pixpilot/shadcn-components.git",
+    "directory": "packages/shadcn-kanban"
+  },
+  "bugs": {
+    "url": "https://github.com/pixpilot/shadcn-components/issues"
+  },
+  "keywords": [
+    "kanban",
+    "board",
+    "drag-and-drop",
+    "dnd-kit",
+    "shadcn",
+    "react"
+  ],
+  "sideEffects": false,
+  "exports": "./src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs"
+      }
+    },
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts"
+  },
+  "scripts": {
+    "prepublishOnly": "pnpm run clean && pnpm run build",
+    "clean": "git clean -xdf .cache .turbo dist",
+    "clean:all": "pnpm clean && git clean -xdf node_modules",
+    "build": "tsdown",
+    "build:watch": "tsdown --watch",
+    "test": "vitest --run --passWithNoTests",
+    "test:watch": "vitest --watch",
+    "test:ui": "vitest --ui --watch",
+    "test:ui:coverage": "vitest --ui --coverage --watch --hookTimeout=30000 --coverage.thresholds.lines=0 --coverage.thresholds.functions=0 --coverage.thresholds.branches=0 --coverage.thresholds.statements=0",
+    "test:coverage": "vitest --coverage",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint",
+    "format": "prettier --check . --ignore-path ../../.gitignore --ignore-path ../../.prettierignore"
+  },
+  "peerDependencies": {
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19"
+  },
+  "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@pixpilot/shadcn-ui": "workspace:*",
+    "@tanstack/react-virtual": "^3.13.23",
+    "lucide-react": "catalog:prod"
+  },
+  "devDependencies": {
+    "@internal/eslint-config": "workspace:*",
+    "@internal/prettier-config": "workspace:*",
+    "@internal/tsconfig": "workspace:*",
+    "@internal/tsdown-config": "workspace:*",
+    "@internal/vitest-config": "workspace:*",
+    "@storybook/react": "catalog:dev",
+    "@testing-library/jest-dom": "catalog:dev",
+    "@testing-library/react": "catalog:dev",
+    "@types/node": "catalog:dev",
+    "@types/react": "catalog:dev",
+    "@types/react-dom": "catalog:dev",
+    "@vitest/coverage-v8": "catalog:dev",
+    "@vitest/ui": "catalog:dev",
+    "eslint": "catalog:dev",
+    "jsdom": "catalog:dev",
+    "postcss": "catalog:dev",
+    "react": "catalog:prod",
+    "react-dom": "catalog:prod",
+    "tailwindcss": "catalog:dev",
+    "tsdown": "catalog:dev",
+    "typescript": "catalog:dev",
+    "typescript-eslint": "catalog:dev",
+    "vitest": "catalog:dev"
+  },
+  "prettier": "@internal/prettier-config"
+}
