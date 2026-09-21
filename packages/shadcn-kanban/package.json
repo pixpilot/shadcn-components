@@ -1,7 +1,7 @@
 {
   "name": "@pixpilot/shadcn-kanban",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "packageManager": "pnpm@10.33.0",
   "description": "Accessible drag-and-drop Kanban board built with shadcn/ui and dnd-kit.",
   "author": "m.doaie <m.doaie@hotmail.com>",
