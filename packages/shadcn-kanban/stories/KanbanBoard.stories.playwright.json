@@ -4,84 +4,102 @@
     "shadcn-kanban-kanbanboard--custom-item-renderer": {
       "screenshots": [
         {
-          "id": "kbMove01",
-          "index": 0,
-          "title": "Custom cards after a keyboard drag",
-          "browserType": "chromium",
-          "browserOptionsId": "kanbanDesktop",
           "actionSets": [
             {
-              "id": "moveCard",
-              "title": "Move a card to the next column",
               "actions": [
                 {
-                  "id": "focusCard",
-                  "name": "focus",
-                  "args": { "selector": "[data-testid=\"kanban-item-1\"]" }
+                  "args": {
+                    "selector": "[data-testid=\"kanban-item-1\"]"
+                  },
+                  "id": "fxKhlrCltwlQ",
+                  "name": "focus"
                 },
                 {
-                  "id": "pickUp",
-                  "name": "keyboard.press",
-                  "args": { "key": "Space" }
+                  "args": {
+                    "key": "Space"
+                  },
+                  "id": "3H5PVcCRfyV4",
+                  "name": "keyboard.press"
                 },
                 {
-                  "id": "moveRight",
-                  "name": "keyboard.press",
-                  "args": { "key": "ArrowRight" }
+                  "args": {
+                    "key": "ArrowRight"
+                  },
+                  "id": "zNW2Z7zu0lg3",
+                  "name": "keyboard.press"
                 },
                 {
-                  "id": "dropCard",
-                  "name": "keyboard.press",
-                  "args": { "key": "Space" }
+                  "args": {
+                    "key": "Space"
+                  },
+                  "id": "TcEkfJIsfEOc",
+                  "name": "keyboard.press"
                 },
                 {
-                  "id": "captureMovedBoard",
-                  "name": "takeElementScreenshot",
-                  "args": { "selector": "[data-testid=\"kanban-board\"]" }
+                  "args": {
+                    "selector": "[data-testid=\"kanban-board\"]"
+                  },
+                  "id": "k6A6er4yFR_w",
+                  "name": "takeElementScreenshot"
                 }
-              ]
+              ],
+              "id": "HEQEIHkyOWnt",
+              "temp": true,
+              "title": "Move a card to the next column"
             }
-          ]
+          ],
+          "browserOptionsId": "vNWY4CCYrVAB",
+          "browserType": "chromium",
+          "id": "gXKVNWsZvPz0",
+          "index": 0,
+          "screenshotOptionsId": "OIjHj5nZUYf-",
+          "title": "Custom cards after a keyboard drag"
         }
       ]
     },
     "shadcn-kanban-kanbanboard--infinite-scroll-columns": {
       "screenshots": [
         {
-          "id": "kbInfinite01",
-          "index": 0,
-          "title": "Second page loaded after scrolling a column to its end",
-          "browserType": "chromium",
-          "browserOptionsId": "kanbanDesktop",
           "actionSets": [
             {
-              "id": "loadNextPage",
-              "title": "Scroll the To Do column until the sentinel loads page two",
               "actions": [
                 {
-                  "id": "scrollTodoColumn",
-                  "name": "scrollSelector",
                   "args": {
                     "selector": "[data-testid=\"kanban-column-scroller-todo\"]",
-                    "scrollProperty": { "top": 4000 }
-                  }
+                    "scrollProperty": {
+                      "top": 4000
+                    }
+                  },
+                  "id": "XOsND5mzPt42",
+                  "name": "scrollSelector"
                 },
                 {
-                  "id": "awaitSecondPage",
-                  "name": "waitForSelector",
                   "args": {
                     "selector": "[data-testid=\"kanban-item-todo-26\"]",
                     "state": "visible"
-                  }
+                  },
+                  "id": "AtE7z9M6d6f3",
+                  "name": "waitForSelector"
                 },
                 {
-                  "id": "captureLoadedBoard",
-                  "name": "takeElementScreenshot",
-                  "args": { "selector": "[data-testid=\"kanban-board\"]" }
+                  "args": {
+                    "selector": "[data-testid=\"kanban-board\"]"
+                  },
+                  "id": "ZL5ODkXOM7wl",
+                  "name": "takeElementScreenshot"
                 }
-              ]
+              ],
+              "id": "xd2o4Pz9Jgmx",
+              "temp": true,
+              "title": "Scroll the To Do column until the sentinel loads page two"
             }
-          ]
+          ],
+          "browserOptionsId": "pFhHi_h40wBT",
+          "browserType": "chromium",
+          "id": "5vXdC2pHu6vV",
+          "index": 0,
+          "screenshotOptionsId": "YDmppGu_JR__",
+          "title": "Second page loaded after scrolling a column to its end"
         }
       ]
     },
@@ -103,7 +121,9 @@
                   "name": "scrollSelector",
                   "args": {
                     "selector": "[data-testid=\"kanban-column-scroller-todo\"]",
-                    "scrollProperty": { "top": 10000 }
+                    "scrollProperty": {
+                      "top": 10000
+                    }
                   }
                 },
                 {
@@ -117,12 +137,16 @@
                 {
                   "id": "settleDeepWindow",
                   "name": "waitForTimeout",
-                  "args": { "timeout": 400 }
+                  "args": {
+                    "timeout": 400
+                  }
                 },
                 {
                   "id": "captureVirtualWindow",
                   "name": "takeElementScreenshot",
-                  "args": { "selector": "[data-testid=\"kanban-board\"]" }
+                  "args": {
+                    "selector": "[data-testid=\"kanban-board\"]"
+                  }
                 }
               ]
             }
@@ -144,7 +168,9 @@
                   "name": "scrollSelector",
                   "args": {
                     "selector": "[data-testid=\"kanban-column-scroller-todo\"]",
-                    "scrollProperty": { "top": 5400 }
+                    "scrollProperty": {
+                      "top": 5400
+                    }
                   }
                 },
                 {
@@ -158,77 +184,107 @@
                 {
                   "id": "settleMidWindow",
                   "name": "waitForTimeout",
-                  "args": { "timeout": 400 }
+                  "args": {
+                    "timeout": 400
+                  }
                 },
                 {
                   "id": "focusMidCard",
                   "name": "focus",
-                  "args": { "selector": "[data-testid=\"kanban-item-todo-101\"]" }
+                  "args": {
+                    "selector": "[data-testid=\"kanban-item-todo-101\"]"
+                  }
                 },
                 {
                   "id": "pickUpDown",
                   "name": "keyboard.press",
-                  "args": { "key": "Space" }
+                  "args": {
+                    "key": "Space"
+                  }
                 },
                 {
                   "id": "settlePickUpDown",
                   "name": "waitForTimeout",
-                  "args": { "timeout": 200 }
+                  "args": {
+                    "timeout": 200
+                  }
                 },
                 {
                   "id": "down1",
                   "name": "keyboard.press",
-                  "args": { "key": "ArrowDown" }
+                  "args": {
+                    "key": "ArrowDown"
+                  }
                 },
                 {
                   "id": "settleDown1",
                   "name": "waitForTimeout",
-                  "args": { "timeout": 200 }
+                  "args": {
+                    "timeout": 200
+                  }
                 },
                 {
                   "id": "down2",
                   "name": "keyboard.press",
-                  "args": { "key": "ArrowDown" }
+                  "args": {
+                    "key": "ArrowDown"
+                  }
                 },
                 {
                   "id": "settleDown2",
                   "name": "waitForTimeout",
-                  "args": { "timeout": 200 }
+                  "args": {
+                    "timeout": 200
+                  }
                 },
                 {
                   "id": "down3",
                   "name": "keyboard.press",
-                  "args": { "key": "ArrowDown" }
+                  "args": {
+                    "key": "ArrowDown"
+                  }
                 },
                 {
                   "id": "settleDown3",
                   "name": "waitForTimeout",
-                  "args": { "timeout": 200 }
+                  "args": {
+                    "timeout": 200
+                  }
                 },
                 {
                   "id": "down4",
                   "name": "keyboard.press",
-                  "args": { "key": "ArrowDown" }
+                  "args": {
+                    "key": "ArrowDown"
+                  }
                 },
                 {
                   "id": "settleDown4",
                   "name": "waitForTimeout",
-                  "args": { "timeout": 200 }
+                  "args": {
+                    "timeout": 200
+                  }
                 },
                 {
                   "id": "dropDown",
                   "name": "keyboard.press",
-                  "args": { "key": "Space" }
+                  "args": {
+                    "key": "Space"
+                  }
                 },
                 {
                   "id": "settleDropDown",
                   "name": "waitForTimeout",
-                  "args": { "timeout": 300 }
+                  "args": {
+                    "timeout": 300
+                  }
                 },
                 {
                   "id": "captureDragDown",
                   "name": "takeElementScreenshot",
-                  "args": { "selector": "[data-testid=\"kanban-board\"]" }
+                  "args": {
+                    "selector": "[data-testid=\"kanban-board\"]"
+                  }
                 }
               ]
             }
@@ -250,7 +306,9 @@
                   "name": "scrollSelector",
                   "args": {
                     "selector": "[data-testid=\"kanban-column-scroller-todo\"]",
-                    "scrollProperty": { "top": 5400 }
+                    "scrollProperty": {
+                      "top": 5400
+                    }
                   }
                 },
                 {
@@ -264,51 +322,93 @@
                 {
                   "id": "settleMidWindowUp",
                   "name": "waitForTimeout",
-                  "args": { "timeout": 400 }
+                  "args": {
+                    "timeout": 400
+                  }
                 },
                 {
                   "id": "focusMidCardUp",
                   "name": "focus",
-                  "args": { "selector": "[data-testid=\"kanban-item-todo-108\"]" }
+                  "args": {
+                    "selector": "[data-testid=\"kanban-item-todo-108\"]"
+                  }
                 },
                 {
                   "id": "pickUpUp",
                   "name": "keyboard.press",
-                  "args": { "key": "Space" }
+                  "args": {
+                    "key": "Space"
+                  }
                 },
                 {
                   "id": "settlePickUpUp",
                   "name": "waitForTimeout",
-                  "args": { "timeout": 200 }
+                  "args": {
+                    "timeout": 200
+                  }
                 },
-                { "id": "up1", "name": "keyboard.press", "args": { "key": "ArrowUp" } },
+                {
+                  "id": "up1",
+                  "name": "keyboard.press",
+                  "args": {
+                    "key": "ArrowUp"
+                  }
+                },
                 {
                   "id": "settleUp1",
                   "name": "waitForTimeout",
-                  "args": { "timeout": 200 }
+                  "args": {
+                    "timeout": 200
+                  }
                 },
-                { "id": "up2", "name": "keyboard.press", "args": { "key": "ArrowUp" } },
+                {
+                  "id": "up2",
+                  "name": "keyboard.press",
+                  "args": {
+                    "key": "ArrowUp"
+                  }
+                },
                 {
                   "id": "settleUp2",
                   "name": "waitForTimeout",
-                  "args": { "timeout": 200 }
+                  "args": {
+                    "timeout": 200
+                  }
                 },
-                { "id": "up3", "name": "keyboard.press", "args": { "key": "ArrowUp" } },
+                {
+                  "id": "up3",
+                  "name": "keyboard.press",
+                  "args": {
+                    "key": "ArrowUp"
+                  }
+                },
                 {
                   "id": "settleUp3",
                   "name": "waitForTimeout",
-                  "args": { "timeout": 200 }
+                  "args": {
+                    "timeout": 200
+                  }
                 },
-                { "id": "dropUp", "name": "keyboard.press", "args": { "key": "Space" } },
+                {
+                  "id": "dropUp",
+                  "name": "keyboard.press",
+                  "args": {
+                    "key": "Space"
+                  }
+                },
                 {
                   "id": "settleDropUp",
                   "name": "waitForTimeout",
-                  "args": { "timeout": 300 }
+                  "args": {
+                    "timeout": 300
+                  }
                 },
                 {
                   "id": "captureDragUp",
                   "name": "takeElementScreenshot",
-                  "args": { "selector": "[data-testid=\"kanban-board\"]" }
+                  "args": {
+                    "selector": "[data-testid=\"kanban-board\"]"
+                  }
                 }
               ]
             }
@@ -328,24 +428,32 @@
                 {
                   "id": "focusTopCard",
                   "name": "focus",
-                  "args": { "selector": "[data-testid=\"kanban-item-todo-3\"]" }
+                  "args": {
+                    "selector": "[data-testid=\"kanban-item-todo-3\"]"
+                  }
                 },
                 {
                   "id": "pickUpTravel",
                   "name": "keyboard.press",
-                  "args": { "key": "Space" }
+                  "args": {
+                    "key": "Space"
+                  }
                 },
                 {
                   "id": "settlePickUpTravel",
                   "name": "waitForTimeout",
-                  "args": { "timeout": 200 }
+                  "args": {
+                    "timeout": 200
+                  }
                 },
                 {
                   "id": "scrollUnderDrag",
                   "name": "scrollSelector",
                   "args": {
                     "selector": "[data-testid=\"kanban-column-scroller-todo\"]",
-                    "scrollProperty": { "top": 12000 }
+                    "scrollProperty": {
+                      "top": 12000
+                    }
                   }
                 },
                 {
@@ -359,22 +467,30 @@
                 {
                   "id": "settleMeasurements",
                   "name": "waitForTimeout",
-                  "args": { "timeout": 600 }
+                  "args": {
+                    "timeout": 600
+                  }
                 },
                 {
                   "id": "dropTravel",
                   "name": "keyboard.press",
-                  "args": { "key": "Space" }
+                  "args": {
+                    "key": "Space"
+                  }
                 },
                 {
                   "id": "settleDrop",
                   "name": "waitForTimeout",
-                  "args": { "timeout": 300 }
+                  "args": {
+                    "timeout": 300
+                  }
                 },
                 {
                   "id": "captureTravel",
                   "name": "takeElementScreenshot",
-                  "args": { "selector": "[data-testid=\"kanban-board\"]" }
+                  "args": {
+                    "selector": "[data-testid=\"kanban-board\"]"
+                  }
                 }
               ]
             }
@@ -400,7 +516,9 @@
                   "name": "scrollSelector",
                   "args": {
                     "selector": "[data-testid=\"kanban-column-scroller-todo\"]",
-                    "scrollProperty": { "top": 2700 }
+                    "scrollProperty": {
+                      "top": 2700
+                    }
                   }
                 },
                 {
@@ -414,12 +532,221 @@
                 {
                   "id": "settleVirtualPaging",
                   "name": "waitForTimeout",
-                  "args": { "timeout": 400 }
+                  "args": {
+                    "timeout": 400
+                  }
                 },
                 {
                   "id": "captureVirtualPaging",
                   "name": "takeElementScreenshot",
-                  "args": { "selector": "[data-testid=\"kanban-board\"]" }
+                  "args": {
+                    "selector": "[data-testid=\"kanban-board\"]"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "shadcn-kanban-kanbanboard--mobile-touch-board": {
+      "screenshots": [
+        {
+          "id": "kbMobile02",
+          "index": 1,
+          "title": "Swiping right settles on the next column, not between two",
+          "browserType": "chromium",
+          "browserOptionsId": "kanbanPhone",
+          "actionSets": [
+            {
+              "id": "swipeToSecond",
+              "title": "Nudge the board past the first column and let it snap",
+              "actions": [
+                {
+                  "id": "nudgePastFirst",
+                  "name": "scrollSelector",
+                  "args": {
+                    "selector": "[data-testid=\"kanban-board\"]",
+                    "scrollProperty": {
+                      "left": 200
+                    }
+                  }
+                },
+                {
+                  "id": "settleSnap",
+                  "name": "waitForTimeout",
+                  "args": {
+                    "timeout": 600
+                  }
+                },
+                {
+                  "id": "captureSecondSlide",
+                  "name": "takeElementScreenshot",
+                  "args": {
+                    "selector": "[data-testid=\"kanban-board\"]"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "kbMobile03",
+          "index": 2,
+          "title": "A card held long enough to arm the drag",
+          "browserType": "chromium",
+          "browserOptionsId": "kanbanPhone",
+          "actionSets": [
+            {
+              "id": "holdCard",
+              "title": "Rest a finger on a card and stop before the drag begins",
+              "actions": [
+                {
+                  "id": "pressCard",
+                  "name": "touchStart",
+                  "args": {
+                    "selector": "[data-testid=\"kanban-item-m1\"]"
+                  }
+                },
+                {
+                  "id": "settleMidHold",
+                  "name": "waitForTimeout",
+                  "args": {
+                    "timeout": 150
+                  }
+                },
+                {
+                  "id": "captureHeldCard",
+                  "name": "takeElementScreenshot",
+                  "args": {
+                    "selector": "[data-testid=\"kanban-board\"]"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "kbMobile04",
+          "index": 3,
+          "title": "A swipe that starts on a card leaves the card alone",
+          "browserType": "chromium",
+          "browserOptionsId": "kanbanPhone",
+          "actionSets": [
+            {
+              "id": "swipeAcrossCard",
+              "title": "Start on a card and move straight away",
+              "actions": [
+                {
+                  "id": "touchCard",
+                  "name": "touchStart",
+                  "args": {
+                    "selector": "[data-testid=\"kanban-item-m1\"]"
+                  }
+                },
+                {
+                  "id": "swipeAcross",
+                  "name": "touchMove",
+                  "args": {
+                    "selector": "[data-testid=\"kanban-item-m1\"]",
+                    "page": {
+                      "x": 40,
+                      "y": 140
+                    }
+                  }
+                },
+                {
+                  "id": "settleSwipe",
+                  "name": "waitForTimeout",
+                  "args": {
+                    "timeout": 200
+                  }
+                },
+                {
+                  "id": "liftFinger",
+                  "name": "touchEnd",
+                  "args": {
+                    "selector": "[data-testid=\"kanban-item-m1\"]"
+                  }
+                },
+                {
+                  "id": "settleAfterLift",
+                  "name": "waitForTimeout",
+                  "args": {
+                    "timeout": 200
+                  }
+                },
+                {
+                  "id": "captureUndraggedCard",
+                  "name": "takeElementScreenshot",
+                  "args": {
+                    "selector": "[data-testid=\"kanban-board\"]"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-testid=\"kanban-column-todo\"]",
+                    "state": "visible"
+                  },
+                  "id": "I33UqGQziWUB",
+                  "name": "waitForSelector"
+                },
+                {
+                  "args": {
+                    "selector": "[data-testid=\"kanban-board\"]"
+                  },
+                  "id": "lgJrasp1OYIr",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "6Hcw2_fEZrg4",
+              "temp": true,
+              "title": "The board at rest on its first column"
+            }
+          ],
+          "browserOptionsId": "UssDfoZCZSL6",
+          "browserType": "chromium",
+          "id": "WPI2kqt7bMkg",
+          "index": 0,
+          "title": "One column filling the phone, the next peeking in"
+        }
+      ]
+    },
+    "shadcn-kanban-kanbanboard--mobile-snap-disabled": {
+      "screenshots": [
+        {
+          "id": "kbMobileNoSnap01",
+          "index": 0,
+          "title": "Plain horizontal scroller at the same phone width",
+          "browserType": "chromium",
+          "browserOptionsId": "kanbanPhone",
+          "actionSets": [
+            {
+              "id": "restingScroller",
+              "title": "The board with columnSnap turned off",
+              "actions": [
+                {
+                  "id": "awaitScrollerColumn",
+                  "name": "waitForSelector",
+                  "args": {
+                    "selector": "[data-testid=\"kanban-column-todo\"]",
+                    "state": "visible"
+                  }
+                },
+                {
+                  "id": "captureScroller",
+                  "name": "takeElementScreenshot",
+                  "args": {
+                    "selector": "[data-testid=\"kanban-board\"]"
+                  }
                 }
               ]
             }
@@ -430,9 +757,59 @@
   },
   "browserOptions": {
     "kanbanDesktop": {
-      "viewport": { "width": 1280, "height": 720 },
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "reducedMotion": "reduce"
+    },
+    "kanbanPhone": {
+      "viewport": {
+        "width": 390,
+        "height": 780
+      },
+      "hasTouch": true,
+      "isMobile": true,
+      "reducedMotion": "reduce"
+    },
+    "vNWY4CCYrVAB": {
+      "viewport": {
+        "height": 370,
+        "width": 836
+      }
+    },
+    "pFhHi_h40wBT": {
+      "viewport": {
+        "height": 714,
+        "width": 836
+      }
+    },
+    "UssDfoZCZSL6": {
+      "viewport": {
+        "height": 369,
+        "width": 836
+      },
+      "hasTouch": true,
+      "isMobile": true,
       "reducedMotion": "reduce"
     }
   },
-  "screenshotOptions": {}
+  "screenshotOptions": {
+    "OIjHj5nZUYf-": {
+      "clip": {
+        "height": 247,
+        "width": 537,
+        "x": 19,
+        "y": 5
+      }
+    },
+    "YDmppGu_JR__": {
+      "clip": {
+        "height": 352,
+        "width": 276,
+        "x": 11,
+        "y": 14
+      }
+    }
+  }
 }

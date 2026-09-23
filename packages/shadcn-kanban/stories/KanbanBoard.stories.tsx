@@ -987,3 +987,112 @@ function VirtualizedInfiniteRenderer() {
 export const VirtualizedInfiniteScroll = {
   render: () => <VirtualizedInfiniteRenderer />,
 };
+
+/* ================================================================== */
+/*  Touch & small screens                                              */
+/* ================================================================== */
+
+const MOBILE_COLUMNS: KanbanColumn[] = [
+  { id: 'todo', title: 'To Do' },
+  { id: 'in-progress', title: 'In Progress' },
+  { id: 'review', title: 'Review' },
+  { id: 'done', title: 'Done' },
+];
+
+const MOBILE_ITEMS: KanbanItem[] = [
+  { id: 'm1', name: 'Research competitors', columnId: 'todo' },
+  { id: 'm2', name: 'Write project brief', columnId: 'todo' },
+  { id: 'm3', name: 'Collect design refs', columnId: 'todo' },
+  { id: 'm4', name: 'Design mockups', columnId: 'in-progress' },
+  { id: 'm5', name: 'Setup CI/CD pipeline', columnId: 'in-progress' },
+  { id: 'm6', name: 'Copy review', columnId: 'review' },
+  { id: 'm7', name: 'Create landing page', columnId: 'done' },
+];
+
+/**
+ * Frames the board at phone width regardless of the Storybook viewport, so the
+ * slider behaviour is visible without resizing the browser. Sizing the frame
+ * does *not* reproduce it on its own — snapping keys off the viewport media
+ * query, so a real narrow viewport is what the screenshots use.
+ */
+function MobileFrame({ children }: React.PropsWithChildren) {
+  return (
+    <div className="bg-muted/30 flex h-screen w-full justify-center p-4">
+      <div className="bg-background h-full w-full max-w-[390px] overflow-hidden rounded-xl border shadow-sm">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function MobileBoardRenderer(props: Partial<KanbanBoardProps>) {
+  const [items, setItems] = React.useState<KanbanItem[]>(MOBILE_ITEMS);
+
+  return (
+    <MobileFrame>
+      <KanbanBoard
+        {...props}
+        columns={MOBILE_COLUMNS}
+        items={items}
+        onChange={(event) => setItems(event.items)}
+      />
+    </MobileFrame>
+  );
+}
+
+/**
+ * The board on a phone.
+ *
+ * Two things change below the `sm` breakpoint (40rem), and both are about the
+ * same conflict: on a touch screen a finger on a card is ambiguous.
+ *
+ * - **Swiping wins by default.** Columns become scroll-snap children roughly a
+ *   screen wide, so a horizontal swipe moves exactly one column and settles
+ *   with the platform's own momentum — including when the swipe starts on top
+ *   of a card. There is no JS carousel here; it is CSS `scroll-snap-type` plus
+ *   `scroll-snap-stop: always`.
+ * - **Dragging has to be asked for.** A card only becomes draggable after the
+ *   finger has rested on it for 250 ms. The card rings while it is being held,
+ *   so the hold is visible before the drag begins, and any movement past a few
+ *   pixels during that window hands the gesture back as a scroll.
+ *
+ * Mouse and keyboard are untouched: a mouse drag still starts after 5 px of
+ * travel.
+ *
+ * Open this story in a narrow viewport (or DevTools device mode) and try both —
+ * a quick swipe across a card pages to the next column; a hold then a drag
+ * moves the card.
+ */
+export const MobileTouchBoard = {
+  render: () => <MobileBoardRenderer />,
+};
+
+/** Columns resting centred rather than flush left, with a narrower slide. */
+export const MobileSnapCentered = {
+  render: () => (
+    <MobileBoardRenderer columnSnap={{ align: 'center', columnWidth: '78%' }} />
+  ),
+};
+
+/**
+ * `columnSnap={false}` — the plain horizontal scroller the board had before,
+ * for a layout that would rather show two narrow columns at once than page
+ * between full-width ones.
+ */
+export const MobileSnapDisabled = {
+  render: () => <MobileBoardRenderer columnSnap={false} />,
+};
+
+/**
+ * A longer hold before the drag arms. Worth raising on a board whose cards are
+ * tall enough that a vertical scroll often starts with the finger resting for a
+ * moment first; worth lowering when cards are the only thing in the column and
+ * a mis-grab costs little.
+ */
+export const MobileLongerHold = {
+  render: () => (
+    <MobileBoardRenderer
+      touch={{ dragActivationDelay: 600, dragActivationTolerance: 4 }}
+    />
+  ),
+};

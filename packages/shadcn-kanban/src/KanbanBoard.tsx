@@ -12,6 +12,7 @@ import { useKanbanFilters } from './hooks/use-kanban-filters';
 import { KanbanColumn } from './KanbanColumn';
 import { KanbanDragOverlay } from './KanbanDragOverlay';
 import { toColumnSortableId } from './utils/column-sortable-id';
+import { resolveColumnSnap } from './utils/resolve-column-snap';
 
 /* Hoisted so dnd-kit does not rebuild its measuring config on every render. */
 const MEASURING = { droppable: { strategy: MeasuringStrategy.Always } };
@@ -70,6 +71,8 @@ export function KanbanBoard<T = Record<string, unknown>>({
   infiniteScroll,
   virtualization,
   dragDisabled = false,
+  touch,
+  columnSnap = true,
 }: KanbanBoardProps<T>) {
   useScrollOnlyFeatureWarning(
     'infiniteScroll',
@@ -103,7 +106,9 @@ export function KanbanBoard<T = Record<string, unknown>>({
     handleDragOver,
     handleDragEnd,
     handleDragCancel,
-  } = useKanbanDrag<T>({ externalItems, columns, onChange, onColumnChange });
+  } = useKanbanDrag<T>({ externalItems, columns, onChange, onColumnChange, touch });
+
+  const snap = resolveColumnSnap(columnSnap, activeId !== null);
 
   const { activeFilters, resolveFilters, handleToggleFilter, handleClearFilters } =
     useKanbanFilters<T>({ filters, onFilterChange });
@@ -161,15 +166,17 @@ export function KanbanBoard<T = Record<string, unknown>>({
       <SortableContext items={columnSortableIds} strategy={horizontalListSortingStrategy}>
         <div
           data-testid="kanban-board"
+          data-snapping={snap.enabled ? '' : undefined}
           className={cn(
             /* `relative` so absolutely positioned descendants (e.g. `sr-only`
                labels) resolve against this scroller instead of an ancestor,
                which would let them escape clipping and scroll the page. */
             'relative flex gap-4 overflow-x-auto overscroll-x-contain p-2',
             columnOverflow === 'scroll' ? 'h-full min-h-0' : 'min-h-full',
+            snap.boardClassName,
             className,
           )}
-          style={style}
+          style={{ ...snap.style, ...style }}
         >
           {columnItemsMap.map(({ column, colItems, colFilters, activeIds }) => (
             <KanbanColumn
@@ -178,7 +185,7 @@ export function KanbanBoard<T = Record<string, unknown>>({
               items={colItems}
               renderItem={renderItem}
               renderColumnHeader={renderColumnHeader}
-              columnClassName={columnClassName}
+              columnClassName={cn(snap.columnClassName, columnClassName)}
               containerProps={getColumnProps?.(column)}
               hideHeader={hideColumnHeaders}
               itemClassName={itemClassName}
@@ -189,13 +196,19 @@ export function KanbanBoard<T = Record<string, unknown>>({
               infiniteScroll={activeInfiniteScroll}
               virtualization={activeVirtualization}
               dragDisabled={dragDisabled}
+              touch={touch}
               activeItemId={activeItem?.id ?? null}
               onToggleFilter={(filterId) => handleToggleFilter(column, filterId)}
               onClearFilters={() => handleClearFilters(column)}
             />
           ))}
 
-          {allowAddColumn && onAddColumn ? <AddColumnButton onAdd={onAddColumn} /> : null}
+          {/* Snaps like a column: under `snap-mandatory` a child with no snap
+              point of its own is a place the scroller refuses to rest, which
+              would leave the button unreachable on a phone. */}
+          {allowAddColumn && onAddColumn ? (
+            <AddColumnButton onAdd={onAddColumn} className={snap.columnClassName} />
+          ) : null}
         </div>
       </SortableContext>
 

@@ -40,6 +40,7 @@ export function KanbanVirtualColumnCards<T = Record<string, unknown>>({
   activeItemId,
   options,
   dragDisabled = false,
+  touch,
 }: KanbanVirtualColumnCardsProps<T>) {
   const {
     estimateItemHeight = DEFAULT_ESTIMATED_ITEM_HEIGHT,
@@ -109,6 +110,7 @@ export function KanbanVirtualColumnCards<T = Record<string, unknown>>({
               renderItem={renderItem}
               className={itemClassName}
               dragDisabled={dragDisabled}
+              touch={touch}
             />
           </div>
         );

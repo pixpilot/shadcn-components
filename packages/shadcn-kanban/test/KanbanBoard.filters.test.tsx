@@ -19,7 +19,8 @@ vi.mock('@dnd-kit/core', () => {
     useDroppable: mockDroppable,
     useSensor: vi.fn(),
     useSensors: vi.fn(() => []),
-    PointerSensor: vi.fn(),
+    MouseSensor: vi.fn(),
+    TouchSensor: vi.fn(),
     KeyboardSensor: vi.fn(),
     closestCorners: vi.fn(),
     closestCenter: vi.fn(() => []),
@@ -93,10 +94,14 @@ function clickFilterOption(label: string) {
 }
 
 describe('kanbanBoard column filters', () => {
-  it('disables touch panning on draggable cards', () => {
+  it('leaves touch panning to the browser on draggable cards', () => {
     render(<KanbanBoard columns={COLUMNS} items={ITEMS} />);
 
-    expect(screen.getByText('High task').parentElement).toHaveClass('touch-none');
+    /* `touch-none` here would swallow the swipe that reaches the next column;
+       the drag is claimed by the hold, not by the touch-action. */
+    const card = screen.getByText('High task').parentElement;
+    expect(card).toHaveClass('touch-manipulation');
+    expect(card).not.toHaveClass('touch-none');
   });
 
   it('does not render a filter button when no filters are provided', () => {

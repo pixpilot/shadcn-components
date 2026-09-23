@@ -1,5 +1,10 @@
 import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core';
-import type { KanbanChangeEvent, KanbanColumn, KanbanItem } from '../../src';
+import type {
+  KanbanChangeEvent,
+  KanbanColumn,
+  KanbanItem,
+  KanbanTouchOptions,
+} from '../../src';
 
 import { renderHook } from '@testing-library/react';
 import { useKanbanDrag } from '../../src/hooks/use-kanban-drag';
@@ -24,6 +29,7 @@ export interface DragProps {
   columns: KanbanColumn[];
   onChange?: (event: KanbanChangeEvent) => void;
   onColumnChange?: (columns: KanbanColumn[]) => void;
+  touch?: KanbanTouchOptions;
 }
 
 export function setupDrag(props: DragProps) {

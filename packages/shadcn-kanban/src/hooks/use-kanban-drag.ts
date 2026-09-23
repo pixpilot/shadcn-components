@@ -9,24 +9,51 @@ import type {
   SensorOptions,
   UniqueIdentifier,
 } from '@dnd-kit/core';
-import type { KanbanChangeEvent, KanbanColumn, KanbanItem } from '../types';
+import type {
+  KanbanChangeEvent,
+  KanbanColumn,
+  KanbanItem,
+  KanbanTouchOptions,
+} from '../types';
 
-import { KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import {
+  KeyboardSensor,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
 import React from 'react';
 import { isColumnSortableId } from '../utils/column-sortable-id';
 import { kanbanKeyboardCoordinates } from '../utils/kanban-keyboard-coordinates';
+import {
+  DRAG_HANDLE_SELECTOR,
+  TOUCH_ACTIVATION_DELAY,
+  TOUCH_ACTIVATION_TOLERANCE,
+} from '../utils/kanban-touch-defaults';
 import { useKanbanBoardState } from './use-kanban-board-state';
 import { useKanbanCardDrag } from './use-kanban-card-drag';
 import { useKanbanCollisionDetection } from './use-kanban-collision-detection';
 import { useKanbanColumnReorder } from './use-kanban-column-reorder';
 
-const POINTER_ACTIVATION_DISTANCE = 5;
+const MOUSE_ACTIVATION_DISTANCE = 5;
+
+/**
+ * An explicit drag handle is already an unambiguous gesture, so it skips the
+ * hold and picks up on contact. Only cards — which share their hit area with
+ * the board's own scrolling — have to earn the drag.
+ */
+function isOnDragHandle(event: Event): boolean {
+  const { target } = event;
+  return target instanceof Element && target.closest(DRAG_HANDLE_SELECTOR) !== null;
+}
 
 interface UseKanbanDragOptions<T> {
   externalItems: KanbanItem<T>[];
   columns: KanbanColumn[];
   onChange?: (event: KanbanChangeEvent<T>) => void;
   onColumnChange?: (columns: KanbanColumn[]) => void;
+  touch?: KanbanTouchOptions;
 }
 
 export interface UseKanbanDragResult<T> {
@@ -52,6 +79,7 @@ export function useKanbanDrag<T>({
   columns,
   onChange,
   onColumnChange,
+  touch,
 }: UseKanbanDragOptions<T>): UseKanbanDragResult<T> {
   const [activeId, setActiveId] = React.useState<UniqueIdentifier | null>(null);
 
@@ -76,9 +104,23 @@ export function useKanbanDrag<T>({
     [internalColumns],
   );
 
+  /*
+   * Mouse and touch are deliberately separate sensors rather than one pointer
+   * sensor: they need opposite activation rules. A mouse press can only mean
+   * "drag", so a few pixels of travel is enough. A finger press is ambiguous —
+   * it is just as likely the start of a swipe to the next column — so it has to
+   * be held still before the board claims the gesture.
+   */
   const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: { distance: POINTER_ACTIVATION_DISTANCE },
+    useSensor(MouseSensor, {
+      activationConstraint: { distance: MOUSE_ACTIVATION_DISTANCE },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: touch?.dragActivationDelay ?? TOUCH_ACTIVATION_DELAY,
+        tolerance: touch?.dragActivationTolerance ?? TOUCH_ACTIVATION_TOLERANCE,
+      },
+      bypassActivationConstraint: ({ event }) => isOnDragHandle(event),
     }),
     useSensor(KeyboardSensor, { coordinateGetter: kanbanKeyboardCoordinates }),
   );

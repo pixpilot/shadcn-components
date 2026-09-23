@@ -1,6 +1,8 @@
 import type { CollisionDetection } from '@dnd-kit/core';
 import type { KanbanChangeEvent, KanbanItem } from '../../src';
+import type { UseKanbanDragResult } from '../../src/hooks/use-kanban-drag';
 
+import { MouseSensor, TouchSensor } from '@dnd-kit/core';
 import { act } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import {
@@ -51,8 +53,71 @@ describe('useKanbanDrag', () => {
     it('should provide sensors and a collision strategy', () => {
       const { result } = setupDrag({ externalItems: ITEMS, columns: COLUMNS });
 
-      expect(result.current.sensors).toHaveLength(2);
+      expect(result.current.sensors).toHaveLength(3);
       expect(typeof result.current.collisionDetection).toBe('function');
+    });
+  });
+
+  describe('sensors', () => {
+    /* `SensorOptions` is the empty base type, so the concrete constraints each
+       sensor was configured with have to be asserted back in. */
+    interface PointerSensorOptions {
+      activationConstraint?: { delay?: number; tolerance?: number; distance?: number };
+      bypassActivationConstraint?: (args: { event: { target: EventTarget } }) => boolean;
+    }
+
+    const findSensor = (sensors: UseKanbanDragResult<never>['sensors'], type: unknown) =>
+      sensors.find((descriptor) => descriptor.sensor === type)?.options as
+        | PointerSensorOptions
+        | undefined;
+
+    it('should arm a touch drag only after a hold, so a swipe still scrolls', () => {
+      const { result } = setupDrag({ externalItems: ITEMS, columns: COLUMNS });
+
+      const touchSensor = findSensor(result.current.sensors, TouchSensor);
+
+      expect(touchSensor?.activationConstraint).toEqual({ delay: 250, tolerance: 8 });
+    });
+
+    it('should let the caller retune the hold', () => {
+      const { result } = setupDrag({
+        externalItems: ITEMS,
+        columns: COLUMNS,
+        touch: { dragActivationDelay: 400, dragActivationTolerance: 2 },
+      });
+
+      const touchSensor = findSensor(result.current.sensors, TouchSensor);
+
+      expect(touchSensor?.activationConstraint).toEqual({ delay: 400, tolerance: 2 });
+    });
+
+    it('should start a mouse drag on distance, with no hold', () => {
+      const { result } = setupDrag({ externalItems: ITEMS, columns: COLUMNS });
+
+      const mouseSensor = findSensor(result.current.sensors, MouseSensor);
+
+      expect(mouseSensor?.activationConstraint).toEqual({ distance: 5 });
+    });
+
+    it('should let an explicit drag handle bypass the hold', () => {
+      const { result } = setupDrag({ externalItems: ITEMS, columns: COLUMNS });
+
+      const handle = document.createElement('button');
+      handle.setAttribute('data-kanban-drag-handle', '');
+      const icon = document.createElement('svg');
+      handle.append(icon);
+      document.body.append(handle);
+
+      const bypass = findSensor(
+        result.current.sensors,
+        TouchSensor,
+      )?.bypassActivationConstraint;
+
+      /* An icon inside the handle counts — that is what a finger actually hits. */
+      expect(bypass?.({ event: { target: icon } })).toBe(true);
+      expect(bypass?.({ event: { target: document.body } })).toBe(false);
+
+      handle.remove();
     });
   });
 

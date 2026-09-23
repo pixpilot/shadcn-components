@@ -59,6 +59,71 @@ export type KanbanFilters<T = Record<string, unknown>> =
 export type ColumnOverflow = 'scroll' | 'expand';
 
 /**
+ * Touch-input behaviour.
+ *
+ * On a touch screen a finger that lands on a card is ambiguous: it could be the
+ * start of a drag, or of a swipe to reach the next column. The board resolves
+ * that the way native mobile UIs do — a card only becomes draggable after the
+ * finger has been held still on it for {@link dragActivationDelay}. Anything
+ * shorter, or any movement past {@link dragActivationTolerance} before the
+ * delay elapses, stays a scroll.
+ *
+ * Mouse and keyboard input is unaffected: a mouse drag still starts as soon as
+ * the pointer has travelled a few pixels.
+ */
+export interface KanbanTouchOptions {
+  /**
+   * Milliseconds a finger must rest on a card before the drag arms.
+   *
+   * @default 250
+   */
+  dragActivationDelay?: number;
+  /**
+   * Pixels of movement tolerated during the hold. Moving further cancels the
+   * press and hands the gesture back to the browser as a scroll.
+   *
+   * @default 8
+   */
+  dragActivationTolerance?: number;
+  /**
+   * Renders a ring on a card while it is being held but has not armed yet, so
+   * the press is visible before the drag begins.
+   *
+   * @default true
+   */
+  pressFeedback?: boolean;
+}
+
+/** Where a snapped column comes to rest inside the board's viewport. */
+export type KanbanColumnSnapAlign = 'start' | 'center';
+
+/**
+ * Turns the board into a one-column-at-a-time slider on small screens, using
+ * CSS scroll snapping — so the swipe keeps the platform's own momentum and
+ * settling animation rather than a re-implementation of it.
+ *
+ * Only applies below the `sm` breakpoint (40rem); above it the board keeps its
+ * regular multi-column layout. Snapping is suspended for the duration of a drag
+ * so dnd-kit's auto-scroll is not fought by the snap points.
+ */
+export interface KanbanColumnSnapOptions {
+  /**
+   * Where each column lands when the swipe settles.
+   *
+   * @default 'start'
+   */
+  align?: KanbanColumnSnapAlign;
+  /**
+   * Any CSS width for a column while snapping is active. Leaving a margin
+   * (the default 85%) keeps the next column peeking in, which is what tells the
+   * user there is more to swipe to.
+   *
+   * @default '85%'
+   */
+  columnWidth?: string;
+}
+
+/**
  * Payload delivered by {@link KanbanBoardProps.onFilterChange} whenever the
  * set of active filters for a column changes.
  */
@@ -255,4 +320,18 @@ export interface KanbanBoardProps<T = Record<string, unknown>> {
    * board. Cards stay mounted and fully interactive; only the drag is off.
    */
   dragDisabled?: boolean;
+  /**
+   * Tunes how a touch drag arms. See {@link KanbanTouchOptions}; the defaults
+   * are what most boards want, so this is mainly an escape hatch for a board
+   * whose cards are unusually small or tall.
+   */
+  touch?: KanbanTouchOptions;
+  /**
+   * Makes the board swipe one column at a time on small screens. Pass `false`
+   * to keep the plain horizontal scroller at every width, or an options object
+   * to change the resting alignment or the column width.
+   *
+   * @default true
+   */
+  columnSnap?: boolean | KanbanColumnSnapOptions;
 }

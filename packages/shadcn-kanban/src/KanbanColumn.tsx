@@ -7,6 +7,7 @@ import type {
   KanbanFilter,
   KanbanInfiniteScroll,
   KanbanItem as KanbanItemType,
+  KanbanTouchOptions,
   KanbanVirtualization,
 } from './types';
 
@@ -25,6 +26,7 @@ import { InfiniteScrollSentinel } from './infinite-scroll';
 import { KanbanColumnCards } from './KanbanColumnCards';
 import { KanbanVirtualColumnCards } from './KanbanVirtualColumnCards';
 import { toColumnSortableId } from './utils/column-sortable-id';
+import { dragHandleProps } from './utils/kanban-touch-defaults';
 
 interface KanbanColumnProps<T> {
   column: KanbanColumnType;
@@ -49,6 +51,8 @@ interface KanbanColumnProps<T> {
   virtualization?: KanbanVirtualization;
   /** Freezes dragging of this column's cards. */
   dragDisabled?: boolean;
+  /** Hold-to-drag tuning, forwarded to every card. */
+  touch?: KanbanTouchOptions;
   /** The card being dragged board-wide, so it stays mounted while virtualized. */
   activeItemId?: UniqueIdentifier | null;
   /** Toggle a single filter on this column. */
@@ -73,6 +77,7 @@ export function KanbanColumn<T = Record<string, unknown>>({
   infiniteScroll,
   virtualization,
   dragDisabled = false,
+  touch,
   activeItemId = null,
   onToggleFilter,
   onClearFilters,
@@ -137,6 +142,7 @@ export function KanbanColumn<T = Record<string, unknown>>({
   return (
     <div
       ref={setSortableRef}
+      data-testid={`kanban-column-${column.id}`}
       style={{ ...containerStyle, ...style }}
       className={cn(
         'bg-muted/40 relative flex min-w-[250px] flex-1 flex-col rounded-lg border',
@@ -158,7 +164,9 @@ export function KanbanColumn<T = Record<string, unknown>>({
             {sortable ? (
               <button
                 type="button"
-                className="text-muted-foreground hover:text-foreground cursor-grab touch-none active:cursor-grabbing"
+                aria-label={`Reorder ${column.title} column`}
+                className="text-muted-foreground hover:text-foreground -m-1 cursor-grab touch-none p-1 active:cursor-grabbing"
+                {...dragHandleProps}
                 {...listeners}
               >
                 <GripVertical className="h-4 w-4" />
@@ -173,7 +181,9 @@ export function KanbanColumn<T = Record<string, unknown>>({
               {sortable ? (
                 <button
                   type="button"
-                  className="text-muted-foreground hover:text-foreground cursor-grab touch-none active:cursor-grabbing"
+                  aria-label={`Reorder ${column.title} column`}
+                  className="text-muted-foreground hover:text-foreground -m-1 cursor-grab touch-none p-1 active:cursor-grabbing"
+                  {...dragHandleProps}
                   {...listeners}
                 >
                   <GripVertical className="h-4 w-4" />
@@ -215,6 +225,7 @@ export function KanbanColumn<T = Record<string, unknown>>({
               activeItemId={activeItemId}
               options={virtualization}
               dragDisabled={dragDisabled}
+              touch={touch}
             />
           ) : (
             <KanbanColumnCards
@@ -223,6 +234,7 @@ export function KanbanColumn<T = Record<string, unknown>>({
               renderItem={renderItem}
               itemClassName={itemClassName}
               dragDisabled={dragDisabled}
+              touch={touch}
             />
           )}
 

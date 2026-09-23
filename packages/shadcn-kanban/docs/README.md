@@ -23,13 +23,14 @@ assign `event.items` back to your state and the board settles.
 
 ## Documentation
 
-| Document                                   | Covers                                                         |
-| ------------------------------------------ | -------------------------------------------------------------- |
-| [api.md](./api.md)                         | Every prop, type and callback                                  |
-| [drag-and-drop.md](./drag-and-drop.md)     | How the drag state machine works, and why it is built this way |
-| [filters.md](./filters.md)                 | Per-column filters, board-side and parent-side                 |
-| [infinite-scroll.md](./infinite-scroll.md) | Loading a column's items a page at a time                      |
-| [virtualization.md](./virtualization.md)   | Mounting only the cards near a column's scroll window          |
+| Document                                     | Covers                                                         |
+| -------------------------------------------- | -------------------------------------------------------------- |
+| [api.md](./api.md)                           | Every prop, type and callback                                  |
+| [drag-and-drop.md](./drag-and-drop.md)       | How the drag state machine works, and why it is built this way |
+| [filters.md](./filters.md)                   | Per-column filters, board-side and parent-side                 |
+| [infinite-scroll.md](./infinite-scroll.md)   | Loading a column's items a page at a time                      |
+| [virtualization.md](./virtualization.md)     | Mounting only the cards near a column's scroll window          |
+| [touch-and-mobile.md](./touch-and-mobile.md) | Hold-to-drag on touch, and columns as a swipeable slider       |
 
 ## Generic over item data
 
@@ -77,7 +78,8 @@ kanban-board/
 │   ├── use-kanban-card-drag.ts          Card moves + reordering
 │   ├── use-kanban-column-reorder.ts     Column reordering
 │   ├── use-kanban-collision-detection.ts Which droppable is under the cursor
-│   └── use-kanban-filters.ts            Active filter tracking
+│   ├── use-kanban-filters.ts            Active filter tracking
+│   └── use-kanban-press-feedback.ts     Shows a touch hold before it arms
 └── utils/                   Pure helpers, each unit-tested
 ```
 

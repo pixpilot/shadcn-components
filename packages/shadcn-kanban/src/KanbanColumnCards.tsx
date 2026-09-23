@@ -4,6 +4,7 @@ import type React from 'react';
 import type {
   KanbanColumn as KanbanColumnType,
   KanbanItem as KanbanItemType,
+  KanbanTouchOptions,
 } from './types';
 
 import { KanbanItem } from './KanbanItem';
@@ -17,6 +18,8 @@ export interface KanbanColumnCardsProps<T> {
   itemClassName?: string;
   /** Freezes dragging of every card in the list. */
   dragDisabled?: boolean;
+  /** Hold-to-drag tuning, forwarded to every card. */
+  touch?: KanbanTouchOptions;
 }
 
 /**
@@ -29,6 +32,7 @@ export function KanbanColumnCards<T = Record<string, unknown>>({
   renderItem,
   itemClassName,
   dragDisabled = false,
+  touch,
 }: KanbanColumnCardsProps<T>) {
   return items.map((item) => (
     <KanbanItem
@@ -38,6 +42,7 @@ export function KanbanColumnCards<T = Record<string, unknown>>({
       renderItem={renderItem}
       className={itemClassName}
       dragDisabled={dragDisabled}
+      touch={touch}
     />
   ));
 }

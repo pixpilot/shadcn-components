@@ -43,6 +43,8 @@ All types are exported from `@pixpilot/shadcn-kanban`.
 | `infiniteScroll` | `KanbanInfiniteScroll`                                              | —          | See [infinite-scroll.md](./infinite-scroll.md). Requires `columnOverflow: 'scroll'`.                                                               |
 | `virtualization` | `KanbanVirtualization`                                              | —          | See [virtualization.md](./virtualization.md). Requires `columnOverflow: 'scroll'`.                                                                 |
 | `dragDisabled`   | `boolean`                                                           | `false`    | Freezes card and column dragging for views where a drop position is meaningless (filtered, externally sorted). Cards stay mounted and interactive. |
+| `touch`          | `KanbanTouchOptions`                                                | —          | Hold-to-drag tuning for touch input. See [touch-and-mobile.md](./touch-and-mobile.md).                                                             |
+| `columnSnap`     | `boolean \| KanbanColumnSnapOptions`                                | `true`     | Columns swipe one at a time below `sm`. See [touch-and-mobile.md](./touch-and-mobile.md).                                                          |
 
 ---
 
@@ -109,6 +111,31 @@ See [infinite-scroll.md](./infinite-scroll.md).
 
 See [virtualization.md](./virtualization.md).
 
+### `KanbanTouchOptions`
+
+```ts
+interface KanbanTouchOptions {
+  dragActivationDelay?: number; // ms a finger must rest on a card   (default 250)
+  dragActivationTolerance?: number; // px of movement tolerated while holding (default 8)
+  pressFeedback?: boolean; // ring the card while it is held    (default true)
+}
+```
+
+Touch only — mouse and keyboard activation are unaffected. See
+[touch-and-mobile.md](./touch-and-mobile.md).
+
+### `KanbanColumnSnapOptions`
+
+```ts
+interface KanbanColumnSnapOptions {
+  align?: 'start' | 'center'; // where a column rests           (default 'start')
+  columnWidth?: string; // any CSS width, while snapping   (default '85%')
+}
+```
+
+Applies below the `sm` breakpoint only. See
+[touch-and-mobile.md](./touch-and-mobile.md).
+
 ---
 
 ## Test hooks
@@ -120,6 +147,11 @@ screenshots:
 | --------------------------------------------------- | ------------------------------ |
 | `[data-testid="kanban-board"]`                      | The board scroller             |
 | `[data-testid="kanban-item-<itemId>"]`              | A card                         |
+| `[data-testid="kanban-column-<columnId>"]`          | A column wrapper               |
 | `[data-testid="kanban-column-scroller-<columnId>"]` | A column's scrolling card list |
 | `[data-testid="kanban-column-virtual-<columnId>"]`  | A virtualized column's spacer  |
 | `[data-slot="infinite-scroll-sentinel"]`            | A column's load-more sentinel  |
+
+Two state attributes are rendered as well: `data-snapping` on the board while
+column snapping is enabled, and `data-pressing` on a card while a touch hold is
+underway but has not armed the drag yet.
