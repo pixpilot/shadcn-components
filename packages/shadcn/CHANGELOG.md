@@ -1,5 +1,11 @@
 # @pixpilot/shadcn
 
+## 2.3.5
+
+### Patch Changes
+
+- update import path from `@internal/ui` to `@pixpilot/ui`
+
 ## 2.3.4
 
 ### Patch Changes
