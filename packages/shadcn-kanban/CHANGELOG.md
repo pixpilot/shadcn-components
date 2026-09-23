@@ -1,5 +1,20 @@
 # @pixpilot/shadcn-kanban
 
+## 1.0.0
+
+### Major Changes
+
+- c0a92c0: first release
+
+### Minor Changes
+
+- add drag-and-drop kanban board package
+
+### Patch Changes
+
+- Updated dependencies
+  - @pixpilot/shadcn-ui@3.17.5
+
 ## 0.3.0
 
 ### Minor Changes
