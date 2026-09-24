@@ -1,5 +1,13 @@
 # @internal/storybook
 
+## 0.0.264
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies [12310c9]
+  - @pixpilot/shadcn-kanban@1.1.0
+
 ## 0.0.263
 
 ### Patch Changes
