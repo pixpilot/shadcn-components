@@ -1,5 +1,15 @@
 # @pixpilot/shadcn-ui
 
+## 3.17.6
+
+### Patch Changes
+
+- remove unused Tailwind plugins
+- e29bbee: Remove unused `tailwindcss-animate` and `@tailwindcss/typography` dependencies, which caused missing `tailwindcss` peer warnings in consumers.
+- Updated dependencies
+- Updated dependencies [e29bbee]
+  - @pixpilot/shadcn@2.3.6
+
 ## 3.17.5
 
 ### Patch Changes

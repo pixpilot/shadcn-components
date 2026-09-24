@@ -1,5 +1,13 @@
 # @pixpilot/shadcn-kanban
 
+## 1.1.1
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies [e29bbee]
+  - @pixpilot/shadcn-ui@3.17.6
+
 ## 1.1.0
 
 ### Minor Changes
