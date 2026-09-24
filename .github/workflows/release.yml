@@ -47,15 +47,16 @@ jobs:
           provenance: 'true'
 
   notify:
-    name: Notify on Release Failure
+    name: Notify Release Status
     needs: [ci, release]
     if: always()
     runs-on: ubuntu-latest
 
     steps:
-      - name: Send Telegram notification
+      - name: Send Telegram release-status notification
         uses: pixpilot/notify-action@v1
         with:
           status: ${{ contains(needs.*.result, 'failure') && 'failure' || contains(needs.*.result, 'cancelled') && 'cancelled' || 'success' }}
+          notify-on: any
           telegram-bot-token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           telegram-chat-id: ${{ secrets.TELEGRAM_CHAT_ID }}
