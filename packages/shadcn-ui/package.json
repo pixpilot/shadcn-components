@@ -64,7 +64,6 @@
     "@pixpilot/shadcn": "workspace:*",
     "@pixpilot/string": "catalog:prod",
     "@radix-ui/react-slot": "catalog:prod",
-    "@tailwindcss/typography": "^0.5.19",
     "@tanstack/react-virtual": "^3.13.23",
     "@tiptap/core": "^3.22.3",
     "@tiptap/extension-link": "^3.22.3",
