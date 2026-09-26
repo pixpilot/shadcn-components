@@ -1,5 +1,12 @@
 # @pixpilot/shadcn
 
+## 2.3.6
+
+### Patch Changes
+
+- remove unused Tailwind plugins
+- e29bbee: Remove unused `tailwindcss-animate` and `@tailwindcss/typography` dependencies, which caused missing `tailwindcss` peer warnings in consumers.
+
 ## 2.3.5
 
 ### Patch Changes
