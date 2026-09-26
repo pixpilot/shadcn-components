@@ -48,6 +48,7 @@ function PaginationLink({
       data-slot="pagination-link"
       data-active={isActive}
       className={cn(
+        'cursor-pointer',
         buttonVariants({
           variant: isActive ? 'outline' : 'ghost',
           size,

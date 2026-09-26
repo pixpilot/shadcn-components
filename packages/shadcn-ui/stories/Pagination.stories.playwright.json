@@ -1,0 +1,83 @@
+{
+  "version": "0",
+  "stories": {
+    "shadcn-ui-pagination--default": {
+      "screenshots": [
+        {
+          "id": "paginationFull",
+          "index": 0,
+          "title": "Full pagination",
+          "browserType": "chromium",
+          "browserOptionsId": "paginationViewport",
+          "actionSets": [
+            {
+              "id": "captureFull",
+              "title": "Capture full pagination",
+              "actions": [
+                {
+                  "id": "screenshotFull",
+                  "name": "takeElementScreenshot",
+                  "args": { "selector": "[data-slot=\"pagination-content\"]" }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "shadcn-ui-pagination--simple": {
+      "screenshots": [
+        {
+          "id": "paginationSimple",
+          "index": 0,
+          "title": "Simple pagination with page info",
+          "browserType": "chromium",
+          "browserOptionsId": "paginationViewport",
+          "actionSets": [
+            {
+              "id": "captureSimple",
+              "title": "Capture simple pagination",
+              "actions": [
+                {
+                  "id": "screenshotSimple",
+                  "name": "takeElementScreenshot",
+                  "args": { "selector": "#storybook-root" }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "shadcn-ui-pagination--compact": {
+      "screenshots": [
+        {
+          "id": "paginationCompact",
+          "index": 0,
+          "title": "Compact pagination",
+          "browserType": "chromium",
+          "browserOptionsId": "paginationViewport",
+          "actionSets": [
+            {
+              "id": "captureCompact",
+              "title": "Capture compact pagination",
+              "actions": [
+                {
+                  "id": "screenshotCompact",
+                  "name": "takeElementScreenshot",
+                  "args": { "selector": "[data-slot=\"pagination-content\"]" }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "paginationViewport": {
+      "viewport": { "width": 800, "height": 240 }
+    }
+  },
+  "screenshotOptions": {}
+}
