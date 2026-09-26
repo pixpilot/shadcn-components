@@ -63,7 +63,7 @@ import { CompleteProfileForm } from '@internal/next-auth-shadcn';
   maxDisplayNameLength={displayNameLimit}
   isLoading={isLoading}
   error={error}
-/>
+/>;
 ```
 
 Pass the same limit to `CompleteProfileFields` when composing that field directly.
