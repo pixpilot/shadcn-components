@@ -1,5 +1,12 @@
 # @pixpilot/shadcn
 
+## 2.4.0
+
+### Minor Changes
+
+- add children prop to PaginationLink component
+- add cursor pointer style to PaginationLink component
+
 ## 2.3.6
 
 ### Patch Changes

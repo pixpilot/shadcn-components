@@ -1,5 +1,17 @@
 # @pixpilot/shadcn-ui
 
+## 3.18.0
+
+### Minor Changes
+
+- add cursor pointer style to PaginationLink component
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+  - @pixpilot/shadcn@2.4.0
+
 ## 3.17.6
 
 ### Patch Changes
