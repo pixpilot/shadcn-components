@@ -48,7 +48,7 @@
     "generate-packages-section": "node scripts/generate-packages-section.js",
     "clean:workspaces": "turbo run clean:all && git clean -xdf .cache .turbo",
     "clean:workspaces:install": "pnpm clean:workspaces && pnpm install",
-    "gen:package": "npx @pixpilot/scaffoldfy --config ./generators/package/scaffoldfy.json"
+    "gen:package": "npx @pixpilot/scaffoldfy@latest --config ./generators/package/scaffoldfy.json"
   },
   "devDependencies": {
     "@changesets/cli": "^2.31.0",

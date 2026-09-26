@@ -1,0 +1,35 @@
+{
+  "version": "0",
+  "stories": {
+    "shadcn-auth-signinmethods--connected-and-available": {
+      "screenshots": [
+        {
+          "browserOptionsId": "auth-methods",
+          "browserType": "chromium",
+          "id": "auth-methods-connected",
+          "index": 0,
+          "title": "Connected and available sign-in methods"
+        }
+      ]
+    },
+    "shadcn-auth-signinmethods--connecting": {
+      "screenshots": [
+        {
+          "browserOptionsId": "auth-methods",
+          "browserType": "chromium",
+          "id": "auth-methods-connecting",
+          "index": 0,
+          "title": "Connecting a sign-in method"
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "auth-methods": {
+      "viewport": {
+        "height": 640,
+        "width": 720
+      }
+    }
+  }
+}

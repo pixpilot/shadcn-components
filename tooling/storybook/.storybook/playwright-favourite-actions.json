@@ -213,6 +213,20 @@
       "id": "a0DGGpE23eBxg7q",
       "title": "click done",
       "visibleTo": "*"
+    },
+    {
+      "actions": [
+        {
+          "args": {
+            "selector": "[data-slot=\"card\"]"
+          },
+          "id": "WgCT87PdUA",
+          "name": "takeElementScreenshot"
+        }
+      ],
+      "id": "1KocZ28tO-EtHc5",
+      "title": "takeElementScreenshot",
+      "visibleTo": "*"
     }
   ]
 }

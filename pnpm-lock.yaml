@@ -515,6 +515,12 @@ importers:
       '@storybook/react':
         specifier: catalog:dev
         version: 8.6.18(@storybook/test@8.6.15(storybook@8.6.18(prettier@3.8.2)))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@8.6.18(prettier@3.8.2))(typescript@5.9.3)
+      '@testing-library/jest-dom':
+        specifier: catalog:dev
+        version: 6.9.1
+      '@testing-library/react':
+        specifier: catalog:dev
+        version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@types/node':
         specifier: catalog:dev
         version: 22.19.17
@@ -524,6 +530,9 @@ importers:
       eslint:
         specifier: catalog:dev
         version: 9.39.4(jiti@2.6.1)
+      jsdom:
+        specifier: catalog:dev
+        version: 27.4.0(postcss@8.5.14)
       react:
         specifier: catalog:prod
         version: 19.2.8

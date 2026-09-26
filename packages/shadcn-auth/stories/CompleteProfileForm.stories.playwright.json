@@ -1,0 +1,24 @@
+{
+  "version": "0",
+  "stories": {
+    "shadcn-auth-completeprofileform--default": {
+      "screenshots": [
+        {
+          "browserOptionsId": "auth-card",
+          "browserType": "chromium",
+          "id": "auth-complete-profile",
+          "index": 0,
+          "title": "Complete a profile after sign-in"
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "auth-card": {
+      "viewport": {
+        "height": 640,
+        "width": 720
+      }
+    }
+  }
+}

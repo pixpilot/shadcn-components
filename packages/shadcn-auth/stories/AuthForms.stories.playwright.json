@@ -1,0 +1,378 @@
+{
+  "version": "0",
+  "stories": {
+    "shadcn-auth-authforms--sign-in": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"card-content\"]"
+                  },
+                  "id": "NJWCjojrg0cx",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "nPvXpPEaUXX-",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "auth-desktop",
+          "browserType": "chromium",
+          "id": "pjWFObTp6iP4",
+          "index": 0,
+          "title": "Sign in with credentials and providers"
+        }
+      ]
+    },
+    "shadcn-auth-authforms--sign-in-error": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"card\"]"
+                  },
+                  "id": "rx1QB6b0kSIy",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "MQGroH1WM8Z-",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "auth-desktop",
+          "browserType": "chromium",
+          "id": "6sal663jnozD",
+          "index": 0,
+          "title": "Sign in with a server error"
+        }
+      ]
+    },
+    "shadcn-auth-authforms--sign-up": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"card\"]"
+                  },
+                  "id": "UYns2raojwdL",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "vM3LouPQLkeH",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "auth-desktop",
+          "browserType": "chromium",
+          "id": "yWS-ehmJ48m7",
+          "index": 0,
+          "title": "Sign up with credentials and consent"
+        }
+      ],
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"card\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "d7Mqdk67AYTS",
+          "title": "takeElementScreenshot"
+        }
+      ]
+    },
+    "shadcn-auth-authforms--reset-password": {
+      "screenshots": [
+        {
+          "browserOptionsId": "auth-desktop",
+          "browserType": "chromium",
+          "id": "auth-reset-password",
+          "index": 0,
+          "title": "Request a password reset"
+        }
+      ],
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"card\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "7Zft9InDjTjs",
+          "title": "takeElementScreenshot"
+        }
+      ]
+    },
+    "shadcn-auth-authforms--magic-link": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"card\"]"
+                  },
+                  "id": "Yf9DMC08oGG5",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "oqd99PWbLexM",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "auth-desktop",
+          "browserType": "chromium",
+          "id": "RlIVfstgGOBZ",
+          "index": 0,
+          "title": "Request a sign-in link"
+        }
+      ],
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"card\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "lIOx1Rmpz3ri",
+          "title": "takeElementScreenshot"
+        }
+      ]
+    },
+    "shadcn-auth-authforms--magic-link-sent": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"card\"]"
+                  },
+                  "id": "hphNX3k_zELD",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "pGn_KkTpuyp1",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "auth-desktop",
+          "browserType": "chromium",
+          "id": "vNsTV8SNp3_j",
+          "index": 0,
+          "title": "Sign-in link sent"
+        },
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "button:has-text('Use a different email')"
+                  },
+                  "id": "lILHwY_lUMGw",
+                  "name": "click"
+                },
+                {
+                  "args": {
+                    "selector": "#magic-link-email",
+                    "state": "visible"
+                  },
+                  "id": "1O4t6bkIcWA5",
+                  "name": "waitForSelector"
+                }
+              ],
+              "id": "OBspLNAcu9fG",
+              "temp": true,
+              "title": "Use a different email"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"card\"]"
+                  },
+                  "id": "loYPeRMjq8iT",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "RGJ0WATkvm1c",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "auth-desktop",
+          "browserType": "chromium",
+          "id": "Rdo9i-PGjyTk",
+          "index": 1,
+          "title": "Return to the sign-in link email field"
+        }
+      ],
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"card\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "To0w4yOFT7cl",
+          "title": "takeElementScreenshot"
+        }
+      ]
+    },
+    "shadcn-auth-authforms--email-code-entry": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"card\"]"
+                  },
+                  "id": "KYVcYV2D89-S",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "DdWAetsMwc0d",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "auth-desktop",
+          "browserType": "chromium",
+          "id": "AFWuF5zmSGQD",
+          "index": 0,
+          "title": "Enter an emailed sign-in code"
+        },
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "button:has-text('Use a different email')"
+                  },
+                  "id": "sWjt36Oi4kMI",
+                  "name": "click"
+                },
+                {
+                  "args": {
+                    "selector": "#email-otp-email",
+                    "state": "visible"
+                  },
+                  "id": "yR-TBVIOZhDq",
+                  "name": "waitForSelector"
+                }
+              ],
+              "id": "o1dOqtCGLPsL",
+              "temp": true,
+              "title": "Use a different email"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"card\"]"
+                  },
+                  "id": "8qNxpmiPXuzX",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "NBIERlR3WoLx",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "auth-desktop",
+          "browserType": "chromium",
+          "id": "XhWEBqTwybDP",
+          "index": 1,
+          "title": "Return to the sign-in code email field"
+        }
+      ],
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"card\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "Vxamijbg_vbI",
+          "title": "takeElementScreenshot"
+        }
+      ]
+    },
+    "shadcn-auth-authforms--provider-only": {
+      "screenshots": [
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-slot=\"card\"]"
+                  },
+                  "id": "vuUs5W2ghHjh",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "j7vrmC9AbDuI",
+              "title": "takeElementScreenshot"
+            }
+          ],
+          "browserOptionsId": "auth-desktop",
+          "browserType": "chromium",
+          "id": "AvuJpgUPGmlx",
+          "index": 0,
+          "title": "Sign in with providers only"
+        }
+      ],
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "selector": "[data-slot=\"card\"]"
+              },
+              "name": "takeElementScreenshot"
+            }
+          ],
+          "id": "mnVfw68Mvaqf",
+          "title": "takeElementScreenshot"
+        }
+      ]
+    }
+  },
+  "browserOptions": {
+    "auth-desktop": {
+      "viewport": {
+        "height": 900,
+        "width": 900
+      }
+    }
+  }
+}

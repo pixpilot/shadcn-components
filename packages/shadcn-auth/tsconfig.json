@@ -12,6 +12,7 @@
     "test/**/*",
     "scripts/**/*",
     "*.config.ts",
+    "vitest.setup.ts",
     "*.config.js",
     "stories/**/*"
   ],
