@@ -28,23 +28,13 @@
           "actions": [
             {
               "args": {
-                "from": {
-                  "x": 523,
-                  "y": 45
-                },
-                "to": {
-                  "x": 607,
-                  "y": 47
-                },
-                "options": {
-                  "skipMouseUp": true
-                }
+                "timeout": 200
               },
-              "name": "mouseFromTo"
+              "name": "waitForTimeout"
             }
           ],
-          "id": "rD_kbUav986c",
-          "title": "mouseFromTo"
+          "id": "QYKNgjFAZBWQ",
+          "title": "delay 200"
         },
         {
           "actions": [
@@ -63,6 +53,41 @@
           ],
           "id": "UXqqxR9iG4K-",
           "title": "mouse.up"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "timeout": 200
+              },
+              "name": "waitForTimeout"
+            }
+          ],
+          "id": "mKSChufM73Sg",
+          "title": "delay 200"
+        },
+        {
+          "actions": [
+            {
+              "args": {
+                "from": {
+                  "x": 500,
+                  "y": 45
+                },
+                "to": {
+                  "x": 620,
+                  "y": 55
+                },
+                "options": {
+                  "skipMouseUp": true,
+                  "steps": 10
+                }
+              },
+              "name": "mouseFromTo"
+            }
+          ],
+          "id": "rD_kbUav986c",
+          "title": "mouseFromTo"
         }
       ],
       "screenshots": [
@@ -156,21 +181,21 @@
                   "args": {
                     "selector": "[data-slot=\"drawer-trigger\"]"
                   },
-                  "id": "fxjFXGindK1d",
+                  "id": "mhi5WescqvOS",
                   "name": "click"
                 }
               ],
-              "id": "ykWFV157QgUS",
+              "id": "7nz8wmYsxGlo",
               "title": "click"
             },
             {
               "actions": [
                 {
-                  "id": "lpiBUjbmcTeJ",
+                  "id": "iIm8bQ6dGfy6",
                   "name": "takeScreenshot"
                 }
               ],
-              "id": "we4V450j48-B",
+              "id": "otp-g_2BiBmx",
               "title": "Take screenshot"
             },
             {
@@ -178,48 +203,75 @@
                 {
                   "args": {
                     "from": {
-                      "x": 523,
+                      "x": 500,
                       "y": 45
                     },
                     "to": {
-                      "x": 607,
-                      "y": 47
+                      "x": 620,
+                      "y": 55
                     },
                     "options": {
-                      "skipMouseUp": true
+                      "skipMouseUp": true,
+                      "steps": 10
                     }
                   },
-                  "id": "W-ufCVAQa6W1",
+                  "id": "SfOu8uyrT_4V",
                   "name": "mouseFromTo"
                 }
               ],
-              "id": "l5scCZeHEy0f",
+              "id": "pkLGtpHVEjzf",
               "title": "mouseFromTo"
             },
             {
               "actions": [
                 {
-                  "id": "qccYHCEIk1aJ",
+                  "args": {
+                    "timeout": 200
+                  },
+                  "id": "ty-bM2055TEo",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "Q3Wm18m_qt8h",
+              "title": "delay 200"
+            },
+            {
+              "actions": [
+                {
+                  "id": "vUhFDk_-tMo5",
                   "name": "takeScreenshot"
                 }
               ],
-              "id": "t58KBXUi4xwP",
+              "id": "3E7uNcc7eOd8",
               "title": "Take screenshot"
             },
             {
               "actions": [
                 {
-                  "id": "G2N2CWrOQdem",
+                  "id": "rfRGANfFEF5w",
                   "name": "mouse.up"
                 }
               ],
-              "id": "xZFEFpHYW7St",
+              "id": "WInPzhKTkWHS",
               "title": "mouse.up"
+            },
+            {
+              "actions": [
+                {
+                  "args": {
+                    "timeout": 200
+                  },
+                  "id": "sCVzJBHdXukP",
+                  "name": "waitForTimeout"
+                }
+              ],
+              "id": "0S77xRyoneqo",
+              "title": "delay 200"
             }
           ],
           "browserOptionsId": "e7gPR14t7RcM",
           "browserType": "chromium",
-          "id": "vpzrOHvjF9kQ",
+          "id": "LtJ1c0Quud1Q",
           "index": 2,
           "screenshotOptionsId": "vnlyGPjF4YTO",
           "title": "should drag to right and close drawer"

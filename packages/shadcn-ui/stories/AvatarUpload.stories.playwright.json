@@ -122,33 +122,21 @@
               "actions": [
                 {
                   "args": {
-                    "timeout": 4000
+                    "timeout": 3000
                   },
-                  "id": "qn12jqUvbObe",
+                  "id": "3Q8Nn4N26cJZ",
                   "name": "waitForTimeout"
                 }
               ],
-              "id": "m-xBMlS5JJkg",
-              "title": "delay 4000"
-            },
-            {
-              "actions": [
-                {
-                  "args": {
-                    "selector": "#avatar-upload-div-1"
-                  },
-                  "id": "YOUr-NB0R26y",
-                  "name": "takeElementScreenshot"
-                }
-              ],
-              "id": "gCPMXQbs31yf",
-              "title": "takeElementScreenshot"
+              "id": "-As27Vej8UUb",
+              "title": "delay 3000"
             }
           ],
-          "browserOptionsId": "LSw61olDITRy",
+          "browserOptionsId": "5QUBmBwghgb0",
           "browserType": "chromium",
-          "id": "lzr3YNMWc1HZ",
+          "id": "1gTHBReUyvVw",
           "index": 0,
+          "screenshotOptionsId": "iFuoRCr2kIJ3",
           "title": "Avatar upload with image displayed"
         }
       ],
@@ -181,13 +169,13 @@
           "actions": [
             {
               "args": {
-                "timeout": 4000
+                "timeout": 3000
               },
               "name": "waitForTimeout"
             }
           ],
           "id": "wcwPynL5ceVF",
-          "title": "delay 4000"
+          "title": "delay 3000"
         }
       ]
     }
@@ -199,6 +187,22 @@
         "width": 780
       },
       "cursor": true
+    },
+    "5QUBmBwghgb0": {
+      "viewport": {
+        "height": 333,
+        "width": 655
+      }
+    }
+  },
+  "screenshotOptions": {
+    "iFuoRCr2kIJ3": {
+      "clip": {
+        "height": 204,
+        "width": 243,
+        "x": 205,
+        "y": 82
+      }
     }
   }
 }

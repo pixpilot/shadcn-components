@@ -591,42 +591,6 @@
           ]
         },
         {
-          "id": "kbMobile03",
-          "index": 2,
-          "title": "A card held long enough to arm the drag",
-          "browserType": "chromium",
-          "browserOptionsId": "kanbanPhone",
-          "actionSets": [
-            {
-              "id": "holdCard",
-              "title": "Rest a finger on a card and stop before the drag begins",
-              "actions": [
-                {
-                  "id": "pressCard",
-                  "name": "touchStart",
-                  "args": {
-                    "selector": "[data-testid=\"kanban-item-m1\"]"
-                  }
-                },
-                {
-                  "id": "settleMidHold",
-                  "name": "waitForTimeout",
-                  "args": {
-                    "timeout": 150
-                  }
-                },
-                {
-                  "id": "captureHeldCard",
-                  "name": "takeElementScreenshot",
-                  "args": {
-                    "selector": "[data-testid=\"kanban-board\"]"
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
           "id": "kbMobile04",
           "index": 3,
           "title": "A swipe that starts on a card leaves the card alone",
@@ -717,6 +681,57 @@
           "id": "WPI2kqt7bMkg",
           "index": 0,
           "title": "One column filling the phone, the next peeking in"
+        },
+        {
+          "actionSets": [
+            {
+              "actions": [
+                {
+                  "args": {
+                    "selector": "[data-testid=\"kanban-item-m1\"]"
+                  },
+                  "id": "G5bANOokWohG",
+                  "name": "touchStart"
+                },
+                {
+                  "args": {
+                    "timeout": 500
+                  },
+                  "id": "NV8mD-BQD4xb",
+                  "name": "waitForTimeout"
+                },
+                {
+                  "args": {
+                    "selector": "[data-testid=\"kanban-board\"]"
+                  },
+                  "id": "PUBob4NjGOPX",
+                  "name": "takeElementScreenshot"
+                }
+              ],
+              "id": "TECoBmMyETM5",
+              "temp": true,
+              "title": "Rest a finger on a card and stop before the drag begins"
+            }
+          ],
+          "browserOptionsId": "LqrkXBp7Ipy9",
+          "browserType": "chromium",
+          "id": "KlErpx1rSxUU",
+          "index": 2,
+          "title": "A card held long enough to arm the drag"
+        }
+      ],
+      "actionSets": [
+        {
+          "actions": [
+            {
+              "args": {
+                "timeout": 500
+              },
+              "name": "waitForTimeout"
+            }
+          ],
+          "id": "sfgVrJ6jLubT",
+          "title": "delay 200"
         }
       ]
     },
@@ -792,6 +807,16 @@
       "hasTouch": true,
       "isMobile": true,
       "reducedMotion": "reduce"
+    },
+    "LqrkXBp7Ipy9": {
+      "viewport": {
+        "width": 390,
+        "height": 780
+      },
+      "hasTouch": true,
+      "isMobile": true,
+      "reducedMotion": "reduce",
+      "cursor": true
     }
   },
   "screenshotOptions": {
