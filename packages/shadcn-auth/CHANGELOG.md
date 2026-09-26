@@ -1,5 +1,15 @@
 # @pixpilot/shadcn-auth
 
+## 2.0.0
+
+### Major Changes
+
+- 704fee8: change to stracture
+
+### Minor Changes
+
+- expand authentication components
+
 ## 1.1.28
 
 ### Patch Changes
