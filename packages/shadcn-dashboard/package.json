@@ -1,7 +1,7 @@
 {
   "name": "@pixpilot/shadcn-dashboard",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "packageManager": "pnpm@10.34.5",
   "description": "Responsive dashboard shell (sidebar, mobile sheet, header, main) and page building blocks built with shadcn/ui.",
   "author": "Mo Doaie <m.doaie@hotmail.com>",
