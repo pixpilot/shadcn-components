@@ -60,4 +60,5 @@ export {
 };
 export * from './toggle-group';
 export * from './tooltip';
+export * from './type-to-confirm-dialog';
 export * from './utils';

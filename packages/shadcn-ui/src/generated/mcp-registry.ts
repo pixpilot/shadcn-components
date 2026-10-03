@@ -54,6 +54,7 @@ import { meta as ToastMeta42 } from '../toast/mcp';
 import { meta as ToggleButtonMeta43 } from '../toggle-button/mcp';
 import { meta as ToggleGroupMeta44 } from '../toggle-group/mcp';
 import { meta as TooltipMeta45 } from '../tooltip/mcp';
+import { meta as TypeToConfirmDialogMeta46 } from '../type-to-confirm-dialog/mcp';
 
 function withHtmlElementNote<
   TComponent extends { htmlElement?: string; notes?: readonly string[] },
@@ -119,6 +120,7 @@ export const mcpRegistry = {
   "ToggleButton": withHtmlElementNote(ToggleButtonMeta43),
   "ToggleGroup": withHtmlElementNote(ToggleGroupMeta44),
   "Tooltip": withHtmlElementNote(TooltipMeta45),
+  "TypeToConfirmDialog": withHtmlElementNote(TypeToConfirmDialogMeta46),
 } as const;
 
 /** Type of the generated component metadata registry. */
