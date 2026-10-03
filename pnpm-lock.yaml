@@ -555,6 +555,82 @@ importers:
         specifier: catalog:dev
         version: 8.58.1(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
 
+  packages/shadcn-dashboard:
+    dependencies:
+      '@pixpilot/shadcn':
+        specifier: workspace:*
+        version: link:../shadcn
+      '@pixpilot/shadcn-ui':
+        specifier: workspace:*
+        version: link:../shadcn-ui
+      lucide-react:
+        specifier: catalog:prod
+        version: 1.26.0(react@19.2.8)
+    devDependencies:
+      '@internal/eslint-config':
+        specifier: workspace:*
+        version: link:../../tooling/eslint
+      '@internal/prettier-config':
+        specifier: workspace:*
+        version: link:../../tooling/prettier
+      '@internal/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
+      '@internal/tsdown-config':
+        specifier: workspace:*
+        version: link:../../tooling/tsdown
+      '@internal/vitest-config':
+        specifier: workspace:*
+        version: link:../../tooling/vitest
+      '@storybook/react':
+        specifier: catalog:dev
+        version: 8.6.18(@storybook/test@8.6.15(storybook@8.6.18(prettier@3.8.2)))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(storybook@8.6.18(prettier@3.8.2))(typescript@5.9.3)
+      '@testing-library/jest-dom':
+        specifier: catalog:dev
+        version: 6.9.1
+      '@testing-library/react':
+        specifier: catalog:dev
+        version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@types/node':
+        specifier: catalog:dev
+        version: 22.19.17
+      '@types/react':
+        specifier: catalog:dev
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: catalog:dev
+        version: 19.2.3(@types/react@19.2.14)
+      '@vitest/coverage-v8':
+        specifier: catalog:dev
+        version: 3.2.4(vitest@3.2.4)
+      '@vitest/ui':
+        specifier: catalog:dev
+        version: 3.2.4(vitest@3.2.4)
+      eslint:
+        specifier: catalog:dev
+        version: 9.39.4(jiti@2.6.1)
+      jsdom:
+        specifier: catalog:dev
+        version: 27.4.0
+      react:
+        specifier: catalog:prod
+        version: 19.2.8
+      react-dom:
+        specifier: catalog:prod
+        version: 19.2.8(react@19.2.8)
+      tsdown:
+        specifier: catalog:dev
+        version: 0.15.12(typescript@5.9.3)(unrun@0.2.16(synckit@0.11.11))
+      typescript:
+        specifier: catalog:dev
+        version: 5.9.3
+      typescript-eslint:
+        specifier: catalog:dev
+        version: 8.58.1(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
+      vitest:
+        specifier: catalog:dev
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@22.19.17)(@vitest/ui@3.2.4)(happy-dom@20.0.11)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.32.0)(msw@2.14.6(@types/node@22.19.17)(typescript@5.9.3))(terser@5.43.1)(tsx@4.21.0)(yaml@2.8.3)
+
   packages/shadcn-formily:
     dependencies:
       '@dnd-kit/core':
