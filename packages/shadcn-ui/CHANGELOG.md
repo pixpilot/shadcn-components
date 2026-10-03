@@ -1,5 +1,12 @@
 # @pixpilot/shadcn-ui
 
+## 3.19.0
+
+### Minor Changes
+
+- add TypeToConfirmDialog component
+- 9276091: Add `TypeToConfirmDialog` (`typeToConfirmDialog.show(...)` / `showTypeToConfirmDialog`): a destructive confirm dialog that enables its confirm button only once the user types an exact word, awaits an async `onConfirm` with a pending state, and stays open when it rejects.
+
 ## 3.18.1
 
 ### Patch Changes
