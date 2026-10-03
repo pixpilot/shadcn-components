@@ -1,5 +1,12 @@
 # @pixpilot/shadcn
 
+## 2.4.1
+
+### Patch Changes
+
+- add `@floating-ui/react` as a dependency
+- 0ad9383: fix(deps): add `@floating-ui/react` as a dependency to satisfy the `@diceui/tags-input` peer requirement in consuming apps
+
 ## 2.4.0
 
 ### Minor Changes
