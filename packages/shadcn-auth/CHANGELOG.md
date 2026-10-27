@@ -1,5 +1,20 @@
 # @pixpilot/shadcn-auth
 
+## 2.1.0
+
+### Minor Changes
+
+- d9bccdf: Add the sign-in callback page as a hook and a screen: `useAuthCallback` reads the code from the redirect URL, hands it to your `exchangeCode` once (Strict Mode safe) and returns its status, which `AuthCallbackScreen` renders; `readCallbackParams` is exported too. Add `SignedOutScreen`, the page signing out lands on, with links back to sign-in, home and contact.
+- add auth screens and brand logo
+- d9bccdf: Add `SignInScreen`: a full-page "Authentication Required" prompt with a sign-in button, shown in place of a page (such as a browser extension view) until the user signs in. Every line of copy can be overridden, and a failed `onSignIn` shows an error under the button.
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies [d9bccdf]
+- Updated dependencies [d9bccdf]
+  - @pixpilot/shadcn-ui@3.20.0
+
 ## 2.0.3
 
 ### Patch Changes
