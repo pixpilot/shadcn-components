@@ -36,6 +36,7 @@ export * from './icon-toggle';
 export * from './input';
 export * from './layout';
 export * from './loading-overlay';
+export * from './logo';
 export * from './overlay-provider';
 export * from './pagination';
 export * from './popover';

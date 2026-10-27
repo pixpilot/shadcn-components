@@ -2,6 +2,7 @@
 
 import { cn, Switch } from '@pixpilot/shadcn';
 import { MoonIcon, SunIcon } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const DEFAULT_ICON_SIZE = 16;
 
@@ -65,6 +66,9 @@ export interface ThemeModeSwitchInsideProps {
  * Light/Dark theme switch with icons inside the switch.
  * Icons are embedded within the switch control.
  * Pure component - requires value and onChange props.
+ *
+ * The theme is only known in the browser, so until mounting the switch keeps
+ * its space but stays hidden and unchecked, avoiding a hydration mismatch.
  */
 export function ThemeModeSwitchInside(props: ThemeModeSwitchInsideProps) {
   const {
@@ -80,10 +84,18 @@ export function ThemeModeSwitchInside(props: ThemeModeSwitchInsideProps) {
     onChange,
   } = props;
 
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // Flips once after hydration, which is the point: the server can't know the theme.
+    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
+    setMounted(true);
+  }, []);
+
   const sizeStyles = SIZE_STYLES[size];
   const iconSize = iconSizeProp ?? sizeStyles.defaultIconSize ?? DEFAULT_ICON_SIZE;
 
-  const isDark = value === 'dark';
+  const isDark = mounted && value === 'dark';
 
   const onCheckedChange = (checked: boolean) => {
     onChange?.(checked ? 'dark' : 'light');
@@ -96,7 +108,7 @@ export function ThemeModeSwitchInside(props: ThemeModeSwitchInsideProps) {
         checked={isDark}
         onCheckedChange={onCheckedChange}
         disabled={disabled}
-        className={cn(switchClassName)}
+        className={cn(!mounted && 'invisible', switchClassName)}
         aria-label={ariaLabel}
       />
     );
@@ -120,6 +132,7 @@ export function ThemeModeSwitchInside(props: ThemeModeSwitchInsideProps) {
         TOGGLE_WRAPPER_CLASS_NAME,
         sizeStyles.wrapper,
         disabled && 'opacity-50',
+        !mounted && 'invisible',
         className,
       )}
     >
