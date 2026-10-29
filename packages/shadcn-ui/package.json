@@ -56,6 +56,7 @@
   },
   "dependencies": {
     "@ebay/nice-modal-react": "^1.2.13",
+    "@floating-ui/dom": "^1.7.4",
     "@iconify-json/fa": "catalog:prod",
     "@iconify-json/mdi": "catalog:prod",
     "@iconify/react": "catalog:prod",
@@ -70,6 +71,7 @@
     "@tiptap/extension-placeholder": "^3.22.3",
     "@tiptap/extension-text-align": "^3.22.3",
     "@tiptap/extensions": "^3.22.3",
+    "@tiptap/pm": "^3.22.3",
     "@tiptap/react": "^3.22.3",
     "@tiptap/starter-kit": "^3.22.3",
     "class-variance-authority": "catalog:prod",

@@ -2,6 +2,22 @@ packages:
   - packages/**
   - tooling/**
 
+# Fail installs on missing/unmet peers so they surface here, not in consuming repos.
+autoInstallPeers: false
+strictPeerDependencies: true
+
+# Known dev-tooling peer gaps (not published). Keep this list tight.
+peerDependencyRules:
+  ignoreMissing:
+    - '@typescript-eslint/rule-tester'
+    - postcss # jsdom (test env) -> csstree patches
+  allowedVersions:
+    'react-json-view>react': '19'
+    'react-json-view>react-dom': '19'
+    'flux>react': '19'
+    '@trpc/react-query>@trpc/client': '11'
+    '@trpc/react-query>@trpc/server': '11'
+
 catalog:
   ai: 6.0.182
   '@openrouter/ai-sdk-provider': ^2.9.0
@@ -38,7 +54,7 @@ catalogs:
     '@storybook/blocks': ^8.6.14
     '@storybook/react': ^8.6.18
     '@storybook/react-vite': ^8.6.18
-    '@storybook/test': ^8.6.15
+    '@storybook/test': 8.6.18
     '@tailwindcss/postcss': ^4.2.2
     '@testing-library/jest-dom': ^6.9.1
     '@testing-library/react': ^16.3.2

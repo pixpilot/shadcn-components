@@ -25,6 +25,7 @@
     "@internal/tsconfig": "workspace:*",
     "@pixpilot/dev-config": "catalog:dev",
     "eslint": "catalog:dev",
+    "eslint-plugin-turbo": "^2.11.10",
     "postcss": "catalog:dev",
     "prettier": "catalog:dev",
     "typescript": "catalog:dev"
