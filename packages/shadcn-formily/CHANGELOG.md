@@ -1,5 +1,14 @@
 # @pixpilot/formily-shadcn
 
+## 2.2.25
+
+### Patch Changes
+
+- declare rich text editor peer dependencies
+- Updated dependencies
+- Updated dependencies [07c3105]
+  - @pixpilot/shadcn-ui@3.20.1
+
 ## 2.2.24
 
 ### Patch Changes

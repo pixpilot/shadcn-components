@@ -1,5 +1,12 @@
 # @pixpilot/shadcn-ui
 
+## 3.20.1
+
+### Patch Changes
+
+- declare rich text editor peer dependencies
+- 07c3105: Declare `@tiptap/pm` and `@floating-ui/dom` as dependencies so consumers no longer get missing-peer warnings from the rich text editor's tiptap packages.
+
 ## 3.20.0
 
 ### Minor Changes
