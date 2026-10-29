@@ -1,5 +1,16 @@
 # @pixpilot/shadcn-ui
 
+## 3.20.0
+
+### Minor Changes
+
+- add auth screens and brand logo
+- d9bccdf: Add `Logo` (the square app icon, `/favicon.svg` by default) and `BrandLogo` (the icon with the brand name beside it), so apps show the brand the same way everywhere.
+
+### Patch Changes
+
+- d9bccdf: `ThemeModeSwitchInside` no longer causes a hydration mismatch: until it mounts in the browser it keeps its space but stays hidden and unchecked, then shows the real theme.
+
 ## 3.19.0
 
 ### Minor Changes
