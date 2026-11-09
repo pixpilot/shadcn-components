@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useId } from 'react';
 import { getGlobalStyles } from './styles';
 
 export const CircleLoaderSize = {
@@ -17,8 +17,6 @@ const DEFAULT_SPEED = 2;
 const DEFAULT_COLOR = 'currentColor';
 const VIEWBOX_STROKE_REF = 40; // Reference width for scaling stroke width in the SVG viewBox
 const PERCENT_MULTIPLIER = 100;
-
-let spinnerIdCounter = 0;
 
 export interface CircleLoaderProps {
   /**
@@ -69,7 +67,9 @@ export const CircleLoader: React.FC<CircleLoaderProps> = ({
   const strokeWidth =
     strokeWidthProp ?? Math.max(MIN_STROKE_WIDTH, Math.round(size * STROKE_WIDTH_RATIO));
 
-  const uniqueId = useMemo(() => `spinner-${++spinnerIdCounter}-${Date.now()}`, []);
+  // useId matches between server and client render, so SSR hydrates cleanly;
+  // its punctuation is stripped to keep the keyframe name a valid CSS identifier.
+  const uniqueId = `spinner-${useId().replace(/[^\w-]/gu, '')}`;
   const viewBoxStrokeWidth = (strokeWidth / size) * VIEWBOX_STROKE_REF;
 
   const CIRCLE_RADIUS = 20;
@@ -96,19 +96,19 @@ export const CircleLoader: React.FC<CircleLoaderProps> = ({
     `;
   };
 
+  // One string child: React renders a <style> with several children as empty on the server.
+  const css = `${getGlobalStyles({
+    uniqueId,
+    speed,
+    size,
+    colors,
+    color,
+    strokeWidth,
+  })}${getColorAnimationKeyframes()}`;
+
   return (
     <>
-      <style>
-        {getGlobalStyles({
-          uniqueId,
-          speed,
-          size,
-          colors,
-          color,
-          strokeWidth,
-        })}
-        {colors && colors.length > 0 && getColorAnimationKeyframes()}
-      </style>
+      <style>{css}</style>
 
       <div className={`${uniqueId}-loader ${className}`}>
         <svg
