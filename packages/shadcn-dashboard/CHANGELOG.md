@@ -1,5 +1,13 @@
 # @pixpilot/shadcn-dashboard
 
+## 0.1.4
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies [3ffedf3]
+  - @pixpilot/shadcn-ui@3.21.0
+
 ## 0.1.3
 
 ### Patch Changes

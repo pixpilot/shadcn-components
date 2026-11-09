@@ -1,5 +1,15 @@
 # @pixpilot/shadcn-ui
 
+## 3.21.0
+
+### Minor Changes
+
+- enhance server-side rendering with `useId`
+
+### Patch Changes
+
+- 3ffedf3: CircleLoader: render its styles on the server and use `useId` for keyframe names, so server-rendered pages hydrate without a mismatch.
+
 ## 3.20.1
 
 ### Patch Changes
